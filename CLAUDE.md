@@ -9,10 +9,15 @@ This repository contains "Machine Learning for Smarter Innovation" - a comprehen
 ## Current Directory Structure
 ```
 ML_Design_Thinking_16/
-├── Week_01/                         # COMPLETED - Full implementation with improvements
+├── Week_01/                         # COMPLETED - Full implementation with latest improvements
 │   ├── 20250913_2133_week01_modular.tex   # Modular main file with \input commands
-│   ├── part*.tex                    # 4 parts + appendix modules
-│   ├── week01_discovery_worksheet.tex      # Expanded 9-page worksheet with pipelines
+│   ├── part1_foundation.tex        # Part 1: Foundation & Problem Statement
+│   ├── part2_technical.tex         # Part 2: Technical ML Content  
+│   ├── part3_design.tex            # Part 3: Design Integration
+│   ├── part4_summary.tex           # Part 4: Summary & Practice
+│   ├── appendix_technical.tex      # Technical appendix
+│   ├── week01_modular_updated.pdf  # Latest compiled version (87 pages)
+│   ├── week01_discovery_worksheet.tex      # Expanded 9-page worksheet
 │   ├── charts/                      # 50+ generated visualizations
 │   ├── scripts/                     # Chart generation scripts  
 │   ├── archive/                     # Old versions (20+ files)
@@ -62,9 +67,11 @@ pdflatex filename.tex  # Run twice for TOC/references
 
 # If PDF is locked by viewer
 pdflatex -jobname=filename_v2 filename.tex
+# Or use updated name
+pdflatex -jobname=week01_modular_updated 20250913_2133_week01_modular.tex
 
-# Clean auxiliary files after compilation
-mkdir -p temp && move *.aux *.log *.nav *.out *.snm *.toc *.vrb temp/ 2>nul || true
+# Clean auxiliary files after compilation (PowerShell)
+powershell -Command "Move-Item '*.aux', '*.log', '*.nav', '*.snm', '*.toc', '*.vrb', '*.out' -Destination 'temp\' -Force -ErrorAction SilentlyContinue"
 ```
 
 ### Quality Checks
@@ -123,11 +130,12 @@ plt.savefig('chart_name.png', dpi=150, bbox_inches='tight')
 
 ### Critical LaTeX Rules
 - **Font sizes**: Exactly 3 (`\Large`, `\normalsize`, `\small`)
-- **Columns**: `0.48/0.48` (equal) or `0.55/0.43` (unequal)
-- **Chart widths**: `0.85` (full), `0.75` (medium), `0.65` (sidebar)
+- **Columns**: `0.48/0.48` (equal), `0.55/0.43` (unequal), or `0.32/0.32/0.32` (three columns)
+- **Chart widths**: `0.95` (charts-only), `0.85` (full), `0.75` (medium), `0.65` (sidebar)
 - **No Unicode**: ASCII only (no emojis, special symbols)
 - **Quotes**: Use `` `` not " "
 - **Lists**: `\begin{itemize}` not HTML tags
+- **Plain frames**: Use `\begin{frame}[plain]` for charts-only slides
 
 ## Current Week Development Status
 
@@ -167,12 +175,12 @@ Verifies font consistency with auto-fix option
 ## Development Workflow
 
 1. **Create timestamp**: `YYYYMMDD_HHMM` format
-2. **Copy template**: From successful Week 1 structure
+2. **Copy template**: From successful Week 1 modular structure
 3. **Add improvements**: Section dividers, transitions, problem slides
-4. **Generate charts**: Use real ML algorithms
+4. **Generate charts**: Use real ML algorithms (50+ charts in Week 1)
 5. **Check quality**: Font sizes, overfull boxes
-6. **Compile PDF**: With cleanup
-7. **Version control**: Move old to `previous/`
+6. **Compile PDF**: With cleanup (use `-jobname` if locked)
+7. **Version control**: Move old to `archive/` folder
 
 ## Content Guidelines
 
@@ -227,9 +235,38 @@ Verifies font consistency with auto-fix option
   - Exercise 5: Pipeline convergence analysis
   - Reflection: Methodological synthesis with 6 academic questions
 
-### Archived Versions (in archive/)
-- Multiple handout versions (enhanced, simplified, pre-lesson)
-- Various pedagogical approaches tested and refined
+### Jupyter Notebooks (NEW)
+- **Week01_Part1_Setup_Foundation.ipynb** - Complete setup and foundation
+  - Section 0: All 21 helper functions (visualization, data generation, clustering, innovation analysis)
+  - Section 1: Pre-Discovery exploration (3 subsections with exercises)
+  - Section 2: Foundation & Context (5 subsections including dual pipeline)
+- **Week01_Part2_Technical_Design.ipynb** - Technical algorithms and design integration
+  - Section 3: All clustering algorithms (K-Means, DBSCAN, Hierarchical, GMM)
+  - Section 4: Design applications (archetypes, taxonomy, opportunity analysis, ecosystem)
+- **Week01_Part3_Practice_Advanced.ipynb** - Practice and advanced topics
+  - Section 5: Spotify case study and innovation challenge
+  - Section 6: Advanced visualizations (PCA/t-SNE, 3D, Dashboard)
+  - Section 7: Hands-on exercises with solutions
+  - Section 8: Quick reference guide
+
+## Recent Slide Modifications (Latest Session)
+
+### Chart Size Adjustments
+- Innovation Discovery: 0.85 → 0.75
+- Your Innovation Journey: 0.85 → 0.95  
+- Current Reality: 0.85 → 0.75
+- From Data Points to Innovation: 0.85 → 0.75
+
+### New Charts-Only Slides Added
+- Algorithm Visual Comparison (plain frame)
+- Gaussian Mixture Models (plain frame)
+- Common Mistakes (plain frame)
+- Data Preprocessing Pipeline duplicate with examples
+
+### Content Reorganization
+- K-Means slides: Charts moved to top, text to bottom with smaller font
+- Hierarchical Clustering: Chart enlarged, text at bottom
+- AI-Generated Archetypes: Split into two separate slides
 
 ## Development Best Practices
 
@@ -244,9 +281,9 @@ Verifies font consistency with auto-fix option
 ### Quality Assurance Checklist
 - [ ] Font sizes: Exactly 3 (\Large, \normalsize, \small)
 - [ ] Column widths: Consistent (0.48/0.48 or 0.55/0.43)
-- [ ] Chart widths: Standardized (0.85, 0.75, or 0.65)
+- [ ] Chart widths: Standardized (0.95, 0.85, 0.75, or 0.65)
 - [ ] Section dividers: All 4 parts clearly marked
 - [ ] Transition slides: Smooth flow between topics
 - [ ] Problem statements: Before each methodology
 - [ ] Real data: Actual ML algorithms used
-- [ ] Slide count: ~48-49 with improvements (31 base + enhancements)
+- [ ] Slide count: ~50-55 with recent enhancements (includes charts-only slides)

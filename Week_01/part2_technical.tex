@@ -123,7 +123,7 @@ What we'll learn:\\
 \framesubtitle{Why One-Size-Fits-All Doesn't Work}
 
 \begin{center}
-\includegraphics[width=0.85\textwidth]{charts/current_reality_visual.pdf}
+\includegraphics[width=0.75\textwidth]{charts/current_reality_visual.pdf}
 \end{center}
 \end{frame}
 
@@ -209,36 +209,32 @@ Things that look similar often belong in the same group\\
 \frametitle{\Large K-Means: The Basic Clustering Method (Part 1)}
 \framesubtitle{Initial Setup - Like Choosing City Centers}
 
+\begin{center}
+\includegraphics[width=0.85\textwidth]{charts/kmeans_animation.pdf}
+\end{center}
+
+\vspace{0.5em}
 \begin{columns}[T]
 \begin{column}{0.48\textwidth}
-\Large\textbf{Steps 1-2: Setup}
-\normalsize
-\vspace{0.5em}
-
+\small
 \textbf{Step 1: Choose K}
 \begin{itemize}
+\small
 \item Decide number of clusters
 \item Based on domain knowledge
 \item Or use elbow method
 \end{itemize}
+\end{column}
 
-\vspace{0.5em}
+\begin{column}{0.48\textwidth}
+\small
 \textbf{Step 2: Initialize Centroids}
 \begin{itemize}
+\small
 \item Place K random points
 \item These are initial cluster centers
 \item Random but spread out
 \end{itemize}
-
-\vspace{0.5em}
-\textcolor{mlblue}{\textbf{Key Decision: How many groups make sense?}}
-\end{column}
-
-\begin{column}{0.48\textwidth}
-\begin{center}
-\includegraphics[width=\textwidth]{charts/kmeans_animation.pdf}
-\end{center}
-\textit{Visualization: Initial random centroids placed}
 \end{column}
 \end{columns}
 \end{frame}
@@ -248,41 +244,43 @@ Things that look similar often belong in the same group\\
 \frametitle{\Large K-Means: The Basic Clustering Method (Part 2)}
 \framesubtitle{Iteration Process - Finding Natural Groups}
 
+\begin{center}
+\includegraphics[width=0.85\textwidth]{charts/kmeans_animation.pdf}
+\end{center}
+
+\vspace{0.3em}
 \begin{columns}[T]
-\begin{column}{0.48\textwidth}
-\Large\textbf{Steps 3-5: Iterate}
-\normalsize
-\vspace{0.5em}
-
-\textbf{Step 3: Assign Points}
+\begin{column}{0.32\textwidth}
+\small
+\textbf{Step 3: Assign}
 \begin{itemize}
-\item Calculate distance to each centroid
-\item Assign to nearest centroid
-\item Forms initial clusters
-\end{itemize}
-
-\vspace{0.5em}
-\textbf{Step 4: Update Centroids}
-\begin{itemize}
-\item Calculate mean of each cluster
-\item Move centroid to that mean
-\item Centers shift to better positions
-\end{itemize}
-
-\vspace{0.5em}
-\textbf{Step 5: Check Convergence}
-\begin{itemize}
-\item Repeat steps 3-4
-\item Stop when centroids don't move
-\item Usually 5-10 iterations
+\small
+\item Distance to centroids
+\item Assign to nearest
+\item Forms clusters
 \end{itemize}
 \end{column}
 
-\begin{column}{0.48\textwidth}
-\begin{center}
-\includegraphics[width=\textwidth]{charts/kmeans_animation.pdf}
-\end{center}
-\textit{Iteration 1 $\rightarrow$ 3 $\rightarrow$ 5 $\rightarrow$ \textbf{Converged}}
+\begin{column}{0.32\textwidth}
+\small
+\textbf{Step 4: Update}
+\begin{itemize}
+\small
+\item Calculate mean
+\item Move centroids
+\item Better positions
+\end{itemize}
+\end{column}
+
+\begin{column}{0.32\textwidth}
+\small
+\textbf{Step 5: Converge}
+\begin{itemize}
+\small
+\item Repeat 3-4
+\item Stop when stable
+\item 5-10 iterations
+\end{itemize}
 \end{column}
 \end{columns}
 \end{frame}
@@ -347,32 +345,29 @@ Things that look similar often belong in the same group\\
 \frametitle{\Large The Elbow Method}
 \framesubtitle{How Many Groups Should We Have? (Like Goldilocks - Not Too Few, Not Too Many)}
 
-\begin{columns}[T]
-\begin{column}{0.43\textwidth}
-\Large\textbf{Finding the Elbow:}
-\normalsize
-\begin{itemize}
-\item Plot inertia vs K
-\item Look for the ``elbow''
-\item Balance between:
-    \begin{itemize}
-    \normalsize
-    \item Too few: Mixed groups
-    \item Too many: Overfitting
-    \end{itemize}
-\end{itemize}
+\begin{center}
+\includegraphics[width=0.85\textwidth]{charts/elbow_method.pdf}
+\end{center}
 
 \vspace{0.5em}
-\begin{tcolorbox}[colback=mlblue!10, colframe=mlblue!50]
-\textbf{Optimal K = 5}\\
-Best trade-off between simplicity and accuracy
-\end{tcolorbox}
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\small
+\textbf{Finding the Elbow:}
+\begin{itemize}
+\small
+\item Plot inertia vs K
+\item Look for the ``elbow''
+\item Balance simplicity vs accuracy
+\end{itemize}
 \end{column}
 
-\begin{column}{0.55\textwidth}
-\begin{center}
-\includegraphics[width=\textwidth]{charts/elbow_method.pdf}
-\end{center}
+\begin{column}{0.48\textwidth}
+\small
+\begin{tcolorbox}[colback=mlblue!10, colframe=mlblue!50]
+\textbf{Optimal K = 5}\\
+Best trade-off point
+\end{tcolorbox}
 \end{column}
 \end{columns}
 \end{frame}
@@ -655,6 +650,13 @@ How many friends make a group?
 \end{center}
 \end{frame}
 
+% NEW: Algorithm Visual Comparison - Charts Only
+\begin{frame}[plain]
+\begin{center}
+\includegraphics[width=0.95\textwidth]{charts/algorithm_visual_examples.pdf}
+\end{center}
+\end{frame}
+
 % NEW: Gaussian Mixture Models Detailed
 \begin{frame}
 \frametitle{\Large Gaussian Mixture Models (GMM)}
@@ -662,6 +664,13 @@ How many friends make a group?
 
 \begin{center}
 \includegraphics[width=0.85\textwidth]{charts/gmm_detailed.pdf}
+\end{center}
+\end{frame}
+
+% NEW: Gaussian Mixture Models - Charts Only
+\begin{frame}[plain]
+\begin{center}
+\includegraphics[width=0.95\textwidth]{charts/gmm_detailed.pdf}
 \end{center}
 \end{frame}
 
@@ -695,30 +704,33 @@ How many friends make a group?
 \frametitle{\Large Hierarchical Clustering}
 \framesubtitle{Building a Tree of Relationships}
 
+\begin{center}
+\includegraphics[width=0.85\textwidth]{charts/dendrogram_example.pdf}
+\end{center}
+
+\vspace{0.3em}
 \begin{columns}[T]
-\begin{column}{0.43\textwidth}
-\Large\textbf{Dendrogram Benefits:}
-\normalsize
+\begin{column}{0.48\textwidth}
+\small
+\textbf{Dendrogram Benefits:}
 \begin{itemize}
+\small
 \item Shows cluster hierarchy
 \item Multiple granularities
 \item Natural relationships
 \item No preset K needed
 \end{itemize}
+\end{column}
 
-\vspace{0.5em}
+\begin{column}{0.48\textwidth}
+\small
 \textbf{Cut the tree at any level:}
 \begin{itemize}
+\small
 \item High cut = Few clusters
 \item Low cut = Many clusters
 \item Choose based on needs
 \end{itemize}
-\end{column}
-
-\begin{column}{0.55\textwidth}
-\begin{center}
-\includegraphics[width=\textwidth]{charts/dendrogram_example.pdf}
-\end{center}
 \end{column}
 \end{columns}
 \end{frame}
@@ -747,6 +759,16 @@ How many friends make a group?
 \end{center}
 \end{frame}
 
+% NEW: Data Preprocessing Pipeline with Example Data
+\begin{frame}
+\frametitle{\Large Data Preprocessing Pipeline - Example}
+\framesubtitle{Real Innovation Data Transformation}
+
+\begin{center}
+\includegraphics[width=0.85\textwidth]{charts/preprocessing_pipeline.pdf}
+\end{center}
+\end{frame}
+
 % NEW: Common Mistakes and Troubleshooting
 \begin{frame}
 \frametitle{\Large Common Mistakes \& Troubleshooting}
@@ -754,6 +776,13 @@ How many friends make a group?
 
 \begin{center}
 \includegraphics[width=0.85\textwidth]{charts/common_mistakes.pdf}
+\end{center}
+\end{frame}
+
+% NEW: Common Mistakes - Charts Only
+\begin{frame}[plain]
+\begin{center}
+\includegraphics[width=0.95\textwidth]{charts/common_mistakes.pdf}
 \end{center}
 \end{frame}
 
