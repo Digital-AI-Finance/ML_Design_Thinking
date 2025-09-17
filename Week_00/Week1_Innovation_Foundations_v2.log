@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.8.4)  17 SEP 2025 07:04
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.8.4)  17 SEP 2025 07:15
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1502,7 +1502,7 @@ Overfull \hbox (79.1023pt too wide) in paragraph at lines 354--354
  [][]  \OT1/cmss/m/n/5 ([])  
  []
 
-<figures/problem_evolution_w1.pdf, id=729, 798.58348pt x 380.11636pt>
+<figures/problem_evolution_w1.pdf, id=728, 798.58348pt x 380.11636pt>
 File: figures/problem_evolution_w1.pdf Graphic file (type pdf)
 <use figures/problem_evolution_w1.pdf>
 Package pdftex.def Info: figures/problem_evolution_w1.pdf  used on input line 3
@@ -1518,15 +1518,15 @@ Overfull \hbox (79.1023pt too wide) has occurred while \output is active
 [21
 
  <./figures/problem_evolution_w1.pdf>]
-Overfull \hbox (79.1023pt too wide) in paragraph at lines 382--382
+Overfull \hbox (79.1023pt too wide) in paragraph at lines 381--381
  [][]  \OT1/cmss/m/n/5 ([])  
  []
 
-<figures/integration_challenge.pdf, id=806, 686.565pt x 491.41217pt>
+<figures/integration_challenge.pdf, id=805, 686.565pt x 491.41217pt>
 File: figures/integration_challenge.pdf Graphic file (type pdf)
 <use figures/integration_challenge.pdf>
 Package pdftex.def Info: figures/integration_challenge.pdf  used on input line 
-382.
+381.
 (pdftex.def)             Requested size: 167.8713pt x 120.15334pt.
 
 
@@ -1538,7 +1538,7 @@ Overfull \hbox (79.1023pt too wide) has occurred while \output is active
 [22
 
  <./figures/integration_challenge.pdf>]
-Overfull \hbox (79.1023pt too wide) in paragraph at lines 394--394
+Overfull \hbox (79.1023pt too wide) in paragraph at lines 393--393
  [][]  \OT1/cmss/m/n/5 ([])  
  []
 
@@ -1552,7 +1552,7 @@ Overfull \hbox (79.1023pt too wide) has occurred while \output is active
 [23
 
 ]
-Overfull \hbox (79.1023pt too wide) in paragraph at lines 430--430
+Overfull \hbox (79.1023pt too wide) in paragraph at lines 429--429
  [][]  \OT1/cmss/m/n/5 ([])  
  []
 
@@ -1566,14 +1566,14 @@ Overfull \hbox (79.1023pt too wide) has occurred while \output is active
 [24
 
 ]
-Overfull \hbox (79.1023pt too wide) in paragraph at lines 454--454
+Overfull \hbox (79.1023pt too wide) in paragraph at lines 453--453
  [][]  \OT1/cmss/m/n/5 ([])  
  []
 
-<figures/metrics_comparison.pdf, id=893, 859.89566pt x 358.7415pt>
+<figures/metrics_comparison.pdf, id=892, 859.89566pt x 358.7415pt>
 File: figures/metrics_comparison.pdf Graphic file (type pdf)
 <use figures/metrics_comparison.pdf>
-Package pdftex.def Info: figures/metrics_comparison.pdf  used on input line 454
+Package pdftex.def Info: figures/metrics_comparison.pdf  used on input line 453
 .
 (pdftex.def)             Requested size: 235.01881pt x 98.04387pt.
 
@@ -1586,7 +1586,7 @@ Overfull \hbox (79.1023pt too wide) has occurred while \output is active
 [25
 
  <./figures/metrics_comparison.pdf>]
-Overfull \hbox (79.1023pt too wide) in paragraph at lines 474--474
+Overfull \hbox (79.1023pt too wide) in paragraph at lines 473--473
  [][]  \OT1/cmss/m/n/5 ([])  
  []
 
@@ -1602,10 +1602,10 @@ Overfull \hbox (79.1023pt too wide) has occurred while \output is active
 ]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\translate ' on input line 478.
+(hyperref)                removing `\translate ' on input line 477.
 
 
-Overfull \hbox (79.1023pt too wide) in paragraph at lines 493--493
+Overfull \hbox (79.1023pt too wide) in paragraph at lines 492--492
  [][]  \OT1/cmss/m/n/5 ([])  
  []
 
@@ -1619,7 +1619,7 @@ Overfull \hbox (79.1023pt too wide) has occurred while \output is active
 [27
 
 ]
-Overfull \hbox (79.1023pt too wide) in paragraph at lines 520--520
+Overfull \hbox (79.1023pt too wide) in paragraph at lines 519--519
  [][]  \OT1/cmss/m/n/5 ([])  
  []
 
@@ -1633,7 +1633,7 @@ Overfull \hbox (79.1023pt too wide) has occurred while \output is active
 [28
 
 ]
-Overfull \hbox (79.1023pt too wide) in paragraph at lines 547--547
+Overfull \hbox (79.1023pt too wide) in paragraph at lines 546--546
  [][]  \OT1/cmss/m/n/5 ([])  
  []
 
@@ -1647,7 +1647,7 @@ Overfull \hbox (79.1023pt too wide) has occurred while \output is active
 [29
 
 ]
-Overfull \hbox (79.1023pt too wide) in paragraph at lines 570--570
+Overfull \hbox (79.1023pt too wide) in paragraph at lines 569--569
  [][]  \OT1/cmss/m/n/5 ([])  
  []
 
@@ -1675,23 +1675,15 @@ Overfull \hbox (79.1023pt too wide) has occurred while \output is active
 LaTeX2e <2025-06-01> patch level 1
 L3 programming layer <2025-07-19>
  ***********
-
-
-Package rerunfilecheck Warning: File `Week1_Innovation_Foundations_v2.out' has 
-changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `Week1_Innovation_Foundations_v2.out
-':
-(rerunfilecheck)             Before: 6848BFAFDDF0B01459690ECB46A7AC5E;1292
-(rerunfilecheck)             After:  35EC9F4DA4E7640512726FA63C928499;1251.
+Package rerunfilecheck Info: File `Week1_Innovation_Foundations_v2.out' has not
+ changed.
+(rerunfilecheck)             Checksum: 35EC9F4DA4E7640512726FA63C928499;1251.
  ) 
 Here is how much of TeX's memory you used:
- 23325 strings out of 468149
- 460573 string characters out of 5426727
+ 23321 strings out of 468149
+ 460541 string characters out of 5426727
  824332 words of memory out of 5000000
- 51365 multiletter control sequences out of 15000+600000
+ 51361 multiletter control sequences out of 15000+600000
  634888 words of font info for 69 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  128i,15n,123p,425b,717s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -1709,7 +1701,7 @@ OsterriederJRO/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cms
 y7.pfb><C:/Users/OsterriederJRO/AppData/Local/Programs/MiKTeX/fonts/type1/publi
 c/amsfonts/cm/cmsy8.pfb><C:/Users/OsterriederJRO/AppData/Local/Programs/MiKTeX/
 fonts/type1/public/amsfonts/symbols/msam7.pfb>
-Output written on Week1_Innovation_Foundations_v2.pdf (30 pages, 561898 bytes).
+Output written on Week1_Innovation_Foundations_v2.pdf (30 pages, 561646 bytes).
 
 PDF statistics:
  1064 PDF objects out of 1200 (max. 8388607)
