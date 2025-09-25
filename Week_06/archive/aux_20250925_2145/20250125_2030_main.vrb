@@ -1,0 +1,49 @@
+\frametitle{Step-by-Step: Prompt Engineering}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Step 1: Ideation Prompt}}
+
+\footnotesize
+\texttt{Generate 10 innovative product ideas}\\
+\texttt{that solve [problem] for [audience].}\\
+\texttt{For each idea provide:}\\
+\texttt{- Name}\\
+\texttt{- One-line description}\\
+\texttt{- Key differentiator}\\
+\texttt{- Target market size}
+
+\vspace{0.2cm}
+\textcolor{mlorange}{\textbf{Step 2: Refinement}}
+
+\footnotesize
+\texttt{Take idea \#3 and expand:}\\
+\texttt{- Problem it solves (specific)}\\
+\texttt{- Solution approach}\\
+\texttt{- 5 key features}\\
+\texttt{- Revenue model}\\
+\texttt{- Competitive advantage}
+
+\column{0.48\textwidth}
+\textcolor{mlgreen}{\textbf{Step 3: Visual Generation}}
+
+\footnotesize
+\texttt{Create a product mockup:}\\
+\texttt{"Minimalist app interface for}\\
+\texttt{[product], clean design,}\\
+\texttt{modern UI, mobile screen,}\\
+\texttt{professional, Figma style"}
+
+\vspace{0.2cm}
+\textcolor{mlpurple}{\textbf{Step 4: Copy Creation}}
+
+\footnotesize
+\texttt{Write landing page copy:}\\
+\texttt{- Hero headline (7 words)}\\
+\texttt{- Subheadline (15 words)}\\
+\texttt{- 3 benefit statements}\\
+\texttt{- Call to action}\\
+\texttt{Target emotion: excitement}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Good prompts = Good outputs}

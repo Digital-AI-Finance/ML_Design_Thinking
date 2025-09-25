@@ -1,0 +1,6 @@
+\babel@toc {english}{}\relax 
+\beamer@sectionintoc {1}{Foundation: The Prototyping Revolution}{3}{0}{1}
+\beamer@sectionintoc {2}{Algorithms: The Magic Behind Generation}{13}{0}{2}
+\beamer@sectionintoc {3}{Implementation: Making It Real}{25}{0}{3}
+\beamer@sectionintoc {4}{Design: Human-AI Creative Partnership}{36}{0}{4}
+\beamer@sectionintoc {5}{Practice: Build Something Amazing}{42}{0}{5}
