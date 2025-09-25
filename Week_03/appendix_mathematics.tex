@@ -1,0 +1,111 @@
+% Appendix: Mathematical Foundations
+\section*{Appendix: Mathematical Foundations}
+
+% Slide 1: TF-IDF Mathematics
+\begin{frame}{TF-IDF: Term Frequency-Inverse Document Frequency}
+\Large\textbf{Measuring Word Importance}
+\normalsize
+
+\textbf{Term Frequency (TF):}
+$$\text{TF}(t, d) = \frac{\text{Number of times term } t \text{ appears in document } d}{\text{Total number of terms in document } d}$$
+
+\vspace{0.5em}
+\textbf{Inverse Document Frequency (IDF):}
+$$\text{IDF}(t, D) = \log\left(\frac{\text{Total number of documents } |D|}{\text{Number of documents containing term } t}\right)$$
+
+\vspace{0.5em}
+\textbf{TF-IDF Score:}
+$$\text{TF-IDF}(t, d, D) = \text{TF}(t, d) \times \text{IDF}(t, D)$$
+
+\begin{tcolorbox}[colback=mlblue!10,colframe=mlblue]
+\centering
+\small High TF-IDF = Term is frequent in document but rare in corpus = Important/distinctive
+\end{tcolorbox}
+\end{frame}
+
+% Slide 2: Word Embedding Theory
+\begin{frame}{Word2Vec: Skip-gram and CBOW}
+\Large\textbf{Learning Word Representations}
+\normalsize
+
+\textbf{Skip-gram Objective:}
+\small
+$$J(\theta) = -\frac{1}{T}\sum_{t=1}^{T}\sum_{-c \leq j \leq c, j \neq 0} \log p(w_{t+j}|w_t;\theta)$$
+
+\normalsize
+where:
+$$p(w_O|w_I) = \frac{\exp(v_{w_O}^T v_{w_I})}{\sum_{w=1}^{W}\exp(v_w^T v_{w_I})}$$
+
+\vspace{0.5em}
+\textbf{CBOW (Continuous Bag of Words):}
+$$p(w_t|w_{t-c},...,w_{t+c}) = \frac{\exp(v_{w_t}^T \bar{v})}{\sum_{w=1}^{W}\exp(v_w^T \bar{v})}$$
+
+where $\bar{v} = \frac{1}{2c}\sum_{-c \leq j \leq c, j \neq 0} v_{w_{t+j}}$ is the average context vector
+
+\vspace{0.5em}
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\textbf{Skip-gram:} Predict context from word
+\end{column}
+\begin{column}{0.48\textwidth}
+\textbf{CBOW:} Predict word from context
+\end{column}
+\end{columns}
+\end{frame}
+
+% Slide 3: Attention Mechanism
+\begin{frame}{Scaled Dot-Product Attention}
+\Large\textbf{The Core of Transformers}
+\normalsize
+
+\textbf{Attention Function:}
+$$\text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V$$
+
+where:
+\begin{itemize}
+\item $Q \in \mathbb{R}^{n \times d_k}$: Query matrix
+\item $K \in \mathbb{R}^{m \times d_k}$: Key matrix
+\item $V \in \mathbb{R}^{m \times d_v}$: Value matrix
+\item $d_k$: Dimension of keys (scaling factor)
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Multi-Head Attention:}
+$$\text{MultiHead}(Q, K, V) = \text{Concat}(\text{head}_1, ..., \text{head}_h)W^O$$
+
+where:
+$$\text{head}_i = \text{Attention}(QW_i^Q, KW_i^K, VW_i^V)$$
+
+\begin{tcolorbox}[colback=mlgreen!10,colframe=mlgreen]
+\centering
+\small Scaling by $\sqrt{d_k}$ prevents softmax saturation with large dimensions
+\end{tcolorbox}
+\end{frame}
+
+% Slide 4: Loss Functions for Classification
+\begin{frame}{Loss Functions: Training Objectives}
+\Large\textbf{Optimizing Sentiment Classification}
+\normalsize
+
+\textbf{Binary Cross-Entropy (Binary Sentiment):}
+$$\mathcal{L}_{BCE} = -\frac{1}{N}\sum_{i=1}^{N}[y_i\log(\hat{y}_i) + (1-y_i)\log(1-\hat{y}_i)]$$
+
+\vspace{0.5em}
+\textbf{Categorical Cross-Entropy (Multi-class):}
+$$\mathcal{L}_{CCE} = -\frac{1}{N}\sum_{i=1}^{N}\sum_{j=1}^{C}y_{ij}\log(\hat{y}_{ij})$$
+
+\vspace{0.5em}
+\textbf{Focal Loss (Imbalanced Data):}
+$$\mathcal{L}_{FL} = -\alpha_t(1-p_t)^\gamma\log(p_t)$$
+
+where:
+\begin{itemize}
+\item $\alpha_t$: Class weight
+\item $\gamma$: Focusing parameter (typically 2)
+\item $p_t$: Model's estimated probability for correct class
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{F1 Score (Evaluation):}
+$$F_1 = 2 \cdot \frac{\text{Precision} \times \text{Recall}}{\text{Precision} + \text{Recall}} = \frac{2TP}{2TP + FP + FN}$$
+\end{frame}

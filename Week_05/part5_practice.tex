@@ -1,0 +1,415 @@
+% Part 5: Practice - Hands-on Innovation Workshop
+\section{Practice: Innovation Mining Workshop}
+
+% Case Study Introduction
+\begin{frame}{Case Study: Smart Home Innovation}
+\begin{columns}[T]
+\column{0.55\textwidth}
+\textcolor{mlblue}{\Large\textbf{Challenge}}\\[0.3cm]
+\normalsize
+A smart home company wants to identify new product opportunities from:
+\begin{itemize}
+\item 50,000 customer reviews
+\item 10,000 support tickets
+\item 5,000 forum discussions
+\item 2,000 survey responses
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlorange}{\textbf{Goal:}} Find top 5 innovation opportunities
+
+\column{0.43\textwidth}
+\includegraphics[width=\textwidth]{case_study_overview.pdf}
+
+\vspace{0.3cm}
+\small\textcolor{mlgreen}{\textbf{Expected Outcomes:}}
+\begin{itemize}
+\item Topic map of user needs
+\item Priority feature list
+\item New product concepts
+\item Development roadmap
+\end{itemize}
+\end{columns}
+\end{frame}
+
+% Workshop Exercise
+\begin{frame}{Workshop Exercise: Your Turn}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Dataset Provided}}
+
+\small
+\textbf{startup\_ideas.csv}
+\begin{itemize}
+\item 5,000 startup descriptions
+\item 15 industry categories
+\item Funding information
+\item Success metrics
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlorange}{\textbf{Your Tasks:}}
+\begin{enumerate}
+\item Load and explore data
+\item Preprocess text
+\item Build topic model
+\item Visualize results
+\item Identify opportunities
+\end{enumerate}
+
+\column{0.48\textwidth}
+\textcolor{mlgreen}{\textbf{Starter Code}}
+
+\footnotesize
+\texttt{\footnotesize
+import pandas as pd\\
+from gensim import models\\
+\\
+\# Load data\\
+df = pd.read\_csv('startup\_ideas.csv')\\
+\\
+\# Your code here:\\
+\# 1. Preprocess descriptions\\
+\# 2. Create topic model\\
+\# 3. Extract insights\\
+\# 4. Find patterns\\
+\\
+\# Deliverable:\\
+\# - 10 innovation themes\\
+\# - Top opportunities\\
+\# - Action plan
+}
+
+\vspace{0.3cm}
+\small\textcolor{mlpurple}{Time: 45 minutes}
+\end{columns}
+\end{frame}
+
+% Step-by-Step Guide
+\begin{frame}{Step-by-Step Implementation}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Step 1: Data Preparation}}
+\footnotesize
+\texttt{
+\# Clean text\\
+def preprocess(text):\\
+~~~~\# Lowercase\\
+~~~~\# Remove special chars\\
+~~~~\# Tokenize\\
+~~~~\# Remove stopwords\\
+~~~~\# Lemmatize\\
+~~~~return tokens\\
+\\
+docs = df['description'].apply(preprocess)
+}
+
+\vspace{0.2cm}
+\textcolor{mlorange}{\textbf{Step 2: Build Model}}
+\footnotesize
+\texttt{
+\# Create dictionary\\
+dictionary = corpora.Dictionary(docs)\\
+corpus = [dictionary.doc2bow(doc)\\
+~~~~~~~~~~for doc in docs]\\
+\\
+\# Train LDA\\
+lda = models.LdaModel(\\
+~~~~corpus, num\_topics=15,\\
+~~~~id2word=dictionary\\
+)
+}
+
+\column{0.48\textwidth}
+\textcolor{mlgreen}{\textbf{Step 3: Extract Insights}}
+\footnotesize
+\texttt{
+\# Get topics\\
+for idx, topic in lda.print\_topics():\\
+~~~~print(f'Topic \{idx\}: \{topic\}')\\
+\\
+\# Document-topic distribution\\
+doc\_topics = []\\
+for doc in corpus:\\
+~~~~doc\_topics.append(\\
+~~~~~~~~lda.get\_document\_topics(doc)\\
+~~~~)
+}
+
+\vspace{0.2cm}
+\textcolor{mlpurple}{\textbf{Step 4: Visualize}}
+\footnotesize
+\texttt{
+\# Create visualization\\
+import pyLDAvis.gensim\\
+vis = pyLDAvis.gensim.prepare(\\
+~~~~lda, corpus, dictionary\\
+)\\
+pyLDAvis.display(vis)
+}
+\end{columns}
+\end{frame}
+
+% Results Analysis
+\begin{frame}{Analyzing Your Results}
+\begin{columns}[T]
+\column{0.55\textwidth}
+\includegraphics[width=\textwidth]{workshop_results.pdf}
+
+\vspace{0.3cm}
+\small
+\textcolor{mlblue}{\textbf{Topics Discovered:}}
+\begin{itemize}
+\item Healthcare AI (18\%)
+\item Sustainable tech (15\%)
+\item EdTech platforms (12\%)
+\item FinTech solutions (11\%)
+\item Food delivery (9\%)
+\end{itemize}
+
+\column{0.43\textwidth}
+\textcolor{mlorange}{\textbf{Interpretation Guide}}
+
+\small
+\begin{enumerate}
+\item \textbf{Topic Prevalence}\\
+   \footnotesize Which themes dominate?
+\item \textbf{Topic Coherence}\\
+   \footnotesize Do words make sense?
+\item \textbf{Topic Distinctiveness}\\
+   \footnotesize Are topics different?
+\item \textbf{Business Relevance}\\
+   \footnotesize Can we act on this?
+\end{enumerate}
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{Next Steps:}}
+\begin{itemize}
+\item Deep dive top 3 topics
+\item Cross-reference with trends
+\item Generate concepts
+\end{itemize}
+\end{columns}
+\end{frame}
+
+% Innovation Opportunities
+\begin{frame}{Innovation Opportunities Found}
+\begin{columns}[T]
+\column{0.32\textwidth}
+\textcolor{mlblue}{\textbf{Opportunity 1}}\\
+\small\textbf{AI Health Assistant}
+
+\footnotesize
+Topics: Healthcare + AI + Elderly\\
+Market size: \$50B\\
+Competition: Low\\
+Feasibility: High
+
+\vspace{0.2cm}
+\textcolor{mlgreen}{Priority: HIGH}
+
+\column{0.32\textwidth}
+\textcolor{mlorange}{\textbf{Opportunity 2}}\\
+\small\textbf{Sustainable Packaging}
+
+\footnotesize
+Topics: Eco + Delivery + Waste\\
+Market size: \$30B\\
+Competition: Medium\\
+Feasibility: Medium
+
+\vspace{0.2cm}
+\textcolor{mlyellow}{Priority: MEDIUM}
+
+\column{0.32\textwidth}
+\textcolor{mlpurple}{\textbf{Opportunity 3}}\\
+\small\textbf{EdTech Gamification}
+
+\footnotesize
+Topics: Education + Gaming + Kids\\
+Market size: \$20B\\
+Competition: High\\
+Feasibility: High
+
+\vspace{0.2cm}
+\textcolor{mlyellow}{Priority: MEDIUM}
+\end{columns}
+
+\vspace{\fill}
+\begin{center}
+\includegraphics[width=0.7\textwidth]{opportunity_roadmap.pdf}
+\end{center}
+\end{frame}
+
+% Common Challenges
+\begin{frame}{Common Challenges \& Solutions}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlred}{\textbf{Challenge 1: Messy Topics}}
+
+\small
+\textbf{Problem:} Topics don't make sense
+
+\textbf{Solution:}
+\begin{itemize}
+\item Better preprocessing
+\item Adjust number of topics
+\item Remove more stopwords
+\item Try different algorithms
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlred}{\textbf{Challenge 2: Overlapping Topics}}
+
+\small
+\textbf{Problem:} Topics too similar
+
+\textbf{Solution:}
+\begin{itemize}
+\item Reduce number of topics
+\item Increase alpha parameter
+\item Use hierarchical models
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{mlred}{\textbf{Challenge 3: Unactionable Insights}}
+
+\small
+\textbf{Problem:} Topics not useful
+
+\textbf{Solution:}
+\begin{itemize}
+\item Add domain knowledge
+\item Filter by relevance
+\item Combine with other data
+\item Involve stakeholders
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlred}{\textbf{Challenge 4: Scale Issues}}
+
+\small
+\textbf{Problem:} Too slow on big data
+
+\textbf{Solution:}
+\begin{itemize}
+\item Sample documents
+\item Use online learning
+\item Parallelize processing
+\item Cloud computing
+\end{itemize}
+\end{columns}
+\end{frame}
+
+% Best Practices Summary
+\begin{frame}{Best Practices for Innovation Mining}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Data Collection}}
+\begin{itemize}
+\item Diverse sources essential
+\item Quality over quantity
+\item Regular updates needed
+\item Include edge cases
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlorange}{\textbf{Model Building}}
+\begin{itemize}
+\item Start simple, iterate
+\item Validate with humans
+\item Document parameters
+\item Version control models
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{mlgreen}{\textbf{Insight Generation}}
+\begin{itemize}
+\item Look for patterns
+\item Cross-reference topics
+\item Consider combinations
+\item Think user-first
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlpurple}{\textbf{Action Planning}}
+\begin{itemize}
+\item Prioritize ruthlessly
+\item Start with MVPs
+\item Test assumptions
+\item Measure impact
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\begin{center}
+\small\textcolor{mlred}{Success = Good Data + Right Model + Human Insight + Action}
+\end{center}
+\end{frame}
+
+% Key Takeaways
+\begin{frame}{Key Takeaways}
+\begin{columns}[T]
+\column{0.55\textwidth}
+\textcolor{mlblue}{\Large\textbf{What You've Learned}}
+
+\normalsize
+\begin{enumerate}
+\item Topic modeling transforms unstructured text into innovation insights
+\item LDA, NMF, and modern methods each have strengths
+\item Quality preprocessing is critical
+\item Topics must translate to action
+\item Combining topics creates breakthroughs
+\end{enumerate}
+
+\column{0.43\textwidth}
+\textcolor{mlorange}{\Large\textbf{Your Toolkit}}
+
+\normalsize
+\begin{itemize}
+\item[\checkmark] Gensim for topic modeling
+\item[\checkmark] pyLDAvis for visualization
+\item[\checkmark] Evaluation metrics
+\item[\checkmark] Design frameworks
+\item[\checkmark] Workshop templates
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\begin{center}
+\Large\textcolor{mlgreen}{\textbf{You're ready to mine innovation at scale!}}
+\end{center}
+\end{frame}
+
+% Next Week Preview
+\begin{frame}{Next Week: Generative AI for Prototyping}
+\begin{columns}[T]
+\column{0.55\textwidth}
+\includegraphics[width=\textwidth]{week6_preview.pdf}
+
+\column{0.43\textwidth}
+\textcolor{mlblue}{\Large\textbf{Week 6 Preview}}
+
+\normalsize
+\begin{itemize}
+\item GPT for design concepts
+\item DALL-E for visualization
+\item Code generation
+\item Rapid prototyping
+\item AI-assisted creativity
+\end{itemize}
+
+\vspace{0.5cm}
+\textcolor{mlorange}{\textbf{Preparation:}}
+\begin{itemize}
+\item Review transformer basics
+\item Explore GPT playground
+\item Think about prototypes
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\begin{center}
+\small\textcolor{mlgray}{From discovering what to build → to building it with AI}
+\end{center}
+\end{frame}

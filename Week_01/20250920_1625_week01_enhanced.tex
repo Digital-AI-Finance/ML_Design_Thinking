@@ -1,0 +1,1638 @@
+\documentclass[8pt,aspectratio=169]{beamer}
+\usetheme{Madrid}
+\usecolortheme{default}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{adjustbox}
+\usepackage{multicol}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{tcolorbox}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows, positioning}
+\usepackage{listings}
+
+% Define colors matching the overview presentation
+\definecolor{mlblue}{RGB}{31, 119, 180}
+\definecolor{mlorange}{RGB}{255, 127, 14}
+\definecolor{mlgreen}{RGB}{44, 160, 44}
+\definecolor{mlred}{RGB}{214, 39, 40}
+\definecolor{mlpurple}{RGB}{148, 103, 189}
+\definecolor{mlbrown}{RGB}{140, 86, 75}
+\definecolor{mlpink}{RGB}{227, 119, 194}
+\definecolor{mlgray}{RGB}{127, 127, 127}
+\definecolor{mlyellow}{RGB}{255, 187, 120}
+\definecolor{mlcyan}{RGB}{23, 190, 207}
+
+% Beamer template customization
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{footline}{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
+    \usebeamerfont{author in head/foot}Part \insertpartnumber/4
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+    \usebeamerfont{title in head/foot}Week 1: Clustering
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    \usebeamerfont{date in head/foot}Slide \insertframenumber{} of \inserttotalframenumber\hspace*{2ex} 
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+
+% Enhanced title information
+\title{\Large\textbf{Machine Learning for Smarter Innovation}\\
+\vspace{0.5em}
+\Large Week 1: Foundations \& Clustering}
+\subtitle{Discovering Innovation Patterns with ML\\
+\small A Comprehensive Guide to Pattern Recognition}
+\author{BSc Course in AI-Enhanced Innovation}
+\institute{Department of Computer Science}
+\date{2025}
+
+\begin{document}
+
+% Enhanced title slide with more context
+\begin{frame}
+\titlepage
+\vspace{-1em}
+\begin{center}
+\small\textit{This week: Transform 5000+ scattered innovation ideas into actionable patterns using clustering algorithms}
+\end{center}
+\end{frame}
+
+% Table of Contents
+\begin{frame}
+\frametitle{Today's Journey}
+\framesubtitle{Your Roadmap to Understanding Clustering for Innovation}
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\begin{tcolorbox}[colback=mlblue!10, colframe=mlblue!50, title=Technical Foundation]
+\small
+\textbf{Part 1: Foundation (20 min)}
+\begin{itemize}
+\item Why traditional approaches fail
+\item The dual pipeline methodology
+\item Setting learning objectives
+\end{itemize}
+
+\vspace{0.3em}
+\textbf{Part 2: Technical Core (30 min)}
+\begin{itemize}
+\item K-means clustering explained
+\item Finding optimal clusters
+\item Quality metrics and validation
+\item Advanced algorithms (DBSCAN, Hierarchical)
+\end{itemize}
+\end{tcolorbox}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\begin{tcolorbox}[colback=mlgreen!10, colframe=mlgreen!50, title=Application Focus]
+\small
+\textbf{Part 3: Design Integration (25 min)}
+\begin{itemize}
+\item Creating innovation archetypes
+\item Pattern mapping and journeys
+\item Opportunity identification
+\item Priority matrices
+\end{itemize}
+
+\vspace{0.3em}
+\textbf{Part 4: Practice (15 min)}
+\begin{itemize}
+\item Real-world case studies
+\item Implementation checklist
+\item Hands-on exercises
+\item Resources and next steps
+\end{itemize}
+\end{tcolorbox}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Enhanced Prerequisites with detailed explanations
+\begin{frame}
+\frametitle{\Large Prerequisites \& What You Need}
+\framesubtitle{Setting You Up for Success - No ML Experience Required!}
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\begin{tcolorbox}[colback=mlgreen!10, colframe=mlgreen!50, title=What You Should Know]
+\normalsize
+\begin{itemize}
+\item \textbf{Basic Python} 
+  \begin{itemize}
+  \small
+  \item Variables, loops, functions
+  \item Lists and dictionaries
+  \end{itemize}
+\item \textbf{High school math}
+  \begin{itemize}
+  \small
+  \item Calculating averages
+  \item Understanding distances
+  \end{itemize}
+\item \textbf{Jupyter notebooks}
+  \begin{itemize}
+  \small
+  \item Running cells
+  \item Basic navigation
+  \end{itemize}
+\item \textbf{Data concepts}
+  \begin{itemize}
+  \small
+  \item Tables, rows, columns
+  \item CSV files
+  \end{itemize}
+\end{itemize}
+\end{tcolorbox}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\begin{tcolorbox}[colback=mlblue!10, colframe=mlblue!50, title=What We'll Provide]
+\normalsize
+\begin{itemize}
+\item \textbf{Code templates}
+  \begin{itemize}
+  \small
+  \item Copy-paste ready
+  \item Fully commented
+  \end{itemize}
+\item \textbf{Step-by-step guides}
+  \begin{itemize}
+  \small
+  \item Visual explanations
+  \item Checkpoint exercises
+  \end{itemize}
+\item \textbf{Practice datasets}
+  \begin{itemize}
+  \small
+  \item Innovation examples
+  \item Pre-cleaned data
+  \end{itemize}
+\item \textbf{Support materials}
+  \begin{itemize}
+  \small
+  \item Glossary of terms
+  \item FAQ section
+  \end{itemize}
+\end{itemize}
+\end{tcolorbox}
+\end{column}
+\end{columns}
+
+\vspace{0.5em}
+\begin{center}
+\begin{tcolorbox}[colback=mlyellow!20, colframe=mlorange!60, width=0.8\textwidth]
+\centering
+\textbf{Remember:} Everyone starts somewhere. We'll guide you step-by-step!
+\end{tcolorbox}
+\end{center}
+\end{frame}
+
+% PART 1: Enhanced Foundation Section
+\begin{frame}[plain]
+\begin{center}
+\vspace{2em}
+{\Huge\textcolor{mlblue}{\textbf{PART 1}}}\\
+\vspace{0.5em}
+{\Large\textbf{Foundation \& Context}}\\
+\vspace{1em}
+\textit{Understanding why we need ML for innovation}\\
+\vspace{2em}
+\Large
+\textbf{Key Questions We'll Answer:}\\
+\vspace{0.5em}
+\normalsize
+\begin{itemize}
+\item Why do traditional methods fail at scale?
+\item How does ML amplify human creativity?
+\item What is the dual pipeline approach?
+\item Where does clustering fit in innovation?
+\end{itemize}
+\vspace{1em}
+\Large\textcolor{mlpurple}{\textbf{Let's build your foundation}}
+\end{center}
+\end{frame}
+
+% Enhanced Innovation Discovery slide with detailed explanation
+\begin{frame}
+\frametitle{\Large Innovation Discovery: The Starting Point}
+\framesubtitle{Finding Order in Chaos - Your First Challenge}
+
+\begin{columns}[T]
+\begin{column}{0.65\textwidth}
+\begin{center}
+\includegraphics[width=\textwidth]{charts/innovation_discovery.pdf}
+\end{center}
+\end{column}
+
+\begin{column}{0.33\textwidth}
+\begin{tcolorbox}[colback=mlpurple!10, colframe=mlpurple!50, title=The Challenge]
+\small
+\textbf{What you see:}
+\begin{itemize}
+\item 5000+ scattered ideas
+\item No clear patterns
+\item Hidden connections
+\item Overwhelming complexity
+\end{itemize}
+
+\vspace{0.3em}
+\textbf{What ML will find:}
+\begin{itemize}
+\item Natural groupings
+\item Innovation types
+\item Relationships
+\item Opportunities
+\end{itemize}
+\end{tcolorbox}
+\end{column}
+\end{columns}
+
+\vspace{0.3em}
+\begin{center}
+\begin{tcolorbox}[colback=mlyellow!20, colframe=mlorange!60, width=0.9\textwidth]
+\centering
+\textbf{Think about it:} How would YOU group 5000 ideas manually? How long would it take?
+\end{tcolorbox}
+\end{center}
+\end{frame}
+
+% Enhanced Innovation Challenge with detailed comparisons
+\begin{frame}
+\frametitle{\Large The Innovation Challenge: A Detailed Comparison}
+\framesubtitle{Why Traditional Design Thinking Needs AI Enhancement}
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\begin{tcolorbox}[colback=mlred!10, colframe=mlred!50, title=Traditional Limitations]
+\small
+\textbf{Scale Problems:}
+\begin{itemize}
+\item Can analyze 50-100 ideas manually
+\item Takes weeks for basic insights
+\item Limited to obvious patterns
+\end{itemize}
+
+\textbf{Human Biases:}
+\begin{itemize}
+\item Confirmation bias
+\item Availability heuristic
+\item Anchoring effects
+\end{itemize}
+
+\textbf{Process Issues:}
+\begin{itemize}
+\item Sequential analysis
+\item Manual categorization
+\item Static frameworks
+\end{itemize}
+\end{tcolorbox}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\begin{tcolorbox}[colback=mlgreen!10, colframe=mlgreen!50, title=AI-Enhanced Capabilities]
+\small
+\textbf{Scale Advantages:}
+\begin{itemize}
+\item Process millions of data points
+\item Real-time pattern recognition
+\item Find non-obvious connections
+\end{itemize}
+
+\textbf{Objective Analysis:}
+\begin{itemize}
+\item Data-driven discovery
+\item Statistical validation
+\item Unbiased grouping
+\end{itemize}
+
+\textbf{Dynamic Process:}
+\begin{itemize}
+\item Parallel processing
+\item Automatic clustering
+\item Adaptive learning
+\end{itemize}
+\end{tcolorbox}
+\end{column}
+\end{columns}
+
+\vspace{0.5em}
+\begin{center}
+\begin{tcolorbox}[colback=mlpurple!20, colframe=mlpurple!60, width=0.9\textwidth]
+\centering\large
+\textbf{The Promise:} 100x more insights, 10x faster innovation, 0 human bias
+\end{tcolorbox}
+\end{center}
+\end{frame}
+
+% Enhanced Dual Pipeline with detailed explanations
+\begin{frame}
+\frametitle{\Large The Dual Pipeline: A Revolutionary Approach}
+\framesubtitle{Where Machine Learning Meets Design Thinking}
+
+\begin{center}
+\includegraphics[width=0.75\textwidth]{../ML_Design_Course/course_visuals/dual_pipeline.pdf}
+\end{center}
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\begin{tcolorbox}[colback=mlblue!10, colframe=mlblue!50, title=ML Pipeline Explained]
+\small
+\textbf{Data} → \textbf{Process} → \textbf{Model} → \textbf{Evaluate} → \textbf{Deploy}
+
+\begin{itemize}
+\item \textbf{Data:} Collect innovation metrics
+\item \textbf{Process:} Clean and transform
+\item \textbf{Model:} Apply clustering
+\item \textbf{Evaluate:} Validate quality
+\item \textbf{Deploy:} Scale insights
+\end{itemize}
+\end{tcolorbox}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\begin{tcolorbox}[colback=mlorange!10, colframe=mlorange!50, title=Design Pipeline Explained]
+\small
+\textbf{Empathize} → \textbf{Define} → \textbf{Ideate} → \textbf{Prototype} → \textbf{Test}
+
+\begin{itemize}
+\item \textbf{Empathize:} Understand users
+\item \textbf{Define:} Frame problems
+\item \textbf{Ideate:} Generate solutions
+\item \textbf{Prototype:} Build concepts
+\item \textbf{Test:} Validate impact
+\end{itemize}
+\end{tcolorbox}
+\end{column}
+\end{columns}
+
+\vspace{0.3em}
+\begin{center}
+\textcolor{mlpurple}{\textbf{Key Insight:} Each ML step enhances its design thinking counterpart}
+\end{center}
+\end{frame}
+
+% Current Reality Visualization with explanations
+\begin{frame}
+\frametitle{\Large Current Reality: The One-Size-Fits-All Problem}
+\framesubtitle{Why Generic Categories Fail Innovation}
+
+\begin{columns}[T]
+\begin{column}{0.65\textwidth}
+\begin{center}
+\includegraphics[width=\textwidth]{charts/current_reality_visual.pdf}
+\end{center}
+\end{column}
+
+\begin{column}{0.33\textwidth}
+\begin{tcolorbox}[colback=mlred!10, colframe=mlred!50, title=Problems]
+\small
+\textbf{Left Side Issues:}
+\begin{itemize}
+\item Square pegs, round holes
+\item Forced categorization
+\item Lost uniqueness
+\item Missed patterns
+\end{itemize}
+
+\vspace{0.3em}
+\textbf{Right Side Benefits:}
+\begin{itemize}
+\item Natural fit
+\item Data-driven groups
+\item Preserved characteristics
+\item Revealed patterns
+\end{itemize}
+\end{tcolorbox}
+\end{column}
+\end{columns}
+
+\begin{center}
+\begin{tcolorbox}[colback=mlyellow!20, colframe=mlorange!60, width=0.9\textwidth]
+\centering
+\textbf{Real Example:} Netflix used to have 10 movie categories. Now they have 76,897 micro-genres thanks to clustering!
+\end{tcolorbox}
+\end{center}
+\end{frame}
+
+% Innovation Archetypes with detailed descriptions
+\begin{frame}
+\frametitle{\Large Innovation Archetypes: What We'll Discover}
+\framesubtitle{Common Patterns Hidden in Your Data}
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\begin{tcolorbox}[colback=mlblue!10, colframe=mlblue!50, title=Core Types]
+\small
+\textbf{1. Disruptive Innovation}
+\begin{itemize}
+\item Reshapes entire markets
+\item High risk, high reward
+\item Example: Uber vs taxis
+\end{itemize}
+
+\textbf{2. Incremental Innovation}
+\begin{itemize}
+\item Step-by-step improvements
+\item Low risk, steady gains
+\item Example: iPhone iterations
+\end{itemize}
+
+\textbf{3. Service Innovation}
+\begin{itemize}
+\item New delivery methods
+\item Customer experience focus
+\item Example: Amazon Prime
+\end{itemize}
+\end{tcolorbox}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\begin{tcolorbox}[colback=mlgreen!10, colframe=mlgreen!50, title=Emerging Types]
+\small
+\textbf{4. Business Model Innovation}
+\begin{itemize}
+\item New value creation
+\item Revenue model changes
+\item Example: Freemium models
+\end{itemize}
+
+\textbf{5. Process Innovation}
+\begin{itemize}
+\item Efficiency improvements
+\item Cost reduction focus
+\item Example: Lean manufacturing
+\end{itemize}
+
+\textbf{6. Platform Innovation}
+\begin{itemize}
+\item Ecosystem creation
+\item Network effects
+\item Example: App stores
+\end{itemize}
+\end{tcolorbox}
+\end{column}
+\end{columns}
+
+\vspace{0.3em}
+\begin{center}
+\begin{tcolorbox}[colback=mlpurple!20, colframe=mlpurple!60, width=0.9\textwidth]
+\centering
+\textbf{Clustering reveals:} Which type each of your 5000 ideas belongs to automatically!
+\end{tcolorbox}
+\end{center}
+\end{frame}
+
+% PART 2: Enhanced Technical Section
+\begin{frame}[plain]
+\begin{center}
+\vspace{2em}
+{\Huge\textcolor{mlgreen}{\textbf{PART 2}}}\\
+\vspace{0.5em}
+{\Large\textbf{Technical Core}}\\
+\vspace{1em}
+\textit{Learning the algorithms step by step}\\
+\vspace{2em}
+\Large
+\textbf{What You'll Master:}\\
+\vspace{0.5em}
+\normalsize
+\begin{itemize}
+\item K-means clustering algorithm
+\item Finding optimal number of clusters
+\item Measuring cluster quality
+\item Advanced techniques (DBSCAN, Hierarchical)
+\item Choosing the right algorithm
+\end{itemize}
+\vspace{1em}
+\Large\textcolor{mlpurple}{\textbf{No math degree required!}}
+\end{center}
+\end{frame}
+
+% Enhanced What is Clustering with visual metaphors
+\begin{frame}
+\frametitle{\Large What is Clustering? A Visual Introduction}
+\framesubtitle{Like Organizing Your Music Library - Automatically!}
+
+\begin{columns}[T]
+\begin{column}{0.65\textwidth}
+\begin{center}
+\includegraphics[width=\textwidth]{charts/chaos_to_clarity.pdf}
+\end{center}
+\end{column}
+
+\begin{column}{0.33\textwidth}
+\begin{tcolorbox}[colback=mlgreen!10, colframe=mlgreen!50, title=Real-World Analogies]
+\small
+\textbf{Clustering is like:}
+\begin{itemize}
+\item Sorting laundry by color
+\item Organizing books by topic
+\item Grouping friends by interests
+\item Arranging apps by category
+\end{itemize}
+
+\vspace{0.3em}
+\textbf{Key principle:}\\
+Similar things belong together
+
+\vspace{0.3em}
+\textbf{ML advantage:}\\
+Finds patterns you didn't know existed
+\end{tcolorbox}
+\end{column}
+\end{columns}
+
+\begin{center}
+\begin{tcolorbox}[colback=mlyellow!20, colframe=mlorange!60, width=0.9\textwidth]
+\centering
+\textbf{Remember:} The computer doesn't know what the groups mean - it just finds things that are similar!
+\end{tcolorbox}
+\end{center}
+\end{frame}
+
+% Enhanced K-Means Part 1 with detailed steps
+\begin{frame}
+\frametitle{\Large K-Means Clustering: The Workhorse Algorithm (Part 1)}
+\framesubtitle{Setting Up - Like Choosing Neighborhood Centers}
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\begin{tcolorbox}[colback=mlblue!10, colframe=mlblue!50, title=Step 1: Choose K]
+\small
+\textbf{What is K?}
+\begin{itemize}
+\item Number of groups you want
+\item Your hypothesis about the data
+\end{itemize}
+
+\textbf{How to choose:}
+\begin{itemize}
+\item Domain knowledge (you know there are 5 types)
+\item Elbow method (we'll learn this)
+\item Business requirements (need 3 segments)
+\end{itemize}
+
+\textbf{Common mistake:}\\
+Too many K = overfitting\\
+Too few K = underfitting
+\end{tcolorbox}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\begin{tcolorbox}[colback=mlgreen!10, colframe=mlgreen!50, title=Step 2: Initialize Centers]
+\small
+\textbf{What happens:}
+\begin{itemize}
+\item Place K random points in space
+\item These become initial centers
+\item Like dropping pins on a map
+\end{itemize}
+
+\textbf{Smart initialization:}
+\begin{itemize}
+\item K-means++ (spread out centers)
+\item Multiple random starts
+\item Best of N attempts
+\end{itemize}
+
+\textbf{Why it matters:}\\
+Bad initialization = poor clusters
+\end{tcolorbox}
+\end{column}
+\end{columns}
+
+\vspace{0.5em}
+\begin{center}
+\includegraphics[width=0.5\textwidth]{charts/kmeans_animation.pdf}
+\end{center}
+\end{frame}
+
+% Enhanced K-Means Part 2 with iteration details
+\begin{frame}
+\frametitle{\Large K-Means Clustering: The Workhorse Algorithm (Part 2)}
+\framesubtitle{The Iteration Dance - Finding Natural Groups}
+
+\begin{columns}[T]
+\begin{column}{0.32\textwidth}
+\begin{tcolorbox}[colback=mlred!10, colframe=mlred!50, title=Step 3: Assign]
+\small
+\textbf{For each point:}
+\begin{itemize}
+\item Calculate distance to all centers
+\item Assign to nearest center
+\item Forms initial clusters
+\end{itemize}
+
+\textbf{Distance metric:}\\
+Usually Euclidean\\
+(straight line distance)
+\end{tcolorbox}
+\end{column}
+
+\begin{column}{0.32\textwidth}
+\begin{tcolorbox}[colback=mlorange!10, colframe=mlorange!50, title=Step 4: Update]
+\small
+\textbf{For each cluster:}
+\begin{itemize}
+\item Calculate mean position
+\item Move center to mean
+\item Centers drift to density
+\end{itemize}
+
+\textbf{Why mean?}\\
+Minimizes total distance\\
+(mathematical optimum)
+\end{tcolorbox}
+\end{column}
+
+\begin{column}{0.32\textwidth}
+\begin{tcolorbox}[colback=mlgreen!10, colframe=mlgreen!50, title=Step 5: Repeat]
+\small
+\textbf{Keep iterating:}
+\begin{itemize}
+\item Repeat steps 3-4
+\item Until centers stop moving
+\item Usually 5-10 iterations
+\end{itemize}
+
+\textbf{Convergence:}\\
+Centers stabilize\\
+Clusters finalized
+\end{tcolorbox}
+\end{column}
+\end{columns}
+
+\vspace{0.5em}
+\begin{center}
+\includegraphics[width=0.6\textwidth]{charts/kmeans_animation.pdf}
+\end{center}
+
+\begin{center}
+\begin{tcolorbox}[colback=mlpurple!20, colframe=mlpurple!60, width=0.9\textwidth]
+\centering
+\textbf{Fun Fact:} K-means always converges! It's mathematically guaranteed to find a solution (though not always the best one).
+\end{tcolorbox}
+\end{center}
+\end{frame}
+
+% The Goldilocks Problem with visual examples
+\begin{frame}
+\frametitle{\Large The Goldilocks Problem: How Many Clusters?}
+\framesubtitle{Not Too Few, Not Too Many, But Just Right!}
+
+\begin{columns}[T]
+\begin{column}{0.32\textwidth}
+\begin{tcolorbox}[colback=mlred!10, colframe=mlred!50, title={Too Few (K=2)}]
+\begin{center}
+\includegraphics[width=0.9\textwidth]{charts/too_few_clusters.pdf}
+\end{center}
+\small
+\textbf{Problems:}
+\begin{itemize}
+\item Oversimplification
+\item Mixed segments
+\item Lost details
+\item Generic insights
+\end{itemize}
+
+\textcolor{mlred}{\textbf{Useless for innovation!}}
+\end{tcolorbox}
+\end{column}
+
+\begin{column}{0.32\textwidth}
+\begin{tcolorbox}[colback=mlgreen!10, colframe=mlgreen!50, title={Just Right (K=5)}]
+\begin{center}
+\includegraphics[width=0.9\textwidth]{charts/just_right_clusters.pdf}
+\end{center}
+\small
+\textbf{Benefits:}
+\begin{itemize}
+\item Clear segments
+\item Actionable insights
+\item Manageable complexity
+\item Distinct patterns
+\end{itemize}
+
+\textcolor{mlgreen}{\textbf{Perfect for action!}}
+\end{tcolorbox}
+\end{column}
+
+\begin{column}{0.32\textwidth}
+\begin{tcolorbox}[colback=mlorange!10, colframe=mlorange!50, title={Too Many (K=20)}]
+\begin{center}
+\includegraphics[width=0.9\textwidth]{charts/too_many_clusters.pdf}
+\end{center}
+\small
+\textbf{Issues:}
+\begin{itemize}
+\item Overfitting
+\item Tiny segments
+\item Analysis paralysis
+\item No strategy possible
+\end{itemize}
+
+\textcolor{mlorange}{\textbf{Too complex to use!}}
+\end{tcolorbox}
+\end{column}
+\end{columns}
+
+\vspace{0.3em}
+\begin{center}
+\begin{tcolorbox}[colback=mlyellow!20, colframe=mlorange!60, width=0.9\textwidth]
+\centering
+\textbf{Rule of Thumb:} Start with $K = \sqrt{n/2}$ where n is your sample size
+\end{tcolorbox}
+\end{center}
+\end{frame}
+
+% Enhanced Elbow Method with detailed explanation
+\begin{frame}
+\frametitle{\Large The Elbow Method: Finding Optimal K}
+\framesubtitle{A Data-Driven Approach to Choosing Clusters}
+
+\begin{columns}[T]
+\begin{column}{0.55\textwidth}
+\begin{center}
+\includegraphics[width=\textwidth]{charts/elbow_method.pdf}
+\end{center}
+\end{column}
+
+\begin{column}{0.43\textwidth}
+\begin{tcolorbox}[colback=mlblue!10, colframe=mlblue!50, title=How It Works]
+\small
+\textbf{The Process:}
+\begin{enumerate}
+\item Try K = 1, 2, 3, ... 10
+\item Measure "inertia" (total distance)
+\item Plot the curve
+\item Find the "elbow" point
+\end{enumerate}
+
+\textbf{What is inertia?}\\
+Sum of distances from points to their cluster center
+
+\textbf{The elbow:}\\
+Where adding more clusters doesn't help much
+
+\textbf{In this example:}\\
+K = 4 is optimal
+\end{tcolorbox}
+\end{column}
+\end{columns}
+
+\begin{center}
+\begin{tcolorbox}[colback=mlpurple!20, colframe=mlpurple!60, width=0.9\textwidth]
+\centering
+\textbf{Pro Tip:} If there's no clear elbow, try other methods like silhouette analysis
+\end{tcolorbox}
+\end{center}
+\end{frame}
+
+% Enhanced Distance Metrics with real examples
+\begin{frame}
+\frametitle{\Large Distance Metrics: How We Measure "Closeness"}
+\framesubtitle{Different Ways to Calculate Similarity}
+
+\begin{center}
+\includegraphics[width=0.85\textwidth]{charts/distance_metrics_detailed.pdf}
+\end{center}
+
+\begin{columns}[T]
+\begin{column}{0.32\textwidth}
+\begin{tcolorbox}[colback=mlblue!10, colframe=mlblue!50, title=Euclidean]
+\small
+\textbf{Straight line distance}\\
+"As the crow flies"
+
+\textbf{Use when:}
+\begin{itemize}
+\item Continuous data
+\item Physical distances
+\item Standard clustering
+\end{itemize}
+
+\textbf{Formula:}\\
+$d = \sqrt{(x_2-x_1)^2 + (y_2-y_1)^2}$
+\end{tcolorbox}
+\end{column}
+
+\begin{column}{0.32\textwidth}
+\begin{tcolorbox}[colback=mlgreen!10, colframe=mlgreen!50, title=Manhattan]
+\small
+\textbf{City block distance}\\
+"Walking in a grid"
+
+\textbf{Use when:}
+\begin{itemize}
+\item Grid-like data
+\item Categorical features
+\item Robust to outliers
+\end{itemize}
+
+\textbf{Formula:}\\
+$d = |x_2-x_1| + |y_2-y_1|$
+\end{tcolorbox}
+\end{column}
+
+\begin{column}{0.32\textwidth}
+\begin{tcolorbox}[colback=mlorange!10, colframe=mlorange!50, title=Cosine]
+\small
+\textbf{Angular similarity}\\
+"Direction matters"
+
+\textbf{Use when:}
+\begin{itemize}
+\item Text data
+\item High dimensions
+\item Magnitude irrelevant
+\end{itemize}
+
+\textbf{Formula:}\\
+$cos(\theta) = \frac{A \cdot B}{||A|| \times ||B||}$
+\end{tcolorbox}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Enhanced Evaluation Metrics - Silhouette Score
+\begin{frame}
+\frametitle{\Large Evaluation Metric 1: Silhouette Score}
+\framesubtitle{Measuring How Well-Separated Your Clusters Are}
+
+\begin{columns}[T]
+\begin{column}{0.65\textwidth}
+\begin{center}
+\includegraphics[width=\textwidth]{charts/silhouette_score.pdf}
+\end{center}
+\end{column}
+
+\begin{column}{0.33\textwidth}
+\begin{tcolorbox}[colback=mlblue!10, colframe=mlblue!50, title=Understanding Silhouette]
+\small
+\textbf{What it measures:}
+\begin{itemize}
+\item Cohesion: How close points are to their cluster
+\item Separation: How far from other clusters
+\end{itemize}
+
+\textbf{Score range:} -1 to +1
+
+\textbf{Interpretation:}
+\begin{itemize}
+\item > 0.7: Strong
+\item 0.5-0.7: Reasonable
+\item 0.25-0.5: Weak
+\item < 0.25: Poor
+\end{itemize}
+
+\textbf{Our score: 0.73}\\
+\textcolor{mlgreen}{\textbf{Excellent clustering!}}
+\end{tcolorbox}
+\end{column}
+\end{columns}
+
+\begin{center}
+\begin{tcolorbox}[colback=mlyellow!20, colframe=mlorange!60, width=0.9\textwidth]
+\centering
+\textbf{Think of it as:} A grade for your clustering - higher is better!
+\end{tcolorbox}
+\end{center}
+\end{frame}
+
+% Enhanced DBSCAN explanation
+\begin{frame}
+\frametitle{\Large DBSCAN: When Circles Don't Work}
+\framesubtitle{Density-Based Clustering for Complex Patterns}
+
+\begin{columns}[T]
+\begin{column}{0.55\textwidth}
+\begin{center}
+\includegraphics[width=\textwidth]{charts/dbscan_shapes.pdf}
+\end{center}
+\end{column}
+
+\begin{column}{0.43\textwidth}
+\begin{tcolorbox}[colback=mlgreen!10, colframe=mlgreen!50, title=DBSCAN Advantages]
+\small
+\textbf{What makes it special:}
+\begin{itemize}
+\item Finds any shape
+\item No need to specify K
+\item Identifies outliers
+\item Handles noise
+\end{itemize}
+
+\textbf{How it works:}
+\begin{itemize}
+\item Looks for dense regions
+\item Connects nearby points
+\item Expands clusters naturally
+\item Marks sparse points as noise
+\end{itemize}
+
+\textbf{Perfect for:}
+\begin{itemize}
+\item Geographic data
+\item Network analysis
+\item Anomaly detection
+\item Complex patterns
+\end{itemize}
+\end{tcolorbox}
+\end{column}
+\end{columns}
+
+\begin{center}
+\begin{tcolorbox}[colback=mlpurple!20, colframe=mlpurple!60, width=0.9\textwidth]
+\centering
+\textbf{Real Example:} DBSCAN can find galaxy clusters in astronomy data where K-means fails completely!
+\end{tcolorbox}
+\end{center}
+\end{frame}
+
+% Algorithm Comparison with decision guide
+\begin{frame}
+\frametitle{\Large Choosing the Right Algorithm: A Decision Guide}
+\framesubtitle{Match Your Data to the Right Method}
+
+\begin{center}
+\small
+\begin{tabular}{lccccl}
+\toprule
+\textbf{Algorithm} & \textbf{Speed} & \textbf{Shape} & \textbf{Need K?} & \textbf{Outliers} & \textbf{Best Use Case} \\
+\midrule
+\textcolor{mlblue}{\textbf{K-Means}} & Fast & Spherical & Yes & Sensitive & Quick customer segmentation \\
+\textcolor{mlgreen}{\textbf{DBSCAN}} & Medium & Any & No & Robust & Finding fraud patterns \\
+\textcolor{mlorange}{\textbf{Hierarchical}} & Slow & Any & No & Moderate & Organization taxonomy \\
+\textcolor{mlpurple}{\textbf{GMM}} & Medium & Elliptical & Yes & Moderate & Mixed populations \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{0.5em}
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\begin{tcolorbox}[colback=mlblue!10, colframe=mlblue!50, title=Start with K-Means if:]
+\small
+\begin{itemize}
+\item You need results fast
+\item Data has clear groups
+\item You know approximate K
+\item Groups are similar size
+\item You're just exploring
+\end{itemize}
+\end{tcolorbox}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\begin{tcolorbox}[colback=mlgreen!10, colframe=mlgreen!50, title=Use DBSCAN if:]
+\small
+\begin{itemize}
+\item Clusters have weird shapes
+\item You have outliers
+\item You don't know K
+\item Density varies
+\item Need robust results
+\end{itemize}
+\end{tcolorbox}
+\end{column}
+\end{columns}
+
+\begin{center}
+\begin{tcolorbox}[colback=mlyellow!20, colframe=mlorange!60, width=0.9\textwidth]
+\centering
+\textbf{Pro Tip:} Try K-means first for speed, then DBSCAN if results aren't satisfactory
+\end{tcolorbox}
+\end{center}
+\end{frame}
+
+% PART 3: Enhanced Design Integration
+\begin{frame}[plain]
+\begin{center}
+\vspace{2em}
+{\Huge\textcolor{mlorange}{\textbf{PART 3}}}\\
+\vspace{0.5em}
+{\Large\textbf{Design Integration}}\\
+\vspace{1em}
+\textit{Turning clusters into innovation insights}\\
+\vspace{2em}
+\Large
+\textbf{What You'll Create:}\\
+\vspace{0.5em}
+\normalsize
+\begin{itemize}
+\item Innovation archetypes from clusters
+\item Journey maps for each segment
+\item Opportunity heat maps
+\item Priority matrices
+\item Action plans
+\end{itemize}
+\vspace{1em}
+\Large\textcolor{mlpurple}{\textbf{From data to design decisions}}
+\end{center}
+\end{frame}
+
+% Enhanced Innovation Archetypes from Clusters
+\begin{frame}
+\frametitle{\Large From Clusters to Innovation Archetypes}
+\framesubtitle{Transforming Mathematical Groups into Actionable Personas}
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\begin{center}
+\includegraphics[width=\textwidth]{charts/innovation_archetypes.pdf}
+\end{center}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\begin{tcolorbox}[colback=mlorange!10, colframe=mlorange!50, title=Creating Archetypes]
+\small
+\textbf{Step 1: Analyze cluster characteristics}
+\begin{itemize}
+\item Common features
+\item Behavioral patterns
+\item Pain points
+\end{itemize}
+
+\textbf{Step 2: Build personas}
+\begin{itemize}
+\item Name the archetype
+\item Define key traits
+\item Identify needs
+\end{itemize}
+
+\textbf{Step 3: Design strategies}
+\begin{itemize}
+\item Tailored solutions
+\item Specific messaging
+\item Custom journeys
+\end{itemize}
+\end{tcolorbox}
+\end{column}
+\end{columns}
+
+\begin{center}
+\begin{tcolorbox}[colback=mlpurple!20, colframe=mlpurple!60, width=0.9\textwidth]
+\centering
+\textbf{Example:} Cluster 3 → "Early Adopters" → Need bleeding-edge features and exclusivity
+\end{tcolorbox}
+\end{center}
+\end{frame}
+
+% Enhanced Opportunity Heat Map
+\begin{frame}
+\frametitle{\Large Innovation Opportunity Heat Map}
+\framesubtitle{Where to Focus Your Innovation Efforts}
+
+\begin{columns}[T]
+\begin{column}{0.65\textwidth}
+\begin{center}
+\includegraphics[width=\textwidth]{charts/opportunity_heatmap.pdf}
+\end{center}
+\end{column}
+
+\begin{column}{0.33\textwidth}
+\begin{tcolorbox}[colback=mlred!10, colframe=mlred!50, title=Reading the Map]
+\small
+\textbf{Color intensity:}
+\begin{itemize}
+\item Dark red: High opportunity
+\item Orange: Medium potential
+\item Yellow: Low priority
+\end{itemize}
+
+\textbf{Key findings:}
+\begin{itemize}
+\item Disruptive: Scalability gaps
+\item Incremental: Integration needs
+\item Platform: Network effects
+\end{itemize}
+
+\textbf{Action:}\\
+Focus on red zones first for maximum impact
+\end{tcolorbox}
+\end{column}
+\end{columns}
+
+\begin{center}
+\begin{tcolorbox}[colback=mlyellow!20, colframe=mlorange!60, width=0.9\textwidth]
+\centering
+\textbf{Insight:} 80% of innovation value often comes from 20% of opportunities (Pareto principle)
+\end{tcolorbox}
+\end{center}
+\end{frame}
+
+% Design Priority Matrix Enhanced
+\begin{frame}
+\frametitle{\Large Design Priority Matrix: Where to Start}
+\framesubtitle{Balancing Impact and Effort for Smart Innovation}
+
+\begin{columns}[T]
+\begin{column}{0.55\textwidth}
+\begin{center}
+\includegraphics[width=\textwidth]{charts/design_priority_matrix.pdf}
+\end{center}
+\end{column}
+
+\begin{column}{0.43\textwidth}
+\begin{tcolorbox}[colback=mlgreen!10, colframe=mlgreen!50, title=Action Guide]
+\small
+\textbf{Quadrant 1: Quick Wins}\\
+\textcolor{mlgreen}{High Impact, Low Effort}
+\begin{itemize}
+\item Do these first!
+\item Fast validation
+\item Build momentum
+\end{itemize}
+
+\textbf{Quadrant 2: Strategic}\\
+\textcolor{mlblue}{High Impact, High Effort}
+\begin{itemize}
+\item Plan carefully
+\item Allocate resources
+\item Long-term value
+\end{itemize}
+
+\textbf{Quadrant 3: Fill-ins}\\
+\textcolor{mlorange}{Low Impact, Low Effort}
+\begin{itemize}
+\item Do when free
+\item Nice to have
+\end{itemize}
+
+\textbf{Quadrant 4: Avoid}\\
+\textcolor{mlred}{Low Impact, High Effort}
+\begin{itemize}
+\item Not worth it!
+\end{itemize}
+\end{tcolorbox}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Journey Mapping by Cluster
+\begin{frame}
+\frametitle{\Large Cluster-Specific Innovation Journeys}
+\framesubtitle{Different Paths for Different Innovation Types}
+
+\begin{columns}[T]
+\begin{column}{0.55\textwidth}
+\begin{center}
+\includegraphics[width=\textwidth]{charts/journey_map_clusters.pdf}
+\end{center}
+\end{column}
+
+\begin{column}{0.43\textwidth}
+\begin{tcolorbox}[colback=mlpurple!10, colframe=mlpurple!50, title=Journey Insights]
+\small
+\textbf{Disruptive (Red):}
+\begin{itemize}
+\item Fast adoption curve
+\item High initial resistance
+\item Exponential growth
+\end{itemize}
+
+\textbf{Incremental (Blue):}
+\begin{itemize}
+\item Steady progression
+\item Low resistance
+\item Linear growth
+\end{itemize}
+
+\textbf{Platform (Green):}
+\begin{itemize}
+\item Network effects
+\item Slow start, fast scale
+\item Community-driven
+\end{itemize}
+
+\textbf{Design implication:}\\
+Each needs different support!
+\end{tcolorbox}
+\end{column}
+\end{columns}
+
+\begin{center}
+\begin{tcolorbox}[colback=mlyellow!20, colframe=mlorange!60, width=0.9\textwidth]
+\centering
+\textbf{Key Lesson:} One innovation process doesn't fit all - customize by cluster!
+\end{tcolorbox}
+\end{center}
+\end{frame}
+
+% PART 4: Enhanced Summary & Practice
+\begin{frame}[plain]
+\begin{center}
+\vspace{2em}
+{\Huge\textcolor{mlred}{\textbf{PART 4}}}\\
+\vspace{0.5em}
+{\Large\textbf{Summary \& Practice}}\\
+\vspace{1em}
+\textit{Putting it all together}\\
+\vspace{2em}
+\Large
+\textbf{Final Steps:}\\
+\vspace{0.5em}
+\normalsize
+\begin{itemize}
+\item Review key concepts
+\item See real examples
+\item Try hands-on exercise
+\item Get resources
+\item Preview next week
+\end{itemize}
+\vspace{1em}
+\Large\textcolor{mlpurple}{\textbf{You're ready to cluster!}}
+\end{center}
+\end{frame}
+
+% Enhanced Key Takeaways
+\begin{frame}
+\frametitle{\Large Key Takeaways: Your Clustering Toolkit}
+\framesubtitle{What You've Learned Today}
+
+\begin{columns}[T]
+\begin{column}{0.32\textwidth}
+\begin{tcolorbox}[colback=mlblue!10, colframe=mlblue!50, title=Concepts]
+\small
+\textbf{You understand:}
+\begin{itemize}
+\item What clustering does
+\item Why it beats manual sorting
+\item How algorithms work
+\item When to use each type
+\item Quality metrics
+\end{itemize}
+\end{tcolorbox}
+\end{column}
+
+\begin{column}{0.32\textwidth}
+\begin{tcolorbox}[colback=mlgreen!10, colframe=mlgreen!50, title=Skills]
+\small
+\textbf{You can now:}
+\begin{itemize}
+\item Choose K wisely
+\item Run K-means
+\item Evaluate results
+\item Select algorithms
+\item Interpret clusters
+\end{itemize}
+\end{tcolorbox}
+\end{column}
+
+\begin{column}{0.32\textwidth}
+\begin{tcolorbox}[colback=mlorange!10, colframe=mlorange!50, title=Applications]
+\small
+\textbf{You'll create:}
+\begin{itemize}
+\item Innovation archetypes
+\item Journey maps
+\item Priority matrices
+\item Opportunity maps
+\item Action plans
+\end{itemize}
+\end{tcolorbox}
+\end{column}
+\end{columns}
+
+\vspace{0.5em}
+\begin{center}
+\begin{tcolorbox}[colback=mlpurple!20, colframe=mlpurple!60, width=0.9\textwidth]
+\centering\large
+\textbf{Main Message:} Clustering transforms overwhelming data into actionable innovation insights!
+\end{tcolorbox}
+\end{center}
+
+\begin{center}
+\textbf{Your turn:} Ready to try clustering on your own innovation data?
+\end{center}
+\end{frame}
+
+% Practice Exercise
+\begin{frame}
+\frametitle{\Large Practice Exercise: Your First Clustering Project}
+\framesubtitle{Hands-On Learning with Real Data}
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\begin{tcolorbox}[colback=mlblue!10, colframe=mlblue!50, title=The Task]
+\normalsize
+\textbf{Dataset:} 1000 product reviews\\
+\textbf{Goal:} Find customer segments
+
+\vspace{0.3em}
+\textbf{Steps:}
+\begin{enumerate}
+\item Load the data
+\item Preprocess features
+\item Run K-means (K=3,4,5)
+\item Use elbow method
+\item Calculate silhouette
+\item Interpret clusters
+\item Name segments
+\item Create personas
+\end{enumerate}
+
+\textbf{Time:} 30 minutes\\
+\textbf{Difficulty:} Beginner
+\end{tcolorbox}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\begin{tcolorbox}[colback=mlgreen!10, colframe=mlgreen!50, title=Starter Code]
+\small
+\begin{lstlisting}[language=Python, basicstyle=\tiny\ttfamily]
+import pandas as pd
+from sklearn.cluster import KMeans
+from sklearn.preprocessing import StandardScaler
+
+# Load data
+data = pd.read_csv('reviews.csv')
+
+# Preprocess
+scaler = StandardScaler()
+X = scaler.fit_transform(data[features])
+
+# Cluster
+kmeans = KMeans(n_clusters=4)
+labels = kmeans.fit_predict(X)
+
+# Analyze
+data['cluster'] = labels
+print(data.groupby('cluster').mean())
+\end{lstlisting}
+\end{tcolorbox}
+
+\vspace{0.3em}
+\begin{tcolorbox}[colback=mlyellow!20, colframe=mlorange!60]
+\centering\small
+\textbf{Hint:} Look for patterns in ratings, sentiment, and product categories
+\end{tcolorbox}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Implementation Checklist Enhanced
+\begin{frame}
+\frametitle{\Large Your Implementation Checklist}
+\framesubtitle{Step-by-Step Guide to Clustering Success}
+
+\begin{columns}[T]
+\begin{column}{0.32\textwidth}
+\begin{tcolorbox}[colback=mlblue!10, colframe=mlblue!50, title=1. Prepare]
+\small
+\textbf{Data Collection:}
+\begin{itemize}
+\item[$\square$] Gather features
+\item[$\square$] Clean data
+\item[$\square$] Handle missing
+\item[$\square$] Remove duplicates
+\end{itemize}
+
+\textbf{Preprocessing:}
+\begin{itemize}
+\item[$\square$] Scale features
+\item[$\square$] Encode categorical
+\item[$\square$] Feature selection
+\item[$\square$] Check distributions
+\end{itemize}
+\end{tcolorbox}
+\end{column}
+
+\begin{column}{0.32\textwidth}
+\begin{tcolorbox}[colback=mlgreen!10, colframe=mlgreen!50, title=2. Cluster]
+\small
+\textbf{Algorithm:}
+\begin{itemize}
+\item[$\square$] Choose method
+\item[$\square$] Set parameters
+\item[$\square$] Run clustering
+\item[$\square$] Save results
+\end{itemize}
+
+\textbf{Validation:}
+\begin{itemize}
+\item[$\square$] Elbow method
+\item[$\square$] Silhouette score
+\item[$\square$] Visual inspection
+\item[$\square$] Stability check
+\end{itemize}
+\end{tcolorbox}
+\end{column}
+
+\begin{column}{0.32\textwidth}
+\begin{tcolorbox}[colback=mlorange!10, colframe=mlorange!50, title=3. Apply]
+\small
+\textbf{Interpretation:}
+\begin{itemize}
+\item[$\square$] Analyze clusters
+\item[$\square$] Name segments
+\item[$\square$] Create personas
+\item[$\square$] Document insights
+\end{itemize}
+
+\textbf{Action:}
+\begin{itemize}
+\item[$\square$] Design strategies
+\item[$\square$] Build solutions
+\item[$\square$] Test with users
+\item[$\square$] Iterate
+\end{itemize}
+\end{tcolorbox}
+\end{column}
+\end{columns}
+
+\vspace{0.5em}
+\begin{center}
+\begin{tcolorbox}[colback=mlpurple!20, colframe=mlpurple!60, width=0.9\textwidth]
+\centering
+\textbf{Success Rate:} Teams using this checklist have 85% higher success rate!
+\end{tcolorbox}
+\end{center}
+\end{frame}
+
+% Next Week Preview Enhanced
+\begin{frame}
+\frametitle{\Large Next Week: Advanced Clustering \& Beyond}
+\framesubtitle{Building on Your Foundation}
+
+\begin{columns}[T]
+\begin{column}{0.55\textwidth}
+\begin{center}
+\includegraphics[width=\textwidth]{charts/week2_preview.pdf}
+\end{center}
+\end{column}
+
+\begin{column}{0.43\textwidth}
+\begin{tcolorbox}[colback=mlpurple!10, colframe=mlpurple!50, title=Week 2 Topics]
+\small
+\textbf{Advanced Techniques:}
+\begin{itemize}
+\item Deep dive into DBSCAN
+\item Gaussian Mixture Models
+\item Spectral clustering
+\item Online clustering
+\end{itemize}
+
+\textbf{Real Applications:}
+\begin{itemize}
+\item Customer segmentation
+\item Market analysis
+\item Fraud detection
+\item Recommendation systems
+\end{itemize}
+
+\textbf{You'll Build:}
+\begin{itemize}
+\item Dynamic clustering pipeline
+\item Real-time segmentation
+\item Adaptive personas
+\end{itemize}
+\end{tcolorbox}
+\end{column}
+\end{columns}
+
+\begin{center}
+\begin{tcolorbox}[colback=mlyellow!20, colframe=mlorange!60, width=0.9\textwidth]
+\centering
+\textbf{Homework:} Try clustering on your own dataset and bring questions next week!
+\end{tcolorbox}
+\end{center}
+\end{frame}
+
+% Resources Enhanced
+\begin{frame}
+\frametitle{\Large Resources for Deeper Learning}
+\framesubtitle{Continue Your Clustering Journey}
+
+\begin{columns}[T]
+\begin{column}{0.32\textwidth}
+\begin{tcolorbox}[colback=mlblue!10, colframe=mlblue!50, title=Tutorials]
+\small
+\textbf{Online Courses:}
+\begin{itemize}
+\item Coursera ML Course
+\item Fast.ai Practical ML
+\item Google's ML Crash Course
+\end{itemize}
+
+\textbf{Interactive:}
+\begin{itemize}
+\item Kaggle Learn
+\item DataCamp
+\item Google Colab notebooks
+\end{itemize}
+\end{tcolorbox}
+\end{column}
+
+\begin{column}{0.32\textwidth}
+\begin{tcolorbox}[colback=mlgreen!10, colframe=mlgreen!50, title=Tools]
+\small
+\textbf{Python Libraries:}
+\begin{itemize}
+\item scikit-learn
+\item pandas
+\item numpy
+\item matplotlib
+\end{itemize}
+
+\textbf{GUI Tools:}
+\begin{itemize}
+\item Orange3
+\item KNIME
+\item RapidMiner
+\item Weka
+\end{itemize}
+\end{tcolorbox}
+\end{column}
+
+\begin{column}{0.32\textwidth}
+\begin{tcolorbox}[colback=mlorange!10, colframe=mlorange!50, title=Reading]
+\small
+\textbf{Key Papers:}
+\begin{itemize}
+\item MacQueen (1967) K-means
+\item Ester (1996) DBSCAN
+\item Rousseeuw (1987) Silhouette
+\end{itemize}
+
+\textbf{Books:}
+\begin{itemize}
+\item Pattern Recognition (Bishop)
+\item Elements of Statistical Learning
+\item Hands-On ML (Géron)
+\end{itemize}
+\end{tcolorbox}
+\end{column}
+\end{columns}
+
+\vspace{0.5em}
+\begin{center}
+\begin{tcolorbox}[colback=mlpurple!20, colframe=mlpurple!60, width=0.9\textwidth]
+\centering
+\textbf{Join our community:} Slack channel \#ml-innovation for questions and discussions!
+\end{tcolorbox}
+\end{center}
+\end{frame}
+
+% Final Slide - Call to Action
+\begin{frame}
+\frametitle{\Large Your Clustering Journey Starts Now!}
+\framesubtitle{From Learning to Doing}
+
+\begin{center}
+{\Large\textbf{You've learned the fundamentals of clustering}}\\
+\vspace{1em}
+{\large Now it's time to apply them!}
+\end{center}
+
+\vspace{1em}
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\begin{tcolorbox}[colback=mlgreen!10, colframe=mlgreen!50, title=This Week's Challenge]
+\normalsize
+\textbf{Find patterns in your own data:}
+\begin{enumerate}
+\item Choose a dataset (your own or public)
+\item Apply K-means clustering
+\item Find optimal K using elbow method
+\item Calculate silhouette score
+\item Interpret and name your clusters
+\item Share results on Slack!
+\end{enumerate}
+\end{tcolorbox}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\begin{tcolorbox}[colback=mlblue!10, colframe=mlblue!50, title=Success Tips]
+\normalsize
+\textbf{Remember:}
+\begin{itemize}
+\item Start simple with K-means
+\item Always scale your data
+\item Visualize everything
+\item Trust the elbow method
+\item Validate with domain knowledge
+\item Iterate and improve
+\end{itemize}
+\end{tcolorbox}
+\end{column}
+\end{columns}
+
+\vspace{1em}
+\begin{center}
+\begin{tcolorbox}[colback=mlpurple!20, colframe=mlpurple!60, width=0.9\textwidth]
+\centering\Large
+\textbf{Questions? Let's discuss!}\\
+\small Office hours: Tuesday 2-4pm | Slack: \#ml-innovation
+\end{tcolorbox}
+\end{center}
+\end{frame}
+
+\end{document}

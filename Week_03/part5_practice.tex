@@ -1,0 +1,344 @@
+% Part 5: Practice & Case Study
+\section{Practice: Real-world Application}
+
+% Slide 1: Section Divider
+\begin{frame}[plain]
+\vfill
+\centering
+\begin{beamercolorbox}[sep=16pt,center]{title}
+\usebeamerfont{title}\Large Part 5: Case Study \& Practice\\
+\normalsize Amazon Review Intelligence System
+\end{beamercolorbox}
+\vfill
+\end{frame}
+
+% Slide 2: Case Study Introduction
+\begin{frame}{Case Study: Amazon Review Intelligence}
+\Large\textbf{Understanding 100 Million Customers}
+\normalsize
+
+\begin{columns}[T]
+\begin{column}{0.55\textwidth}
+\textbf{The Challenge:}
+\begin{itemize}
+\item 2+ million reviews daily
+\item 35 languages
+\item Multiple product categories
+\item Fake review detection
+\item Real-time insights needed
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Business Goals:}
+\begin{itemize}
+\item Improve product quality
+\item Identify trends early
+\item Enhance customer satisfaction
+\item Reduce return rates
+\end{itemize}
+\end{column}
+\begin{column}{0.43\textwidth}
+\includegraphics[width=\textwidth]{charts/amazon_case_overview.pdf}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Slide 3: Data Collection & Processing
+\begin{frame}{Data Pipeline: Scale \& Speed}
+\Large\textbf{Processing Millions of Reviews}
+\normalsize
+
+\begin{center}
+\includegraphics[width=0.85\textwidth]{charts/amazon_data_pipeline.pdf}
+\end{center}
+
+\begin{columns}[T]
+\begin{column}{0.32\textwidth}
+\textbf{Collection}
+\begin{itemize}
+\small
+\item Review text
+\item Star ratings
+\item Verified purchase
+\item Product metadata
+\item User history
+\end{itemize}
+\end{column}
+\begin{column}{0.32\textwidth}
+\textbf{Processing}
+\begin{itemize}
+\small
+\item Language detection
+\item Spam filtering
+\item Text cleaning
+\item Translation
+\item Normalization
+\end{itemize}
+\end{column}
+\begin{column}{0.32\textwidth}
+\textbf{Analysis}
+\begin{itemize}
+\small
+\item Sentiment scoring
+\item Aspect extraction
+\item Topic modeling
+\item Trend detection
+\item Anomaly flagging
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Slide 4: Sentiment Distribution Analysis
+\begin{frame}{Sentiment Patterns: Beyond Star Ratings}
+\Large\textbf{Text Reveals Hidden Insights}
+\normalsize
+
+\begin{columns}[T]
+\begin{column}{0.55\textwidth}
+\includegraphics[width=\textwidth]{charts/sentiment_vs_stars.pdf}
+\end{column}
+\begin{column}{0.43\textwidth}
+\textbf{Key Findings:}
+\begin{itemize}
+\item 23\% of 4-star reviews contain negative sentiment
+\item 5-star reviews with ``but'' = future problems
+\item 3-star most informative
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Hidden Patterns:}
+\begin{itemize}
+\item Expectation mismatch
+\item Feature complaints
+\item Quality over time
+\item Comparison mentions
+\end{itemize}
+\end{column}
+\end{columns}
+
+\begin{tcolorbox}[colback=mlorange!10,colframe=mlorange]
+\centering
+\small ``5 stars! Amazing product but the app could be better'' → Feature request identified
+\end{tcolorbox}
+\end{frame}
+
+% Slide 5: Aspect-Based Analysis
+\begin{frame}{Aspect-Based Sentiment: Granular Insights}
+\Large\textbf{What Exactly Do They Love/Hate?}
+\normalsize
+
+\begin{center}
+\includegraphics[width=0.85\textwidth]{charts/aspect_sentiment_matrix.pdf}
+\end{center}
+
+\textbf{Product: Echo Dot (Example)}
+\begin{columns}[T]
+\begin{column}{0.24\textwidth}
+\textbf{Sound Quality}
+\begin{itemize}
+\small
+\item Positive: 72\%
+\item ``Clear voice''
+\item ``Good bass''
+\end{itemize}
+\end{column}
+\begin{column}{0.24\textwidth}
+\textbf{Setup}
+\begin{itemize}
+\small
+\item Negative: 45\%
+\item ``Confusing''
+\item ``WiFi issues''
+\end{itemize}
+\end{column}
+\begin{column}{0.24\textwidth}
+\textbf{Price}
+\begin{itemize}
+\small
+\item Positive: 89\%
+\item ``Great value''
+\item ``Worth it''
+\end{itemize}
+\end{column}
+\begin{column}{0.24\textwidth}
+\textbf{Privacy}
+\begin{itemize}
+\small
+\item Mixed: 50\%
+\item ``Concerns''
+\item ``Always listening''
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Slide 6: Key Insights & Patterns
+\begin{frame}{Insights That Drive Product Changes}
+\Large\textbf{From Analysis to Action}
+\normalsize
+
+\begin{columns}[T]
+\begin{column}{0.55\textwidth}
+\includegraphics[width=\textwidth]{charts/insights_to_actions.pdf}
+\end{column}
+\begin{column}{0.43\textwidth}
+\textbf{Top Discoveries:}
+\begin{enumerate}
+\item Setup wizard needed
+\item Size expectations wrong
+\item Packaging frustration
+\item Feature discovery issue
+\item Comparison shopping
+\end{enumerate}
+
+\vspace{0.5em}
+\textbf{Actions Taken:}
+\begin{itemize}
+\item Redesigned onboarding
+\item Added size reference
+\item Simplified packaging
+\item Created tutorials
+\item Comparison tool
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Slide 7: Impact & Results
+\begin{frame}{Results: Measurable Improvement}
+\Large\textbf{ROI of Sentiment Analysis}
+\normalsize
+
+\begin{center}
+\includegraphics[width=0.85\textwidth]{charts/improvement_metrics.pdf}
+\end{center}
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\textbf{Customer Metrics:}
+\begin{itemize}
+\item Return rate: -18\%
+\item Support tickets: -35\%
+\item Satisfaction: +12\%
+\item Repeat purchase: +22\%
+\end{itemize}
+\end{column}
+\begin{column}{0.48\textwidth}
+\textbf{Business Impact:}
+\begin{itemize}
+\item \$50M saved in returns
+\item 2x faster issue detection
+\item 40\% better forecasting
+\item 25\% higher LTV
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Slide 8: Practice Exercise
+\begin{frame}{Practice Exercise: Twitter Sentiment Analysis}
+\Large\textbf{Your Turn: Analyze Brand Perception}
+\normalsize
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\textbf{Dataset:}
+\begin{itemize}
+\item 5,000 tweets about a product
+\item Last 30 days
+\item Multiple languages
+\item Includes replies/mentions
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Tasks:}
+\begin{enumerate}
+\item Clean and preprocess
+\item Sentiment classification
+\item Emotion detection
+\item Topic extraction
+\item Temporal analysis
+\item Create insights report
+\end{enumerate}
+\end{column}
+\begin{column}{0.48\textwidth}
+\textbf{Deliverables:}
+\begin{itemize}
+\item Jupyter notebook
+\item Sentiment dashboard
+\item Top 10 pain points
+\item Emotion journey map
+\item Recommendations
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Bonus Challenges:}
+\begin{itemize}
+\item Detect sarcasm
+\item Find influencers
+\item Predict virality
+\item Compare competitors
+\end{itemize}
+\end{column}
+\end{columns}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mlgreen!10,colframe=mlgreen]
+\centering
+\textbf{Time:} 2 hours | \textbf{Tools:} Python, BERT, Plotly | \textbf{Goal:} Actionable insights
+\end{tcolorbox}
+\end{frame}
+
+% Slide 9: Key Takeaways
+\begin{frame}{Week 3 Key Takeaways}
+\Large\textbf{What You've Learned}
+\normalsize
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\textbf{Technical Skills:}
+\begin{itemize}
+\item Text preprocessing pipelines
+\item BERT implementation
+\item Sentiment classification
+\item Emotion detection
+\item Production deployment
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Tools Mastered:}
+\begin{itemize}
+\item Hugging Face Transformers
+\item spaCy/NLTK
+\item FastAPI
+\item Pandas/NumPy
+\end{itemize}
+\end{column}
+\begin{column}{0.48\textwidth}
+\textbf{Design Applications:}
+\begin{itemize}
+\item Voice of Customer analysis
+\item Emotional journey mapping
+\item Pain point prioritization
+\item Feature discovery
+\item Impact measurement
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Business Value:}
+\begin{itemize}
+\item Scalable insights
+\item Real-time monitoring
+\item Data-driven decisions
+\item Customer empathy
+\end{itemize}
+\end{column}
+\end{columns}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mlblue!10,colframe=mlblue]
+\centering
+\Large\textbf{Next Week:} Classification for Problem Definition
+\end{tcolorbox}
+\end{frame}

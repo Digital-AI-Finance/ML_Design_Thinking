@@ -1,0 +1,383 @@
+% Part 5: Practice & Case Studies (7 slides)
+\section{Practice: Real-World Applications}
+
+% Slide 44: Case Study - Startup Success Predictor
+\begin{frame}{Case Study: Startup Success Predictor}
+\Large\textbf{Real-World Implementation}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\textbf{The Challenge:}
+\begin{itemize}
+\item VC firm evaluating 1000+ startups/year
+\item 2\% success rate historically
+\item Manual evaluation bottleneck
+\item Bias in selection process
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{The Solution:}
+\begin{itemize}
+\item 10 years historical data
+\item 47 features extracted
+\item Ensemble classifier
+\item Human-in-the-loop design
+\end{itemize}
+\end{column}
+\begin{column}{0.48\textwidth}
+\textbf{Results:}
+\begin{center}
+\begin{tikzpicture}[scale=0.7]
+\begin{axis}[
+    ybar,
+    width=7cm,
+    height=5cm,
+    ylabel={Success Rate (\%)},
+    symbolic x coords={Before,After},
+    xtick=data,
+    nodes near coords,
+    ymin=0, ymax=10,
+]
+\addplot[fill=mlred] coordinates {(Before,2) (After,7.5)};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Impact:}
+\begin{itemize}
+\item 3.75x improvement
+\item 50\% time saved
+\item More diverse portfolio
+\item \$120M additional returns
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Slide 45: Hands-On Exercise Setup
+\begin{frame}{Hands-On Exercise}
+\Large\textbf{Build Your Own Classifier}
+\normalsize
+
+\vspace{0.5em}
+
+\textbf{Exercise: Product Launch Predictor}
+
+\vspace{0.5em}
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\textbf{Your Task:}
+\begin{enumerate}
+\item Load innovation dataset
+\item Explore and visualize
+\item Build 3 classifiers
+\item Compare performance
+\item Create predictions
+\item Interpret results
+\end{enumerate}
+
+\vspace{0.5em}
+\textbf{Starter Code:}
+\begin{small}
+\texttt{import pandas as pd} \\
+\texttt{from sklearn import ...} \\
+~\\
+\texttt{\# Load data} \\
+\texttt{df = pd.read\_csv(} \\
+\texttt{~~'innovation\_products.csv')} \\
+~\\
+\texttt{\# Your code here...}
+\end{small}
+\end{column}
+\begin{column}{0.48\textwidth}
+\textbf{Evaluation Criteria:}
+\begin{itemize}
+\item Accuracy > 80\%
+\item Proper validation
+\item Feature importance analysis
+\item Business insights
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Bonus Challenges:}
+\begin{itemize}
+\item Handle imbalanced data
+\item Create ensemble model
+\item Build simple UI
+\item Deploy as API
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Resources:}
+\begin{itemize}
+\item Jupyter notebook template
+\item Dataset documentation
+\item Solution walkthrough
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Slide 46: Common Pitfalls and Solutions
+\begin{frame}{Common Pitfalls and Solutions}
+\Large\textbf{Learn from Experience}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{center}
+\begin{tabular}{p{4cm}p{6cm}}
+\toprule
+\textbf{Pitfall} & \textbf{Solution} \\
+\midrule
+Overfitting to training data &
+Use cross-validation, regularization, simpler models \\
+\addlinespace
+Ignoring class imbalance &
+Apply SMOTE, class weights, appropriate metrics \\
+\addlinespace
+Feature leakage &
+Careful feature selection, temporal validation \\
+\addlinespace
+Poor interpretability &
+Use SHAP values, feature importance, simpler models \\
+\addlinespace
+Slow predictions &
+Feature selection, model optimization, caching \\
+\addlinespace
+Concept drift &
+Monitor performance, retrain regularly, track distributions \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{0.5em}
+\begin{center}
+\textit{``The best model is not always the most complex one''}
+\end{center}
+\end{frame}
+
+% Slide 47: Industry Applications
+\begin{frame}{Industry Applications}
+\Large\textbf{Classification in the Wild}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\begin{column}{0.32\textwidth}
+\textbf{E-Commerce}
+\begin{itemize}
+\small
+\item Product categorization
+\item Review sentiment
+\item Fraud detection
+\item Customer segmentation
+\end{itemize}
+\vspace{0.3em}
+Amazon: 100M+ products classified daily
+\end{column}
+\begin{column}{0.32\textwidth}
+\textbf{Healthcare}
+\begin{itemize}
+\small
+\item Disease diagnosis
+\item Risk prediction
+\item Treatment selection
+\item Patient triage
+\end{itemize}
+\vspace{0.3em}
+95\% accuracy in diabetic retinopathy
+\end{column}
+\begin{column}{0.32\textwidth}
+\textbf{Finance}
+\begin{itemize}
+\small
+\item Credit scoring
+\item Fraud detection
+\item Trading signals
+\item Risk assessment
+\end{itemize}
+\vspace{0.3em}
+\$1B+ saved annually in fraud
+\end{column}
+\end{columns}
+
+\vspace{1em}
+
+\begin{center}
+\begin{tikzpicture}
+\node[draw,fill=mlgreen!20,rounded corners,text width=10cm,align=center] {
+\textbf{Common Thread:} Turning uncertain decisions into data-driven predictions
+};
+\end{tikzpicture}
+\end{center}
+\end{frame}
+
+% Slide 48: Key Takeaways
+\begin{frame}{Key Takeaways}
+\Large\textbf{What to Remember}
+\normalsize
+
+\vspace{1em}
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\textbf{Technical Skills:}
+\begin{itemize}
+\item Classification transforms decisions
+\item Multiple algorithms for different needs
+\item Evaluation beyond accuracy
+\item Feature engineering crucial
+\item Validation prevents overfitting
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Implementation Tips:}
+\begin{itemize}
+\item Start simple, iterate
+\item Monitor in production
+\item Maintain interpretability
+\item Handle edge cases
+\end{itemize}
+\end{column}
+\begin{column}{0.48\textwidth}
+\textbf{Design Integration:}
+\begin{itemize}
+\item User trust through transparency
+\item Actionable insights matter
+\item Confidence communication
+\item Feedback loops essential
+\item Human judgment valuable
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Business Impact:}
+\begin{itemize}
+\item Scalable decision making
+\item Reduced bias
+\item Consistent quality
+\item Measurable outcomes
+\end{itemize}
+\end{column}
+\end{columns}
+
+\vspace{1em}
+\begin{center}
+\Large
+\textit{Classification empowers innovation through prediction}
+\end{center}
+\end{frame}
+
+% Slide 49: Next Week Preview
+\begin{frame}{Next Week: Topic Modeling \& Ideation}
+\Large\textbf{Discovering Hidden Themes}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\textbf{What's Coming:}
+\begin{itemize}
+\item Unsupervised text analysis
+\item LDA and NMF algorithms
+\item Topic discovery in feedback
+\item Idea clustering
+\item Trend identification
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Applications:}
+\begin{itemize}
+\item User feedback mining
+\item Innovation theme detection
+\item Content organization
+\item Research synthesis
+\end{itemize}
+\end{column}
+\begin{column}{0.48\textwidth}
+\begin{center}
+\begin{tikzpicture}[scale=0.7]
+% Document cloud
+\foreach \x/\y in {0/0,1/0.5,2/0,0.5/1.5,1.5/1.5,1/2.5} {
+    \node[draw,fill=mlblue!20,rounded corners] at (\x,\y) {\tiny doc};
+}
+
+% Arrow
+\draw[thick,->] (2.5,1.25) -- (3.5,1.25);
+
+% Topics
+\node[draw,circle,fill=mlgreen!30] at (4.5,2) {Topic 1};
+\node[draw,circle,fill=mlorange!30] at (4.5,1) {Topic 2};
+\node[draw,circle,fill=mlpurple!30] at (4.5,0) {Topic 3};
+\end{tikzpicture}
+\end{center}
+
+\vspace{0.5em}
+\textbf{Preparation:}
+\begin{itemize}
+\item Review text preprocessing
+\item Understand clustering concepts
+\item Collect text data samples
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Slide 50: Resources and References
+\begin{frame}{Resources and References}
+\Large\textbf{Continue Your Learning}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\textbf{Course Materials:}
+\begin{itemize}
+\item Jupyter notebooks
+\item Dataset documentation
+\item Handout exercises
+\item Solution walkthroughs
+\item Office hours: Wed 3-5pm
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Online Resources:}
+\begin{itemize}
+\item scikit-learn.org/stable
+\item kaggle.com/competitions
+\item towardsdatascience.com
+\item papers.nips.cc
+\end{itemize}
+\end{column}
+\begin{column}{0.48\textwidth}
+\textbf{Recommended Reading:}
+\begin{itemize}
+\item Pattern Recognition and ML - Bishop
+\item Elements of Statistical Learning
+\item Hands-On ML - Géron
+\item Interpretable ML - Molnar
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Tools to Master:}
+\begin{itemize}
+\item Python: scikit-learn, pandas
+\item Visualization: matplotlib, seaborn
+\item Deployment: Flask, Docker
+\item Monitoring: MLflow
+\end{itemize}
+\end{column}
+\end{columns}
+
+\vspace{1em}
+\begin{center}
+\textbf{Questions?} \\
+\small Contact: innovation-ml-course@university.edu
+\end{center}
+\end{frame}

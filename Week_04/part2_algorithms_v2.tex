@@ -1,0 +1,587 @@
+% Part 2: Algorithms - How It Works (12 slides)
+\section{Part 2: Algorithms - How Classification Works}
+
+% Slide 1: Theory - Mathematical foundation
+\begin{frame}{The Math Behind the Magic}
+\Large\textbf{Classification as Function Approximation}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\textbf{The Core Problem:}
+$$y = f(X) + \epsilon$$
+
+\begin{itemize}
+\item $X$: Your 27 features
+\item $y$: Success/Failure (or level)
+\item $f$: Unknown true function
+\item $\epsilon$: Noise we can't capture
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Our Mission:}
+Find $\hat{f}$ that best approximates $f$
+\end{column}
+\begin{column}{0.48\textwidth}
+\textbf{Decision Boundaries:}
+\begin{center}
+\begin{tikzpicture}[scale=0.7]
+\draw[->] (-2,0) -- (3,0) node[right] {Feature 1};
+\draw[->] (0,-2) -- (0,3) node[above] {Feature 2};
+
+% Linear boundary
+\draw[thick,mlblue] (-1.5,-2) -- (2,2.5);
+% Non-linear boundary
+\draw[thick,mlred,dashed] plot[smooth] coordinates {(-1.5,-1) (-0.5,-1.5) (0.5,-1) (1.5,0) (2,1.5)};
+
+% Points
+\foreach \x/\y in {-1/-1,-0.5/-1.5,-1.5/-0.5} {
+    \node[circle,fill=mlred,inner sep=2pt] at (\x,\y) {};
+}
+\foreach \x/\y in {1/1,1.5/0.5,0.5/1.5} {
+    \node[circle,fill=mlgreen,inner sep=2pt] at (\x,\y) {};
+}
+
+\node[mlblue] at (2.5,2) {Linear};
+\node[mlred] at (2.5,1) {Non-linear};
+\end{tikzpicture}
+\end{center}
+
+Different algorithms draw different boundaries
+\end{column}
+\end{columns}
+\end{frame}
+
+% Slide 2: Linear - Logistic Regression
+\begin{frame}{Start Simple: Logistic Regression}
+\Large\textbf{The Baseline Classifier}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\textbf{The Sigmoid Transform:}
+$$P(success) = \frac{1}{1 + e^{-(\beta_0 + \beta^T X)}}$$
+
+\begin{center}
+\begin{tikzpicture}[scale=0.6]
+\begin{axis}[
+    xlabel={Linear combination},
+    ylabel={Probability},
+    grid=major,
+    width=6cm,
+    height=4cm,
+    ymin=0, ymax=1
+]
+\addplot[mlblue,ultra thick,domain=-6:6,samples=100] {1/(1+exp(-x))};
+\addplot[dashed,mlred] coordinates {(-6,0.5) (6,0.5)};
+\node at (axis cs:0,0.5) [circle,fill=mlgreen,inner sep=2pt] {};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+\end{column}
+\begin{column}{0.48\textwidth}
+\textbf{Why Start Here:}
+\begin{itemize}
+\item Fast to train (<1 second)
+\item Interpretable weights
+\item Probability output
+\item No hyperparameters
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Innovation Example:}
+\begin{small}
+$P = \sigma(0.5 \cdot novelty + 0.3 \cdot market + 0.2 \cdot team)$
+\end{small}
+
+\vspace{0.5em}
+\accuracy{76} on our dataset
+\end{column}
+\end{columns}
+\end{frame}
+
+% Slide 3: Trees - Decision logic
+\begin{frame}{Think Like a Human: Decision Trees}
+\Large\textbf{If-Then Rules for Classification}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\begin{column}{0.55\textwidth}
+\begin{center}
+\begin{tikzpicture}[scale=0.8,
+    every node/.style={draw,rounded corners},
+    level 1/.style={sibling distance=4cm},
+    level 2/.style={sibling distance=2cm}]
+\node[fill=mlblue!20] {Novelty > 70\%?}
+    child {node[fill=mlorange!20] {Team > 5 yrs?}
+        child {node[fill=mlred!30,draw=mlred] {\textbf{Fail} (70\%)}}
+        child {node[fill=mlgreen!30,draw=mlgreen] {\textbf{Success} (85\%)}}
+    }
+    child {node[fill=mlorange!20] {Market > \$1M?}
+        child {node[fill=mlyellow!30] {Maybe (55\%)}}
+        child {node[fill=mlgreen!30,draw=mlgreen] {\textbf{Success} (92\%)}}
+    };
+\end{tikzpicture}
+\end{center}
+\end{column}
+\begin{column}{0.43\textwidth}
+\textbf{How It Decides:}
+\begin{itemize}
+\item Split on best feature
+\item Maximize information gain
+\item Continue until pure
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Strengths:}
+\begin{itemize}
+\item Visual \& interpretable
+\item Handles any relationship
+\item Feature importance free
+\end{itemize}
+
+\vspace{0.5em}
+\accuracy{78} single tree
+\end{column}
+\end{columns}
+\end{frame}
+
+% Slide 4: Ensemble - Random Forest
+\begin{frame}{Wisdom of Crowds: Random Forest}
+\Large\textbf{Many Trees Vote Together}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\begin{center}
+\begin{tikzpicture}[scale=0.7]
+% Multiple trees
+\foreach \x in {0,2,4} {
+    \draw[thick,brown] (\x,0) -- (\x,0.8);
+    \draw[fill=mlgreen!50,draw=mlgreen!70] (\x,1.2) circle (0.6);
+    \node at (\x,1.2) {\tiny Tree \x};
+}
+
+% Voting arrows
+\foreach \x in {0,2,4} {
+    \draw[->,thick] (\x,1.8) -- (2,2.8);
+}
+
+% Voting box
+\node[draw,fill=mlblue!30,minimum width=2.5cm,minimum height=0.6cm] at (2,3.2) {Majority Vote};
+
+% Result
+\draw[->,ultra thick] (2,3.6) -- (2,4.2);
+\node[draw,fill=mlgreen!40,rounded corners] at (2,4.5) {\textbf{Final Decision}};
+\end{tikzpicture}
+\end{center}
+
+Each tree sees different data \& features
+\end{column}
+\begin{column}{0.48\textwidth}
+\textbf{The Power of Ensemble:}
+\begin{itemize}
+\item 100+ trees voting
+\item Each trained on random sample
+\item Random features at each split
+\item Reduces overfitting dramatically
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Feature Importance:}
+\begin{small}
+1. Novelty score: 25\%\\
+2. Team experience: 18\%\\
+3. Market size: 15\%\\
+4. Development time: 12\%
+\end{small}
+
+\vspace{0.5em}
+\accuracy{86} ensemble accuracy
+\end{column}
+\end{columns}
+\end{frame}
+
+% Slide 5: Maximum Margin - SVM
+\begin{frame}{Find the Best Border: Support Vector Machines}
+\Large\textbf{Maximum Margin Classification}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\textbf{Linear SVM:}
+\begin{center}
+\begin{tikzpicture}[scale=0.7]
+\draw[->] (0,0) -- (4,0) node[right] {$x_1$};
+\draw[->] (0,0) -- (0,3) node[above] {$x_2$};
+
+% Margin lines
+\draw[dashed,mlgray] (0.5,0) -- (3,2.5);
+\draw[ultra thick,mlblue] (1,0) -- (3.5,2.5);
+\draw[dashed,mlgray] (1.5,0) -- (4,2.5);
+
+% Support vectors (circled)
+\node[circle,fill=mlred,draw=black,thick,inner sep=2pt] at (1,0.5) {};
+\node[circle,fill=mlgreen,draw=black,thick,inner sep=2pt] at (2.5,1.8) {};
+
+% Other points
+\foreach \x/\y in {0.3/0.2,0.5/0.8} {
+    \node[circle,fill=mlred,inner sep=2pt] at (\x,\y) {};
+}
+\foreach \x/\y in {3/2,3.5/2.2} {
+    \node[circle,fill=mlgreen,inner sep=2pt] at (\x,\y) {};
+}
+
+% Margin annotation
+\draw[<->] (1.5,0.7) -- (2,1.2);
+\node at (2.3,0.7) {\tiny margin};
+\end{tikzpicture}
+\end{center}
+\end{column}
+\begin{column}{0.48\textwidth}
+\textbf{The Kernel Trick:}
+Transform to higher dimensions where linear separation works
+
+\vspace{0.5em}
+\textbf{Common Kernels:}
+\begin{itemize}
+\item Linear: Simple boundary
+\item RBF: Flexible curves
+\item Polynomial: Specific degrees
+\end{itemize}
+
+\vspace{0.5em}
+\accuracy{84} with RBF kernel
+\end{column}
+\end{columns}
+\end{frame}
+
+% Slide 6: Deep - Neural Networks
+\begin{frame}{Learn Complex Patterns: Neural Networks}
+\Large\textbf{Deep Learning for Classification}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\begin{column}{0.55\textwidth}
+\begin{center}
+\begin{tikzpicture}[scale=0.6,
+    neuron/.style={circle,draw,fill=mlblue!20,minimum size=6mm}]
+
+% Input layer
+\foreach \y in {1,2,3} {
+    \node[neuron] (i\y) at (0,\y) {};
+}
+\node at (0,0.3) {$\vdots$};
+\node at (0,-0.5) {\small Input};
+
+% Hidden layers
+\foreach \y in {0.7,1.7,2.7,3.3} {
+    \node[neuron,fill=mlorange!20] (h1\y) at (2.5,\y) {};
+}
+\node at (2.5,-0.5) {\small Hidden};
+
+\foreach \y in {1.2,2.2,3} {
+    \node[neuron,fill=mlyellow!20] (h2\y) at (5,\y) {};
+}
+\node at (5,-0.5) {\small Hidden};
+
+% Output
+\node[neuron,fill=mlgreen!30] (o) at (7.5,2) {};
+\node at (7.5,-0.5) {\small Output};
+
+% Sample connections
+\foreach \i in {1,2,3} {
+    \foreach \h in {0.7,1.7,2.7,3.3} {
+        \draw[->] (i\i) -- (h1\h);
+    }
+}
+\end{tikzpicture}
+\end{center}
+\end{column}
+\begin{column}{0.43\textwidth}
+\textbf{Automatic Feature Learning:}
+\begin{itemize}
+\item Learns what to look for
+\item Combines features automatically
+\item Captures complex interactions
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Trade-offs:}
+\begin{itemize}
+\item[+] Best for complex patterns
+\item[+] State-of-the-art accuracy
+\item[-] Needs more data
+\item[-] Black box
+\end{itemize}
+
+\vspace{0.5em}
+\accuracy{88} with proper tuning
+\end{column}
+\end{columns}
+\end{frame}
+
+% Slide 7: Sequential - Gradient Boosting
+\begin{frame}{Learn from Mistakes: Gradient Boosting}
+\Large\textbf{Sequential Improvement Strategy}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\begin{center}
+\begin{tikzpicture}[scale=0.7]
+% Sequential models with improvement
+\node[draw,fill=mlred!30,minimum width=1.8cm] at (0,3) {Model 1};
+\node at (0,2.5) {\small 65\% accurate};
+
+\draw[->,thick] (0,2) -- (0,1.5) node[midway,right] {\tiny Learn errors};
+
+\node[draw,fill=mlorange!30,minimum width=1.8cm] at (0,1) {Model 2};
+\node at (0,0.5) {\small +10\% = 75\%};
+
+\draw[->,thick] (0,0) -- (0,-0.5) node[midway,right] {\tiny Fix remaining};
+
+\node[draw,fill=mlgreen!30,minimum width=1.8cm] at (0,-1) {Model 3};
+\node at (0,-1.5) {\small +14\% = 89\%};
+\end{tikzpicture}
+\end{center}
+
+Each model fixes previous mistakes
+\end{column}
+\begin{column}{0.48\textwidth}
+\textbf{How It Works:}
+\begin{enumerate}
+\item Train initial model
+\item Find what it got wrong
+\item Train next model on errors
+\item Combine all predictions
+\end{enumerate}
+
+\vspace{0.5em}
+\textbf{Why It Wins:}
+\begin{itemize}
+\item Focuses on hard cases
+\item Gradual improvement
+\item Often best performer
+\end{itemize}
+
+\vspace{0.5em}
+\accuracy{89} best in class
+\end{column}
+\end{columns}
+\end{frame}
+
+% Slide 8: Comparison - Algorithm showdown
+\begin{frame}{Algorithm Showdown}
+\Large\textbf{How Different Algorithms See Data}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{center}
+\includegraphics[width=0.85\textwidth]{charts/decision_boundaries.pdf}
+\end{center}
+
+\vspace{0.5em}
+
+\begin{center}
+\begin{tabular}{lccccc}
+\toprule
+\textbf{Algorithm} & \textbf{Accuracy} & \textbf{Speed} & \textbf{Interpretable} & \textbf{Best For} \\
+\midrule
+Logistic Regression & 76\% & ⚡⚡⚡ & ✓✓✓ & Baseline \\
+Random Forest & 86\% & ⚡⚡ & ✓✓ & General use \\
+SVM (RBF) & 84\% & ⚡ & ✓ & Non-linear \\
+Neural Network & 88\% & ⚡ & ✗ & Complex \\
+Gradient Boosting & \textbf{89\%} & ⚡⚡ & ✓ & Best accuracy \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{frame}
+
+% Slide 9: Metrics - Beyond accuracy
+\begin{frame}{Measure What Matters}
+\Large\textbf{Beyond Simple Accuracy}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\textbf{Confusion Matrix:}
+\begin{center}
+\begin{tabular}{cc|cc}
+& & \multicolumn{2}{c}{\textbf{Predicted}} \\
+& & Fail & Success \\
+\hline
+\textbf{Actual} & Fail & \cellcolor{mlgreen!30}850 & \cellcolor{mlred!30}150 \\
+& Success & \cellcolor{mlred!30}100 & \cellcolor{mlgreen!30}900 \\
+\end{tabular}
+\end{center}
+
+\vspace{0.5em}
+\textbf{Key Metrics:}
+\begin{itemize}
+\item \textbf{Precision:} Of predicted successes, how many true? \textcolor{mlgreen}{85.7\%}
+\item \textbf{Recall:} Of actual successes, how many found? \textcolor{mlblue}{90\%}
+\item \textbf{F1-Score:} Harmonic mean \textcolor{mlorange}{87.8\%}
+\end{itemize}
+\end{column}
+\begin{column}{0.48\textwidth}
+\textbf{Choose Your Focus:}
+
+\vspace{0.5em}
+\textbf{High Precision:}
+\begin{itemize}
+\item When false positives costly
+\item Investment decisions
+\item Quality over quantity
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{High Recall:}
+\begin{itemize}
+\item When can't miss opportunities
+\item Initial screening
+\item Cast wide net
+\end{itemize}
+
+\vspace{0.5em}
+\textit{Different business needs = Different metrics}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Slide 10: ROC - Threshold independent
+\begin{frame}{ROC Curves: The Full Picture}
+\Large\textbf{Performance Across All Thresholds}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\begin{column}{0.55\textwidth}
+\includegraphics[width=\textwidth]{charts/precision_recall_curves.pdf}
+\end{column}
+\begin{column}{0.43\textwidth}
+\textbf{Reading ROC Curves:}
+\begin{itemize}
+\item Diagonal = Random guess
+\item Top-left corner = Perfect
+\item Area Under Curve (AUC) = Overall performance
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{AUC Interpretation:}
+\begin{itemize}
+\item 0.9-1.0: Excellent
+\item 0.8-0.9: Good
+\item 0.7-0.8: Fair
+\item 0.5-0.7: Poor
+\end{itemize}
+
+\vspace{0.5em}
+Our models: AUC 0.82-0.91
+\end{column}
+\end{columns}
+\end{frame}
+
+% Slide 11: Imbalance - Handling rare events
+\begin{frame}{When Success is Rare}
+\Large\textbf{Handling Imbalanced Data}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\textbf{The Problem:}
+\begin{center}
+\begin{tikzpicture}[scale=0.8]
+\draw[fill=mlred!30] (0,0) rectangle (3.8,2);
+\draw[fill=mlgreen!30] (3.8,0) rectangle (4,2);
+\node at (1.9,1) {\Large 95\% Failures};
+\node[rotate=90] at (3.9,1) {\tiny 5\%};
+\end{tikzpicture}
+\end{center}
+
+Model learns: ``Always predict failure'' → 95\% accurate but useless!
+
+\vspace{0.5em}
+\textbf{Solutions:}
+\begin{enumerate}
+\item Weighted classes
+\item SMOTE (synthetic examples)
+\item Different metrics
+\item Ensemble approaches
+\end{enumerate}
+\end{column}
+\begin{column}{0.48\textwidth}
+\textbf{Class Weighting:}
+\begin{small}
+\texttt{class\_weight = \{} \\
+\texttt{~~~~0: 1,} \\
+\texttt{~~~~1: 19} \textit{\# 95/5 ratio} \\
+\texttt{\}}
+\end{small}
+
+\vspace{0.5em}
+\textbf{Better Metrics:}
+\begin{itemize}
+\item Precision-Recall AUC
+\item Balanced accuracy
+\item Matthews correlation
+\item Cohen's kappa
+\end{itemize}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mlblue!10,colframe=mlblue]
+Focus on minority class performance
+\end{tcolorbox}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Slide 12: Transition - Theory to practice
+\begin{frame}{From Theory to Practice}
+\Large\textbf{Ready to Build?}
+\normalsize
+
+\vspace{1em}
+
+\begin{center}
+You now understand:
+\begin{itemize}
+\item How algorithms make decisions
+\item Strengths of each approach
+\item How to measure success
+\item How to handle challenges
+\end{itemize}
+
+\vspace{1em}
+\Huge\textbf{Time to implement!}
+
+\vspace{1em}
+\begin{tikzpicture}
+\draw[ultra thick,->,mlgreen] (0,0) -- (4,0);
+\node[above] at (2,0.2) {\Large Next: Part 3 - Making It Work};
+\end{tikzpicture}
+
+\vspace{1em}
+\Large\textit{``From notebooks to production systems''}
+\end{center}
+\end{frame}

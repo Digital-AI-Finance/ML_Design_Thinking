@@ -1,0 +1,98 @@
+% Appendix: Mathematical Foundations (3 slides)
+\section*{Appendix: Mathematical Foundations}
+
+% Slide A1: Logistic Regression Mathematics
+\begin{frame}{Appendix: Logistic Regression Mathematics}
+\Large\textbf{Gradient Descent Optimization}
+\normalsize
+
+\vspace{0.5em}
+
+\textbf{Log-Likelihood Function:}
+$$\ell(\beta) = \sum_{i=1}^n \left[ y_i \log(p_i) + (1-y_i) \log(1-p_i) \right]$$
+
+where $p_i = \frac{1}{1 + e^{-\beta^T x_i}}$
+
+\vspace{0.5em}
+\textbf{Gradient:}
+$$\frac{\partial \ell}{\partial \beta_j} = \sum_{i=1}^n (y_i - p_i) x_{ij}$$
+
+\vspace{0.5em}
+\textbf{Update Rule:}
+$$\beta^{(t+1)} = \beta^{(t)} + \alpha \sum_{i=1}^n (y_i - p_i^{(t)}) x_i$$
+
+\vspace{0.5em}
+\textbf{Convergence:} When $||\nabla \ell|| < \epsilon$ or maximum iterations reached
+
+\vspace{0.5em}
+\textbf{Regularization:} Add penalty term $-\lambda ||\beta||^2$ to prevent overfitting
+\end{frame}
+
+% Slide A2: Information Theory for Trees
+\begin{frame}{Appendix: Information Theory for Decision Trees}
+\Large\textbf{Entropy and Information Gain}
+\normalsize
+
+\vspace{0.5em}
+
+\textbf{Entropy (Impurity Measure):}
+$$H(S) = -\sum_{c \in C} p_c \log_2(p_c)$$
+
+where $p_c$ is the proportion of samples in class $c$
+
+\vspace{0.5em}
+\textbf{Information Gain:}
+$$IG(S, A) = H(S) - \sum_{v \in Values(A)} \frac{|S_v|}{|S|} H(S_v)$$
+
+\vspace{0.5em}
+\textbf{Gini Impurity (Alternative):}
+$$Gini(S) = 1 - \sum_{c \in C} p_c^2$$
+
+\vspace{0.5em}
+\textbf{Example Calculation:}
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+Parent node: 60 success, 40 fail \\
+$H(parent) = -0.6 \log_2(0.6) - 0.4 \log_2(0.4)$ \\
+$H(parent) = 0.971$
+\end{column}
+\begin{column}{0.48\textwidth}
+After split: \\
+Left: 50 success, 10 fail \\
+Right: 10 success, 30 fail \\
+$IG = 0.971 - 0.811 = 0.160$
+\end{column}
+\end{columns}
+\end{frame}
+
+% Slide A3: SVM and Kernel Mathematics
+\begin{frame}{Appendix: SVM and the Kernel Trick}
+\Large\textbf{Maximum Margin Optimization}
+\normalsize
+
+\vspace{0.5em}
+
+\textbf{Primal Optimization Problem:}
+$$\min_{w,b} \frac{1}{2}||w||^2 \quad \text{subject to} \quad y_i(w^T x_i + b) \geq 1$$
+
+\vspace{0.5em}
+\textbf{Dual Form (Using Lagrange Multipliers):}
+$$\max_{\alpha} \sum_{i=1}^n \alpha_i - \frac{1}{2}\sum_{i,j} \alpha_i \alpha_j y_i y_j x_i^T x_j$$
+
+\vspace{0.5em}
+\textbf{Kernel Trick:}
+Replace $x_i^T x_j$ with kernel function $K(x_i, x_j)$
+
+\vspace{0.5em}
+\textbf{Common Kernels:}
+\begin{itemize}
+\item Linear: $K(x_i, x_j) = x_i^T x_j$
+\item Polynomial: $K(x_i, x_j) = (x_i^T x_j + r)^d$
+\item RBF (Gaussian): $K(x_i, x_j) = \exp(-\gamma ||x_i - x_j||^2)$
+\item Sigmoid: $K(x_i, x_j) = \tanh(\kappa x_i^T x_j + c)$
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Decision Function:}
+$$f(x) = \text{sign}\left(\sum_{i \in SV} \alpha_i y_i K(x_i, x) + b\right)$$
+\end{frame}

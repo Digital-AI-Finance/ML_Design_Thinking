@@ -1,0 +1,276 @@
+% Part 1: Foundation - Understanding Ideation Through Topics
+\section{Foundation: From Chaos to Clarity}
+
+% Opening Power Visualization
+\begin{frame}{The Ideation Challenge}
+\begin{columns}[T]
+\column{0.55\textwidth}
+\includegraphics[width=\textwidth]{topic_discovery_landscape.pdf}
+
+\column{0.43\textwidth}
+\textcolor{mlblue}{\Large 10,000 Ideas}\\[0.5cm]
+\textcolor{mlorange}{\normalsize How do we find patterns?}\\[0.3cm]
+
+\small
+\begin{itemize}
+\item Customer feedback: 5,000 reviews
+\item Innovation workshops: 2,000 ideas
+\item Market research: 3,000 insights
+\end{itemize}
+
+\vspace{\fill}
+{\footnotesize\textcolor{mlgray}{Topic modeling reveals hidden structure}}
+\end{columns}
+\end{frame}
+
+% The Ideation Problem
+\begin{frame}{The Ideation Problem}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Traditional Ideation}}
+
+\small
+\begin{itemize}
+\item Manual categorization
+\item Subjective grouping
+\item Limited scale (100s of ideas)
+\item Bias toward obvious themes
+\item Missing connections
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlred}{Result:} Lost opportunities
+
+\column{0.48\textwidth}
+\textcolor{mlgreen}{\textbf{ML-Enhanced Ideation}}
+
+\small
+\begin{itemize}
+\item Automatic theme discovery
+\item Data-driven clustering
+\item Unlimited scale (1000s+)
+\item Hidden pattern detection
+\item Cross-theme insights
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{Result:} Innovation patterns
+\end{columns}
+
+\vspace{\fill}
+\begin{center}
+\footnotesize\textcolor{mlgray}{Topic modeling bridges human creativity and machine pattern recognition}
+\end{center}
+\end{frame}
+
+% What is Topic Modeling?
+\begin{frame}{What is Topic Modeling?}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Core Concept}}
+
+\normalsize
+Finding hidden themes in large text collections
+
+\vspace{0.5cm}
+\small
+\textcolor{mlorange}{\textbf{Key Assumptions:}}
+\begin{enumerate}
+\item Documents contain multiple topics
+\item Topics are probability distributions over words
+\item Words can belong to multiple topics
+\end{enumerate}
+
+\column{0.48\textwidth}
+\includegraphics[width=\textwidth]{topic_word_distribution.pdf}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Each document is a mixture of topics, each topic is a mixture of words}
+\end{frame}
+
+% Real-World Impact
+\begin{frame}{Real-World Impact}
+\begin{columns}[T]
+\column{0.32\textwidth}
+\textcolor{mlblue}{\textbf{Netflix}}\\
+\small
+Content categorization\\
+\textcolor{mlgreen}{35 micro-genres discovered}\\
+\textcolor{mlorange}{+18\% engagement}
+
+\vspace{0.5cm}
+\textcolor{mlblue}{\textbf{3M}}\\
+\small
+Innovation mining\\
+\textcolor{mlgreen}{47 new product ideas}\\
+\textcolor{mlorange}{\$12M revenue}
+
+\column{0.32\textwidth}
+\textcolor{mlblue}{\textbf{IDEO}}\\
+\small
+Design research synthesis\\
+\textcolor{mlgreen}{60\% faster insights}\\
+\textcolor{mlorange}{3x more patterns}
+
+\vspace{0.5cm}
+\textcolor{mlblue}{\textbf{P\&G}}\\
+\small
+Consumer needs analysis\\
+\textcolor{mlgreen}{23 unmet needs found}\\
+\textcolor{mlorange}{5 new products}
+
+\column{0.32\textwidth}
+\textcolor{mlblue}{\textbf{Spotify}}\\
+\small
+Music recommendation\\
+\textcolor{mlgreen}{1,500 micro-moods}\\
+\textcolor{mlorange}{+25\% listening time}
+
+\vspace{0.5cm}
+\textcolor{mlblue}{\textbf{Amazon}}\\
+\small
+Review insights\\
+\textcolor{mlgreen}{Product improvements}\\
+\textcolor{mlorange}{-30\% returns}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Topic modeling transforms unstructured data into actionable innovation insights}
+\end{frame}
+
+% The Innovation Funnel
+\begin{frame}{The Innovation Funnel with Topics}
+\begin{center}
+\includegraphics[width=0.9\textwidth]{innovation_funnel_topics.pdf}
+\end{center}
+
+\vspace{-0.3cm}
+\begin{columns}[T]
+\column{0.25\textwidth}
+\centering\small
+\textcolor{challenge}{\textbf{Raw Ideas}}\\
+\footnotesize 10,000 inputs
+
+\column{0.25\textwidth}
+\centering\small
+\textcolor{explore}{\textbf{Topics Found}}\\
+\footnotesize 50 themes
+
+\column{0.25\textwidth}
+\centering\small
+\textcolor{filter}{\textbf{Prioritized}}\\
+\footnotesize 10 opportunities
+
+\column{0.25\textwidth}
+\centering\small
+\textcolor{strategy}{\textbf{Developed}}\\
+\footnotesize 3 solutions
+\end{columns}
+\end{frame}
+
+% Types of Topic Models
+\begin{frame}{Topic Modeling Approaches}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Probabilistic Models}}
+
+\small
+\textbf{LDA (Latent Dirichlet Allocation)}
+\begin{itemize}
+\item Bayesian approach
+\item Interpretable topics
+\item Industry standard
+\end{itemize}
+
+\textbf{LSA (Latent Semantic Analysis)}
+\begin{itemize}
+\item Matrix factorization
+\item Fast computation
+\item Good for similarity
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{mlorange}{\textbf{Modern Approaches}}
+
+\small
+\textbf{NMF (Non-negative Matrix Factorization)}
+\begin{itemize}
+\item Parts-based representation
+\item Sparse, interpretable
+\item Good for short texts
+\end{itemize}
+
+\textbf{BERTopic}
+\begin{itemize}
+\item Transformer-based
+\item Contextual understanding
+\item State-of-the-art accuracy
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Choose based on: data size, interpretability needs, computational resources}
+\end{frame}
+
+% Learning Objectives
+\begin{frame}{Learning Objectives}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\Large\textbf{Technical Skills}}
+
+\normalsize
+\begin{enumerate}
+\item Build topic models with LDA/NMF
+\item Optimize hyperparameters
+\item Visualize topic distributions
+\item Evaluate model quality
+\item Handle different text types
+\end{enumerate}
+
+\column{0.48\textwidth}
+\textcolor{mlorange}{\Large\textbf{Design Applications}}
+
+\normalsize
+\begin{enumerate}
+\item Transform ideas into themes
+\item Identify innovation patterns
+\item Create opportunity maps
+\item Prioritize based on topics
+\item Generate new combinations
+\end{enumerate}
+\end{columns}
+
+\vspace{\fill}
+\begin{center}
+\small\textcolor{mlgreen}{\textbf{Outcome:} Data-driven ideation at scale}
+\end{center}
+\end{frame}
+
+% Section Summary
+\begin{frame}{Foundation Summary}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Key Concepts}}
+\begin{itemize}
+\item Topics as hidden themes
+\item Probabilistic word distributions
+\item Document-topic mixtures
+\item Unsupervised discovery
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{mlorange}{\textbf{Business Value}}
+\begin{itemize}
+\item Scale ideation 100x
+\item Find non-obvious patterns
+\item Reduce bias in categorization
+\item Accelerate innovation cycles
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\begin{center}
+\normalsize\textcolor{mlgreen}{\textbf{Next:} Deep dive into algorithms}
+\end{center}
+\end{frame}

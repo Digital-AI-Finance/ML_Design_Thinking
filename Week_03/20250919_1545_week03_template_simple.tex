@@ -1,0 +1,294 @@
+\documentclass[8pt]{beamer}
+\usetheme{Madrid}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{adjustbox}
+\usepackage{multicol}
+\usepackage{amsmath}
+
+% Color definitions
+\definecolor{mlblue}{RGB}{31, 119, 180}
+\definecolor{mlorange}{RGB}{255, 127, 14}
+\definecolor{mlgreen}{RGB}{44, 160, 44}
+\definecolor{mlred}{RGB}{214, 39, 40}
+\definecolor{mlpurple}{RGB}{148, 103, 189}
+\definecolor{mlgray}{RGB}{127, 127, 127}
+
+% Remove navigation symbols
+\setbeamertemplate{navigation symbols}{}
+
+% Clean itemize/enumerate
+\setbeamertemplate{itemize items}[circle]
+\setbeamertemplate{enumerate items}[default]
+
+% Reduce margins for more content space
+\setbeamersize{text margin left=5mm,text margin right=5mm}
+
+% Title information
+\title{Week 3: NLP for Emotional Context}
+\subtitle{Understanding Language as Window to User Experience}
+\author{Prof. Dr. Joerg Osterrieder}
+\institute{ML-Augmented Design Thinking - BSc Course}
+\date{\today}
+
+\begin{document}
+
+% Title slide
+\begin{frame}[t]
+\titlepage
+\end{frame}
+
+% Table of contents
+\begin{frame}[t]{Week 3 Overview}
+\tableofcontents
+\vfill
+\footnotesize
+\textbf{Learning Objectives:} Master sentiment analysis from basic to advanced. Understand BERT and transformers. Apply NLP to design thinking. Build production sentiment systems. Integrate emotional insights into UX design.
+\end{frame}
+
+% Section 1: Introduction to NLP and Sentiment Analysis
+\section{Introduction to NLP and Sentiment Analysis}
+
+\begin{frame}[t]
+\vfill
+\centering
+\begin{beamercolorbox}[sep=8pt,center]{title}
+\usebeamerfont{title}\Large Introduction to NLP and Sentiment Analysis\par
+\end{beamercolorbox}
+\vfill
+\end{frame}
+
+\begin{frame}[t]{The Power of Understanding Emotion}
+\begin{columns}[T]
+\begin{column}{0.38\textwidth}
+\textbf{Traditional Analysis:}
+\begin{itemize}
+\item Keyword counting
+\item Manual categorization
+\item Surface-level insights
+\item Limited scale
+\item Misses context
+\end{itemize}
+\vspace{10pt}
+\textbf{Challenge:}\\
+How to understand emotion at scale?
+\end{column}
+\begin{column}{0.58\textwidth}
+\includegraphics[width=\textwidth]{charts/emotion_spectrum_heatmap.pdf}
+\end{column}
+\end{columns}
+\vfill
+\footnotesize
+\textbf{NLP Revolution:} Modern NLP transforms emotion understanding. BERT achieves 94\% accuracy. Real-time processing handles 10K+ reviews/minute. Contextual understanding detects sarcasm and nuanced emotions.
+\end{frame}
+
+\begin{frame}[t]{Language as Window to User Experience}
+\centering
+\includegraphics[width=0.95\textwidth]{charts/language_emotion_flow.pdf}
+\vspace{5pt}
+\small Every word reveals frustration points, delight moments, and hidden needs
+\vfill
+\footnotesize
+\textbf{Design Applications:} Automated user research through review mining. Real-time sentiment monitoring. Persona development based on emotional patterns. Journey mapping with sentiment analysis. A/B testing with emotional impact measurement.
+\end{frame}
+
+\begin{frame}[t]{Context is Everything}
+\begin{columns}[T]
+\begin{column}{0.38\textwidth}
+\textbf{Same Words, Different Meanings:}
+\begin{itemize}
+\item ``This is sick!''
+\item ``It's fine''
+\item ``Interesting choice''
+\item ``Thanks for nothing''
+\end{itemize}
+\vspace{10pt}
+\textbf{Context Sources:}
+\begin{itemize}
+\item Domain knowledge
+\item User demographics
+\item Historical patterns
+\item Surrounding text
+\end{itemize}
+\end{column}
+\begin{column}{0.58\textwidth}
+\includegraphics[width=\textwidth]{charts/context_sentiment_examples.pdf}
+\end{column}
+\end{columns}
+\vfill
+\footnotesize
+\textbf{Technical Implementation:} Contextual embeddings capture semantic meaning. BERT processes bidirectionally for complete context. Domain adaptation fine-tunes for specific use cases. Attention mechanisms highlight relevant context automatically.
+\end{frame}
+
+% Section 2: Technical Foundations
+\section{Technical Foundations}
+
+\begin{frame}[t]
+\vfill
+\centering
+\begin{beamercolorbox}[sep=8pt,center]{title}
+\usebeamerfont{title}\Large Technical Foundations\par
+\end{beamercolorbox}
+\vfill
+\end{frame}
+
+\begin{frame}[t]{Text Preprocessing Pipeline}
+\begin{columns}[T]
+\begin{column}{0.25\textwidth}
+\textbf{Critical Steps:}
+\begin{enumerate}
+\item HTML/URL removal
+\item Character handling
+\item Encoding normalization
+\item Tokenization
+\item Lowercasing
+\item Stopword removal
+\end{enumerate}
+\vspace{10pt}
+\textbf{Quality Check:}\\
+99.5\% clean text required
+\end{column}
+\begin{column}{0.75\textwidth}
+\includegraphics[width=\textwidth]{charts/text_preprocessing_pipeline.pdf}
+\end{column}
+\end{columns}
+\vfill
+\footnotesize
+\textbf{Implementation:} Regular expressions handle 80\% of cleaning. Unicode normalization prevents encoding issues. Custom tokenizers preserve domain terms. Quality metrics track effectiveness. Automated pipeline processes 1M+ documents/hour.
+\end{frame}
+
+\begin{frame}[t]{BERT: Bidirectional Understanding}
+\centering
+\includegraphics[width=0.85\textwidth]{charts/bert_bidirectional.pdf}
+\vspace{5pt}
+\small Revolutionary bidirectional context understanding changes everything
+\vfill
+\footnotesize
+\textbf{BERT Innovation:} Unlike left-to-right models, BERT sees entire context simultaneously. Masked language modeling trains bidirectional representations. Pre-training on 3.3B words then fine-tuning. 110M parameters for Base, 340M for Large.
+\end{frame}
+
+% Section 3: Implementation Methods
+\section{Implementation Methods}
+
+\begin{frame}[t]
+\vfill
+\centering
+\begin{beamercolorbox}[sep=8pt,center]{title}
+\usebeamerfont{title}\Large Implementation Methods\par
+\end{beamercolorbox}
+\vfill
+\end{frame}
+
+\begin{frame}[t]{Model Performance Comparison}
+\centering
+\includegraphics[width=0.95\textwidth]{charts/model_comparison_enhanced.pdf}
+\vspace{5pt}
+\small Comprehensive evaluation across accuracy, speed, and resource requirements
+\vfill
+\footnotesize
+\textbf{Evaluation Framework:} Cross-validation ensures robust estimates. Multiple datasets test generalization. Statistical significance validates improvements. Error analysis identifies failure modes. Human evaluation validates automated metrics.
+\end{frame}
+
+% Section 4: Real-World Applications
+\section{Real-World Applications}
+
+\begin{frame}[t]
+\vfill
+\centering
+\begin{beamercolorbox}[sep=8pt,center]{title}
+\usebeamerfont{title}\Large Real-World Applications\par
+\end{beamercolorbox}
+\vfill
+\end{frame}
+
+\begin{frame}[t]{Amazon Case Study Overview}
+\centering
+\includegraphics[width=\textwidth]{charts/amazon_case_overview.pdf}
+\vfill
+\footnotesize
+\textbf{Scale and Scope:} Amazon processes 2M+ customer reviews daily. Multi-language support for global markets. Real-time sentiment analysis influences search rankings. Review quality scoring prevents manipulation. Automated moderation flags inappropriate content.
+\end{frame}
+
+% Section 5: Performance Assessment
+\section{Performance Assessment}
+
+\begin{frame}[t]
+\vfill
+\centering
+\begin{beamercolorbox}[sep=8pt,center]{title}
+\usebeamerfont{title}\Large Performance Assessment\par
+\end{beamercolorbox}
+\vfill
+\end{frame}
+
+\begin{frame}[t]{Performance Metrics Summary}
+\small
+\begin{table}
+\centering
+\begin{tabular}{lcccc}
+\toprule
+Method & Accuracy & Speed & Resources & Interpretability \\
+\midrule
+Rule-Based & 68\% & Very Fast & Low & High \\
+Traditional ML & 78\% & Fast & Medium & Medium \\
+Deep Learning & 88\% & Medium & High & Low \\
+BERT/Transformers & 94\% & Slow & Very High & Medium \\
+\bottomrule
+\end{tabular}
+\end{table}
+\vspace{10pt}
+\includegraphics[width=0.8\textwidth]{charts/method_comparison.pdf}
+\vfill
+\footnotesize
+\textbf{Selection Guidelines:} Rule-based for interpretability and speed. Traditional ML for balanced performance. Deep learning for accuracy with sufficient data. Transformers for state-of-the-art results with computational resources.
+\end{frame}
+
+% Conclusions
+\section{Conclusions and Next Steps}
+
+\begin{frame}[t]{Key Takeaways}
+\begin{columns}[T]
+\begin{column}{0.4\textwidth}
+\textbf{Technical Achievements:}
+\begin{itemize}
+\item 94\% sentiment accuracy
+\item Real-time processing
+\item Multilingual support
+\item Aspect-level analysis
+\item Production deployment
+\end{itemize}
+\vspace{10pt}
+\textbf{Design Integration:}
+\begin{itemize}
+\item Journey mapping enhancement
+\item Pain point identification
+\item Delight moment discovery
+\item Persona development
+\item Impact measurement
+\end{itemize}
+\end{column}
+\begin{column}{0.6\textwidth}
+\includegraphics[width=\textwidth]{charts/nlp_impact_metrics.pdf}
+\end{column}
+\end{columns}
+\vfill
+\footnotesize
+\textbf{Future Directions:} Multimodal sentiment analysis combining text, image, and audio. Real-time personalization based on emotional state. Ethical AI ensuring fair and unbiased analysis. Cross-cultural emotion understanding for global applications.
+\end{frame}
+
+\begin{frame}[t]{Thank You}
+\centering
+\Large Questions and Discussion\\
+\vspace{20pt}
+\normalsize
+\textbf{Week 3 Summary:}\\
+From basic sentiment to advanced NLP systems\\
+\vspace{10pt}
+\textbf{Next Week:}\\
+Classification for Problem Definition\\
+\vspace{10pt}
+\textbf{Practical Exercise:}\\
+Build your own sentiment analyzer with BERT
+\end{frame}
+
+\end{document}

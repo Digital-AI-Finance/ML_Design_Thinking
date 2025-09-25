@@ -1,0 +1,779 @@
+\documentclass[8pt,aspectratio=169]{beamer}
+\usetheme{Madrid}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{graphicx}
+\usepackage{tikz}
+\graphicspath{{figures/}}
+
+% Nature Professional Color Palette
+\definecolor{ForestGreen}{RGB}{20,83,45}      % #14532D - Primary dark forest green
+\definecolor{Teal}{RGB}{13,148,136}           % #0D9488 - Secondary natural teal
+\definecolor{Amber}{RGB}{245,158,11}          % #F59E0B - Accent warm amber
+\definecolor{Slate}{RGB}{71,85,105}           % #475569 - Support slate gray
+\definecolor{MintCream}{RGB}{240,253,244}     % #F0FDF4 - Background mint cream
+\definecolor{LightGreen}{RGB}{134,239,172}    % #86EFAC - Light green
+\definecolor{DarkTeal}{RGB}{15,118,110}       % #0F766E - Dark teal variant
+\definecolor{LightAmber}{RGB}{252,211,77}     % #FCD34D - Light amber
+
+% Apply Nature Professional colors to beamer
+\setbeamercolor{structure}{fg=ForestGreen}
+\setbeamercolor{normal text}{fg=ForestGreen,bg=white}
+\setbeamercolor{frametitle}{fg=ForestGreen,bg=LightGreen!20}
+\setbeamercolor{background canvas}{bg=MintCream}
+
+% Navigation and decoration
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{footline}[frame number]
+\setbeamerfont{frametitle}{series=\bfseries,size=\large}
+
+% Blocks with nature theme
+\setbeamertemplate{blocks}[default]
+\setbeamercolor{block title}{fg=white,bg=Teal}
+\setbeamercolor{block body}{fg=ForestGreen,bg=MintCream}
+\setbeamercolor{block title alerted}{fg=white,bg=Amber}
+\setbeamercolor{block body alerted}{fg=ForestGreen,bg=LightAmber!20}
+\setbeamercolor{block title example}{fg=white,bg=ForestGreen}
+\setbeamercolor{block body example}{fg=ForestGreen,bg=LightGreen!20}
+
+% Items with nature accent colors
+\setbeamercolor{item}{fg=Amber}
+\setbeamercolor{subitem}{fg=Teal}
+\setbeamercolor{subsubitem}{fg=DarkTeal}
+
+\title{\textcolor{ForestGreen}{Presentation Template}}
+\subtitle{\textcolor{Teal}{Nature Professional Layout Examples}}
+\author{\textcolor{Slate}{Author Name}}
+\date{}
+
+\begin{document}
+
+% ==================== LAYOUT 1: PLAIN TITLE ====================
+\begin{frame}[plain]
+\vspace{2cm}
+\begin{center}
+{\Huge\textcolor{ForestGreen}{Main Title}}\\[0.5cm]
+{\Large\textcolor{Teal}{Subtitle or Description}}\\[2cm]
+{\normalsize\textcolor{Amber}{Additional Information}}
+\end{center}
+\end{frame}
+
+% ==================== LAYOUT 2: STANDARD TITLE ====================
+\begin{frame}[plain]
+\titlepage
+\end{frame}
+
+% ==================== LAYOUT 3: TWO COLUMNS TEXT ====================
+\begin{frame}{Two Column Layout - Text}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{ForestGreen}{\textbf{Left Column Header}}
+
+Main content for the left side. This is where your primary information goes.
+
+\textcolor{Amber}{Key points:}
+\begin{itemize}
+\item First point
+\item Second point
+\item Third point with more text
+\item Fourth point
+\end{itemize}
+
+Additional paragraph text can go here to provide more context or explanation.
+
+\column{0.48\textwidth}
+\textcolor{ForestGreen}{\textbf{Right Column Header}}
+
+Supporting content or contrasting information for the right side.
+
+\textcolor{Teal}{Related items:}
+\begin{itemize}
+\item Supporting point one
+\item Supporting point two
+\item Supporting point three
+\end{itemize}
+
+More descriptive text that complements the left column content.
+\end{columns}
+
+\vspace{\fill}
+\small\textcolor{Slate}{Bottom annotation: Additional notes, references, or key takeaways}
+\end{frame}
+
+% ==================== LAYOUT 4: TWO COLUMNS WITH MATH ====================
+\begin{frame}{Two Column Layout - Mathematics}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{ForestGreen}{\textbf{Definition}}
+
+A mathematical concept defined:
+$$\textcolor{Teal}{f(x) = ax^2 + bx + c}$$
+
+\textcolor{Amber}{Properties:}
+\begin{itemize}
+\item Property one: $a \neq 0$
+\item Property two: Vertex at $x = -\frac{b}{2a}$
+\item Property three: Discriminant $\Delta = b^2 - 4ac$
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{ForestGreen}{\textbf{Example}}
+
+Specific instance:
+$$\textcolor{DarkTeal}{f(x) = 2x^2 + 3x + 1}$$
+
+\textcolor{Teal}{Calculation:}
+\begin{align*}
+f'(x) &= 4x + 3 \\
+f'(0) &= 3 \\
+f''(x) &= 4
+\end{align*}
+
+Result: Minimum at $x = -\frac{3}{4}$
+\end{columns}
+
+\vspace{\fill}
+\small\textcolor{Slate}{Mathematical concepts are best understood through both theory and examples}
+\end{frame}
+
+% ==================== LAYOUT 5: COLUMNS WITH LIST VARIATIONS ====================
+\begin{frame}{List Variations}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{ForestGreen}{\textbf{Enumerated List}}
+\begin{enumerate}
+\item First step in process
+\item Second step with details
+\item Third step
+\begin{itemize}
+\item Sub-point A
+\item Sub-point B
+\end{itemize}
+\item Final step
+\end{enumerate}
+
+\vspace{0.5em}
+\textcolor{Teal}{\textbf{Bullet Points}}
+\begin{itemize}
+\item Main concept
+\item Supporting idea
+\item Additional thought
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{ForestGreen}{\textbf{Mixed Content}}
+
+Paragraph text introducing a concept.
+
+\textcolor{Amber}{Key formulas:}
+\begin{itemize}
+\item Linear: $y = mx + b$
+\item Quadratic: $y = ax^2 + bx + c$
+\item Exponential: $y = ae^{bx}$
+\end{itemize}
+
+Concluding remarks about the formulas and their applications in real-world scenarios.
+\end{columns}
+\end{frame}
+
+% ==================== LAYOUT 6: THREE-WAY SPLIT ====================
+\begin{frame}{Three Column Layout}
+\begin{columns}[T]
+\column{0.31\textwidth}
+\textcolor{ForestGreen}{\textbf{Category A}}
+
+Content for first category:
+\begin{itemize}
+\item Item 1
+\item Item 2
+\item Item 3
+\end{itemize}
+
+Additional notes about this category.
+
+\column{0.31\textwidth}
+\textcolor{Teal}{\textbf{Category B}}
+
+Content for second category:
+\begin{itemize}
+\item Item 1
+\item Item 2
+\item Item 3
+\end{itemize}
+
+Additional notes about this category.
+
+\column{0.31\textwidth}
+\textcolor{Amber}{\textbf{Category C}}
+
+Content for third category:
+\begin{itemize}
+\item Item 1
+\item Item 2
+\item Item 3
+\end{itemize}
+
+Additional notes about this category.
+\end{columns}
+
+\vspace{\fill}
+\small\textcolor{Slate}{Three columns work well for comparisons or related concepts}
+\end{frame}
+
+% ==================== LAYOUT 7: FULL WIDTH WITH IMAGE SPACE ====================
+\begin{frame}{Full Width Content with Image}
+\textcolor{ForestGreen}{\textbf{Main Topic Introduction}}
+
+This layout provides space for a full-width explanation followed by an image or chart.
+
+\textcolor{Teal}{Key concepts to understand:}
+\begin{itemize}
+\item Concept one with brief explanation
+\item Concept two with additional details
+\item Concept three relating to the visual below
+\end{itemize}
+
+\vspace{0.5em}
+\begin{center}
+% Space for image/chart
+\framebox[0.9\textwidth][c]{
+\vspace{3cm}
+\textcolor{Slate}{[Image/Chart Placeholder]}
+\vspace{3cm}
+}
+\end{center}
+
+\vspace{\fill}
+\small\textcolor{Slate}{Visuals should complement and enhance the textual content}
+\end{frame}
+
+% ==================== LAYOUT 8: COLUMNS WITH IMAGE ====================
+\begin{frame}{Mixed Media Layout}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{ForestGreen}{\textbf{Text Content}}
+
+Explanation of concept with supporting details.
+
+\textcolor{Amber}{Important points:}
+\begin{itemize}
+\item First observation
+\item Second observation
+\item Third observation
+\item Conclusion
+\end{itemize}
+
+Formula if needed:
+$$\textcolor{Teal}{E = mc^2}$$
+
+\column{0.48\textwidth}
+\begin{center}
+% Space for image
+\framebox[0.9\columnwidth][c]{
+\vspace{4cm}
+\textcolor{Slate}{[Visual Element]}
+\vspace{4cm}
+}
+\end{center}
+\end{columns}
+
+\vspace{\fill}
+\small\textcolor{Slate}{Combine text and visuals for maximum impact}
+\end{frame}
+
+% ==================== LAYOUT 9: DEFINITION-EXAMPLE PATTERN ====================
+\begin{frame}{Definition and Examples}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{ForestGreen}{\textbf{Definition}}
+
+Formal statement of concept or theorem.
+
+\vspace{0.5em}
+\textcolor{Teal}{\textbf{Properties}}
+\begin{itemize}
+\item Property 1
+\item Property 2
+\item Property 3
+\end{itemize}
+
+\vspace{0.5em}
+\textcolor{DarkTeal}{\textbf{Conditions}}
+\begin{itemize}
+\item Must satisfy A
+\item Must satisfy B
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{Amber}{\textbf{Example 1}}
+
+Concrete instance demonstrating the concept.
+
+Details:
+\begin{itemize}
+\item Specific value: 42
+\item Result: Valid
+\end{itemize}
+
+\vspace{0.5em}
+\textcolor{Amber}{\textbf{Example 2}}
+
+Another instance showing different aspect.
+
+Details:
+\begin{itemize}
+\item Specific value: -5
+\item Result: Invalid
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\small\textcolor{Slate}{Definitions paired with examples aid understanding}
+\end{frame}
+
+% ==================== LAYOUT 10: COMPARISON TABLE ====================
+\begin{frame}{Comparison Layout}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{ForestGreen}{\textbf{Method A}}
+\begin{itemize}
+\item Advantage 1
+\item Advantage 2
+\item Advantage 3
+\end{itemize}
+
+\textcolor{Amber}{\textbf{Disadvantages}}
+\begin{itemize}
+\item Limitation 1
+\item Limitation 2
+\end{itemize}
+
+\textcolor{Teal}{\textbf{Best for:}} Scenario type X
+
+\column{0.48\textwidth}
+\textcolor{ForestGreen}{\textbf{Method B}}
+\begin{itemize}
+\item Advantage 1
+\item Advantage 2
+\item Advantage 3
+\end{itemize}
+
+\textcolor{Amber}{\textbf{Disadvantages}}
+\begin{itemize}
+\item Limitation 1
+\item Limitation 2
+\end{itemize}
+
+\textcolor{Teal}{\textbf{Best for:}} Scenario type Y
+\end{columns}
+
+\vspace{\fill}
+\small\textcolor{Slate}{Direct comparisons help in decision making}
+\end{frame}
+
+% ==================== LAYOUT 11: PROGRESSIVE REVEAL ====================
+\begin{frame}{Step-by-Step Process}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{ForestGreen}{\textbf{Initial State}}
+
+Description of starting point:
+\begin{itemize}
+\item \textcolor{Teal}{Given:} Input data
+\item \textcolor{Teal}{Goal:} Desired output
+\item \textcolor{Amber}{Constraint:} Time limit
+\end{itemize}
+
+\vspace{0.5em}
+\textcolor{ForestGreen}{\textbf{Step 1: Preparation}}
+
+Actions taken in first step.
+
+\vspace{0.5em}
+\textcolor{ForestGreen}{\textbf{Step 2: Execution}}
+
+Main processing occurs here.
+
+\column{0.48\textwidth}
+\textcolor{DarkTeal}{\textbf{Step 3: Refinement}}
+
+Optimization and adjustments.
+
+\vspace{0.5em}
+\textcolor{DarkTeal}{\textbf{Step 4: Validation}}
+
+Check results against criteria.
+
+\vspace{0.5em}
+\textcolor{Amber}{\textbf{Final State}}
+
+Description of outcome:
+\begin{itemize}
+\item Result: Success
+\item Time: 2.3 seconds
+\item Accuracy: 99.5\%
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\small\textcolor{Slate}{Step-by-step breakdowns clarify complex processes}
+\end{frame}
+
+% ==================== LAYOUT 12: FORMULA COLLECTION ====================
+\begin{frame}{Formula Reference}
+\begin{columns}[T]
+\column{0.31\textwidth}
+\textcolor{ForestGreen}{\textbf{Category 1}}
+
+Basic formulas:
+$$\textcolor{Teal}{a + b = c}$$
+$$\textcolor{Teal}{x^2 + y^2 = r^2}$$
+$$\textcolor{Teal}{F = ma}$$
+
+\column{0.31\textwidth}
+\textcolor{DarkTeal}{\textbf{Category 2}}
+
+Intermediate formulas:
+$$\textcolor{ForestGreen}{\int_a^b f(x)\,dx}$$
+$$\textcolor{ForestGreen}{\sum_{i=1}^n i = \frac{n(n+1)}{2}}$$
+$$\textcolor{ForestGreen}{e^{i\pi} + 1 = 0}$$
+
+\column{0.31\textwidth}
+\textcolor{Amber}{\textbf{Category 3}}
+
+Advanced formulas:
+$$\textcolor{DarkTeal}{\nabla \times \vec{F} = 0}$$
+$$\textcolor{DarkTeal}{\frac{\partial u}{\partial t} = k\nabla^2 u}$$
+$$\textcolor{DarkTeal}{E = \hbar\omega}$$
+\end{columns}
+
+\vspace{\fill}
+\small\textcolor{Slate}{Quick reference formulas organized by category}
+\end{frame}
+
+% ==================== LAYOUT 13: SUMMARY STYLE ====================
+\begin{frame}{Summary Layout}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{ForestGreen}{\textbf{Key Concepts}}
+\begin{itemize}
+\item Main idea 1
+\item Main idea 2
+\item Main idea 3
+\item Main idea 4
+\end{itemize}
+
+\vspace{0.5em}
+\textcolor{Teal}{\textbf{Methods Covered}}
+\begin{itemize}
+\item Technique A
+\item Technique B
+\item Technique C
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{Amber}{\textbf{Applications}}
+\begin{itemize}
+\item Real-world use 1
+\item Real-world use 2
+\item Real-world use 3
+\end{itemize}
+
+\vspace{0.5em}
+\textcolor{DarkTeal}{\textbf{Next Steps}}
+\begin{itemize}
+\item Further reading
+\item Practice problems
+\item Advanced topics
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\small\textcolor{Slate}{Summaries consolidate learning and provide direction}
+\end{frame}
+
+% ==================== LAYOUT 14: Q&A STYLE ====================
+\begin{frame}{Question and Answer Format}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{ForestGreen}{\textbf{Common Questions}}
+
+\textcolor{Teal}{\textit{Q1: What is the main purpose?}}
+
+Answer explaining the primary goal and its importance.
+
+\vspace{0.5em}
+\textcolor{Teal}{\textit{Q2: How does it work?}}
+
+Brief explanation of the mechanism or process.
+
+\column{0.48\textwidth}
+\textcolor{Amber}{\textit{Q3: When should it be used?}}
+
+Scenarios and conditions for application.
+
+\vspace{0.5em}
+\textcolor{Amber}{\textit{Q4: What are the limitations?}}
+
+Known constraints and boundaries.
+\end{columns}
+
+\vspace{\fill}
+\small\textcolor{Slate}{Anticipating questions improves comprehension}
+\end{frame}
+
+% ==================== LAYOUT 15: CLOSING SLIDE ====================
+\begin{frame}[plain]
+\vspace{3cm}
+\begin{center}
+{\Large\textcolor{ForestGreen}{Thank you}}\\[2cm]
+{\normalsize\textcolor{Teal}{Questions?}}\\[1cm]
+{\small\textcolor{Amber}{contact@example.com}}
+\end{center}
+\end{frame}
+
+% ==================== LAYOUT 16: OVERVIEW WITH SECTIONS ====================
+\begin{frame}{Course Overview}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{ForestGreen}{\textbf{Part 1: Foundations}}
+\begin{itemize}
+\item Topic 1.1
+\item Topic 1.2
+\item Topic 1.3
+\item Topic 1.4
+\end{itemize}
+
+\vspace{0.5em}
+\textcolor{Teal}{\textbf{Part 2: Intermediate}}
+\begin{itemize}
+\item Topic 2.1
+\item Topic 2.2
+\item Topic 2.3
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{DarkTeal}{\textbf{Part 3: Advanced}}
+\begin{itemize}
+\item Topic 3.1
+\item Topic 3.2
+\item Topic 3.3
+\end{itemize}
+
+\vspace{0.5em}
+\textcolor{Amber}{\textbf{Part 4: Applications}}
+\begin{itemize}
+\item Application A
+\item Application B
+\item Application C
+\item Case Studies
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\small\textcolor{Slate}{Structured overview helps learners navigate content}
+\end{frame}
+
+% ==================== LAYOUT 17: CODE AND OUTPUT ====================
+\begin{frame}[fragile]{Code Example Layout}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{ForestGreen}{\textbf{Input Code}}
+
+\begin{verbatim}
+def function(x):
+    if x > 0:
+        return x * 2
+    else:
+        return -x
+
+result = function(5)
+print(result)
+\end{verbatim}
+
+\vspace{0.5em}
+\textcolor{Teal}{\textbf{Explanation}}
+
+This function doubles positive numbers and negates negative numbers.
+
+\column{0.48\textwidth}
+\textcolor{Amber}{\textbf{Output}}
+
+\texttt{10}
+
+\vspace{0.5em}
+\textcolor{DarkTeal}{\textbf{Trace Through}}
+\begin{enumerate}
+\item Input: $x = 5$
+\item Check: $5 > 0$ (True)
+\item Execute: $5 \times 2 = 10$
+\item Return: $10$
+\end{enumerate}
+
+\textcolor{ForestGreen}{\textbf{Other Examples}}
+\begin{itemize}
+\item $f(3) = 6$
+\item $f(-4) = 4$
+\item $f(0) = 0$
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\small\textcolor{Slate}{Code examples benefit from step-by-step explanation}
+\end{frame}
+
+% ==================== LAYOUT 18: PROS AND CONS ====================
+\begin{frame}{Advantages and Disadvantages}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{ForestGreen}{\textbf{Advantages}}
+\begin{itemize}
+\item[\textcolor{Teal}{+}] Benefit one with explanation
+\item[\textcolor{Teal}{+}] Benefit two
+\item[\textcolor{Teal}{+}] Benefit three
+\item[\textcolor{Teal}{+}] Benefit four with additional context
+\item[\textcolor{Teal}{+}] Benefit five
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{ForestGreen}{\textbf{Disadvantages}}
+\begin{itemize}
+\item[\textcolor{Amber}{-}] Drawback one
+\item[\textcolor{Amber}{-}] Drawback two with details
+\item[\textcolor{Amber}{-}] Drawback three
+\item[\textcolor{Amber}{-}] Drawback four
+\end{itemize}
+
+\vspace{0.5em}
+\textcolor{DarkTeal}{\textbf{Verdict}}
+
+Best suited for situations where benefits outweigh drawbacks.
+\end{columns}
+
+\vspace{\fill}
+\small\textcolor{Slate}{Balanced analysis helps informed decision-making}
+\end{frame}
+
+% ==================== LAYOUT 19: TIMELINE ====================
+\begin{frame}{Timeline Layout}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{ForestGreen}{\textbf{Phase 1: Initial Development}}
+\begin{itemize}
+\item \textcolor{Teal}{Week 1-2:} Planning
+\item \textcolor{Teal}{Week 3-4:} Design
+\item \textcolor{Teal}{Week 5-6:} Prototype
+\end{itemize}
+
+\vspace{0.5em}
+\textcolor{ForestGreen}{\textbf{Phase 2: Implementation}}
+\begin{itemize}
+\item \textcolor{Teal}{Week 7-10:} Core features
+\item \textcolor{Teal}{Week 11-12:} Testing
+\item \textcolor{Teal}{Week 13-14:} Refinement
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{Amber}{\textbf{Phase 3: Deployment}}
+\begin{itemize}
+\item \textcolor{DarkTeal}{Week 15:} Beta release
+\item \textcolor{DarkTeal}{Week 16-17:} Feedback
+\item \textcolor{DarkTeal}{Week 18:} Final release
+\end{itemize}
+
+\vspace{0.5em}
+\textcolor{Amber}{\textbf{Phase 4: Maintenance}}
+\begin{itemize}
+\item \textcolor{DarkTeal}{Ongoing:} Updates
+\item \textcolor{DarkTeal}{Monthly:} Reviews
+\item \textcolor{DarkTeal}{Quarterly:} Major updates
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\small\textcolor{Slate}{Clear timelines set expectations and track progress}
+\end{frame}
+
+% ==================== LAYOUT 20: REFERENCES ====================
+\begin{frame}{References and Resources}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{ForestGreen}{\textbf{Primary Sources}}
+\begin{itemize}
+\item Author (2024): \textit{Main Title}
+\item Researcher (2023): \textit{Key Paper}
+\item Expert (2023): \textit{Foundational Work}
+\end{itemize}
+
+\vspace{0.5em}
+\textcolor{Teal}{\textbf{Books}}
+\begin{itemize}
+\item Comprehensive Guide
+\item Practical Handbook
+\item Theory and Practice
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{Amber}{\textbf{Online Resources}}
+\begin{itemize}
+\item Official documentation
+\item Video tutorials
+\item Interactive examples
+\item Community forums
+\end{itemize}
+
+\vspace{0.5em}
+\textcolor{DarkTeal}{\textbf{Tools}}
+\begin{itemize}
+\item Software package A
+\item Library B
+\item Framework C
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\small\textcolor{Slate}{Curated resources accelerate learning}
+\end{frame}
+
+% ==================== LAYOUT 21: NATURE-THEMED SPECIAL ====================
+\begin{frame}{Nature Professional Special Features}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{ForestGreen}{\textbf{Color Psychology}}
+
+The Nature Professional palette creates:
+\begin{itemize}
+\item \textcolor{Teal}{Calming effect} from natural greens
+\item \textcolor{Amber}{Focus points} with amber accents
+\item \textcolor{ForestGreen}{Professional tone} with forest green
+\item \textcolor{Slate}{Subtle support} with slate elements
+\end{itemize}
+
+\vspace{0.5em}
+\begin{block}{Environmental Connection}
+Natural colors reduce eye strain and improve information retention.
+\end{block}
+
+\column{0.48\textwidth}
+\textcolor{Teal}{\textbf{Usage Guidelines}}
+
+\begin{itemize}
+\item \textcolor{ForestGreen}{Primary text} - Main content
+\item \textcolor{Teal}{Secondary elements} - Supporting info
+\item \textcolor{Amber}{Highlights} - Key points
+\item \textcolor{DarkTeal}{Variations} - Depth
+\item \textcolor{Slate}{Annotations} - Meta info
+\end{itemize}
+
+\vspace{0.5em}
+\begin{alertblock}{Best Practice}
+Use color consistently to create visual hierarchy and guide attention.
+\end{alertblock}
+\end{columns}
+
+\vspace{\fill}
+\small\textcolor{Slate}{Nature Professional theme: Where professionalism meets natural harmony}
+\end{frame}
+
+\end{document}

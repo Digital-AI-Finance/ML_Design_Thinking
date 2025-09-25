@@ -1,0 +1,532 @@
+% Template Showcase Presentation
+% Demonstrates all features of the Optimal Readability Master Template
+% Generated: 2025-01-20 08:50
+
+\input{NLP_slides/common/master_template.tex}
+
+% Document metadata
+\title[Template Showcase]{Master Template Showcase}
+\subtitle{Optimal Readability Design System}
+\author[NLP Course]{Natural Language Processing Course 2025}
+\institute{Department of Computer Science}
+\date{\today}
+
+\begin{document}
+
+% ====================================
+% TITLE SLIDE
+% ====================================
+\begin{frame}
+\titlepage
+\end{frame}
+
+% ====================================
+% TABLE OF CONTENTS
+% ====================================
+\begin{frame}{Presentation Overview}
+\tableofcontents
+\end{frame}
+
+% ====================================
+% SECTION 1: COLOR SYSTEM
+% ====================================
+\section{Optimal Readability Color System}
+
+\begin{frame}{Color Palette - WCAG AAA Compliant}
+\begin{columns}[T]
+\column{0.5\textwidth}
+\textbf{Primary Colors:}
+\begin{itemize}
+\item \textcolor{PureBlack}{Pure Black (21:1 contrast)}
+\item \textcolor{DeepBlue}{Deep Blue (12.6:1 contrast)}
+\item \textcolor{DarkGray}{Dark Gray (9.7:1 contrast)}
+\end{itemize}
+
+\vspace{1em}
+\textbf{Chart Colors (Colorblind-Safe):}
+\begin{itemize}
+\item \textcolor{ChartBlue}{Chart Blue - Primary data}
+\item \textcolor{ChartOrange}{Chart Orange - Secondary data}
+\item \textcolor{ChartTeal}{Chart Teal - Tertiary data}
+\item \textcolor{ChartPurple}{Chart Purple - Quaternary data}
+\end{itemize}
+
+\column{0.5\textwidth}
+\textbf{Semantic Colors:}
+\begin{itemize}
+\item \textcolor{DarkGreen}{Dark Green - Success/Positive}
+\item \textcolor{DarkRed}{Dark Red - Warning/Negative}
+\item \textcolor{LightGray}{Light Gray - Borders/Grids}
+\end{itemize}
+
+\vspace{1em}
+\keypoint{All colors meet WCAG AAA standards for accessibility}
+\end{columns}
+\end{frame}
+
+% ====================================
+% SECTION 2: SLIDE LAYOUTS
+% ====================================
+\section{Standard Slide Layouts}
+
+\twocolslide{Two-Column Layout}{
+\textbf{Left Column Content:}
+\begin{itemize}
+\item Primary information
+\item Key concepts
+\item Main arguments
+\item Core definitions
+\end{itemize}
+
+\vspace{1em}
+This layout is ideal for:
+\begin{enumerate}
+\item Comparisons
+\item Before/after scenarios
+\item Theory vs practice
+\item Problem/solution pairs
+\end{enumerate}
+}{
+\textbf{Right Column Content:}
+\begin{itemize}
+\item Supporting details
+\item Examples
+\item Visualizations
+\item Code snippets
+\end{itemize}
+
+\vspace{1em}
+\formula{P(A|B) = \frac{P(B|A) \cdot P(A)}{P(B)}}
+
+\secondary{Secondary text appears in gray for visual hierarchy}
+}
+
+\threecolslide{Three-Column Layout}{
+\textbf{Column 1}
+\begin{itemize}
+\item Concept A
+\item Detail 1
+\item Detail 2
+\end{itemize}
+
+\vspace{0.5em}
+\success{Advantages:}
+\begin{itemize}
+\item Pro 1
+\item Pro 2
+\end{itemize}
+}{
+\textbf{Column 2}
+\begin{itemize}
+\item Concept B
+\item Detail 1
+\item Detail 2
+\end{itemize}
+
+\vspace{0.5em}
+\warning{Limitations:}
+\begin{itemize}
+\item Con 1
+\item Con 2
+\end{itemize}
+}{
+\textbf{Column 3}
+\begin{itemize}
+\item Concept C
+\item Detail 1
+\item Detail 2
+\end{itemize}
+
+\vspace{0.5em}
+\data{Results:}
+\begin{itemize}
+\item Finding 1
+\item Finding 2
+\end{itemize}
+}
+
+% ====================================
+% SECTION 3: VISUALIZATION INTEGRATION
+% ====================================
+\section{Chart and Visualization Integration}
+
+\fullchartslide{Full Chart Display}{figures/model_comparison.pdf}
+
+\chartslide{Scaled Chart with Caption}{0.75}{figures/attention_heatmap.pdf}
+
+\conceptslide{Concept Slide with Visualization}{
+\textbf{Encoder-Decoder Architecture}
+
+Key components:
+\begin{itemize}
+\item \highlight{Encoder}: Processes input sequence
+\item \highlight{Context Vector}: Fixed-size representation
+\item \highlight{Decoder}: Generates output sequence
+\end{itemize}
+
+\vspace{1em}
+Mathematical formulation:
+\formula{h_t = f(x_t, h_{t-1})}
+\formula{c = q(h_1, h_2, ..., h_T)}
+\formula{s_t = g(y_{t-1}, s_{t-1}, c)}
+
+\vspace{1em}
+\secondary{Note: Variable length input/output capability}
+}{figures/encoder_decoder.pdf}
+
+\begin{frame}{Multi-Panel Dashboard}
+\begin{center}
+\includegraphics[width=0.78\textwidth]{figures/training_dashboard.pdf}
+\end{center}
+\secondary{Comprehensive training monitoring with multiple metrics}
+\end{frame}
+
+% ====================================
+% SECTION 4: CODE INTEGRATION
+% ====================================
+\section{Code and Algorithm Display}
+
+\begin{frame}[fragile]{Code Display with Syntax Highlighting}
+\begin{lstlisting}[language=Python]
+import torch
+import torch.nn as nn
+
+class Seq2Seq(nn.Module):
+    def __init__(self, encoder, decoder, device):
+        super().__init__()
+        self.encoder = encoder
+        self.decoder = decoder
+        self.device = device
+
+    def forward(self, src, trg, teacher_forcing_ratio=0.5):
+        # Encoder processes entire source sequence
+        encoder_outputs, hidden = self.encoder(src)
+
+        # Decoder generates target sequence
+        outputs = []
+        input = trg[0]  # <SOS> token
+
+        for t in range(1, trg.shape[0]):
+            output, hidden = self.decoder(input, hidden, encoder_outputs)
+            outputs.append(output)
+
+            # Teacher forcing decision
+            use_teacher_force = random.random() < teacher_forcing_ratio
+            input = trg[t] if use_teacher_force else output.argmax(1)
+
+        return torch.stack(outputs)
+\end{lstlisting}
+\end{frame}
+
+% ====================================
+% SECTION 5: TABLES AND DATA
+% ====================================
+\section{Tables and Data Presentation}
+
+\tableslide{Performance Comparison Table}{
+\begin{tabular}{lccc}
+\toprule
+\textbf{Model} & \textbf{BLEU} & \textbf{Speed} & \textbf{Memory} \\
+\midrule
+RNN & 23.5 & Fast & Low \\
+LSTM & 31.2 & Medium & Medium \\
+GRU & 30.8 & Medium & Medium \\
+Transformer & \highlight{41.3} & Slow & High \\
+\bottomrule
+\end{tabular}
+
+\vspace{1em}
+\keypoint{Transformer achieves best quality at computational cost}
+}
+
+\begin{frame}{Complex Table with Multiple Sections}
+\begin{center}
+\begin{tabular}{l|ccc|ccc}
+\toprule
+& \multicolumn{3}{c|}{\textbf{Training}} & \multicolumn{3}{c}{\textbf{Inference}} \\
+\textbf{Architecture} & Time & GPU & Batch & Speed & Memory & Latency \\
+\midrule
+\textbf{Sequential Models} & & & & & & \\
+\quad RNN & 2h & 4GB & 32 & 1000/s & 1GB & 5ms \\
+\quad LSTM & 3h & 8GB & 32 & 800/s & 2GB & 6ms \\
+\quad GRU & 2.5h & 6GB & 32 & 850/s & 1.5GB & 5.5ms \\
+\midrule
+\textbf{Attention Models} & & & & & & \\
+\quad Seq2Seq+Attn & 4h & 12GB & 16 & 400/s & 3GB & 12ms \\
+\quad Transformer & 8h & 16GB & 8 & 200/s & 4GB & 20ms \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{1em}
+\secondary{Performance metrics across different model architectures and operational phases}
+\end{frame}
+
+% ====================================
+% SECTION 6: MATHEMATICAL NOTATION
+% ====================================
+\section{Mathematical Notation and Formulas}
+
+\begin{frame}{Mathematical Expressions}
+\begin{columns}[T]
+\column{0.5\textwidth}
+\textbf{Probability Notation:}
+\begin{itemize}
+\item Joint: $\prob{A, B}$
+\item Conditional: $\prob{A \given B}$
+\item Marginal: $\prob{A} = \sum_b \prob{A, B=b}$
+\end{itemize}
+
+\vspace{1em}
+\textbf{Optimization:}
+\formula{\theta^* = \argmax_\theta \mathcal{L}(\theta)}
+\formula{\hat{y} = \argmax_y P(y \given x)}
+
+\column{0.5\textwidth}
+\textbf{Neural Network Operations:}
+
+Attention mechanism:
+\formula{\alpha_{ij} = \frac{\exp(e_{ij})}{\sum_{k=1}^{T_x} \exp(e_{ik})}}
+
+Context vector:
+\formula{c_i = \sum_{j=1}^{T_x} \alpha_{ij} h_j}
+
+Output distribution:
+\formula{P(y_t) = \softmax(W_o \cdot s_t)}
+\end{columns}
+
+\vspace{1em}
+\keypoint{All mathematical notation follows standard ML conventions}
+\end{frame}
+
+% ====================================
+% SECTION 7: PEDAGOGICAL ELEMENTS
+% ====================================
+\section{Educational Components}
+
+\begin{frame}{Text Highlighting and Emphasis}
+\begin{columns}[T]
+\column{0.5\textwidth}
+\textbf{Highlighting Commands:}
+\begin{itemize}
+\item \highlight{Primary highlight} - key concepts
+\item \secondary{Secondary text} - supporting info
+\item \success{Success message} - positive outcomes
+\item \warning{Warning text} - important cautions
+\item \data{Data reference} - metrics/values
+\item \dataalt{Alternative data} - comparisons
+\end{itemize}
+
+\column{0.5\textwidth}
+\textbf{Usage Examples:}
+
+The \highlight{attention mechanism} solved the \warning{bottleneck problem} in sequence models.
+
+Performance improved from \data{23.5 BLEU} to \dataalt{41.3 BLEU}.
+
+\success{Key achievement}: Variable-length sequences
+
+\secondary{Note: Results may vary with dataset size}
+\end{columns}
+
+\vspace{1em}
+\keypoint{Consistent color coding enhances comprehension and retention}
+\end{frame}
+
+% ====================================
+% SECTION 8: COMPARISON VISUALIZATIONS
+% ====================================
+\section{Comparison and Analysis}
+
+\begin{frame}{Side-by-Side Comparison}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\begin{center}
+\textbf{Traditional RNN}
+\end{center}
+\begin{itemize}
+\item Sequential processing
+\item Fixed context window
+\item Gradient vanishing
+\item Fast inference
+\item Low memory usage
+\end{itemize}
+
+\vspace{0.5em}
+\formula{h_t = \tanh(W_h h_{t-1} + W_x x_t)}
+
+\vspace{0.5em}
+\success{Strengths:}
+\begin{itemize}
+\item Simple implementation
+\item Efficient for short sequences
+\end{itemize}
+
+\column{0.48\textwidth}
+\begin{center}
+\textbf{Transformer}
+\end{center}
+\begin{itemize}
+\item Parallel processing
+\item Global context access
+\item Stable gradients
+\item Slower inference
+\item High memory usage
+\end{itemize}
+
+\vspace{0.5em}
+\formula{\text{Attention}(Q,K,V) = \softmax(\frac{QK^T}{\sqrt{d_k}})V}
+
+\vspace{0.5em}
+\success{Strengths:}
+\begin{itemize}
+\item Superior for long sequences
+\item Better context modeling
+\end{itemize}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Performance Analysis Charts}
+\begin{columns}[T]
+\column{0.5\textwidth}
+\begin{center}
+\includegraphics[width=0.95\textwidth]{figures/sequence_analysis.pdf}
+\end{center}
+
+\column{0.5\textwidth}
+\begin{center}
+\includegraphics[width=0.95\textwidth]{figures/bleu_comparison.pdf}
+\end{center}
+\end{columns}
+
+\vspace{0.5em}
+\secondary{Left: Computational complexity | Right: Translation quality evolution}
+\end{frame}
+
+% ====================================
+% SECTION 9: BEST PRACTICES
+% ====================================
+\section{Template Best Practices}
+
+\begin{frame}{Design Principles}
+\begin{columns}[T]
+\column{0.5\textwidth}
+\textbf{Typography Guidelines:}
+\begin{itemize}
+\item 8pt base font size for readability
+\item Bold for emphasis, not color alone
+\item Consistent heading hierarchy
+\item Maximum 3 font sizes per slide
+\end{itemize}
+
+\vspace{1em}
+\textbf{Color Usage:}
+\begin{itemize}
+\item Black text on white background
+\item Accents for structure, not decoration
+\item Semantic colors for meaning
+\item Colorblind-safe chart palettes
+\end{itemize}
+
+\column{0.5\textwidth}
+\textbf{Layout Principles:}
+\begin{itemize}
+\item Maximum 3 key points per slide
+\item Consistent spacing and alignment
+\item Visual hierarchy through size/weight
+\item White space for clarity
+\end{itemize}
+
+\vspace{1em}
+\textbf{Content Organization:}
+\begin{itemize}
+\item Clear section divisions
+\item Logical flow and progression
+\item Summary/takeaway boxes
+\item Minimal text, maximum impact
+\end{itemize}
+\end{columns}
+
+\vspace{1em}
+\keypoint{Simplicity and consistency enhance learning outcomes}
+\end{frame}
+
+% ====================================
+% SECTION 10: SUMMARY
+% ====================================
+\section{Summary and Resources}
+
+\summaryslide{Template Features Summary}{
+\begin{itemize}
+\item \highlight{WCAG AAA compliant} color system
+\item \highlight{Colorblind-safe} visualization palette
+\item \highlight{Multiple layout} templates
+\item \highlight{Integrated chart} generation system
+\item \highlight{Mathematical notation} support
+\item \highlight{Code highlighting} with Python/LaTeX
+\item \highlight{Semantic color} coding
+\item \highlight{Accessibility-first} design
+\end{itemize}
+}
+
+\begin{frame}{Resources and Files}
+\begin{columns}[T]
+\column{0.5\textwidth}
+\textbf{Core Template Files:}
+\begin{itemize}
+\item \texttt{master\_template.tex}
+\item \texttt{chart\_utils.py}
+\item \texttt{generate\_charts.py}
+\end{itemize}
+
+\vspace{1em}
+\textbf{Documentation:}
+\begin{itemize}
+\item Layout command reference
+\item Color palette guide
+\item Chart generation examples
+\item Best practices checklist
+\end{itemize}
+
+\column{0.5\textwidth}
+\textbf{Example Usage:}
+\begin{itemize}
+\item Week 4: Seq2Seq models
+\item Attention mechanisms
+\item Training dashboards
+\item Performance comparisons
+\end{itemize}
+
+\vspace{1em}
+\textbf{File Organization:}
+\begin{itemize}
+\item \texttt{figures/} - Generated charts
+\item \texttt{scripts/} - Python utilities
+\item \texttt{previous/} - Version archive
+\end{itemize}
+\end{columns}
+
+\vspace{1em}
+\keypoint{This template ensures consistent, accessible presentations across the course}
+\end{frame}
+
+% ====================================
+% END SLIDE
+% ====================================
+\begin{frame}
+\begin{center}
+\vspace{2cm}
+{\Huge \textbf{Thank You}}
+
+\vspace{1cm}
+{\Large Questions?}
+
+\vspace{2cm}
+\secondary{Template Version 1.0 - Optimal Readability}
+
+\vspace{0.5cm}
+\secondary{Natural Language Processing Course 2025}
+\end{center}
+\end{frame}
+
+\end{document}

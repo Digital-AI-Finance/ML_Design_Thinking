@@ -1,0 +1,469 @@
+% Part 2: Technical Deep Dive - NLP & BERT Theory
+\section{Technical Deep Dive: NLP Fundamentals to Transformers}
+
+% Slide 1: Section Divider
+\begin{frame}[plain]
+\vfill
+\centering
+\begin{beamercolorbox}[sep=16pt,center]{title}
+\usebeamerfont{title}\Large Part 2: Technical Deep Dive\\
+\normalsize From Text to Understanding
+\end{beamercolorbox}
+\vfill
+\end{frame}
+
+% Slide 2: Text Preprocessing Pipeline
+\begin{frame}{Text Preprocessing: Preparing for Analysis}
+\Large\textbf{The Critical First Steps}
+\normalsize
+
+\begin{center}
+\includegraphics[width=0.85\textwidth]{charts/text_preprocessing_pipeline.pdf}
+\end{center}
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\textbf{Cleaning Steps:}
+\begin{itemize}
+\item Remove HTML/URLs
+\item Handle special characters
+\item Normalize whitespace
+\item Fix encoding issues
+\end{itemize}
+\end{column}
+\begin{column}{0.48\textwidth}
+\textbf{Processing Steps:}
+\begin{itemize}
+\item Tokenization
+\item Lowercasing
+\item Stopword removal
+\item Stemming/Lemmatization
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Slide 3: Tokenization & Vectorization
+\begin{frame}{From Text to Numbers: Tokenization}
+\Large\textbf{Breaking Down Language}
+\normalsize
+
+\begin{columns}[T]
+\begin{column}{0.55\textwidth}
+\textbf{Tokenization Methods:}
+\begin{itemize}
+\item Word-level: ``I love this'' $\rightarrow$ [``I'', ``love'', ``this'']
+\item Subword: ``unbelievable'' $\rightarrow$ [``un'', ``believ'', ``able'']
+\item Character: ``ML'' $\rightarrow$ [``M'', ``L'']
+\item Byte-Pair Encoding (BPE)
+\item WordPiece (BERT)
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Why It Matters:}
+\begin{itemize}
+\item Handles out-of-vocabulary words
+\item Captures morphology
+\item Reduces vocabulary size
+\end{itemize}
+\end{column}
+\begin{column}{0.43\textwidth}
+\includegraphics[width=\textwidth]{charts/tokenization_examples.pdf}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Slide 4: Bag of Words to Word Embeddings
+\begin{frame}{Evolution: From BoW to Embeddings}
+\Large\textbf{Capturing Meaning in Vectors}
+\normalsize
+
+\begin{center}
+\includegraphics[width=0.85\textwidth]{charts/word_embedding_evolution.pdf}
+\end{center}
+
+\begin{columns}[T]
+\begin{column}{0.32\textwidth}
+\textbf{Bag of Words}
+\begin{itemize}
+\small
+\item Sparse vectors
+\item No word order
+\item High dimensionality
+\item Simple but limited
+\end{itemize}
+\end{column}
+\begin{column}{0.32\textwidth}
+\textbf{TF-IDF}
+\begin{itemize}
+\small
+\item Term weighting
+\item Document importance
+\item Better features
+\item Still sparse
+\end{itemize}
+\end{column}
+\begin{column}{0.32\textwidth}
+\textbf{Word Embeddings}
+\begin{itemize}
+\small
+\item Dense vectors
+\item Semantic similarity
+\item Low dimensionality
+\item Context-aware
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Slide 5: Word Embeddings Deep Dive
+\begin{frame}{Word Embeddings: Meaning in Space}
+\Large\textbf{Similar Words, Nearby Vectors}
+\normalsize
+
+\begin{columns}[T]
+\begin{column}{0.55\textwidth}
+\includegraphics[width=\textwidth]{charts/word_embedding_space.pdf}
+\end{column}
+\begin{column}{0.43\textwidth}
+\textbf{Key Properties:}
+\begin{itemize}
+\item Semantic relationships
+\item Analogies work: King - Man + Woman = Queen
+\item Distance = similarity
+\item Clustering by meaning
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Popular Models:}
+\begin{itemize}
+\item Word2Vec (Google)
+\item GloVe (Stanford)
+\item FastText (Facebook)
+\item Contextual: ELMo, BERT
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Slide 6: Transformer Architecture Overview
+\begin{frame}{The Transformer Revolution}
+\Large\textbf{Attention is All You Need}
+\normalsize
+
+\begin{center}
+\includegraphics[width=0.75\textwidth]{charts/transformer_architecture.pdf}
+\end{center}
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\textbf{Key Innovations:}
+\begin{itemize}
+\item Self-attention mechanism
+\item Parallel processing
+\item Position encodings
+\item Multi-head attention
+\end{itemize}
+\end{column}
+\begin{column}{0.48\textwidth}
+\textbf{Advantages:}
+\begin{itemize}
+\item Long-range dependencies
+\item No recurrence needed
+\item Faster training
+\item Better performance
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Slide 7: Attention Mechanism Explained
+\begin{frame}{Attention Mechanism: Focus on What Matters}
+\Large\textbf{How Transformers ``Pay Attention''}
+\normalsize
+
+\begin{center}
+\includegraphics[width=0.85\textwidth]{charts/attention_visualization.pdf}
+\end{center}
+
+\textbf{Query, Key, Value:}
+\begin{itemize}
+\item Query: What am I looking for?
+\item Key: What information do I have?
+\item Value: What should I extract?
+\item Score = Query $\cdot$ Key / $\sqrt{d_k}$
+\end{itemize}
+\end{frame}
+
+% Slide 8: BERT - Bidirectional Context
+\begin{frame}{BERT: Bidirectional Understanding}
+\Large\textbf{Reading Both Ways for Better Context}
+\normalsize
+
+\begin{columns}[T]
+\begin{column}{0.55\textwidth}
+\includegraphics[width=\textwidth]{charts/bert_bidirectional.pdf}
+\end{column}
+\begin{column}{0.43\textwidth}
+\textbf{BERT Innovation:}
+\begin{itemize}
+\item Bidirectional context
+\item Masked language modeling
+\item Next sentence prediction
+\item Transfer learning
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Example:}
+\small
+``The bank is by the [MASK]''
+\begin{itemize}
+\item River $\rightarrow$ ``bank'' = shore
+\item Street $\rightarrow$ ``bank'' = financial
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Slide 9: Pre-training & Fine-tuning
+\begin{frame}{BERT Training: Two-Stage Process}
+\Large\textbf{Pre-train Once, Fine-tune Many}
+\normalsize
+
+\begin{center}
+\includegraphics[width=0.85\textwidth]{charts/bert_training_process.pdf}
+\end{center}
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\textbf{Pre-training (Google):}
+\begin{itemize}
+\item 3.3 billion words
+\item Wikipedia + BookCorpus
+\item Masked LM + NSP tasks
+\item Weeks of training
+\end{itemize}
+\end{column}
+\begin{column}{0.48\textwidth}
+\textbf{Fine-tuning (You):}
+\begin{itemize}
+\item Your specific task
+\item Much smaller dataset
+\item Hours to train
+\item Task-specific head
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Slide 10: BERT Variants
+\begin{frame}{BERT Family: Choose Your Model}
+\Large\textbf{Different Sizes for Different Needs}
+\normalsize
+
+\begin{center}
+\includegraphics[width=0.75\textwidth]{charts/bert_variants_comparison.pdf}
+\end{center}
+
+\begin{columns}[T]
+\begin{column}{0.32\textwidth}
+\textbf{BERT-Base}
+\begin{itemize}
+\small
+\item 110M parameters
+\item 12 layers
+\item Good baseline
+\item Balanced speed
+\end{itemize}
+\end{column}
+\begin{column}{0.32\textwidth}
+\textbf{DistilBERT}
+\begin{itemize}
+\small
+\item 66M parameters
+\item 6 layers
+\item 60\% faster
+\item 95\% performance
+\end{itemize}
+\end{column}
+\begin{column}{0.32\textwidth}
+\textbf{RoBERTa}
+\begin{itemize}
+\small
+\item 125M parameters
+\item Better training
+\item Higher accuracy
+\item More compute
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Slide 11: Sentiment Analysis Techniques
+\begin{frame}{Sentiment Analysis: Approaches Compared}
+\Large\textbf{From Rules to Deep Learning}
+\normalsize
+
+\begin{center}
+\includegraphics[width=0.85\textwidth]{charts/sentiment_approaches.pdf}
+\end{center}
+
+\begin{columns}[T]
+\begin{column}{0.32\textwidth}
+\textbf{Rule-Based}
+\begin{itemize}
+\small
+\item Lexicon lookup
+\item Fast & interpretable
+\item Misses context
+\item 65-70\% accuracy
+\end{itemize}
+\end{column}
+\begin{column}{0.32\textwidth}
+\textbf{Machine Learning}
+\begin{itemize}
+\small
+\item Feature engineering
+\item Good baseline
+\item Needs features
+\item 75-85\% accuracy
+\end{itemize}
+\end{column}
+\begin{column}{0.32\textwidth}
+\textbf{Deep Learning}
+\begin{itemize}
+\small
+\item End-to-end learning
+\item Context-aware
+\item Data hungry
+\item 90-95\% accuracy
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Slide 12: Model Evaluation Metrics
+\begin{frame}{Evaluation: Beyond Accuracy}
+\Large\textbf{Choosing the Right Metrics}
+\normalsize
+
+\begin{columns}[T]
+\begin{column}{0.55\textwidth}
+\textbf{Classification Metrics:}
+\begin{itemize}
+\item \textbf{Accuracy}: Overall correctness
+\item \textbf{Precision}: When you predict positive, how often correct?
+\item \textbf{Recall}: Of all positives, how many found?
+\item \textbf{F1-Score}: Harmonic mean of P\&R
+\item \textbf{AUC-ROC}: Discrimination ability
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{For Imbalanced Data:}
+\begin{itemize}
+\item Weighted F1
+\item Macro/Micro averaging
+\item Cohen's Kappa
+\end{itemize}
+\end{column}
+\begin{column}{0.43\textwidth}
+\includegraphics[width=\textwidth]{charts/confusion_matrix.pdf}
+\vspace{0.5em}
+\includegraphics[width=\textwidth]{charts/roc_curves.pdf}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Slide 13: Cross-validation for Text
+\begin{frame}{Cross-Validation: Reliable Evaluation}
+\Large\textbf{Avoiding Overfitting in NLP}
+\normalsize
+
+\begin{center}
+\includegraphics[width=0.85\textwidth]{charts/cross_validation_text.pdf}
+\end{center}
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\textbf{Strategies:}
+\begin{itemize}
+\item K-fold cross-validation
+\item Stratified sampling
+\item Time-based splits
+\item Domain-based splits
+\end{itemize}
+\end{column}
+\begin{column}{0.48\textwidth}
+\textbf{Text-Specific Issues:}
+\begin{itemize}
+\item Data leakage
+\item Author bias
+\item Temporal drift
+\item Domain shift
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Slide 14: Handling Imbalanced Sentiment
+\begin{frame}{Imbalanced Data: Real-world Challenge}
+\Large\textbf{When Negatives Dominate}
+\normalsize
+
+\begin{columns}[T]
+\begin{column}{0.55\textwidth}
+\includegraphics[width=\textwidth]{charts/imbalanced_sentiment.pdf}
+\end{column}
+\begin{column}{0.43\textwidth}
+\textbf{Common Scenario:}
+\begin{itemize}
+\item 80\% negative reviews
+\item 15\% neutral
+\item 5\% positive
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Solutions:}
+\begin{itemize}
+\item Class weights
+\item SMOTE oversampling
+\item Focal loss
+\item Ensemble methods
+\item Threshold tuning
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Slide 15: Domain Adaptation
+\begin{frame}{Domain Adaptation: One Model, Many Domains}
+\Large\textbf{Transfer Learning for NLP}
+\normalsize
+
+\begin{center}
+\includegraphics[width=0.85\textwidth]{charts/domain_adaptation.pdf}
+\end{center}
+
+\textbf{Challenge:} Model trained on movie reviews $\rightarrow$ Apply to product reviews
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\textbf{Techniques:}
+\begin{itemize}
+\item Fine-tuning on target
+\item Domain adversarial training
+\item Multi-task learning
+\item Few-shot learning
+\end{itemize}
+\end{column}
+\begin{column}{0.48\textwidth}
+\textbf{Best Practices:}
+\begin{itemize}
+\item Start with pre-trained
+\item Gradual unfreezing
+\item Lower learning rates
+\item Monitor for catastrophic forgetting
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}

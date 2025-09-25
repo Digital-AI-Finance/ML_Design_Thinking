@@ -1,0 +1,651 @@
+% Part 4: Design Integration - User Experience (11 slides)
+\section{Part 4: Design Integration - From Systems to People}
+
+% Slide 1: Bridge - From technical to human
+\begin{frame}{From Algorithm to Experience}
+\Large\textbf{Bridging the Gap}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+% Left side - Technical
+\node[draw,fill=mlblue!20,rounded corners,minimum width=3cm,minimum height=1.5cm] at (-3,0) {
+\begin{tabular}{c}
+\textbf{What We Built}\\
+\small Algorithms\\
+\small Models\\
+\small Pipelines
+\end{tabular}
+};
+
+% Arrow
+\draw[ultra thick,->,mlpurple] (-1.2,0) -- (1.2,0) node[midway,above] {Design};
+
+% Right side - Human
+\node[draw,fill=mlgreen!20,rounded corners,minimum width=3cm,minimum height=1.5cm] at (3,0) {
+\begin{tabular}{c}
+\textbf{What Users Need}\\
+\small Decisions\\
+\small Trust\\
+\small Control
+\end{tabular}
+};
+\end{tikzpicture}
+\end{center}
+
+\vspace{1em}
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\textbf{Technical Excellence:}
+\begin{itemize}
+\item 94\% accuracy achieved
+\item $<$100ms response time
+\item Scalable architecture
+\end{itemize}
+\end{column}
+\begin{column}{0.48\textwidth}
+\textbf{User Questions:}
+\begin{itemize}
+\item Can I trust this?
+\item What should I do?
+\item Why this result?
+\end{itemize}
+\end{column}
+\end{columns}
+
+\vspace{0.5em}
+\begin{center}
+\Large\textit{``Great ML is invisible to users''}
+\end{center}
+\end{frame}
+
+% Slide 2: Interface - Making predictions accessible
+\begin{frame}{Design the Right Interface}
+\Large\textbf{Making Predictions Accessible}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\begin{column}{0.55\textwidth}
+\begin{center}
+\begin{tikzpicture}[scale=0.75]
+% Interface mockup
+\draw[thick,rounded corners] (0,0) rectangle (8,5.5);
+\node[anchor=west] at (0.3,5) {\textbf{Innovation Evaluator}};
+\draw[gray] (0.3,4.7) -- (7.7,4.7);
+
+% Input section
+\node[anchor=west] at (0.5,4.2) {\small\textbf{Input Metrics:}};
+\draw[fill=gray!10] (0.5,2.5) rectangle (7.5,3.9);
+\node[anchor=west] at (0.7,3.5) {Novelty: [========--] 82\%};
+\node[anchor=west] at (0.7,3.0) {Market: \$2.3M potential};
+
+% Results section
+\draw[fill=mlgreen!20,rounded corners] (0.5,1.3) rectangle (7.5,2.2);
+\node at (4,1.75) {\textbf{Success Probability: 87\%}};
+
+% Actions
+\draw[fill=mlblue!30] (1,0.4) rectangle (3.5,0.9);
+\node at (2.25,0.65) {Details};
+\draw[fill=mlorange!30] (4.5,0.4) rectangle (7,0.9);
+\node at (5.75,0.65) {Compare};
+\end{tikzpicture}
+\end{center}
+\end{column}
+\begin{column}{0.43\textwidth}
+\textbf{Design Principles:}
+\begin{enumerate}
+\item Progressive disclosure
+\item Clear affordances
+\item Immediate feedback
+\item Error prevention
+\item User control
+\end{enumerate}
+
+\vspace{0.5em}
+\textbf{Key Features:}
+\begin{itemize}
+\item Visual confidence bars
+\item Contextual help
+\item Comparison tools
+\item Export capabilities
+\item Audit trail
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Slide 3: Trust - Communicating confidence
+\begin{frame}{Build Trust Through Transparency}
+\Large\textbf{Confidence, Not Just Predictions}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.8]
+% High confidence
+\draw[thick] (0,3) -- (7,3);
+\draw[fill=mlgreen!70] (5.5,2.8) rectangle (6.5,3.2);
+\node[left] at (0,3) {\textbf{High:}};
+\node[right] at (7.5,3) {92\% $\pm$ 3\%};
+\node[below] at (6,2.5) {\small ``Ready to proceed''};
+
+% Medium confidence
+\draw[thick] (0,1.5) -- (7,1.5);
+\draw[fill=mlyellow!70] (2.5,1.3) rectangle (4.5,1.7);
+\node[left] at (0,1.5) {\textbf{Medium:}};
+\node[right] at (7.5,1.5) {68\% $\pm$ 12\%};
+\node[below] at (3.5,1) {\small ``Gather more data''};
+
+% Low confidence
+\draw[thick] (0,0) -- (7,0);
+\draw[fill=mlred!70] (1,-0.2) rectangle (5,0.2);
+\node[left] at (0,0) {\textbf{Low:}};
+\node[right] at (7.5,0) {51\% $\pm$ 28\%};
+\node[below] at (3,-0.5) {\small ``Seek expert input''};
+\end{tikzpicture}
+\end{center}
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\textbf{What Builds Trust:}
+\begin{itemize}
+\item Showing uncertainty
+\item Consistent performance
+\item Clear limitations
+\item Explainable logic
+\end{itemize}
+\end{column}
+\begin{column}{0.48\textwidth}
+\textbf{What Destroys Trust:}
+\begin{itemize}
+\item Overconfident errors
+\item Black box decisions
+\item Changing behavior
+\item Hidden biases
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Slide 4: Explainability - Why this prediction?
+\begin{frame}{Explain Every Decision}
+\Large\textbf{From Black Box to Glass Box}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\begin{center}
+\begin{tikzpicture}[scale=0.7]
+% Feature importance
+\node[anchor=west] at (0,4.5) {\textbf{Why 87\% Success?}};
+\draw[gray,dashed] (0,4.2) -- (5,4.2);
+
+% Positive factors
+\draw[fill=mlgreen!60] (0,3.5) rectangle (3.5,3.8);
+\node[right] at (3.6,3.65) {+28\% Novelty};
+
+\draw[fill=mlgreen!50] (0,3) rectangle (2.5,3.3);
+\node[right] at (2.6,3.15) {+18\% Market fit};
+
+\draw[fill=mlgreen!40] (0,2.5) rectangle (2,2.8);
+\node[right] at (2.1,2.65) {+14\% Team exp};
+
+% Negative factors
+\draw[fill=mlred!40] (0,2) rectangle (-1,2.3);
+\node[right] at (0.1,2.15) {-6\% Timeline};
+
+% Baseline
+\draw[gray,thick] (0,1.5) -- (4,1.5);
+\node[right] at (0,1.2) {Base rate: 33\%};
+\end{tikzpicture}
+\end{center}
+
+\vspace{0.5em}
+\textbf{Actionable Insights:}
+\begin{itemize}
+\item ``Reduce timeline by 2 months → +8\%''
+\item ``Add UX designer → +5\%''
+\item ``Target enterprise → +7\%''
+\end{itemize}
+\end{column}
+\begin{column}{0.48\textwidth}
+\textbf{Explanation Levels:}
+\begin{enumerate}
+\item \textbf{Summary:} High success likely
+\item \textbf{Factors:} Top 3 drivers shown
+\item \textbf{Details:} All features ranked
+\item \textbf{Counterfactual:} What-if analysis
+\end{enumerate}
+
+\vspace{0.5em}
+\textbf{User Benefits:}
+\begin{itemize}
+\item Understand reasoning
+\item Identify improvements
+\item Validate with domain knowledge
+\item Learn patterns
+\end{itemize}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mlblue!10,colframe=mlblue]
+Explanations increase adoption by 3x
+\end{tcolorbox}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Slide 5: Real-time - Live systems
+\begin{frame}{Deploy for Real-Time Decisions}
+\Large\textbf{Instant Intelligence at Scale}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.7,
+    box/.style={draw,rounded corners,minimum width=2.2cm,minimum height=0.7cm}]
+
+% System architecture
+\node[box,fill=mlblue!20] (user) at (0,3) {User Request};
+\node[box,fill=mlorange!20] (api) at (0,1.8) {API Gateway};
+\node[box,fill=mlgreen!20] (model) at (-2.5,0.5) {Model};
+\node[box,fill=mlyellow!20] (cache) at (0,0.5) {Cache};
+\node[box,fill=mlcyan!20] (feature) at (2.5,0.5) {Features};
+\node[box,fill=mlpurple!20] (response) at (0,-0.8) {Response};
+
+% Connections
+\draw[->] (user) -- (api);
+\draw[->] (api) -- (model);
+\draw[->] (api) -- (cache);
+\draw[->] (api) -- (feature);
+\draw[->] (model) -- (response);
+\draw[->] (cache) -- (response);
+\draw[->] (feature) -- (model);
+
+% Performance metrics
+\node[right] at (4,2.5) {\textbf{Performance:}};
+\node[right] at (4,2) {• Latency: 45ms};
+\node[right] at (4,1.5) {• Throughput: 10K/s};
+\node[right] at (4,1) {• Uptime: 99.95\%};
+\node[right] at (4,0.5) {• Accuracy: 94\%};
+\end{tikzpicture}
+\end{center}
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\textbf{Critical Design Choices:}
+\begin{itemize}
+\item Graceful degradation
+\item Fallback predictions
+\item Queue management
+\item Result caching
+\end{itemize}
+\end{column}
+\begin{column}{0.48\textwidth}
+\textbf{User Experience:}
+\begin{itemize}
+\item Instant feedback
+\item Progress indicators
+\item Partial results
+\item Offline mode
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Slide 6: Feedback - Continuous learning
+\begin{frame}{Learn from Every Interaction}
+\Large\textbf{The Feedback Loop}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.75,
+    box/.style={draw,rounded corners,fill=mlblue!20,minimum width=2.3cm,minimum height=0.8cm}]
+
+% Learning cycle
+\node[box,fill=mlgreen!20] (predict) at (0,2) {Predict};
+\node[box,fill=mlyellow!20] (act) at (3.5,0) {User Acts};
+\node[box,fill=mlorange!20] (outcome) at (0,-2) {Observe};
+\node[box,fill=mlred!20] (learn) at (-3.5,0) {Improve};
+
+% Arrows with labels
+\draw[thick,->] (predict) -- (act) node[midway,above right] {\small decision};
+\draw[thick,->] (act) -- (outcome) node[midway,below right] {\small result};
+\draw[thick,->] (outcome) -- (learn) node[midway,below left] {\small feedback};
+\draw[thick,->] (learn) -- (predict) node[midway,above left] {\small update};
+
+% Center metrics
+\node at (0,0) {\textbf{+2\% monthly}};
+\node at (0,-0.4) {\small improvement};
+\end{tikzpicture}
+\end{center}
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\textbf{Implicit Feedback:}
+\begin{itemize}
+\item Time on page
+\item Actions taken
+\item Selections made
+\item Features used
+\end{itemize}
+\end{column}
+\begin{column}{0.48\textwidth}
+\textbf{Explicit Feedback:}
+\begin{itemize}
+\item Thumbs up/down
+\item Corrections
+\item Comments
+\item Ratings
+\end{itemize}
+\end{column}
+\end{columns}
+
+\vspace{0.5em}
+\begin{center}
+\textit{``Every user interaction teaches the system''}
+\end{center}
+\end{frame}
+
+% Slide 7: A/B Testing - Experimentation
+\begin{frame}{Test Every Improvement}
+\Large\textbf{A/B Testing with Intelligence}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\begin{column}{0.55\textwidth}
+\begin{center}
+\begin{tikzpicture}[scale=0.7]
+% Test setup
+\draw[fill=mlblue!20] (0,2) rectangle (2,4);
+\node at (1,3.5) {\textbf{Model A}};
+\node at (1,2.8) {Current};
+\node at (1,2.3) {87\% acc};
+
+\draw[fill=mlorange!20] (3,2) rectangle (5,4);
+\node at (4,3.5) {\textbf{Model B}};
+\node at (4,2.8) {New};
+\node at (4,2.3) {91\% acc};
+
+% Users
+\draw[->] (2.5,5) -- (1,4.2);
+\draw[->] (2.5,5) -- (4,4.2);
+\node at (2.5,5.3) {10,000 users};
+
+% Results
+\draw[fill=mlgreen!20] (1,0) rectangle (4,1.5);
+\node at (2.5,1.1) {\textbf{Winner: Model B}};
+\node at (2.5,0.6) {p < 0.001};
+\node at (2.5,0.2) {+12\% satisfaction};
+\end{tikzpicture}
+\end{center}
+\end{column}
+\begin{column}{0.43\textwidth}
+\textbf{Test Metrics:}
+\begin{itemize}
+\item Accuracy improvement
+\item User satisfaction
+\item Task completion
+\item Time to decision
+\item Error reduction
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Best Practices:}
+\begin{itemize}
+\item Random assignment
+\item Sufficient sample size
+\item Multiple metrics
+\item Guard rails
+\item Rollback plan
+\end{itemize}
+\end{column}
+\end{columns}
+
+\vspace{0.5em}
+\begin{center}
+\accuracy{15\%} average improvement through systematic testing
+\end{center}
+\end{frame}
+
+% Slide 8: Portfolio - Strategic view
+\begin{frame}{Optimize Your Innovation Portfolio}
+\Large\textbf{Strategic Decision Support}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\begin{column}{0.55\textwidth}
+\includegraphics[width=\textwidth]{charts/innovation_success_dashboard.pdf}
+\end{column}
+\begin{column}{0.43\textwidth}
+\textbf{Portfolio Intelligence:}
+\begin{itemize}
+\item Risk distribution
+\item Success probabilities
+\item Resource allocation
+\item Timeline optimization
+\item Synergy detection
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Recommended Mix:}
+\begin{itemize}
+\item 20\% Moonshots
+\item 50\% Core innovation
+\item 30\% Quick wins
+\end{itemize}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mlgreen!10,colframe=mlgreen]
+ML-optimized portfolios show 40\% better returns
+\end{tcolorbox}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Slide 9: Ethics - Responsible AI
+\begin{frame}{Design for Fairness and Ethics}
+\Large\textbf{Responsible Classification}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\textbf{Fairness Checks:}
+\begin{itemize}
+\item Demographic parity
+\item Equal opportunity
+\item Individual fairness
+\item Counterfactual fairness
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Bias Sources:}
+\begin{itemize}
+\item Historical data
+\item Sampling bias
+\item Label bias
+\item Feedback loops
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Mitigation Strategies:}
+\begin{itemize}
+\item Diverse training data
+\item Fairness constraints
+\item Regular audits
+\item Human oversight
+\end{itemize}
+\end{column}
+\begin{column}{0.48\textwidth}
+\begin{center}
+\begin{tikzpicture}[scale=0.7]
+% Fairness metrics
+\node at (2,4) {\textbf{Fairness Dashboard}};
+\draw[gray] (0,3.7) -- (4,3.7);
+
+% Group performance
+\draw[fill=mlgreen!50] (0,3) rectangle (3.5,3.3);
+\node[right] at (3.6,3.15) {Group A: 89\%};
+
+\draw[fill=mlgreen!50] (0,2.4) rectangle (3.3,2.7);
+\node[right] at (3.4,2.55) {Group B: 87\%};
+
+\draw[fill=mlyellow!50] (0,1.8) rectangle (2.8,2.1);
+\node[right] at (2.9,1.95) {Group C: 78\%};
+
+\draw[fill=mlred!50] (0,1.2) rectangle (2.2,1.5);
+\node[right] at (2.3,1.35) {Group D: 68\%};
+
+\node at (2,0.5) {\textcolor{mlred}{Alert: Disparity detected}};
+\end{tikzpicture}
+\end{center}
+
+\vspace{0.5em}
+\textbf{Ethical Guidelines:}
+\begin{itemize}
+\item Transparency first
+\item User consent
+\item Right to explanation
+\item Human appeal process
+\item Regular fairness audits
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Slide 10: Future - What's next
+\begin{frame}{The Future of Intelligent Design}
+\Large\textbf{Where We're Heading}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.8]
+% Timeline
+\draw[ultra thick,->,mlgray] (0,0) -- (10,0);
+
+% Current
+\node[draw,fill=mlgreen!20,rounded corners] at (2,1) {Today};
+\node[below,text width=2cm,align=center] at (2,-0.5) {\small Rule-based\\decisions};
+
+% Near future
+\node[draw,fill=mlyellow!20,rounded corners] at (5,1) {2026};
+\node[below,text width=2cm,align=center] at (5,-0.5) {\small Adaptive\\systems};
+
+% Future
+\node[draw,fill=mlorange!20,rounded corners] at (8,1) {2028};
+\node[below,text width=2cm,align=center] at (8,-0.5) {\small Autonomous\\innovation};
+\end{tikzpicture}
+\end{center}
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\textbf{Emerging Capabilities:}
+\begin{itemize}
+\item Self-improving models
+\item Causal inference
+\item Few-shot learning
+\item Multimodal classification
+\item Quantum ML
+\end{itemize}
+\end{column}
+\begin{column}{0.48\textwidth}
+\textbf{Design Opportunities:}
+\begin{itemize}
+\item Conversational AI interfaces
+\item Augmented decision making
+\item Predictive user needs
+\item Collaborative human-AI teams
+\item Ethical AI by design
+\end{itemize}
+\end{column}
+\end{columns}
+
+\vspace{0.5em}
+\begin{center}
+\Large\textit{``The best interface is no interface - just intelligence''}
+\end{center}
+\end{frame}
+
+% Slide 11: Summary - Key takeaways
+\begin{frame}{Design Integration Summary}
+\Large\textbf{From Code to Human Impact}
+\normalsize
+
+\vspace{1em}
+
+\begin{center}
+\textbf{You've learned to bridge ML and UX:}
+\end{center}
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\textbf{Technical Mastery:}
+\begin{itemize}
+\item Build accurate classifiers
+\item Deploy at scale
+\item Monitor performance
+\item Iterate based on data
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Design Excellence:}
+\begin{itemize}
+\item Create intuitive interfaces
+\item Build user trust
+\item Provide explanations
+\item Enable user control
+\end{itemize}
+\end{column}
+\begin{column}{0.48\textwidth}
+\textbf{Key Principles:}
+\begin{enumerate}
+\item Users don't care about algorithms
+\item Trust beats accuracy
+\item Explanations drive adoption
+\item Feedback improves everything
+\item Ethics are non-negotiable
+\end{enumerate}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mlblue!10,colframe=mlblue]
+\centering
+\textbf{Remember:}\\
+Great ML empowers humans,\\
+it doesn't replace them
+\end{tcolorbox}
+\end{column}
+\end{columns}
+
+\vspace{0.5em}
+\begin{center}
+\Large\textbf{Now: Let's practice!}
+\end{center}
+\end{frame}

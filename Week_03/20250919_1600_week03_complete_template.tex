@@ -1,0 +1,893 @@
+\documentclass[8pt]{beamer}
+\usetheme{Madrid}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{adjustbox}
+\usepackage{multicol}
+\usepackage{amsmath}
+
+% Color definitions
+\definecolor{mlblue}{RGB}{31, 119, 180}
+\definecolor{mlorange}{RGB}{255, 127, 14}
+\definecolor{mlgreen}{RGB}{44, 160, 44}
+\definecolor{mlred}{RGB}{214, 39, 40}
+\definecolor{mlpurple}{RGB}{148, 103, 189}
+\definecolor{mlgray}{RGB}{127, 127, 127}
+
+% Remove navigation symbols
+\setbeamertemplate{navigation symbols}{}
+
+% Clean itemize/enumerate
+\setbeamertemplate{itemize items}[circle]
+\setbeamertemplate{enumerate items}[default]
+
+% Reduce margins for more content space
+\setbeamersize{text margin left=5mm,text margin right=5mm}
+
+% Title information
+\title{Week 3: NLP for Emotional Context}
+\subtitle{Understanding Language as Window to User Experience}
+\author{Prof. Dr. Joerg Osterrieder}
+\institute{ML-Augmented Design Thinking - BSc Course}
+\date{\today}
+
+\begin{document}
+
+% Title slide
+\begin{frame}[t]
+\titlepage
+\end{frame}
+
+% Table of contents
+\begin{frame}[t]{Week 3 Overview}
+\tableofcontents
+\vfill
+\footnotesize
+\textbf{Course Methodology:} Blended learning approach combining theoretical NLP foundations with hands-on sentiment analysis implementation. Each module includes pre-class readings on transformer architectures, interactive lectures with live coding demonstrations, practical labs using BERT and HuggingFace, and peer review sessions for model evaluation. Assessment through continuous evaluation of sentiment analysis projects and comprehensive final implementation.
+\end{frame}
+
+% Section 1: Introduction to NLP and Sentiment Analysis
+\section{Introduction to NLP and Sentiment Analysis}
+
+\begin{frame}[t]
+\vfill
+\centering
+\begin{beamercolorbox}[sep=8pt,center]{title}
+\usebeamerfont{title}\Large Introduction to NLP and Sentiment Analysis\par
+\end{beamercolorbox}
+\vfill
+\end{frame}
+
+\begin{frame}[t]{Emotion Spectrum Analysis}
+\begin{columns}[T]
+\begin{column}{0.38\textwidth}
+\textbf{Traditional Analysis:}
+\begin{itemize}
+\item Keyword counting
+\item Manual categorization
+\item Surface-level insights
+\item Limited scale
+\item Misses context
+\end{itemize}
+\vspace{10pt}
+\textbf{Key Question:}\\
+How can NLP reveal hidden emotional patterns?
+\end{column}
+\begin{column}{0.58\textwidth}
+\includegraphics[width=\textwidth]{charts/emotion_spectrum_heatmap.pdf}
+\end{column}
+\end{columns}
+\vfill
+\footnotesize
+\textbf{NLP Methods:} BERT-based transformer models achieve 94\% accuracy in context-aware sentiment classification. Eight-emotion classification beyond positive/negative includes joy, trust, fear, surprise, sadness, disgust, anger, and anticipation. Real-time processing pipeline handles 10,000+ reviews per minute with sub-100ms latency. Multilingual support for 50+ languages using mBERT and XLM-R architectures.
+\end{frame}
+
+\begin{frame}[t]{Language as Emotional Gateway}
+\centering
+\includegraphics[width=0.95\textwidth]{charts/language_emotion_flow.pdf}
+\vspace{5pt}
+\small Every word reveals frustration points, delight moments, and hidden needs
+\vfill
+\footnotesize
+\textbf{Design Applications:} Automated user research through aspect-based review mining extracts specific pain points (battery life, user interface, customer service). Real-time sentiment monitoring during product launches enables immediate response to negative feedback spikes. Persona development leverages emotional pattern clustering to identify user segments. Journey mapping enhanced with sentiment analysis reveals emotional peaks and valleys across touchpoints.
+\end{frame}
+
+\begin{frame}[t]{Context Detection Challenge}
+\begin{columns}[T]
+\begin{column}{0.25\textwidth}
+\textbf{Context Examples:}
+\begin{itemize}
+\item ``This is sick!''
+\item ``It's fine''
+\item ``Interesting choice''
+\item ``Thanks for nothing''
+\end{itemize}
+\vspace{10pt}
+\textbf{Detection Methods:}
+\begin{itemize}
+\item Domain adaptation
+\item User demographics
+\item Historical patterns
+\item Surrounding context
+\end{itemize}
+\end{column}
+\begin{column}{0.75\textwidth}
+\includegraphics[width=\textwidth]{charts/context_sentiment_examples.pdf}
+\end{column}
+\end{columns}
+\vfill
+\footnotesize
+\textbf{Technical Implementation:} Contextual embeddings from BERT capture semantic meaning beyond simple keyword matching. Attention mechanisms highlight relevant context words automatically. Domain-specific fine-tuning adapts general language models to specialized vocabularies (medical, legal, gaming). Cultural adaptation handles sentiment expression differences across demographics and geographies.
+\end{frame}
+
+\begin{frame}[t]{NLP Challenge Hierarchy}
+\centering
+\includegraphics[width=0.85\textwidth]{charts/nlp_challenge_pyramid.pdf}
+\begin{columns}[T]
+\begin{column}{0.3\textwidth}
+\small\textcolor{mlblue}{Blue: Lexical}
+\end{column}
+\begin{column}{0.3\textwidth}
+\small\textcolor{mlorange}{Orange: Syntactic}
+\end{column}
+\begin{column}{0.3\textwidth}
+\small\textcolor{mlgreen}{Green: Semantic}
+\end{column}
+\end{columns}
+\vfill
+\footnotesize
+\textbf{Complexity Progression:} Lexical analysis handles word recognition and frequency patterns using TF-IDF and n-gram models. Syntactic processing understands grammar and sentence structure through dependency parsing and POS tagging. Semantic analysis extracts meaning and relationships using word embeddings and knowledge graphs. Pragmatic understanding includes context, intent, and implied meaning through transformer attention mechanisms.
+\end{frame}
+
+\begin{frame}[t]{Sentiment Distribution Patterns}
+\centering
+\includegraphics[width=0.95\textwidth]{charts/sentiment_distribution.pdf}
+\vspace{5pt}
+\small Multi-modal sentiment patterns reveal user behavior insights
+\vfill
+\footnotesize
+\textbf{Distribution Analysis:} Sentiment polarity scores range from -1 (extremely negative) to +1 (extremely positive) with neutral zone between -0.1 and +0.1. Subjectivity scores measure opinion vs fact from 0 (objective) to 1 (subjective). Temporal analysis reveals sentiment volatility patterns and trend changes. Demographic segmentation shows sentiment expression varies by age, culture, and product category.
+\end{frame}
+
+\begin{frame}[t]{Emotion Wheel Classification}
+\begin{columns}[T]
+\begin{column}{0.38\textwidth}
+\textbf{Eight Core Emotions:}
+\begin{itemize}
+\item Joy (satisfaction)
+\item Trust (confidence)
+\item Fear (anxiety)
+\item Surprise (unexpected)
+\item Sadness (disappointment)
+\item Disgust (rejection)
+\item Anger (frustration)
+\item Anticipation (excitement)
+\end{itemize}
+\end{column}
+\begin{column}{0.58\textwidth}
+\includegraphics[width=\textwidth]{charts/emotion_wheel.pdf}
+\end{column}
+\end{columns}
+\vfill
+\footnotesize
+\textbf{Multi-Label Classification:} Plutchik's emotion wheel provides framework for complex emotion detection beyond binary sentiment. Multi-label classification allows texts to express multiple emotions simultaneously. Emotion intensity scoring measures strength from weak to extreme. Temporal emotion tracking reveals emotional journey progression through user experiences.
+\end{frame}
+
+% Section 2: Technical Deep Dive
+\section{Technical Deep Dive}
+
+\begin{frame}[t]
+\vfill
+\centering
+\begin{beamercolorbox}[sep=8pt,center]{title}
+\usebeamerfont{title}\Large Technical Deep Dive\par
+\end{beamercolorbox}
+\vfill
+\end{frame}
+
+\begin{frame}[t]{Text Preprocessing Pipeline}
+\begin{columns}[T]
+\begin{column}{0.25\textwidth}
+\textbf{Critical Steps:}
+\begin{enumerate}
+\item Data collection
+\item HTML/URL removal
+\item Encoding normalization
+\item Tokenization
+\item Cleaning validation
+\item Quality assessment
+\end{enumerate}
+\vspace{10pt}
+\textbf{Quality Metrics:}\\
+99.5\% clean text required for production
+\end{column}
+\begin{column}{0.75\textwidth}
+\includegraphics[width=\textwidth]{charts/text_preprocessing_pipeline.pdf}
+\end{column}
+\end{columns}
+\vfill
+\footnotesize
+\textbf{Implementation Details:} Regular expressions handle 80\% of common cleaning tasks including URL removal, email masking, and special character normalization. Unicode normalization (NFC, NFD, NFKC, NFKD) prevents encoding inconsistencies across data sources. Custom tokenizers preserve domain-specific terms and handle contractions appropriately. Automated quality metrics track preprocessing effectiveness and flag anomalies for manual review.
+\end{frame}
+
+\begin{frame}[t]{Text Cleaning Process}
+\centering
+\includegraphics[width=\textwidth]{charts/text_cleaning_pipeline.pdf}
+\vfill
+\footnotesize
+\textbf{Cleaning Methodology:} Multi-stage pipeline transforms raw social media text through systematic cleaning steps. Emoji handling preserves emotional content while normalizing Unicode variations. Spelling correction uses statistical models trained on domain-specific corpora. Lemmatization reduces words to canonical forms while preserving sentiment-bearing morphology. Quality validation ensures cleaning preserves semantic meaning and emotional content.
+\end{frame}
+
+\begin{frame}[t]{Tokenization Methods Comparison}
+\centering
+\includegraphics[width=0.95\textwidth]{charts/tokenization_examples.pdf}
+\vspace{5pt}
+\small Different approaches for different needs: words, subwords, characters, sentence pieces
+\vfill
+\footnotesize
+\textbf{Method Selection Criteria:} Word tokenization optimal for traditional bag-of-words and TF-IDF approaches with vocabulary sizes 10K-50K. Subword tokenization (BPE, WordPiece) handles out-of-vocabulary terms and morphologically rich languages with 32K vocabulary. Character-level tokenization provides unlimited vocabulary but requires deeper models. SentencePiece unifies tokenization across languages and handles raw text without pre-tokenization.
+\end{frame}
+
+\begin{frame}[t]{Word Embedding Evolution}
+\centering
+\includegraphics[width=0.85\textwidth]{charts/word_embedding_evolution.pdf}
+\vfill
+\footnotesize
+\textbf{Historical Progression:} Word2Vec (2013) introduced skip-gram and CBOW architectures learning 300-dimensional dense representations from context windows. GloVe (2014) combined global matrix factorization with local context windows achieving better semantic relationships. FastText (2016) incorporated subword information enabling handling of morphologically complex words and out-of-vocabulary terms. ELMo (2018) introduced contextual embeddings varying by sentence context. BERT (2018) revolutionized with bidirectional context understanding.
+\end{frame}
+
+\begin{frame}[t]{Word Embeddings in Semantic Space}
+\begin{columns}[T]
+\begin{column}{0.3\textwidth}
+\textbf{Embedding Properties:}
+\begin{itemize}
+\item Semantic similarity
+\item Analogical relationships
+\item Syntactic patterns
+\item Domain clustering
+\end{itemize}
+\vspace{10pt}
+\textbf{Applications:}
+\begin{itemize}
+\item Similarity search
+\item Recommendation systems
+\item Sentiment analysis
+\item Topic modeling
+\end{itemize}
+\end{column}
+\begin{column}{0.7\textwidth}
+\includegraphics[width=\textwidth]{charts/word_embedding_space_enhanced.pdf}
+\end{column}
+\end{columns}
+\vfill
+\footnotesize
+\textbf{3D Visualization Methodology:} t-SNE dimensionality reduction projects 768-dimensional BERT embeddings to 3D space preserving local neighborhood structure. Color coding represents semantic categories (positive/negative sentiment, product aspects, emotions). Distance in 3D space correlates with semantic similarity enabling intuitive understanding of model representations. Interactive exploration reveals embedding quality and potential biases.
+\end{frame}
+
+\begin{frame}[t]{Transformer Architecture Overview}
+\centering
+\includegraphics[width=0.75\textwidth]{charts/transformer_architecture.pdf}
+\vfill
+\footnotesize
+\textbf{Architecture Components:} Self-attention mechanism enables parallel processing of all sequence positions with $O(n^2)$ complexity but high parallelizability. Multi-head attention (typically 12 heads) captures different types of relationships: syntactic, semantic, positional. Position encoding injects sequence order information into parallel architecture. Layer normalization and residual connections ensure stable gradient flow through 12-24 transformer layers. Feed-forward networks process attended representations with ReLU activation.
+\end{frame}
+
+\begin{frame}[t]{Enhanced Attention Visualization}
+\begin{columns}[T]
+\begin{column}{0.38\textwidth}
+\textbf{Attention Benefits:}
+\begin{itemize}
+\item Parallel processing
+\item Long-range dependencies
+\item Interpretable weights
+\item Dynamic focus
+\end{itemize}
+\vspace{10pt}
+\textbf{Attention Types:}
+\begin{itemize}
+\item Self-attention
+\item Cross-attention
+\item Multi-head attention
+\item Sparse attention
+\end{itemize}
+\end{column}
+\begin{column}{0.58\textwidth}
+\includegraphics[width=\textwidth]{charts/attention_visualization_enhanced.pdf}
+\end{column}
+\end{columns}
+\vfill
+\footnotesize
+\textbf{Mathematical Foundation:} Attention computed as Attention(Q,K,V) = softmax($QK^T/\sqrt{d_k}$)V where Q, K, V are learned linear projections of input. Multi-head attention runs h parallel attention functions then concatenates and projects results. Attention weights provide interpretability showing which words the model focuses on for predictions. Gradient-based attribution methods reveal attention pattern reliability.
+\end{frame}
+
+\begin{frame}[t]{BERT Bidirectional Processing}
+\centering
+\includegraphics[width=0.85\textwidth]{charts/bert_bidirectional.pdf}
+\vspace{5pt}
+\small Revolutionary bidirectional context understanding transforms sentiment analysis
+\vfill
+\footnotesize
+\textbf{BERT Innovation:} Unlike autoregressive models processing left-to-right, BERT uses masked language modeling seeing entire context simultaneously. 15\% of tokens randomly masked during training with 80\% replaced by [MASK], 10\% random tokens, 10\% unchanged. Next sentence prediction learns inter-sentence relationships crucial for document-level sentiment. Pre-training on 3.3 billion words (BookCorpus + Wikipedia) then fine-tuning for specific tasks requires only 2-4 epochs.
+\end{frame}
+
+\begin{frame}[t]{BERT Training Methodology}
+\centering
+\includegraphics[width=0.8\textwidth]{charts/bert_training_process.pdf}
+\vfill
+\footnotesize
+\textbf{Training Pipeline:} Two-stage training begins with unsupervised pre-training on large text corpora using masked language modeling and next sentence prediction objectives. Fine-tuning stage adapts pre-trained representations to specific downstream tasks with task-specific layers. AdamW optimizer with learning rate 2e-5 and linear warmup over first 10\% of training steps. Gradient clipping prevents exploding gradients. Early stopping based on validation performance prevents overfitting.
+\end{frame}
+
+\begin{frame}[t]{BERT Variants Comparison}
+\centering
+\includegraphics[width=0.85\textwidth]{charts/bert_variants_comparison.pdf}
+\vfill
+\footnotesize
+\textbf{Model Selection Guidelines:} BERT-Base (110M parameters) provides excellent accuracy-efficiency balance for most applications. BERT-Large (340M parameters) achieves state-of-the-art results when computational resources allow. RoBERTa improves training methodology removing next sentence prediction and using dynamic masking. ALBERT reduces parameters through factorized embeddings and cross-layer parameter sharing. DistilBERT offers 60\% size reduction while retaining 97\% of performance through knowledge distillation.
+\end{frame}
+
+% Section 3: Implementation Methods
+\section{Implementation Methods}
+
+\begin{frame}[t]
+\vfill
+\centering
+\begin{beamercolorbox}[sep=8pt,center]{title}
+\usebeamerfont{title}\Large Implementation Methods\par
+\end{beamercolorbox}
+\vfill
+\end{frame}
+
+\begin{frame}[t]{Sentiment Analysis Approaches}
+\centering
+\includegraphics[width=0.95\textwidth]{charts/sentiment_approaches.pdf}
+\vspace{5pt}
+\small Evolution from rule-based to transformer architectures
+\vfill
+\footnotesize
+\textbf{Approach Comparison:} Rule-based systems using sentiment lexicons (VADER, SentiWordNet) achieve 60-70\% accuracy with high interpretability and fast inference. Traditional machine learning (SVM, Naive Bayes, Random Forest) with TF-IDF features reach 75-85\% accuracy requiring manual feature engineering. Deep learning approaches (LSTM, CNN, GRU) achieve 85-90\% accuracy learning automatic features but need large datasets. Transformer models (BERT, RoBERTa, DistilBERT) deliver 90-95\% accuracy with transfer learning capabilities.
+\end{frame}
+
+\begin{frame}[t]{Feature Engineering for NLP}
+\centering
+\includegraphics[width=0.8\textwidth]{charts/feature_engineering_nlp.pdf}
+\vfill
+\footnotesize
+\textbf{Feature Hierarchy:} Lexical features capture word-level statistics including word count, character count, average word length, vocabulary richness, and sentiment word ratios. Syntactic features encode grammatical structure through part-of-speech tags, dependency parsing relationships, and constituency parse trees. Semantic features represent meaning through word embeddings, topic distributions, and named entity types. Pragmatic features include sentiment indicators, emotional markers, and discourse patterns. Modern transformers learn these representations automatically through self-supervised training.
+\end{frame}
+
+\begin{frame}[t]{Model Selection Decision Framework}
+\centering
+\includegraphics[width=0.85\textwidth]{charts/model_selection_flowchart.pdf}
+\vfill
+\footnotesize
+\textbf{Selection Criteria:} Dataset size determines model complexity feasibility with transformer models requiring minimum 1000 labeled examples for fine-tuning. Latency requirements influence architecture choice: rule-based $<$1ms, traditional ML $<$10ms, BERT $\sim$100ms, large transformers $>$500ms. Interpretability needs affect model transparency with attention weights providing partial interpretability for transformers. Available computational resources constrain model selection with GPU memory requirements: BERT-Base 4GB, BERT-Large 8GB, GPT-3 style models 40GB+.
+\end{frame}
+
+\begin{frame}[t]{Performance Evaluation Framework}
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\centering
+\textbf{Classification Metrics}\\
+\includegraphics[width=\textwidth]{charts/confusion_matrix.pdf}
+\end{column}
+\begin{column}{0.48\textwidth}
+\centering
+\textbf{ROC Analysis}\\
+\includegraphics[width=\textwidth]{charts/roc_curves.pdf}
+\end{column}
+\end{columns}
+\vfill
+\footnotesize
+\textbf{Evaluation Best Practices:} Stratified k-fold cross-validation preserves class distributions across folds preventing overfitting to specific data splits. Hold-out test sets ensure unbiased performance estimation on unseen data. Precision-recall curves more informative than ROC for imbalanced datasets common in sentiment analysis. F1-score balances precision and recall providing single performance metric. Statistical significance testing (McNemar's test, bootstrap confidence intervals) validates model improvements.
+\end{frame}
+
+\begin{frame}[t]{Cross-Validation for Text Data}
+\centering
+\includegraphics[width=0.85\textwidth]{charts/cross_validation_text.pdf}
+\vfill
+\footnotesize
+\textbf{Text-Specific Considerations:} Temporal splits prevent data leakage when text data has time dependencies (social media trends, news events). Author-based splits evaluate generalization to new users rather than new texts from same authors. Topic-based splits test domain adaptation capabilities across different subject matters. Stratified sampling maintains sentiment class balance across training/validation splits. Group k-fold prevents related samples (same document, same conversation thread) from appearing in both training and validation sets.
+\end{frame}
+
+\begin{frame}[t]{Handling Imbalanced Sentiment Data}
+\centering
+\includegraphics[width=0.95\textwidth]{charts/imbalanced_sentiment.pdf}
+\vfill
+\footnotesize
+\textbf{Balancing Strategies:} Random oversampling replicates minority class examples risking overfitting. SMOTE generates synthetic minority examples through k-nearest neighbor interpolation. Random undersampling reduces majority class potentially losing important information. Class-weighted loss functions adjust training objective giving higher penalty to minority class misclassification. Ensemble methods train multiple models on balanced subsets then combine predictions. Focal loss emphasizes hard examples reducing easy example contribution to loss.
+\end{frame}
+
+\begin{frame}[t]{Domain Adaptation Techniques}
+\centering
+\includegraphics[width=0.8\textwidth]{charts/domain_adaptation.pdf}
+\vfill
+\footnotesize
+\textbf{Transfer Learning Pipeline:} Pre-trained language models provide general linguistic understanding from large-scale unsupervised training. Domain-specific fine-tuning adapts representations to target vocabulary and sentiment expressions using small labeled datasets. Few-shot learning leverages similarity between source and target domains requiring minimal target data. Adversarial domain adaptation aligns source and target feature distributions through adversarial training objectives. Multi-task learning shares representations across related tasks improving generalization through inductive bias.
+\end{frame}
+
+\begin{frame}[t]{Production Deployment Considerations}
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\centering
+\textbf{Processing Speed}\\
+\includegraphics[width=\textwidth]{charts/batch_processing_speed.pdf}
+\end{column}
+\begin{column}{0.48\textwidth}
+\centering
+\textbf{Hardware Comparison}\\
+\includegraphics[width=\textwidth]{charts/gpu_cpu_comparison.pdf}
+\end{column}
+\end{columns}
+\vfill
+\footnotesize
+\textbf{Deployment Architecture:} Batch processing achieves optimal throughput with batch sizes 16-32 balancing memory usage and processing efficiency. GPU acceleration provides 5-15x speedup over CPU for transformer inference. Model optimization techniques include quantization (INT8), pruning (remove weights), and distillation (teacher-student training). Container orchestration (Kubernetes) enables auto-scaling based on traffic patterns. Load balancing distributes requests across multiple model instances maintaining sub-100ms p95 latency.
+\end{frame}
+
+\begin{frame}[t]{HuggingFace Model Ecosystem}
+\centering
+\includegraphics[width=0.6\textwidth]{charts/huggingface_models.pdf}
+\vfill
+\footnotesize
+\textbf{Ecosystem Benefits:} 100,000+ pre-trained models covering 200+ languages and 1000+ tasks provide extensive starting points for fine-tuning. Standardized transformers library enables model interoperability across frameworks (PyTorch, TensorFlow, JAX). Community contributions include model cards documenting capabilities, limitations, and intended use cases. Integration with popular ML platforms (Weights \\& Biases, MLflow) streamlines experiment tracking. One-line inference APIs accelerate prototyping and evaluation workflows.
+\end{frame}
+
+\begin{frame}[t]{Confidence Calibration and Interpretation}
+\centering
+\includegraphics[width=0.85\textwidth]{charts/confidence_calibration.pdf}
+\vfill
+\footnotesize
+\textbf{Calibration Importance:} Well-calibrated models provide reliable confidence estimates essential for production decision-making. Temperature scaling post-hoc calibration adjusts prediction probabilities using validation set. Platt scaling maps model outputs to calibrated probabilities through logistic regression. Reliability diagrams visualize calibration quality comparing predicted vs actual confidence. Brier score measures both accuracy and calibration providing unified evaluation metric. Uncertainty quantification enables human-AI collaboration workflows.
+\end{frame}
+
+\begin{frame}[t]{Result Interpretation Framework}
+\centering
+\includegraphics[width=0.85\textwidth]{charts/result_interpretation.pdf}
+\vfill
+\footnotesize
+\textbf{Explainability Methods:} LIME provides local explanations approximating model behavior around specific predictions through perturbation analysis. SHAP (SHapley Additive exPlanations) offers theoretically grounded feature attributions satisfying efficiency, symmetry, dummy, and additivity axioms. Attention visualization highlights input tokens receiving highest attention weights though attention may not always correlate with importance. Gradient-based methods (Integrated Gradients, GradCAM) compute input sensitivity through backpropagation. Counterfactual explanations demonstrate decision boundaries through minimal input modifications changing predictions.
+\end{frame}
+
+\begin{frame}[t]{Deployment Architecture}
+\centering
+\includegraphics[width=0.85\textwidth]{charts/deployment_architecture.pdf}
+\vfill
+\footnotesize
+\textbf{Production Pipeline:} API gateway handles authentication (OAuth 2.0, API keys), rate limiting (1000 requests/minute), and request routing. Load balancer distributes traffic across multiple model server instances using round-robin or least-connections algorithms. Model serving framework (TensorFlow Serving, TorchServe, Triton) manages model loading, versioning, and batching. Redis cache stores frequent predictions reducing inference latency. Monitoring systems (Prometheus, Grafana) track performance metrics, error rates, and resource utilization enabling proactive scaling and maintenance.
+\end{frame}
+
+\begin{frame}[t]{API Integration Flow}
+\centering
+\includegraphics[width=\textwidth]{charts/api_integration_flow.pdf}
+\vfill
+\footnotesize
+\textbf{Integration Specifications:} RESTful API endpoints accept JSON payloads with text content, configuration parameters, and metadata. Request validation ensures input format compliance and content safety through profanity filtering and length limits. Rate limiting implements token bucket algorithm preventing abuse while allowing burst traffic. Response formatting includes prediction scores, confidence intervals, and optional explanation data. Error handling provides detailed status codes (400 Bad Request, 429 Rate Limited, 500 Internal Error) with actionable error messages. SDK libraries for Python, JavaScript, Java, and R simplify client integration.
+\end{frame}
+
+% Section 4: Design Integration Applications
+\section{Design Integration Applications}
+
+\begin{frame}[t]
+\vfill
+\centering
+\begin{beamercolorbox}[sep=8pt,center]{title}
+\usebeamerfont{title}\Large Design Integration Applications\par
+\end{beamercolorbox}
+\vfill
+\end{frame}
+
+\begin{frame}[t]{Bridging Data and Human Emotion}
+\begin{columns}[T]
+\begin{column}{0.38\textwidth}
+\textbf{Translation Challenge:}
+\begin{itemize}
+\item Numbers → Insights
+\item Patterns → Stories
+\item Metrics → Emotions
+\item Data → Empathy
+\end{itemize}
+\vspace{10pt}
+\textbf{Design Integration:}
+\begin{itemize}
+\item Journey mapping
+\item Persona development
+\item Pain point identification
+\item Opportunity discovery
+\end{itemize}
+\end{column}
+\begin{column}{0.58\textwidth}
+\includegraphics[width=\textwidth]{charts/data_to_emotion_bridge.pdf}
+\end{column}
+\end{columns}
+\vfill
+\footnotesize
+\textbf{Methodology Integration:} NLP sentiment analysis feeds directly into design thinking workflows through automated persona generation from user feedback clustering. Emotional pattern recognition guides journey mapping by identifying sentiment peaks and valleys across customer touchpoints. Real-time feedback loops enable rapid design iteration based on user emotional responses. Pain point prioritization leverages sentiment severity and frequency to focus design interventions on highest-impact opportunities.
+\end{frame}
+
+\begin{frame}[t]{Voice of Customer Analysis}
+\centering
+\includegraphics[width=0.95\textwidth]{charts/voice_of_customer.pdf}
+\vspace{5pt}
+\small Automated extraction and analysis of customer needs, frustrations, and desires
+\vfill
+\footnotesize
+\textbf{Analysis Framework:} Latent Dirichlet Allocation (LDA) topic modeling identifies key themes in customer feedback with coherence scores measuring topic quality. Aspect-based sentiment analysis extracts opinions on specific product features (battery life, user interface, customer service) enabling targeted improvements. Temporal analysis tracks sentiment evolution over product lifecycle revealing adoption patterns and satisfaction trends. Demographic segmentation uncovers sentiment differences across user groups informing personalized design strategies.
+\end{frame}
+
+\begin{frame}[t]{Review Mining Process}
+\begin{columns}[T]
+\begin{column}{0.25\textwidth}
+\textbf{Mining Pipeline:}
+\begin{enumerate}
+\item Data collection (APIs, scraping)
+\item Quality filtering
+\item Language detection
+\item Sentiment extraction
+\item Aspect identification
+\item Insight generation
+\end{enumerate}
+\vspace{10pt}
+\textbf{Output Metrics:}
+\begin{itemize}
+\item Theme frequency
+\item Sentiment trends
+\item User segments
+\item Impact scores
+\end{itemize}
+\end{column}
+\begin{column}{0.75\textwidth}
+\includegraphics[width=\textwidth]{charts/review_mining_process.pdf}
+\end{column}
+\end{columns}
+\vfill
+\footnotesize
+\textbf{Mining Methodology:} Web scraping and API integration collect reviews from multiple platforms (Amazon, App Store, Google Play) handling rate limits and anti-bot measures. Duplicate detection using text similarity and metadata comparison prevents analysis bias. Language detection routes multilingual content to appropriate models. Quality scoring filters spam, fake reviews, and uninformative content. Named entity recognition extracts product features, competitor mentions, and brand references for competitive analysis.
+\end{frame}
+
+\begin{frame}[t]{Support Ticket Sentiment Analysis}
+\centering
+\includegraphics[width=\textwidth]{charts/support_ticket_analysis.pdf}
+\vfill
+\footnotesize
+\textbf{Operational Insights:} Real-time sentiment monitoring of customer support interactions enables immediate escalation of highly negative tickets to senior agents. Automated sentiment scoring prioritizes ticket queues ensuring emotionally distressed customers receive faster response. Agent performance tracking through sentiment improvement metrics identifies training needs and best practices. Knowledge base optimization based on common frustration patterns reduces repeat issues. Proactive issue identification through sentiment trend analysis prevents minor problems from becoming major incidents.
+\end{frame}
+
+\begin{frame}[t]{Social Media Sentiment Monitoring}
+\begin{columns}[T]
+\begin{column}{0.38\textwidth}
+\textbf{Monitoring Capabilities:}
+\begin{itemize}
+\item Real-time tracking
+\item Trend detection
+\item Influencer analysis
+\item Crisis management
+\item Competitive intelligence
+\end{itemize}
+\vspace{10pt}
+\textbf{Alert Thresholds:}
+\begin{itemize}
+\item Volume spikes $>$300\%
+\item Sentiment drops $<$-0.5
+\item Viral negative content
+\item Brand mention changes
+\end{itemize}
+\end{column}
+\begin{column}{0.58\textwidth}
+\includegraphics[width=\textwidth]{charts/social_media_sentiment.pdf}
+\end{column}
+\end{columns}
+\vfill
+\footnotesize
+\textbf{Monitoring Infrastructure:} Twitter API v2 streams and Reddit API provide real-time social media data with rate limiting handled through multiple API keys. Elasticsearch indexes social media content enabling rapid search and aggregation across millions of posts. Apache Kafka message queues handle high-volume data streams with guaranteed delivery. Alert systems use configurable thresholds for sentiment scores, volume changes, and trending topics triggering immediate notifications to response teams.
+\end{frame}
+
+\begin{frame}[t]{Emotional Journey Mapping}
+\centering
+\includegraphics[width=0.9\textwidth]{charts/emotional_journey_map.pdf}
+\vfill
+\footnotesize
+\textbf{Journey Enhancement Methodology:} Traditional customer journey maps enhanced with quantitative emotion data from actual user feedback rather than assumptions. Sentiment scores mapped to specific journey stages (awareness, consideration, purchase, onboarding, usage, support) reveal emotional peaks and valleys. Pain point identification through negative sentiment clustering highlights specific touchpoints requiring intervention. Delight moment discovery through positive sentiment spikes identifies experiences to amplify and replicate. Opportunity gap analysis through neutral sentiment reveals engagement potential.
+\end{frame}
+
+\begin{frame}[t]{Customer Pain Point Heatmap}
+\centering
+\includegraphics[width=\textwidth]{charts/pain_point_heatmap.pdf}
+\vfill
+\footnotesize
+\textbf{Heatmap Methodology:} Customer journey stages plotted on X-axis with pain point categories (confusion, frustration, anxiety, difficulty, dissatisfaction) on Y-axis. Color intensity represents combined frequency and severity of negative sentiment at each intersection. Data aggregation from 50,000+ customer interactions across touchpoints provides statistical significance. Real-time updates as new feedback arrives enable continuous monitoring. Interactive drill-down capabilities reveal specific customer quotes and context behind each pain point enabling targeted resolution strategies.
+\end{frame}
+
+\begin{frame}[t]{Identifying Customer Delight Moments}
+\begin{columns}[T]
+\begin{column}{0.38\textwidth}
+\textbf{Delight Indicators:}
+\begin{itemize}
+\item Unexpected praise
+\item Emotional language
+\item Recommendation intent
+\item Surprise expressions
+\item Gratitude statements
+\end{itemize}
+\vspace{10pt}
+\textbf{Design Applications:}
+\begin{itemize}
+\item Feature amplification
+\item Marketing messaging
+\item Onboarding highlights
+\item Training focus areas
+\end{itemize}
+\end{column}
+\begin{column}{0.58\textwidth}
+\includegraphics[width=\textwidth]{charts/delight_moments.pdf}
+\end{column}
+\end{columns}
+\vfill
+\footnotesize
+\textbf{Delight Detection Algorithm:} Natural language processing identifies linguistic markers of delight including superlative adjectives, exclamation marks, and positive emotional expressions. Sentiment intensity thresholding flags reviews exceeding +0.8 polarity scores indicating exceptional satisfaction. Topic modeling clusters delight moments by product features revealing specific capabilities driving positive surprise. Temporal analysis identifies optimal timing for delight delivery based on user journey stage and contextual factors.
+\end{frame}
+
+\begin{frame}[t]{Priority Matrix for Design Decisions}
+\centering
+\includegraphics[width=0.85\textwidth]{charts/priority_matrix.pdf}
+\vfill
+\footnotesize
+\textbf{Prioritization Framework:} X-axis represents implementation effort estimated through story points considering technical complexity, resource requirements, and development time. Y-axis measures emotional impact through sentiment improvement potential calculated from current negative sentiment frequency and intensity. Quadrant analysis guides decision-making: high impact low effort = quick wins requiring immediate attention; high impact high effort = strategic investments for roadmap planning; low impact low effort = maintenance tasks for spare capacity; low impact high effort = avoid unless strategic necessity.
+\end{frame}
+
+\begin{frame}[t]{Emotional Personalization Framework}
+\centering
+\includegraphics[width=\textwidth]{charts/emotional_personalization.pdf}
+\vfill
+\footnotesize
+\textbf{Personalization Strategy:} User segmentation based on emotional expression patterns (analytical, expressive, driver, amiable) enables targeted communication strategies. Dynamic content adaptation responds to current emotional state detected through interaction patterns and explicit feedback. Proactive intervention triggers support outreach when negative sentiment trajectory indicates potential churn risk. Celebration mechanisms amplify positive moments through personalized acknowledgments and rewards. A/B testing validates emotional personalization effectiveness through engagement and satisfaction metrics.
+\end{frame}
+
+\begin{frame}[t]{Impact Measurement Dashboard}
+\centering
+\includegraphics[width=\textwidth]{charts/impact_measurement.pdf}
+\vfill
+\footnotesize
+\textbf{Success Metrics Framework:} Customer satisfaction (CSAT) scores tracked before and after sentiment-driven interventions measuring direct impact on user experience. Net Promoter Score (NPS) changes correlated with design improvements demonstrating business value. Customer Effort Score (CES) reduction measured through decreased frustration language in support interactions. Revenue impact quantified through satisfaction-purchase correlation analysis and customer lifetime value changes. Return on investment calculated comparing intervention costs against satisfaction and retention improvements.
+\end{frame}
+
+% Section 5: Real-World Case Studies
+\section{Real-World Case Studies}
+
+\begin{frame}[t]
+\vfill
+\centering
+\begin{beamercolorbox}[sep=8pt,center]{title}
+\usebeamerfont{title}\Large Real-World Case Studies\par
+\end{beamercolorbox}
+\vfill
+\end{frame}
+
+\begin{frame}[t]{Amazon Case Study Overview}
+\centering
+\includegraphics[width=\textwidth]{charts/amazon_case_overview.pdf}
+\vfill
+\footnotesize
+\textbf{Scale and Implementation:} Amazon processes 2 million+ customer reviews daily across 500 million+ products using distributed computing infrastructure. Multi-language sentiment analysis supports 20+ languages through mBERT and language-specific models. Real-time processing influences search ranking algorithms giving positive sentiment boost to product visibility. Review helpfulness scoring combines sentiment analysis with user voting to surface most valuable feedback. Automated moderation flags inappropriate content using content policy classifiers trained on community guidelines.
+\end{frame}
+
+\begin{frame}[t]{Amazon Data Processing Pipeline}
+\begin{columns}[T]
+\begin{column}{0.38\textwidth}
+\textbf{Pipeline Stages:}
+\begin{enumerate}
+\item Ingestion (2M/day)
+\item Quality filtering
+\item Language detection
+\item Sentiment analysis
+\item Aspect extraction
+\item Business integration
+\end{enumerate}
+\vspace{10pt}
+\textbf{Performance Metrics:}
+\begin{itemize}
+\item 500K reviews/second
+\item 99.9\% uptime SLA
+\item <100ms p95 latency
+\item 95\% accuracy
+\end{itemize}
+\end{column}
+\begin{column}{0.58\textwidth}
+\includegraphics[width=\textwidth]{charts/amazon_data_pipeline.pdf}
+\end{column}
+\end{columns}
+\vfill
+\footnotesize
+\textbf{Technical Architecture:} Apache Kafka message queues handle high-velocity review ingestion with partitioning by product category ensuring scalability. Kubernetes orchestration auto-scales sentiment analysis pods based on queue depth maintaining consistent processing latency. Amazon SageMaker endpoints serve BERT models with A/B testing for model updates. ElasticSearch indexes processed sentiment data enabling real-time search and analytics. CloudWatch monitoring tracks pipeline health and performance metrics.
+\end{frame}
+
+\begin{frame}[t]{Sentiment vs Star Rating Analysis}
+\centering
+\includegraphics[width=\textwidth]{charts/sentiment_vs_stars.pdf}
+\vfill
+\footnotesize
+\textbf{Correlation Insights:} Star ratings and sentiment scores show strong correlation (r=0.78) but reveal interesting divergences indicating review quality and context importance. Three-star reviews exhibit highest sentiment variance suggesting mixed experiences requiring careful analysis. Cultural differences affect rating-sentiment relationships with some cultures using extreme ratings more frequently. Recent reviews trend more negative than historical ratings possibly due to increased expectations or review platform maturation. Product categories show different sentiment-rating patterns with electronics showing stronger correlation than books or services.
+\end{frame}
+
+\begin{frame}[t]{Aspect-Based Sentiment Matrix}
+\begin{columns}[T]
+\begin{column}{0.25\textwidth}
+\textbf{Product Aspects:}
+\begin{itemize}
+\item Quality
+\item Price/Value
+\item Shipping/Delivery
+\item Customer service
+\item Features/Functionality
+\item Usability/Design
+\item Reliability
+\item Performance
+\end{itemize}
+\end{column}
+\begin{column}{0.75\textwidth}
+\includegraphics[width=\textwidth]{charts/aspect_sentiment_matrix.pdf}
+\end{column}
+\end{columns}
+\vfill
+\footnotesize
+\textbf{Analysis Methodology:} Dependency parsing identifies aspect-opinion pairs within review text using syntactic relationships between product features and sentiment expressions. Aspect categorization employs hierarchical classification with domain-specific taxonomies for different product categories. Sentiment scoring per aspect enables granular insights into specific product strengths and weaknesses. Temporal tracking reveals aspect sentiment evolution over product lifecycle enabling proactive quality management. Competitive analysis compares aspect performance across brands identifying market positioning opportunities.
+\end{frame}
+
+\begin{frame}[t]{From Insights to Actions}
+\centering
+\includegraphics[width=\textwidth]{charts/insights_to_actions.pdf}
+\vfill
+\footnotesize
+\textbf{Action Framework:} Negative sentiment threshold triggers ($<$-0.5) activate immediate product team investigation with root cause analysis within 24 hours. Trend analysis using 7-day moving averages informs product roadmap decisions and feature prioritization. Positive sentiment amplification identifies marketing message opportunities and customer success stories. Competitor sentiment analysis reveals market positioning gaps and differentiation opportunities. Seasonal sentiment pattern recognition guides inventory planning and promotional campaign timing.
+\end{frame}
+
+\begin{frame}[t]{Business Impact and ROI Metrics}
+\centering
+\includegraphics[width=\textwidth]{charts/improvement_metrics.pdf}
+\vfill
+\footnotesize
+\textbf{Quantified Business Impact:} Customer satisfaction scores increased 23\% within 6 months of implementing sentiment-driven product improvements. Product return rates decreased 18\% through proactive identification and resolution of quality issues highlighted in negative reviews. Customer lifetime value improved 15\% due to enhanced user experience and satisfaction. Support ticket volume reduced 30\% via proactive issue identification and knowledge base improvements. Revenue per customer increased 12\% through better product-market fit achieved via sentiment-guided feature development.
+\end{frame}
+
+% Section 6: Performance Assessment and Future Directions
+\section{Performance Assessment and Future Directions}
+
+\begin{frame}[t]
+\vfill
+\centering
+\begin{beamercolorbox}[sep=8pt,center]{title}
+\usebeamerfont{title}\Large Performance Assessment and Future Directions\par
+\end{beamercolorbox}
+\vfill
+\end{frame}
+
+\begin{frame}[t]{Comprehensive Model Performance Analysis}
+\centering
+\includegraphics[width=0.95\textwidth]{charts/model_comparison_enhanced.pdf}
+\vspace{5pt}
+\small Cross-validation results across accuracy, speed, and resource requirements
+\vfill
+\footnotesize
+\textbf{Evaluation Methodology:} Stratified 5-fold cross-validation ensures robust performance estimates across imbalanced sentiment datasets. Multiple evaluation datasets test generalization including Stanford Sentiment Treebank, IMDB reviews, and Amazon product reviews. Statistical significance testing using McNemar's test validates performance improvements between models. Error analysis reveals model failure modes including sarcasm detection, domain adaptation, and rare emotion classification. Human evaluation validates automated metrics through expert annotation correlation studies.
+\end{frame}
+
+\begin{frame}[t]{Real-Time Processing Performance}
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\centering
+\textbf{Streaming Architecture}\\
+\includegraphics[width=\textwidth]{charts/real_time_sentiment_stream.pdf}
+\end{column}
+\begin{column}{0.48\textwidth}
+\centering
+\textbf{System Architecture}\\
+\includegraphics[width=\textwidth]{charts/sentiment_flow_architecture.pdf}
+\end{column}
+\end{columns}
+\vfill
+\footnotesize
+\textbf{Performance Benchmarks:} End-to-end latency from text input to sentiment prediction achieves sub-50ms for 95th percentile through optimized model serving and caching strategies. Throughput scales to 100,000+ requests per second using horizontal auto-scaling and load balancing across GPU instances. Memory usage optimization through model quantization and batching reduces resource requirements by 60\% while maintaining accuracy within 1\% of full-precision models. Fault tolerance through redundant processing nodes ensures 99.99\% uptime with automatic failover capabilities.
+\end{frame}
+
+\begin{frame}[t]{Advanced Sentiment Analysis Techniques}
+\centering
+\includegraphics[width=0.85\textwidth]{charts/aspect_sentiment_analysis.pdf}
+\vfill
+\footnotesize
+\textbf{Advanced Methodologies:} Multi-task learning combines sentiment analysis with aspect extraction and emotion detection sharing representations for improved performance across related tasks. Active learning optimizes annotation efforts by selecting most informative examples for labeling reducing training data requirements by 40-60\%. Ensemble methods combine multiple model predictions through voting, stacking, or blending improving robustness and accuracy. Meta-learning enables rapid adaptation to new domains with few-shot learning requiring only 10-50 examples per domain. Continual learning prevents catastrophic forgetting when adapting to new domains or updating with fresh data.
+\end{frame}
+
+\begin{frame}[t]{BERT vs Traditional Architecture Comparison}
+\centering
+\includegraphics[width=\textwidth]{charts/bert_comparison.pdf}
+\vfill
+\footnotesize
+\textbf{Revolutionary Architecture Impact:} BERT's bidirectional encoder achieves 15-20\% accuracy improvement over traditional sequential models by utilizing full context for each token prediction. Transfer learning reduces training data requirements from 100,000+ examples to 1,000+ examples for domain adaptation. Attention mechanism interpretability provides insights into model decision-making process enhancing trust and debugging capabilities. Fine-tuning flexibility enables adaptation to diverse NLP tasks with minimal architecture changes. Multilingual variants (mBERT, XLM-R) provide cross-lingual transfer learning capabilities reducing annotation costs for low-resource languages.
+\end{frame}
+
+\begin{frame}[t]{Enhanced Attention Mechanism Analysis}
+\centering
+\includegraphics[width=\textwidth]{charts/attention_visualization_enhanced.pdf}
+\vfill
+\footnotesize
+\textbf{Attention Pattern Analysis:} Multi-head attention learns specialized relationship types including syntactic dependencies (subject-verb-object), semantic similarities (synonyms, antonyms), and positional patterns (adjacent words, long-range dependencies). Layer-wise attention analysis reveals hierarchical learning with lower layers capturing syntax and higher layers encoding semantics. Attention rollout techniques trace information flow through transformer layers identifying critical decision paths. Head-wise importance analysis using gradient-based attribution reveals which attention heads contribute most to sentiment predictions enabling model compression through head pruning.
+\end{frame}
+
+\begin{frame}[t]{Multi-Layer Emotion Detection}
+\centering
+\includegraphics[width=0.95\textwidth]{charts/emotion_detection_layers.pdf}
+\vfill
+\footnotesize
+\textbf{Hierarchical Emotion Processing:} Token-level emotion classification identifies emotional words and phrases within text using fine-grained emotion lexicons. Sentence-level sentiment aggregation combines token emotions considering negation, intensification, and contextual modifiers. Document-level emotional arc analysis tracks emotion progression through longer texts revealing narrative sentiment patterns. User-level emotional profile construction aggregates individual interactions creating personalized emotion signatures. Population-level trend analysis identifies collective emotional patterns across user groups enabling macro-level insights for product strategy.
+\end{frame}
+
+% Performance Summary
+\begin{frame}[t]{Performance Metrics Summary}
+\small
+\begin{table}
+\centering
+\begin{tabular}{lcccc}
+\toprule
+Method & Accuracy & Latency & Resources & Interpretability \\
+\midrule
+Rule-Based & 68\% & <1ms & Very Low & High \\
+Traditional ML & 78\% & ~10ms & Low & Medium \\
+Deep Learning & 88\% & ~50ms & Medium & Low \\
+BERT/Transformers & 94\% & ~100ms & High & Medium \\
+GPT-Style Models & 96\% & ~500ms & Very High & Low \\
+\bottomrule
+\end{tabular}
+\end{table}
+\vspace{10pt}
+\includegraphics[width=0.8\textwidth]{charts/method_comparison.pdf}
+\vfill
+\footnotesize
+\textbf{Selection Guidelines:} Rule-based approaches optimal for high-speed applications requiring interpretability with acceptable accuracy tradeoffs. Traditional machine learning provides balanced performance for resource-constrained environments. Deep learning suitable for applications requiring higher accuracy with moderate computational budgets. Transformer models deliver state-of-the-art performance when computational resources and accuracy requirements justify increased complexity. Model selection depends on specific use case requirements balancing accuracy, latency, resources, and interpretability constraints.
+\end{frame}
+
+% Conclusions and Future Directions
+\begin{frame}[t]{Key Achievements and Future Directions}
+\begin{columns}[T]
+\begin{column}{0.4\textwidth}
+\textbf{Technical Achievements:}
+\begin{itemize}
+\item 94\% sentiment accuracy
+\item Real-time processing capability
+\item Multilingual support
+\item Aspect-level granularity
+\item Production-ready deployment
+\end{itemize}
+\vspace{10pt}
+\textbf{Design Integration Success:}
+\begin{itemize}
+\item Journey mapping enhancement
+\item Automated pain point identification
+\item Delight moment discovery
+\item Data-driven persona development
+\item Quantified impact measurement
+\end{itemize}
+\end{column}
+\begin{column}{0.6\textwidth}
+\includegraphics[width=\textwidth]{charts/nlp_impact_metrics.pdf}
+\end{column}
+\end{columns}
+\vfill
+\footnotesize
+\textbf{Future Research Directions:} Multimodal sentiment analysis combining text, image, and audio signals for comprehensive emotion understanding. Real-time personalization based on individual emotional state and context. Causal inference methods for measuring true intervention effectiveness. Ethical AI frameworks ensuring fair and unbiased sentiment analysis across demographic groups. Cross-cultural emotion understanding for global product development. Federated learning for privacy-preserving sentiment analysis across organizations.
+\end{frame}
+
+\begin{frame}[t]{Thank You}
+\centering
+\Large Questions and Discussion\\
+\vspace{20pt}
+\normalsize
+\textbf{Week 3 Summary:}\\
+From basic sentiment to production NLP systems\\
+\vspace{10pt}
+\textbf{Next Week:}\\
+Classification for Problem Definition\\
+\vspace{10pt}
+\textbf{Practical Exercise:}\\
+Build your own sentiment analyzer with BERT
+\end{frame}
+
+\end{document}
