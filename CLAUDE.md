@@ -4,94 +4,78 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Repository Overview
 
-"Machine Learning for Smarter Innovation" - BSc-level course bridging ML/AI with design thinking across 10 weeks (310 slides). The course demonstrates how machine learning augments human-centered design processes through practical applications and real algorithm implementations.
+"Machine Learning for Smarter Innovation" - BSc-level course bridging ML/AI with design thinking. The course demonstrates how machine learning augments human-centered design processes through practical applications and real algorithm implementations.
+
+**Core Concept**: The Innovation Diamond - visual metaphor showing expansion from 1 challenge through divergent thinking to 5000 possibilities, then convergence through ML filtering to 5 strategic solutions.
 
 ## High-Level Architecture
 
-### Modular LaTeX Structure
-Each week uses a **4-file modular architecture**:
+### Current Structure Evolution
+- **Week 0 Series**: 5 standalone presentations following 4-act dramatic structure
+- **Week 1**: Traditional single file + compile.py (47 slides)
+- **Week 2-3**: Enhanced modular architecture (5-6 parts)
+- **Week 4+**: Dual-version system (advanced + beginner-friendly)
+
+### Standard Week Structure
 ```
 Week_##/
-├── YYYYMMDD_HHMM_week##_modular.tex    # Main file with \input commands
-├── part1_foundation.tex                 # Slides 1-10: Problem & context
-├── part2_technical.tex                  # Slides 11-20: ML algorithms
-├── part3_design.tex                     # Slides 21-27: Human applications
-└── part4_summary.tex                    # Slides 28-31: Practice & appendix
+├── YYYYMMDD_HHMM_main.tex              # Master controller with \input{} commands
+├── YYYYMMDD_HHMM_main_beginner.tex     # Beginner version (Week 4+)
+├── part1_*.tex                         # Modular content parts (varies by week)
+├── part2_*.tex
+├── part3_*.tex
+├── part4_*.tex
+├── part5_*.tex (optional)
+├── appendix_*.tex (optional)
+├── compile.py                          # Automated compilation with cleanup
+├── charts/                             # PDF (300dpi) + PNG (150dpi) visualizations
+├── scripts/                            # Chart generation Python scripts
+├── handouts/                           # 3-level skill-targeted guides (.md)
+└── archive/                            # Version control & cleanup
+    ├── aux/                            # Auxiliary files auto-moved here
+    ├── builds/                         # Timestamped PDF archives
+    └── previous/                       # Version history
 ```
-
-The main `.tex` file coordinates all sections through `\input{}` commands, enabling parallel development and consistent structure across all 10 weeks.
-
-### Jupyter Notebook Pipeline
-**Function-First Architecture**: All notebooks follow this structure:
-```
-Cells 0-1:   Headers and imports
-Cells 2-4:   Complete Function Library (all functions defined here)
-Cells 5+:    Function calls and demonstrations only
-```
-
-This architecture enables:
-- Modular testing of individual functions
-- Cross-notebook function reuse
-- Clear separation of implementation and demonstration
-
-### Visualization Generation System
-Charts follow a **two-format pipeline**:
-```python
-# Standard template for all 50+ charts
-plt.savefig('charts/chart_name.pdf', dpi=300, bbox_inches='tight')  # Print quality
-plt.savefig('charts/chart_name.png', dpi=150, bbox_inches='tight')  # Preview
-```
-
-Key requirements:
-- Real sklearn algorithms only (no synthetic data)
-- Consistent 5-color palette across all visualizations
-- Self-explanatory charts without accompanying text
 
 ## Common Commands
 
-### LaTeX Compilation
+### Primary Compilation Workflow
 ```bash
-# Standard compilation (Windows)
-pdflatex filename.tex
-pdflatex filename.tex  # Run twice for TOC
+# Standard compilation with automatic cleanup (RECOMMENDED)
+cd Week_##
+python compile.py                       # Auto-detects latest main.tex
+python compile.py YYYYMMDD_HHMM_main.tex   # Specific file
 
-# When PDF is locked
-pdflatex -jobname=filename_v2 filename.tex
+# Manual compilation if needed
+pdflatex YYYYMMDD_HHMM_main.tex
+pdflatex YYYYMMDD_HHMM_main.tex        # Run twice for references
 
-# Clean auxiliary files (PowerShell)
-powershell -Command "New-Item -ItemType Directory -Force -Path temp; Move-Item *.aux,*.log,*.nav,*.snm,*.toc,*.vrb,*.out -Destination temp -Force -ErrorAction SilentlyContinue"
-```
-
-### Jupyter Notebook Operations
-```bash
-# Execute all cells in a notebook
-jupyter nbconvert --to notebook --execute Week_01/Week01_Part1_Setup_Foundation.ipynb --output executed.ipynb
-
-# Batch execute all three parts
-for %i in (1 2 3) do jupyter nbconvert --to notebook --execute Week_01/Week01_Part%i_*.ipynb --output executed_part%i.ipynb
+# When PDF is locked (Windows)
+pdflatex -jobname=filename_temp filename.tex
 ```
 
 ### Chart Generation
 ```bash
-# Generate Week 1 visualizations
-cd Week_01/charts
-python create_improved_charts.py
-python create_part3_design_charts.py
-
-# Batch generate all charts
-for %f in (*.py) do python %f
+cd Week_##/scripts
+python create_*.py                      # Generates both PDF and PNG
 ```
 
-## LaTeX/Beamer Configuration
+### Clean Auxiliary Files (Manual)
+```powershell
+New-Item -ItemType Directory -Force -Path archive/aux
+Move-Item *.aux,*.log,*.nav,*.snm,*.toc,*.vrb,*.out -Destination archive/aux -Force
+```
 
-### Required Setup
+## Critical LaTeX/Beamer Requirements
+
+### Document Setup
 ```latex
 \documentclass[8pt,aspectratio=169]{beamer}
 \usetheme{Madrid}
-\setbeamertemplate{navigation symbols}{}
-\setbeamertemplate{footline}[frame number]
+```
 
-% Color definitions (mandatory)
+### Mandatory Color Definitions
+```latex
 \definecolor{mlblue}{RGB}{31, 119, 180}
 \definecolor{mlorange}{RGB}{255, 127, 14}
 \definecolor{mlgreen}{RGB}{44, 160, 44}
@@ -99,91 +83,118 @@ for %f in (*.py) do python %f
 \definecolor{mlpurple}{RGB}{148, 103, 189}
 ```
 
-### Strict Formatting Rules
-- **Font sizes**: Only 3 allowed (`\Large`, `\normalsize`, `\small`)
-- **Column widths**: `0.48/0.48` (equal), `0.55/0.43` (unequal), `0.32/0.32/0.32` (three)
-- **Chart widths**: `0.95` (chart-only), `0.85` (full), `0.75` (medium), `0.65` (sidebar)
-- **Plain frames**: Use `\begin{frame}[plain]` for chart-only slides
-- **No Unicode**: ASCII only, use `` `` for quotes, not " "
+### Critical Rules
+- **Font sizes**: Only `\Large`, `\normalsize`, `\small` allowed
+- **Column widths**: 0.48/0.48, 0.55/0.43, or 0.32/0.32/0.32
+- **No Unicode**: ASCII only (no emojis, special characters)
+- **File naming**: YYYYMMDD_HHMM_ prefix mandatory for all .tex files
+- **Charts**: Python-generated only, NO TikZ
+- **Week 0 Finance**: NO Python code on slides
 
-## Weekly Structure (31 Slides)
+## Pedagogical Framework (4-Act Structure)
 
-```
-Slide 1:      Opening Power Chart (compelling visualization)
-Slides 2-10:  Part 1 Foundation (problem statement & context)
-              - Include section divider
-              - Problem before solution
-Slides 11-20: Part 2 Technical (ML algorithms & implementation)
-              - Include section divider
-              - Real sklearn implementations
-Slides 21-27: Part 3 Design (human-centered applications)
-              - Include section divider
-              - Bridge to user impact
-Slides 28-31: Part 4 Summary/Appendix (practice & math details)
-```
+All Week 0 series presentations follow this proven template:
 
-## Critical Implementation Patterns
+1. **Act 1: Challenge** (5 slides) - Build tension from zero knowledge
+2. **Act 2: First Solution** (5-6 slides) - Initial success → failure pattern
+3. **Act 3: Breakthrough** (9-10 slides) - Key insight → validation
+4. **Act 4: Synthesis** (4 slides) - Modern applications + lessons
 
-### From Week 1 Success
-1. **Section dividers** between all 4 parts
-2. **Transition slides** bridging major topics
-3. **Problem-first approach** before each methodology
-4. **"The [X] Challenge" slides** framing each concept
-5. **Chart-only slides** using `[plain]` frame option
-6. **Real algorithms only** (KMeans, DBSCAN, GMM from sklearn)
+### Critical Pedagogical Beats
+- Success slide BEFORE failure (builds hope)
+- Quantified failure with data table
+- "How do YOU...?" human introspection
+- Zero-jargon explanation before technical terms
+- Full numerical walkthrough with actual numbers
+- Before/after experimental validation
 
-### Common Chart Generation Pattern
+## Week-Specific Notes
+
+### Week 0 Series (5 Presentations)
+- **0a**: ML Foundations (26 slides) - Learning journey metaphor
+- **0b**: Supervised Learning (25 slides) - Prediction challenge
+- **0c**: Unsupervised Learning (26 slides) - Discovery without labels
+- **0d**: Neural Networks (25 slides) - Depth challenge
+- **0e**: Generative AI (25 slides) - Creation challenge
+
+### Weeks with Special Features
+- **Week 1**: Innovation Diamond visualization series (18 charts)
+- **Week 3**: NLP with 75 charts, Twitter sentiment workshop
+- **Week 4**: Dual versions (advanced + beginner), first to use v2/v3 structure
+- **Week 7**: Custom Nature Professional color theme
+- **Week 10**: Complete with verified industry statistics
+
+## compile.py Features
+
+The `compile.py` script (present in all weeks) provides:
+- Auto-detection of latest main.tex file
+- Dual pdflatex pass for complete references
+- Automatic archiving to `archive/builds/` with timestamps
+- Auxiliary file cleanup to `archive/aux/`
+- 60-second timeout per compilation pass
+- Clear progress indicators and file size reporting
+
+## Handout System
+
+All weeks include 3 skill-level handouts:
+
+1. **Basic** (~150-200 lines): No math/code, checklists, plain English
+2. **Intermediate** (~300-400 lines): Python implementation guides, case studies
+3. **Advanced** (~400-500 lines): Mathematical proofs, production considerations
+
+## Development Workflow
+
+1. **New content**: Copy Week_04 structure as template (most complete)
+2. **File creation**: Use timestamp prefix YYYYMMDD_HHMM_
+3. **Charts**: Generate via Python scripts → save as PDF + PNG
+4. **Compilation**: Always use `compile.py` for consistency
+5. **Archiving**: Previous versions auto-moved to `archive/previous/`
+6. **Cleanup**: Auxiliary files auto-moved to `archive/aux/`
+
+## Python Dependencies
+
 ```python
-import numpy as np
-import matplotlib.pyplot as plt
-from sklearn.cluster import KMeans
+# Core
+scikit-learn, numpy, pandas, scipy, matplotlib, seaborn
 
-# Always use real ML
-np.random.seed(42)
-X, y = make_blobs(n_samples=1000, centers=3)
-kmeans = KMeans(n_clusters=3)
-labels = kmeans.fit_predict(X)
+# NLP (Week 3+)
+textblob, transformers, nltk, wordcloud
 
-# Consistent styling
-plt.style.use('seaborn-v0_8-whitegrid')
-fig, ax = plt.subplots(figsize=(14, 10))
+# Topic Modeling (Week 5)
+gensim, pyLDAvis
 
-# Standard color palette
-colors_map = {0: '#1f77b4', 1: '#ff7f0e', 2: '#2ca02c'}
+# Imbalanced Data (Week 4)
+imblearn
+
+# Statistics (Week 10)
+statsmodels
 ```
 
-## File Naming Convention
+## Quality Checklist Before Compilation
 
-```
-YYYYMMDD_HHMM_description.tex    # LaTeX files with timestamp
-Week_##/charts/chart_name.pdf    # Generated visualizations
-Week_##/notebooks/Week##_Part#_*.ipynb    # Jupyter notebooks
-Week_##/previous/                # Version archive
-```
+1. Font sizes limited to 3 allowed sizes
+2. No Unicode characters (ASCII only)
+3. Verify `\input{}` paths in main.tex
+4. Color definitions included in preamble
+5. Charts use real sklearn data (no synthetic)
+6. Previous folder exists for archiving
 
-## Quality Checks
+## Common Issues & Solutions
 
-### Before Compilation
-1. Font sizes: Exactly 3 (`\Large`, `\normalsize`, `\small`)
-2. Column widths: Consistent (0.48/0.48 or 0.55/0.43)
-3. Chart widths: Standard sizes (0.95, 0.85, 0.75, 0.65)
-4. Section dividers: Present between all 4 parts
-5. Real ML algorithms: No synthetic/fake data
+### LaTeX Errors
+- **Undefined color**: Add color definitions to preamble
+- **PDF locked**: Use `-jobname` parameter or close viewer
+- **Unicode error**: Replace with ASCII equivalents
 
-### Common Issues
-| Issue | Solution |
-|-------|----------|
-| PDF locked | Use `-jobname=filename_v2` |
-| Overfull hbox | Adjust chart width down by 0.05 |
-| Font inconsistency | Limit to 3 sizes only |
-| Missing sklearn | All charts must use real algorithms |
+### Python Script Issues
+- **Import error**: Check dependencies list
+- **Chart not rendering**: Verify matplotlib backend
+- **Memory error**: Reduce algorithm sample size
 
-## Current Status
+## Statistics Verification Protocol
 
-| Week | Topic | Primary Algorithm | Status |
-|------|-------|------------------|--------|
-| 1 | Clustering & Empathy | KMeans, DBSCAN | ✅ Complete (70 pages) |
-| 2 | Advanced Clustering | Hierarchical, GMM | 🔄 Structure ready |
-| 3-10 | Various | See full outline | 📋 Planned |
-
-Week 1 contains 50+ charts demonstrating real clustering algorithms with consistent styling and narrative flow from problem identification through solution to application.
+When including industry statistics:
+1. Verify all claims via web search
+2. Cite sources when available
+3. Use conservative estimates when sources conflict
+4. Examples of verified stats kept in Week 10 documentation
