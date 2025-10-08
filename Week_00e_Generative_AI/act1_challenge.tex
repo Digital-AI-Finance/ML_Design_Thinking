@@ -1,0 +1,230 @@
+% Slide 1: Want to CREATE, not just classify
+\begin{frame}
+\frametitle{The Creation Challenge}
+\framesubtitle{Moving Beyond Classification}
+
+\begin{columns}[c]
+\column{0.48\textwidth}
+\Large
+\textbf{Traditional ML:} \\
+``What is this?''
+
+\vspace{0.5cm}
+\normalsize
+\begin{itemize}
+\item Email: spam or not?
+\item Image: cat or dog?
+\item Text: positive sentiment?
+\item Patient: high risk?
+\end{itemize}
+
+\vspace{0.5cm}
+\textcolor{mlred}{\textbf{Limitation:}} Analysis only
+
+\column{0.48\textwidth}
+\Large
+\textbf{Generative AI:} \\
+``Create something new''
+
+\vspace{0.5cm}
+\normalsize
+\begin{itemize}
+\item Generate: realistic images
+\item Write: coherent articles
+\item Compose: original music
+\item Design: novel molecules
+\end{itemize}
+
+\vspace{0.5cm}
+\textcolor{mlgreen}{\textbf{Power:}} Creation \& innovation
+\end{columns}
+
+\vspace{\fill}
+\small \textcolor{gray}{
+The fundamental shift: from understanding existing data to creating new possibilities
+}
+\end{frame}
+
+% Slide 2: Generative vs discriminative models distinction
+\begin{frame}
+\frametitle{Mathematical Foundation}
+\framesubtitle{Two Approaches to Learning}
+
+\begin{columns}[c]
+\column{0.48\textwidth}
+\Large
+\textbf{Discriminative Models}
+
+\vspace{0.3cm}
+\normalsize
+Learn: $P(y|x)$ \\
+``Given input x, what's the label y?''
+
+\vspace{0.3cm}
+\textbf{Examples:}
+\begin{itemize}
+\item Logistic regression
+\item Random Forest
+\item Neural networks (classification)
+\item SVM
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlblue}{\textbf{Goal:}} Decision boundaries
+
+\column{0.48\textwidth}
+\Large
+\textbf{Generative Models}
+
+\vspace{0.3cm}
+\normalsize
+Learn: $P(x)$ or $P(x,y)$ \\
+``What does the data distribution look like?''
+
+\vspace{0.3cm}
+\textbf{Examples:}
+\begin{itemize}
+\item Gaussian Mixture Models
+\item Variational Autoencoders
+\item GANs
+\item Diffusion models
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{Goal:}} Data generation
+\end{columns}
+
+\vspace{\fill}
+\small \textcolor{gray}{
+Discriminative: ``Is this a cat?'' | Generative: ``Draw me a cat''
+}
+\end{frame}
+
+% Slide 3: Capturing full data distribution (hard problem)
+\begin{frame}
+\frametitle{The Hard Problem}
+\framesubtitle{Why Generation is Fundamentally Difficult}
+
+\begin{center}
+\includegraphics[width=0.8\textwidth]{charts/distribution_complexity.pdf}
+\end{center}
+
+\vspace{0.3cm}
+
+\begin{columns}[c]
+\column{0.48\textwidth}
+\textbf{Challenges:}
+\begin{itemize}
+\item High-dimensional spaces
+\item Complex dependencies
+\item Multimodal distributions
+\item Sparse meaningful regions
+\end{itemize}
+
+\column{0.48\textwidth}
+\textbf{Requirements:}
+\begin{itemize}
+\item Capture ALL patterns
+\item Generate diverse samples
+\item Maintain realism
+\item Avoid mode collapse
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\small \textcolor{gray}{
+Real data lives on complex, high-dimensional manifolds - learning the full distribution is exponentially hard
+}
+\end{frame}
+
+% Slide 4: Realistic vs diverse tradeoff
+\begin{frame}
+\frametitle{The Fundamental Tradeoff}
+\framesubtitle{Quality vs Diversity Dilemma}
+
+\begin{center}
+\includegraphics[width=0.9\textwidth]{charts/quality_diversity_tradeoff.pdf}
+\end{center}
+
+\vspace{0.3cm}
+
+\begin{columns}[c]
+\column{0.32\textwidth}
+\textcolor{mlred}{\textbf{High Quality,}} \\
+\textcolor{mlred}{\textbf{Low Diversity}}
+\begin{itemize}
+\item Mode collapse
+\item Repetitive outputs
+\item Safe but boring
+\end{itemize}
+
+\column{0.32\textwidth}
+\textcolor{mlorange}{\textbf{Balanced}} \\
+\textcolor{mlorange}{\textbf{Generation}}
+\begin{itemize}
+\item Realistic variety
+\item Novel combinations
+\item Creative outputs
+\end{itemize}
+
+\column{0.32\textwidth}
+\textcolor{mlblue}{\textbf{High Diversity,}} \\
+\textcolor{mlblue}{\textbf{Low Quality}}
+\begin{itemize}
+\item Unrealistic samples
+\item Incoherent outputs
+\item Creative but unusable
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\small \textcolor{gray}{
+The holy grail: generating samples that are both realistic AND diverse
+}
+\end{frame}
+
+% Slide 5: Quantify: Inception Score, FID, perplexity
+\begin{frame}
+\frametitle{Measuring Generation Quality}
+\framesubtitle{Metrics for Evaluating Generative Models}
+
+\begin{center}
+\includegraphics[width=0.9\textwidth]{charts/generation_metrics.pdf}
+\end{center}
+
+\vspace{0.3cm}
+
+\begin{columns}[c]
+\column{0.32\textwidth}
+\textbf{Inception Score (IS)}
+\begin{itemize}
+\item Range: 1-1000+
+\item Higher = better
+\item Quality \& diversity
+\item $IS = \exp(E[KL(p(y|x)||p(y))])$
+\end{itemize}
+
+\column{0.32\textwidth}
+\textbf{FID Score}
+\begin{itemize}
+\item Range: 0-500+
+\item Lower = better
+\item Feature distance
+\item Real vs generated
+\end{itemize}
+
+\column{0.32\textwidth}
+\textbf{Perplexity (Text)}
+\begin{itemize}
+\item Range: 1-10,000+
+\item Lower = better
+\item Predictability
+\item Language fluency
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\small \textcolor{gray}{
+Quantitative evaluation: IS=300+ (excellent), FID<10 (photorealistic), Perplexity<20 (human-like text)
+}
+\end{frame}

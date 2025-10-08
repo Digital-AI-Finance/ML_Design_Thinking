@@ -1,0 +1,248 @@
+% ==================== PART 1: THE CHALLENGE ====================
+\section{Part 1: The Emotional Understanding Challenge}
+
+% Slide 1: Human Hook - Motivate from Experience
+\begin{frame}[t]{Your Challenge: 50,000 Reviews, 10 Critical Insights}
+\Large\textbf{Which Reviews Reveal Why Users Really Quit?}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\column{0.55\textwidth}
+\textbf{The Scenario You Face:}
+\begin{itemize}
+\item Your product has 50,000 user reviews
+\item Average review: 100 words
+\item Total: 5 million words to process
+\item Hidden inside: The 10 reviews that explain 80\% of churn
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{The Human Limit:}
+\begin{itemize}
+\item Reading speed: 200 words/minute
+\item Time to read all: 417 hours (10 weeks!)
+\item Reviews arrive: 500 new ones daily
+\item \textcolor{mlred}{You're already behind before you start}
+\end{itemize}
+
+\column{0.43\textwidth}
+\begin{tcolorbox}[colback=mllavender4, colframe=mlred]
+\textbf{Real Review Examples:}\\[0.3em]
+\footnotesize
+``Love it but...'' (quit in 2 weeks)\\[0.2em]
+``Not bad for the price'' (renewed 3 years)\\[0.2em]
+``Just what I expected!'' (1-star rating)\\[0.2em]
+``Finally someone gets it'' (5-star champion)
+\end{tcolorbox}
+
+\vspace{0.5em}
+\begin{center}
+\includegraphics[width=0.9\textwidth]{charts/review_volume_growth.pdf}
+\end{center}
+\end{columns}
+
+\bottomnote{Real company data: Slack processes 2.5M messages daily, Airbnb 1M reviews monthly}
+\end{frame}
+
+% Slide 2: First Foundational Concept - Words to Meaning
+\begin{frame}[t]{Building Block 1: Words Don't Have Fixed Meanings}
+\Large\textbf{Context Changes Everything}
+\normalsize
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{Same Word, Different Meanings:}
+
+\vspace{0.5em}
+\textbf{``Cold''}
+\begin{itemize}
+\item Restaurant: ``The soup was cold'' \textcolor{mlred}{→ Negative}
+\item Service: ``Support was cold'' \textcolor{mlred}{→ Negative}
+\item Beer: ``Nice and cold'' \textcolor{mlgreen}{→ Positive}
+\item Logic: ``Cold hard facts'' \textcolor{mlblue}{→ Neutral}
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{``Fast''}
+\begin{itemize}
+\item Delivery: ``Super fast!'' \textcolor{mlgreen}{→ Positive}
+\item Battery: ``Dies too fast'' \textcolor{mlred}{→ Negative}
+\item Customer service: ``Too fast, felt rushed'' \textcolor{mlred}{→ Negative}
+\end{itemize}
+
+\column{0.48\textwidth}
+\textbf{The Computer's Problem:}
+
+\begin{center}
+\includegraphics[width=0.95\textwidth]{charts/context_dependency.pdf}
+\end{center}
+
+\begin{tcolorbox}[colback=mlyellow!20, colframe=mlorange]
+\footnotesize
+\textbf{Key Insight:} A word's emotional meaning depends on ALL surrounding words, not just the word itself.\\[0.3em]
+This is why simple keyword counting fails spectacularly.
+\end{tcolorbox}
+\end{columns}
+
+\bottomnote{Technical term we'll build to: ``Contextual Word Embeddings'' - but first, let's understand the problem}
+\end{frame}
+
+% Slide 3: Second Foundational Concept - Emotion Layers
+\begin{frame}[t]{Building Block 2: Emotion Has Multiple Layers}
+\Large\textbf{What People Say ≠ What They Feel}
+\normalsize
+
+\begin{columns}[T]
+\column{0.31\textwidth}
+\textbf{Layer 1: Literal}
+\begin{itemize}
+\item ``Great product''
+\item Clear positive
+\item Easy to detect
+\item 15\% of reviews
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Example:}\\
+\footnotesize
+``This is excellent. I love every feature. Will buy again.''\\
+\textcolor{mlgreen}{→ Genuinely positive}
+
+\column{0.31\textwidth}
+\textbf{Layer 2: Sarcastic}
+\begin{itemize}
+\item ``Just wonderful''
+\item Opposite meaning
+\item Context reveals truth
+\item 25\% of reviews
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Example:}\\
+\footnotesize
+``Oh great, another update that breaks everything''\\
+\textcolor{mlred}{→ Actually negative}
+
+\column{0.31\textwidth}
+\textbf{Layer 3: Cultural}
+\begin{itemize}
+\item ``It's okay''
+\item Varies by culture
+\item UK: Negative
+\item US: Neutral
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Example:}\\
+\footnotesize
+``It does what it says''\\
+UK: \textcolor{mlorange}{Disappointed}\\
+US: \textcolor{mlgreen}{Satisfied}
+\end{columns}
+
+\vspace{0.5em}
+
+\begin{center}
+\begin{tcolorbox}[colback=mllavender4, colframe=mlpurple, width=0.9\textwidth]
+\centering
+\textbf{The Complexity:} 60\% of emotional meaning is NOT in the words themselves but in how they're used together
+\end{tcolorbox}
+\end{center}
+
+\bottomnote{This multi-layer challenge is why human annotators only agree 79\% of the time on sentiment}
+\end{frame}
+
+% Slide 4: Combine Concepts to Show Challenge
+\begin{frame}[t]{The Impossible Task: Context × Emotion × Scale}
+\Large\textbf{Why This Problem Explodes in Complexity}
+\normalsize
+
+\begin{center}
+\includegraphics[width=0.75\textwidth]{charts/complexity_explosion.pdf}
+\end{center}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{The Multiplication Effect:}
+\begin{itemize}
+\item 10,000 unique words in reviews
+\item × 5 possible emotional states
+\item × 3 context types (product/service/price)
+\item × 4 cultural backgrounds
+\item = \textcolor{mlred}{600,000 combinations}
+\end{itemize}
+
+\column{0.48\textwidth}
+\textbf{Information Overload:}
+\begin{itemize}
+\item Each review: 100 words
+\item Each word: Needs context of ±5 words
+\item Actual analysis: 100 × 11 = 1,100 decisions
+\item For 50,000 reviews: \textcolor{mlred}{55 million decisions}
+\end{itemize}
+\end{columns}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mlred!10, colframe=mlred]
+\centering
+\textbf{The Core Challenge:} How do we compress 55 million contextual decisions into actionable insights?
+\end{tcolorbox}
+
+\bottomnote{This is why Fortune 500 companies invest millions in NLP - the scale makes human analysis impossible}
+\end{frame}
+
+% Slide 5: Quantify the Challenge with Information Theory
+\begin{frame}[t]{Information Theory: Why Compression Loses Emotion}
+\Large\textbf{The Mathematical Impossibility}
+\normalsize
+
+\begin{columns}[T]
+\column{0.55\textwidth}
+\textbf{Information Content Analysis:}
+
+\begin{tabular}{lrr}
+\toprule
+\textbf{Component} & \textbf{Bits} & \textbf{Information} \\
+\midrule
+One word & 14 bits & Which of 10,000 words \\
++ Position & 7 bits & Where in sentence \\
++ Emotion & 3 bits & 8 emotion types \\
++ Context & 10 bits & Surrounding words \\
++ Sarcasm & 1 bit & Yes/No \\
+\midrule
+\textbf{Total per word} & 35 bits & \\
+\textbf{Per review (100 words)} & 3,500 bits & \\
+\textbf{50,000 reviews} & \textcolor{mlred}{175M bits} & \textcolor{mlred}{22 MB} \\
+\bottomrule
+\end{tabular}
+
+\vspace{0.5em}
+\textbf{Traditional Compression:}
+\begin{itemize}
+\item Keyword counts: 10,000 → 100 words
+\item Compression ratio: 100:1
+\item Information lost: \textcolor{mlred}{99\%}
+\end{itemize}
+
+\column{0.43\textwidth}
+\begin{center}
+\includegraphics[width=0.95\textwidth]{charts/information_loss.pdf}
+\end{center}
+
+\begin{tcolorbox}[colback=mlyellow!20, colframe=mlorange]
+\textbf{The Dilemma:}\\[0.3em]
+Compress too much → Lose emotional nuance\\
+Keep everything → Impossible to process\\[0.3em]
+\textbf{Need:} Selective preservation of emotional signal
+\end{tcolorbox}
+\end{columns}
+
+\vspace{0.5em}
+\begin{center}
+\Large\textcolor{mlpurple}{\textbf{Can we preserve emotion while compressing 100:1?}}
+\end{center}
+
+\bottomnote{Shannon's theorem: Lossless compression impossible beyond entropy limit - emotion has high entropy}
+\end{frame}

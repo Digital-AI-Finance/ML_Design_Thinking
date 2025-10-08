@@ -1,0 +1,361 @@
+% Part 5: Practice - Hands-On Workshop
+\section{Practice: Workshop \& Advanced Tips}
+
+% PART 5 Section Divider
+\begin{frame}[plain]
+\begin{center}
+\vspace{2em}
+{\Huge\textcolor{mlpurple}{\textbf{PART 5}}}\\
+\vspace{0.5em}
+{\Large\textbf{Hands-On Workshop}}\\
+\vspace{1em}
+\textit{Practice makes perfect}\\
+\vspace{2em}
+\Large
+\textbf{Workshop Activities:}\\
+\vspace{0.5em}
+\normalsize
+\begin{itemize}
+\item Live coding demonstration
+\item Troubleshooting common issues
+\item Advanced clustering tips
+\item Q\&A session
+\item Group exercises
+\end{itemize}
+\vspace{1em}
+\Large\textcolor{mlgreen}{\textbf{Let's build together!}}
+\end{center}
+\end{frame}
+
+% Live Coding Demo
+\begin{frame}
+\frametitle{\Large Live Demo: Clustering Innovation Ideas}
+\framesubtitle{Step-by-Step Implementation}
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\begin{tcolorbox}[colback=mlblue!10, colframe=mlblue!50, title=Demo Dataset]
+\small
+\textbf{Innovation Ideas Dataset:}
+\begin{itemize}
+\item 500 startup pitches
+\item Features: industry, funding, team size
+\item Goal: Find innovation patterns
+\end{itemize}
+
+\textbf{We'll implement:}
+\begin{enumerate}
+\item Data loading and exploration
+\item Feature preprocessing
+\item K-means clustering (K=3-8)
+\item Elbow method analysis
+\item Silhouette validation
+\item Cluster interpretation
+\end{enumerate}
+
+\textbf{Expected outcome:}\\
+5 distinct innovation archetypes
+\end{tcolorbox}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\begin{tcolorbox}[colback=mlgreen!10, colframe=mlgreen!50, title=Follow Along]
+\small
+\textbf{Live coding setup:}
+\begin{itemize}
+\item Open Jupyter notebook
+\item Download demo dataset
+\item Install required packages
+\item Follow instructor step-by-step
+\end{itemize}
+
+\textbf{Key learning points:}
+\begin{itemize}
+\item Real data challenges
+\item Parameter tuning
+\item Interpretation strategies
+\item Visualization techniques
+\item Common pitfalls
+\end{itemize}
+
+\textbf{Take notes on:}\\
+Your specific questions and insights
+\end{tcolorbox}
+\end{column}
+\end{columns}
+
+\begin{center}
+\begin{tcolorbox}[colback=mlyellow!20, colframe=mlorange!60, width=0.9\textwidth]
+\centering
+\textbf{Interactive:} Ask questions anytime during the demo - let's learn together!
+\end{tcolorbox}
+\end{center}
+\end{frame}
+
+% Common Issues and Solutions
+\begin{frame}
+\frametitle{\Large Troubleshooting: Common Clustering Pitfalls}
+\framesubtitle{Learn from Others' Mistakes}
+
+\begin{columns}[T]
+\begin{column}{0.32\textwidth}
+\begin{tcolorbox}[colback=mlred!10, colframe=mlred!50, title=Data Issues]
+\small
+\textbf{Problem: Poor results}
+
+\textbf{Common causes:}
+\begin{itemize}
+\item Unscaled features
+\item Missing values
+\item Outliers
+\item Wrong features
+\end{itemize}
+
+\textbf{Solutions:}
+\begin{itemize}
+\item Always use StandardScaler
+\item Handle missing data first
+\item Remove or transform outliers
+\item Feature selection/engineering
+\end{itemize}
+
+\textbf{Quick check:}\\
+Plot feature distributions first!
+\end{tcolorbox}
+\end{column}
+
+\begin{column}{0.32\textwidth}
+\begin{tcolorbox}[colback=mlorange!10, colframe=mlorange!50, title=Algorithm Issues]
+\small
+\textbf{Problem: Bad clusters}
+
+\textbf{Common causes:}
+\begin{itemize}
+\item Wrong K value
+\item Poor initialization
+\item Wrong algorithm choice
+\item Local optima
+\end{itemize}
+
+\textbf{Solutions:}
+\begin{itemize}
+\item Use elbow method + silhouette
+\item Try K-means++ initialization
+\item Consider DBSCAN for odd shapes
+\item Run multiple times, pick best
+\end{itemize}
+
+\textbf{Pro tip:}\\
+Visualize clusters in 2D/3D first
+\end{tcolorbox}
+\end{column}
+
+\begin{column}{0.32\textwidth}
+\begin{tcolorbox}[colback=mlgreen!10, colframe=mlgreen!50, title=Interpretation Issues]
+\small
+\textbf{Problem: Unclear meaning}
+
+\textbf{Common causes:}
+\begin{itemize}
+\item Too many clusters
+\item Mixed feature types
+\item No domain knowledge
+\item Over-interpretation
+\end{itemize}
+
+\textbf{Solutions:}
+\begin{itemize}
+\item Start with fewer clusters
+\item Separate numeric/categorical
+\item Involve domain experts
+\item Focus on clear patterns
+\end{itemize}
+
+\textbf{Remember:}\\
+Clusters should tell a story!
+\end{tcolorbox}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Advanced Tips
+\begin{frame}
+\frametitle{\Large Advanced Clustering Tips}
+\framesubtitle{Professional-Level Insights}
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\begin{tcolorbox}[colback=mlpurple!10, colframe=mlpurple!50, title=Feature Engineering Magic]
+\small
+\textbf{Create better features:}
+\begin{itemize}
+\item Ratios (profit/revenue)
+\item Interactions (age × income)
+\item Time-based (seasonality)
+\item Domain-specific (innovation score)
+\end{itemize}
+
+\textbf{Dimensionality reduction:}
+\begin{itemize}
+\item PCA before clustering
+\item t-SNE for visualization
+\item Feature selection (SelectKBest)
+\end{itemize}
+
+\textbf{Example:}\\
+Customer data: Create "lifetime value" from purchase history before clustering
+\end{tcolorbox}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\begin{tcolorbox}[colback=mlblue!10, colframe=mlblue!50, title=Validation Strategies]
+\small
+\textbf{Multiple validation metrics:}
+\begin{itemize}
+\item Silhouette score (quality)
+\item Calinski-Harabasz (separation)
+\item Davies-Bouldin (compactness)
+\item Business validation (makes sense?)
+\end{itemize}
+
+\textbf{Stability testing:}
+\begin{itemize}
+\item Bootstrap sampling
+\item Different random seeds
+\item Cross-validation
+\item Temporal stability
+\end{itemize}
+
+\textbf{Golden rule:}\\
+If results change dramatically with small data changes, be suspicious!
+\end{tcolorbox}
+\end{column}
+\end{columns}
+
+\begin{center}
+\begin{tcolorbox}[colback=mlyellow!20, colframe=mlorange!60, width=0.9\textwidth]
+\centering
+\textbf{Industry Secret:} The best clusters often come from the 3rd or 4th iteration, not the first attempt!
+\end{tcolorbox}
+\end{center}
+\end{frame}
+
+% Group Exercise
+\begin{frame}
+\frametitle{\Large Group Exercise: Innovation Archetype Challenge}
+\framesubtitle{Team-Based Learning (15 minutes)}
+
+\begin{columns}[T]
+\begin{column}{0.55\textwidth}
+\begin{tcolorbox}[colback=mlgreen!10, colframe=mlgreen!50, title=The Challenge]
+\normalsize
+\textbf{Scenario:} You're consultants for a tech accelerator
+
+\textbf{Dataset:} 200 startup applications with:
+\begin{itemize}
+\item Industry sector
+\item Funding requested
+\item Team experience
+\item Market size
+\item Innovation type
+\end{itemize}
+
+\textbf{Mission:} Find 4-5 startup archetypes to help accelerator create targeted support programs
+
+\textbf{Deliverable:} Name and describe each archetype with key characteristics
+\end{tcolorbox}
+\end{column}
+
+\begin{column}{0.43\textwidth}
+\begin{tcolorbox}[colback=mlblue!10, colframe=mlblue!50, title=Team Roles]
+\small
+\textbf{Data Analyst:}
+\begin{itemize}
+\item Load and explore data
+\item Handle preprocessing
+\item Run clustering algorithms
+\end{itemize}
+
+\textbf{Algorithm Expert:}
+\begin{itemize}
+\item Choose optimal K
+\item Validate cluster quality
+\item Try different methods
+\end{itemize}
+
+\textbf{Business Interpreter:}
+\begin{itemize}
+\item Analyze cluster characteristics
+\item Name the archetypes
+\item Suggest support strategies
+\end{itemize}
+
+\textbf{Presenter:}
+\begin{itemize}
+\item Prepare 2-minute summary
+\item Highlight key insights
+\item Present to class
+\end{itemize>
+\end{tcolorbox}
+\end{column}
+\end{columns}
+
+\vspace{0.3em}
+\begin{center}
+\textbf{Teams of 4 | 15 minutes work | 2 minutes presentation each}
+\end{center}
+\end{frame}
+
+% Q&A and Wrap-up
+\begin{frame}
+\frametitle{\Large Q\&A: Your Clustering Questions}
+\framesubtitle{No Question Too Basic or Too Advanced}
+
+\begin{center}
+\vspace{1em}
+{\Large\textbf{Let's discuss your challenges}}\\
+\vspace{2em}
+\end{center}
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\begin{tcolorbox}[colback=mlgreen!10, colframe=mlgreen!50, title=Common Questions]
+\normalsize
+\begin{itemize}
+\item "How do I know if my clusters are good?"
+\item "What if the elbow isn't clear?"
+\item "Can I cluster text data?"
+\item "How many features is too many?"
+\item "What about categorical variables?"
+\item "How to handle imbalanced clusters?"
+\end{itemize}
+\end{tcolorbox}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\begin{tcolorbox}[colback=mlblue!10, colframe=mlblue!50, title=Your Questions]
+\normalsize
+\textbf{Share your challenges:}
+\begin{itemize}
+\item Specific dataset issues
+\item Algorithm selection doubts
+\item Interpretation difficulties
+\item Implementation problems
+\item Business application questions
+\end{itemize}
+
+\vspace{1em}
+\textbf{Also ask about:}\\
+Next week's advanced techniques, career advice, or industry applications
+\end{tcolorbox}
+\end{column}
+\end{columns>
+
+\vspace{1em}
+\begin{center}
+\begin{tcolorbox}[colback=mlpurple!20, colframe=mlpurple!60, width=0.9\textwidth]
+\centering\Large
+\textbf{Remember:} Every expert was once a beginner - ask away!
+\end{tcolorbox}
+\end{center}
+\end{frame}

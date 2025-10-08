@@ -1,0 +1,429 @@
+% Part 1: Foundation - Beyond Accuracy
+\section{Foundation: The Multi-Metric Imperative}
+
+% Slide 1: Opening - The Accuracy Trap
+\begin{frame}{The Accuracy Trap: When 95\% is Useless}
+\begin{columns}[T]
+\column{0.55\textwidth}
+\includegraphics[width=0.85\textwidth]{charts/accuracy_trap.pdf}
+
+\column{0.43\textwidth}
+\textcolor{mlred}{\Large 95\% Accurate!}\\[0.5cm]
+
+\textcolor{mlblue}{\normalsize Reality Check:}\\[0.2cm]
+\small
+\begin{itemize}
+\item Email dataset: 95\% not spam
+\item Classifier predicts ``not spam'' for everything
+\item 95\% accuracy achieved
+\item Catches ZERO spam emails
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlorange}{\textbf{The Problem:}}\\
+Single metrics hide catastrophic failures
+
+\vspace{\fill}
+{\footnotesize\textcolor{mlgray}{Why most ``accurate'' models fail in production}}
+\end{columns}
+\end{frame}
+
+% Slide 2: Real Failure Examples
+\begin{frame}{When High Accuracy Means Failure}
+\begin{columns}[T]
+\column{0.32\textwidth}
+\textcolor{mlred}{\textbf{Fraud Detection}}
+
+\small
+\begin{itemize}
+\item 99.5\% accuracy
+\item Fraud rate: 0.5\%
+\item Model: predict ``not fraud'' always
+\item Catches zero fraud
+\item Business loss: millions
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlgray}{\small Impact:}\\
+Compliance failure
+
+\column{0.32\textwidth}
+\textcolor{mlorange}{\textbf{Medical Diagnosis}}
+
+\small
+\begin{itemize}
+\item 97\% accuracy
+\item Disease rate: 3\%
+\item Misses 80\% of cases
+\item High recall needed
+\item False negatives deadly
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlgray}{\small Impact:}\\
+Patient harm
+
+\column{0.32\textwidth}
+\textcolor{mlpurple}{\textbf{Content Moderation}}
+
+\small
+\begin{itemize}
+\item 94\% accuracy
+\item Over-blocks content
+\item Low precision
+\item User frustration
+\item Platform abandonment
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlgray}{\small Impact:}\\
+User churn
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Single metrics optimized, business objectives failed}
+\end{frame}
+
+% Slide 3: The Validation Pyramid
+\begin{frame}{The Validation Pyramid: Three Levels}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\includegraphics[width=0.85\textwidth]{charts/validation_pyramid.pdf}
+
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Level 1: Single Metric}}
+
+\small
+\begin{itemize}
+\item Accuracy only
+\item Fast to calculate
+\item Easy to communicate
+\item Often misleading
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{Level 2: Multi-Metric}}
+
+\small
+\begin{itemize}
+\item Precision, Recall, F1
+\item ROC-AUC, PR-AUC
+\item Trade-off visibility
+\item Comprehensive view
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlorange}{\textbf{Level 3: Business Metrics}}
+
+\small
+\begin{itemize}
+\item Revenue impact
+\item Cost savings
+\item User satisfaction
+\item ROI alignment
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Production systems require all three levels}
+\end{frame}
+
+% Slide 4: When Accuracy Fails
+\begin{frame}{Four Scenarios Where Accuracy Fails}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlred}{\textbf{1. Class Imbalance}}
+
+\small
+\textbf{Problem:} Rare event detection\\
+\textbf{Example:} Fraud (0.1\% of transactions)\\
+\textbf{Why:} Predict majority class = high accuracy\\
+\textbf{Fix:} Use Precision-Recall curves
+
+\vspace{0.3cm}
+\textcolor{mlorange}{\textbf{2. Cost Asymmetry}}
+
+\small
+\textbf{Problem:} Error costs differ\\
+\textbf{Example:} Medical false negative $>$ false positive\\
+\textbf{Why:} Accuracy treats errors equally\\
+\textbf{Fix:} Weighted metrics, business ROI
+
+\column{0.48\textwidth}
+\textcolor{mlgreen}{\textbf{3. Threshold Sensitivity}}
+
+\small
+\textbf{Problem:} Performance varies by cutoff\\
+\textbf{Example:} 0.5 threshold arbitrary\\
+\textbf{Why:} Accuracy hides threshold impact\\
+\textbf{Fix:} ROC curves, threshold optimization
+
+\vspace{0.3cm}
+\textcolor{mlpurple}{\textbf{4. Multi-Class Confusion}}
+
+\small
+\textbf{Problem:} Some class pairs matter more\\
+\textbf{Example:} Confusing cat/dog ok, cat/car bad\\
+\textbf{Why:} Accuracy averages all errors\\
+\textbf{Fix:} Confusion matrix analysis
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Each scenario requires specific metrics beyond accuracy}
+\end{frame}
+
+% Slide 5: Confusion Matrix Deep Dive
+\begin{frame}{Confusion Matrix: Four Numbers, Infinite Insights}
+\begin{columns}[T]
+\column{0.55\textwidth}
+\includegraphics[width=0.85\textwidth]{charts/confusion_matrix_anatomy.pdf}
+
+\column{0.43\textwidth}
+\textcolor{mlblue}{\textbf{The Four Quadrants}}
+
+\small
+\textbf{True Positive (TP):}\\
+Predicted positive, actually positive\\
+Example: Detected fraud that was real
+
+\vspace{0.2cm}
+\textbf{True Negative (TN):}\\
+Predicted negative, actually negative\\
+Example: Approved legitimate transaction
+
+\vspace{0.2cm}
+\textbf{False Positive (FP):}\\
+Predicted positive, actually negative\\
+Example: Blocked legitimate transaction
+
+\vspace{0.2cm}
+\textbf{False Negative (FN):}\\
+Predicted negative, actually positive\\
+Example: Missed actual fraud
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{All metrics derive from these four numbers}
+\end{frame}
+
+% Slide 6: The Precision-Recall Spectrum
+\begin{frame}{Precision vs Recall: The Fundamental Trade-Off}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Precision}}
+
+\small
+\textbf{Definition:} TP / (TP + FP)\\
+\textbf{Question:} When I predict positive, am I right?\\
+\textbf{Focus:} Accuracy of positive predictions
+
+\vspace{0.3cm}
+\textbf{High Precision Means:}
+\begin{itemize}
+\item Few false alarms
+\item Conservative predictions
+\item High confidence when predicting positive
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlgray}{\small Use when:} False positives costly\\
+\textcolor{mlgray}{\small Example:} Email spam (don't block real email)
+
+\column{0.48\textwidth}
+\textcolor{mlorange}{\textbf{Recall (Sensitivity)}}
+
+\small
+\textbf{Definition:} TP / (TP + FN)\\
+\textbf{Question:} Of all actual positives, how many did I catch?\\
+\textbf{Focus:} Completeness of detection
+
+\vspace{0.3cm}
+\textbf{High Recall Means:}
+\begin{itemize}
+\item Catch most positive cases
+\item Aggressive predictions
+\item Few missed detections
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlgray}{\small Use when:} False negatives costly\\
+\textcolor{mlgray}{\small Example:} Disease screening (don't miss sick patients)
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{You cannot optimize both simultaneously - trade-off is fundamental}
+\end{frame}
+
+% Slide 7: Production Requirements
+\begin{frame}{What Validation Means in Production}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Technical Requirements}}
+
+\small
+\begin{itemize}
+\item Multiple metric evaluation
+\item Statistical significance testing
+\item Cross-validation for stability
+\item Threshold optimization
+\item Edge case analysis
+\item Performance monitoring
+\item A/B test readiness
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlgray}{\small Goal:}\\
+Confident deployment decisions
+
+\column{0.48\textwidth}
+\textcolor{mlgreen}{\textbf{Business Requirements}}
+
+\small
+\begin{itemize}
+\item ROI alignment
+\item Cost-benefit analysis
+\item User impact assessment
+\item Compliance verification
+\item Stakeholder communication
+\item Risk quantification
+\item Performance guarantees
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlgray}{\small Goal:}\\
+Business value delivery
+\end{columns}
+
+\vspace{0.5cm}
+\begin{center}
+\textcolor{mlorange}{\normalsize Production = Technical excellence + Business alignment}
+\end{center}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Validation bridges ML engineering and business outcomes}
+\end{frame}
+
+% Slide 8: Learning Objectives
+\begin{frame}{What You'll Master This Week}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Technical Skills}}
+
+\small
+\begin{enumerate}
+\item Calculate 10+ validation metrics
+\item Interpret confusion matrices
+\item Plot and analyze ROC/PR curves
+\item Perform cross-validation
+\item Test statistical significance
+\item Build validation pipelines
+\item Optimize decision thresholds
+\end{enumerate}
+
+\column{0.48\textwidth}
+\textcolor{mlgreen}{\textbf{Strategic Skills}}
+
+\small
+\begin{enumerate}
+\item Choose metrics for problems
+\item Compare models systematically
+\item Communicate performance
+\item Align metrics with business
+\item Make deployment decisions
+\item Design validation frameworks
+\end{enumerate}
+\end{columns}
+
+\vspace{0.5cm}
+\begin{center}
+\textcolor{mlorange}{\normalsize By the end: Confidently validate and select models for production}
+\end{center}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{From single-metric thinking to comprehensive evaluation}
+\end{frame}
+
+% Slide 9: Innovation Impact
+\begin{frame}{Innovation Impact: Validation Accelerates Iteration}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlred}{\textbf{Without Multi-Metric}}
+
+\small
+\begin{itemize}
+\item Optimize accuracy only
+\item Deploy model
+\item Production failures emerge
+\item Discover wrong metric optimized
+\item Back to development
+\item Weeks of lost time
+\item Team loses confidence
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlgray}{\small Timeline:} 4-6 weeks per iteration\\
+\textcolor{mlgray}{\small Success rate:} 40\%
+
+\column{0.48\textwidth}
+\textcolor{mlgreen}{\textbf{With Multi-Metric}}
+
+\small
+\begin{itemize}
+\item Evaluate all relevant metrics
+\item Identify trade-offs early
+\item Align with business needs
+\item Confident deployment
+\item Production performance matches validation
+\item Fast iteration cycles
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlgray}{\small Timeline:} 1-2 weeks per iteration\\
+\textcolor{mlgray}{\small Success rate:} 85\%
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Rigorous validation reduces time-to-market for startups}
+\end{frame}
+
+% Slide 10: Foundation Summary
+\begin{frame}{Foundation Summary: Multi-Metric Mindset}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Core Principles}}
+
+\small
+\begin{enumerate}
+\item Accuracy alone is dangerous
+\item All metrics have trade-offs
+\item Context determines metric choice
+\item Confusion matrix is foundation
+\item Business alignment is essential
+\end{enumerate}
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{Remember:}}\\
+No single metric tells complete story\\
+Production requires comprehensive view
+
+\column{0.48\textwidth}
+\textcolor{mlorange}{\textbf{Key Questions}}
+
+\small
+\begin{itemize}
+\item What are we optimizing for?
+\item What errors are more costly?
+\item Is data balanced or skewed?
+\item What threshold should we use?
+\item How stable is performance?
+\item Does it align with business goals?
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlpurple}{\textbf{Next Steps:}}\\
+Learn specific metrics and techniques
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Part 2: Deep dive into validation metrics and techniques}
+\end{frame}

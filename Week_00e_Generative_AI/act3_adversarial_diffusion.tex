@@ -1,0 +1,479 @@
+% Slide 12: Human introspection: Artists improve through critique
+\begin{frame}
+\frametitle{Human Learning Analogy}
+\framesubtitle{How Artists Develop Mastery}
+
+\begin{center}
+\includegraphics[width=0.9\textwidth]{charts/artist_learning_process.pdf}
+\end{center}
+
+\vspace{0.3cm}
+
+\begin{columns}[c]
+\column{0.48\textwidth}
+\textbf{Traditional Art Education:}
+\begin{itemize}
+\item Student creates artwork
+\item Teacher provides critique
+\item ``This needs more contrast''
+\item ``The proportions are off''
+\item Student improves iteratively
+\end{itemize}
+
+\column{0.48\textwidth}
+\textbf{Key Insights:}
+\begin{itemize}
+\item \textcolor{mlgreen}{\textbf{Adversarial feedback}} drives improvement
+\item Critic must be \textbf{expert-level}
+\item Student learns to \textbf{fool the critic}
+\item Process is \textbf{iterative}
+\item Both student \& critic improve
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\small \textcolor{gray}{
+This adversarial learning process inspired Generative Adversarial Networks (GANs)
+}
+\end{frame}
+
+% Slide 13: Hypothesis: Adversarial training OR iterative denoising
+\begin{frame}
+\frametitle{Two Revolutionary Approaches}
+\framesubtitle{Beyond VAEs to Better Generation}
+
+\begin{center}
+\includegraphics[width=0.9\textwidth]{charts/two_approaches.pdf}
+\end{center}
+
+\vspace{0.3cm}
+
+\begin{columns}[c]
+\column{0.48\textwidth}
+\textcolor{mlred}{\Large \textbf{Approach 1: Adversarial}}
+\begin{itemize}
+\item Two networks compete
+\item Generator vs Discriminator
+\item Minimax game theory
+\item ``Forger vs Detective''
+\item Sharp, realistic outputs
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{mlblue}{\Large \textbf{Approach 2: Diffusion}}
+\begin{itemize}
+\item Iterative denoising process
+\item Learn to reverse corruption
+\item Gradual refinement
+\item ``Sculptor revealing statue''
+\item Stable, controllable generation
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\small \textcolor{gray}{
+Both approaches address VAE limitations but through fundamentally different mechanisms
+}
+\end{frame}
+
+% Slide 14: Zero-jargon: "Forger vs detective game" (GAN)
+\begin{frame}
+\frametitle{GANs: The Forger vs Detective Game}
+\framesubtitle{Adversarial Training in Plain English}
+
+\begin{center}
+\includegraphics[width=0.9\textwidth]{charts/forger_detective_analogy.pdf}
+\end{center}
+
+\vspace{0.3cm}
+
+\begin{columns}[c]
+\column{0.48\textwidth}
+\textcolor{mlred}{\textbf{The Forger (Generator):}}
+\begin{itemize}
+\item Creates fake paintings
+\item Starts with random noise
+\item Tries to fool the detective
+\item Gets better over time
+\item Goal: perfect forgeries
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{The Detective (Discriminator):}}
+\begin{itemize}
+\item Examines paintings
+\item Decides: real or fake?
+\item Learns from mistakes
+\item Gets better at spotting fakes
+\item Goal: catch all forgeries
+\end{itemize}
+\end{columns}
+
+\vspace{0.5cm}
+\Large
+\textcolor{mlgreen}{\textbf{Result:}} Forger becomes so good that detective can't tell real from fake!
+
+\vspace{\fill}
+\small \textcolor{gray}{
+This competitive process drives both networks to excellence
+}
+\end{frame}
+
+% Slide 15: Zero-jargon: "Reverse corruption" (diffusion)
+\begin{frame}
+\frametitle{Diffusion: The Reverse Corruption Process}
+\framesubtitle{Denoising in Plain English}
+
+\begin{center}
+\includegraphics[width=0.9\textwidth]{charts/reverse_corruption_analogy.pdf}
+\end{center}
+
+\vspace{0.3cm}
+
+\begin{columns}[c]
+\column{0.48\textwidth}
+\textbf{Forward Process (Corruption):}
+\begin{itemize}
+\item Start with clean image
+\item Add noise gradually
+\item 1000 tiny steps
+\item End with pure noise
+\item Like: painting → static
+\end{itemize}
+
+\column{0.48\textwidth}
+\textbf{Reverse Process (Generation):}
+\begin{itemize}
+\item Start with pure noise
+\item Remove noise gradually
+\item 1000 tiny steps
+\item End with clean image
+\item Like: static → painting
+\end{itemize}
+\end{columns}
+
+\vspace{0.5cm}
+\Large
+\textcolor{mlgreen}{\textbf{Key Insight:}} Learn to undo corruption step by step
+
+\vspace{\fill}
+\small \textcolor{gray}{
+Like a sculptor revealing a statue by removing marble, one chip at a time
+}
+\end{frame}
+
+% Slide 16: Geometric intuition: Generator/discriminator dynamics
+\begin{frame}
+\frametitle{GAN Dynamics: Geometric View}
+\framesubtitle{Understanding the Adversarial Process}
+
+\begin{center}
+\includegraphics[width=0.9\textwidth]{charts/gan_geometric_dynamics.pdf}
+\end{center}
+
+\vspace{0.3cm}
+
+\begin{columns}[c]
+\column{0.48\textwidth}
+\textbf{Generator Learning:}
+\begin{itemize}
+\item Maps noise $z$ to data $x$
+\item Learns data manifold
+\item Pushes fake samples toward real data
+\item Adversarial loss: $-\log D(G(z))$
+\end{itemize}
+
+\column{0.48\textwidth}
+\textbf{Discriminator Learning:}
+\begin{itemize}
+\item Learns decision boundary
+\item Separates real from fake
+\item Provides gradient signal
+\item Binary loss: $-\log D(x) - \log(1-D(G(z)))$
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\small \textcolor{gray}{
+Nash equilibrium: Generator distribution = Real data distribution, Discriminator accuracy = 50\%
+}
+\end{frame}
+
+% Slide 17: Full walkthrough: GAN iteration with actual loss values
+\begin{frame}
+\frametitle{GAN Training: Step-by-Step Example}
+\framesubtitle{Real Loss Values from MNIST Training}
+
+\begin{center}
+\includegraphics[width=0.9\textwidth]{charts/gan_training_walkthrough.pdf}
+\end{center}
+
+\vspace{0.3cm}
+
+\begin{columns}[c]
+\column{0.48\textwidth}
+\textbf{Epoch 1 (Early Training):}
+\begin{itemize}
+\item D\_loss: 1.386 (random guessing)
+\item G\_loss: 0.693 (can't fool D)
+\item D\_accuracy: 50.2\%
+\item Generated images: pure noise
+\end{itemize}
+
+\column{0.48\textwidth}
+\textbf{Epoch 100 (Converged):}
+\begin{itemize}
+\item D\_loss: 0.695 (balanced)
+\item G\_loss: 0.698 (balanced)
+\item D\_accuracy: 51.3\%
+\item Generated images: realistic digits
+\end{itemize}
+\end{columns}
+
+\vspace{0.3cm}
+\textbf{Training Dynamics:} D\_loss + G\_loss $\approx$ 1.4 indicates healthy competition
+
+\vspace{\fill}
+\small \textcolor{gray}{
+Sweet spot: Both networks are equally strong, neither dominates
+}
+\end{frame}
+
+% Slide 18: Diffusion forward/reverse process
+\begin{frame}
+\frametitle{Diffusion Mathematical Framework}
+\framesubtitle{Forward and Reverse Processes}
+
+\begin{center}
+\includegraphics[width=0.9\textwidth]{charts/diffusion_mathematics.pdf}
+\end{center}
+
+\vspace{0.3cm}
+
+\begin{columns}[c]
+\column{0.48\textwidth}
+\textbf{Forward Process (Fixed):}
+\begin{align}
+q(x_t|x_{t-1}) &= \mathcal{N}(x_t; \sqrt{1-\beta_t}x_{t-1}, \beta_t I) \\
+x_t &= \sqrt{1-\beta_t}x_{t-1} + \sqrt{\beta_t}\epsilon
+\end{align}
+$\beta_t$: noise schedule (0.0001 → 0.02)
+
+\column{0.48\textwidth}
+\textbf{Reverse Process (Learned):}
+\begin{align}
+p_\theta(x_{t-1}|x_t) &= \mathcal{N}(x_{t-1}; \mu_\theta(x_t,t), \Sigma_\theta(x_t,t)) \\
+\mu_\theta(x_t,t) &= \frac{1}{\sqrt{\alpha_t}}(x_t - \frac{\beta_t}{\sqrt{1-\bar{\alpha}_t}}\epsilon_\theta(x_t,t))
+\end{align}
+Neural network $\epsilon_\theta$ predicts noise
+\end{columns}
+
+\vspace{\fill}
+\small \textcolor{gray}{
+Key insight: If you can predict the noise, you can reverse the corruption process
+}
+\end{frame}
+
+% Slide 19: Visualization: Latent space interpolation
+\begin{frame}
+\frametitle{Latent Space Interpolation}
+\framesubtitle{Smooth Transitions in Generated Content}
+
+\begin{center}
+\includegraphics[width=0.9\textwidth]{charts/latent_interpolation.pdf}
+\end{center}
+
+\vspace{0.3cm}
+
+\begin{columns}[c]
+\column{0.48\textwidth}
+\textbf{GAN Interpolation:}
+\begin{itemize}
+\item Sample $z_1, z_2 \sim \mathcal{N}(0,I)$
+\item Linear interpolation: $z_t = (1-t)z_1 + tz_2$
+\item Generate: $x_t = G(z_t)$
+\item Result: smooth morphing
+\end{itemize}
+
+\column{0.48\textwidth}
+\textbf{Applications:}
+\begin{itemize}
+\item Style transfer
+\item Face morphing
+\item Character animation
+\item Drug discovery (molecular interpolation)
+\item Creative AI tools
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\small \textcolor{gray}{
+Well-trained generative models create semantically meaningful latent spaces
+}
+\end{frame}
+
+% Slide 20: Visualization: Denoising steps
+\begin{frame}
+\frametitle{Diffusion Denoising Visualization}
+\framesubtitle{From Noise to Image in 1000 Steps}
+
+\begin{center}
+\includegraphics[width=0.9\textwidth]{charts/denoising_steps.pdf}
+\end{center}
+
+\vspace{0.3cm}
+
+\begin{columns}[c]
+\column{0.48\textwidth}
+\textbf{Key Time Steps:}
+\begin{itemize}
+\item T=1000: Pure noise
+\item T=750: Rough shapes emerge
+\item T=500: Clear structure
+\item T=250: Fine details
+\item T=0: High-quality image
+\end{itemize}
+
+\column{0.48\textwidth}
+\textbf{Process Control:}
+\begin{itemize}
+\item Guidance scale: creativity vs adherence
+\item Step count: quality vs speed
+\item Noise schedule: $\beta_t$ profile
+\item Classifier guidance: conditional generation
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\small \textcolor{gray}{
+Each step removes a small amount of noise, gradually revealing the final image
+}
+\end{frame}
+
+% Slide 21: Why it works: Adversarial pressure forces realism
+\begin{frame}
+\frametitle{Why Adversarial Training Works}
+\framesubtitle{The Mathematical Guarantee}
+
+\begin{center}
+\includegraphics[width=0.9\textwidth]{charts/adversarial_theory.pdf}
+\end{center}
+
+\vspace{0.3cm}
+
+\begin{columns}[c]
+\column{0.48\textwidth}
+\textbf{Theoretical Foundation:}
+\begin{itemize}
+\item Minimax objective ensures convergence
+\item Optimal discriminator: $D^*(x) = \frac{p_{data}(x)}{p_{data}(x) + p_g(x)}$
+\item At equilibrium: $p_g = p_{data}$
+\item Jensen-Shannon divergence minimized
+\end{itemize}
+
+\column{0.48\textwidth}
+\textbf{Practical Benefits:}
+\begin{itemize}
+\item Sharp, realistic images
+\item No blurring effect
+\item Captures fine details
+\item Mode coverage (with proper training)
+\item Implicit density modeling
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\small \textcolor{gray}{
+Adversarial pressure prevents the averaging problem that plagues other approaches
+}
+\end{frame}
+
+% Slide 22: Experimental validation: Image quality metrics over time
+\begin{frame}
+\frametitle{Experimental Validation}
+\framesubtitle{Quality Metrics Throughout Training}
+
+\begin{center}
+\includegraphics[width=0.9\textwidth]{charts/quality_metrics_over_time.pdf}
+\end{center}
+
+\vspace{0.3cm}
+
+\begin{columns}[c]
+\column{0.48\textwidth}
+\textbf{GAN Training Progress:}
+\begin{itemize}
+\item Epoch 0: IS=1.2, FID=450
+\item Epoch 25: IS=2.8, FID=180
+\item Epoch 50: IS=7.2, FID=45
+\item Epoch 100: IS=8.9, FID=12.3
+\item Convergence: IS=9.1, FID=8.7
+\end{itemize}
+
+\column{0.48\textwidth}
+\textbf{Diffusion Model Progress:}
+\begin{itemize}
+\item Step 0: Pure noise
+\item Step 100k: Basic shapes (FID=200)
+\item Step 500k: Clear structure (FID=50)
+\item Step 1M: Fine details (FID=15)
+\item Final: Photorealistic (FID=3.2)
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\small \textcolor{gray}{
+Both approaches show dramatic improvement, but diffusion models achieve superior final quality
+}
+\end{frame}
+
+% Slide 23: Implementation: Stable Diffusion API code
+\begin{frame}[fragile]
+\frametitle{Implementation: Stable Diffusion API}
+\framesubtitle{Production-Ready Generative AI}
+
+\begin{center}
+\includegraphics[width=0.9\textwidth]{charts/stable_diffusion_api.pdf}
+\end{center}
+
+\vspace{0.3cm}
+
+\begin{columns}[c]
+\column{0.48\textwidth}
+\small
+\textbf{Basic Usage:}
+\begin{verbatim}
+import requests
+
+url = "https://api.stability.ai/v1/generation/stable-diffusion-xl-1024-v1-0/text-to-image"
+
+response = requests.post(url,
+    headers={"Authorization": f"Bearer {api_key}"},
+    json={
+        "text_prompts": [{"text": "A futuristic city"}],
+        "cfg_scale": 7,
+        "steps": 30,
+        "width": 1024,
+        "height": 1024
+    })
+\end{verbatim}
+
+\column{0.48\textwidth}
+\textbf{Advanced Parameters:}
+\begin{itemize}
+\item \texttt{cfg\_scale}: Prompt adherence (1-20)
+\item \texttt{steps}: Quality vs speed (10-150)
+\item \texttt{seed}: Reproducible results
+\item \texttt{style\_preset}: Artistic styles
+\item \texttt{negative\_prompt}: Avoid unwanted elements
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Cost:} \$0.004 per image (1024x1024)
+\end{columns}
+
+\vspace{\fill}
+\small \textcolor{gray}{
+Production diffusion models available via API: DALL-E 3, Midjourney, Stable Diffusion
+}
+\end{frame}

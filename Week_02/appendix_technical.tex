@@ -1,0 +1,232 @@
+% Appendix: Technical Details
+\section*{Appendix: Mathematical Foundations}
+
+% Appendix divider
+\begin{frame}[plain]
+\vfill
+\centering
+\begin{beamercolorbox}[sep=16pt,center]{title}
+\usebeamerfont{title}\Large Appendix: Technical Details\par
+\vspace{0.5em}
+\large Mathematical Foundations \& Advanced Topics\par
+\end{beamercolorbox}
+\vfill
+\end{frame}
+
+% K-means Objective Function
+\begin{frame}{Mathematical Formulation: K-Means Objective}
+\Large\textbf{Optimization Problem}
+\normalsize
+\vspace{0.5em}
+
+K-means clustering solves the following optimization problem:
+
+\begin{equation}
+\min_{C_1,...,C_k} \sum_{i=1}^{k} \sum_{x \in C_i} ||x - \mu_i||^2
+\end{equation}
+
+where:
+\begin{itemize}
+\item $C_i$ = cluster $i$
+\item $\mu_i$ = centroid of cluster $i$
+\item $||\cdot||$ = Euclidean distance
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Centroid Update Rule:}
+\begin{equation}
+\mu_i = \frac{1}{|C_i|} \sum_{x \in C_i} x
+\end{equation}
+
+\textbf{Assignment Rule:}
+\begin{equation}
+C_i = \{x_p : ||x_p - \mu_i||^2 \leq ||x_p - \mu_j||^2 \text{ for all } j \in \{1,...,k\}\}
+\end{equation}
+
+\vspace{0.5em}
+\textcolor{mlblue}{\textbf{Convergence:}} Guaranteed to local minimum (not global)
+\end{frame}
+
+% Silhouette Coefficient
+\begin{frame}{Silhouette Coefficient: Mathematical Definition}
+\Large\textbf{Cluster Validation Metric}
+\normalsize
+\vspace{0.5em}
+
+For a data point $i$ in cluster $C_I$:
+
+\begin{equation}
+s(i) = \frac{b(i) - a(i)}{\max\{a(i), b(i)\}}
+\end{equation}
+
+where:
+\begin{itemize}
+\item $a(i)$ = average distance from $i$ to other points in same cluster
+\begin{equation}
+a(i) = \frac{1}{|C_I| - 1} \sum_{j \in C_I, j \neq i} d(i,j)
+\end{equation}
+
+\item $b(i)$ = minimum average distance from $i$ to points in other clusters
+\begin{equation}
+b(i) = \min_{J \neq I} \frac{1}{|C_J|} \sum_{j \in C_J} d(i,j)
+\end{equation}
+\end{itemize}
+
+\textbf{Interpretation:}
+\begin{itemize}
+\item $s(i) \approx 1$ → well clustered
+\item $s(i) \approx 0$ → on border between clusters
+\item $s(i) < 0$ → misclassified
+\end{itemize}
+
+\textbf{Overall score:} $\bar{s} = \frac{1}{n}\sum_{i=1}^{n} s(i)$
+\end{frame}
+
+% DBSCAN Algorithm
+\begin{frame}{DBSCAN: Formal Algorithm}
+\Large\textbf{Density-Based Spatial Clustering}
+\normalsize
+\vspace{0.5em}
+
+\textbf{Definitions:}
+\begin{itemize}
+\item $\varepsilon$-neighborhood: $N_{\varepsilon}(p) = \{q \in D : dist(p,q) \leq \varepsilon\}$
+\item Core point: $|N_{\varepsilon}(p)| \geq MinPts$
+\item Directly density-reachable: $q \in N_{\varepsilon}(p)$ and $p$ is core
+\item Density-reachable: Chain of directly density-reachable points
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Algorithm:}
+\begin{enumerate}
+\item \textbf{for each} point $p \in D$:
+\item \quad \textbf{if} $p$ is not visited:
+\item \quad\quad mark $p$ as visited
+\item \quad\quad $N = getNeighbors(p, \varepsilon)$
+\item \quad\quad \textbf{if} $|N| < MinPts$:
+\item \quad\quad\quad mark $p$ as NOISE
+\item \quad\quad \textbf{else}:
+\item \quad\quad\quad $C = $ new cluster
+\item \quad\quad\quad expandCluster($p$, $N$, $C$, $\varepsilon$, $MinPts$)
+\end{enumerate}
+
+\textbf{Complexity:} $O(n \log n)$ with spatial index, $O(n^2)$ without
+\end{frame}
+
+% Gaussian Mixture Models
+\begin{frame}{Gaussian Mixture Models: EM Algorithm}
+\Large\textbf{Probabilistic Clustering}
+\normalsize
+\vspace{0.5em}
+
+\textbf{Model:}
+\begin{equation}
+p(x) = \sum_{k=1}^{K} \pi_k \mathcal{N}(x | \mu_k, \Sigma_k)
+\end{equation}
+
+where $\pi_k$ = mixing coefficients, $\sum_k \pi_k = 1$
+
+\vspace{0.5em}
+\textbf{Expectation-Maximization Algorithm:}
+
+\textcolor{mlblue}{\textbf{E-step:}} Calculate responsibilities
+\begin{equation}
+\gamma_{ik} = \frac{\pi_k \mathcal{N}(x_i | \mu_k, \Sigma_k)}{\sum_{j=1}^{K} \pi_j \mathcal{N}(x_i | \mu_j, \Sigma_j)}
+\end{equation}
+
+\textcolor{mlorange}{\textbf{M-step:}} Update parameters
+\begin{align}
+\mu_k^{new} &= \frac{\sum_{i=1}^{N} \gamma_{ik} x_i}{\sum_{i=1}^{N} \gamma_{ik}} \\
+\Sigma_k^{new} &= \frac{\sum_{i=1}^{N} \gamma_{ik} (x_i - \mu_k^{new})(x_i - \mu_k^{new})^T}{\sum_{i=1}^{N} \gamma_{ik}} \\
+\pi_k^{new} &= \frac{1}{N} \sum_{i=1}^{N} \gamma_{ik}
+\end{align}
+\end{frame}
+
+% Complexity Analysis
+\begin{frame}{Computational Complexity Analysis}
+\normalsize\textbf{Algorithm Comparison}
+
+\begin{table}
+\centering
+\scriptsize
+\begin{tabular}{lccc}
+\toprule
+\textbf{Algorithm} & \textbf{Time} & \textbf{Space} & \textbf{Scale} \\
+\midrule
+K-Means & $O(nkdi)$ & $O((n+k)d)$ & Excel. \\
+Mini-batch & $O(kdi)$ & $O(kd)$ & V.Good \\
+\midrule
+DBSCAN (tree) & $O(n \log n)$ & $O(n)$ & Good \\
+DBSCAN (no idx) & $O(n^2)$ & $O(n)$ & Poor \\
+\midrule
+Hierarchical & $O(n^2)$ & $O(n^2)$ & Poor \\
+\midrule
+GMM (full) & $O(nkd^2i)$ & $O(kd^2)$ & Mod. \\
+GMM (diag) & $O(nkdi)$ & $O(kd)$ & Good \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\vspace{0.2em}
+\tiny
+\textbf{Legend:} $n$ = points, $k$ = clusters, $d$ = dimensions, $i$ = iterations
+
+\vspace{0.2em}
+\begin{tcolorbox}[colback=mlyellow!20, colframe=mlorange!50]
+\centering
+\small\textbf{Rule:} For $n > 100K$, use K-means or mini-batch
+\end{tcolorbox}
+\end{frame}
+
+% Additional Resources
+\begin{frame}{Additional Resources \& Further Reading}
+\Large\textbf{Deepen Your Knowledge}
+\normalsize
+\vspace{0.5em}
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Essential Papers:}}
+\begin{itemize}
+\item MacQueen (1967) - K-means origin
+\item Ester et al. (1996) - DBSCAN
+\item Rousseeuw (1987) - Silhouette
+\item Dempster et al. (1977) - EM/GMM
+\end{itemize}
+
+\vspace{0.5em}
+\textcolor{mlgreen}{\textbf{Python Libraries:}}
+\begin{itemize}
+\item scikit-learn - All algorithms
+\item HDBSCAN - Advanced density
+\item pyclustering - Performance
+\item yellowbrick - Visualization
+\end{itemize}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\textcolor{mlorange}{\textbf{Online Resources:}}
+\begin{itemize}
+\item Stanford CS229 Notes
+\item Andrew Ng's Coursera
+\item ESL Book (Chapter 14)
+\item sklearn documentation
+\end{itemize}
+
+\vspace{0.5em}
+\textcolor{mlpurple}{\textbf{Practice Datasets:}}
+\begin{itemize}
+\item UCI ML Repository
+\item Kaggle Clustering Challenges
+\item sklearn.datasets generators
+\item R clustering datasets
+\end{itemize}
+\end{column}
+\end{columns}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mlgreen!10, colframe=mlgreen!50]
+\centering
+\textbf{Next Week:} NLP for Emotional Context - Text as Data!
+\end{tcolorbox}
+\end{frame}

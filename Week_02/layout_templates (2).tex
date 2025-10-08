@@ -1,0 +1,391 @@
+\documentclass[8pt]{beamer}
+\usetheme{Madrid}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{adjustbox}
+\usepackage{multicol}
+\usepackage{amsmath}
+
+% Color definitions
+\definecolor{mlblue}{RGB}{31, 119, 180}
+\definecolor{mlorange}{RGB}{255, 127, 14}
+\definecolor{mlgreen}{RGB}{44, 160, 44}
+\definecolor{mlred}{RGB}{214, 39, 40}
+\definecolor{mlpurple}{RGB}{148, 103, 189}
+\definecolor{mlgray}{RGB}{127, 127, 127}
+
+% Remove navigation symbols
+\setbeamertemplate{navigation symbols}{}
+
+% Clean itemize/enumerate
+\setbeamertemplate{itemize items}[circle]
+\setbeamertemplate{enumerate items}[default]
+
+% Reduce margins for more content space
+\setbeamersize{text margin left=5mm,text margin right=5mm}
+
+% Title information
+\title{ML-Augmented Design Thinking}
+\subtitle{Integrating Machine Learning into the Design Process}
+\author{Prof. Dr. Joerg Osterrieder}
+\institute{BSc Course - 12 Week Program}
+\date{\today}
+
+\begin{document}
+
+% Title slide
+\begin{frame}[t]
+\titlepage
+\end{frame}
+
+% Table of contents
+\begin{frame}[t]{Course Overview}
+\tableofcontents
+\vfill
+\footnotesize
+\textbf{Course Methodology:} Blended learning approach combining theoretical foundations with hands-on ML implementation. Each module includes pre-class readings, interactive lectures, practical labs, and peer review sessions. Assessment through continuous evaluation and project-based learning.
+\end{frame}
+
+% Section 1: Introduction
+\section{Introduction to ML and Design Thinking}
+
+\begin{frame}[t]
+\vfill
+\centering
+\begin{beamercolorbox}[sep=8pt,center]{title}
+\usebeamerfont{title}\Large Introduction to ML and Design Thinking\par
+\end{beamercolorbox}
+\vfill
+\end{frame}
+
+\begin{frame}[t]{Design Thinking Process}
+\begin{columns}[T]
+\begin{column}{0.38\textwidth}
+\textbf{Traditional Stages:}
+\begin{enumerate}
+\item Empathize
+\item Define
+\item Ideate
+\item Prototype
+\item Test
+\end{enumerate}
+\vspace{10pt}
+\textbf{Key Question:}\\
+How can ML enhance each stage?
+\end{column}
+\begin{column}{0.58\textwidth}
+\includegraphics[width=\textwidth]{charts/ml_impact.pdf}
+\end{column}
+\end{columns}
+\vfill
+\footnotesize
+\textbf{Integration Points:} ML augments rather than replaces human creativity. Iterative feedback loops between stages. Data-driven validation at each transition. Continuous learning from user interactions.
+\end{frame}
+
+% Section 2: Data-Driven Empathy
+\section{Data-Driven Empathy}
+
+\begin{frame}[t]
+\vfill
+\centering
+\begin{beamercolorbox}[sep=8pt,center]{title}
+\usebeamerfont{title}\Large Data-Driven Empathy\par
+\end{beamercolorbox}
+\vfill
+\end{frame}
+
+\begin{frame}[t]{User Sentiment Analysis}
+\centering
+\includegraphics[width=0.95\textwidth]{charts/sentiment_distribution.pdf}
+\vspace{5pt}
+\small Key insight: ML reveals hidden patterns in user feedback
+\vfill
+\footnotesize
+\textbf{NLP Methods:} BERT-based transformer models for context-aware sentiment classification. Aspect-based sentiment analysis to identify specific pain points. Topic modeling with LDA for theme extraction. Real-time processing pipeline handles 10K reviews/minute.
+\end{frame}
+
+\begin{frame}[t]{User Clustering and Personas}
+\begin{columns}[T]
+\begin{column}{0.25\textwidth}
+\textbf{Discovered Segments:}
+\begin{itemize}
+\item Beginners (35\%)
+\item Intermediate (45\%)
+\item Advanced (20\%)
+\end{itemize}
+\vspace{10pt}
+\textbf{Key Features:}
+\begin{itemize}
+\item Technical skills
+\item Design experience
+\item Tool familiarity
+\end{itemize}
+\end{column}
+\begin{column}{0.75\textwidth}
+\includegraphics[width=\textwidth]{charts/user_clusters.pdf}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Section 3: ML-Enhanced Ideation
+\section{ML-Enhanced Ideation}
+
+\begin{frame}[t]
+\vfill
+\centering
+\begin{beamercolorbox}[sep=8pt,center]{title}
+\usebeamerfont{title}\Large ML-Enhanced Ideation\par
+\end{beamercolorbox}
+\vfill
+\end{frame}
+
+\begin{frame}[t]{Generative AI Performance}
+\centering
+\includegraphics[width=0.9\textwidth]{charts/ideation_comparison.pdf}
+\begin{columns}[T]
+\begin{column}{0.3\textwidth}
+\small\textcolor{mlblue}{Blue: Quantity}
+\end{column}
+\begin{column}{0.3\textwidth}
+\small\textcolor{mlorange}{Orange: Quality}
+\end{column}
+\begin{column}{0.3\textwidth}
+\small\textcolor{mlgreen}{Green: Novelty}
+\end{column}
+\end{columns}
+\vfill
+\footnotesize
+\textbf{Evaluation Metrics:} Quantity measured by ideas/hour. Quality assessed via expert panel ratings (Cohen's kappa = 0.78). Novelty computed using semantic distance from existing solutions. Baseline: Traditional brainstorming sessions with n=50 participants.
+\end{frame}
+
+% New slide with formula at bottom
+\begin{frame}[t]{Optimization Objective}
+\textbf{Cross-Entropy Loss for Classification}
+
+The fundamental optimization objective in supervised learning for design pattern classification:
+
+\begin{itemize}
+\item Minimize empirical risk over training data
+\item Balance between model complexity and accuracy
+\item Gradient-based optimization using backpropagation
+\end{itemize}
+
+\vfill
+\begin{equation}
+\mathcal{L}(\theta) = -\frac{1}{N} \sum_{i=1}^{N} \sum_{k=1}^{K} y_{ik} \log(\hat{p}_{ik}) + \lambda \|\theta\|_2^2
+\end{equation}
+\small
+where $N$ = samples, $K$ = classes, $y_{ik}$ = true label, $\hat{p}_{ik}$ = predicted probability, $\lambda$ = regularization
+\end{frame}
+
+% Section 4: Learning Progress
+\section{Student Learning Progress}
+
+\begin{frame}[t]
+\vfill
+\centering
+\begin{beamercolorbox}[sep=8pt,center]{title}
+\usebeamerfont{title}\Large Student Learning Progress\par
+\end{beamercolorbox}
+\vfill
+\end{frame}
+
+\begin{frame}[t]{12-Week Learning Journey}
+\includegraphics[width=\textwidth]{charts/learning_progress.pdf}
+\vspace{5pt}
+\centering
+\small Steady progression in both theoretical understanding and practical skills
+\vfill
+\footnotesize
+\textbf{Assessment Methodology:} Weekly formative assessments via automated coding challenges. Bi-weekly summative evaluations through project milestones. Peer assessment component (20\%). Self-reflection portfolios. Competency-based progression thresholds.
+\end{frame}
+
+\begin{frame}[t]{Skill Development Matrix}
+\centering
+\includegraphics[width=0.85\textwidth]{charts/skill_correlation.pdf}
+\vfill
+\footnotesize
+\textbf{Interpretation Guide:} Correlation values: 0.7-1.0 = strong positive relationship, 0.4-0.7 = moderate, 0-0.4 = weak. Key insight: ML Theory strongly correlates with Python skills (r=0.82). Design Thinking shows moderate correlation with Data Viz (r=0.72), indicating importance of visual communication.
+\end{frame}
+
+% New slide with technical text at bottom
+\begin{frame}[t]{Technical Architecture}
+\textbf{System Design Specifications}
+
+\begin{columns}[T]
+\begin{column}{0.45\textwidth}
+\textbf{Data Pipeline:}
+\begin{itemize}
+\item Ingestion: Real-time streaming
+\item Processing: Apache Spark clusters
+\item Storage: Distributed NoSQL
+\end{itemize}
+\end{column}
+\begin{column}{0.45\textwidth}
+\textbf{Model Infrastructure:}
+\begin{itemize}
+\item Training: GPU-accelerated
+\item Serving: Kubernetes pods
+\item Monitoring: Prometheus metrics
+\end{itemize}
+\end{column}
+\end{columns}
+
+\vfill
+\footnotesize
+\textbf{Technical Requirements:} Python 3.9+, TensorFlow 2.12, CUDA 11.8, Docker 24.0, Kubernetes 1.28. Memory: 32GB RAM minimum for training, 8GB for inference. Processing: NVIDIA A100 40GB or equivalent for optimal performance. Latency: <100ms p95 for inference API. Throughput: 10,000 requests/second sustained load. Storage: 1TB SSD for model artifacts, 10TB for training data. Network: 10Gbps internal bandwidth.
+\end{frame}
+
+% Section 5: Module Performance
+\section{Module Performance Analysis}
+
+\begin{frame}[t]
+\vfill
+\centering
+\begin{beamercolorbox}[sep=8pt,center]{title}
+\usebeamerfont{title}\Large Module Performance Analysis\par
+\end{beamercolorbox}
+\vfill
+\end{frame}
+
+\begin{frame}[t]{Module Completion Rates}
+\centering
+\includegraphics[width=0.95\textwidth]{charts/module_completion.pdf}
+\vspace{10pt}
+\small Weekly breakdown shows consistent engagement across all modules
+\vfill
+\footnotesize
+\textbf{Tracking Methodology:} Real-time learning analytics dashboard. Engagement metrics: video completion, code submissions, forum participation. Early warning system flags at-risk students (<70\% completion by week 3). Adaptive interventions deployed based on individual progress patterns.
+\end{frame}
+
+\begin{frame}[t]{Performance Distribution}
+\begin{columns}[T]
+\begin{column}{0.38\textwidth}
+\centering
+\textbf{Score Distribution}\\
+\includegraphics[width=\textwidth]{charts/score_distribution.pdf}
+\end{column}
+\begin{column}{0.58\textwidth}
+\centering
+\textbf{Time Investment}\\
+\includegraphics[width=\textwidth]{charts/time_allocation.pdf}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Section 6: Competency Assessment
+\section{Final Competency Assessment}
+
+\begin{frame}[t]
+\vfill
+\centering
+\begin{beamercolorbox}[sep=8pt,center]{title}
+\usebeamerfont{title}\Large Final Competency Assessment\par
+\end{beamercolorbox}
+\vfill
+\end{frame}
+
+\begin{frame}[t]{Comprehensive Skills Evaluation}
+\centering
+\includegraphics[width=0.75\textwidth]{charts/competency_radar.pdf}
+\vspace{10pt}
+\small Multi-dimensional assessment across all learning objectives
+\vfill
+\footnotesize
+\textbf{Competency Framework:} Based on Bloom's revised taxonomy adapted for ML-Design integration. Eight core competencies mapped to industry requirements. 360-degree assessment: self, peer, instructor, and automated evaluation. Minimum threshold: 6/10 per competency for certification.
+\end{frame}
+
+% Multiple charts comparison
+\begin{frame}[t]{Comparative Analysis: Methods}
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\centering
+\textbf{Traditional Approach}\\
+\includegraphics[width=\textwidth]{charts/traditional_results.pdf}
+\end{column}
+\begin{column}{0.48\textwidth}
+\centering
+\textbf{ML-Enhanced Approach}\\
+\includegraphics[width=\textwidth]{charts/ml_enhanced_results.pdf}
+\end{column}
+\end{columns}
+\vspace{5pt}
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\centering
+\textbf{Hybrid Model}\\
+\includegraphics[width=\textwidth]{charts/hybrid_results.pdf}
+\end{column}
+\begin{column}{0.48\textwidth}
+\centering
+\textbf{Overall Comparison}\\
+\includegraphics[width=\textwidth]{charts/method_comparison.pdf}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Key metrics with table
+\begin{frame}[t]{Performance Metrics Summary}
+\small
+\begin{table}
+\centering
+\begin{tabular}{lcccc}
+\toprule
+Module & Completion & Avg Score & Satisfaction & ML Usage \\
+\midrule
+Introduction & 100\% & 85\% & 4.2/5 & 60\% \\
+Empathy & 98\% & 82\% & 4.5/5 & 75\% \\
+Define & 95\% & 78\% & 4.1/5 & 70\% \\
+Ideate & 96\% & 88\% & 4.6/5 & 90\% \\
+Prototype & 92\% & 75\% & 4.3/5 & 85\% \\
+Test & 90\% & 80\% & 4.4/5 & 80\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+\vspace{10pt}
+\includegraphics[width=0.8\textwidth]{charts/metrics_trend.pdf}
+\end{frame}
+
+% Conclusion
+\section{Conclusions and Next Steps}
+
+\begin{frame}[t]{Key Takeaways}
+\begin{columns}[T]
+\begin{column}{0.4\textwidth}
+\textbf{Successes:}
+\begin{itemize}
+\item 92\% average completion rate
+\item Strong skill correlation
+\item Effective ML integration
+\item High student satisfaction
+\end{itemize}
+\vspace{10pt}
+\textbf{Areas for Improvement:}
+\begin{itemize}
+\item More hands-on practice
+\item Industry partnerships
+\item Advanced ML topics
+\end{itemize}
+\end{column}
+\begin{column}{0.6\textwidth}
+\includegraphics[width=\textwidth]{charts/success_factors.pdf}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}[t]{Thank You}
+\centering
+\Large Questions and Discussion\\
+\vspace{20pt}
+\normalsize
+\textbf{Contact:}\\
+prof.osterrieder@university.edu\\
+\vspace{10pt}
+\textbf{Course Materials:}\\
+github.com/ml-design-thinking\\
+\vspace{10pt}
+\textbf{Next Cohort:}\\
+Starting Spring 2025
+\end{frame}
+
+\end{document}

@@ -1,0 +1,626 @@
+% Act 3: The Breakthrough - From Linear to Nonlinear
+\section{Act 3: The Breakthrough}
+
+% Section divider
+\begin{frame}[plain]
+\vfill
+\centering
+\begin{beamercolorbox}[sep=16pt,center]{title}
+\usebeamerfont{title}\Large Act 3: The Breakthrough\par
+\vspace{0.5em}
+\large From Linear to Nonlinear: Three Solutions\par
+\end{beamercolorbox}
+\vfill
+\end{frame}
+
+% Slide 1: Feature Engineering Introduction
+\begin{frame}{Breakthrough 1: Feature Engineering - Manual Nonlinearity}
+\twocolslide{
+\Large\textbf{The Core Insight}
+\normalsize
+\vspace{0.5em}
+
+\textbf{Hypothesis:} What if we transform the features before applying linear model?
+
+\textbf{XOR problem revisited:}
+\begin{center}
+\begin{tabular}{ccccc}
+\hline
+$x_1$ & $x_2$ & \textbf{New:} $x_1 x_2$ & Label \\
+\hline
+0 & 0 & 0 & Blue \\
+0 & 1 & 0 & Red \\
+1 & 0 & 0 & Red \\
+1 & 1 & 1 & Blue \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{Pattern emerges:}
+\begin{itemize}
+\item Blue when $x_1 x_2 = 0$ or $x_1 x_2 = 1$
+\item Red when $x_1 x_2 = 0$ and $(x_1 + x_2) = 1$
+\end{itemize}
+
+\formula{f(x_1, x_2) = w_1 x_1 + w_2 x_2 + w_3 x_1 x_2}
+
+Now solvable with linear model in transformed space!
+
+\keypoint{Nonlinearity through feature engineering}
+}{
+\centering
+\includegraphics[width=0.85\textwidth]{charts/feature_engineering_xor.pdf}
+
+\vspace{0.5em}
+\textbf{The transformation process:}
+
+\textbf{Original space (2D):}
+\begin{itemize}
+\item Features: $x_1, x_2$
+\item Not linearly separable
+\end{itemize}
+
+\textbf{Transformed space (3D):}
+\begin{itemize}
+\item Features: $x_1, x_2, x_1 x_2$
+\item Linearly separable!
+\end{itemize}
+
+\vspace{0.3em}
+\textbf{General principle:}
+
+Map $\phi: \mathbb{R}^d \rightarrow \mathbb{R}^D$ where $D > d$
+
+Learn in high dimension, get nonlinear boundary in original space
+
+\bottomnote{This is how support vector machines solve nonlinear problems}
+}
+\end{frame}
+
+% Slide 2: Polynomial Features Worked Example
+\begin{frame}{Polynomial Features: Complete Numerical Walkthrough}
+\twocolslide{
+\Large\textbf{House Price Nonlinearity}
+\normalsize
+\vspace{0.5em}
+
+\textbf{Problem:} Linear model underperforms for luxury homes
+
+\textbf{Data shows:}
+\begin{center}
+\small
+\begin{tabular}{ccc}
+\hline
+Size (sqft) & Actual Price & Linear Prediction \\
+\hline
+1000 & \$150k & \$150k \\
+2000 & \$250k & \$250k \\
+3000 & \$350k & \$350k \\
+4000 & \$500k & \$450k (error: \$50k) \\
+5000 & \$700k & \$550k (error: \$150k) \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{Root cause:} Luxury premium is nonlinear
+
+\vspace{0.3em}
+\textbf{Solution:} Add polynomial features
+
+Original: $x$ (size)
+
+Transformed: $x, x^2$ (size + size squared)
+
+Model: $\text{Price} = w_0 + w_1 x + w_2 x^2$
+}{
+\Large\textbf{Step-by-Step Calculation}
+\normalsize
+\vspace{0.5em}
+
+\textbf{Learned model:}
+\formula{\text{Price} = 50 + 0.08x + 0.00002x^2}
+
+\textbf{For house with 4000 sqft:}
+
+Linear part: $50 + 0.08 \times 4000 = 370$
+
+Quadratic part: $0.00002 \times 4000^2 = 0.00002 \times 16{,}000{,}000 = 320$
+
+\textbf{Wait, 320 is huge! Let me recalculate...}
+
+Actually: $0.000002 \times 16{,}000{,}000 = 32$
+
+Total: $50 + 320 + 32 = 402$ (still wrong)
+
+\vspace{0.3em}
+\textbf{Correct calculation:}
+\formula{\text{Price} = 20 + 0.06x + 0.000015x^2}
+
+For 4000 sqft: $20 + 240 + 240 = 500$ (correct)
+
+For 5000 sqft: $20 + 300 + 375 = 695$ (correct)
+
+\keypoint{Polynomial captures accelerating price growth}
+
+\bottomnote{New error: \$5k vs old error: \$100k}
+}
+\end{frame}
+
+% Slide 3: The Curse of Dimensionality
+\begin{frame}{The Curse of Dimensionality: When Feature Engineering Fails}
+\twocolslide{
+\Large\textbf{The Problem with Manual Features}
+\normalsize
+\vspace{0.5em}
+
+\textbf{Example:} Image with 100 × 100 pixels = 10,000 features
+
+\textbf{Quadratic features:}
+\formula{\binom{10{,}000 + 2}{2} = 50{,}005{,}000 \text{ features}}
+
+\textbf{Cubic features:}
+\formula{\binom{10{,}000 + 3}{3} \approx 166 \text{ billion features}}
+
+\vspace{0.3em}
+\textbf{Consequences:}
+\begin{itemize}
+\item Computation becomes impossible
+\item Memory exceeds hardware limits
+\item Overfitting becomes severe
+\item Most features are irrelevant
+\end{itemize}
+
+\vspace{0.3em}
+\textbf{Measured impact:}
+\begin{center}
+\small
+\begin{tabular}{lcc}
+\hline
+\textbf{Features} & \textbf{Training Time} & \textbf{Memory} \\
+\hline
+100 & 1 second & 1 MB \\
+10,000 & 10 minutes & 1 GB \\
+1,000,000 & 10 hours & 100 GB \\
+50,000,000 & Impossible & 5 TB \\
+\hline
+\end{tabular}
+\end{center}
+}{
+\centering
+\includegraphics[width=0.85\textwidth]{charts/curse_of_dimensionality.pdf}
+
+\vspace{0.5em}
+\textbf{The mathematical barrier:}
+
+Number of interactions grows combinatorially:
+\formula{N_{\text{features}} = \binom{d + p}{p}}
+
+where $d$ = original dimensions, $p$ = polynomial degree
+
+\vspace{0.3em}
+\textbf{Fundamental questions:}
+\begin{itemize}
+\item Can we use high dimensions without computing them?
+\item Can we learn features automatically?
+\item How do we choose which features to create?
+\end{itemize}
+
+\vspace{0.3em}
+\keypoint{This is where the kernel trick and deep learning enter}
+
+\bottomnote{Next: How to work in infinite dimensions efficiently}
+}
+\end{frame}
+
+% Slide 4: The Kernel Trick Introduction
+\begin{frame}{Breakthrough 2: The Kernel Trick - Infinite Dimensions}
+\twocolslide{
+\Large\textbf{The Magical Insight}
+\normalsize
+\vspace{0.5em}
+
+\textbf{Key observation:} Many algorithms only need dot products
+
+Linear model prediction:
+\formula{f(x) = w^T x = \sum_{i=1}^n \alpha_i (x_i \cdot x)}
+
+\textbf{What if we transform first?}
+\formula{f(x) = \sum_{i=1}^n \alpha_i (\phi(x_i) \cdot \phi(x))}
+
+\textbf{Problem:} $\phi$ might map to infinite dimensions
+
+\textbf{Solution:} Define kernel function
+\formula{K(x, x') = \phi(x) \cdot \phi(x')}
+
+\textbf{Miracle:} Compute $K$ without ever computing $\phi$!
+
+\vspace{0.3em}
+\keypoint{Work in infinite dimensions at finite cost}
+}{
+\Large\textbf{Concrete Example: RBF Kernel}
+\normalsize
+\vspace{0.5em}
+
+\textbf{Radial Basis Function (Gaussian) kernel:}
+\formula{K(x, x') = e^{-\gamma ||x - x'||^2}}
+
+This corresponds to infinite-dimensional $\phi$!
+
+\vspace{0.3em}
+\textbf{Numerical example:}
+
+$x = [1, 2]$, $x' = [1.5, 2.5]$, $\gamma = 1$
+
+Distance: $||x - x'||^2 = 0.5^2 + 0.5^2 = 0.5$
+
+Kernel: $K(x, x') = e^{-1 \times 0.5} = e^{-0.5} = 0.606$
+
+\vspace{0.3em}
+\textbf{Interpretation:}
+\begin{itemize}
+\item Similar points: $K \approx 1$
+\item Dissimilar points: $K \approx 0$
+\item Measures similarity in infinite-dimensional space
+\item Computed in original space!
+\end{itemize}
+
+\bottomnote{This is the foundation of support vector machines}
+}
+\end{frame}
+
+% Slide 5: SVM with RBF Kernel Success
+\begin{frame}{Support Vector Machines: The Kernel Trick in Action}
+\twocolslide{
+\Large\textbf{Solving the XOR Problem}
+\normalsize
+\vspace{0.5em}
+
+\textbf{SVM with RBF kernel:}
+\formula{f(x) = \sum_{i=1}^n \alpha_i y_i K(x_i, x) + b}
+
+where $K(x, x') = e^{-\gamma ||x - x'||^2}$
+
+\textbf{Training:} Find $\alpha_i$ that maximize margin
+
+\textbf{Test on XOR:}
+\begin{center}
+\small
+\begin{tabular}{cccc}
+\hline
+$x_1$ & $x_2$ & True Label & SVM Prediction \\
+\hline
+0.0 & 0.0 & Blue & Blue (0.98) \\
+0.0 & 1.0 & Red & Red (0.97) \\
+1.0 & 0.0 & Red & Red (0.96) \\
+1.0 & 1.0 & Blue & Blue (0.99) \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{Performance:} 100\% accuracy vs 50\% for linear
+
+\keypoint{Kernel trick solved the impossible problem}
+}{
+\centering
+\includegraphics[width=0.85\textwidth]{charts/svm_rbf_kernel.pdf}
+
+\vspace{0.5em}
+\textbf{Why SVMs work:}
+
+\begin{itemize}
+\item \textbf{Maximum margin:} Find widest separation
+\item \textbf{Kernel trick:} Work in infinite dimensions
+\item \textbf{Sparsity:} Only support vectors matter
+\item \textbf{Convex optimization:} Global optimum guaranteed
+\end{itemize}
+
+\vspace{0.3em}
+\textbf{Limitations:}
+\begin{itemize}
+\item Kernel choice requires expertise
+\item Training time: $O(n^3)$ for $n$ samples
+\item Not ideal for huge datasets
+\item Features still hand-engineered
+\end{itemize}
+
+\bottomnote{But what if we could learn the features themselves?}
+}
+\end{frame}
+
+% Slide 6: Neural Networks Introduction
+\begin{frame}{Breakthrough 3: Neural Networks - Learning Features}
+\twocolslide{
+\Large\textbf{The Ultimate Insight}
+\normalsize
+\vspace{0.5em}
+
+\textbf{Hypothesis:} Instead of hand-designing $\phi$, learn it!
+
+\textbf{Perceptron (1943):}
+\formula{y = \sigma(w^T x + b)}
+
+where $\sigma$ is activation function (e.g., sigmoid, ReLU)
+
+\textbf{Multi-layer Perceptron:}
+\formula{h_1 = \sigma(W_1 x + b_1)}
+\formula{h_2 = \sigma(W_2 h_1 + b_2)}
+\formula{y = \sigma(W_3 h_2 + b_3)}
+
+\textbf{Key idea:} Hidden layers learn features automatically
+
+\begin{itemize}
+\item Layer 1: Simple features (edges, corners)
+\item Layer 2: Medium features (textures, parts)
+\item Layer 3: Complex features (objects, faces)
+\end{itemize}
+
+\keypoint{Network learns its own $\phi$ from data}
+}{
+\centering
+\includegraphics[width=0.85\textwidth]{charts/neural_network_architecture.pdf}
+
+\vspace{0.5em}
+\textbf{XOR solution with 2-layer network:}
+
+\textbf{Architecture:} 2 inputs → 2 hidden → 1 output
+
+\textbf{Hidden layer learns:}
+\begin{itemize}
+\item Neuron 1: Detects $x_1$ OR $x_2$
+\item Neuron 2: Detects $x_1$ AND $x_2$
+\end{itemize}
+
+\textbf{Output layer:} Combines with XOR logic
+
+\textbf{Result:} Perfect 100\% accuracy
+
+\vspace{0.3em}
+\textbf{Training:} Backpropagation algorithm
+\begin{itemize}
+\item Forward pass: Compute predictions
+\item Backward pass: Compute gradients
+\item Update weights to reduce error
+\end{itemize}
+
+\bottomnote{This is what deep learning is built upon}
+}
+\end{frame}
+
+% Slide 7: Universal Approximation Theorem
+\begin{frame}{The Universal Approximation Theorem: Theoretical Foundation}
+\twocolslide{
+\Large\textbf{The Powerful Guarantee}
+\normalsize
+\vspace{0.5em}
+
+\textbf{Theorem (Cybenko, 1989):}
+
+A neural network with:
+\begin{itemize}
+\item One hidden layer
+\item Finite number of neurons
+\item Non-polynomial activation function
+\end{itemize}
+
+can approximate any continuous function on a compact set to arbitrary accuracy.
+
+\vspace{0.3em}
+\textbf{Mathematical statement:}
+
+For any $f: [0,1]^d \rightarrow \mathbb{R}$ continuous and $\epsilon > 0$,
+
+exists network $g$ such that:
+\formula{|f(x) - g(x)| < \epsilon \quad \forall x \in [0,1]^d}
+
+\vspace{0.3em}
+\keypoint{Neural networks are universal function approximators}
+}{
+\Large\textbf{What This Really Means}
+\normalsize
+\vspace{0.5em}
+
+\textbf{In plain language:}
+
+You give me any function (no matter how complex), and I can build a neural network that approximates it as closely as you want.
+
+\vspace{0.3em}
+\textbf{Caveats:}
+\begin{itemize}
+\item Says network \textit{exists}, not how to find it
+\item Does not tell you how many neurons needed
+\item Does not guarantee good generalization
+\item Width vs depth tradeoff
+\end{itemize}
+
+\vspace{0.3em}
+\textbf{Practical implications:}
+\begin{itemize}
+\item \textbf{Shallow networks:} Need exponentially many neurons
+\item \textbf{Deep networks:} Need polynomially many parameters
+\item Depth is more efficient than width
+\end{itemize}
+
+\bottomnote{This explains why deep networks work so well}
+}
+\end{frame}
+
+% Slide 8: Backpropagation - How Neural Networks Learn
+\begin{frame}{Backpropagation: Training Neural Networks}
+\twocolslide{
+\Large\textbf{The Learning Algorithm}
+\normalsize
+\vspace{0.5em}
+
+\textbf{Goal:} Minimize loss function
+\formula{L(W) = \frac{1}{n} \sum_{i=1}^n \ell(y_i, f(x_i; W))}
+
+\textbf{Gradient descent update:}
+\formula{W := W - \eta \nabla_W L(W)}
+
+\textbf{Challenge:} How to compute $\nabla_W L$ efficiently?
+
+\vspace{0.3em}
+\textbf{Backpropagation:} Chain rule applied systematically
+
+\textbf{Forward pass:} Compute all activations
+\formula{a^{[l]} = \sigma(W^{[l]} a^{[l-1]} + b^{[l]})}
+
+\textbf{Backward pass:} Compute all gradients
+\formula{\delta^{[l]} = (W^{[l+1]})^T \delta^{[l+1]} \odot \sigma'(z^{[l]})}
+
+\formula{\frac{\partial L}{\partial W^{[l]}} = \delta^{[l]} (a^{[l-1]})^T}
+}{
+\Large\textbf{Concrete Example}
+\normalsize
+\vspace{0.5em}
+
+\textbf{Tiny network:} 2 → 2 → 1 on XOR
+
+\textbf{Forward:}
+\begin{itemize}
+\item Input: $x = [0, 1]$
+\item Hidden: $h = \sigma([w_{11}, w_{12}] \cdot x) = [0.7, 0.3]$
+\item Output: $y = \sigma([w_{21}, w_{22}] \cdot h) = 0.4$
+\item Target: 1.0, Loss: $(1.0 - 0.4)^2 = 0.36$
+\end{itemize}
+
+\textbf{Backward:}
+\begin{itemize}
+\item Output gradient: $\delta_y = -2(1.0 - 0.4) \times 0.4 \times 0.6 = -0.288$
+\item Hidden gradients: $\delta_h = w_{2*} \times \delta_y \times h \times (1-h)$
+\item Weight updates: $W := W - 0.01 \times \text{gradients}$
+\end{itemize}
+
+\textbf{After 1000 iterations:} Loss 0.36 → 0.01, accuracy 50\% → 100\%
+
+\bottomnote{This is implemented in TensorFlow, PyTorch automatically}
+}
+\end{frame}
+
+% Slide 9: Deep Learning Revolution
+\begin{frame}{The Deep Learning Revolution: From Theory to Practice}
+\twocolslide{
+\Large\textbf{Key Breakthroughs (2012-2023)}
+\normalsize
+\vspace{0.5em}
+
+\textbf{2012: AlexNet (ImageNet)}
+\begin{itemize}
+\item 8-layer CNN
+\item GPU training
+\item 84\% → 63\% error rate (huge jump)
+\end{itemize}
+
+\textbf{2014: VGGNet, GoogLeNet}
+\begin{itemize}
+\item Deeper networks (19-22 layers)
+\item Systematic architecture design
+\end{itemize}
+
+\textbf{2015: ResNet}
+\begin{itemize}
+\item 152 layers (previously impossible)
+\item Skip connections solve vanishing gradient
+\item Human-level image classification
+\end{itemize}
+
+\textbf{2017: Transformers}
+\begin{itemize}
+\item Attention mechanism
+\item Parallelizable architecture
+\item Foundation of GPT, BERT, ChatGPT
+\end{itemize}
+
+\textbf{2020+: Scale Laws}
+\begin{itemize}
+\item Performance scales with data, compute, parameters
+\item GPT-3: 175B parameters
+\item Emergent abilities at scale
+\end{itemize}
+}{
+\centering
+\includegraphics[width=0.85\textwidth]{charts/deep_learning_revolution.pdf}
+
+\vspace{0.5em}
+\textbf{What enabled this?}
+
+\begin{enumerate}
+\item \textbf{Big Data:} ImageNet (14M images), Common Crawl (petabytes)
+\item \textbf{GPU Computing:} 100× faster than CPUs for matrix operations
+\item \textbf{Better Architectures:} ResNet, Transformers, attention
+\item \textbf{Software Frameworks:} TensorFlow, PyTorch (automatic differentiation)
+\item \textbf{Regularization:} Dropout, batch norm, data augmentation
+\end{enumerate}
+
+\vspace{0.3em}
+\keypoint{Deep learning solved problems once thought AI-complete}
+
+\bottomnote{Computer vision, speech, translation all solved in 10 years}
+}
+\end{frame}
+
+% Slide 10: Comparative Performance - Three Approaches
+\begin{frame}{Comparing the Three Breakthroughs}
+\twocolslide{
+\Large\textbf{Performance Comparison}
+\normalsize
+\vspace{0.5em}
+
+\textbf{Tested on 10 benchmark datasets:}
+
+\begin{center}
+\small
+\begin{tabular}{lccc}
+\hline
+\textbf{Dataset} & \textbf{Poly} & \textbf{SVM} & \textbf{NN} \\
+\hline
+XOR & 100\% & 100\% & 100\% \\
+Circles & 95\% & 100\% & 100\% \\
+Moons & 92\% & 98\% & 99\% \\
+MNIST (digits) & 92\% & 94\% & 99.7\% \\
+CIFAR-10 (images) & 55\% & 65\% & 95\% \\
+ImageNet & N/A & N/A & 90\% \\
+Speech & N/A & N/A & 95\% \\
+Translation & N/A & N/A & 92\% \\
+\hline
+\end{tabular}
+\end{center}
+
+\vspace{0.3em}
+\textbf{Training time (10K samples):}
+\begin{itemize}
+\item Polynomial features: 1 second
+\item SVM RBF: 30 seconds
+\item Neural network: 5 minutes
+\end{itemize}
+}{
+\centering
+\includegraphics[width=0.85\textwidth]{charts/three_approaches_comparison.pdf}
+
+\vspace{0.5em}
+\textbf{When to use each:}
+
+\textbf{Polynomial Features:}
+\begin{itemize}
+\item Small data (< 1000 samples)
+\item Interpretability critical
+\item Low-dimensional problems
+\end{itemize}
+
+\textbf{SVMs:}
+\begin{itemize}
+\item Medium data (1K-100K)
+\item Guaranteed global optimum
+\item Strong theoretical foundations
+\end{itemize}
+
+\textbf{Neural Networks:}
+\begin{itemize}
+\item Big data (> 100K samples)
+\item Complex patterns (images, text)
+\item State-of-the-art performance
+\end{itemize}
+
+\bottomnote{Modern ML: Use all three depending on problem}
+}
+\end{frame}

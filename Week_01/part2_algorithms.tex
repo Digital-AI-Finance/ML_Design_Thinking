@@ -1,0 +1,504 @@
+% Part 2: Algorithms - Learning the Technical Core
+\section{Algorithms: Clustering Fundamentals}
+
+% PART 2 Section Divider
+\begin{frame}[plain]
+\begin{center}
+\vspace{2em}
+{\Huge\textcolor{mlgreen}{\textbf{PART 2}}}\\
+\vspace{0.5em}
+{\Large\textbf{Technical Core}}\\
+\vspace{1em}
+\textit{Learning the algorithms step by step}\\
+\vspace{2em}
+\Large
+\textbf{What You'll Master:}\\
+\vspace{0.5em}
+\normalsize
+\begin{itemize}
+\item K-means clustering algorithm
+\item Finding optimal number of clusters
+\item Measuring cluster quality
+\item Advanced techniques (DBSCAN, Hierarchical)
+\item Choosing the right algorithm
+\end{itemize}
+\vspace{1em}
+\Large\textcolor{mlpurple}{\textbf{No math degree required!}}
+\end{center}
+\end{frame}
+
+% Enhanced What is Clustering with visual metaphors
+\begin{frame}
+\frametitle{\Large What is Clustering? A Visual Introduction}
+\framesubtitle{Like Organizing Your Music Library - Automatically!}
+
+\begin{columns}[T]
+\column{0.65\textwidth}
+\begin{center}
+\includegraphics[width=0.85\textwidth]{charts/chaos_to_clarity.pdf}
+\end{center}
+
+\column{0.33\textwidth}
+\begin{tcolorbox}[colback=mlgreen!10, colframe=mlgreen!50, title=Real-World Analogies]
+\small
+\textbf{Clustering is like:}
+\begin{itemize}
+\item Sorting laundry by color
+\item Organizing books by topic
+\item Grouping friends by interests
+\item Arranging apps by category
+\end{itemize}
+
+\vspace{0.3em}
+\textbf{Key principle:}\\
+Similar things belong together
+
+\vspace{0.3em}
+\textbf{ML advantage:}\\
+Finds patterns you didn't know existed
+\end{tcolorbox}
+\end{columns}
+
+\begin{center}
+\begin{tcolorbox}[colback=mlyellow!20, colframe=mlorange!60, width=0.9\textwidth]
+\centering
+\textbf{Remember:} The computer doesn't know what the groups mean - it just finds things that are similar!
+\end{tcolorbox}
+\end{center}
+\end{frame}
+
+% Enhanced K-Means Part 1 with detailed steps
+\begin{frame}
+\frametitle{\Large K-Means Clustering: The Workhorse Algorithm (Part 1)}
+\framesubtitle{Setting Up - Like Choosing Neighborhood Centers}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\begin{tcolorbox}[colback=mlblue!10, colframe=mlblue!50, title=Step 1: Choose K]
+\small
+\textbf{What is K?}
+\begin{itemize}
+\item Number of groups you want
+\item Your hypothesis about the data
+\end{itemize}
+
+\textbf{How to choose:}
+\begin{itemize}
+\item Domain knowledge (you know there are 5 types)
+\item Elbow method (we'll learn this)
+\item Business requirements (need 3 segments)
+\end{itemize}
+
+\textbf{Common mistake:}\\
+Too many K = overfitting\\
+Too few K = underfitting
+\end{tcolorbox}
+
+\column{0.48\textwidth}
+\begin{tcolorbox}[colback=mlgreen!10, colframe=mlgreen!50, title=Step 2: Initialize Centers]
+\small
+\textbf{What happens:}
+\begin{itemize}
+\item Place K random points in space
+\item These become initial centers
+\item Like dropping pins on a map
+\end{itemize}
+
+\textbf{Smart initialization:}
+\begin{itemize}
+\item K-means++ (spread out centers)
+\item Multiple random starts
+\item Best of N attempts
+\end{itemize}
+
+\textbf{Why it matters:}\\
+Bad initialization = poor clusters
+\end{tcolorbox}
+\end{columns}
+
+\vspace{0.5em}
+\begin{center}
+\includegraphics[width=0.5\textwidth]{charts/kmeans_initialization.pdf}
+\end{center}
+\end{frame}
+
+% Enhanced K-Means Part 2 with iteration details
+\begin{frame}
+\frametitle{\Large K-Means Clustering: The Workhorse Algorithm (Part 2)}
+\framesubtitle{The Iteration Dance - Finding Natural Groups}
+
+\begin{columns}[T]
+\column{0.32\textwidth}
+\begin{tcolorbox}[colback=mlred!10, colframe=mlred!50, title=Step 3: Assign]
+\small
+\textbf{For each point:}
+\begin{itemize}
+\item Calculate distance to all centers
+\item Assign to nearest center
+\item Forms initial clusters
+\end{itemize}
+
+\textbf{Distance metric:}\\
+Usually Euclidean\\
+(straight line distance)
+\end{tcolorbox}
+
+\column{0.32\textwidth}
+\begin{tcolorbox}[colback=mlorange!10, colframe=mlorange!50, title=Step 4: Update]
+\small
+\textbf{For each cluster:}
+\begin{itemize}
+\item Calculate mean position
+\item Move center to mean
+\item Centers drift to density
+\end{itemize}
+
+\textbf{Why mean?}\\
+Minimizes total distance\\
+(mathematical optimum)
+\end{tcolorbox}
+
+\column{0.32\textwidth}
+\begin{tcolorbox}[colback=mlgreen!10, colframe=mlgreen!50, title=Step 5: Repeat]
+\small
+\textbf{Keep iterating:}
+\begin{itemize}
+\item Repeat steps 3-4
+\item Until centers stop moving
+\item Usually 5-10 iterations
+\end{itemize}
+
+\textbf{Convergence:}\\
+Centers stabilize\\
+Clusters finalized
+\end{tcolorbox}
+\end{columns}
+
+\vspace{0.5em}
+\begin{center}
+\includegraphics[width=0.6\textwidth]{charts/kmeans_evolution.pdf}
+\end{center}
+
+\begin{center}
+\begin{tcolorbox}[colback=mlpurple!20, colframe=mlpurple!60, width=0.9\textwidth]
+\centering
+\textbf{Fun Fact:} K-means always converges! It's mathematically guaranteed to find a solution (though not always the best one).
+\end{tcolorbox}
+\end{center}
+\end{frame}
+
+% The Goldilocks Problem with visual examples
+\begin{frame}
+\frametitle{\Large The Goldilocks Problem: How Many Clusters?}
+\framesubtitle{Not Too Few, Not Too Many, But Just Right!}
+
+\begin{columns}[T]
+\column{0.32\textwidth}
+\begin{tcolorbox}[colback=mlred!10, colframe=mlred!50, title={Too Few (K=2)}]
+\begin{center}
+\includegraphics[width=0.9\textwidth]{charts/too_few_clusters.pdf}
+\end{center}
+\small
+\textbf{Problems:}
+\begin{itemize}
+\item Oversimplification
+\item Mixed segments
+\item Lost details
+\item Generic insights
+\end{itemize}
+
+\textcolor{mlred}{\textbf{Useless for innovation!}}
+\end{tcolorbox}
+
+\column{0.32\textwidth}
+\begin{tcolorbox}[colback=mlgreen!10, colframe=mlgreen!50, title={Just Right (K=5)}]
+\begin{center}
+\includegraphics[width=0.9\textwidth]{charts/just_right_clusters.pdf}
+\end{center}
+\small
+\textbf{Benefits:}
+\begin{itemize}
+\item Clear segments
+\item Actionable insights
+\item Manageable complexity
+\item Distinct patterns
+\end{itemize}
+
+\textcolor{mlgreen}{\textbf{Perfect for action!}}
+\end{tcolorbox}
+
+\column{0.32\textwidth}
+\begin{tcolorbox}[colback=mlorange!10, colframe=mlorange!50, title={Too Many (K=20)}]
+\begin{center}
+\includegraphics[width=0.9\textwidth]{charts/too_many_clusters.pdf}
+\end{center}
+\small
+\textbf{Issues:}
+\begin{itemize}
+\item Overfitting
+\item Tiny segments
+\item Analysis paralysis
+\item No strategy possible
+\end{itemize}
+
+\textcolor{mlorange}{\textbf{Too complex to use!}}
+\end{tcolorbox}
+\end{columns}
+
+\vspace{0.3em}
+\begin{center}
+\begin{tcolorbox}[colback=mlyellow!20, colframe=mlorange!60, width=0.9\textwidth]
+\centering
+\textbf{Rule of Thumb:} Start with $K = \sqrt{n/2}$ where n is your sample size
+\end{tcolorbox}
+\end{center}
+\end{frame}
+
+% Enhanced Elbow Method with detailed explanation
+\begin{frame}
+\frametitle{\Large The Elbow Method: Finding Optimal K}
+\framesubtitle{A Data-Driven Approach to Choosing Clusters}
+
+\begin{columns}[T]
+\column{0.55\textwidth}
+\begin{center}
+\includegraphics[width=0.85\textwidth]{charts/elbow_method.pdf}
+\end{center}
+
+\column{0.43\textwidth}
+\begin{tcolorbox}[colback=mlblue!10, colframe=mlblue!50, title=How It Works]
+\small
+\textbf{The Process:}
+\begin{enumerate}
+\item Try K = 1, 2, 3, ... 10
+\item Measure "inertia" (total distance)
+\item Plot the curve
+\item Find the "elbow" point
+\end{enumerate}
+
+\textbf{What is inertia?}\\
+Sum of distances from points to their cluster center
+
+\textbf{The elbow:}\\
+Where adding more clusters doesn't help much
+
+\textbf{In this example:}\\
+K = 4 is optimal
+\end{tcolorbox}
+\end{columns}
+
+\begin{center}
+\begin{tcolorbox}[colback=mlpurple!20, colframe=mlpurple!60, width=0.9\textwidth]
+\centering
+\textbf{Pro Tip:} If there's no clear elbow, try other methods like silhouette analysis
+\end{tcolorbox}
+\end{center}
+\end{frame}
+
+% Enhanced Distance Metrics with real examples
+\begin{frame}
+\frametitle{\Large Distance Metrics: How We Measure "Closeness"}
+\framesubtitle{Different Ways to Calculate Similarity}
+
+\begin{center}
+\includegraphics[width=0.85\textwidth]{charts/distance_metrics_comparison.pdf}
+\end{center}
+
+\begin{columns}[T]
+\column{0.32\textwidth}
+\begin{tcolorbox}[colback=mlblue!10, colframe=mlblue!50, title=Euclidean]
+\small
+\textbf{Straight line distance}\\
+"As the crow flies"
+
+\textbf{Use when:}
+\begin{itemize}
+\item Continuous data
+\item Physical distances
+\item Standard clustering
+\end{itemize}
+
+\textbf{Formula:}\\
+$d = \sqrt{(x_2-x_1)^2 + (y_2-y_1)^2}$
+\end{tcolorbox}
+
+\column{0.32\textwidth}
+\begin{tcolorbox}[colback=mlgreen!10, colframe=mlgreen!50, title=Manhattan]
+\small
+\textbf{City block distance}\\
+"Walking in a grid"
+
+\textbf{Use when:}
+\begin{itemize}
+\item Grid-like data
+\item Categorical features
+\item Robust to outliers
+\end{itemize}
+
+\textbf{Formula:}\\
+$d = |x_2-x_1| + |y_2-y_1|$
+\end{tcolorbox}
+
+\column{0.32\textwidth}
+\begin{tcolorbox}[colback=mlorange!10, colframe=mlorange!50, title=Cosine]
+\small
+\textbf{Angular similarity}\\
+"Direction matters"
+
+\textbf{Use when:}
+\begin{itemize}
+\item Text data
+\item High dimensions
+\item Magnitude irrelevant
+\end{itemize}
+
+\textbf{Formula:}\\
+$cos(\theta) = \frac{A \cdot B}{||A|| \times ||B||}$
+\end{tcolorbox}
+\end{columns}
+\end{frame}
+
+% Enhanced Evaluation Metrics - Silhouette Score
+\begin{frame}
+\frametitle{\Large Evaluation Metric: Silhouette Score}
+\framesubtitle{Measuring How Well-Separated Your Clusters Are}
+
+\begin{columns}[T]
+\column{0.65\textwidth}
+\begin{center}
+\includegraphics[width=0.85\textwidth]{charts/silhouette_analysis.pdf}
+\end{center}
+
+\column{0.33\textwidth}
+\begin{tcolorbox}[colback=mlblue!10, colframe=mlblue!50, title=Understanding Silhouette]
+\small
+\textbf{What it measures:}
+\begin{itemize}
+\item Cohesion: How close points are to their cluster
+\item Separation: How far from other clusters
+\end{itemize}
+
+\textbf{Score range:} -1 to +1
+
+\textbf{Interpretation:}
+\begin{itemize}
+\item $>$ 0.7: Strong
+\item 0.5-0.7: Reasonable
+\item 0.25-0.5: Weak
+\item $<$ 0.25: Poor
+\end{itemize}
+
+\textbf{Our score: 0.73}\\
+\textcolor{mlgreen}{\textbf{Excellent clustering!}}
+\end{tcolorbox}
+\end{columns}
+
+\begin{center}
+\begin{tcolorbox}[colback=mlyellow!20, colframe=mlorange!60, width=0.9\textwidth]
+\centering
+\textbf{Think of it as:} A grade for your clustering - higher is better!
+\end{tcolorbox}
+\end{center}
+\end{frame}
+
+% Enhanced DBSCAN explanation
+\begin{frame}
+\frametitle{\Large DBSCAN: When Circles Don't Work}
+\framesubtitle{Density-Based Clustering for Complex Patterns}
+
+\begin{columns}[T]
+\column{0.55\textwidth}
+\begin{center}
+\includegraphics[width=0.85\textwidth]{charts/dbscan_vs_kmeans.pdf}
+\end{center}
+
+\column{0.43\textwidth}
+\begin{tcolorbox}[colback=mlgreen!10, colframe=mlgreen!50, title=DBSCAN Advantages]
+\small
+\textbf{What makes it special:}
+\begin{itemize}
+\item Finds any shape
+\item No need to specify K
+\item Identifies outliers
+\item Handles noise
+\end{itemize}
+
+\textbf{How it works:}
+\begin{itemize}
+\item Looks for dense regions
+\item Connects nearby points
+\item Expands clusters naturally
+\item Marks sparse points as noise
+\end{itemize}
+
+\textbf{Perfect for:}
+\begin{itemize}
+\item Geographic data
+\item Network analysis
+\item Anomaly detection
+\item Complex patterns
+\end{itemize}
+\end{tcolorbox}
+\end{columns}
+
+\begin{center}
+\begin{tcolorbox}[colback=mlpurple!20, colframe=mlpurple!60, width=0.9\textwidth]
+\centering
+\textbf{Real Example:} DBSCAN can find galaxy clusters in astronomy data where K-means fails completely!
+\end{tcolorbox}
+\end{center}
+\end{frame}
+
+% Algorithm Comparison with decision guide
+\begin{frame}
+\frametitle{\Large Choosing the Right Algorithm: A Decision Guide}
+\framesubtitle{Match Your Data to the Right Method}
+
+\begin{center}
+\small
+\begin{tabular}{lccccl}
+\toprule
+\textbf{Algorithm} & \textbf{Speed} & \textbf{Shape} & \textbf{Need K?} & \textbf{Outliers} & \textbf{Best Use Case} \\
+\midrule
+\textcolor{mlblue}{\textbf{K-Means}} & Fast & Spherical & Yes & Sensitive & Quick customer segmentation \\
+\textcolor{mlgreen}{\textbf{DBSCAN}} & Medium & Any & No & Robust & Finding fraud patterns \\
+\textcolor{mlorange}{\textbf{Hierarchical}} & Slow & Any & No & Moderate & Organization taxonomy \\
+\textcolor{mlpurple}{\textbf{GMM}} & Medium & Elliptical & Yes & Moderate & Mixed populations \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{0.5em}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\begin{tcolorbox}[colback=mlblue!10, colframe=mlblue!50, title=Start with K-Means if:]
+\small
+\begin{itemize}
+\item You need results fast
+\item Data has clear groups
+\item You know approximate K
+\item Groups are similar size
+\item You're just exploring
+\end{itemize}
+\end{tcolorbox}
+
+\column{0.48\textwidth}
+\begin{tcolorbox}[colback=mlgreen!10, colframe=mlgreen!50, title=Use DBSCAN if:]
+\small
+\begin{itemize}
+\item Clusters have weird shapes
+\item You have outliers
+\item You don't know K
+\item Density varies
+\item Need robust results
+\end{itemize}
+\end{tcolorbox}
+\end{columns}
+
+\begin{center}
+\begin{tcolorbox}[colback=mlyellow!20, colframe=mlorange!60, width=0.9\textwidth]
+\centering
+\textbf{Pro Tip:} Try K-means first for speed, then DBSCAN if results aren't satisfactory
+\end{tcolorbox}
+\end{center}
+\end{frame}

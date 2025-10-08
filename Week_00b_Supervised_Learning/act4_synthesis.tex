@@ -1,0 +1,155 @@
+% Act 4: Synthesis (4 slides)
+
+\begin{frame}{22. Algorithm Landscape: Linear → Tree → Ensemble → SVM}
+\begin{columns}
+\begin{column}{0.48\textwidth}
+\textbf{Complexity Progression}
+\begin{itemize}
+\item \textbf{Linear}: $y = w^T x + b$
+\item \textbf{Tree}: Recursive partitioning
+\item \textbf{Ensemble}: Multiple tree combination
+\item \textbf{SVM}: Kernel-based mapping
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Computational Complexity}
+\begin{itemize}
+\item Linear: $O(nd)$ training
+\item Single tree: $O(nd \log n)$
+\item Random forest: $O(tnd \log n)$
+\item SVM: $O(n^2d)$ to $O(n^3d)$
+\end{itemize}
+\end{column}
+\begin{column}{0.48\textwidth}
+\includegraphics[width=\textwidth]{charts/algorithm_landscape.pdf}
+
+\vspace{0.2cm}
+\small
+Algorithms form a spectrum from simple linear to complex nonlinear methods
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{23. When to Use Each: Interpretability vs Accuracy}
+\begin{columns}
+\begin{column}{0.48\textwidth}
+\textbf{Linear Models}
+\begin{itemize}
+\item High interpretability
+\item Fast training/prediction
+\item Few parameters
+\item Good baseline
+\item Use when: Regulatory requirements, simple relationships
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Decision Trees}
+\begin{itemize}
+\item Moderate interpretability
+\item Handles missing values
+\item Feature selection automatic
+\item Use when: Rule extraction needed, mixed data types
+\end{itemize}
+\end{column}
+\begin{column}{0.48\textwidth}
+\textbf{Ensemble Methods}
+\begin{itemize}
+\item Lower interpretability
+\item Highest accuracy often
+\item Robust to overfitting
+\item Use when: Performance critical, sufficient data
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{SVM}
+\begin{itemize}
+\item Low interpretability
+\item Kernel flexibility
+\item Memory efficient
+\item Use when: High dimensions, small datasets
+\end{itemize}
+
+\vspace{0.2cm}
+\includegraphics[width=\textwidth]{charts/interpretability_accuracy_tradeoff.pdf}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{24. Modern Applications: Production ML Pipelines}
+\begin{columns}
+\begin{column}{0.48\textwidth}
+\textbf{Real-World Pipeline}
+\begin{enumerate}
+\item Data ingestion \& cleaning
+\item Feature engineering
+\item Model training \& validation
+\item Hyperparameter tuning
+\item Production deployment
+\item Monitoring \& retraining
+\end{enumerate}
+
+\vspace{0.3cm}
+\textbf{Industry Applications}
+\begin{itemize}
+\item Credit scoring: Gradient boosting
+\item Recommendation: Ensemble methods
+\item Fraud detection: Anomaly detection
+\item Medical diagnosis: Interpretable models
+\end{itemize}
+\end{column}
+\begin{column}{0.48\textwidth}
+\includegraphics[width=\textwidth]{charts/production_ml_pipeline.pdf}
+
+\vspace{0.2cm}
+\small
+Modern ML systems integrate multiple algorithms in end-to-end pipelines
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{25. Summary \& Preview: Unsupervised Learning}
+\begin{columns}
+\begin{column}{0.48\textwidth}
+\textbf{Supervised Learning Recap}
+\begin{itemize}
+\item Linear models: Fast, interpretable
+\item Regularization: Prevents overfitting
+\item Nonlinear methods: Handle complexity
+\item Ensembles: Often best performance
+\item No free lunch: Algorithm choice matters
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Key Takeaways}
+\begin{itemize}
+\item Start simple, add complexity as needed
+\item Validate on unseen data
+\item Consider interpretability requirements
+\item Monitor performance in production
+\end{itemize}
+\end{column}
+\begin{column}{0.48\textwidth}
+\textbf{Next: Unsupervised Learning}
+\begin{itemize}
+\item No target variable
+\item Pattern discovery
+\item Clustering algorithms
+\item Dimensionality reduction
+\item Association rules
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Preview Applications}
+\begin{itemize}
+\item Customer segmentation
+\item Market basket analysis
+\item Data visualization
+\item Feature engineering
+\item Anomaly detection
+\end{itemize}
+
+\vspace{0.2cm}
+\includegraphics[width=\textwidth]{charts/supervised_to_unsupervised.pdf}
+\end{column}
+\end{columns}
+\end{frame}

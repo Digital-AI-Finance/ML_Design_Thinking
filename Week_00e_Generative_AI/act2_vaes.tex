@@ -1,0 +1,241 @@
+% Slide 6: Autoencoder: Encode → Latent → Decode
+\begin{frame}
+\frametitle{Autoencoders: The Foundation}
+\framesubtitle{Learning Compressed Representations}
+
+\begin{center}
+\includegraphics[width=0.9\textwidth]{charts/autoencoder_architecture.pdf}
+\end{center}
+
+\vspace{0.3cm}
+
+\begin{columns}[c]
+\column{0.32\textwidth}
+\textbf{Encoder}
+\begin{itemize}
+\item Input: 784D (28x28 image)
+\item Compress to 128D
+\item Learn: $z = f_{\text{enc}}(x)$
+\end{itemize}
+
+\column{0.32\textwidth}
+\textbf{Latent Space}
+\begin{itemize}
+\item Bottleneck: 128D
+\item Compressed representation
+\item Key features captured
+\end{itemize}
+
+\column{0.32\textwidth}
+\textbf{Decoder}
+\begin{itemize}
+\item Latent: 128D
+\item Reconstruct to 784D
+\item Learn: $\hat{x} = f_{\text{dec}}(z)$
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\small \textcolor{gray}{
+Basic idea: Force information through a bottleneck, learn to reconstruct perfectly
+}
+\end{frame}
+
+% Slide 7: Worked example: Compress image to 128D
+\begin{frame}
+\frametitle{Worked Example: MNIST Compression}
+\framesubtitle{From 784 Pixels to 128 Features}
+
+\begin{center}
+\includegraphics[width=0.85\textwidth]{charts/mnist_compression_example.pdf}
+\end{center}
+
+\vspace{0.3cm}
+
+\begin{columns}[c]
+\column{0.48\textwidth}
+\textbf{Architecture Details:}
+\begin{itemize}
+\item Input: 28×28 = 784 pixels
+\item Encoder: 784 → 512 → 256 → 128
+\item Decoder: 128 → 256 → 512 → 784
+\item Activation: ReLU (hidden), Sigmoid (output)
+\end{itemize}
+
+\column{0.48\textwidth}
+\textbf{Training Process:}
+\begin{itemize}
+\item Loss: $L = ||x - \hat{x}||^2$
+\item Optimizer: Adam, lr=0.001
+\item Epochs: 100
+\item Compression ratio: 784/128 = 6.125x
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\small \textcolor{gray}{
+Reconstruction loss: MSE drops from 0.45 to 0.03 over 100 epochs
+}
+\end{frame}
+
+% Slide 8: ✅ SUCCESS: Learns compact representations
+\begin{frame}
+\frametitle{Autoencoder Successes}
+\framesubtitle{What Works Well}
+
+\begin{center}
+\includegraphics[width=0.9\textwidth]{charts/autoencoder_successes.pdf}
+\end{center}
+
+\vspace{0.3cm}
+
+\begin{columns}[c]
+\column{0.48\textwidth}
+\textcolor{mlgreen}{\Large \textbf{[+] SUCCESSES:}}
+\begin{itemize}
+\item \textbf{Dimensionality reduction:} 784D → 128D
+\item \textbf{Feature learning:} Discovers edges, shapes
+\item \textbf{Denoising:} Removes noise effectively
+\item \textbf{Anomaly detection:} High reconstruction error
+\item \textbf{Data compression:} 6x size reduction
+\end{itemize}
+
+\column{0.48\textwidth}
+\textbf{Quantitative Results:}
+\begin{itemize}
+\item Reconstruction MSE: 0.031
+\item Compression ratio: 6.125x
+\item Training time: 2.3 minutes
+\item Latent space: interpretable
+\item Applications: preprocessing, visualization
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\small \textcolor{gray}{
+Autoencoders excel at learning efficient representations and data compression
+}
+\end{frame}
+
+% Slide 9: ❌ FAILURE PATTERN: Blurry outputs, lack of diversity (metrics table)
+\begin{frame}
+\frametitle{Autoencoder Limitations}
+\framesubtitle{The Generation Problem}
+
+\begin{center}
+\includegraphics[width=0.9\textwidth]{charts/autoencoder_failures.pdf}
+\end{center}
+
+\vspace{0.3cm}
+
+\begin{columns}[c]
+\column{0.48\textwidth}
+\textcolor{mlred}{\Large \textbf{[-] FAILURES:}}
+\begin{itemize}
+\item \textbf{Blurry outputs:} Averaging effect
+\item \textbf{Poor generation:} Random sampling fails
+\item \textbf{Holes in latent space:} Invalid regions
+\item \textbf{Mode collapse:} Limited diversity
+\item \textbf{No density modeling:} Can't sample $P(x)$
+\end{itemize}
+
+\column{0.48\textwidth}
+\textbf{Generation Metrics:}
+\begin{tabular}{lr}
+\toprule
+\textbf{Metric} & \textbf{Score} \\
+\midrule
+Inception Score & 2.1 \\
+FID Score & 127.3 \\
+SSIM & 0.43 \\
+Diversity & Low \\
+Realism & Poor \\
+\bottomrule
+\end{tabular}
+
+\vspace{0.3cm}
+\small Compare: Real MNIST IS=9.7, FID=3.2
+\end{columns}
+
+\vspace{\fill}
+\small \textcolor{gray}{
+Problem: Autoencoders learn to reconstruct, NOT to generate realistic new samples
+}
+\end{frame}
+
+% Slide 10: Diagnosis: Reconstruction loss encourages averaging
+\begin{frame}
+\frametitle{Root Cause Analysis}
+\framesubtitle{Why Autoencoders Generate Poorly}
+
+\begin{center}
+\includegraphics[width=0.85\textwidth]{charts/averaging_problem.pdf}
+\end{center}
+
+\vspace{0.3cm}
+
+\begin{columns}[c]
+\column{0.48\textwidth}
+\textbf{The Averaging Problem:}
+\begin{itemize}
+\item Loss: $L = ||x - \hat{x}||^2$
+\item Multiple inputs → same latent code
+\item Decoder outputs average
+\item Result: blurry, unrealistic images
+\end{itemize}
+
+\column{0.48\textwidth}
+\textbf{Mathematical Insight:}
+\begin{itemize}
+\item $\hat{x} = \text{argmin}_x E[||x - \hat{x}||^2]$
+\item Solution: $\hat{x} = E[x]$ (expectation)
+\item Minimizing MSE = generating averages
+\item Need: probabilistic approach
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\small \textcolor{gray}{
+Fundamental issue: Reconstruction loss forces the model to hedge its bets by averaging
+}
+\end{frame}
+
+% Slide 11: VAE mathematical framework
+\begin{frame}
+\frametitle{Variational Autoencoders (VAEs)}
+\framesubtitle{The Probabilistic Solution}
+
+\begin{center}
+\includegraphics[width=0.9\textwidth]{charts/vae_framework.pdf}
+\end{center}
+
+\vspace{0.3cm}
+
+\begin{columns}[c]
+\column{0.48\textwidth}
+\textbf{Key Innovation:}
+\begin{itemize}
+\item Encode to \textbf{distribution}, not point
+\item $q_\phi(z|x) = \mathcal{N}(\mu(x), \sigma^2(x))$
+\item Sample: $z \sim q_\phi(z|x)$
+\item Decode: $p_\theta(x|z)$
+\end{itemize}
+
+\column{0.48\textwidth}
+\textbf{VAE Loss Function:}
+\begin{align}
+\mathcal{L} &= -E[log p_\theta(x|z)] \\
+&\quad + KL(q_\phi(z|x)||p(z))
+\end{align}
+
+\begin{itemize}
+\item Term 1: Reconstruction loss
+\item Term 2: Regularization (keep $z$ well-behaved)
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\small \textcolor{gray}{
+VAE breakthrough: Learn a continuous, well-structured latent space for generation
+}
+\end{frame}

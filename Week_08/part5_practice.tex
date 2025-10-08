@@ -1,0 +1,368 @@
+% Part 5: Practice - Workshop & Best Practices
+\section{Practice: Hands-On Workshop}
+
+% Slide 1: Workshop Introduction
+\begin{frame}{Workshop: Restaurant Review Intelligence System}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Your Challenge}}
+
+\small
+Build a system that extracts structured data from unstructured restaurant reviews.
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{Why This Matters:}}
+\begin{itemize}
+\item Real-world problem
+\item Applies all Week 8 concepts
+\item Production-ready skill
+\item Portfolio project
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlorange}{\textbf{Success Criteria:}}
+\begin{itemize}
+\item 90\%+ extraction accuracy
+\item Valid JSON output
+\item Handles errors gracefully
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{mlpurple}{\textbf{What You'll Build}}
+
+\small
+\begin{enumerate}
+\item JSON schema definition
+\item Extraction prompt
+\item Function calling implementation
+\item Validation pipeline
+\item Error handling
+\item Testing suite
+\end{enumerate}
+
+\vspace{0.3cm}
+\textcolor{mlgray}{\textbf{Time:}} 60 minutes\\
+\textcolor{mlgray}{\textbf{Deliverable:}} Python notebook\\
+\textcolor{mlgray}{\textbf{Dataset:}} 1,000 reviews provided
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Complete, working system that extracts structured data reliably}
+\end{frame}
+
+% Slide 2: Dataset Description
+\begin{frame}{Workshop Dataset: 1,000 Restaurant Reviews}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Data Format}}
+
+\small
+\texttt{review\_id: 1234}\\
+\texttt{text: "Amazing food! The service was excellent..."}\\
+\texttt{verified: true}
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{Characteristics:}}
+\begin{itemize}
+\item 100-500 words per review
+\item Mix of positive/negative
+\item Various writing styles
+\item Different detail levels
+\item Some ambiguous cases
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{mlorange}{\textbf{Extract These Fields:}}
+
+\small
+\textbf{Required:}
+\begin{itemize}
+\item overall\_rating (1-5)
+\item food\_quality (1-5)
+\item service\_quality (1-5)
+\item price\_level (cheap/moderate/expensive)
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Optional:}
+\begin{itemize}
+\item ambiance\_rating (1-5)
+\item top\_3\_themes (array)
+\item recommended\_for (array)
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Dataset includes 100 human-labeled examples for validation}
+\end{frame}
+
+% Slide 3: Implementation Steps
+\begin{frame}{Step-by-Step Implementation Guide}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Phase 1: Schema (15 min)}}
+
+\small
+\begin{enumerate}
+\item Define JSON schema
+\item Add type constraints
+\item Set value ranges
+\item Mark required fields
+\item Test with sample data
+\end{enumerate}
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{Phase 2: Prompt (15 min)}}
+
+\small
+\begin{enumerate}
+\item Write extraction prompt
+\item Add role definition
+\item Include examples
+\item Test on 5 reviews
+\item Iterate to improve
+\end{enumerate}
+
+\column{0.48\textwidth}
+\textcolor{mlorange}{\textbf{Phase 3: Implementation (20 min)}}
+
+\small
+\begin{enumerate}
+\item Set up function calling
+\item Add validation layer
+\item Implement error handling
+\item Test on 50 reviews
+\item Fix common failures
+\end{enumerate}
+
+\vspace{0.3cm}
+\textcolor{mlpurple}{\textbf{Phase 4: Validation (10 min)}}
+
+\small
+\begin{enumerate}
+\item Run on 100 labeled examples
+\item Calculate accuracy
+\item Analyze failure cases
+\item Document results
+\end{enumerate}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Starter notebook provided with code templates}
+\end{frame}
+
+% Slide 4: Testing Your System
+\begin{frame}{Testing \& Validation Approach}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Unit Tests}}
+
+\small
+\begin{itemize}
+\item Schema validation works?
+\item Type checking catches errors?
+\item Business rules enforced?
+\item Edge cases handled?
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{Integration Tests}}
+
+\small
+\begin{itemize}
+\item Full pipeline works?
+\item Error handling triggers?
+\item Retry logic functions?
+\item Fallback activates?
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{mlorange}{\textbf{Accuracy Metrics}}
+
+\small
+\begin{itemize}
+\item Field-level accuracy
+\item Overall match rate
+\item Confidence calibration
+\item Error type distribution
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlpurple}{\textbf{Success Thresholds:}}
+\begin{itemize}
+\item Rating extraction: 95\%+
+\item Price level: 90\%+
+\item Themes: 85\%+
+\item Overall system: 90\%+
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Compare your results against human-labeled ground truth}
+\end{frame}
+
+% Slide 5: Results Analysis
+\begin{frame}{Analyzing Your Results}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{What to Analyze}}
+
+\small
+\begin{enumerate}
+\item Accuracy by field
+\item Common error patterns
+\item Confidence vs accuracy
+\item Processing time
+\item Cost per review
+\item Edge case handling
+\end{enumerate}
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{Questions to Ask:}}
+\begin{itemize}
+\item Which fields fail most?
+\item Why did specific cases fail?
+\item Is confidence score reliable?
+\item What patterns emerge?
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{mlorange}{\textbf{Iteration Strategies}}
+
+\small
+\textbf{If accuracy $<$ 90\%:}
+\begin{itemize}
+\item Add more examples to prompt
+\item Refine schema constraints
+\item Improve error handling
+\item Lower temperature
+\item Try chain-of-thought
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{If too slow:}
+\begin{itemize}
+\item Remove unnecessary steps
+\item Use smaller model
+\item Add caching
+\item Batch process
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Iteration is key - expect 2-3 refinement cycles}
+\end{frame}
+
+% Slide 6: Best Practices Summary
+\begin{frame}{Best Practices Checklist}
+\includegraphics[width=0.85\textwidth]{charts/best_practices_checklist.pdf}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Apply these practices to every structured output system}
+\end{frame}
+
+% Slide 7: Resources & Tools
+\begin{frame}{Resources for Structured AI Development}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Libraries \& Tools}}
+
+\small
+\textbf{Python:}
+\begin{itemize}
+\item Pydantic - Validation
+\item OpenAI SDK - Function calling
+\item Anthropic SDK - Tool use
+\item JSON Schema - Definitions
+\item pytest - Testing
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Monitoring:}
+\begin{itemize}
+\item Datadog, New Relic
+\item Weights \& Biases
+\item LangSmith
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{mlgreen}{\textbf{Documentation}}
+
+\small
+\begin{itemize}
+\item OpenAI Function Calling Guide
+\item Anthropic Tool Use Tutorial
+\item Pydantic Documentation
+\item JSON Schema Validator
+\item Course handouts (3 levels)
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlorange}{\textbf{Practice Datasets:}}
+\begin{itemize}
+\item Restaurant reviews (today)
+\item Invoice extraction
+\item Customer support tickets
+\item Product descriptions
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{All resources linked in course materials}
+\end{frame}
+
+% Slide 8: Key Takeaways
+\begin{frame}{Week 8 Key Takeaways}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Core Concepts}}
+
+\small
+\begin{enumerate}
+\item Structured outputs enable production AI
+\item 80\% of AI projects fail without reliability
+\item JSON schemas define clear contracts
+\item Validation catches errors early
+\item Multiple techniques combine for 98\%+ reliability
+\end{enumerate}
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{Technical Skills:}}
+\begin{itemize}
+\item Function calling
+\item Pydantic validation
+\item Error handling
+\item Testing strategies
+\item Production deployment
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{mlorange}{\textbf{Design Skills:}}
+
+\small
+\begin{itemize}
+\item Progressive enhancement
+\item Confidence display
+\item Human-in-the-loop
+\item Error recovery UX
+\item Trust-building patterns
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlpurple}{\textbf{Remember:}}
+\begin{itemize}
+\item Creativity for exploration
+\item Structure for production
+\item User always in control
+\item Trust through consistency
+\end{itemize}
+\end{columns}
+
+\vspace{0.5cm}
+\begin{center}
+\textcolor{mlred}{\large You can now build production-ready AI systems!}
+\end{center}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Next weeks: Testing, validation, and optimization}
+\end{frame}

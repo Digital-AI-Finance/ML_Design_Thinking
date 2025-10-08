@@ -1,0 +1,458 @@
+% ==================== PART 2: UNDERSTANDING HIDDEN STRUCTURE ====================
+\section{Part 2: Teaching Machines to Find Themes}
+
+% Slide 6: The Recipe Metaphor
+\begin{frame}[t]{Documents Are Like Recipes}
+\Large\textbf{A Simple Way to Think About Topics}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{Think of Cooking:}
+
+\vspace{0.3em}
+\textbf{Ingredients = Words}
+\begin{itemize}
+\footnotesize
+\item Tomato, cheese, basil, pasta...
+\item Each has different uses
+\item Can appear in many dishes
+\end{itemize}
+
+\vspace{0.3em}
+\textbf{Recipe Types = Topics}
+\begin{itemize}
+\footnotesize
+\item Italian: pasta, tomato, basil, olive oil
+\item Mexican: beans, corn, chili, lime
+\item Asian: rice, soy, ginger, sesame
+\end{itemize}
+
+\vspace{0.3em}
+\textbf{Actual Dish = Document}
+\begin{itemize}
+\footnotesize
+\item Fusion pasta: 60\% Italian, 40\% Asian
+\item Uses ingredients from both
+\item Mixed in specific proportions
+\end{itemize}
+
+\column{0.48\textwidth}
+\textbf{The Document Recipe:}
+\begin{center}
+\begin{tikzpicture}[scale=0.7]
+% Topics (ingredient lists)
+\node[draw,fill=mlred!30,minimum width=2cm] (t1) at (0,3) {Topic 1};
+\node[below] at (0,2.5) {\tiny quality, excellent, durable};
+
+\node[draw,fill=mlblue!30,minimum width=2cm] (t2) at (3,3) {Topic 2};
+\node[below] at (3,2.5) {\tiny price, value, affordable};
+
+\node[draw,fill=mlgreen!30,minimum width=2cm] (t3) at (6,3) {Topic 3};
+\node[below] at (6,2.5) {\tiny shipping, fast, delivery};
+
+% Mixing arrows
+\draw[->,thick] (t1) -- (1.5,0.5);
+\draw[->,thick] (t2) -- (3,0.5);
+\draw[->,thick] (t3) -- (4.5,0.5);
+
+% Document
+\node[draw,fill=mlyellow!30,minimum width=4cm] at (3,-0.5) {Document};
+\node[below] at (3,-1) {\footnotesize 30\% T1 + 50\% T2 + 20\% T3};
+\end{tikzpicture}
+\end{center}
+
+\begin{tcolorbox}[colback=mllavender4, colframe=mlpurple]
+\footnotesize
+\textbf{Key Insight:} Every document mixes multiple topics, just like fusion cuisine mixes cooking styles
+\end{tcolorbox}
+\end{columns}
+
+\bottomnote{This mixing is why forcing documents into single categories loses so much information}
+\end{frame}
+
+% Slide 7: Topics as Probability Distributions
+\begin{frame}[t]{Topics Are Word Probabilities}
+\Large\textbf{Which Words Define Each Theme?}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{What Is a Topic?}
+\begin{itemize}
+\item A list of words with probabilities
+\item High probability = core to topic
+\item Low probability = rarely appears
+\item All probabilities sum to 100\%
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Example: "Customer Service" Topic}
+\begin{center}
+\begin{tabular}{lc}
+\toprule
+\textbf{Word} & \textbf{Probability} \\
+\midrule
+service & 15\% \\
+support & 12\% \\
+helpful & 10\% \\
+response & 8\% \\
+quick & 7\% \\
+team & 6\% \\
+... & ... \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\column{0.48\textwidth}
+\textbf{Visual Distribution:}
+\begin{center}
+\includegraphics[width=0.9\textwidth]{charts/topic_word_distribution.pdf}
+\end{center}
+
+\textbf{Reading the Chart:}
+\begin{itemize}
+\footnotesize
+\item Tall bars = defining words
+\item Many small bars = common words
+\item Pattern = topic signature
+\end{itemize}
+
+\vspace{0.3em}
+\begin{tcolorbox}[colback=mlgreen!10, colframe=mlgreen]
+\footnotesize
+\textbf{Computers find these patterns by analyzing millions of word co-occurrences}
+\end{tcolorbox}
+\end{columns}
+
+\bottomnote{A topic is just a probability distribution over vocabulary - which words tend to appear together}
+\end{frame}
+
+% Slide 8: Documents as Topic Mixtures
+\begin{frame}[t]{Every Document Mixes Multiple Topics}
+\Large\textbf{Real Documents Are Never Pure}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{A Real Product Review:}
+\footnotesize
+"The laptop arrived quickly and was well packaged. Performance is excellent for the price, though battery life could be better. Customer service was helpful when I had questions about setup."
+
+\vspace{0.5em}
+\normalsize
+\textbf{Topic Breakdown:}
+\begin{itemize}
+\item \textcolor{mlblue}{Shipping (25\%)}: arrived, quickly, packaged
+\item \textcolor{mlgreen}{Performance (35\%)}: excellent, battery, performance
+\item \textcolor{mlorange}{Value (20\%)}: price, worth
+\item \textcolor{mlred}{Service (20\%)}: customer, helpful, questions
+\end{itemize}
+
+\vspace{0.3em}
+\textbf{The Math:}
+\footnotesize
+P(word|doc) = $\sum$ P(word|topic) × P(topic|doc)
+
+\column{0.48\textwidth}
+\textbf{Topic Mixture Visualization:}
+\begin{center}
+\begin{tikzpicture}[scale=0.8]
+% Pie chart
+\draw[fill=mlblue!30] (0,0) -- (0,2) arc (90:162:2) -- cycle;
+\draw[fill=mlgreen!30] (0,0) -- (162:2) arc (162:288:2) -- cycle;
+\draw[fill=mlorange!30] (0,0) -- (288:2) arc (288:360:2) -- cycle;
+\draw[fill=mlred!30] (0,0) -- (0:2) arc (0:90:2) -- cycle;
+
+% Labels
+\node at (45:2.5) {Service 20\%};
+\node at (126:2.5) {Shipping 25\%};
+\node at (225:2.5) {Performance 35\%};
+\node at (324:2.5) {Value 20\%};
+\end{tikzpicture}
+\end{center}
+
+\begin{tcolorbox}[colback=mllavender4, colframe=mlpurple]
+\footnotesize
+\textbf{No document is 100\% one topic} - real communication always blends themes
+\end{tcolorbox}
+\end{columns}
+
+\bottomnote{This mixture approach captures how humans actually write - we naturally blend topics}
+\end{frame}
+
+% Slide 9: The Unmixing Challenge
+\begin{frame}[t]{The Challenge: Unmixing the Smoothie}
+\Large\textbf{Reverse Engineering the Recipe}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{The Problem:}
+\begin{center}
+\begin{tikzpicture}[scale=0.7]
+% Forward process
+\node[draw,fill=mlred!30] (t1) at (0,3) {Topics};
+\node[draw,fill=mlblue!30] (t2) at (2,3) {+};
+\node[draw,fill=mlgreen!30] (t3) at (4,3) {Mixing};
+\draw[->,thick] (2,2.5) -- (2,1.5);
+\node[draw,fill=mlyellow!30] (doc) at (2,1) {Documents};
+
+% Reverse challenge
+\draw[->,thick,dashed,mlred] (2,0.5) -- (2,-0.5);
+\node[draw,fill=gray!30] at (2,-1) {???};
+\node[right] at (3,-1) {\footnotesize How to reverse?};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Given:} Mixed documents\\
+\textbf{Find:} Original topics\\
+\textbf{Challenge:} Many valid solutions!
+
+\vspace{0.3em}
+\textbf{Like Having a Smoothie:}
+\begin{itemize}
+\footnotesize
+\item Taste the final blend
+\item Need to identify ingredients
+\item Determine proportions
+\item Without the recipe!
+\end{itemize}
+
+\column{0.48\textwidth}
+\textbf{How Algorithms Solve It:}
+
+\textbf{1. Pattern Recognition}
+\begin{itemize}
+\footnotesize
+\item Words that appear together
+\item Consistent co-occurrences
+\item Statistical regularities
+\end{itemize}
+
+\textbf{2. Iterative Refinement}
+\begin{itemize}
+\footnotesize
+\item Start with random guess
+\item Improve topic definitions
+\item Adjust document mixtures
+\item Repeat until stable
+\end{itemize}
+
+\textbf{3. Optimization}
+\begin{itemize}
+\footnotesize
+\item Maximize topic coherence
+\item Minimize reconstruction error
+\item Balance specificity/coverage
+\end{itemize}
+
+\vspace{0.3em}
+\begin{tcolorbox}[colback=mlgreen!10, colframe=mlgreen]
+\footnotesize
+\textbf{The Magic:} Algorithms find patterns humans can't see in millions of documents
+\end{tcolorbox}
+\end{columns}
+
+\bottomnote{Topic modeling is essentially sophisticated pattern recognition at massive scale}
+\end{frame}
+
+% Slide 10: Matrix View (Simplified)
+\begin{frame}[t]{The Matrix View: Documents × Words}
+\Large\textbf{Organizing Text as Numbers}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{Step 1: Count Words}
+\begin{center}
+\footnotesize
+\begin{tabular}{lccc}
+\toprule
+ & quality & price & service \\
+\midrule
+Review 1 & 3 & 1 & 0 \\
+Review 2 & 0 & 2 & 4 \\
+Review 3 & 2 & 3 & 1 \\
+Review 4 & 1 & 0 & 5 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{Step 2: Find Patterns}
+\begin{itemize}
+\footnotesize
+\item Reviews 1,3: quality + price
+\item Reviews 2,4: service-focused
+\item Hidden structure emerges
+\end{itemize}
+
+\textbf{Step 3: Decompose}
+\begin{itemize}
+\footnotesize
+\item Original = Topics × Mixtures
+\item 1000×5000 = (1000×20) × (20×5000)
+\item Huge matrix → Two smaller ones
+\end{itemize}
+
+\column{0.48\textwidth}
+\textbf{Visual Decomposition:}
+\begin{center}
+\begin{tikzpicture}[scale=0.6]
+% Original matrix
+\draw[fill=gray!30] (0,0) rectangle (3,4);
+\node at (1.5,2) {Documents};
+\node at (1.5,-0.5) {Words};
+\node[rotate=90] at (-0.5,2) {1000};
+\node at (1.5,4.5) {5000};
+
+% Equals
+\node at (3.5,2) {=};
+
+% Topic matrix
+\draw[fill=mlred!30] (4,0) rectangle (5,4);
+\node[rotate=90] at (4.5,2) {\footnotesize Docs};
+\node at (4.5,-0.5) {\footnotesize Topics};
+\node at (4.5,4.5) {20};
+
+% Times
+\node at (5.5,2) {×};
+
+% Word matrix
+\draw[fill=mlblue!30] (6,1.5) rectangle (9,2.5);
+\node at (7.5,2) {\footnotesize T×W};
+\node[rotate=90] at (5.5,2) {20};
+\node at (7.5,3) {5000};
+\end{tikzpicture}
+\end{center}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mllavender4, colframe=mlpurple]
+\footnotesize
+\textbf{Benefit:} Compress millions of words into 20 meaningful topics
+\end{tcolorbox}
+\end{columns}
+
+\bottomnote{Matrix decomposition: Like compressing a huge spreadsheet into its essential patterns}
+\end{frame}
+
+% Slide 11: Topic Quality - How We Know It Works
+\begin{frame}[t]{How Do We Know Topics Are Good?}
+\Large\textbf{Measuring Quality Without Ground Truth}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{Good Topics Are:}
+
+\textbf{1. Coherent}
+\begin{itemize}
+\footnotesize
+\item Words belong together
+\item Make semantic sense
+\item Tell a clear story
+\end{itemize}
+\textbf{Example:} \textcolor{mlgreen}{[GOOD]} \{pizza, pasta, Italian, restaurant\}
+
+\vspace{0.3em}
+\textbf{2. Distinctive}
+\begin{itemize}
+\footnotesize
+\item Different from other topics
+\item Not overlapping
+\item Clear boundaries
+\end{itemize}
+\textbf{Example:} \textcolor{mlred}{[BAD]} Topic 1 and 2 both about "food"
+
+\vspace{0.3em}
+\textbf{3. Interpretable}
+\begin{itemize}
+\footnotesize
+\item Humans understand them
+\item Can be labeled easily
+\item Actionable insights
+\end{itemize}
+
+\column{0.48\textwidth}
+\textbf{Quality Metrics:}
+\begin{center}
+\includegraphics[width=0.9\textwidth]{charts/topic_coherence_plot.pdf}
+\end{center}
+
+\textbf{Choosing Number of Topics:}
+\begin{itemize}
+\footnotesize
+\item Too few (5): Too general
+\item Just right (20): Clear themes
+\item Too many (100): Redundant
+\end{itemize}
+
+\vspace{0.3em}
+\begin{tcolorbox}[colback=mlgreen!10, colframe=mlgreen]
+\footnotesize
+\textbf{Rule of thumb:} 20-50 topics for most datasets, check coherence score
+\end{tcolorbox}
+\end{columns}
+
+\bottomnote{Unlike classification, we don't have "correct" answers - quality is measured by usefulness}
+\end{frame}
+
+% Slide 12: Setting Up for Algorithms
+\begin{frame}[t]{Ready to Learn the Algorithms}
+\Large\textbf{What You Now Understand}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{Core Concepts:}
+\begin{itemize}
+\item Documents mix multiple topics
+\item Topics are word probabilities
+\item Goal: unmix the smoothie
+\item Matrix decomposition helps
+\item Quality matters more than quantity
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{The Challenge:}
+\begin{itemize}
+\item Given: Mixed documents
+\item Find: Hidden topics
+\item Make: Useful for innovation
+\end{itemize}
+
+\column{0.48\textwidth}
+\textbf{Next: Four Approaches}
+\begin{center}
+\begin{tikzpicture}[scale=0.7]
+\node[draw,fill=mlred!30,minimum width=3cm] at (0,3) {LDA: Probabilistic};
+\node[draw,fill=mlblue!30,minimum width=3cm] at (0,2) {NMF: Parts-based};
+\node[draw,fill=mlgreen!30,minimum width=3cm] at (0,1) {LSA: Semantic};
+\node[draw,fill=mlpurple!30,minimum width=3cm] at (0,0) {BERT: Context};
+\end{tikzpicture}
+\end{center}
+
+Each algorithm unmixes topics differently - like different chefs approaching the same ingredients
+\end{columns}
+
+\vspace{0.5em}
+\begin{center}
+\textcolor{mlpurple}{\textbf{Next: Deep dive into each algorithm}}
+\end{center}
+
+\bottomnote{You now understand the problem - let's see how different algorithms solve it}
+\end{frame}

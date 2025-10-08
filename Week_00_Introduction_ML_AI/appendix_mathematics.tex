@@ -1,0 +1,282 @@
+% Appendix: Mathematical Foundations
+\section*{Appendix: Mathematical Foundations}
+
+\begin{frame}[plain]
+\vfill
+\centering
+\begin{beamercolorbox}[sep=16pt,center]{title}
+\usebeamerfont{title}\Large Appendix: Mathematical Foundations\par
+\vspace{0.5em}
+\large Essential Mathematics for Machine Learning\par
+\end{beamercolorbox}
+\vfill
+\end{frame}
+
+% Linear Algebra Essentials
+\begin{frame}{Linear Algebra: Vectors and Matrices}
+\twocolslide{
+\Large\textbf{Vector Operations}
+\normalsize
+\vspace{0.5em}
+
+\textbf{Dot Product:}
+\formula{\mathbf{a} \cdot \mathbf{b} = \sum_{i=1}^n a_i b_i = ||\mathbf{a}|| ||\mathbf{b}|| \cos \theta}
+
+\textbf{Vector Norm:}
+\formula{||\mathbf{x}||_p = \left(\sum_{i=1}^n |x_i|^p\right)^{1/p}}
+
+\textbf{Matrix Multiplication:}
+\formula{(AB)_{ij} = \sum_{k=1}^m A_{ik} B_{kj}}
+
+\textbf{Matrix Inverse:}
+\formula{AA^{-1} = A^{-1}A = I}
+
+\textbf{Transpose Properties:}
+\formula{(AB)^T = B^T A^T}
+}{
+\Large\textbf{Eigendecomposition}
+\normalsize
+\vspace{0.5em}
+
+\textbf{Eigenvalue Equation:}
+\formula{A\mathbf{v} = \lambda \mathbf{v}}
+
+\textbf{Characteristic Polynomial:}
+\formula{\det(A - \lambda I) = 0}
+
+\textbf{Diagonalization:}
+\formula{A = P\Lambda P^{-1}}
+
+where $P$ contains eigenvectors, $\Lambda$ contains eigenvalues
+
+\textbf{Singular Value Decomposition:}
+\formula{A = U\Sigma V^T}
+
+where $U$, $V$ are orthogonal, $\Sigma$ is diagonal
+}
+\end{frame}
+
+% Calculus and Optimization
+\begin{frame}{Calculus: Derivatives and Optimization}
+\twocolslide{
+\Large\textbf{Multivariable Calculus}
+\normalsize
+\vspace{0.5em}
+
+\textbf{Gradient:}
+\formula{\nabla f(x) = \left(\frac{\partial f}{\partial x_1}, \frac{\partial f}{\partial x_2}, \ldots, \frac{\partial f}{\partial x_n}\right)}
+
+\textbf{Chain Rule:}
+\formula{\frac{\partial f}{\partial x} = \frac{\partial f}{\partial u} \frac{\partial u}{\partial x}}
+
+\textbf{Hessian Matrix:}
+\formula{H_{ij} = \frac{\partial^2 f}{\partial x_i \partial x_j}}
+
+\textbf{Taylor Expansion:}
+\formula{f(x + h) \approx f(x) + \nabla f(x)^T h + \frac{1}{2} h^T H h}
+
+\textbf{Directional Derivative:}
+\formula{D_{\mathbf{u}} f = \nabla f \cdot \mathbf{u}}
+}{
+\Large\textbf{Optimization}
+\normalsize
+\vspace{0.5em}
+
+\textbf{Gradient Descent:}
+\formula{\theta_{t+1} = \theta_t - \eta \nabla L(\theta_t)}
+
+\textbf{Newton's Method:}
+\formula{\theta_{t+1} = \theta_t - H^{-1} \nabla L(\theta_t)}
+
+\textbf{Convexity:}
+A function $f$ is convex if:
+\formula{f(\lambda x + (1-\lambda)y) \leq \lambda f(x) + (1-\lambda)f(y)}
+
+\textbf{Lagrange Multipliers:}
+\formula{L(x,\lambda) = f(x) + \lambda g(x)}
+
+\textbf{Optimality Conditions:}
+\formula{\nabla_x L = 0, \quad \nabla_\lambda L = 0}
+}
+\end{frame}
+
+% Probability Theory
+\begin{frame}{Probability Theory: Foundations of Uncertainty}
+\twocolslide{
+\Large\textbf{Basic Probability}
+\normalsize
+\vspace{0.5em}
+
+\textbf{Bayes' Theorem:}
+\formula{P(A|B) = \frac{P(B|A)P(A)}{P(B)}}
+
+\textbf{Expectation:}
+\formula{E[X] = \sum_x x P(X = x)}
+
+\textbf{Variance:}
+\formula{\text{Var}(X) = E[X^2] - (E[X])^2}
+
+\textbf{Covariance:}
+\formula{\text{Cov}(X,Y) = E[XY] - E[X]E[Y]}
+
+\textbf{Independence:}
+\formula{P(X,Y) = P(X)P(Y)}
+}{
+\Large\textbf{Distributions}
+\normalsize
+\vspace{0.5em}
+
+\textbf{Gaussian (Normal):}
+\formula{p(x) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}}
+
+\textbf{Multivariate Gaussian:}
+\formula{p(\mathbf{x}) = \frac{1}{(2\pi)^{k/2}|\Sigma|^{1/2}} e^{-\frac{1}{2}(\mathbf{x}-\boldsymbol{\mu})^T\Sigma^{-1}(\mathbf{x}-\boldsymbol{\mu})}}
+
+\textbf{Bernoulli:}
+\formula{P(X = k) = p^k (1-p)^{1-k}}
+
+\textbf{Exponential Family:}
+\formula{p(x|\theta) = h(x) e^{\eta(\theta)^T T(x) - A(\theta)}}
+}
+\end{frame}
+
+% Information Theory
+\begin{frame}{Information Theory: Measuring Information}
+\twocolslide{
+\Large\textbf{Core Concepts}
+\normalsize
+\vspace{0.5em}
+
+\textbf{Entropy:}
+\formula{H(X) = -\sum_x P(x) \log P(x)}
+
+\textbf{Cross-Entropy:}
+\formula{H(p,q) = -\sum_x p(x) \log q(x)}
+
+\textbf{KL Divergence:}
+\formula{D_{KL}(p||q) = \sum_x p(x) \log \frac{p(x)}{q(x)}}
+
+\textbf{Mutual Information:}
+\formula{I(X;Y) = \sum_{x,y} p(x,y) \log \frac{p(x,y)}{p(x)p(y)}}
+
+\textbf{Properties:}
+\begin{itemize}
+\item $H(X) \geq 0$ (non-negative)
+\item $D_{KL}(p||q) \geq 0$ (non-negative)
+\item $D_{KL}(p||q) = 0$ iff $p = q$
+\end{itemize>
+}{
+\Large\textbf{Applications in ML}
+\normalsize
+\vspace{0.5em}
+
+\textbf{Maximum Likelihood:}
+\formula{\theta^* = \argmax_\theta \sum_i \log p(x_i|\theta)}
+
+Equivalent to minimizing cross-entropy
+
+\textbf{Information Gain (Decision Trees):}
+\formula{IG = H(S) - \sum_{v} \frac{|S_v|}{|S|} H(S_v)}
+
+\textbf{Variational Inference:}
+\formula{\log p(x) \geq \mathbb{E}_q[\log p(x,z)] - \mathbb{E}_q[\log q(z)]}
+
+\textbf{Regularization via Information:}
+\begin{itemize}
+\item Information bottleneck principle
+\item Minimum description length
+\item Occam's razor formalization
+\end{itemize}
+}
+\end{frame}
+
+% Statistical Learning Theory
+\begin{frame}{Statistical Learning Theory: Generalization Bounds}
+\twocolslide{
+\Large\textbf{PAC Learning}
+\normalsize
+\vspace{0.5em}
+
+\textbf{Probably Approximately Correct:}
+With probability $\geq 1 - \delta$, a learning algorithm outputs hypothesis $h$ such that:
+\formula{R(h) \leq R^*(h) + \epsilon}
+
+\textbf{Sample Complexity:}
+\formula{m \geq \frac{1}{\epsilon}\left(\log |H| + \log \frac{1}{\delta}\right)}
+
+for finite hypothesis class $H$
+
+\textbf{VC Dimension:}
+Largest set size that can be shattered by hypothesis class
+
+\textbf{Generalization Bound:}
+\formula{R(h) \leq \hat{R}(h) + \sqrt{\frac{d \log(m/d) + \log(1/\delta)}{m}}}
+
+where $d$ is VC dimension
+}{
+\Large\textbf{Regularization Theory}
+\normalsize
+\vspace{0.5em}
+
+\textbf{Structural Risk Minimization:}
+\formula{h^* = \argmin_h \left[\hat{R}(h) + \lambda \Omega(h)\right]}
+
+\textbf{Rademacher Complexity:}
+\formula{\mathfrak{R}_m(F) = \mathbb{E}_\sigma \left[\sup_{f \in F} \frac{1}{m} \sum_{i=1}^m \sigma_i f(x_i)\right]}
+
+\textbf{Concentration Inequalities:}
+
+\textit{Hoeffding's Inequality:}
+\formula{P(|\hat{\mu} - \mu| \geq t) \leq 2e^{-2mt^2}}
+
+\textit{McDiarmid's Inequality:}
+For bounded differences, concentration around expectation
+}
+\end{frame}
+
+% Numerical Methods
+\begin{frame}{Numerical Methods for Machine Learning}
+\twocolslide{
+\Large\textbf{Optimization Algorithms}
+\normalsize
+\vspace{0.5em}
+
+\textbf{Stochastic Gradient Descent:}
+\formula{\theta_{t+1} = \theta_t - \eta_t \nabla L_i(\theta_t)}
+
+\textbf{Momentum:}
+\formula{v_t = \gamma v_{t-1} + \eta \nabla L(\theta_t)}
+\formula{\theta_{t+1} = \theta_t - v_t}
+
+\textbf{AdaGrad:}
+\formula{G_t = G_{t-1} + (\nabla L(\theta_t))^2}
+\formula{\theta_{t+1} = \theta_t - \frac{\eta}{\sqrt{G_t + \epsilon}} \nabla L(\theta_t)}
+
+\textbf{Adam:}
+\formula{m_t = \beta_1 m_{t-1} + (1-\beta_1) \nabla L(\theta_t)}
+\formula{v_t = \beta_2 v_{t-1} + (1-\beta_2) (\nabla L(\theta_t))^2}
+\formula{\theta_{t+1} = \theta_t - \frac{\eta}{\sqrt{v_t} + \epsilon} m_t}
+}{
+\Large\textbf{Numerical Stability}
+\normalsize
+\vspace{0.5em}
+
+\textbf{Softmax Numerical Stability:}
+\formula{\text{softmax}(x_i) = \frac{e^{x_i - \max_j x_j}}{\sum_j e^{x_j - \max_j x_j}}}
+
+\textbf{Log-Sum-Exp Trick:}
+\formula{\log \sum_i e^{x_i} = a + \log \sum_i e^{x_i - a}}
+
+where $a = \max_i x_i$
+
+\textbf{Gradient Clipping:}
+\formula{\mathbf{g} = \begin{cases} \mathbf{g} & ||\mathbf{g}|| \leq \theta \\ \frac{\theta}{||\mathbf{g}||} \mathbf{g} & ||\mathbf{g}|| > \theta \end{cases}}
+
+\textbf{Numerical Precision:}
+\begin{itemize}
+\item Float32 vs Float64 tradeoffs
+\item Catastrophic cancellation
+\item Conditioning and stability
+\end{itemize}
+}
+\end{frame}

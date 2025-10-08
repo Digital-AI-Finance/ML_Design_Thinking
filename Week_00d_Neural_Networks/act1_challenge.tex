@@ -1,0 +1,137 @@
+% Act 1: The Challenge (5 slides)
+
+\begin{frame}{1. Image Recognition Needs Hierarchical Features}
+\begin{columns}[c]
+\column{0.48\textwidth}
+\begin{itemize}
+\item Raw pixels are meaningless noise
+\item Vision builds up complexity:
+  \begin{itemize}
+  \item Edges from pixel gradients
+  \item Shapes from edge combinations
+  \item Objects from shape patterns
+  \end{itemize}
+\item Traditional ML: Manual feature engineering
+\item Deep learning: Automatic feature hierarchy
+\end{itemize}
+
+\column{0.48\textwidth}
+\begin{center}
+\includegraphics[width=\textwidth]{charts/hierarchical_features.pdf}
+\end{center}
+\end{columns}
+
+\vspace{\fill}
+\small\textcolor{gray}{Neural networks must learn increasingly abstract representations}
+\end{frame}
+
+\begin{frame}{2. Single Perceptron: Linear Only}
+\begin{columns}[c]
+\column{0.48\textwidth}
+\textbf{The Perceptron (1957)}
+\begin{align}
+y &= \text{sign}(w_1x_1 + w_2x_2 + b) \\
+&= \text{sign}(\mathbf{w}^T\mathbf{x} + b)
+\end{align}
+
+\textbf{Geometric Interpretation:}
+\begin{itemize}
+\item Creates a linear decision boundary
+\item Hyperplane in n-dimensional space
+\item Cannot separate non-linear patterns
+\end{itemize}
+
+\column{0.48\textwidth}
+\begin{center}
+\includegraphics[width=\textwidth]{charts/perceptron_limitation.pdf}
+\end{center}
+\end{columns}
+
+\vspace{\fill}
+\small\textcolor{gray}{Single layer = single hyperplane = linear separation only}
+\end{frame}
+
+\begin{frame}{3. XOR Problem: Concrete Example}
+\begin{columns}[c]
+\column{0.48\textwidth}
+\textbf{XOR Truth Table:}
+\begin{center}
+\begin{tabular}{cc|c}
+\toprule
+$x_1$ & $x_2$ & XOR \\
+\midrule
+0 & 0 & 0 \\
+0 & 1 & 1 \\
+1 & 0 & 1 \\
+1 & 1 & 0 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{The Problem:}
+\begin{itemize}
+\item No single line separates the classes
+\item Requires non-linear decision boundary
+\item Proof: Perceptron cannot solve XOR
+\end{itemize}
+
+\column{0.48\textwidth}
+\begin{center}
+\includegraphics[width=\textwidth]{charts/xor_problem.pdf}
+\end{center}
+\end{columns}
+
+\vspace{\fill}
+\small\textcolor{gray}{XOR became the symbol of perceptron limitations (1969 AI winter)}
+\end{frame}
+
+\begin{frame}{4. Universal Approximation Theorem}
+\begin{columns}[c]
+\column{0.48\textwidth}
+\textbf{Theoretical Foundation:}
+\begin{itemize}
+\item Any continuous function can be approximated
+\item Single hidden layer with enough neurons
+\item Activation: sigmoid, tanh, ReLU
+\item Arbitrarily small error possible
+\end{itemize}
+
+\textbf{Mathematical Statement:}
+\small
+For any $\epsilon > 0$ and continuous $f$ on compact set $K$, there exists network $N$ such that:
+$$\sup_{x \in K} |f(x) - N(x)| < \epsilon$$
+
+\column{0.48\textwidth}
+\begin{center}
+\includegraphics[width=\textwidth]{charts/universal_approximation.pdf}
+\end{center}
+\end{columns}
+
+\vspace{\fill}
+\small\textcolor{gray}{Theory says it's possible - but how many neurons do we actually need?}
+\end{frame}
+
+\begin{frame}{5. Quantify: How Many Neurons/Layers Needed?}
+\begin{columns}[c]
+\column{0.48\textwidth}
+\textbf{Practical Reality:}
+\begin{itemize}
+\item Theory: Single layer sufficient
+\item Practice: Exponentially many neurons
+\item Example: Parity function on n bits
+  \begin{itemize}
+  \item 1 layer: $2^{n-1}$ neurons needed
+  \item 2 layers: $O(n)$ neurons sufficient
+  \end{itemize}
+\item \textcolor{mlred}{Curse of width vs. blessing of depth}
+\end{itemize}
+
+\column{0.48\textwidth}
+\begin{center}
+\includegraphics[width=\textwidth]{charts/neurons_vs_layers.pdf}
+\end{center}
+\end{columns}
+
+\vspace{\fill}
+\small\textcolor{gray}{Depth provides exponential expressivity advantage over width}
+\end{frame}

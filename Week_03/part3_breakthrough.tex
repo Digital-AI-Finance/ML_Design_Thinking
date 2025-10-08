@@ -1,0 +1,584 @@
+% ==================== PART 3: THE BREAKTHROUGH ====================
+\section{Part 3: The Transformer Breakthrough}
+
+% Slide 12: Human Introspection - How Do We Really Understand?
+\begin{frame}[t]{Stop: How Do YOU Understand ``The Bank is Nice''?}
+\Large\textbf{Let's Be Honest About Our Mental Process}
+\normalsize
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{Trace Your Thinking:}
+
+\vspace{0.3em}
+\textbf{Sentence:} ``I went to the bank. The water was nice.''
+
+\footnotesize
+\begin{enumerate}
+\item Read ``I went to the bank''
+\item Your brain: Could be financial or river...
+\item Read ``The water was nice''
+\item Your brain: Ah! River bank, not financial
+\item Re-interpret: ``bank'' = riverbank
+\item Understand: Person enjoyed the riverside
+\end{enumerate}
+
+\normalsize
+\vspace{0.5em}
+\textbf{What You Actually Did:}
+\begin{itemize}
+\item Held multiple meanings open
+\item Used later words to resolve earlier ones
+\item \textcolor{mlpurple}{\textbf{Selectively focused on ``water'' to understand ``bank''}}
+\end{itemize}
+
+\column{0.48\textwidth}
+\begin{tcolorbox}[colback=mllavender4, colframe=mlpurple]
+\textbf{The Key Observation:}\\[0.3em]
+You DON'T compress the sentence into a summary.\\[0.3em]
+You KEEP all words available and SELECTIVELY ATTEND to relevant ones when needed.\\[0.3em]
+\textcolor{mlpurple}{\textbf{This is the breakthrough insight!}}
+\end{tcolorbox}
+
+\vspace{0.5em}
+\begin{center}
+\includegraphics[width=0.9\textwidth]{charts/human_attention_process.pdf}
+\end{center}
+\end{columns}
+
+\bottomnote{Cognitive science: Humans use ``selective attention'' - focusing on relevant information while keeping context available}
+\end{frame}
+
+% Slide 13: The Hypothesis - Conceptual Only, No Math
+\begin{frame}[t]{The Hypothesis: Don't Compress, Selectively Attend}
+\Large\textbf{A Fundamentally Different Approach}
+\normalsize
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{Old Way (Bag of Words):}
+\begin{itemize}
+\item Take all words
+\item Compress to counts
+\item Lose relationships
+\item Try to reconstruct meaning
+\end{itemize}
+
+\vspace{0.3em}
+\textbf{Analogy:}\\
+\footnotesize
+Like taking a book, counting word frequencies, throwing away the book, then trying to understand the story from counts.
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mlred!10, colframe=mlred]
+\footnotesize
+\textbf{Result:} Lost 82\% of information\\
+Can't recover context
+\end{tcolorbox}
+
+\column{0.48\textwidth}
+\textbf{New Way (Attention):}
+\begin{itemize}
+\item Keep all words
+\item Keep all positions
+\item For each word, look at all others
+\item Decide how much to focus on each
+\end{itemize}
+
+\vspace{0.3em}
+\textbf{Analogy:}\\
+\footnotesize
+Like keeping the entire book and using a smart highlighter that knows which sentences help understand other sentences.
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mlgreen!10, colframe=mlgreen]
+\footnotesize
+\textbf{Result:} Keep 100\% of information\\
+Use what's relevant when needed
+\end{tcolorbox}
+\end{columns}
+
+\vspace{0.5em}
+\begin{center}
+\Large\textcolor{mlpurple}{\textbf{Instead of asking ``What to keep?'' we ask ``What to focus on?''}}
+\end{center}
+
+\bottomnote{This shift from compression to attention is why Transformers revolutionized NLP in 2017}
+\end{frame}
+
+% Slide 14: Zero-Jargon Explanation of Attention
+\begin{frame}[t]{How Attention Works: Focus Percentages}
+\Large\textbf{No Math Yet - Just Percentages}
+\normalsize
+
+\textbf{Example:} Understanding ``bank'' in: ``The bank by the river is peaceful''
+
+\vspace{0.5em}
+\begin{columns}[T]
+\column{0.55\textwidth}
+\textbf{Step 1: For word ``bank'', look at all other words}
+
+\footnotesize
+\begin{tabular}{lc}
+\toprule
+\textbf{Word} & \textbf{Relevance to ``bank''} \\
+\midrule
+The & Low \\
+by & Medium \\
+the & Low \\
+\textcolor{mlgreen}{\textbf{river}} & \textcolor{mlgreen}{\textbf{Very High}} \\
+is & Low \\
+peaceful & Medium \\
+\bottomrule
+\end{tabular}
+
+\normalsize
+\vspace{0.5em}
+\textbf{Step 2: Convert to percentages (must sum to 100\%)}
+
+\footnotesize
+\begin{tabular}{lr}
+\toprule
+\textbf{Word} & \textbf{Focus \%} \\
+\midrule
+The & 5\% \\
+by & 15\% \\
+the & 5\% \\
+\textcolor{mlgreen}{\textbf{river}} & \textcolor{mlgreen}{\textbf{55\%}} \\
+is & 5\% \\
+peaceful & 15\% \\
+\bottomrule
+\end{tabular}
+
+\column{0.43\textwidth}
+\textbf{Step 3: Use these percentages to understand ``bank''}
+
+\begin{tcolorbox}[colback=mllavender4, colframe=mlpurple]
+\footnotesize
+``bank'' meaning =\\
+5\% × meaning(``The'') +\\
+15\% × meaning(``by'') +\\
+5\% × meaning(``the'') +\\
+\textcolor{mlgreen}{\textbf{55\% × meaning(``river'')}} +\\
+5\% × meaning(``is'') +\\
+15\% × meaning(``peaceful'')\\[0.3em]
+= Mostly ``river'' context\\
+= Riverbank, not financial bank!
+\end{tcolorbox}
+
+\vspace{0.3em}
+\normalsize
+\textcolor{mlpurple}{\textbf{These percentages ARE the attention weights!}}
+\end{columns}
+
+\bottomnote{Attention weights = How much each word helps understand the current word (always sum to 100\%)}
+\end{frame}
+
+% Slide 15: Geometric Intuition - Start Simple
+\begin{frame}[t]{Why This Works: Geometric Intuition}
+\Large\textbf{Words as Directions in Space}
+\normalsize
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{Start Simple: 2D Space}
+
+\begin{center}
+\includegraphics[width=0.95\textwidth]{charts/word_vectors_2d.pdf}
+\end{center}
+
+\footnotesize
+\begin{itemize}
+\item Words = arrows (vectors)
+\item Similar meaning = similar direction
+\item ``river'' and ``water'' point similarly
+\item ``river'' and ``money'' point differently
+\end{itemize}
+
+\normalsize
+\textbf{Measuring Similarity:}\\
+Dot product = How aligned are two vectors?
+\begin{itemize}
+\item Same direction: High score
+\item Perpendicular: Zero score
+\item Opposite: Negative score
+\end{itemize}
+
+\column{0.48\textwidth}
+\textbf{Scale to Real NLP: 768D Space}
+
+\begin{tcolorbox}[colback=mllavender4, colframe=mlpurple]
+\footnotesize
+\textbf{Same principle, more dimensions:}\\[0.3em]
+• 2D: [x, y] coordinates\\
+• 768D: [x₁, x₂, ..., x₇₆₈] coordinates\\[0.3em]
+More dimensions = More nuanced meaning\\
+Can distinguish ``bank (river)'' from ``bank (money)'' from ``bank (slope)''
+\end{tcolorbox}
+
+\vspace{0.5em}
+\textbf{The Attention Calculation:}
+\begin{enumerate}
+\item Compute alignment (dot product) with all words
+\item Higher alignment = Pay more attention
+\item Convert to percentages
+\item Use percentages to blend meanings
+\end{enumerate}
+
+\vspace{0.3em}
+\textcolor{mlpurple}{\textbf{Geometry gives us semantic similarity!}}
+\end{columns}
+
+\bottomnote{Word vectors (embeddings) place words in high-dimensional space where distance = semantic difference}
+\end{frame}
+
+% Slide 16: The Attention Algorithm - 3 Steps with WHY
+\begin{frame}[t]{The Attention Algorithm: Three Essential Steps}
+\Large\textbf{Each Step Has a Purpose}
+\normalsize
+
+\begin{columns}[T]
+\column{0.55\textwidth}
+\textbf{Step 1: SCORE - Find Relevance}
+\begin{itemize}
+\item Action: For each word, compute alignment with all others
+\item Why: Identify which words help understand this one
+\item Math: $\text{Score}_{ij} = Q_i \cdot K_j$
+\item Plain: How relevant is word $j$ to understanding word $i$?
+\end{itemize}
+
+\vspace{0.3em}
+\textbf{Step 2: NORMALIZE - Create Percentages}
+\begin{itemize}
+\item Action: Convert scores to probabilities (0-100\%)
+\item Why: Need weights that sum to 1.0 for averaging
+\item Math: $\alpha_{ij} = \frac{e^{\text{Score}_{ij}}}{\sum_k e^{\text{Score}_{ik}}}$
+\item Plain: What percentage of attention should word $j$ get?
+\end{itemize}
+
+\vspace{0.3em}
+\textbf{Step 3: AGGREGATE - Blend Information}
+\begin{itemize}
+\item Action: Weighted sum of all word meanings
+\item Why: Combine context based on attention weights
+\item Math: $\text{Output}_i = \sum_j \alpha_{ij} \cdot V_j$
+\item Plain: New understanding using focused context
+\end{itemize}
+
+\column{0.43\textwidth}
+\begin{center}
+\includegraphics[width=0.95\textwidth]{charts/attention_three_steps.pdf}
+\end{center}
+
+\begin{tcolorbox}[colback=mlyellow!20, colframe=mlorange]
+\textbf{The Complete Formula:}\\[0.3em]
+$$\text{Attention}(Q,K,V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V$$
+
+Where:\\
+\footnotesize
+• Q = Query (what am I looking for?)\\
+• K = Keys (what info is available?)\\
+• V = Values (what to extract?)\\
+• $\sqrt{d_k}$ = Scaling factor for stability
+\end{tcolorbox}
+\end{columns}
+
+\bottomnote{This three-step process happens for EVERY word in parallel - that's the power of Transformers}
+\end{frame}
+
+% Slide 17: Full Numerical Walkthrough
+\begin{frame}[t]{Attention in Action: Complete Numerical Example}
+\Large\textbf{Real Numbers, Real Calculation}
+\normalsize
+
+\textbf{Task:} Computing attention for ``nice'' in: ``The service was nice''
+
+\begin{columns}[T]
+\column{0.58\textwidth}
+\footnotesize
+\textbf{Given: Word Vectors (Simplified to 2D)}\\
+The = [1, 0], service = [2, 3], was = [0, 1], nice = [3, 2]
+
+\vspace{0.3em}
+\textbf{Step 1: Calculate Scores}\\
+Query (nice) = [3, 2]\\
+\begin{tabular}{lccr}
+\textbf{Word} & \textbf{Key} & \textbf{Q·K} & \textbf{Score} \\
+\hline
+The & [1, 0] & 3×1+2×0 & 3 \\
+service & [2, 3] & 3×2+2×3 & 12 \\
+was & [0, 1] & 3×0+2×1 & 2 \\
+nice & [3, 2] & 3×3+2×2 & 13 \\
+\end{tabular}
+
+\vspace{0.3em}
+\textbf{Step 2: Convert to Percentages (Softmax)}\\
+\begin{tabular}{lrr}
+\textbf{Word} & \textbf{e\^{}Score} & \textbf{Attention \%} \\
+\hline
+The & 20 & 0.7\% \\
+service & 162,755 & \textcolor{mlgreen}{\textbf{63.1\%}} \\
+was & 7 & 0.0\% \\
+nice & 442,413 & 36.2\% \\
+\end{tabular}
+
+\column{0.40\textwidth}
+\textbf{Step 3: Aggregate}\\
+\footnotesize
+Values: The=[1,1], service=[4,5], was=[1,2], nice=[5,4]
+
+\vspace{0.3em}
+Output for ``nice'' =\\
+0.007 × [1,1] +\\
+\textcolor{mlgreen}{\textbf{0.631 × [4,5]}} +\\
+0.000 × [1,2] +\\
+0.362 × [5,4]\\
+= [0.01, 0.01] + \textcolor{mlgreen}{\textbf{[2.52, 3.16]}} + [0, 0] + [1.81, 1.45]\\
+= [4.34, 4.62]
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mlgreen!10, colframe=mlgreen]
+\textbf{Result:} 63\% attention on ``service''\\
+The word ``nice'' is understood primarily in context of ``service'' → Customer service sentiment!
+\end{tcolorbox}
+\end{columns}
+
+\bottomnote{In practice: 768 dimensions, not 2 - but the exact same calculation principle applies}
+\end{frame}
+
+% Slide 18: BERT Innovation - Bidirectional Understanding
+\begin{frame}[t]{BERT: Reading in Both Directions Changes Everything}
+\Large\textbf{The Power of Looking Forward AND Backward}
+\normalsize
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{Traditional (Left-to-Right Only):}
+
+\footnotesize
+Sentence: ``The bank charges are too high''
+
+Reading ``bank'':
+\begin{itemize}
+\item Can see: ``The''
+\item Cannot see: ``charges are too high''
+\item Guess: Could be river or financial...
+\item \textcolor{mlred}{50\% chance of error}
+\end{itemize}
+
+\normalsize
+\vspace{0.5em}
+\textbf{BERT (Bidirectional):}
+
+\footnotesize
+Same sentence: ``The bank charges are too high''
+
+Reading ``bank'':
+\begin{itemize}
+\item Can see: ``The'' AND ``charges are too high''
+\item ``charges'' → financial context
+\item Certain: Financial bank
+\item \textcolor{mlgreen}{99\% accurate}
+\end{itemize}
+
+\column{0.48\textwidth}
+\begin{center}
+\includegraphics[width=0.95\textwidth]{charts/bert_bidirectional.pdf}
+\end{center}
+
+\begin{tcolorbox}[colback=mllavender4, colframe=mlpurple]
+\textbf{BERT's Training Trick:}\\[0.3em]
+\footnotesize
+1. Mask random words: ``The [MASK] is nice''\\
+2. Predict masked word using ALL context\\
+3. Must understand both directions to succeed\\
+4. Learns deep bidirectional representations
+\end{tcolorbox}
+
+\vspace{0.3em}
+\textcolor{mlpurple}{\textbf{Bidirectional = 2x the context = Much better understanding}}
+\end{columns}
+
+\bottomnote{BERT = Bidirectional Encoder Representations from Transformers (Google 2018)}
+\end{frame}
+
+% Slide 19: Pre-training Scale - The Magic
+\begin{frame}[t]{Pre-training: Learning from 3.3 Billion Words}
+\Large\textbf{Standing on the Shoulders of Human Knowledge}
+\normalsize
+
+\begin{columns}[T]
+\column{0.55\textwidth}
+\textbf{BERT's Pre-training Data:}
+\begin{itemize}
+\item \textbf{Wikipedia:} 2.5 billion words
+\item \textbf{BookCorpus:} 800 million words
+\item \textbf{Total:} 3.3 billion words
+\item \textbf{Equivalent:} 16,500 books (200 pages each)
+\item \textbf{Reading time:} 104 years non-stop
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{What BERT Learned:}
+\begin{itemize}
+\item Language patterns
+\item World knowledge
+\item Cultural contexts
+\item Emotional expressions
+\item Sarcasm patterns
+\item Domain vocabularies
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Training Cost:}
+\begin{itemize}
+\item Time: 4 days on 64 TPUs
+\item Cost: \$50,000-100,000
+\item Result: Reusable for everyone!
+\end{itemize}
+
+\column{0.43\textwidth}
+\begin{center}
+\includegraphics[width=0.95\textwidth]{charts/pretraining_scale.pdf}
+\end{center}
+
+\begin{tcolorbox}[colback=mlgreen!10, colframe=mlgreen]
+\textbf{The Key Insight:}\\[0.3em]
+You DON'T need to train from scratch!\\[0.3em]
+BERT already knows:
+\begin{itemize}
+\footnotesize
+\item Grammar ✓
+\item Vocabulary ✓
+\item Context patterns ✓
+\item Emotional language ✓
+\end{itemize}
+\vspace{0.3em}
+You just teach it YOUR specific task
+\end{tcolorbox}
+\end{columns}
+
+\bottomnote{Pre-training is like medical school - general education before specialization}
+\end{frame}
+
+% Slide 20: Fine-tuning - Your Task
+\begin{frame}[t]{Fine-tuning: Teaching BERT Your Specific Task}
+\Large\textbf{From General Knowledge to Your Reviews}
+\normalsize
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{Your Fine-tuning Process:}
+
+\footnotesize
+\textbf{1. Start with Pre-trained BERT}
+\begin{itemize}
+\item Has general language understanding
+\item Knows emotions, sarcasm, context
+\item But doesn't know YOUR products
+\end{itemize}
+
+\vspace{0.3em}
+\textbf{2. Prepare Your Data}
+\begin{itemize}
+\item 1,000 labeled reviews
+\item Positive, Negative, Neutral labels
+\item Your product-specific language
+\end{itemize}
+
+\vspace{0.3em}
+\textbf{3. Fine-tune (Transfer Learning)}
+\begin{itemize}
+\item Show BERT your reviews
+\item It adjusts its parameters slightly
+\item Learns your domain specifics
+\item Keeps general knowledge intact
+\end{itemize}
+
+\vspace{0.3em}
+\textbf{4. Time \& Cost}
+\begin{itemize}
+\item Time: 2-3 hours on GPU
+\item Cost: \$10-50 cloud compute
+\item Data needed: As few as 500 examples
+\end{itemize}
+
+\column{0.48\textwidth}
+\textbf{Example: Learning Company Slang}
+
+\begin{tcolorbox}[colback=mllavender4, colframe=mlpurple]
+\footnotesize
+\textbf{Before Fine-tuning:}\\
+``This app is sick!'' → Negative (illness)\\[0.3em]
+\textbf{Your Training Data:}\\
+``Sick UI design!'' → Positive\\
+``Sick features!'' → Positive\\
+``Sick performance!'' → Positive\\[0.3em]
+\textbf{After Fine-tuning:}\\
+``This app is sick!'' → Positive (cool)
+\end{tcolorbox}
+
+\vspace{0.3em}
+\begin{center}
+\includegraphics[width=0.9\textwidth]{charts/finetuning_process.pdf}
+\end{center}
+
+\textcolor{mlpurple}{\textbf{3.3B words of knowledge + 1000 of your reviews = Perfect understanding}}
+\end{columns}
+
+\bottomnote{Fine-tuning leverages billions in pre-training investment for your specific needs}
+\end{frame}
+
+% Slide 21: Validation - The Proof
+\begin{frame}[t]{The Results: From 34\% to 94\% Accuracy}
+\Large\textbf{Transformers Solve the Context Problem}
+\normalsize
+
+\begin{center}
+\includegraphics[width=0.75\textwidth]{charts/performance_comparison_final.pdf}
+\end{center}
+
+\begin{columns}[T]
+\column{0.32\textwidth}
+\textbf{Simple Reviews:}
+\begin{itemize}
+\item BoW: 95\%
+\item BERT: 98\%
+\item Gain: +3\%
+\end{itemize}
+\footnotesize
+Already good gets better
+
+\column{0.32\textwidth}
+\textbf{Sarcasm:}
+\begin{itemize}
+\item BoW: 23\%
+\item BERT: 89\%
+\item Gain: \textcolor{mlgreen}{+66\%}
+\end{itemize}
+\footnotesize
+\textcolor{mlgreen}{Massive improvement}
+
+\column{0.32\textwidth}
+\textbf{Context-Dependent:}
+\begin{itemize}
+\item BoW: 34\%
+\item BERT: 94\%
+\item Gain: \textcolor{mlgreen}{+60\%}
+\end{itemize}
+\footnotesize
+\textcolor{mlgreen}{Problem solved!}
+\end{columns}
+
+\vspace{0.5em}
+\begin{center}
+\begin{tcolorbox}[colback=mlgreen!20, colframe=mlgreen, width=0.8\textwidth]
+\centering
+\Large\textbf{Overall: 51\% → 93\% accuracy}\\
+\normalsize
+Finally better than human agreement (79\%)!
+\end{tcolorbox}
+\end{center}
+
+\bottomnote{These gains translate directly to better user understanding and product decisions}
+\end{frame}

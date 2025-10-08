@@ -1,21 +1,20 @@
-#!/usr/bin/env python3
 """
-Create additional visualizations for Week 5 Topic Modeling presentation.
+Create additional visualization charts for Week 5: Topic Modeling & Ideation
+Charts that complement the narrative flow of discovering hidden patterns
 """
 
-import numpy as np
 import matplotlib.pyplot as plt
-import seaborn as sns
-from matplotlib.patches import Circle, Rectangle, Wedge
+import numpy as np
 import pandas as pd
-import warnings
-warnings.filterwarnings('ignore')
+from scipy.stats import norm
+import matplotlib.patches as patches
+from matplotlib.patches import FancyBboxPatch, Rectangle
+import matplotlib.lines as mlines
 
 # Set style
 plt.style.use('seaborn-v0_8-whitegrid')
-sns.set_palette("husl")
 
-# Color scheme
+# Define color palette (matching template_beamer_layout.tex)
 colors = {
     'mlblue': '#1f77b4',
     'mlorange': '#ff7f0e',
@@ -25,311 +24,454 @@ colors = {
     'mlbrown': '#8c564b',
     'mlpink': '#e377c2',
     'mlgray': '#7f7f7f',
-    'mlyellow': '#f1c40f',
-    'mlcyan': '#17becf'
+    'mlyellow': '#FFD700',
+    'mlcyan': '#17becf',
+    'mllavender': '#9999CC',
+    'mllavender2': '#B3B3E0',
+    'mllavender3': '#CCCCF0',
+    'mllavender4': '#E6E6F5'
 }
 
-def create_lda_document_topics():
-    """Create visualization of document-topic distributions."""
+def create_hidden_patterns_revealed():
+    """Create the iceberg visualization of hidden vs visible patterns"""
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 6))
+
+    # Left: Traditional Analysis
+    ax1.set_title('Traditional Analysis', fontsize=14, fontweight='bold')
+    categories = ['Price', 'Quality', 'Service', 'Speed', 'Other']
+    visible = [25, 20, 15, 10, 30]
+
+    bars = ax1.bar(categories, visible, color=colors['mlgray'], alpha=0.7)
+    ax1.set_ylabel('% of Feedback', fontsize=12)
+    ax1.set_ylim(0, 100)
+
+    # Add text showing what's missing
+    ax1.text(0.5, 60, 'Missing 70% of insights',
+             transform=ax1.transAxes, fontsize=11, color=colors['mlred'],
+             horizontalalignment='center', style='italic')
+
+    # Right: Topic Modeling Discovery
+    ax2.set_title('Topic Modeling Discovery', fontsize=14, fontweight='bold')
+
+    # Create layers of discovery
+    y_positions = np.linspace(0, 90, 20)
+    widths = np.random.uniform(3, 15, 20)
+    x_positions = np.random.uniform(0, 10, 20)
+
+    for i, (x, y, w) in enumerate(zip(x_positions, y_positions, widths)):
+        color = plt.cm.viridis(i/20)
+        ax2.barh(y, w, left=x, height=3, color=color, alpha=0.6)
+
+    ax2.set_xlabel('Topic Strength', fontsize=12)
+    ax2.set_ylabel('Hidden Themes Discovered', fontsize=12)
+    ax2.set_xlim(0, 20)
+    ax2.set_ylim(0, 100)
+
+    # Add annotations
+    ax2.text(0.5, 0.9, '20 themes found', transform=ax2.transAxes,
+             fontsize=11, color=colors['mlgreen'], fontweight='bold',
+             horizontalalignment='center')
+
+    plt.tight_layout()
+    plt.savefig('../charts/hidden_patterns_revealed.pdf', dpi=300, bbox_inches='tight')
+    plt.savefig('../charts/hidden_patterns_revealed.png', dpi=150, bbox_inches='tight')
+    plt.close()
+
+def create_topic_discovery_landscape():
+    """Create landscape visualization of topic discovery process"""
     fig, ax = plt.subplots(figsize=(10, 6))
 
-    # Sample documents
-    docs = ['Review 1', 'Review 2', 'Review 3', 'Review 4']
-    topics = ['Food', 'Service', 'Atmosphere']
+    # Create mountain-like landscape representing document space
+    x = np.linspace(0, 10, 1000)
 
-    # Document-topic proportions
-    data = np.array([
-        [0.7, 0.2, 0.1],  # Review 1
-        [0.2, 0.6, 0.2],  # Review 2
-        [0.1, 0.2, 0.7],  # Review 3
-        [0.4, 0.3, 0.3],  # Review 4
-    ])
+    # Multiple peaks representing different topics
+    y = (0.8 * np.exp(-(x-2)**2/0.5) +
+         1.2 * np.exp(-(x-4)**2/0.3) +
+         0.6 * np.exp(-(x-6)**2/0.4) +
+         0.9 * np.exp(-(x-8)**2/0.35) +
+         0.3 * np.sin(x*3) * np.exp(-x/10))
 
-    # Create stacked bar chart
-    bottom = np.zeros(len(docs))
-    topic_colors = [colors['mlblue'], colors['mlorange'], colors['mlgreen']]
+    ax.fill_between(x, 0, y, color=colors['mllavender'], alpha=0.3)
+    ax.plot(x, y, color=colors['mlpurple'], linewidth=2)
 
-    for i, topic in enumerate(topics):
-        ax.bar(docs, data[:, i], bottom=bottom, label=topic, color=topic_colors[i])
-        bottom += data[:, i]
+    # Mark discovered topics as peaks
+    peak_positions = [2, 4, 6, 8]
+    peak_heights = [0.8, 1.2, 0.6, 0.9]
+    peak_labels = ['Customer\nService', 'Product\nQuality', 'Shipping\nIssues', 'Innovation\nNeeds']
 
-    ax.set_ylabel('Topic Proportion', fontsize=12)
-    ax.set_title('Document-Topic Distribution Example', fontsize=14, fontweight='bold')
-    ax.legend(title='Topics', loc='upper right')
-    ax.set_ylim(0, 1)
+    for pos, height, label in zip(peak_positions, peak_heights, peak_labels):
+        ax.plot(pos, height, 'o', markersize=12, color=colors['mlgreen'])
+        ax.annotate(label, xy=(pos, height), xytext=(pos, height+0.3),
+                   ha='center', fontsize=10, color=colors['mlgreen'],
+                   fontweight='bold', arrowprops=dict(arrowstyle='->', color=colors['mlgreen']))
 
-    # Add percentage labels
-    for i, doc in enumerate(docs):
-        y_offset = 0
-        for j, topic in enumerate(topics):
-            if data[i, j] > 0.05:
-                ax.text(i, y_offset + data[i, j]/2, f'{data[i, j]:.0%}',
-                       ha='center', va='center', fontsize=10, color='white', fontweight='bold')
-            y_offset += data[i, j]
+    ax.set_xlabel('Document Space', fontsize=12)
+    ax.set_ylabel('Topic Strength', fontsize=12)
+    ax.set_title('Topic Discovery Landscape: Finding Peaks in Data Mountains', fontsize=14, fontweight='bold')
+    ax.grid(True, alpha=0.3)
+    ax.set_xlim(0, 10)
+    ax.set_ylim(0, 2)
 
     plt.tight_layout()
-    plt.savefig('../charts/lda_document_topics.pdf', dpi=300, bbox_inches='tight')
-    plt.savefig('../charts/lda_document_topics.png', dpi=150, bbox_inches='tight')
+    plt.savefig('../charts/topic_discovery_landscape.pdf', dpi=300, bbox_inches='tight')
+    plt.savefig('../charts/topic_discovery_landscape.png', dpi=150, bbox_inches='tight')
     plt.close()
 
-def create_nmf_decomposition():
-    """Create NMF matrix decomposition visualization."""
-    fig, ax = plt.subplots(figsize=(12, 6))
+def create_topic_word_distribution():
+    """Create visualization of word probabilities within a topic"""
+    fig, ax = plt.subplots(figsize=(10, 6))
 
-    # Remove axes
-    ax.axis('off')
+    # Words and their probabilities for a "Customer Service" topic
+    words = ['service', 'support', 'helpful', 'response', 'quick',
+             'team', 'issue', 'resolved', 'thank', 'excellent',
+             'problem', 'email', 'chat', 'phone', 'wait']
+    probs = [0.15, 0.12, 0.10, 0.08, 0.07,
+             0.06, 0.05, 0.05, 0.04, 0.04,
+             0.03, 0.03, 0.03, 0.02, 0.02]
 
-    # Matrix V (documents × terms)
-    ax.add_patch(Rectangle((0.05, 0.3), 0.15, 0.4, facecolor=colors['mlgray'], alpha=0.5))
-    ax.text(0.125, 0.5, 'V\n(Docs×Terms)\n10000×5000', ha='center', va='center', fontsize=11, fontweight='bold')
+    # Normalize to show remaining probability
+    shown_prob = sum(probs)
+    probs.append(1 - shown_prob)
+    words.append('...')
 
-    # Equals sign
-    ax.text(0.25, 0.5, '≈', fontsize=20, ha='center', va='center')
+    # Create bars
+    bars = ax.bar(range(len(words)), probs, color=colors['mlblue'], alpha=0.7)
 
-    # Matrix W (documents × topics)
-    ax.add_patch(Rectangle((0.35, 0.3), 0.15, 0.4, facecolor=colors['mlblue'], alpha=0.5))
-    ax.text(0.425, 0.5, 'W\n(Docs×Topics)\n10000×20', ha='center', va='center', fontsize=11, fontweight='bold')
+    # Color top 5 words differently
+    for i in range(5):
+        bars[i].set_color(colors['mlorange'])
+        bars[i].set_alpha(0.9)
 
-    # Times sign
-    ax.text(0.55, 0.5, '×', fontsize=20, ha='center', va='center')
+    ax.set_xticks(range(len(words)))
+    ax.set_xticklabels(words, rotation=45, ha='right')
+    ax.set_ylabel('Probability', fontsize=12)
+    ax.set_title('Topic Word Distribution: "Customer Service" Theme', fontsize=14, fontweight='bold')
 
-    # Matrix H (topics × terms)
-    ax.add_patch(Rectangle((0.65, 0.4), 0.25, 0.2, facecolor=colors['mlorange'], alpha=0.5))
-    ax.text(0.775, 0.5, 'H\n(Topics×Terms)\n20×5000', ha='center', va='center', fontsize=11, fontweight='bold')
+    # Add annotation
+    ax.axhline(y=0.05, color=colors['mlred'], linestyle='--', alpha=0.5)
+    ax.text(len(words)-1, 0.05, 'Core words threshold',
+            ha='right', va='bottom', color=colors['mlred'], fontsize=10)
 
-    ax.set_xlim(0, 1)
-    ax.set_ylim(0, 1)
-    ax.set_title('NMF: Non-negative Matrix Factorization', fontsize=14, fontweight='bold', y=0.85)
+    ax.grid(True, alpha=0.3, axis='y')
 
     plt.tight_layout()
-    plt.savefig('../charts/nmf_decomposition.pdf', dpi=300, bbox_inches='tight')
-    plt.savefig('../charts/nmf_decomposition.png', dpi=150, bbox_inches='tight')
+    plt.savefig('../charts/topic_word_distribution.pdf', dpi=300, bbox_inches='tight')
+    plt.savefig('../charts/topic_word_distribution.png', dpi=150, bbox_inches='tight')
     plt.close()
 
-def create_topics_to_opportunities():
-    """Create topics to opportunities transformation visualization."""
+def create_topic_coherence_plot():
+    """Create plot showing coherence scores vs number of topics"""
+    fig, ax = plt.subplots(figsize=(10, 6))
+
+    # Number of topics to test
+    num_topics = np.arange(5, 51, 5)
+
+    # Simulated coherence scores (typically peaks around 15-25 topics)
+    coherence = (0.35 + 0.15 * np.exp(-(num_topics-20)**2/100)
+                 - 0.001 * num_topics + 0.02 * np.random.randn(len(num_topics)))
+
+    # Plot main line
+    ax.plot(num_topics, coherence, 'o-', color=colors['mlblue'],
+            linewidth=2, markersize=8, label='Coherence Score')
+
+    # Mark optimal point
+    optimal_idx = np.argmax(coherence)
+    ax.plot(num_topics[optimal_idx], coherence[optimal_idx], 'o',
+            markersize=15, color=colors['mlgreen'], zorder=5)
+    ax.annotate('Optimal: 20 topics',
+                xy=(num_topics[optimal_idx], coherence[optimal_idx]),
+                xytext=(num_topics[optimal_idx]+5, coherence[optimal_idx]+0.02),
+                arrowprops=dict(arrowstyle='->', color=colors['mlgreen']),
+                fontsize=11, color=colors['mlgreen'], fontweight='bold')
+
+    # Add regions
+    ax.axvspan(5, 10, alpha=0.2, color=colors['mlred'], label='Too General')
+    ax.axvspan(35, 50, alpha=0.2, color=colors['mlorange'], label='Too Specific')
+    ax.axvspan(15, 25, alpha=0.2, color=colors['mlgreen'], label='Sweet Spot')
+
+    ax.set_xlabel('Number of Topics', fontsize=12)
+    ax.set_ylabel('Topic Coherence Score', fontsize=12)
+    ax.set_title('Finding the Right Number of Topics', fontsize=14, fontweight='bold')
+    ax.grid(True, alpha=0.3)
+    ax.legend(loc='upper right')
+
+    plt.tight_layout()
+    plt.savefig('../charts/topic_coherence_plot.pdf', dpi=300, bbox_inches='tight')
+    plt.savefig('../charts/topic_coherence_plot.png', dpi=150, bbox_inches='tight')
+    plt.close()
+
+def create_algorithm_comparison():
+    """Create comparison chart of different topic modeling algorithms"""
     fig, ax = plt.subplots(figsize=(12, 8))
 
-    # Left side - Topics
-    topics_y = np.linspace(0.2, 0.8, 3)
-    topics = ['Battery Issues', 'User Interface', 'Connectivity']
+    algorithms = ['LDA', 'NMF', 'LSA', 'BERTopic']
+    metrics = ['Speed', 'Interpretability', 'Accuracy', 'Scalability', 'Context-Aware']
 
-    for i, (y, topic) in enumerate(zip(topics_y, topics)):
-        ax.add_patch(Circle((0.2, y), 0.08, facecolor=colors['mlblue'], alpha=0.6))
-        ax.text(0.2, y, 'T', ha='center', va='center', fontsize=14, fontweight='bold', color='white')
-        ax.text(0.05, y, topic, ha='right', va='center', fontsize=10)
+    # Scores for each algorithm (out of 5)
+    scores = {
+        'LDA': [3, 5, 4, 4, 2],
+        'NMF': [5, 4, 3, 5, 2],
+        'LSA': [4, 3, 3, 4, 1],
+        'BERTopic': [2, 4, 5, 3, 5]
+    }
 
-    # Middle - Translation
-    ax.arrow(0.35, 0.5, 0.2, 0, head_width=0.05, head_length=0.02, fc=colors['mlgray'], ec=colors['mlgray'])
-    ax.text(0.45, 0.55, 'Analysis', ha='center', fontsize=10, style='italic')
+    x = np.arange(len(metrics))
+    width = 0.2
 
-    # Right side - Opportunities
-    opps_y = np.linspace(0.15, 0.85, 4)
-    opportunities = [
-        'Wireless Charging',
-        'Power Banks',
-        'Gesture Control',
-        '5G Integration'
-    ]
+    colors_list = [colors['mlred'], colors['mlblue'], colors['mlgreen'], colors['mlpurple']]
 
-    for i, (y, opp) in enumerate(zip(opps_y, opportunities)):
-        ax.add_patch(Rectangle((0.65, y-0.03), 0.3, 0.06, facecolor=colors['mlgreen'], alpha=0.6))
-        ax.text(0.8, y, opp, ha='center', va='center', fontsize=10, fontweight='bold')
+    for i, (algo, color) in enumerate(zip(algorithms, colors_list)):
+        offset = (i - 1.5) * width
+        ax.bar(x + offset, scores[algo], width, label=algo, color=color, alpha=0.8)
 
-    # Draw connections
-    connections = [
-        (0, 0), (0, 1), (1, 2), (2, 3)
-    ]
-    for topic_idx, opp_idx in connections:
-        ax.plot([0.28, 0.65], [topics_y[topic_idx], opps_y[opp_idx]],
-               'k--', alpha=0.3, linewidth=1)
+    ax.set_xlabel('Metric', fontsize=12)
+    ax.set_ylabel('Score (1-5)', fontsize=12)
+    ax.set_title('Algorithm Comparison: Choose Based on Your Needs', fontsize=14, fontweight='bold')
+    ax.set_xticks(x)
+    ax.set_xticklabels(metrics)
+    ax.legend(loc='upper right')
+    ax.grid(True, alpha=0.3, axis='y')
+    ax.set_ylim(0, 5.5)
 
-    ax.set_xlim(0, 1)
-    ax.set_ylim(0, 1)
-    ax.set_title('From Topics to Design Opportunities', fontsize=14, fontweight='bold')
-    ax.axis('off')
+    # Add annotations for best use cases
+    ax.text(0.02, 0.98, 'Best for:', transform=ax.transAxes, fontsize=11, fontweight='bold', va='top')
+    ax.text(0.02, 0.93, '• LDA: General exploration', transform=ax.transAxes, fontsize=10, va='top', color=colors['mlred'])
+    ax.text(0.02, 0.88, '• NMF: Clear topics', transform=ax.transAxes, fontsize=10, va='top', color=colors['mlblue'])
+    ax.text(0.02, 0.83, '• LSA: Quick analysis', transform=ax.transAxes, fontsize=10, va='top', color=colors['mlgreen'])
+    ax.text(0.02, 0.78, '• BERT: Accuracy', transform=ax.transAxes, fontsize=10, va='top', color=colors['mlpurple'])
 
     plt.tight_layout()
-    plt.savefig('../charts/topics_to_opportunities.pdf', dpi=300, bbox_inches='tight')
-    plt.savefig('../charts/topics_to_opportunities.png', dpi=150, bbox_inches='tight')
+    plt.savefig('../charts/algorithm_comparison.pdf', dpi=300, bbox_inches='tight')
+    plt.savefig('../charts/algorithm_comparison.png', dpi=150, bbox_inches='tight')
+    plt.close()
+
+def create_dynamic_topics_timeline():
+    """Create visualization of topics evolving over time"""
+    fig, ax = plt.subplots(figsize=(12, 6))
+
+    # Time periods
+    months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun']
+
+    # Topics and their prevalence over time
+    topics = {
+        'Quality Issues': [10, 25, 30, 15, 10, 5],
+        'Shipping Delays': [5, 10, 15, 35, 20, 10],
+        'Great Service': [30, 25, 20, 15, 25, 35],
+        'Price Concerns': [15, 10, 5, 10, 20, 25],
+        'New Features': [5, 10, 15, 20, 25, 30]
+    }
+
+    # Create stacked area chart
+    x = np.arange(len(months))
+    y_stack = np.zeros(len(months))
+
+    colors_list = [colors['mlred'], colors['mlorange'], colors['mlgreen'],
+                   colors['mlblue'], colors['mlpurple']]
+
+    for (topic, values), color in zip(topics.items(), colors_list):
+        ax.fill_between(x, y_stack, y_stack + values, label=topic, color=color, alpha=0.7)
+        y_stack += values
+
+    # Mark critical events
+    ax.axvline(x=3.5, color='red', linestyle='--', alpha=0.7)
+    ax.text(3.5, 95, 'Supply Chain Crisis', rotation=90,
+            va='top', ha='right', color='red', fontsize=10)
+
+    ax.set_xticks(x)
+    ax.set_xticklabels(months)
+    ax.set_xlabel('Time Period', fontsize=12)
+    ax.set_ylabel('Topic Prevalence (%)', fontsize=12)
+    ax.set_title('Dynamic Topics: Tracking Changes Over Time', fontsize=14, fontweight='bold')
+    ax.legend(loc='upper left', ncol=2)
+    ax.grid(True, alpha=0.3)
+    ax.set_ylim(0, 100)
+
+    plt.tight_layout()
+    plt.savefig('../charts/dynamic_topics_timeline.pdf', dpi=300, bbox_inches='tight')
+    plt.savefig('../charts/dynamic_topics_timeline.png', dpi=150, bbox_inches='tight')
     plt.close()
 
 def create_innovation_opportunity_map():
-    """Create innovation opportunity mapping visualization."""
+    """Create opportunity map for Spotify micro-moods case"""
     fig, ax = plt.subplots(figsize=(10, 8))
 
-    # Generate random opportunities
-    np.random.seed(42)
-    n_opportunities = 30
+    # Create quadrant plot
+    ax.axhline(y=0, color='gray', linestyle='-', alpha=0.3)
+    ax.axvline(x=0, color='gray', linestyle='-', alpha=0.3)
 
-    frequency = np.random.uniform(0, 100, n_opportunities)
-    impact = np.random.uniform(0, 100, n_opportunities)
+    # Define opportunities
+    opportunities = {
+        'Monday Motivation': (0.7, 0.8, colors['mlgreen']),
+        'Workout Energy': (0.9, 0.6, colors['mlgreen']),
+        'Study Focus': (0.6, 0.9, colors['mlgreen']),
+        'Rainy Day': (0.3, 0.7, colors['mlblue']),
+        'Party Mode': (0.8, 0.4, colors['mlorange']),
+        'Sleep Time': (-0.2, 0.5, colors['mlpurple']),
+        'Commute Mix': (0.5, 0.3, colors['mlblue']),
+        'Cooking Jazz': (-0.4, 0.6, colors['mlpurple']),
+        'Romance': (0.2, 0.5, colors['mlred']),
+        'Nostalgia': (-0.6, 0.8, colors['mlred']),
+        'Productivity': (0.7, 0.7, colors['mlgreen']),
+        'Meditation': (-0.7, 0.9, colors['mlpurple'])
+    }
 
-    # Categorize into quadrants
-    colors_quad = []
-    for f, i in zip(frequency, impact):
-        if f > 50 and i > 50:
-            colors_quad.append(colors['mlgreen'])  # High-High
-        elif f < 50 and i > 50:
-            colors_quad.append(colors['mlorange'])  # Low-High
-        elif f > 50 and i < 50:
-            colors_quad.append(colors['mlyellow'])  # High-Low
-        else:
-            colors_quad.append(colors['mlgray'])    # Low-Low
+    for mood, (x, y, color) in opportunities.items():
+        size = np.random.uniform(200, 800)  # Random size for market potential
+        ax.scatter(x, y, s=size, alpha=0.6, color=color)
+        ax.annotate(mood, xy=(x, y), xytext=(5, 5), textcoords='offset points',
+                   fontsize=9, alpha=0.8)
 
-    # Create scatter plot
-    scatter = ax.scatter(frequency, impact, c=colors_quad, s=200, alpha=0.6, edgecolors='black', linewidth=1)
+    ax.set_xlabel('← Traditional | Innovative →', fontsize=12)
+    ax.set_ylabel('← Niche | Mainstream →', fontsize=12)
+    ax.set_title('Innovation Opportunity Map: 1,500 Micro-Moods Discovered', fontsize=14, fontweight='bold')
 
-    # Add quadrant lines
-    ax.axhline(y=50, color='black', linestyle='--', alpha=0.3)
-    ax.axvline(x=50, color='black', linestyle='--', alpha=0.3)
+    # Add quadrant labels
+    ax.text(0.5, 0.9, 'High Impact\nInnovations', transform=ax.transAxes,
+            fontsize=11, ha='center', color=colors['mlgreen'], fontweight='bold')
+    ax.text(0.05, 0.9, 'Experimental\nNiche', transform=ax.transAxes,
+            fontsize=11, ha='center', color=colors['mlpurple'], fontweight='bold')
 
-    # Label quadrants
-    ax.text(75, 75, 'Priority\nInnovations', ha='center', va='center', fontsize=11, fontweight='bold')
-    ax.text(25, 75, 'Differentiation\nOpportunities', ha='center', va='center', fontsize=11, fontweight='bold')
-    ax.text(75, 25, 'Quick Wins', ha='center', va='center', fontsize=11, fontweight='bold')
-    ax.text(25, 25, 'Low Priority', ha='center', va='center', fontsize=11, fontweight='bold', alpha=0.5)
-
-    ax.set_xlabel('Topic Frequency (%)', fontsize=12)
-    ax.set_ylabel('Business Impact (%)', fontsize=12)
-    ax.set_title('Innovation Opportunity Mapping', fontsize=14, fontweight='bold')
-    ax.set_xlim(0, 100)
-    ax.set_ylim(0, 100)
-    ax.grid(True, alpha=0.3)
+    ax.set_xlim(-1, 1)
+    ax.set_ylim(0, 1)
+    ax.grid(True, alpha=0.2)
 
     plt.tight_layout()
     plt.savefig('../charts/innovation_opportunity_map.pdf', dpi=300, bbox_inches='tight')
     plt.savefig('../charts/innovation_opportunity_map.png', dpi=150, bbox_inches='tight')
     plt.close()
 
-def create_persona_topic_heatmap():
-    """Create persona-topic alignment heatmap."""
+def create_topics_to_opportunities():
+    """Create funnel showing topics converting to opportunities"""
     fig, ax = plt.subplots(figsize=(10, 8))
 
-    personas = ['Tech Enthusiasts', 'Eco-conscious', 'Budget-minded', 'Premium seekers', 'Early adopters']
-    topics = ['AI/Automation', 'Sustainability', 'Value/Price', 'Quality', 'Innovation', 'Design', 'Ethics']
+    # Funnel data
+    stages = ['Raw Feedback\n100,000 items',
+              'Topics Found\n50 themes',
+              'Validated\n20 strong',
+              'Actionable\n10 ideas',
+              'Prioritized\n5 projects',
+              'Launched\n2 products']
 
-    # Create random alignment scores
-    np.random.seed(42)
-    data = np.random.uniform(0.2, 1.0, (len(personas), len(topics)))
+    values = [100000, 50, 20, 10, 5, 2]
+    colors_list = [colors['mlgray'], colors['mllavender'], colors['mlblue'],
+                   colors['mlorange'], colors['mlgreen'], colors['mlpurple']]
 
-    # Make some logical adjustments
-    data[0, 0] = 0.95  # Tech Enthusiasts - AI
-    data[1, 1] = 0.92  # Eco-conscious - Sustainability
-    data[2, 2] = 0.88  # Budget-minded - Value
-    data[3, 3] = 0.90  # Premium seekers - Quality
+    # Create funnel
+    y_pos = np.arange(len(stages))
 
-    im = ax.imshow(data, cmap='YlOrRd', aspect='auto', vmin=0, vmax=1)
+    for i, (stage, value, color) in enumerate(zip(stages, values, colors_list)):
+        # Calculate width based on log scale
+        width = np.log10(value + 1)
+        ax.barh(i, width, color=color, alpha=0.7, edgecolor='white', linewidth=2)
 
-    # Set ticks
-    ax.set_xticks(np.arange(len(topics)))
-    ax.set_yticks(np.arange(len(personas)))
-    ax.set_xticklabels(topics, rotation=45, ha='right')
-    ax.set_yticklabels(personas)
+        # Add text
+        ax.text(width/2, i, stage, ha='center', va='center',
+                fontweight='bold', fontsize=10)
 
-    # Add text annotations
-    for i in range(len(personas)):
-        for j in range(len(topics)):
-            text = ax.text(j, i, f'{data[i, j]:.2f}',
-                         ha="center", va="center", color="black" if data[i, j] < 0.5 else "white", fontsize=9)
+    ax.set_yticks([])
+    ax.set_xlim(0, 6)
+    ax.set_xlabel('Process Refinement →', fontsize=12)
+    ax.set_title('From Feedback Chaos to Product Launch', fontsize=14, fontweight='bold')
+    ax.spines['top'].set_visible(False)
+    ax.spines['right'].set_visible(False)
+    ax.spines['left'].set_visible(False)
 
-    # Add colorbar
-    cbar = plt.colorbar(im, ax=ax)
-    cbar.set_label('Alignment Score', fontsize=11)
-
-    ax.set_title('Persona-Topic Alignment Matrix', fontsize=14, fontweight='bold')
-    plt.tight_layout()
-    plt.savefig('../charts/persona_topic_heatmap.pdf', dpi=300, bbox_inches='tight')
-    plt.savefig('../charts/persona_topic_heatmap.png', dpi=150, bbox_inches='tight')
-    plt.close()
-
-def create_trend_evolution():
-    """Create trend evolution over time visualization."""
-    fig, ax = plt.subplots(figsize=(12, 6))
-
-    months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-
-    # Create trend data
-    ai_ethics = 20 + np.cumsum(np.random.randn(12) * 2 + 1.5)
-    circular_economy = 15 + np.cumsum(np.random.randn(12) * 1.5 + 1.2)
-    mental_health = 10 + np.cumsum(np.random.randn(12) * 2 + 2)
-    remote_work = 30 - np.cumsum(np.random.randn(12) * 1 + 0.5)
-
-    ax.plot(months, ai_ethics, marker='o', linewidth=2, label='AI Ethics', color=colors['mlblue'])
-    ax.plot(months, circular_economy, marker='s', linewidth=2, label='Circular Economy', color=colors['mlgreen'])
-    ax.plot(months, mental_health, marker='^', linewidth=2, label='Mental Health Tech', color=colors['mlorange'])
-    ax.plot(months, remote_work, marker='d', linewidth=2, label='Remote Work', color=colors['mlgray'], linestyle='--')
-
-    ax.set_xlabel('Month', fontsize=12)
-    ax.set_ylabel('Topic Prevalence (%)', fontsize=12)
-    ax.set_title('Emerging Topic Trends Over Time', fontsize=14, fontweight='bold')
-    ax.legend(loc='best')
-    ax.grid(True, alpha=0.3)
-    ax.set_ylim(0, 60)
-
-    # Add trend arrows
-    ax.annotate('', xy=(11.5, ai_ethics[-1]), xytext=(10.5, ai_ethics[-3]),
-               arrowprops=dict(arrowstyle='->', color=colors['mlgreen'], lw=2))
-    ax.annotate('', xy=(11.5, remote_work[-1]), xytext=(10.5, remote_work[-3]),
-               arrowprops=dict(arrowstyle='->', color=colors['mlred'], lw=2))
+    # Add success rate
+    ax.text(0.98, 0.02, 'Success Rate: 2%', transform=ax.transAxes,
+            fontsize=11, ha='right', color=colors['mlred'], fontweight='bold')
 
     plt.tight_layout()
-    plt.savefig('../charts/trend_evolution.pdf', dpi=300, bbox_inches='tight')
-    plt.savefig('../charts/trend_evolution.png', dpi=150, bbox_inches='tight')
+    plt.savefig('../charts/topics_to_opportunities.pdf', dpi=300, bbox_inches='tight')
+    plt.savefig('../charts/topics_to_opportunities.png', dpi=150, bbox_inches='tight')
     plt.close()
 
-def create_workshop_results():
-    """Create workshop results visualization."""
+def create_innovation_funnel_topics():
+    """Create innovation funnel visualization"""
     fig, ax = plt.subplots(figsize=(10, 8))
 
-    # Create pie chart for topics discovered
-    sizes = [18, 15, 12, 11, 9, 35]
-    labels = ['Healthcare AI', 'Sustainable Tech', 'EdTech', 'FinTech', 'Food Delivery', 'Others']
-    colors_pie = [colors['mlblue'], colors['mlgreen'], colors['mlorange'],
-                 colors['mlpurple'], colors['mlcyan'], colors['mlgray']]
+    # Funnel stages
+    stages = [
+        ('Data Collection', 100, colors['mlgray']),
+        ('Topic Discovery', 70, colors['mllavender2']),
+        ('Pattern Analysis', 40, colors['mlblue']),
+        ('Opportunity Mapping', 20, colors['mlorange']),
+        ('Concept Development', 10, colors['mlgreen']),
+        ('Product Launch', 3, colors['mlpurple'])
+    ]
 
-    wedges, texts, autotexts = ax.pie(sizes, labels=labels, colors=colors_pie,
-                                       autopct='%1.1f%%', startangle=90,
-                                       explode=[0.05, 0.05, 0, 0, 0, 0])
+    # Create funnel shape
+    for i, (stage, width, color) in enumerate(stages):
+        y = len(stages) - i - 1
 
-    # Make percentage text bold
-    for autotext in autotexts:
-        autotext.set_fontweight('bold')
-        autotext.set_color('white')
+        # Create trapezoid for each stage
+        left = (100 - width) / 2
+        right = left + width
 
-    ax.set_title('Workshop Results: Topic Distribution in Startup Ideas', fontsize=14, fontweight='bold')
+        # Draw the stage
+        ax.fill([left, right, right + 5, left - 5],
+                [y, y, y-0.9, y-0.9],
+                color=color, alpha=0.7, edgecolor='white', linewidth=2)
+
+        # Add text
+        ax.text(50, y-0.45, f'{stage}\n{width}%',
+                ha='center', va='center', fontweight='bold', fontsize=10)
+
+    # Add side annotations
+    ax.text(105, 5.5, '500+ Ideas', fontsize=10, color=colors['mlgray'])
+    ax.text(105, 4.5, '20-30 Topics', fontsize=10, color=colors['mllavender'])
+    ax.text(105, 3.5, 'Patterns', fontsize=10, color=colors['mlblue'])
+    ax.text(105, 2.5, '5-10 Opps', fontsize=10, color=colors['mlorange'])
+    ax.text(105, 1.5, 'Concepts', fontsize=10, color=colors['mlgreen'])
+    ax.text(105, 0.5, '1-3 Products', fontsize=10, color=colors['mlpurple'])
+
+    ax.set_xlim(-10, 120)
+    ax.set_ylim(-1, 6)
+    ax.axis('off')
+    ax.set_title('The Innovation Funnel: From Data to Products',
+                 fontsize=14, fontweight='bold', pad=20)
+
+    # Add success metrics
+    ax.text(0.5, -0.05, 'Success Rate: 60% vs 10% traditional',
+            transform=ax.transAxes, ha='center', fontsize=11,
+            color=colors['mlgreen'], fontweight='bold')
 
     plt.tight_layout()
-    plt.savefig('../charts/workshop_results.pdf', dpi=300, bbox_inches='tight')
-    plt.savefig('../charts/workshop_results.png', dpi=150, bbox_inches='tight')
+    plt.savefig('../charts/innovation_funnel_topics.pdf', dpi=300, bbox_inches='tight')
+    plt.savefig('../charts/innovation_funnel_topics.png', dpi=150, bbox_inches='tight')
     plt.close()
 
 def main():
-    """Generate additional charts for Week 5."""
-    print("Generating additional Week 5 charts...")
+    """Generate all charts"""
+    print("Creating Week 5 additional charts...")
 
-    create_lda_document_topics()
-    print("[OK] LDA document topics")
+    create_hidden_patterns_revealed()
+    print("[OK] Hidden patterns revealed chart created")
 
-    create_nmf_decomposition()
-    print("[OK] NMF decomposition")
+    create_topic_discovery_landscape()
+    print("[OK] Topic discovery landscape created")
 
-    create_topics_to_opportunities()
-    print("[OK] Topics to opportunities")
+    create_topic_word_distribution()
+    print("[OK] Topic word distribution created")
+
+    create_topic_coherence_plot()
+    print("[OK] Topic coherence plot created")
+
+    create_algorithm_comparison()
+    print("[OK] Algorithm comparison created")
+
+    create_dynamic_topics_timeline()
+    print("[OK] Dynamic topics timeline created")
 
     create_innovation_opportunity_map()
-    print("[OK] Innovation opportunity map")
+    print("[OK] Innovation opportunity map created")
 
-    create_persona_topic_heatmap()
-    print("[OK] Persona topic heatmap")
+    create_topics_to_opportunities()
+    print("[OK] Topics to opportunities funnel created")
 
-    create_trend_evolution()
-    print("[OK] Trend evolution")
+    create_innovation_funnel_topics()
+    print("[OK] Innovation funnel created")
 
-    create_workshop_results()
-    print("[OK] Workshop results")
-
-    print("\nAdditional charts generated successfully!")
+    print("\nAll charts generated successfully!")
 
 if __name__ == "__main__":
     main()

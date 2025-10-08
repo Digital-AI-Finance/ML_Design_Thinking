@@ -1,0 +1,310 @@
+% ==================== PART 1: THE HIDDEN PATTERN PROBLEM ====================
+\section{Part 1: The Hidden Pattern Problem}
+
+% Slide 1: The Opening Hook
+\begin{frame}[t]{Your Challenge: 1 Million Feedback Comments}
+\Large\textbf{What Are People Really Saying?}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{The Scenario:}
+\begin{itemize}
+\item Online retailer with 1M reviews
+\item Need insights by tomorrow
+\item Competitors analyzing manually
+\item Missing patterns = lost opportunities
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Manual Approach:}
+\begin{itemize}
+\item Read 100 reviews/day
+\item 10,000 days to finish (27 years!)
+\item Cost: 50 analysts × \$50K = \$2.5M/year
+\item Still miss cross-cutting themes
+\end{itemize}
+
+\column{0.48\textwidth}
+\textbf{What You're Missing:}
+\begin{center}
+\begin{tikzpicture}[scale=0.7]
+% Iceberg
+\draw[fill=mllavender2] (0,0) -- (-1.5,-0.5) -- (-1.2,-3) -- (1.2,-3) -- (1.5,-0.5) -- cycle;
+\draw[fill=mllavender3] (0,0) -- (-1.5,-0.5) -- (1.5,-0.5) -- (0.8,0.3) -- (-0.8,0.3) -- cycle;
+\draw[thick] (-2,-0.5) -- (2,-0.5);
+\node at (0,0.8) {\small \textbf{Visible: 5\%}};
+\node at (0,-1.5) {\small \textbf{Hidden: 95\%}};
+% Labels
+\node[align=left] at (2.5,0.3) {\footnotesize Obvious\\complaints};
+\node[align=left] at (2.5,-1) {\footnotesize Emerging\\issues};
+\node[align=left] at (2.5,-2) {\footnotesize Latent\\needs};
+\end{tikzpicture}
+\end{center}
+
+\begin{tcolorbox}[colback=mlred!10, colframe=mlred]
+\centering
+\textbf{Result:} You see complaints,\\
+miss opportunities
+\end{tcolorbox}
+\end{columns}
+
+\bottomnote{Real case: Amazon processes 1 billion reviews yearly - impossible without topic modeling}
+\end{frame}
+
+% Slide 2: The Cost of Missing Patterns
+\begin{frame}[t]{The Real Cost of Missing Hidden Patterns}
+\Large\textbf{When You Can't See the Forest for the Trees}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{Blockbuster (2000-2010):}
+\begin{itemize}
+\item Had millions of rental records
+\item Categorized by genre (Action, Drama)
+\item Missed micro-preferences
+\item Couldn't see "Films with strong female leads from the 80s"
+\item Result: Bankruptcy in 2010
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Netflix (Same Period):}
+\begin{itemize}
+\item Applied topic modeling to viewing data
+\item Discovered 76,897 micro-genres
+\item "Critically-acclaimed emotional dramas"
+\item "Witty foreign thrillers"
+\item Result: \$240B market cap
+\end{itemize}
+
+\column{0.48\textwidth}
+\textbf{The Pattern Discovery Gap:}
+\begin{center}
+% \includegraphics[width=0.9\textwidth]{charts/hidden_patterns_revealed.pdf}
+\textcolor{mllavender}{[Chart: Pattern Discovery Comparison]}
+\end{center}
+
+\begin{tcolorbox}[colback=mlgreen!10, colframe=mlgreen]
+\footnotesize
+\textbf{Netflix found:}\\
+• Micro-genres humans never named\\
+• Cross-category preferences\\
+• Time-based viewing patterns\\
+• Mood-driven selections
+\end{tcolorbox}
+\end{columns}
+
+\bottomnote{The difference: Netflix saw patterns invisible to human categorization}
+\end{frame}
+
+% Slide 3: Human Categorization Fails at Scale
+\begin{frame}[t]{Why Human Categorization Breaks Down}
+\Large\textbf{Our Brains Aren't Built for Big Data}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{Human Limits:}
+
+\textbf{1. Cognitive Capacity}
+\begin{itemize}
+\footnotesize
+\item Can track ~7 categories at once
+\item After 50 items: accuracy drops 40\%
+\item After 500 items: random guessing
+\end{itemize}
+
+\textbf{2. Consistency Problem}
+\begin{itemize}
+\footnotesize
+\item Same text, different day = different category
+\item Two analysts = 60\% agreement max
+\item Fatigue changes decisions
+\end{itemize}
+
+\textbf{3. Bias Blindness}
+\begin{itemize}
+\footnotesize
+\item See what we expect to see
+\item Miss emerging trends
+\item Overlook weak signals
+\end{itemize}
+
+\column{0.48\textwidth}
+\textbf{Scale Comparison:}
+\begin{center}
+\begin{tikzpicture}[scale=0.7]
+% Human capacity
+\draw[fill=mlred!30] (0,0) rectangle (1,0.5);
+\node[right] at (1.2,0.25) {\footnotesize Human: 100/day};
+
+% Daily data
+\draw[fill=mlorange!30] (0,1) rectangle (5,1.5);
+\node[right] at (5.2,1.25) {\footnotesize Daily: 10,000};
+
+% Monthly data
+\draw[fill=mlyellow!30] (0,2) rectangle (7,2.5);
+\node[right] at (7.2,2.25) {\footnotesize Monthly: 300,000};
+
+% Yearly data
+\draw[fill=mlgreen!30] (0,3) rectangle (8.5,3.5);
+\node[right] at (8.7,3.25) {\footnotesize Yearly: 3.6M};
+
+\draw[->] (0,0) -- (0,4);
+\node[rotate=90] at (-0.5,2) {\footnotesize Volume};
+\end{tikzpicture}
+\end{center}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mllavender4, colframe=mlpurple]
+\centering
+\textbf{The Gap:} Human capacity is linear,\\
+data growth is exponential
+\end{tcolorbox}
+\end{columns}
+
+\bottomnote{Spotify processes 4 billion user actions daily - human categorization is impossible}
+\end{frame}
+
+% Slide 4: The Cross-Cutting Problem
+\begin{frame}[t]{The Cross-Cutting Theme Challenge}
+\Large\textbf{When Topics Don't Fit in Boxes}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{Traditional Categories:}
+\begin{center}
+\begin{tikzpicture}[scale=0.6]
+% Boxes
+\draw[fill=mlred!30] (0,0) rectangle (2,1.5);
+\draw[fill=mlblue!30] (2.5,0) rectangle (4.5,1.5);
+\draw[fill=mlgreen!30] (5,0) rectangle (7,1.5);
+\node at (1,0.75) {Price};
+\node at (3.5,0.75) {Quality};
+\node at (6,0.75) {Service};
+
+% Problem documents
+\node[draw,circle,fill=mlyellow] (d1) at (1.25,2.5) {Doc};
+\draw[->] (d1) -- (1,1.5);
+\draw[->] (d1) -- (3.5,1.5);
+\node[right] at (2,2.5) {\footnotesize Where does this go?};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Real Review:}
+\footnotesize
+"Great value for money, though shipping was slow. Product quality exceeded expectations given the price point."
+
+\normalsize
+\textbf{Problem:} Mentions price, quality, AND service - which box?
+
+\column{0.48\textwidth}
+\textbf{Topic Modeling Solution:}
+\begin{center}
+\begin{tikzpicture}[scale=0.6]
+% Overlapping circles
+\draw[fill=mlred!30,opacity=0.5] (1,1) circle (1.2);
+\draw[fill=mlblue!30,opacity=0.5] (2.5,1) circle (1.2);
+\draw[fill=mlgreen!30,opacity=0.5] (1.75,2.2) circle (1.2);
+\node at (0.5,0.5) {\footnotesize Price};
+\node at (3,0.5) {\footnotesize Quality};
+\node at (1.75,3) {\footnotesize Service};
+
+% Document in overlap
+\node[draw,circle,fill=mlyellow] at (1.75,1.3) {Doc};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Document Mixture:}
+\begin{itemize}
+\footnotesize
+\item 40\% about price/value
+\item 35\% about quality
+\item 25\% about service
+\end{itemize}
+
+\vspace{0.3em}
+\textbf{Benefit:} Captures full meaning, not forced choice
+\end{columns}
+
+\bottomnote{Every document is a unique mixture of topics - forcing single categories loses information}
+\end{frame}
+
+% Slide 5: Enter Topic Modeling
+\begin{frame}[t]{Enter Topic Modeling: Pattern Discovery at Scale}
+\Large\textbf{From Human Limits to Machine Intelligence}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{What Topic Modeling Does:}
+
+\vspace{0.3em}
+\textbf{1. Discovers Hidden Themes}
+\begin{itemize}
+\footnotesize
+\item No predefined categories
+\item Themes emerge from data
+\item Finds unexpected connections
+\end{itemize}
+
+\textbf{2. Handles Scale}
+\begin{itemize}
+\footnotesize
+\item 1M documents in hours
+\item Consistent analysis
+\item Never gets tired
+\end{itemize}
+
+\textbf{3. Captures Nuance}
+\begin{itemize}
+\footnotesize
+\item Documents as topic mixtures
+\item Probabilistic understanding
+\item Cross-cutting themes
+\end{itemize}
+
+\textbf{4. Evolves with Data}
+\begin{itemize}
+\footnotesize
+\item Detects emerging trends
+\item Tracks topic evolution
+\item Adapts to new patterns
+\end{itemize}
+
+\column{0.48\textwidth}
+\textbf{The Transformation:}
+\begin{center}
+\includegraphics[width=0.9\textwidth]{charts/topic_discovery_landscape.pdf}
+\end{center}
+
+\begin{tcolorbox}[colback=mlgreen!10, colframe=mlgreen]
+\centering
+\textbf{Real Impact:}\\[0.3em]
+\footnotesize
+• 10,000 documents → 20 themes\\
+• Processing time: 5 minutes\\
+• Human equivalent: 3 months\\
+• Patterns found: 15 unexpected
+\end{tcolorbox}
+\end{columns}
+
+\vspace{0.5em}
+\begin{center}
+\textcolor{mlpurple}{\textbf{Next: How do machines find these hidden patterns?}}
+\end{center}
+
+\bottomnote{Topic modeling: Turning unstructured text chaos into structured innovation opportunities}
+\end{frame}

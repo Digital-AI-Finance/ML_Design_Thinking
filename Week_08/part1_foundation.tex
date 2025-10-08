@@ -1,0 +1,390 @@
+% Part 1: Foundation - The Reliability Challenge
+\section{Foundation: From Prototype to Production}
+
+% Slide 1: Opening Power Visualization - Cost Impact
+\begin{frame}{The Hidden Cost of Unreliable AI}
+\begin{columns}[T]
+\column{0.55\textwidth}
+\includegraphics[width=0.85\textwidth]{charts/reliability_cost_impact.pdf}
+
+\column{0.43\textwidth}
+\textcolor{mlblue}{\Large \$310K Per Year}\\[0.5cm]
+
+\textcolor{mlorange}{\normalsize Impact Areas:}\\[0.2cm]
+\small
+\begin{itemize}
+\item Manual error correction
+\item Customer churn from mistakes
+\item Support ticket overload
+\item Delayed product launches
+\item Refunds and compensation
+\end{itemize}
+
+\vspace{\fill}
+{\footnotesize\textcolor{mlgray}{Per 1000 users - typical AI-powered service}}
+\end{columns}
+\end{frame}
+
+% Slide 2: The Prototype-to-Production Gap
+\begin{frame}{The 80\% Problem: Why Most AI Projects Fail}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlred}{\textbf{The Gap}}
+
+\small
+\begin{itemize}
+\item 80\% of AI projects never reach production
+\item Prototypes work in demos, fail in reality
+\item Unpredictable outputs
+\item No integration path
+\item Cannot handle errors
+\end{itemize}
+
+\vspace{0.5cm}
+\textcolor{mlgray}{\small Week 6:} Generated creative content\\
+\textcolor{mlgray}{\small Week 8:} Make it reliable and usable
+
+\column{0.48\textwidth}
+\textcolor{mlgreen}{\textbf{The Solution}}
+
+\small
+\begin{itemize}
+\item Structured outputs
+\item JSON schema validation
+\item Error handling
+\item Production architecture
+\item Monitoring and testing
+\end{itemize}
+
+\vspace{0.5cm}
+\textcolor{mlblue}{\textbf{Result:}} Prototype → Production-ready MVP
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Moving from creative exploration to reliable deployment}
+\end{frame}
+
+% Slide 3: Real Failure Examples
+\begin{frame}{When AI Goes Wrong: Real Examples}
+\begin{columns}[T]
+\column{0.32\textwidth}
+\textcolor{mlred}{\textbf{E-commerce Chatbot}}
+
+\small
+\begin{itemize}
+\item Generated wrong pricing
+\item Promised impossible discounts
+\item Gave conflicting product info
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlgray}{\small Impact:}\\
+\$45K in honored mistakes\\
+2,300 confused customers\\
+Brand damage
+
+\column{0.32\textwidth}
+\textcolor{mlorange}{\textbf{Form Filling AI}}
+
+\small
+\begin{itemize}
+\item Inconsistent field extraction
+\item Mixed up phone/email
+\item Lost required data
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlgray}{\small Impact:}\\
+40\% forms required manual fix\\
+3 hours/day staff time\\
+Customer frustration
+
+\column{0.32\textwidth}
+\textcolor{mlpurple}{\textbf{Report Generator}}
+
+\small
+\begin{itemize}
+\item Formatting varied wildly
+\item Missing key sections
+\item Unstructured data
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlgray}{\small Impact:}\\
+Reports unusable as-is\\
+Lost automation benefits\\
+Manual reconstruction
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Common failure pattern: Unstructured outputs in structured contexts}
+\end{frame}
+
+% Slide 4: Structured vs Unstructured - Visual Comparison
+\begin{frame}{Structured vs Unstructured Outputs}
+\includegraphics[width=0.85\textwidth]{charts/structured_vs_unstructured.pdf}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Structured outputs enable reliable automation and integration}
+\end{frame}
+
+% Slide 5: When You Need Structured Outputs
+\begin{frame}{When Do You Need Structured Outputs?}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlgreen}{\textbf{Use Structured Outputs:}}
+
+\small
+\begin{itemize}
+\item Database integration
+\item API responses
+\item Form filling
+\item Data extraction
+\item Automated workflows
+\item Multi-step processing
+\item Validation requirements
+\item Consistent formatting
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlblue}{When reliability matters more than creativity}
+
+\column{0.48\textwidth}
+\textcolor{mlorange}{\textbf{Use Unstructured Text:}}
+
+\small
+\begin{itemize}
+\item Creative writing
+\item Content generation
+\item Explanations
+\item Brainstorming
+\item Conversational responses
+\item Marketing copy
+\item Storytelling
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlpurple}{When creativity matters more than structure}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Most production AI systems need structure for reliability}
+\end{frame}
+
+% Slide 6: Production Requirements
+\begin{frame}{What Makes AI Production-Ready?}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Technical Requirements}}
+
+\small
+\begin{itemize}
+\item Consistent output format
+\item Schema validation
+\item Error handling
+\item Retry logic
+\item Monitoring
+\item Logging
+\item Performance SLAs
+\item Cost optimization
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{mlgreen}{\textbf{Business Requirements}}
+
+\small
+\begin{itemize}
+\item 95\%+ success rate
+\item $<$ 2 second response time
+\item Graceful degradation
+\item User trust
+\item Compliance
+\item Audit trails
+\item ROI positive
+\item Scalable
+\end{itemize}
+\end{columns}
+
+\vspace{0.5cm}
+\begin{center}
+\textcolor{mlorange}{\large Structured outputs are the foundation for meeting these requirements}
+\end{center}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Production readiness requires reliability, not just functionality}
+\end{frame}
+
+% Slide 7: Learning Objectives
+\begin{frame}{What You'll Master This Week}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Technical Skills}}
+
+\small
+\begin{enumerate}
+\item Design JSON schemas for AI outputs
+\item Implement function calling (OpenAI/Anthropic)
+\item Write prompts for structured generation
+\item Build validation pipelines
+\item Handle errors gracefully
+\item Deploy to production
+\item Monitor system health
+\end{enumerate}
+
+\column{0.48\textwidth}
+\textcolor{mlgreen}{\textbf{Design Skills}}
+
+\small
+\begin{enumerate}
+\item Create UX for AI features
+\item Build trust through consistency
+\item Design error recovery flows
+\item Human-in-the-loop patterns
+\item Progressive enhancement
+\item Accessibility considerations
+\end{enumerate}
+\end{columns}
+
+\vspace{0.5cm}
+\begin{center}
+\textcolor{mlorange}{\normalsize By the end: Transform prototypes into production MVPs}
+\end{center}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Practical skills for building real AI products}
+\end{frame}
+
+% Slide 8: Innovation Impact
+\begin{frame}{Innovation Impact: Speed to Market}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlred}{\textbf{Without Structured Outputs}}
+
+\small
+\begin{itemize}
+\item Prototype looks good
+\item Integration takes weeks
+\item Constant manual fixes
+\item Cannot scale
+\item User complaints
+\item Team loses confidence
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlgray}{\small Timeline:} 6-12 weeks prototype → production\\
+\textcolor{mlgray}{\small Success rate:} 20\%
+
+\column{0.48\textwidth}
+\textcolor{mlgreen}{\textbf{With Structured Outputs}}
+
+\small
+\begin{itemize}
+\item Prototype integrates directly
+\item Validation catches errors
+\item Automated workflows
+\item Scales to thousands
+\item Reliable user experience
+\item Team ships with confidence
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlgray}{\small Timeline:} 1-2 weeks prototype → production\\
+\textcolor{mlgray}{\small Success rate:} 85\%
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Structured outputs dramatically reduce time-to-market}
+\end{frame}
+
+% Slide 9: Historical Context
+\begin{frame}{Evolution of AI Reliability}
+\begin{columns}[T]
+\column{0.32\textwidth}
+\textcolor{mlgray}{\textbf{2020-2022}}\\
+\textcolor{mlblue}{\small Text Generation Era}
+
+\small
+\begin{itemize}
+\item GPT-3 creative outputs
+\item Unstructured text
+\item Manual parsing required
+\item Low reliability
+\item Demo-only quality
+\end{itemize}
+
+\column{0.32\textwidth}
+\textcolor{mlgray}{\textbf{2023}}\\
+\textcolor{mlorange}{\small Function Calling Era}
+
+\small
+\begin{itemize}
+\item OpenAI function calling
+\item JSON mode
+\item Structured outputs
+\item 90\%+ reliability
+\item Production-ready
+\end{itemize}
+
+\column{0.32\textwidth}
+\textcolor{mlgray}{\textbf{2024-2025}}\\
+\textcolor{mlgreen}{\small Reliable AI Era}
+
+\small
+\begin{itemize}
+\item Native structured output
+\item Schema enforcement
+\item 99\% reliability
+\item Enterprise-grade
+\item Mainstream adoption
+\end{itemize}
+\end{columns}
+
+\vspace{0.5cm}
+\begin{center}
+\textcolor{mlpurple}{\normalsize We're at the tipping point: AI becomes truly reliable}
+\end{center}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{The transition from creative tools to production systems}
+\end{frame}
+
+% Slide 10: Foundation Summary
+\begin{frame}{Foundation Summary: Key Principles}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Core Concepts}}
+
+\small
+\begin{enumerate}
+\item Reliability is the production bottleneck
+\item Structured outputs solve 80\% gap
+\item JSON schemas define contracts
+\item Validation catches errors early
+\item Monitoring ensures quality
+\end{enumerate}
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{Remember:}}\\
+Creativity for exploration\\
+Structure for production
+
+\column{0.48\textwidth}
+\textcolor{mlorange}{\textbf{Success Metrics}}
+
+\small
+\begin{itemize}
+\item 95\%+ success rate
+\item $<$ 2s response time
+\item Zero manual parsing
+\item Direct integration
+\item User trust
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlpurple}{\textbf{Next Steps:}}\\
+Learn the techniques to achieve this reliability
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Part 2: Techniques for making AI outputs reliable}
+\end{frame}

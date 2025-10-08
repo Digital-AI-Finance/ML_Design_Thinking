@@ -1,0 +1,371 @@
+% Act 2: First Solution and Limits - Linear Models
+\section{Act 2: First Solution and Limits}
+
+% Section divider
+\begin{frame}[plain]
+\vfill
+\centering
+\begin{beamercolorbox}[sep=16pt,center]{title}
+\usebeamerfont{title}\Large Act 2: First Solution and Limits\par
+\vspace{0.5em}
+\large Linear Models: Success Before Failure\par
+\end{beamercolorbox}
+\vfill
+\end{frame}
+
+% Slide 1: Linear Regression Success (house prices)
+\begin{frame}{Your First Learning Algorithm: Linear Regression}
+\twocolslide{
+\Large\textbf{The House Price Prediction Problem}
+\normalsize
+\vspace{0.5em}
+
+You want to predict house prices from square footage.
+
+\textbf{Training data (10 houses):}
+\begin{center}
+\small
+\begin{tabular}{cc}
+\hline
+\textbf{Size (sqft)} & \textbf{Price (\$1000)} \\
+\hline
+1000 & 150 \\
+1500 & 200 \\
+2000 & 250 \\
+2500 & 300 \\
+3000 & 350 \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{Pattern you notice:}
+Every 500 sqft adds roughly \$50,000
+
+\textbf{Mathematical model:}
+\formula{\text{Price} = 50 + 0.1 \times \text{Size}}
+
+\textbf{Test:} New house with 1800 sqft
+\textbf{Prediction:} \$50k + 0.1 × 1800 = \$230k
+\textbf{Actual:} \$235k (error: 2\%)
+
+\keypoint{Linear model works beautifully for this problem}
+}{
+\centering
+\includegraphics[width=0.85\textwidth]{charts/linear_regression_success.pdf}
+
+\vspace{0.5em}
+\textbf{How the algorithm learned:}
+
+\textbf{Step 1:} Start with random line
+\formula{y = w_0 + w_1 x}
+
+\textbf{Step 2:} Measure total error
+\formula{\text{Error} = \sum_{i=1}^{10} (\text{Actual}_i - \text{Predicted}_i)^2}
+
+\textbf{Step 3:} Adjust slope and intercept to minimize error
+
+\textbf{Result:} Found $w_0 = 50$, $w_1 = 0.1$
+
+\bottomnote{This is the fundamental idea: Find parameters that minimize prediction error}
+}
+\end{frame}
+
+% Slide 2: Measured Success Pattern (quantified performance)
+\begin{frame}{Measured Success: Linear Regression Performance}
+\twocolslide{
+\Large\textbf{Quantified Performance Metrics}
+\normalsize
+\vspace{0.5em}
+
+\textbf{Tested on 100 real houses:}
+
+\begin{center}
+\begin{tabular}{lc}
+\hline
+\textbf{Metric} & \textbf{Value} \\
+\hline
+Mean Absolute Error & \$12,500 \\
+Root Mean Squared Error & \$18,300 \\
+R-squared ($R^2$) & 0.82 \\
+Training Time & 0.03 seconds \\
+\hline
+\end{tabular}
+\end{center}
+
+\vspace{0.3em}
+\textbf{What does $R^2 = 0.82$ mean?}
+\begin{itemize}
+\item 82\% of price variation explained by size
+\item Remaining 18\% due to other factors (location, age, etc.)
+\item Very good performance for single feature
+\end{itemize}
+
+\vspace{0.3em}
+\keypoint{Linear regression succeeded: Fast, interpretable, accurate}
+}{
+\centering
+\includegraphics[width=0.85\textwidth]{charts/regression_performance.pdf}
+
+\vspace{0.5em}
+\textbf{Success factors:}
+
+\begin{itemize}
+\item \textbf{Linear relationship:} Price truly increases linearly with size
+\item \textbf{Single feature:} Simple one-dimensional problem
+\item \textbf{No outliers:} Clean data without extreme values
+\item \textbf{Interpretable:} Coefficient has clear meaning (price per sqft)
+\end{itemize}
+
+\vspace{0.3em}
+\textbf{Business impact:}
+\begin{itemize}
+\item Real estate agent saves 2 hours per valuation
+\item 82\% accuracy good enough for initial estimates
+\item Model deployed in production
+\end{itemize}
+
+\bottomnote{But this success is specific to this problem type}
+}
+\end{frame}
+
+% Slide 3: Failure Pattern - The XOR Problem
+\begin{frame}{When Linear Models Fail: The XOR Problem}
+\twocolslide{
+\Large\textbf{A Simple Classification Task}
+\normalsize
+\vspace{0.5em}
+
+\textbf{Problem:} Classify points as red or blue
+
+\textbf{Training data (4 points):}
+\begin{center}
+\begin{tabular}{ccc}
+\hline
+\textbf{$x_1$} & \textbf{$x_2$} & \textbf{Label} \\
+\hline
+0 & 0 & Blue \\
+0 & 1 & Red \\
+1 & 0 & Red \\
+1 & 1 & Blue \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{Pattern:} Red if $x_1 \neq x_2$, Blue if $x_1 = x_2$
+
+\vspace{0.3em}
+\textbf{Linear model attempt:}
+\formula{y = w_1 x_1 + w_2 x_2 + b}
+
+Draw a straight line to separate red from blue.
+
+\textbf{Result:} \textcolor{mlred}{\textbf{IMPOSSIBLE}}
+
+No straight line can separate these points.
+}{
+\centering
+\includegraphics[width=0.85\textwidth]{charts/xor_failure.pdf}
+
+\vspace{0.5em}
+\textbf{Measured failure:}
+
+\begin{center}
+\begin{tabular}{lc}
+\hline
+\textbf{Metric} & \textbf{Linear Model} \\
+\hline
+Training Accuracy & 50\% (random guessing) \\
+Best possible line & Still 50\% \\
+R-squared & 0.00 \\
+\hline
+\end{tabular}
+\end{center}
+
+\keypoint{Linear models fundamentally cannot solve nonlinear problems}
+
+\bottomnote{This is the XOR problem - discovered in 1969, triggered AI winter}
+}
+\end{frame}
+
+% Slide 4: Root Cause Diagnosis (traced example)
+\begin{frame}{Root Cause Diagnosis: Why Linear Models Fail}
+\twocolslide{
+\Large\textbf{Trace Through the Math}
+\normalsize
+\vspace{0.5em}
+
+\textbf{Attempt 1:} Try to find $w_1, w_2, b$ that work
+
+For point (0, 0) → Blue, we need:
+\formula{w_1(0) + w_2(0) + b < 0 \quad \Rightarrow \quad b < 0}
+
+For point (0, 1) → Red, we need:
+\formula{w_1(0) + w_2(1) + b > 0 \quad \Rightarrow \quad w_2 + b > 0}
+
+For point (1, 0) → Red, we need:
+\formula{w_1(1) + w_2(0) + b > 0 \quad \Rightarrow \quad w_1 + b > 0}
+
+For point (1, 1) → Blue, we need:
+\formula{w_1(1) + w_2(1) + b < 0 \quad \Rightarrow \quad w_1 + w_2 + b < 0}
+
+\vspace{0.3em}
+\textbf{Combine constraints:}
+From points 2 and 3: $w_2 + b > 0$ and $w_1 + b > 0$
+
+Adding: $w_1 + w_2 + 2b > 0$
+
+But point 4 requires: $w_1 + w_2 + b < 0$
+
+\textcolor{mlred}{\textbf{CONTRADICTION!}} No solution exists.
+}{
+\Large\textbf{Geometric Intuition}
+\normalsize
+\vspace{0.5em}
+
+\centering
+\includegraphics[width=0.85\textwidth]{charts/linear_decision_boundary.pdf}
+
+\vspace{0.5em}
+\textbf{The fundamental limitation:}
+
+A linear model defines a \textbf{hyperplane}:
+\formula{w_1 x_1 + w_2 x_2 + b = 0}
+
+This hyperplane:
+\begin{itemize}
+\item Divides space into two half-spaces
+\item Is always a straight line (2D) or flat plane (3D+)
+\item Cannot bend or curve
+\item Cannot create circular or complex regions
+\end{itemize}
+
+\vspace{0.3em}
+\keypoint{Root cause: Linear models assume linearly separable data}
+
+\bottomnote{Real-world problems are often nonlinear (e.g., face recognition)}
+}
+\end{frame}
+
+% Slide 5: The Bias-Variance Tradeoff
+\begin{frame}{The Fundamental Tradeoff: Bias vs Variance}
+\twocolslide{
+\Large\textbf{Two Sources of Error}
+\normalsize
+\vspace{0.5em}
+
+\textbf{Bias (Underfitting):}
+\begin{itemize}
+\item Model is too simple
+\item Cannot capture true patterns
+\item High error on training data
+\item High error on test data
+\end{itemize}
+
+Example: Linear model for XOR
+\begin{itemize}
+\item Training accuracy: 50\%
+\item Test accuracy: 50\%
+\item Problem: Model lacks capacity
+\end{itemize}
+
+\vspace{0.3em}
+\textbf{Variance (Overfitting):}
+\begin{itemize}
+\item Model is too complex
+\item Memorizes noise in training data
+\item Low error on training data
+\item High error on test data
+\end{itemize}
+
+Example: 100-degree polynomial for house prices
+\begin{itemize}
+\item Training accuracy: 99.9\%
+\item Test accuracy: 40\%
+\item Problem: Model has too much capacity
+\end{itemize}
+}{
+\centering
+\includegraphics[width=0.85\textwidth]{charts/bias_variance_tradeoff.pdf}
+
+\vspace{0.5em}
+\textbf{The mathematical decomposition:}
+
+Total error can be split:
+\formula{\text{Error} = \text{Bias}^2 + \text{Variance} + \text{Noise}}
+
+\textbf{You cannot minimize both simultaneously:}
+\begin{itemize}
+\item Increase model complexity → Bias ↓, Variance ↑
+\item Decrease model complexity → Bias ↑, Variance ↓
+\end{itemize}
+
+\vspace{0.3em}
+\keypoint{The challenge: Find the sweet spot in the middle}
+
+\textbf{Act 3 will show how to navigate this tradeoff}
+
+\bottomnote{This is the most fundamental concept in machine learning}
+}
+\end{frame}
+
+% Slide 6: The Nonlinear Challenge
+\begin{frame}{The Nonlinear Challenge: What We Need}
+\twocolslide{
+\Large\textbf{Real-World Problems Are Nonlinear}
+\normalsize
+\vspace{0.5em}
+
+\textbf{Examples of nonlinear patterns:}
+
+\textbf{Image recognition:}
+\begin{itemize}
+\item Cat detection cannot use straight line
+\item Need to recognize curves, textures, shapes
+\item Millions of pixel combinations
+\end{itemize}
+
+\textbf{Speech recognition:}
+\begin{itemize}
+\item Sound waves are complex patterns
+\item Phonemes have nonlinear relationships
+\item Context-dependent processing
+\end{itemize}
+
+\textbf{Customer behavior:}
+\begin{itemize}
+\item Purchase decisions have thresholds
+\item Interaction effects between features
+\item Segmentation into distinct groups
+\end{itemize}
+
+\vspace{0.3em}
+\keypoint{Linear models work for 20\% of problems, fail for 80\%}
+}{
+\Large\textbf{What We Need to Solve This}
+\normalsize
+\vspace{0.5em}
+
+\textbf{Requirements for nonlinear learning:}
+
+\begin{enumerate}
+\item \textbf{Nonlinear transformations:} Ability to curve decision boundaries
+\item \textbf{Multiple layers:} Hierarchical feature learning
+\item \textbf{Regularization:} Prevent overfitting complex models
+\item \textbf{Efficient optimization:} Train models with millions of parameters
+\end{enumerate}
+
+\vspace{0.3em}
+\textbf{Three approaches we will explore:}
+
+\begin{itemize}
+\item \textbf{Feature engineering:} Manually create nonlinear features ($x^2, x_1 x_2$)
+\item \textbf{Kernel methods:} Implicitly transform to high dimensions
+\item \textbf{Neural networks:} Learn transformations automatically
+\end{itemize}
+
+\vspace{0.3em}
+\textcolor{mlpurple}{\textbf{Act 3 reveals the breakthrough: The kernel trick and deep learning}}
+
+\bottomnote{The journey from linear to nonlinear is the history of modern AI}
+}
+\end{frame}

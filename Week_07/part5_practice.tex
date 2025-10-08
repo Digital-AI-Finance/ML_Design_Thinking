@@ -1,0 +1,372 @@
+% Part 5: Practice - Ethical Decision Framework
+
+\section{Practice: Building an Ethics Framework}
+
+% Slide 1: Ethical Decision Tree
+\begin{frame}{Ethical Decision Framework}
+\begin{columns}[T]
+\column{0.55\textwidth}
+\includegraphics[width=0.85\textwidth]{charts/ethical_framework_decision_tree.pdf}
+
+\column{0.43\textwidth}
+\textcolor{ForestGreen}{\Large Key Questions}\\[0.5cm]
+
+\textcolor{Amber}{\textbf{1. Should we build this?}}
+\begin{itemize}
+\item Is there a real need?
+\item Are alternatives better?
+\item Can we do it responsibly?
+\end{itemize}
+
+\textcolor{Teal}{\textbf{2. Who might be harmed?}}
+\begin{itemize}
+\item Direct stakeholders?
+\item Indirect stakeholders?
+\item Future generations?
+\end{itemize}
+
+\textcolor{DarkTeal}{\textbf{3. How do we mitigate?}}
+\begin{itemize}
+\item Technical safeguards?
+\item Governance structures?
+\item Accountability mechanisms?
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{Slate}{Start with ``should we?'' before ``how?''}
+\end{frame}
+
+% Slide 2: Ethical Audit Checklist
+\begin{frame}{Pre-Deployment Ethical Audit}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{ForestGreen}{\textbf{Data Audit}}
+
+\textcolor{Amber}{Questions:}
+\begin{itemize}
+\item[\textcolor{Teal}{Y/N}] Documented provenance?
+\item[\textcolor{Teal}{Y/N}] Consent obtained?
+\item[\textcolor{Teal}{Y/N}] Representative samples?
+\item[\textcolor{Teal}{Y/N}] Known biases identified?
+\item[\textcolor{Teal}{Y/N}] Privacy protections?
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{Teal}{\textbf{Model Audit}}
+
+\textcolor{Amber}{Questions:}
+\begin{itemize}
+\item[\textcolor{DarkTeal}{Y/N}] Fairness metrics measured?
+\item[\textcolor{DarkTeal}{Y/N}] Disaggregated performance?
+\item[\textcolor{DarkTeal}{Y/N}] Explainability tested?
+\item[\textcolor{DarkTeal}{Y/N}] Adversarial robustness?
+\item[\textcolor{DarkTeal}{Y/N}] Model card completed?
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{ForestGreen}{\textbf{Deployment Audit}}
+
+\textcolor{Amber}{Questions:}
+\begin{itemize}
+\item[\textcolor{Teal}{Y/N}] Human oversight plan?
+\item[\textcolor{Teal}{Y/N}] Appeal mechanism?
+\item[\textcolor{Teal}{Y/N}] Monitoring dashboard?
+\item[\textcolor{Teal}{Y/N}] Incident response plan?
+\item[\textcolor{Teal}{Y/N}] Regular audits scheduled?
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{DarkTeal}{\textbf{Governance Audit}}
+
+\textcolor{Amber}{Questions:}
+\begin{itemize}
+\item[\textcolor{Teal}{Y/N}] Clear accountability?
+\item[\textcolor{Teal}{Y/N}] Ethics review completed?
+\item[\textcolor{Teal}{Y/N}] Stakeholder input?
+\item[\textcolor{Teal}{Y/N}] Legal compliance?
+\item[\textcolor{Teal}{Y/N}] Insurance coverage?
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{Amber}{\textbf{Pass Threshold:}} 90\% Yes
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{Slate}{Any ``No'' should trigger investigation and mitigation}
+\end{frame}
+
+% Slide 3: Hands-On Exercise
+\begin{frame}{Exercise: Bias Detection in Practice}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{ForestGreen}{\textbf{Scenario}}
+
+You're reviewing a credit scoring model:
+
+\textcolor{Amber}{Dataset:}
+\begin{itemize}
+\item 100k loan applications
+\item 60\% approved overall
+\item Features: income, assets, history
+\end{itemize}
+
+\textcolor{Teal}{Performance:}
+\begin{itemize}
+\item Overall accuracy: 78\%
+\item AUC: 0.82
+\end{itemize}
+
+\textcolor{DarkTeal}{Demographic Breakdown:}
+\begin{itemize}
+\item Group A (majority): 65\% approved
+\item Group B (minority): 45\% approved
+\item Base credit quality similar
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{ForestGreen}{\textbf{Your Tasks}}
+
+\textcolor{Amber}{1. Identify Issues}
+\begin{itemize}
+\item What fairness violations?
+\item Which metrics to measure?
+\item Potential causes?
+\end{itemize}
+
+\textcolor{Teal}{2. Diagnose}
+\begin{itemize}
+\item Data bias?
+\item Model bias?
+\item Threshold bias?
+\end{itemize}
+
+\textcolor{DarkTeal}{3. Propose Solutions}
+\begin{itemize}
+\item Pre-processing?
+\item In-processing?
+\item Post-processing?
+\item Non-technical interventions?
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{Amber}{\textbf{Discuss:}}\\
+Trade-offs between solutions
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{Slate}{Work in groups, present findings}
+\end{frame}
+
+% Slide 4: Building an Ethics Review Process
+\begin{frame}{Institutional Ethics Review Process}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{ForestGreen}{\textbf{Structure}}
+
+\textcolor{Amber}{Ethics Review Board:}
+\begin{itemize}
+\item Technical experts
+\item Domain specialists
+\item Ethicists/philosophers
+\item Legal counsel
+\item Community representatives
+\item Rotating membership
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{Teal}{Scope:}
+\begin{itemize}
+\item All high-risk AI systems
+\item Threshold: Impacts on 1000+ people
+\item Sensitive domains: Health, justice, employment
+\item Customer-facing decisions
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{ForestGreen}{\textbf{Process}}
+
+\textcolor{DarkTeal}{Stage 1: Initial Review}
+\begin{itemize}
+\item Submit project proposal
+\item Risk assessment
+\item 2-week turnaround
+\end{itemize}
+
+\textcolor{Amber}{Stage 2: Full Review}
+\begin{itemize}
+\item Detailed documentation
+\item Stakeholder analysis
+\item Bias testing results
+\item Mitigation plans
+\item 6-week evaluation
+\end{itemize}
+
+\textcolor{Teal}{Stage 3: Monitoring}
+\begin{itemize}
+\item Quarterly reports
+\item Incident tracking
+\item Annual re-certification
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{DarkTeal}{\textbf{Authority:}}\\
+Board can block deployment
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{Slate}{Model after institutional review boards (IRBs) in research}
+\end{frame}
+
+% Slide 5: Regulatory Compliance Landscape
+\begin{frame}{Global AI Regulations}
+\begin{columns}[T]
+\column{0.55\textwidth}
+\includegraphics[width=0.85\textwidth]{charts/regulatory_landscape.pdf}
+
+\column{0.43\textwidth}
+\textcolor{ForestGreen}{\Large Key Regulations}\\[0.5cm]
+
+\textcolor{Amber}{\textbf{EU AI Act (2024)}}
+\begin{itemize}
+\item Risk-based approach
+\item Prohibited practices
+\item High-risk requirements
+\item Fines up to 7\% revenue
+\end{itemize}
+
+\textcolor{Teal}{\textbf{GDPR (2018)}}
+\begin{itemize}
+\item Right to explanation
+\item Data minimization
+\item Fines up to 4\% revenue
+\end{itemize}
+
+\textcolor{DarkTeal}{\textbf{US (Fragmented)}}
+\begin{itemize}
+\item State laws (CA, NY, etc.)
+\item Sector-specific rules
+\item No federal AI law yet
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{Slate}{Compliance is complex but necessary}
+\end{frame}
+
+% Slide 6: EU AI Act Deep Dive
+\begin{frame}{EU AI Act: What You Need to Know}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{ForestGreen}{\textbf{Risk Categories}}
+
+\textcolor{Amber}{Unacceptable Risk (Banned):}
+\begin{itemize}
+\item Social scoring
+\item Manipulative AI
+\item Real-time biometric surveillance (limited exceptions)
+\item Emotion recognition in workplaces/schools
+\end{itemize}
+
+\textcolor{Teal}{High Risk (Regulated):}
+\begin{itemize}
+\item Critical infrastructure
+\item Education/employment
+\item Law enforcement
+\item Border control
+\item Administration of justice
+\end{itemize}
+
+\textcolor{DarkTeal}{Limited/Minimal Risk:}
+\begin{itemize}
+\item Transparency requirements
+\item Self-regulation
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{ForestGreen}{\textbf{High-Risk Requirements}}
+
+\textcolor{Amber}{Before Deployment:}
+\begin{itemize}
+\item Risk management system
+\item Data governance
+\item Technical documentation
+\item Record-keeping
+\item Transparency
+\item Human oversight
+\item Accuracy requirements
+\item Cybersecurity
+\item Conformity assessment
+\end{itemize}
+
+\textcolor{Teal}{After Deployment:}
+\begin{itemize}
+\item Post-market monitoring
+\item Incident reporting
+\item Corrective actions
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{DarkTeal}{\textbf{Timeline:}}\\
+Fully applicable: August 2026
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{Slate}{EU AI Act is most comprehensive regulation globally}
+\end{frame}
+
+% Slide 7: Course Summary and Action Items
+\begin{frame}{Week 7 Summary: Your Action Plan}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{ForestGreen}{\textbf{What We Covered}}
+
+\begin{enumerate}
+\item Ethics foundations \& real failures
+\item Fairness metrics \& trade-offs
+\item Toolkits \& implementation
+\item Human-centered design
+\item Practical frameworks
+\end{enumerate}
+
+\vspace{0.3cm}
+\textcolor{Amber}{\textbf{Core Message:}}\\
+Ethics is not optional or an afterthought -- it's essential for building trustworthy, sustainable, legitimate AI systems
+
+\vspace{0.3cm}
+\textcolor{Teal}{\textbf{Key Insight:}}\\
+There is no purely technical solution to ethical problems -- judgment required
+
+\column{0.48\textwidth}
+\textcolor{ForestGreen}{\textbf{Action Items This Week}}
+
+\textcolor{DarkTeal}{Personal:}
+\begin{itemize}
+\item Install one fairness toolkit
+\item Try SHAP or LIME
+\item Read one model card
+\item Review EU AI Act summary
+\end{itemize}
+
+\textcolor{Amber}{Professional:}
+\begin{itemize}
+\item Audit one current project
+\item Document ethical considerations
+\item Propose ethics review process
+\item Calculate environmental impact
+\end{itemize}
+
+\textcolor{Teal}{Community:}
+\begin{itemize}
+\item Share learnings with team
+\item Start ethics discussion
+\item Engage affected communities
+\item Advocate for better practices
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\begin{center}
+\Large\textcolor{ForestGreen}{Ethics is Everyone's Responsibility}
+\end{center}
+\end{frame}

@@ -1,0 +1,562 @@
+% Part 2: Algorithms - Fairness & Bias
+
+\section{Algorithms: Measuring and Mitigating Bias}
+
+% Slide 1: Fairness Metrics Overview
+\begin{frame}{Fairness Metrics Landscape}
+\begin{columns}[T]
+\column{0.55\textwidth}
+\includegraphics[width=0.85\textwidth]{charts/fairness_metrics_comparison.pdf}
+
+\column{0.43\textwidth}
+\textcolor{ForestGreen}{\Large Three Main Approaches}\\[0.5cm]
+
+\textcolor{Amber}{\textbf{Group Fairness}}
+\begin{itemize}
+\item Compare outcomes across groups
+\item Statistical parity
+\item Most common in practice
+\end{itemize}
+
+\textcolor{Teal}{\textbf{Individual Fairness}}
+\begin{itemize}
+\item Similar individuals treated similarly
+\item Harder to define
+\item Context-dependent
+\end{itemize}
+
+\textcolor{DarkTeal}{\textbf{Causal Fairness}}
+\begin{itemize}
+\item Counterfactual reasoning
+\item Identify discrimination
+\item Most rigorous
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{Slate}{Different metrics capture different notions of fairness}
+\end{frame}
+
+% Slide 2: Demographic Parity
+\begin{frame}{Demographic Parity (Statistical Parity)}
+\begin{columns}[T]
+\column{0.55\textwidth}
+\includegraphics[width=0.85\textwidth]{charts/demographic_parity.pdf}
+
+\column{0.43\textwidth}
+\textcolor{ForestGreen}{\Large Mathematical Definition}\\[0.5cm]
+
+For protected attribute $A$ and decision $D$:
+
+$$\textcolor{Teal}{P(D=1|A=a) = P(D=1|A=b)}$$
+
+\vspace{0.3cm}
+\textcolor{Amber}{\textbf{Intuition:}}\\
+Positive outcomes should be independent of group membership
+
+\vspace{0.3cm}
+\textcolor{Teal}{\textbf{Example:}}
+\begin{itemize}
+\item 50\% of Group A approved
+\item 50\% of Group B approved
+\item Same rate regardless of merit
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{Slate}{Simple to measure but ignores differing base rates}
+\end{frame}
+
+% Slide 3: Demographic Parity Limitations
+\begin{frame}{When Demographic Parity Fails}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{ForestGreen}{\textbf{The Problem}}
+
+Consider loan approval:
+\begin{itemize}
+\item Group A: 80\% good credit
+\item Group B: 40\% good credit
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{Amber}{Demographic Parity Forces:}
+\begin{itemize}
+\item Approve 60\% from each group
+\item Underpredict Group A
+\item Overpredict Group B
+\item Ignores actual creditworthiness
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{Teal}{\textbf{Result:}}
+\begin{itemize}
+\item Higher default rates in Group B
+\item Missed opportunities in Group A
+\item Economic inefficiency
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{ForestGreen}{\textbf{When to Use It}}
+
+Appropriate when:
+\begin{itemize}
+\item Base rates should be equal
+\item Differences reflect discrimination
+\item Goal is representation
+\item Historical bias correction
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{DarkTeal}{Examples:}
+\begin{itemize}
+\item University admissions (diversity)
+\item Jury selection
+\item Political representation
+\item Media visibility
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{Amber}{\textbf{Key Insight:}}\\
+Demographic parity prioritizes equal outcomes over equal error rates
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{Slate}{No metric is universally correct -- context matters}
+\end{frame}
+
+% Slide 4: Equal Opportunity
+\begin{frame}{Equal Opportunity (Equality of Opportunity)}
+\begin{columns}[T]
+\column{0.55\textwidth}
+\includegraphics[width=0.85\textwidth]{charts/equal_opportunity.pdf}
+
+\column{0.43\textwidth}
+\textcolor{ForestGreen}{\Large Mathematical Definition}\\[0.5cm]
+
+For true label $Y=1$ (qualified):
+
+$$\textcolor{Teal}{P(D=1|Y=1, A=a) = P(D=1|Y=1, A=b)}$$
+
+\vspace{0.3cm}
+\textcolor{Amber}{\textbf{Intuition:}}\\
+Qualified individuals have equal chances regardless of group
+
+\vspace{0.3cm}
+\textcolor{Teal}{\textbf{Focus:}}
+\begin{itemize}
+\item True Positive Rate (TPR)
+\item Recall parity
+\item Benefit the deserving
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{Slate}{Allows different base rates while ensuring equal treatment of qualified}
+\end{frame}
+
+% Slide 5: Equalized Odds
+\begin{frame}{Equalized Odds}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{ForestGreen}{\textbf{Mathematical Definition}}
+
+For both $Y=1$ and $Y=0$:
+
+$$\textcolor{Teal}{P(D=1|Y=y, A=a) = P(D=1|Y=y, A=b)}$$
+
+\vspace{0.3cm}
+\textcolor{Amber}{\textbf{Requires:}}
+\begin{itemize}
+\item Equal TPR across groups
+\item Equal FPR across groups
+\item Stronger than equal opportunity
+\end{itemize}
+
+\vspace{0.3cm}
+$$\textcolor{DarkTeal}{\text{TPR}_a = \text{TPR}_b}$$
+$$\textcolor{DarkTeal}{\text{FPR}_a = \text{FPR}_b}$$
+
+\column{0.48\textwidth}
+\textcolor{ForestGreen}{\textbf{Intuition}}
+
+Predictions independent of group:
+\begin{itemize}
+\item For qualified individuals
+\item For unqualified individuals
+\item Both errors equalized
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{Teal}{\textbf{Trade-off:}}
+\begin{itemize}
+\item More constrained
+\item Harder to achieve
+\item Better group fairness
+\item May reduce accuracy
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{Amber}{\textbf{Example:}}\\
+Criminal recidivism: Equal error rates for defendants of different races
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{Slate}{Equalized odds balances both types of errors}
+\end{frame}
+
+% Slide 6: The Impossibility Theorem
+\begin{frame}{Fairness Trade-offs: Impossibility Results}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{ForestGreen}{\textbf{The Bad News}}
+
+You cannot simultaneously achieve:
+\begin{enumerate}
+\item Demographic Parity
+\item Equal Opportunity
+\item Calibration
+\end{enumerate}
+
+\vspace{0.3cm}
+\textcolor{Amber}{Unless:}
+\begin{itemize}
+\item Perfect prediction (impossible)
+\item OR base rates are equal
+\item OR you sacrifice accuracy
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{Teal}{\textbf{Implication:}}\\
+Fairness is not a purely technical problem -- it requires value judgments
+
+\column{0.48\textwidth}
+\textcolor{ForestGreen}{\textbf{Choosing Your Metric}}
+
+\textcolor{DarkTeal}{Questions to ask:}
+\begin{itemize}
+\item What harm are we preventing?
+\item Who bears the cost of errors?
+\item What are the base rates?
+\item Is historical bias present?
+\item What do stakeholders prefer?
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{Amber}{\textbf{Example: Lending}}
+\begin{itemize}
+\item Banks prefer calibration
+\item Regulators prefer demographic parity
+\item Borrowers prefer equal opportunity
+\item Courts require justification
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{Slate}{Math can't resolve value conflicts -- transparency about choices is essential}
+\end{frame}
+
+% Slide 7: Bias Detection Workflow
+\begin{frame}{Detecting Bias in Your Model}
+\begin{columns}[T]
+\column{0.55\textwidth}
+\includegraphics[width=0.85\textwidth]{charts/bias_detection_workflow.pdf}
+
+\column{0.43\textwidth}
+\textcolor{ForestGreen}{\Large 5-Step Process}\\[0.5cm]
+
+\textcolor{Amber}{\textbf{1. Identify Groups}}
+\begin{itemize}
+\item Protected attributes
+\item Intersectional identities
+\end{itemize}
+
+\textcolor{Teal}{\textbf{2. Choose Metrics}}
+\begin{itemize}
+\item Context-appropriate
+\item Multiple perspectives
+\end{itemize}
+
+\textcolor{DarkTeal}{\textbf{3. Measure Disparities}}
+\begin{itemize}
+\item Statistical tests
+\item Confidence intervals
+\end{itemize}
+
+\textcolor{Amber}{\textbf{4. Investigate Sources}}
+\begin{itemize}
+\item Data? Model? Deployment?
+\end{itemize}
+
+\textcolor{Teal}{\textbf{5. Iterate}}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{Slate}{Bias detection should be continuous, not one-time}
+\end{frame}
+
+% Slide 8: Types of Bias
+\begin{frame}{Taxonomy of Bias}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{ForestGreen}{\textbf{Data Bias}}
+
+\textcolor{Amber}{Historical Bias}
+\begin{itemize}
+\item Past discrimination in data
+\item Example: Hiring data reflects sexism
+\end{itemize}
+
+\textcolor{Teal}{Representation Bias}
+\begin{itemize}
+\item Missing or undersampled groups
+\item Example: Face datasets lack diversity
+\end{itemize}
+
+\textcolor{DarkTeal}{Measurement Bias}
+\begin{itemize}
+\item Proxy labels differ by group
+\item Example: Arrest rates vs crime rates
+\end{itemize}
+
+\textcolor{Amber}{Aggregation Bias}
+\begin{itemize}
+\item One model for all groups
+\item Example: Medical tests designed for men
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{ForestGreen}{\textbf{Algorithmic Bias}}
+
+\textcolor{Teal}{Evaluation Bias}
+\begin{itemize}
+\item Metrics favor majority
+\item Example: Accuracy vs F1 score
+\end{itemize}
+
+\textcolor{DarkTeal}{Deployment Bias}
+\begin{itemize}
+\item Different usage patterns
+\item Example: Over-policing minority areas
+\end{itemize}
+
+\textcolor{Amber}{Feedback Loops}
+\begin{itemize}
+\item Predictions influence future data
+\item Example: Predictive policing
+\end{itemize}
+
+\textcolor{Teal}{Interaction Bias}
+\begin{itemize}
+\item User behavior differs by group
+\item Example: Voice assistants \& accents
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{Slate}{Multiple biases often compound -- address systematically}
+\end{frame}
+
+% Slide 9: Pre-processing Mitigation
+\begin{frame}{Bias Mitigation: Pre-processing}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{ForestGreen}{\textbf{Data Transformations}}
+
+\textcolor{Amber}{Reweighting}
+\begin{itemize}
+\item Adjust sample weights
+\item Balance group representation
+\item Preserve individual data
+\end{itemize}
+
+\textcolor{Teal}{Resampling}
+\begin{itemize}
+\item Oversample minorities
+\item Undersample majorities
+\item SMOTE for synthetic data
+\end{itemize}
+
+\textcolor{DarkTeal}{Relabeling}
+\begin{itemize}
+\item Fix label bias
+\item Correct historical discrimination
+\item Requires domain knowledge
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{ForestGreen}{\textbf{Feature Transformations}}
+
+\textcolor{Amber}{Disparate Impact Remover}
+\begin{itemize}
+\item Modify features
+\item Preserve utility
+\item Reduce correlation with protected attribute
+\end{itemize}
+
+\textcolor{Teal}{Fair Representation Learning}
+\begin{itemize}
+\item Learn fair latent space
+\item Information theory approach
+\item Encode only task-relevant info
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{DarkTeal}{\textbf{Pros \& Cons}}
+
+Pros: Model-agnostic\\
+Cons: May lose information
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{Slate}{Pre-processing is transparent but may over-correct}
+\end{frame}
+
+% Slide 10: In-processing Mitigation
+\begin{frame}{Bias Mitigation: In-processing}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{ForestGreen}{\textbf{Constrained Optimization}}
+
+Add fairness constraints:
+
+$$\min_\theta L(\theta) \text{ s.t. } F(\theta) \leq \epsilon$$
+
+Where:
+\begin{itemize}
+\item $L$: Loss function
+\item $F$: Fairness violation
+\item $\epsilon$: Tolerance
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{Amber}{Examples:}
+\begin{itemize}
+\item Fairness-aware SVM
+\item Constrained deep learning
+\item Lagrangian formulations
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{ForestGreen}{\textbf{Adversarial Debiasing}}
+
+Train two models:
+\begin{enumerate}
+\item Predictor $P$: Predict label
+\item Adversary $A$: Predict group from $P$'s predictions
+\end{enumerate}
+
+\vspace{0.3cm}
+$$\min_P \max_A L_P - \lambda L_A$$
+
+\vspace{0.3cm}
+\textcolor{Teal}{\textbf{Intuition:}}\\
+If adversary can't infer group, predictions are fair
+
+\vspace{0.3cm}
+\textcolor{DarkTeal}{\textbf{Trade-off:}}\\
+$\lambda$ balances accuracy vs fairness
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{Slate}{In-processing offers fine-grained control but requires model modification}
+\end{frame}
+
+% Slide 11: Post-processing Mitigation
+\begin{frame}{Bias Mitigation: Post-processing}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{ForestGreen}{\textbf{Threshold Optimization}}
+
+Adjust decision thresholds per group:
+
+\textcolor{Amber}{Group A:} $D_a = 1$ if $\hat{y}_a > \tau_a$\\
+\textcolor{Teal}{Group B:} $D_b = 1$ if $\hat{y}_b > \tau_b$
+
+\vspace{0.3cm}
+Find $\tau_a, \tau_b$ to satisfy:
+\begin{itemize}
+\item Demographic parity: Equal accept rates
+\item Equal opportunity: Equal TPR
+\item Equalized odds: Equal TPR \& FPR
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{DarkTeal}{\textbf{Pros:}}
+\begin{itemize}
+\item Model-agnostic
+\item Easy to implement
+\item Reversible
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{ForestGreen}{\textbf{Calibrated Fairness}}
+
+Ensure calibration per group:
+
+$$\textcolor{Teal}{P(Y=1|\hat{y}=p, A=a) = p}$$
+
+\vspace{0.3cm}
+For all groups and all scores $p$
+
+\vspace{0.3cm}
+\textcolor{Amber}{\textbf{Methods:}}
+\begin{itemize}
+\item Platt scaling per group
+\item Isotonic regression
+\item Beta calibration
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{DarkTeal}{\textbf{Cons:}}
+\begin{itemize}
+\item Requires held-out data
+\item May conflict with other metrics
+\item Doesn't fix root cause
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{Slate}{Post-processing is practical but treats symptoms, not causes}
+\end{frame}
+
+% Slide 12: Algorithms Summary
+\begin{frame}{Algorithms Summary: Measure and Mitigate}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{ForestGreen}{\textbf{Key Takeaways}}
+
+\begin{enumerate}
+\item Multiple fairness metrics exist
+\item Trade-offs are inevitable
+\item Demographic parity: Equal outcomes
+\item Equal opportunity: Equal TPR
+\item Equalized odds: Equal TPR \& FPR
+\item Three mitigation stages: Pre, in, post
+\end{enumerate}
+
+\vspace{0.3cm}
+\textcolor{Amber}{\textbf{Critical Choice:}}\\
+Which metric matches your values and context?
+
+\column{0.48\textwidth}
+\textcolor{Teal}{\textbf{Next: Implementation}}
+
+From theory to practice:
+\begin{itemize}
+\item Fairness toolkits
+\item Explainability methods
+\item Model cards
+\item Privacy techniques
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{DarkTeal}{\textbf{Remember:}}\\
+Mathematics provides tools, not answers. Human judgment required.
+\end{columns}
+
+\vspace{\fill}
+\begin{center}
+\Large\textcolor{ForestGreen}{Fairness is Multi-Dimensional}
+\end{center}
+\end{frame}

@@ -1,0 +1,199 @@
+% Act 1: The Challenge (5 slides)
+
+\section{\color{challengered}Act 1: The Challenge}
+
+\begin{frame}{Slide 1: Customer Segmentation Without Labels}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{\color{challengered}The Unsupervised Challenge}
+\begin{itemize}
+\item 10,000 customers, no categories
+\item Purchase history: \$amounts, frequency
+\item Demographics: age, location, income
+\item Behavioral data: website clicks, time spent
+\end{itemize}
+
+\textbf{The Question:}\\
+``How do we group similar customers when we don't know what similar means?''
+
+\column{0.48\textwidth}
+\textbf{Raw Data Sample:}
+\begin{center}
+\includegraphics[width=\textwidth]{charts/customer_data_sample.pdf}
+\end{center}
+
+\textbf{No Teacher, No Labels}
+\begin{itemize}
+\item No ``premium'' vs ``budget'' categories
+\item No expert-defined segments
+\item Must discover patterns automatically
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+{\footnotesize \color{textgray}Unsupervised learning: Finding structure without ground truth}
+\end{frame}
+
+\begin{frame}{Slide 2: Defining Similarity Mathematically}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{\color{challengered}What Makes Customers Similar?}
+
+\textbf{Euclidean Distance:}
+\begin{align}
+d(x_i, x_j) &= \sqrt{\sum_{k=1}^{n} (x_{ik} - x_{jk})^2}
+\end{align}
+
+\textbf{Example Calculation:}
+\begin{itemize}
+\item Customer A: [\$500, 25 visits, age 30]
+\item Customer B: [\$520, 28 visits, age 32]
+\item Distance = $\sqrt{(500-520)^2 + (25-28)^2 + (30-32)^2}$
+\item Distance = $\sqrt{400 + 9 + 4} = 20.3$
+\end{itemize}
+
+\column{0.48\textwidth}
+\textbf{Distance Visualization:}
+\begin{center}
+\includegraphics[width=\textwidth]{charts/distance_calculation.pdf}
+\end{center}
+
+\textbf{Alternative Metrics:}
+\begin{itemize}
+\item Manhattan: $\sum |x_i - x_j|$
+\item Cosine: $\frac{x_i \cdot x_j}{||x_i|| ||x_j||}$
+\item Correlation-based distances
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+{\footnotesize \color{textgray}Mathematical foundation: Distance metrics define similarity}
+\end{frame}
+
+\begin{frame}{Slide 3: No Ground Truth to Check Against}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{\color{challengered}The Validation Problem}
+
+\textbf{Supervised Learning:}
+\begin{itemize}
+\item Training data: (features, labels)
+\item Test accuracy: Compare predictions vs truth
+\item Clear success metric
+\end{itemize}
+
+\textbf{Unsupervised Learning:}
+\begin{itemize}
+\item Only features, no labels
+\item No ``correct'' clustering exists
+\item Success is subjective
+\end{itemize}
+
+\textbf{The Dilemma:}\\
+``How do we know if our clusters are good?''
+
+\column{0.48\textwidth}
+\textbf{Evaluation Challenge:}
+\begin{center}
+\includegraphics[width=\textwidth]{charts/validation_problem.pdf}
+\end{center}
+
+\textbf{Multiple Valid Solutions:}
+\begin{itemize}
+\item Geographic segments
+\item Spending-based groups
+\item Age demographics
+\item Behavioral patterns
+\end{itemize}
+
+All could be ``correct'' depending on business goals.
+\end{columns}
+
+\vspace{\fill}
+{\footnotesize \color{textgray}Challenge: Evaluating clusters without external truth}
+\end{frame}
+
+\begin{frame}{Slide 4: Choosing Number of Clusters Problem}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{\color{challengered}The K-Selection Dilemma}
+
+\textbf{Too Few Clusters (k=2):}
+\begin{itemize}
+\item Over-generalized segments
+\item Miss important sub-groups
+\item Low business actionability
+\end{itemize}
+
+\textbf{Too Many Clusters (k=50):}
+\begin{itemize}
+\item Over-fragmented data
+\item Noise becomes clusters
+\item Difficult to interpret
+\end{itemize}
+
+\textbf{The Sweet Spot:}\\
+Meaningful, actionable segments that capture real customer differences.
+
+\column{0.48\textwidth}
+\textbf{K-Selection Methods:}
+\begin{center}
+\includegraphics[width=\textwidth]{charts/elbow_method.pdf}
+\end{center}
+
+\textbf{Common Approaches:}
+\begin{itemize}
+\item Elbow method: Find ``bend'' in curve
+\item Gap statistic: Compare to random
+\item Silhouette analysis: Cluster quality
+\item Business constraints: 3-7 segments typical
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+{\footnotesize \color{textgray}Critical decision: Optimal number of clusters for business value}
+\end{frame}
+
+\begin{frame}{Slide 5: Quantify: Silhouette Scores \& Within-Cluster Variance}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{\color{challengered}Internal Validation Metrics}
+
+\textbf{Silhouette Score:}
+\begin{align}
+s(i) &= \frac{b(i) - a(i)}{\max(a(i), b(i))}
+\end{align}
+
+Where:
+\begin{itemize}
+\item $a(i)$: Average distance within cluster
+\item $b(i)$: Average distance to nearest cluster
+\item Range: [-1, 1], higher is better
+\end{itemize}
+
+\textbf{Within-Cluster Sum of Squares (WCSS):}
+\begin{align}
+WCSS &= \sum_{k=1}^{K} \sum_{x \in C_k} ||x - \mu_k||^2
+\end{align}
+
+\column{0.48\textwidth}
+\textbf{Metric Interpretation:}
+\begin{center}
+\includegraphics[width=\textwidth]{charts/silhouette_analysis.pdf}
+\end{center}
+
+\textbf{Quality Indicators:}
+\begin{itemize}
+\item Silhouette > 0.5: Strong clusters
+\item Silhouette 0.25-0.5: Weak clusters
+\item Silhouette < 0.25: Poor clustering
+\item WCSS: Lower indicates tighter clusters
+\end{itemize}
+
+\textbf{Practical Example:}\\
+Customer segmentation with Silhouette = 0.67 suggests well-separated groups.
+\end{columns}
+
+\vspace{\fill}
+{\footnotesize \color{textgray}Quantitative evaluation: Internal metrics for cluster quality assessment}
+\end{frame}

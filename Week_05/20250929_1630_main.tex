@@ -1,0 +1,150 @@
+\documentclass[8pt,aspectratio=169]{beamer}
+\usetheme{Madrid}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{adjustbox}
+\usepackage{multicol}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{tcolorbox}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows, positioning, calc}
+
+% Color definitions - Template Beamer style
+\definecolor{mlblue}{RGB}{0,102,204}
+\definecolor{mlpurple}{RGB}{51,51,178}
+\definecolor{mllavender}{RGB}{173,173,224}
+\definecolor{mllavender2}{RGB}{193,193,232}
+\definecolor{mllavender3}{RGB}{204,204,235}
+\definecolor{mllavender4}{RGB}{214,214,239}
+\definecolor{mlorange}{RGB}{255, 127, 14}
+\definecolor{mlgreen}{RGB}{44, 160, 44}
+\definecolor{mlred}{RGB}{214, 39, 40}
+\definecolor{mlgray}{RGB}{127, 127, 127}
+\definecolor{mlyellow}{RGB}{255, 206, 84}
+\definecolor{mlcyan}{RGB}{23, 190, 207}
+
+% Apply custom colors to Madrid theme
+\setbeamercolor{palette primary}{bg=mllavender3,fg=mlpurple}
+\setbeamercolor{palette secondary}{bg=mllavender2,fg=mlpurple}
+\setbeamercolor{palette tertiary}{bg=mllavender,fg=white}
+\setbeamercolor{palette quaternary}{bg=mlpurple,fg=white}
+
+\setbeamercolor{structure}{fg=mlpurple}
+\setbeamercolor{section in toc}{fg=mlpurple}
+\setbeamercolor{subsection in toc}{fg=mlblue}
+\setbeamercolor{title}{fg=mlpurple}
+\setbeamercolor{frametitle}{fg=mlpurple,bg=mllavender3}
+\setbeamercolor{block title}{bg=mllavender2,fg=mlpurple}
+\setbeamercolor{block body}{bg=mllavender4,fg=black}
+
+% Remove navigation symbols
+\setbeamertemplate{navigation symbols}{}
+
+% Clean itemize/enumerate
+\setbeamertemplate{itemize items}[circle]
+\setbeamertemplate{enumerate items}[default]
+
+% Reduce margins for more content space
+\setbeamersize{text margin left=5mm,text margin right=5mm}
+
+% Custom footer
+\setbeamertemplate{footline}{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.25\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
+    \usebeamerfont{author in head/foot}Week 5
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+    \usebeamerfont{title in head/foot}Topic Modeling \& Ideation
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.25\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    \usebeamerfont{date in head/foot}\insertframenumber{} / \inserttotalframenumber\hspace*{2ex}
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+
+% Command for bottom annotation (Madrid-style)
+\newcommand{\bottomnote}[1]{%
+\vfill
+\vspace{-2mm}
+\textcolor{mllavender2}{\rule{\textwidth}{0.4pt}}
+\vspace{1mm}
+\footnotesize
+\textbf{#1}
+}
+
+% Title information
+\title{\Large Machine Learning for Smarter Innovation}
+\subtitle{Week 5: Topic Modeling \& Ideation\\
+Finding Hidden Themes in Mountains of Text}
+\author{ML \& Design Thinking Course}
+\date{BSc Level - 2025}
+
+\begin{document}
+
+% Title slide with plain style
+\begin{frame}[plain]
+\vspace{2cm}
+\begin{center}
+{\Huge \textcolor{mlpurple}{\textbf{Topic Modeling \& Ideation}}}\\[0.5cm]
+{\Large Discovering What You Didn't Know You Were Looking For}\\[1.5cm]
+{\large Week 5: Machine Learning for Smarter Innovation}\\[0.5cm]
+{\normalsize Transform 1 Million Comments into 10 Innovation Opportunities}
+\end{center}
+\end{frame}
+
+% Table of contents with overview
+\begin{frame}[t]{Today's Journey: From Chaos to Clarity}
+\Large\textbf{Four Stages of Discovery}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{enumerate}
+\item \textbf{The Hidden Pattern Problem} - Why we miss what matters most
+\item \textbf{Understanding Hidden Structure} - How documents mix topics
+\item \textbf{The Algorithm Arsenal} - Four ways to unmix topics
+\item \textbf{Innovation Through Discovery} - From patterns to products
+\end{enumerate}
+
+\vspace{1em}
+
+\begin{center}
+\begin{tcolorbox}[colback=mllavender4, colframe=mlpurple, width=0.8\textwidth]
+\centering
+\textbf{Core Question:} How do you find themes you didn't know existed in data too large to read?
+\end{tcolorbox}
+\end{center}
+
+\bottomnote{By the end: You'll discover patterns that lead to breakthrough innovations}
+\end{frame}
+
+% Include the main parts
+\input{part1_hidden_patterns}
+\input{part2_understanding}
+\input{part3_algorithms}
+\input{part4_innovation}
+\input{part5_practice}
+
+% Closing slide
+\begin{frame}[plain]
+\vspace{2cm}
+\begin{center}
+{\Huge \textcolor{mlpurple}{\textbf{Topic Modeling Mastered}}}\\[1cm]
+{\Large You Can Now:}\\[0.5cm]
+{\normalsize
+\begin{itemize}
+\item Find hidden themes in massive text collections
+\item Choose the right algorithm for your data
+\item Transform unstructured feedback into structured insights
+\item Discover innovation opportunities others miss
+\end{itemize}
+}
+\vspace{1cm}
+{\large \textcolor{mlpurple}{\textbf{Next Week: Generative AI for Rapid Prototyping}}}
+\end{center}
+\end{frame}
+
+\end{document}

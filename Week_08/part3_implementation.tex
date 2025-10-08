@@ -1,0 +1,348 @@
+% Part 3: Implementation - Building Reliable Systems
+\section{Implementation: Building Production Systems}
+
+% Slide 1: OpenAI Function Calling Example
+\begin{frame}[fragile]{OpenAI Function Calling: Code Example}
+\begin{columns}[T]
+\column{0.55\textwidth}
+\small
+\texttt{functions = [\{\\
+\hspace{1cm}"name": "extract\_review",\\
+\hspace{1cm}"description": "Extract data",\\
+\hspace{1cm}"parameters": \{\\
+\hspace{2cm}"type": "object",\\
+\hspace{2cm}"properties": \{\\
+\hspace{3cm}"rating": \{"type": "integer"\},\\
+\hspace{3cm}"price": \{"type": "string"\}\\
+\hspace{2cm}\}\\
+\hspace{1cm}\}\\
+\}]}
+
+\vspace{0.3cm}
+\texttt{response = openai.ChatCompletion.create(\\
+\hspace{1cm}model="gpt-4",\\
+\hspace{1cm}messages=[...],\\
+\hspace{1cm}functions=functions\\
+)}
+
+\column{0.43\textwidth}
+\textcolor{mlblue}{\textbf{Key Points:}}
+
+\small
+\begin{itemize}
+\item Define schema upfront
+\item Model decides to call function
+\item Returns structured JSON
+\item Validates automatically
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{Benefits:}}
+\begin{itemize}
+\item Native validation
+\item Type-safe
+\item No parsing needed
+\item 95\%+ reliability
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{OpenAI handles JSON schema validation internally}
+\end{frame}
+
+% Slide 2: Anthropic Tool Use Example
+\begin{frame}[fragile]{Anthropic Tool Use: Alternative Approach}
+\begin{columns}[T]
+\column{0.55\textwidth}
+\small
+\texttt{tools = [\{\\
+\hspace{1cm}"name": "extract\_review\_data",\\
+\hspace{1cm}"description": "Extract structured data",\\
+\hspace{1cm}"input\_schema": \{\\
+\hspace{2cm}"type": "object",\\
+\hspace{2cm}"properties": \{\\
+\hspace{3cm}"rating": \{...}\\
+\hspace{2cm}\},\\
+\hspace{2cm}"required": ["rating"]\\
+\hspace{1cm}\}\\
+\}]}
+
+\vspace{0.3cm}
+\texttt{message = anthropic.messages.create(\\
+\hspace{1cm}model="claude-3-opus",\\
+\hspace{1cm}tools=tools,\\
+\hspace{1cm}messages=[...]\\
+)}
+
+\column{0.43\textwidth}
+\textcolor{mlblue}{\textbf{Differences:}}
+
+\small
+\begin{itemize}
+\item input\_schema vs parameters
+\item More explicit tool definitions
+\item Designed for multi-tool agents
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlorange}{\textbf{Same Result:}}
+\begin{itemize}
+\item Structured JSON output
+\item Type validation
+\item High reliability
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Choose based on your LLM provider - both work well}
+\end{frame}
+
+% Slide 3: Pydantic Validation
+\begin{frame}[fragile]{Pydantic: Type-Safe Python Validation}
+\begin{columns}[T]
+\column{0.55\textwidth}
+\small
+\texttt{from pydantic import BaseModel\\
+\\
+class Review(BaseModel):\\
+\hspace{1cm}rating: int\\
+\hspace{1cm}food\_quality: int\\
+\hspace{1cm}price\_level: str\\
+\hspace{1cm}\\
+\hspace{1cm}@validator('rating')\\
+\hspace{1cm}def check\_rating(cls, v):\\
+\hspace{2cm}if v < 1 or v > 5:\\
+\hspace{3cm}raise ValueError("1-5 only")\\
+\hspace{2cm}return v}
+
+\vspace{0.3cm}
+\texttt{review = Review(**ai\_output)\\
+}
+
+\column{0.43\textwidth}
+\textcolor{mlblue}{\textbf{Benefits:}}
+
+\small
+\begin{itemize}
+\item Automatic type checking
+\item Custom validators
+\item Clear error messages
+\item IDE autocompletion
+\item JSON schema generation
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{Production Ready:}}
+\begin{itemize}
+\item Catches errors immediately
+\item Prevents bad data
+\item Self-documenting code
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Pydantic is the standard for Python API validation}
+\end{frame}
+
+% Slide 4: Error Handling Architecture
+\begin{frame}{Production Error Handling Architecture}
+\includegraphics[width=0.85\textwidth]{charts/production_architecture.pdf}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Layered architecture with caching, validation, and monitoring}
+\end{frame}
+
+% Slide 5: Error Handling Code Pattern
+\begin{frame}[fragile]{Graceful Error Handling Pattern}
+\small
+\texttt{def extract\_with\_fallback(text, retries=3):\\
+\hspace{1cm}for attempt in range(retries):\\
+\hspace{2cm}try:\\
+\hspace{3cm}result = ai\_extract(text)\\
+\hspace{3cm}if validate(result):\\
+\hspace{4cm}return result\\
+\hspace{3cm}else:\\
+\hspace{4cm}log\_validation\_failure(result)\\
+\hspace{2cm}except APIError:\\
+\hspace{3cm}if attempt < retries - 1:\\
+\hspace{4cm}time.sleep(2 ** attempt) \# Exponential backoff\\
+\hspace{4cm}continue\\
+\hspace{1cm}\\
+\hspace{1cm}\# All retries failed - use fallback\\
+\hspace{1cm}return rule\_based\_fallback(text)}
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{Key Components:}}
+\begin{itemize}
+\item Retry with exponential backoff
+\item Validation checks
+\item Logging for debugging
+\item Rule-based fallback
+\item Never return invalid data
+\end{itemize}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Production systems need multiple fallback layers}
+\end{frame}
+
+% Slide 6: Testing Strategy
+\begin{frame}{Testing Structured Outputs}
+\includegraphics[width=0.85\textwidth]{charts/testing_pyramid.pdf}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{70\% unit tests, 20\% integration, 10\% end-to-end}
+\end{frame}
+
+% Slide 7: Monitoring Dashboard
+\begin{frame}{Production Monitoring}
+\includegraphics[width=0.85\textwidth]{charts/monitoring_dashboard.pdf}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Track success rate, response time, errors, and costs}
+\end{frame}
+
+% Slide 8: Deployment Checklist
+\begin{frame}{Production Deployment Checklist}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Before Deployment}}
+
+\small
+$\Box$ Schema defined and documented\\
+$\Box$ Validation tests pass 100\%\\
+$\Box$ Error handling implemented\\
+$\Box$ Retry logic tested\\
+$\Box$ Fallback system works\\
+$\Box$ Logging configured\\
+$\Box$ Monitoring dashboards ready\\
+$\Box$ Alerts configured\\
+$\Box$ Load tested at 10x volume
+
+\column{0.48\textwidth}
+\textcolor{mlgreen}{\textbf{After Deployment}}
+
+\small
+$\Box$ Success rate $>$ 95\%\\
+$\Box$ P95 latency $<$ 2s\\
+$\Box$ Error rate $<$ 2\%\\
+$\Box$ Cost within budget\\
+$\Box$ No manual interventions needed\\
+$\Box$ User feedback positive\\
+$\Box$ Documentation updated\\
+$\Box$ Team trained\\
+$\Box$ Runbook created
+\end{columns}
+
+\vspace{0.5cm}
+\begin{center}
+\textcolor{mlorange}{\normalsize Don't skip the checklist - it prevents production fires}
+\end{center}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Production readiness requires careful verification}
+\end{frame}
+
+% Slide 9: Performance Optimization
+\begin{frame}{Optimization Strategies}
+\begin{columns}[T]
+\column{0.32\textwidth}
+\textcolor{mlblue}{\textbf{Token Reduction}}
+
+\small
+\begin{itemize}
+\item Shorter prompts
+\item Remove examples after tuning
+\item Compress context
+\item Use smaller models when possible
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlgray}{\small Impact:}\\
+50\% cost reduction\\
+30\% faster
+
+\column{0.32\textwidth}
+\textcolor{mlgreen}{\textbf{Caching}}
+
+\small
+\begin{itemize}
+\item Cache identical requests
+\item 1-hour TTL
+\item Redis for speed
+\item Cache hit rate $>$ 40\%
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlgray}{\small Impact:}\\
+70\% cost reduction\\
+10x faster
+
+\column{0.32\textwidth}
+\textcolor{mlorange}{\textbf{Batching}}
+
+\small
+\begin{itemize}
+\item Process multiple items together
+\item Async processing
+\item Queue management
+\item Batch size 10-50
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlgray}{\small Impact:}\\
+40\% cost reduction\\
+Better throughput
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Optimization can reduce costs by 60-80\% while maintaining quality}
+\end{frame}
+
+% Slide 10: Implementation Summary
+\begin{frame}{Implementation Summary: Key Takeaways}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Core Implementation}}
+
+\small
+\begin{enumerate}
+\item Use function calling or tool use
+\item Validate with Pydantic or similar
+\item Implement retry + fallback
+\item Add comprehensive logging
+\item Monitor everything
+\end{enumerate}
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{Production Requirements:}}
+\begin{itemize}
+\item 95\%+ success rate
+\item $<$ 2s P95 latency
+\item Graceful degradation
+\item Cost optimized
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{mlorange}{\textbf{Common Mistakes to Avoid}}
+
+\small
+\begin{itemize}
+\item No validation layer
+\item Single point of failure
+\item No error logging
+\item No monitoring
+\item Skipping testing
+\item No fallback plan
+\item Ignoring costs
+\end{itemize}
+
+\end{columns}
+
+\vspace{0.3cm}
+\begin{center}
+\textcolor{mlpurple}{\textbf{Next:}} Design UX patterns for reliability
+\end{center}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Part 4: Creating user experiences with structured AI}
+\end{frame}

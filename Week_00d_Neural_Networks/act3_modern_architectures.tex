@@ -1,0 +1,320 @@
+% Act 3: Modern Architectures (10 slides)
+
+\begin{frame}{12. Human Introspection: Vision is Hierarchical}
+\begin{columns}[c]
+\column{0.48\textwidth}
+\textbf{How Humans See:}
+\begin{itemize}
+\item \textbf{Level 1}: Edge detection (V1 cortex)
+  \begin{itemize}
+  \item Horizontal, vertical, diagonal lines
+  \item Local contrast detection
+  \end{itemize}
+\item \textbf{Level 2}: Texture \& shape (V2, V4)
+  \begin{itemize}
+  \item Curves, corners, textures
+  \item Spatial relationships
+  \end{itemize}
+\item \textbf{Level 3}: Objects (IT cortex)
+  \begin{itemize}
+  \item Faces, cars, animals
+  \item Invariant recognition
+  \end{itemize}
+\end{itemize}
+
+\column{0.48\textwidth}
+\begin{center}
+\includegraphics[width=\textwidth]{charts/human_visual_hierarchy.pdf}
+\end{center}
+\end{columns}
+
+\vspace{\fill}
+\small\textcolor{gray}{Neuroscience insight: Vision builds complexity through specialized layers}
+\end{frame}
+
+\begin{frame}{13. Hypothesis: Specialized Architectures Matching Data Structure}
+\begin{columns}[c]
+\column{0.48\textwidth}
+\textbf{The Key Insight:}
+\begin{itemize}
+\item \textcolor{mlred}{Problem}: Generic MLPs ignore data structure
+\item \textcolor{mlgreen}{Solution}: Architecture matches inductive bias
+\end{itemize}
+
+\textbf{Examples:}
+\begin{itemize}
+\item \textbf{Images}: Spatial locality → CNNs
+\item \textbf{Sequences}: Temporal order → RNNs
+\item \textbf{Graphs}: Node relationships → GNNs
+\item \textbf{Language}: Long-range dependencies → Transformers
+\end{itemize}
+
+\column{0.48\textwidth}
+\begin{center}
+\includegraphics[width=\textwidth]{charts/architecture_data_matching.pdf}
+\end{center}
+\end{columns}
+
+\vspace{\fill}
+\small\textcolor{gray}{Right architecture = built-in prior knowledge about the problem domain}
+\end{frame}
+
+\begin{frame}{14. Zero-Jargon: Convolution as ``Sliding Pattern Detector''}
+\begin{columns}[c]
+\column{0.48\textwidth}
+\textbf{Convolution Intuition:}
+\begin{itemize}
+\item Take a small ``template'' (3x3 filter)
+\item Slide it across the entire image
+\item At each position: compute similarity
+\item Result: ``Where is this pattern?''
+\end{itemize}
+
+\textbf{Example Filters:}
+\begin{itemize}
+\item Edge detector: $\begin{bmatrix} -1 & 0 & 1 \\ -1 & 0 & 1 \\ -1 & 0 & 1 \end{bmatrix}$
+\item Blur: $\frac{1}{9}\begin{bmatrix} 1 & 1 & 1 \\ 1 & 1 & 1 \\ 1 & 1 & 1 \end{bmatrix}$
+\end{itemize}
+
+\column{0.48\textwidth}
+\begin{center}
+\includegraphics[width=\textwidth]{charts/convolution_intuition.pdf}
+\end{center}
+\end{columns}
+
+\vspace{\fill}
+\small\textcolor{gray}{Convolution = template matching with learnable templates}
+\end{frame}
+
+\begin{frame}{15. Geometric Intuition: Filters Detect Edges/Textures}
+\begin{columns}[c]
+\column{0.48\textwidth}
+\textbf{What Filters Learn:}
+
+\textbf{Layer 1}: Low-level features
+\begin{itemize}
+\item Edges, corners, blobs
+\item Oriented lines at different angles
+\item Color gradients
+\end{itemize}
+
+\textbf{Layer 2}: Mid-level features
+\begin{itemize}
+\item Textures, patterns
+\item Simple shapes
+\item Motifs and repeating elements
+\end{itemize}
+
+\textbf{Layer 3+}: High-level features
+\begin{itemize}
+\item Object parts (eyes, wheels)
+\item Complex patterns
+\end{itemize}
+
+\column{0.48\textwidth}
+\begin{center}
+\includegraphics[width=\textwidth]{charts/filter_hierarchy.pdf}
+\end{center}
+\end{columns}
+
+\vspace{\fill}
+\small\textcolor{gray}{Each layer builds more complex features from simpler ones}
+\end{frame}
+
+\begin{frame}{16. CNN Architecture Details}
+\begin{columns}[c]
+\column{0.48\textwidth}
+\textbf{Key Components:}
+
+\textbf{1. Convolutional Layers}
+\begin{itemize}
+\item Multiple filters per layer
+\item Shared weights across spatial locations
+\item Parameter sharing reduces overfitting
+\end{itemize}
+
+\textbf{2. Pooling Layers}
+\begin{itemize}
+\item Downsampling (max, average)
+\item Translation invariance
+\item Computational efficiency
+\end{itemize}
+
+\textbf{3. Fully Connected}
+\begin{itemize}
+\item Final classification
+\item Combines all learned features
+\end{itemize}
+
+\column{0.48\textwidth}
+\begin{center}
+\includegraphics[width=\textwidth]{charts/cnn_architecture_detailed.pdf}
+\end{center}
+\end{columns}
+
+\vspace{\fill}
+\small\textcolor{gray}{CNN = Feature extraction (conv+pool) + Classification (FC)}
+\end{frame}
+
+\begin{frame}{17. Full Walkthrough: Convolve Filter with Actual Numbers}
+\begin{columns}[c]
+\column{0.48\textwidth}
+\textbf{Example Calculation:}
+
+\textbf{Input (3x3):}
+$\begin{bmatrix} 1 & 2 & 1 \\ 0 & 1 & 2 \\ 1 & 0 & 1 \end{bmatrix}$
+
+\textbf{Filter (3x3):}
+$\begin{bmatrix} -1 & 0 & 1 \\ -2 & 0 & 2 \\ -1 & 0 & 1 \end{bmatrix}$
+
+\textbf{Convolution (element-wise multiply + sum):}
+\begin{align}
+&= (-1)(1) + (0)(2) + (1)(1) + \\
+&\quad (-2)(0) + (0)(1) + (2)(2) + \\
+&\quad (-1)(1) + (0)(0) + (1)(1) \\
+&= -1 + 0 + 1 - 0 + 0 + 4 - 1 + 0 + 1 \\
+&= 4
+\end{align}
+
+\column{0.48\textwidth}
+\begin{center}
+\includegraphics[width=\textwidth]{charts/convolution_calculation.pdf}
+\end{center}
+\end{columns}
+
+\vspace{\fill}
+\small\textcolor{gray}{High response (4) means vertical edge detected at this location}
+\end{frame}
+
+\begin{frame}{18. RNN and Transformer Architectures}
+\begin{columns}[c]
+\column{0.48\textwidth}
+\textbf{Recurrent Neural Networks (RNNs):}
+\begin{align}
+h_t &= \tanh(W_{hh}h_{t-1} + W_{xh}x_t + b_h) \\
+y_t &= W_{hy}h_t + b_y
+\end{align}
+
+\begin{itemize}
+\item Hidden state carries memory
+\item Sequential processing
+\item Good for: Time series, NLP
+\item Problem: Vanishing gradients over time
+\end{itemize}
+
+\textbf{Transformers (2017):}
+\begin{itemize}
+\item Self-attention mechanism
+\item Parallel processing
+\item Long-range dependencies
+\item State-of-the-art for language
+\end{itemize}
+
+\column{0.48\textwidth}
+\begin{center}
+\includegraphics[width=\textwidth]{charts/rnn_transformer_comparison.pdf}
+\end{center}
+\end{columns}
+
+\vspace{\fill}
+\small\textcolor{gray}{RNNs: Sequential memory, Transformers: Parallel attention}
+\end{frame}
+
+\begin{frame}{19. Visualization: Feature Maps, Attention Heatmaps}
+\begin{columns}[c]
+\column{0.48\textwidth}
+\textbf{CNN Feature Maps:}
+\begin{itemize}
+\item Each filter produces a feature map
+\item Bright areas = high activation
+\item Shows what the network ``sees''
+\item Layer 1: Edges and textures
+\item Layer N: Complex patterns
+\end{itemize}
+
+\textbf{Transformer Attention:}
+\begin{itemize}
+\item Attention weights as heatmaps
+\item Shows which words influence others
+\item Different heads learn different patterns
+\item Interpretable relationships
+\end{itemize}
+
+\column{0.48\textwidth}
+\begin{center}
+\includegraphics[width=\textwidth]{charts/feature_maps_attention.pdf}
+\end{center}
+\end{columns}
+
+\vspace{\fill}
+\small\textcolor{gray}{Visualization reveals the internal representations learned by neural networks}
+\end{frame}
+
+\begin{frame}{20. Why It Works: Inductive Biases Reduce Search Space}
+\begin{columns}[c]
+\column{0.48\textwidth}
+\textbf{The Core Principle:}
+
+\textbf{Without Structure:}
+\begin{itemize}
+\item Search space: All possible functions
+\item Size: Exponential in parameters
+\item Sample complexity: Intractable
+\end{itemize}
+
+\textbf{With Architecture:}
+\begin{itemize}
+\item Built-in assumptions about data
+\item Drastically reduced search space
+\item Faster learning, better generalization
+\end{itemize}
+
+\textbf{Examples:}
+\begin{itemize}
+\item CNNs assume translation invariance
+\item RNNs assume sequential dependence
+\item Transformers assume attention patterns
+\end{itemize}
+
+\column{0.48\textwidth}
+\begin{center}
+\includegraphics[width=\textwidth]{charts/inductive_bias_reduction.pdf}
+\end{center}
+\end{columns}
+
+\vspace{\fill}
+\small\textcolor{gray}{Architecture = built-in prior knowledge that guides learning}
+\end{frame}
+
+\begin{frame}{21. Experimental Validation: ImageNet Accuracy Over Time}
+\begin{columns}[c]
+\column{0.48\textwidth}
+\textbf{ImageNet Challenge Results:}
+
+\begin{center}
+\begin{tabular}{lcc}
+\toprule
+Year & Model & Top-5 Error \\
+\midrule
+2010 & Traditional CV & 28.2\% \\
+2012 & AlexNet (CNN) & 15.3\% \\
+2013 & ZFNet & 14.8\% \\
+2014 & VGGNet & 7.3\% \\
+2014 & GoogLeNet & 6.7\% \\
+2015 & ResNet & 3.6\% \\
+2017 & DenseNet & 2.2\% \\
+\midrule
+- & Human Performance & 5.1\% \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\column{0.48\textwidth}
+\begin{center}
+\includegraphics[width=\textwidth]{charts/imagenet_progress.pdf}
+\end{center}
+\end{columns}
+
+\vspace{\fill}
+\small\textcolor{gray}{CNNs achieved superhuman performance in just 5 years}
+\end{frame}

@@ -1,0 +1,547 @@
+% Part 4: Design - Human-Centered AI Ethics
+
+\section{Design: Human-Centered AI Ethics}
+
+% Slide 1: Inclusive Design Principles
+\begin{frame}{Inclusive Design for AI}
+\begin{columns}[T]
+\column{0.55\textwidth}
+\includegraphics[width=0.85\textwidth]{charts/inclusive_design_principles.pdf}
+
+\column{0.43\textwidth}
+\textcolor{ForestGreen}{\Large Design for All}\\[0.5cm]
+
+\textcolor{Amber}{\textbf{Core Principles:}}
+\begin{itemize}
+\item Recognize diversity
+\item Provide choice
+\item Be flexible
+\item Enable participation
+\item Distribute power
+\end{itemize}
+
+\textcolor{Teal}{\textbf{In Practice:}}
+\begin{itemize}
+\item Multiple input modalities
+\item Customizable interfaces
+\item Cultural adaptation
+\item Accessibility by default
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{Slate}{Design with, not for, marginalized communities}
+\end{frame}
+
+% Slide 2: Accessibility Requirements
+\begin{frame}{Accessibility in AI Systems}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{ForestGreen}{\textbf{WCAG 2.1 for AI}}
+
+\textcolor{Amber}{Perceivable}
+\begin{itemize}
+\item Alt text for AI-generated images
+\item Captions for voice interfaces
+\item High contrast UI
+\item Screen reader compatibility
+\end{itemize}
+
+\textcolor{Teal}{Operable}
+\begin{itemize}
+\item Keyboard navigation
+\item Sufficient time limits
+\item No seizure-inducing patterns
+\item Clear navigation
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{DarkTeal}{Understandable}
+\begin{itemize}
+\item Plain language explanations
+\item Consistent behavior
+\item Input assistance
+\item Error prevention
+\end{itemize}
+
+\textcolor{Amber}{Robust}
+\begin{itemize}
+\item Compatible with assistive tech
+\item Future-proof markup
+\item Graceful degradation
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{Teal}{\textbf{Legal Requirement:}}\\
+EU Accessibility Act (2025)\\
+ADA compliance (US)
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{Slate}{Accessibility benefits everyone, not just disabled users}
+\end{frame}
+
+% Slide 3: Transparency & Consent
+\begin{frame}{User Transparency and Consent}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{ForestGreen}{\textbf{Transparency Layers}}
+
+\textcolor{Amber}{Level 1: Existence}
+\begin{itemize}
+\item Disclose AI is being used
+\item Not a human interaction
+\item System capabilities
+\end{itemize}
+
+\textcolor{Teal}{Level 2: Process}
+\begin{itemize}
+\item How decisions are made
+\item What data is used
+\item Who has access
+\end{itemize}
+
+\textcolor{DarkTeal}{Level 3: Reasoning}
+\begin{itemize}
+\item Why this specific decision
+\item Contributing factors
+\item Actionable recourse
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{ForestGreen}{\textbf{Consent Design}}
+
+\textcolor{Amber}{Informed Consent Requires:}
+\begin{itemize}
+\item Clear language (not legalese)
+\item Specific purposes
+\item Real choices
+\item Easy opt-out
+\item Granular control
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{Teal}{\textbf{GDPR Requirements:}}
+\begin{itemize}
+\item Right to explanation
+\item Right to deletion
+\item Right to object
+\item Right to human review
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{DarkTeal}{\textbf{Anti-pattern:}}\\
+``Agree or leave'' is not real consent
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{Slate}{Transparency without agency is surveillance}
+\end{frame}
+
+% Slide 4: Environmental Impact
+\begin{frame}{AI's Carbon Footprint}
+\begin{columns}[T]
+\column{0.55\textwidth}
+\includegraphics[width=0.85\textwidth]{charts/carbon_footprint_ml.pdf}
+
+\column{0.43\textwidth}
+\textcolor{ForestGreen}{\Large Hidden Environmental Cost}\\[0.5cm]
+
+\textcolor{Amber}{\textbf{Training Emissions:}}
+\begin{itemize}
+\item GPT-3: 552 tons CO2
+\item BERT: 1438 lbs CO2
+\item Transformer NAS: 626k lbs CO2
+\end{itemize}
+
+\textcolor{Teal}{\textbf{Inference at Scale:}}
+\begin{itemize}
+\item Billions of queries daily
+\item Data center energy
+\item Cooling requirements
+\end{itemize}
+
+\textcolor{DarkTeal}{\textbf{Mitigation:}}
+\begin{itemize}
+\item Efficient architectures
+\item Green data centers
+\item Model compression
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{Slate}{Ethics includes environmental responsibility}
+\end{frame}
+
+% Slide 5: Case Study - Detroit Facial Recognition
+\begin{frame}{Case Study: Detroit Wrongful Arrest}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{ForestGreen}{\textbf{The Incident (2020, settled 2024)}}
+
+\textcolor{Amber}{Facts:}
+\begin{itemize}
+\item Robert Williams, Black man
+\item Arrested for shoplifting
+\item Facial recognition false match
+\item Detained 30 hours
+\item Charges eventually dropped
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{Teal}{Technical Failure:}
+\begin{itemize}
+\item Low-quality image
+\item No confidence threshold
+\item No human verification
+\item Known bias in FR systems
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{ForestGreen}{\textbf{Lessons Learned}}
+
+\textcolor{DarkTeal}{What Went Wrong:}
+\begin{itemize}
+\item Over-reliance on technology
+\item No quality checks
+\item Ignored known limitations
+\item Procedural shortcuts
+\item Lack of accountability
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{Amber}{Outcome:}
+\begin{itemize}
+\item Settlement \& policy change
+\item Detroit now bans FR-only arrests
+\item National attention to FR bias
+\item ACLU lawsuits in multiple cities
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{Teal}{\textbf{Key Insight:}}\\
+Technology amplifies existing biases in criminal justice
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{Slate}{Source: ACLU, Detroit Free Press, 2024}
+\end{frame}
+
+% Slide 6: Case Study Timeline
+\begin{frame}{AI Ethics Failures: 2020-2024 Timeline}
+\begin{columns}[T]
+\column{0.55\textwidth}
+\includegraphics[width=0.85\textwidth]{charts/case_study_timeline.pdf}
+
+\column{0.43\textwidth}
+\textcolor{ForestGreen}{\Large Major Incidents}\\[0.5cm]
+
+\textcolor{Amber}{\textbf{2020}}
+\begin{itemize}
+\item Detroit FR arrest \#1
+\item Amazon Rekognition bias exposed
+\end{itemize}
+
+\textcolor{Teal}{\textbf{2021-2023}}
+\begin{itemize}
+\item More FR wrongful arrests
+\item Healthcare AI discrimination
+\item Hiring algorithm lawsuits
+\end{itemize}
+
+\textcolor{DarkTeal}{\textbf{2024}}
+\begin{itemize}
+\item 233 incidents reported
+\item UK Facewatch case
+\item Uber Eats driver case
+\item Policy reforms begin
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{Slate}{Pattern: Marginalized communities disproportionately harmed}
+\end{frame}
+
+% Slide 7: Hiring Algorithm Bias
+\begin{frame}{Case Study: AI in Hiring}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{ForestGreen}{\textbf{The Problem}}
+
+\textcolor{Amber}{2024 Reality:}
+\begin{itemize}
+\item 79\% of Fortune 500 use AI screening
+\item Most managers untrained
+\item Women \& minorities disadvantaged
+\item Black-box decision systems
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{Teal}{How Bias Enters:}
+\begin{itemize}
+\item Historical hiring data (biased)
+\item Proxy variables (school names)
+\item Resume keywords (gendered)
+\item Face/voice analysis (discriminatory)
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{ForestGreen}{\textbf{Documented Cases}}
+
+\textcolor{DarkTeal}{Amazon (2018):}
+\begin{itemize}
+\item Resume screening tool
+\item Penalized ``women's college''
+\item Learned from male-dominated data
+\item Scrapped after discovery
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{Amber}{HireVue (2021):}
+\begin{itemize}
+\item Video interview AI
+\item Analyzed facial expressions
+\item Lacked scientific validity
+\item Dropped after criticism
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{Teal}{\textbf{Regulatory Response:}}\\
+NYC Local Law 144 (2023)\\
+Requires bias audits
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{Slate}{Hiring AI perpetuates discrimination at scale}
+\end{frame}
+
+% Slide 8: Participatory Design
+\begin{frame}{Participatory Design with Affected Communities}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{ForestGreen}{\textbf{Why It Matters}}
+
+\textcolor{Amber}{Traditional Approach:}
+\begin{itemize}
+\item Design for users
+\item Expert-driven
+\item Top-down
+\item Assumptions-based
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{Teal}{Participatory Approach:}
+\begin{itemize}
+\item Design with users
+\item Community-driven
+\item Bottom-up
+\item Experience-based
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{DarkTeal}{\textbf{Especially Critical:}}\\
+When system affects marginalized groups without choice
+
+\column{0.48\textwidth}
+\textcolor{ForestGreen}{\textbf{Practical Methods}}
+
+\textcolor{Amber}{Community Engagement:}
+\begin{itemize}
+\item Co-design workshops
+\item Paid advisory boards
+\item Continuous feedback
+\item Shared decision-making
+\end{itemize}
+
+\textcolor{Teal}{Compensation:}
+\begin{itemize}
+\item Fair payment for time
+\item Acknowledge expertise
+\item Share ownership
+\item Long-term relationships
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{DarkTeal}{\textbf{Examples:}}
+\begin{itemize}
+\item Detroit Digital Justice Coalition
+\item Data for Black Lives
+\item Indigenous data sovereignty
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{Slate}{Nothing about us without us}
+\end{frame}
+
+% Slide 9: Value Sensitive Design
+\begin{frame}{Value Sensitive Design Framework}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{ForestGreen}{\textbf{Three Iterations}}
+
+\textcolor{Amber}{1. Conceptual Investigation}
+\begin{itemize}
+\item Identify stakeholders
+\item Map values \& tensions
+\item Recognize trade-offs
+\item Document assumptions
+\end{itemize}
+
+\textcolor{Teal}{2. Empirical Investigation}
+\begin{itemize}
+\item Observe actual use
+\item Interview stakeholders
+\item Measure impacts
+\item Test hypotheses
+\end{itemize}
+
+\textcolor{DarkTeal}{3. Technical Investigation}
+\begin{itemize}
+\item Design for values
+\item Build prototypes
+\item Evaluate alternatives
+\item Iterate based on feedback
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{ForestGreen}{\textbf{Core Values to Consider}}
+
+\textcolor{Amber}{Human Welfare:}
+\begin{itemize}
+\item Safety
+\item Health
+\item Peace
+\end{itemize}
+
+\textcolor{Teal}{Human Dignity:}
+\begin{itemize}
+\item Autonomy
+\item Privacy
+\item Non-discrimination
+\end{itemize}
+
+\textcolor{DarkTeal}{Justice:}
+\begin{itemize}
+\item Fairness
+\item Equality
+\item Access
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{Amber}{\textbf{Key Insight:}}\\
+Values often conflict -- design must navigate trade-offs explicitly
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{Slate}{Embed values from the start, not as afterthought}
+\end{frame}
+
+% Slide 10: Red Teaming for Ethics
+\begin{frame}{Red Teaming: Adversarial Ethics Testing}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{ForestGreen}{\textbf{What is Red Teaming?}}
+
+\textcolor{Amber}{Origin:}
+\begin{itemize}
+\item Military/cybersecurity practice
+\item Simulated attack scenarios
+\item Find vulnerabilities before adversaries
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{Teal}{For AI Ethics:}
+\begin{itemize}
+\item Deliberately try to break fairness
+\item Probe for hidden biases
+\item Test edge cases
+\item Challenge assumptions
+\item Adversarial prompting
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{DarkTeal}{\textbf{Red Team Composition:}}
+\begin{itemize}
+\item Diverse perspectives
+\item Domain experts
+\item Affected community members
+\item Security professionals
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{ForestGreen}{\textbf{Red Teaming Process}}
+
+\textcolor{Amber}{Phase 1: Threat Modeling}
+\begin{itemize}
+\item Identify attack surfaces
+\item Map potential harms
+\item Prioritize risks
+\end{itemize}
+
+\textcolor{Teal}{Phase 2: Testing}
+\begin{itemize}
+\item Systematic probing
+\item Boundary exploration
+\item Stress testing
+\item Edge case generation
+\end{itemize}
+
+\textcolor{DarkTeal}{Phase 3: Reporting}
+\begin{itemize}
+\item Document findings
+\item Assess severity
+\item Recommend mitigations
+\item Track remediation
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{Amber}{\textbf{Result:}}\\
+More robust, ethical systems through adversarial thinking
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{Slate}{Assume adversaries -- ethical and malicious}
+\end{frame}
+
+% Slide 11: Design Summary
+\begin{frame}{Design Summary: Human-Centered Ethics}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{ForestGreen}{\textbf{Key Takeaways}}
+
+\begin{enumerate}
+\item Design with, not for, users
+\item Accessibility is non-negotiable
+\item Transparency enables agency
+\item Environmental cost matters
+\item Real harms to real people
+\item Participatory design essential
+\item Red team for robustness
+\end{enumerate}
+
+\vspace{0.3cm}
+\textcolor{Amber}{\textbf{Critical Insight:}}\\
+Ethics is about power, not just fairness metrics
+
+\column{0.48\textwidth}
+\textcolor{Teal}{\textbf{Next: Practice}}
+
+Putting it all together:
+\begin{itemize}
+\item Ethical audit framework
+\item Hands-on exercises
+\item Building review processes
+\item Regulatory compliance
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{DarkTeal}{\textbf{Remember:}}\\
+The most ethical AI is often the one not built
+\end{columns}
+
+\vspace{\fill}
+\begin{center}
+\Large\textcolor{ForestGreen}{Center Humans, Not Technology}
+\end{center}
+\end{frame}

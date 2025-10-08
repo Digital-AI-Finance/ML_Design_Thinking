@@ -1,0 +1,439 @@
+% Part 3: Implementation - Building Responsible Systems
+
+\section{Implementation: Tools and Techniques}
+
+% Slide 1: Fairness Toolkit Landscape
+\begin{frame}{Fairness Toolkits Comparison}
+\begin{columns}[T]
+\column{0.55\textwidth}
+\includegraphics[width=0.85\textwidth]{charts/fairness_toolkit_comparison.pdf}
+
+\column{0.43\textwidth}
+\textcolor{ForestGreen}{\Large Top Toolkits}\\[0.5cm]
+
+\textcolor{Amber}{\textbf{IBM AIF360}}
+\begin{itemize}
+\item 70+ metrics
+\item 10+ algorithms
+\item Python \& R
+\end{itemize}
+
+\textcolor{Teal}{\textbf{Fairlearn}}
+\begin{itemize}
+\item Microsoft-backed
+\item Sklearn integration
+\item Strong visualization
+\end{itemize}
+
+\textcolor{DarkTeal}{\textbf{Google What-If}}
+\begin{itemize}
+\item Interactive exploration
+\item TensorBoard integration
+\item Visual debugging
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{Slate}{Choose based on your stack and needs}
+\end{frame}
+
+% Slide 2: IBM AIF360 Deep Dive
+\begin{frame}{IBM AIF360: Comprehensive Fairness}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{ForestGreen}{\textbf{Key Features}}
+
+\textcolor{Amber}{Metrics:}
+\begin{itemize}
+\item 70+ fairness metrics
+\item Group \& individual fairness
+\item Intersectional analysis
+\item Temporal fairness
+\end{itemize}
+
+\textcolor{Teal}{Algorithms:}
+\begin{itemize}
+\item Pre-processing (4 methods)
+\item In-processing (3 methods)
+\item Post-processing (3 methods)
+\end{itemize}
+
+\textcolor{DarkTeal}{Datasets:}
+\begin{itemize}
+\item 10 benchmark datasets
+\item Preprocessed \& ready
+\item Academic standard
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{ForestGreen}{\textbf{Example Usage}}
+
+\small
+\texttt{from aif360.datasets import}\\
+\texttt{~~AdultDataset}\\
+\texttt{from aif360.metrics import}\\
+\texttt{~~BinaryLabelDatasetMetric}\\
+
+\texttt{dataset = AdultDataset()}\\
+\texttt{metric = BinaryLabelDatasetMetric(}\\
+\texttt{~~dataset,}\\
+\texttt{~~unprivileged\_groups=[}\\
+\texttt{~~~~\{'sex': 0\}],}\\
+\texttt{~~privileged\_groups=[}\\
+\texttt{~~~~\{'sex': 1\}]}\\
+\texttt{)}\\
+
+\texttt{print(metric.mean\_difference())}\\
+\texttt{print(metric.disparate\_impact())}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{Slate}{AIF360: Best for comprehensive fairness assessment}
+\end{frame}
+
+% Slide 3: Fairlearn Practical Example
+\begin{frame}{Fairlearn: Easy sklearn Integration}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{ForestGreen}{\textbf{Core Concepts}}
+
+\textcolor{Amber}{Assessment}
+\begin{itemize}
+\item MetricFrame for group metrics
+\item Disaggregated analysis
+\item Interactive dashboards
+\end{itemize}
+
+\textcolor{Teal}{Mitigation}
+\begin{itemize}
+\item GridSearch: Threshold optimization
+\item ExponentiatedGradient: In-processing
+\item ThresholdOptimizer: Post-processing
+\end{itemize}
+
+\textcolor{DarkTeal}{Constraints}
+\begin{itemize}
+\item Demographic parity
+\item Equalized odds
+\item True positive rate parity
+\item Bounded group loss
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{ForestGreen}{\textbf{Example Code}}
+
+\small
+\texttt{from fairlearn.reductions import}\\
+\texttt{~~ExponentiatedGradient}\\
+\texttt{from fairlearn.reductions import}\\
+\texttt{~~DemographicParity}\\
+
+\texttt{constraint = DemographicParity()}\\
+
+\texttt{mitigator = ExponentiatedGradient(}\\
+\texttt{~~estimator,}\\
+\texttt{~~constraints=constraint}\\
+\texttt{)}\\
+
+\texttt{mitigator.fit(X, y,}\\
+\texttt{~~sensitive\_features=A)}\\
+
+\texttt{y\_pred = mitigator.predict(X\_test)}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{Slate}{Fairlearn: Best for quick sklearn integration}
+\end{frame}
+
+% Slide 4: Explainability - SHAP
+\begin{frame}{SHAP: Explaining Model Decisions}
+\begin{columns}[T]
+\column{0.55\textwidth}
+\includegraphics[width=0.85\textwidth]{charts/shap_explanation_example.pdf}
+
+\column{0.43\textwidth}
+\textcolor{ForestGreen}{\Large SHapley Additive exPlanations}\\[0.5cm]
+
+\textcolor{Amber}{\textbf{Theory:}}
+\begin{itemize}
+\item Game-theoretic foundation
+\item Shapley values
+\item Additive feature attribution
+\item Mathematically rigorous
+\end{itemize}
+
+\textcolor{Teal}{\textbf{Practical:}}
+\begin{itemize}
+\item Model-agnostic
+\item Fast approximations
+\item Beautiful visualizations
+\item Local \& global explanations
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{Slate}{SHAP values: The gold standard for feature importance}
+\end{frame}
+
+% Slide 5: Explainability - LIME
+\begin{frame}{LIME: Local Interpretable Model-agnostic Explanations}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{ForestGreen}{\textbf{How LIME Works}}
+
+\begin{enumerate}
+\item Perturb input locally
+\item Get model predictions
+\item Fit simple linear model
+\item Explain with coefficients
+\end{enumerate}
+
+\vspace{0.3cm}
+\textcolor{Amber}{\textbf{Key Idea:}}\\
+Complex models are locally linear
+
+\vspace{0.3cm}
+\textcolor{Teal}{\textbf{Advantages:}}
+\begin{itemize}
+\item Truly model-agnostic
+\item Works on any data type
+\item Human-interpretable
+\item Fast computation
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{ForestGreen}{\textbf{Example Usage}}
+
+\small
+\texttt{from lime.lime\_tabular import}\\
+\texttt{~~LimeTabularExplainer}\\
+
+\texttt{explainer = LimeTabularExplainer(}\\
+\texttt{~~X\_train,}\\
+\texttt{~~feature\_names=features,}\\
+\texttt{~~class\_names=classes,}\\
+\texttt{~~mode='classification'}\\
+\texttt{)}\\
+
+\texttt{explanation = explainer.explain\_instance(}\\
+\texttt{~~X\_test[i],}\\
+\texttt{~~model.predict\_proba}\\
+\texttt{)}\\
+
+\texttt{explanation.show\_in\_notebook()}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{Slate}{LIME: Best for quick local explanations}
+\end{frame}
+
+% Slide 6: Model Cards
+\begin{frame}{Model Cards: Documentation Standard}
+\begin{columns}[T]
+\column{0.55\textwidth}
+\includegraphics[width=0.85\textwidth]{charts/model_card_template.pdf}
+
+\column{0.43\textwidth}
+\textcolor{ForestGreen}{\Large Essential Documentation}\\[0.5cm]
+
+\textcolor{Amber}{\textbf{Required Sections:}}
+\begin{itemize}
+\item Model details
+\item Intended use
+\item Factors (demographics)
+\item Metrics
+\item Training data
+\item Evaluation data
+\item Ethical considerations
+\item Caveats \& recommendations
+\end{itemize}
+
+\textcolor{Teal}{\textbf{Benefits:}}
+\begin{itemize}
+\item Transparency
+\item Accountability
+\item Risk communication
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{Slate}{Model cards should be mandatory for deployed systems}
+\end{frame}
+
+% Slide 7: Datasheets for Datasets
+\begin{frame}{Datasheets: Documenting Training Data}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{ForestGreen}{\textbf{Why Datasheets Matter}}
+
+\textcolor{Amber}{Problems with undocumented data:}
+\begin{itemize}
+\item Unknown biases
+\item Unclear provenance
+\item Misuse in new contexts
+\item Privacy violations
+\item Reproduction failures
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{Teal}{\textbf{Inspiration:}}\\
+Electronics datasheets -- standardized, comprehensive, essential
+
+\column{0.48\textwidth}
+\textcolor{ForestGreen}{\textbf{Core Questions}}
+
+\textcolor{DarkTeal}{Motivation}
+\begin{itemize}
+\item Why was dataset created?
+\item Who funded it?
+\end{itemize}
+
+\textcolor{Amber}{Composition}
+\begin{itemize}
+\item What do instances represent?
+\item How many instances?
+\item Missing data?
+\end{itemize}
+
+\textcolor{Teal}{Collection}
+\begin{itemize}
+\item How was data acquired?
+\item Who was involved?
+\item Ethical review?
+\end{itemize}
+
+\textcolor{DarkTeal}{Uses}
+\begin{itemize}
+\item Intended tasks?
+\item What to avoid?
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{Slate}{Dataset documentation prevents downstream harms}
+\end{frame}
+
+% Slide 8: Privacy-Preserving ML
+\begin{frame}{Privacy Techniques}
+\begin{columns}[T]
+\column{0.55\textwidth}
+\includegraphics[width=0.85\textwidth]{charts/privacy_techniques.pdf}
+
+\column{0.43\textwidth}
+\textcolor{ForestGreen}{\Large Three Approaches}\\[0.5cm]
+
+\textcolor{Amber}{\textbf{Differential Privacy}}
+\begin{itemize}
+\item Add calibrated noise
+\item Formal privacy guarantee
+\item Accuracy trade-off
+\end{itemize}
+
+\textcolor{Teal}{\textbf{Federated Learning}}
+\begin{itemize}
+\item Train locally
+\item Share only updates
+\item Keep data distributed
+\end{itemize}
+
+\textcolor{DarkTeal}{\textbf{Secure Multi-party Computation}}
+\begin{itemize}
+\item Cryptographic protocols
+\item Compute on encrypted data
+\item No raw data exposure
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{Slate}{Privacy and utility can coexist with right techniques}
+\end{frame}
+
+% Slide 9: Differential Privacy
+\begin{frame}{Differential Privacy: Formal Guarantees}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{ForestGreen}{\textbf{Mathematical Definition}}
+
+A mechanism $M$ is $(\epsilon, \delta)$-differentially private if:
+
+$$\textcolor{Teal}{P(M(D) \in S) \leq e^\epsilon P(M(D') \in S) + \delta}$$
+
+For all datasets $D, D'$ differing in one record
+
+\vspace{0.3cm}
+\textcolor{Amber}{\textbf{Intuition:}}
+\begin{itemize}
+\item Adding/removing one person
+\item Changes output minimally
+\item Individual contribution hidden
+\item Privacy budget $\epsilon$
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{ForestGreen}{\textbf{Practical Implementation}}
+
+\small
+\texttt{from diffprivlib.models import}\\
+\texttt{~~LogisticRegression}\\
+
+\texttt{clf = LogisticRegression(}\\
+\texttt{~~epsilon=1.0,}\\
+\texttt{~~data\_norm=5.0}\\
+\texttt{)}\\
+
+\texttt{clf.fit(X, y)}\\
+
+\vspace{0.3cm}
+\textcolor{Teal}{\textbf{Trade-off:}}
+\begin{itemize}
+\item Lower $\epsilon$ = More privacy
+\item Lower $\epsilon$ = Less accuracy
+\item Typical: $\epsilon \in [0.1, 10]$
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{Slate}{Differential privacy: Industry standard for privacy-preserving analytics}
+\end{frame}
+
+% Slide 10: Implementation Summary
+\begin{frame}{Implementation Summary: Tools \& Techniques}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{ForestGreen}{\textbf{Key Takeaways}}
+
+\begin{enumerate}
+\item Fairness toolkits exist and work
+\item AIF360: Comprehensive
+\item Fairlearn: Easy integration
+\item SHAP \& LIME: Explainability
+\item Model cards: Documentation
+\item Privacy techniques available
+\end{enumerate}
+
+\vspace{0.3cm}
+\textcolor{Amber}{\textbf{Action Item:}}\\
+Install and try one toolkit this week
+
+\column{0.48\textwidth}
+\textcolor{Teal}{\textbf{Next: Design}}
+
+Human-centered perspective:
+\begin{itemize}
+\item Inclusive design
+\item Accessibility
+\item User consent
+\item Environmental impact
+\item Real case studies
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{DarkTeal}{\textbf{Remember:}}\\
+Tools are necessary but not sufficient -- judgment required
+\end{columns}
+
+\vspace{\fill}
+\begin{center}
+\Large\textcolor{ForestGreen}{Implementation Makes Ethics Real}
+\end{center}
+\end{frame}

@@ -5,7 +5,7 @@
 \begin{frame}{Generative Adversarial Networks (GANs)}
 \begin{columns}[T]
 \column{0.55\textwidth}
-\includegraphics[width=\textwidth]{gan_architecture.pdf}
+\includegraphics[width=0.85\textwidth]{gan_architecture.pdf}
 
 \column{0.43\textwidth}
 \textcolor{mlblue}{\Large The Creative Duel}\\[0.5cm]
@@ -81,7 +81,7 @@ $$V(D,G) = \mathbb{E}_{x \sim p_{data}}[\log D(x)] + \mathbb{E}_{z \sim p_z}[\lo
 \begin{frame}{Variational Autoencoders (VAEs)}
 \begin{columns}[T]
 \column{0.55\textwidth}
-\includegraphics[width=\textwidth]{vae_latent_space.pdf}
+\includegraphics[width=0.85\textwidth]{vae_latent_space.pdf}
 
 \column{0.43\textwidth}
 \textcolor{mlpurple}{\Large Latent Space Magic}\\[0.5cm]
@@ -155,7 +155,7 @@ $$\mathcal{L} = \mathbb{E}_{q(z|x)}[\log p(x|z)] - KL(q(z|x)||p(z))$$
 \begin{frame}{Diffusion Models: The New Paradigm}
 \begin{columns}[T]
 \column{0.55\textwidth}
-\includegraphics[width=\textwidth]{diffusion_process.pdf}
+\includegraphics[width=0.85\textwidth]{diffusion_process.pdf}
 
 \column{0.43\textwidth}
 \textcolor{mlcyan}{\Large Noise to Art}\\[0.5cm]
@@ -193,7 +193,7 @@ $$\mathcal{L} = \mathbb{E}_{q(z|x)}[\log p(x|z)] - KL(q(z|x)||p(z))$$
 \item Sample timestep $t$
 \item Add noise: $x_t = \sqrt{\alpha_t}x_0 + \sqrt{1-\alpha_t}\epsilon$
 \item Predict noise: $\epsilon_\theta(x_t, t)$
-\item Loss: $||\\epsilon - \epsilon_\theta||^2$
+\item Loss: $||\epsilon - \epsilon_\theta||^2$
 \end{enumerate}
 
 \vspace{0.3cm}
@@ -235,7 +235,7 @@ $$\mathcal{L} = \mathbb{E}_{q(z|x)}[\log p(x|z)] - KL(q(z|x)||p(z))$$
 \begin{frame}{Transformers: The Universal Architecture}
 \begin{columns}[T]
 \column{0.55\textwidth}
-\includegraphics[width=\textwidth]{transformer_attention.pdf}
+\includegraphics[width=0.85\textwidth]{transformer_attention.pdf}
 
 \column{0.43\textwidth}
 \textcolor{mlblue}{\Large Attention is All You Need}\\[0.5cm]
@@ -310,7 +310,7 @@ GPT-3: 175B $\rightarrow$ GPT-4: 1.76T
 \begin{frame}{Algorithm Comparison Matrix}
 \begin{columns}[T]
 \column{0.55\textwidth}
-\includegraphics[width=\textwidth]{quality_vs_speed_tradeoff.pdf}
+\includegraphics[width=0.85\textwidth]{quality_vs_speed_tradeoff.pdf}
 
 \column{0.43\textwidth}
 \textcolor{mlblue}{\Large Choose Your Fighter}\\[0.5cm]

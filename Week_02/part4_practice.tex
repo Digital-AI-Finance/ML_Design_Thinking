@@ -1,0 +1,409 @@
+% Part 4: Practice & Case Study
+\section{Practice: Real-World Application}
+
+% Section divider
+\begin{frame}[plain]
+\vfill
+\centering
+\begin{beamercolorbox}[sep=16pt,center]{title}
+\usebeamerfont{title}\Large Part 4: Practice \& Case Study\par
+\vspace{0.5em}
+\large Spotify's Music Persona Revolution\par
+\end{beamercolorbox}
+\vfill
+\end{frame}
+
+% Case Study Introduction
+\begin{frame}{Case Study: Spotify's User Segmentation Success}
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\Large\textcolor{mlgreen}{\textbf{The Challenge}}
+\normalsize
+\vspace{0.5em}
+\begin{itemize}
+\item 500M+ users globally
+\item Diverse music tastes
+\item Engagement plateau
+\item Generic recommendations
+\item One-size-fits-all UI
+\end{itemize}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mlred!10, colframe=mlred!50]
+\centering\textbf{Problem}\\
+How to personalize for half a billion users?
+\end{tcolorbox}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\Large\textcolor{mlblue}{\textbf{The Solution}}
+\normalsize
+\vspace{0.5em}
+\begin{itemize}
+\item Clustering on listening behavior
+\item 5 core music personas
+\item Personalized Discover Weekly
+\item Adaptive UI elements
+\item Targeted feature rollouts
+\end{itemize}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mlgreen!10, colframe=mlgreen!50]
+\centering\textbf{Result}\\
+40\% increase in user engagement
+\end{tcolorbox}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Spotify's Data Collection
+\begin{frame}{Step 1: Data Collection \& Features}
+\begin{columns}[T]
+\begin{column}{0.55\textwidth}
+\Large\textbf{Features Collected}
+\normalsize
+\vspace{0.5em}
+
+\textcolor{mlblue}{\textbf{Behavioral Data:}}
+\begin{itemize}
+\item Songs played per day
+\item Skip rate
+\item Playlist creation frequency
+\item Social sharing actions
+\item Discovery vs. repeat listening
+\end{itemize}
+
+\textcolor{mlorange}{\textbf{Content Preferences:}}
+\begin{itemize}
+\item Genre diversity score
+\item Era preferences (decades)
+\item Mood patterns (energy, valence)
+\item Artist loyalty index
+\end{itemize}
+\end{column}
+
+\begin{column}{0.43\textwidth}
+\Large\textbf{Data Scale}
+\normalsize
+\vspace{0.5em}
+
+\begin{tcolorbox}[colback=mlpurple!10, colframe=mlpurple!50]
+\centering\textbf{Daily Processing}\\
+\vspace{0.3em}
+• 500M users\\
+• 100B data points\\
+• 30TB of behavioral data\\
+• Real-time streaming
+\end{tcolorbox}
+
+\vspace{0.5em}
+\textbf{Feature Engineering:}\\
+\small
+200+ features → PCA → 50 dimensions\\
+Standardized → K-means clustering
+\end{column}
+\end{columns}
+
+\vspace{0.5em}
+\begin{center}
+\Large\textcolor{mlpurple}{\textbf{Quality data = Quality segments}}
+\end{center}
+\end{frame}
+
+% Clustering Implementation
+\begin{frame}{Step 2: Clustering Implementation}
+\centering
+\Large\textbf{Spotify's Clustering Pipeline}
+\normalsize
+\vspace{0.5em}
+
+\begin{tikzpicture}[scale=0.8, transform shape]
+\tikzstyle{process} = [rectangle, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=mlblue!20]
+\tikzstyle{data} = [rectangle, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=mlgreen!20]
+\tikzstyle{result} = [rectangle, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=mlorange!20]
+\tikzstyle{arrow} = [thick,->,>=stealth]
+
+% Pipeline
+\node[data] (raw) at (0,3) {Raw User Data};
+\node[process] (feature) at (4,3) {Feature Engineering};
+\node[process] (pca) at (8,3) {PCA Reduction};
+\node[process] (kmeans) at (12,3) {K-Means (K=5)};
+
+\node[data] (scaled) at (2,1) {Scaled Features};
+\node[process] (validate) at (6,1) {Validation};
+\node[result] (segments) at (10,1) {5 Personas};
+
+% Arrows
+\draw[arrow] (raw) -- (feature);
+\draw[arrow] (feature) -- (pca);
+\draw[arrow] (pca) -- (kmeans);
+\draw[arrow] (feature) -- (scaled);
+\draw[arrow] (scaled) -- (validate);
+\draw[arrow] (validate) -- (segments);
+\draw[arrow] (kmeans) -- (segments);
+
+% Annotations
+\node at (0,4) {\small 500M users};
+\node at (4,4) {\small 200 features};
+\node at (8,4) {\small 50 dimensions};
+\node at (12,4) {\small Optimal K};
+\end{tikzpicture}
+
+\vspace{1em}
+\begin{columns}[T]
+\begin{column}{0.3\textwidth}
+\centering
+\textbf{Processing Time}\\
+\small 6 hours on cluster
+\end{column}
+\begin{column}{0.3\textwidth}
+\centering
+\textbf{Validation}\\
+\small Silhouette: 0.68
+\end{column}
+\begin{column}{0.3\textwidth}
+\centering
+\textbf{Stability}\\
+\small 92\% consistent
+\end{column}
+\end{columns}
+\end{frame}
+
+% Discovered Personas
+\begin{frame}{Step 3: The 5 Music Personas Discovered}
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\textcolor{mlblue}{\Large\textbf{1. Loyalists (25\%)}}
+\normalsize
+• Replay favorite artists\\
+• Low skip rate\\
+• Deep catalogue diving\\
+\vspace{0.5em}
+
+\textcolor{mlorange}{\Large\textbf{2. Explorers (20\%)}}
+\normalsize
+• High discovery rate\\
+• Diverse genres\\
+• Early adopters\\
+\vspace{0.5em}
+
+\textcolor{mlgreen}{\Large\textbf{3. Casuals (30\%)}}
+\normalsize
+• Popular hits only\\
+• Passive listening\\
+• Radio-style consumption
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\textcolor{mlpurple}{\Large\textbf{4. Socialites (15\%)}}
+\normalsize
+• Share frequently\\
+• Collaborative playlists\\
+• Party music focus\\
+\vspace{0.5em}
+
+\textcolor{mlred}{\Large\textbf{5. Specialists (10\%)}}
+\normalsize
+• Single genre focus\\
+• Deep expertise\\
+• Curators \& tastemakers\\
+\vspace{0.5em}
+
+\begin{tcolorbox}[colback=mlyellow!20, colframe=mlorange!50]
+\centering
+\textbf{Key Discovery}\\
+Behavior trumps demographics
+\end{tcolorbox}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Design Implementations
+\begin{frame}{Step 4: Persona-Driven Features}
+\centering
+\Large\textbf{Tailored Experiences for Each Persona}
+\normalsize
+\vspace{0.5em}
+
+\begin{tabular}{lccccc}
+\toprule
+\textbf{Feature} & \textbf{Loyalist} & \textbf{Explorer} & \textbf{Casual} & \textbf{Social} & \textbf{Specialist} \\
+\midrule
+Discover Weekly & Deep cuts & New artists & Top 40 & Viral hits & Niche gems \\
+Home Screen & Artist focus & Genre mix & Simple & Social feed & Deep dive \\
+Playlists & Artist radio & Discovery & Hits only & Collaborative & Genre pure \\
+Notifications & New releases & New finds & Minimal & Friend activity & Genre news \\
+Pricing & Premium & Premium+ & Free/Ad & Family plan & Curator tier \\
+\bottomrule
+\end{tabular}
+
+\vspace{1em}
+\begin{columns}[T]
+\begin{column}{0.3\textwidth}
+\centering
+\includegraphics[width=0.8\textwidth]{charts/journey_comparison.pdf}\\
+\small Loyalist Journey
+\end{column}
+\begin{column}{0.3\textwidth}
+\centering
+\includegraphics[width=0.8\textwidth]{charts/journey_comparison.pdf}\\
+\small Explorer Journey
+\end{column}
+\begin{column}{0.3\textwidth}
+\centering
+\includegraphics[width=0.8\textwidth]{charts/journey_comparison.pdf}\\
+\small Casual Journey
+\end{column}
+\end{columns}
+\end{frame}
+
+% Results and Impact
+\begin{frame}{Results: The Power of Personalization}
+\begin{columns}[T]
+\begin{column}{0.55\textwidth}
+\Large\textcolor{mlgreen}{\textbf{Quantitative Impact}}
+\normalsize
+\vspace{0.5em}
+
+\begin{itemize}
+\item \textbf{Engagement:} +40\% listening time
+\item \textbf{Discovery:} +65\% new artist follows
+\item \textbf{Retention:} +28\% monthly active users
+\item \textbf{Revenue:} +31\% premium conversions
+\item \textbf{NPS:} +35 points improvement
+\end{itemize}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mlgreen!10, colframe=mlgreen!50]
+\centering\Large\textbf{\$2.1B}\\
+\normalsize Additional annual revenue
+\end{tcolorbox}
+\end{column}
+
+\begin{column}{0.43\textwidth}
+\Large\textcolor{mlpurple}{\textbf{Qualitative Impact}}
+\normalsize
+\vspace{0.5em}
+
+\textbf{User Feedback:}\\
+\small
+``Finally, Spotify gets me!''\\
+``Discover Weekly changed my life''\\
+``It's like having a personal DJ''\\
+\vspace{0.5em}
+
+\textbf{Industry Recognition:}\\
+• Best personalization (2023)\\
+• Innovation award\\
+• Case study at MIT\\
+\vspace{0.5em}
+
+\textcolor{mlblue}{\textbf{Competitive Advantage:}}\\
+First-mover in ML personalization
+\end{column}
+\end{columns}
+\end{frame}
+
+% Practice Exercise
+\begin{frame}{Your Turn: Practice Exercise}
+\Large\textbf{Mini-Project: Segment Your App's Users}
+\normalsize
+\vspace{0.5em}
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Step 1: Data Preparation}}
+\begin{enumerate}
+\item Load user\_data.csv
+\item Explore features
+\item Scale the data
+\item Check for outliers
+\end{enumerate}
+
+\vspace{0.5em}
+\textcolor{mlorange}{\textbf{Step 2: Clustering}}
+\begin{enumerate}
+\item Try K = 3, 4, 5
+\item Use elbow method
+\item Calculate silhouette
+\item Choose optimal K
+\end{enumerate}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\textcolor{mlgreen}{\textbf{Step 3: Analysis}}
+\begin{enumerate}
+\item Profile each cluster
+\item Name your personas
+\item Identify key differences
+\item Find opportunities
+\end{enumerate}
+
+\vspace{0.5em}
+\textcolor{mlpurple}{\textbf{Step 4: Design}}
+\begin{enumerate}
+\item Create empathy map
+\item Design features
+\item Propose UI changes
+\item Present findings
+\end{enumerate}
+\end{column}
+\end{columns}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mlyellow!20, colframe=mlorange!50]
+\centering
+\textbf{Deliverable:} 5-slide presentation with your personas and recommendations\\
+\textbf{Time:} 45 minutes | \textbf{Tools:} Python, sklearn, matplotlib
+\end{tcolorbox}
+\end{frame}
+
+% Key Takeaways
+\begin{frame}{Key Takeaways: Clustering for Empathy}
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\Large\textcolor{mlblue}{\textbf{Technical Lessons}}
+\normalsize
+\vspace{0.5em}
+\begin{enumerate}
+\item Always scale your features
+\item Validate with multiple methods
+\item Start simple (K-means)
+\item Consider your data shape
+\item Test stability
+\end{enumerate}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mlblue!10, colframe=mlblue!50]
+\centering
+\textbf{Remember:}\\
+No clustering is perfect,\\but all reveal insights
+\end{tcolorbox}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\Large\textcolor{mlpurple}{\textbf{Design Lessons}}
+\normalsize
+\vspace{0.5em}
+\begin{enumerate}
+\item Clusters $\neq$ demographics
+\item Behavior reveals needs
+\item Each segment is valuable
+\item Personalization scales
+\item Test with real users
+\end{enumerate}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mlpurple!10, colframe=mlpurple!50]
+\centering
+\textbf{Remember:}\\
+Data augments empathy,\\doesn't replace it
+\end{tcolorbox}
+\end{column}
+\end{columns}
+
+\vspace{0.5em}
+\begin{center}
+\Large\textcolor{mlgreen}{\textbf{You now have the power to understand millions of users!}}
+\end{center}
+\end{frame}

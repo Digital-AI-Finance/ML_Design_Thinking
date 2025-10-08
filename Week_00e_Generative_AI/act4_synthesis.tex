@@ -1,0 +1,220 @@
+% Slide 24: Generative model landscape (VAE, GAN, Diffusion, Transformer)
+\begin{frame}
+\frametitle{The Generative AI Landscape}
+\framesubtitle{Four Fundamental Approaches}
+
+\begin{center}
+\includegraphics[width=0.9\textwidth]{charts/generative_landscape.pdf}
+\end{center}
+
+\vspace{0.3cm}
+
+\begin{columns}[c]
+\column{0.48\textwidth}
+\textbf{Variational Autoencoders (VAEs):}
+\begin{itemize}
+\item Probabilistic encoding
+\item Smooth latent space
+\item Good for interpolation
+\item Blurry outputs
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Generative Adversarial Networks (GANs):}
+\begin{itemize}
+\item Adversarial training
+\item Sharp, realistic outputs
+\item Training instability
+\item Mode collapse risk
+\end{itemize}
+
+\column{0.48\textwidth}
+\textbf{Diffusion Models:}
+\begin{itemize}
+\item Iterative denoising
+\item High-quality generation
+\item Stable training
+\item Slow sampling
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Autoregressive Transformers:}
+\begin{itemize}
+\item Sequential generation
+\item Excellent for text
+\item Scalable architecture
+\item Left-to-right bias
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\small \textcolor{gray}{
+Each approach has unique strengths - modern systems often combine multiple techniques
+}
+\end{frame}
+
+% Slide 25: Trade-offs: Training stability vs sample quality
+\begin{frame}
+\frametitle{Fundamental Trade-offs}
+\framesubtitle{No Free Lunch in Generative Modeling}
+
+\begin{center}
+\includegraphics[width=0.9\textwidth]{charts/generative_tradeoffs.pdf}
+\end{center}
+
+\vspace{0.3cm}
+
+\begin{columns}[c]
+\column{0.48\textwidth}
+\textbf{Training Stability:}
+\begin{itemize}
+\item \textcolor{mlgreen}{VAEs:} Very stable
+\item \textcolor{mlgreen}{Diffusion:} Stable
+\item \textcolor{mlorange}{Transformers:} Moderately stable
+\item \textcolor{mlred}{GANs:} Unstable, requires tuning
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Sampling Speed:}
+\begin{itemize}
+\item \textcolor{mlgreen}{VAEs \& GANs:} Fast (single pass)
+\item \textcolor{mlorange}{Transformers:} Moderate
+\item \textcolor{mlred}{Diffusion:} Slow (1000 steps)
+\end{itemize}
+
+\column{0.48\textwidth}
+\textbf{Sample Quality:}
+\begin{itemize}
+\item \textcolor{mlgreen}{Diffusion:} Excellent
+\item \textcolor{mlgreen}{GANs:} Very good (when stable)
+\item \textcolor{mlorange}{Transformers:} Good
+\item \textcolor{mlred}{VAEs:} Fair (blurry)
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Controllability:}
+\begin{itemize}
+\item \textcolor{mlgreen}{Diffusion:} Excellent (guidance)
+\item \textcolor{mlgreen}{Transformers:} Very good (prompts)
+\item \textcolor{mlorange}{VAEs:} Good (interpolation)
+\item \textcolor{mlred}{GANs:} Limited
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\small \textcolor{gray}{
+Choose your approach based on your specific requirements: quality, speed, or stability
+}
+\end{frame}
+
+% Slide 26: Modern applications: DALL-E 3, Midjourney, GPT-4, Claude
+\begin{frame}
+\frametitle{State-of-the-Art Applications}
+\framesubtitle{Production Generative AI Systems}
+
+\begin{center}
+\includegraphics[width=0.9\textwidth]{charts/modern_applications.pdf}
+\end{center}
+
+\vspace{0.3cm}
+
+\begin{columns}[c]
+\column{0.48\textwidth}
+\textbf{Image Generation:}
+\begin{itemize}
+\item \textbf{DALL-E 3:} OpenAI's diffusion model
+\item \textbf{Midjourney:} Artistic generation
+\item \textbf{Stable Diffusion:} Open-source alternative
+\item \textbf{Adobe Firefly:} Commercial integration
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Performance Metrics:}
+\begin{itemize}
+\item Resolution: up to 1024×1024
+\item Generation time: 10-30 seconds
+\item Cost: \$0.004-0.08 per image
+\item Prompt adherence: 90%+ accuracy
+\end{itemize}
+
+\column{0.48\textwidth}
+\textbf{Text Generation:}
+\begin{itemize}
+\item \textbf{GPT-4:} Transformer-based LLM
+\item \textbf{Claude:} Constitutional AI approach
+\item \textbf{Gemini:} Google's multimodal model
+\item \textbf{Llama 2:} Meta's open model
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Capabilities:}
+\begin{itemize}
+\item Context length: 32k-200k tokens
+\item Languages: 100+ supported
+\item Code generation: Multiple languages
+\item Reasoning: Complex problem solving
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\small \textcolor{gray}{
+Modern generative AI achieves human-level performance in many creative domains
+}
+\end{frame}
+
+% Slide 27: Summary & ethical considerations (deepfakes, copyright)
+\begin{frame}
+\frametitle{Summary \& Ethical Considerations}
+\framesubtitle{Power and Responsibility in Generative AI}
+
+\begin{center}
+\includegraphics[width=0.9\textwidth]{charts/ethics_summary.pdf}
+\end{center}
+
+\vspace{0.3cm}
+
+\begin{columns}[c]
+\column{0.48\textwidth}
+\textcolor{mlgreen}{\textbf{Revolutionary Capabilities:}}
+\begin{itemize}
+\item Create realistic images from text
+\item Generate human-like writing
+\item Compose original music
+\item Design novel molecules
+\item Accelerate creative processes
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlblue}{\textbf{Technical Achievements:}}
+\begin{itemize}
+\item Solved the generation quality problem
+\item Stable, controllable training
+\item Production-ready APIs
+\item Democratized AI creation
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{mlred}{\textbf{Ethical Challenges:}}
+\begin{itemize}
+\item \textbf{Deepfakes:} Misinformation, identity theft
+\item \textbf{Copyright:} Training on copyrighted data
+\item \textbf{Bias:} Amplifying societal prejudices
+\item \textbf{Labor:} Displacement of creative workers
+\item \textbf{Environment:} High computational costs
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlorange}{\textbf{Responsible Development:}}
+\begin{itemize}
+\item Watermarking \& detection systems
+\item Consent-based training data
+\item Bias auditing \& mitigation
+\item Human-AI collaboration models
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\small \textcolor{gray}{
+``With great power comes great responsibility'' - the generative AI revolution requires thoughtful governance
+}
+\end{frame}

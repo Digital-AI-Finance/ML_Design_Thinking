@@ -1,0 +1,189 @@
+% Act 2: Shallow MLPs (6 slides)
+
+\begin{frame}{6. Add Hidden Layer Approach}
+\begin{columns}[c]
+\column{0.48\textwidth}
+\textbf{Multi-Layer Perceptron (MLP):}
+\begin{align}
+\mathbf{h} &= \sigma(\mathbf{W}_1\mathbf{x} + \mathbf{b}_1) \\
+y &= \sigma(\mathbf{w}_2^T\mathbf{h} + b_2)
+\end{align}
+
+\textbf{Key Innovation:}
+\begin{itemize}
+\item Hidden layer creates feature combinations
+\item Non-linear activation $\sigma$ (sigmoid, tanh, ReLU)
+\item Each neuron = learned feature detector
+\item Output combines these features
+\end{itemize}
+
+\column{0.48\textwidth}
+\begin{center}
+\includegraphics[width=\textwidth]{charts/mlp_architecture.pdf}
+\end{center}
+\end{columns}
+
+\vspace{\fill}
+\small\textcolor{gray}{Hidden layer transforms input space to make linear separation possible}
+\end{frame}
+
+\begin{frame}{7. Worked Example: XOR Solved!}
+\begin{columns}[c]
+\column{0.48\textwidth}
+\textbf{Network Architecture:}
+\begin{itemize}
+\item Input: $x_1, x_2$
+\item Hidden: 2 neurons with sigmoid
+\item Output: 1 neuron with sigmoid
+\end{itemize}
+
+\textbf{Solution Strategy:}
+\begin{itemize}
+\item $h_1$: Detects $x_1$ OR $x_2$
+\item $h_2$: Detects $x_1$ AND $x_2$
+\item Output: $h_1$ AND NOT $h_2$
+\end{itemize}
+
+\column{0.48\textwidth}
+\begin{center}
+\includegraphics[width=\textwidth]{charts/xor_solution.pdf}
+\end{center}
+
+\textbf{Actual Weights:}
+\small
+\begin{align}
+h_1 &= \sigma(20x_1 + 20x_2 - 10) \\
+h_2 &= \sigma(20x_1 + 20x_2 - 30) \\
+y &= \sigma(20h_1 - 20h_2 - 10)
+\end{align}
+\end{columns}
+
+\vspace{\fill}
+\small\textcolor{gray}{Two hidden neurons sufficient to solve any 2D non-linear problem}
+\end{frame}
+
+\begin{frame}{8. \textcolor{mlgreen}{SUCCESS}: Nonlinearity Achieved}
+\begin{columns}[c]
+\column{0.48\textwidth}
+\textbf{What We Gained:}
+\begin{itemize}
+\item \textcolor{mlgreen}{Non-linear decision boundaries}
+\item \textcolor{mlgreen}{Universal approximation}
+\item \textcolor{mlgreen}{Automatic feature learning}
+\item \textcolor{mlgreen}{Backpropagation training}
+\end{itemize}
+
+\textbf{Applications Unlocked:}
+\begin{itemize}
+\item Image classification (MNIST)
+\item Function approximation
+\item Pattern recognition
+\item Control systems
+\end{itemize}
+
+\column{0.48\textwidth}
+\begin{center}
+\includegraphics[width=\textwidth]{charts/mlp_success_boundaries.pdf}
+\end{center}
+\end{columns}
+
+\vspace{\fill}
+\small\textcolor{gray}{MLPs solved the non-linearity problem and enabled the neural network renaissance}
+\end{frame}
+
+\begin{frame}{9. \textcolor{mlred}{FAILURE PATTERN}: Vanishing Gradients in Deep Networks}
+\begin{columns}[c]
+\column{0.48\textwidth}
+\textbf{The Problem with Depth:}
+
+\begin{center}
+\begin{tabular}{ccc}
+\toprule
+Layers & Final Accuracy & Training Time \\
+\midrule
+1 & 87.2\% & 10 min \\
+2 & 91.5\% & 15 min \\
+3 & 89.3\% & 25 min \\
+4 & 82.1\% & 40 min \\
+5 & 71.8\% & 60 min \\
+6 & 58.3\% & 90 min \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{Observation:}
+Deeper networks perform \textcolor{mlred}{worse}, not better!
+
+\column{0.48\textwidth}
+\begin{center}
+\includegraphics[width=\textwidth]{charts/vanishing_gradients_data.pdf}
+\end{center}
+\end{columns}
+
+\vspace{\fill}
+\small\textcolor{gray}{Real data from 1990s experiments - deeper meant worse performance}
+\end{frame}
+
+\begin{frame}{10. Diagnosis: Gradient Multiplication → Exponential Decay}
+\begin{columns}[c]
+\column{0.48\textwidth}
+\textbf{Chain Rule in Deep Networks:}
+\begin{align}
+\frac{\partial L}{\partial W_1} &= \frac{\partial L}{\partial y} \cdot \frac{\partial y}{\partial h_n} \cdot \ldots \cdot \frac{\partial h_2}{\partial h_1} \cdot \frac{\partial h_1}{\partial W_1}
+\end{align}
+
+\textbf{Sigmoid Derivative:}
+\begin{align}
+\sigma'(x) &= \sigma(x)(1-\sigma(x)) \\
+&\leq 0.25
+\end{align}
+
+\textbf{The Problem:}
+Each layer multiplies by $\leq 0.25$
+\begin{itemize}
+\item 5 layers: $(0.25)^5 = 0.001$
+\item 10 layers: $(0.25)^{10} = 0.000001$
+\end{itemize}
+
+\column{0.48\textwidth}
+\begin{center}
+\includegraphics[width=\textwidth]{charts/gradient_decay.pdf}
+\end{center}
+\end{columns}
+
+\vspace{\fill}
+\small\textcolor{gray}{Gradients vanish exponentially - early layers learn nothing}
+\end{frame}
+
+\begin{frame}{11. Gradient Flow Analysis}
+\begin{columns}[c]
+\column{0.48\textwidth}
+\textbf{Mathematical Analysis:}
+
+For L-layer network with sigmoid activations:
+$$\left|\frac{\partial L}{\partial W_1}\right| \leq C \cdot (0.25)^{L-1}$$
+
+\textbf{Consequences:}
+\begin{itemize}
+\item Early layers: Tiny gradients
+\item Late layers: Large gradients
+\item \textcolor{mlred}{Gradient mismatch problem}
+\item Training becomes impossible
+\end{itemize}
+
+\textbf{Historical Impact:}
+\begin{itemize}
+\item 1990s: ``Neural networks don't scale''
+\item SVMs and ensemble methods dominated
+\item Deep learning winter until 2006
+\end{itemize}
+
+\column{0.48\textwidth}
+\begin{center}
+\includegraphics[width=\textwidth]{charts/gradient_flow_layers.pdf}
+\end{center}
+\end{columns}
+
+\vspace{\fill}
+\small\textcolor{gray}{Understanding this problem was crucial for the deep learning breakthrough}
+\end{frame}

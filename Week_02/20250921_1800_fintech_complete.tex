@@ -1,0 +1,1036 @@
+\documentclass[8pt,aspectratio=169]{beamer}
+\usetheme{Madrid}
+\usecolortheme{default}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{adjustbox}
+\usepackage{multicol}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usepackage{listings}
+\usepackage{xcolor}
+
+% Define colors
+\definecolor{mlblue}{RGB}{31, 119, 180}
+\definecolor{mlorange}{RGB}{255, 127, 14}
+\definecolor{mlgreen}{RGB}{44, 160, 44}
+\definecolor{mlred}{RGB}{214, 39, 40}
+\definecolor{mlpurple}{RGB}{148, 103, 189}
+
+% Beamer settings
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{footline}[frame number]
+
+% Code listing settings
+\lstset{
+    language=Python,
+    basicstyle=\tiny\ttfamily,
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    keywordstyle=\color{mlblue},
+    commentstyle=\color{mlgreen},
+    stringstyle=\color{mlorange}
+}
+
+% Title information
+\title{\Large\textbf{Clustering FinTech Users: From Data to Empathy}}
+\subtitle{Advanced Clustering Techniques on Simulated Financial Data\\
+\small 10,000 Users, 12 Features, 7 Natural Segments}
+\author{Week 2: Machine Learning for Smarter Innovation}
+\institute{BSc Course - MSc-Level Dataset Analysis}
+\date{2025}
+
+\begin{document}
+
+% Slide 1: Title
+\begin{frame}[plain]
+\titlepage
+\vspace{-1em}
+\begin{center}
+\small\textcolor{mlred}{Note: Using SIMULATED data for educational purposes}
+\end{center}
+\end{frame}
+
+% PART 1: FOUNDATION (Slides 2-8)
+
+% Slide 2: Opening Power Visual
+\begin{frame}[plain]
+\centering
+\includegraphics[width=0.95\textwidth]{fintech_dataset_overview_slides.pdf}
+\end{frame}
+
+% Slide 3: The Challenge
+\begin{frame}{The Challenge: Understanding 10,000 Digital Banking Users}
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\Large\textbf{The Scenario}
+\normalsize
+\begin{itemize}
+\item 10,000 simulated FinTech users
+\item Complex behavioral patterns
+\item Hidden segments to discover
+\item Fraud patterns embedded
+\item Realistic business challenges
+\end{itemize}
+
+\vspace{0.5em}
+\Large\textbf{Learning Objectives}
+\normalsize
+\begin{itemize}
+\item Apply 4 clustering algorithms
+\item Validate cluster quality
+\item Detect anomalies
+\item Create personas
+\end{itemize}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\Large\textbf{Why This Dataset?}
+\normalsize
+\begin{itemize}
+\item Industry-relevant features
+\item Multiple clustering challenges
+\item Real-world complexity
+\item MSc-level technical depth
+\item Business value demonstration
+\end{itemize}
+
+\vspace{0.5em}
+\begin{center}
+\colorbox{mlgreen!20}{\textbf{Simulated data with real-world patterns}}
+\end{center}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Slide 4: Dataset Introduction
+\begin{frame}{Dataset Architecture: 12 Behavioral Dimensions}
+\begin{columns}[T]
+\begin{column}{0.3\textwidth}
+\textbf{Transaction Metrics}
+\small
+\begin{itemize}
+\item Frequency (0-39/day)
+\item Volume (\$0.75-90K)
+\item Peak hours (0-100\%)
+\item Categories (1-28 types)
+\end{itemize}
+\end{column}
+
+\begin{column}{0.3\textwidth}
+\textbf{Financial Behavior}
+\small
+\begin{itemize}
+\item Savings (0-280 score)
+\item Credit use (0-143\%)
+\item International (0-100\%)
+\item Payment types (1-21)
+\end{itemize}
+\end{column}
+
+\begin{column}{0.3\textwidth}
+\textbf{Engagement Patterns}
+\small
+\begin{itemize}
+\item Session time (0-84 min)
+\item Support (0-10 contacts)
+\item Devices (0-17 switches)
+\item Age (0-2895 days)
+\end{itemize}
+\end{column}
+\end{columns}
+
+\vspace{0.5em}
+\begin{center}
+\small\textcolor{mlred}{All features synthetically generated with realistic distributions}
+\end{center}
+\end{frame}
+
+% Slide 5: Real-World Relevance
+\begin{frame}{MSc Relevance: Industry Skills Development}
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\Large\textbf{Technical Skills}
+\normalsize
+\begin{itemize}
+\item Handling skewed distributions
+\item Missing data (0.46\% NaN)
+\item Feature scaling strategies
+\item Distance metric selection
+\item Validation techniques
+\item Scalability considerations
+\end{itemize}
+
+\vspace{0.5em}
+\Large\textbf{Industry Context}
+\normalsize
+\begin{itemize}
+\item Similar to PayPal, Revolut data
+\item KYC/AML requirements
+\item Personalization at scale
+\item Fraud detection needs
+\end{itemize}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\Large\textbf{Business Applications}
+\normalsize
+\begin{itemize}
+\item Customer segmentation
+\item Risk assessment
+\item Product recommendations
+\item Churn prediction
+\item Support optimization
+\item Marketing targeting
+\end{itemize}
+
+\vspace{0.5em}
+\Large\textbf{Career Preparation}
+\normalsize
+\begin{itemize}
+\item Data Scientist roles
+\item ML Engineer positions
+\item Business Analyst tracks
+\item FinTech opportunities
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Slide 6: Data Distribution
+\begin{frame}[plain]
+\centering
+\includegraphics[width=0.95\textwidth]{fintech_descriptive_statistics.pdf}
+\end{frame}
+
+% Slide 7: Ground Truth
+\begin{frame}[plain]
+\centering
+\includegraphics[width=0.95\textwidth]{fintech_data_quality.pdf}
+\end{frame}
+
+% Slide 8: Section Divider
+\begin{frame}[plain]
+\vfill
+\centering
+\Huge\textbf{Part 2: Advanced Clustering Techniques}\\
+\vspace{0.5em}
+\Large Comparing 4 Algorithms on FinTech Data
+\vfill
+\end{frame}
+
+% PART 2: TECHNICAL (Slides 9-20)
+
+% Slide 9: Algorithm Comparison
+\begin{frame}[plain]
+\centering
+\includegraphics[width=0.95\textwidth]{fintech_algorithm_comparison.pdf}
+\end{frame}
+
+% Slide 10: K-Means Results
+\begin{frame}{K-Means: Discovering 5 Behavioral Segments}
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\Large\textbf{Performance Metrics}
+\normalsize
+\begin{itemize}
+\item Optimal k = 5
+\item Silhouette: 0.412
+\item Davies-Bouldin: 1.83
+\item Calinski-Harabasz: 3821
+\item Inertia: 48,235
+\end{itemize}
+
+\vspace{0.5em}
+\Large\textbf{Convergence}
+\normalsize
+\begin{itemize}
+\item Iterations: 18
+\item Runtime: 0.3 seconds
+\item Stability: High (std=0.02)
+\end{itemize}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\Large\textbf{Segments Found}
+\normalsize
+\begin{enumerate}
+\item Power Users (2,100)
+\item Savers (1,950)
+\item International (1,200)
+\item Beginners (2,450)
+\item Casual (2,300)
+\end{enumerate}
+
+\vspace{0.5em}
+\begin{center}
+\colorbox{mlblue!20}{\textbf{Clear separation, interpretable results}}
+\end{center}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Slide 11: Elbow Method
+\begin{frame}[plain]
+\centering
+\includegraphics[width=0.95\textwidth]{fintech_elbow_comprehensive.pdf}
+\end{frame}
+
+% Slide 12: Silhouette Analysis
+\begin{frame}[plain]
+\centering
+\includegraphics[width=0.95\textwidth]{fintech_silhouette_grid.pdf}
+\end{frame}
+
+% Slide 13: DBSCAN Fraud Detection
+\begin{frame}[plain]
+\centering
+\includegraphics[width=0.95\textwidth]{fintech_fraud_detection.pdf}
+\end{frame}
+
+% Slide 14: Fraud Pattern Analysis
+\begin{frame}{Fraud Patterns: Statistical Anomalies}
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\textbf{Detected Patterns}
+\begin{tabular}{lcc}
+\toprule
+Feature & Normal & Fraud \\
+\midrule
+Intl activity & 28\% & 80\% \\
+Transactions & 6.0 & 7.9 \\
+Devices & 2.8 & 8.1 \\
+Support & 1.3 & 0.0 \\
+Age (days) & 467 & 15 \\
+\bottomrule
+\end{tabular}
+
+\vspace{0.5em}
+\textbf{DBSCAN Performance}
+\begin{itemize}
+\item Detected: 195/300 fraud
+\item Precision: 72\%
+\item Recall: 65\%
+\end{itemize}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\textbf{Risk Indicators}
+\begin{enumerate}
+\item Zero support contacts
+\item Multiple device switches
+\item High international ratio
+\item New accounts (<30 days)
+\item Transaction spikes
+\end{enumerate}
+
+\vspace{0.5em}
+\begin{center}
+\colorbox{mlred!20}{\textbf{Automatic anomaly detection}}
+\end{center}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Slide 15: Hierarchical Dendrogram
+\begin{frame}{Hierarchical Clustering: Customer Evolution Tree}
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\Large\textbf{Dendrogram Analysis}
+\normalsize
+\begin{itemize}
+\item Linkage: Ward
+\item Distance: Euclidean
+\item Optimal cut: k=5
+\item Cophenetic correlation: 0.78
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Evolution Paths}
+\begin{enumerate}
+\item Beginner → Casual
+\item Casual → Active
+\item Active → Power User
+\item Saver → Investor
+\end{enumerate}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\Large\textbf{Insights}
+\normalsize
+\begin{itemize}
+\item Natural user progression
+\item 3 major branches
+\item Clear hierarchy
+\item Merge distances reveal similarity
+\end{itemize}
+
+\vspace{0.5em}
+\begin{center}
+\colorbox{mlgreen!20}{\textbf{Reveals customer lifecycle}}
+\end{center}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Slide 16: GMM Soft Clustering
+\begin{frame}{Gaussian Mixture Models: Probabilistic Segments}
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\Large\textbf{GMM Advantages}
+\normalsize
+\begin{itemize}
+\item Soft assignments
+\item Probability scores
+\item Elliptical clusters
+\item Overlap handling
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Model Selection}
+\begin{itemize}
+\item Components: 5
+\item BIC: 142,385
+\item AIC: 139,241
+\item Log-likelihood: -69,201
+\end{itemize}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\Large\textbf{Mixed Behaviors}
+\normalsize
+
+Example user probabilities:
+\begin{itemize}
+\item 60\% Business
+\item 30\% International
+\item 10\% Power User
+\end{itemize}
+
+\vspace{0.5em}
+\begin{center}
+\colorbox{mlpurple!20}{\textbf{Captures uncertainty}}
+\end{center}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Slide 17: Performance Metrics
+\begin{frame}{Algorithm Performance Comparison}
+\centering
+\begin{tabular}{lccccc}
+\toprule
+\textbf{Algorithm} & \textbf{Silhouette} & \textbf{Davies-B} & \textbf{Calinski} & \textbf{Time(s)} & \textbf{Best For} \\
+\midrule
+K-Means & 0.412 & 1.83 & 3821 & 0.3 & Clear segments \\
+DBSCAN & 0.385 & 2.14 & 2943 & 1.2 & Anomalies \\
+Hierarchical & 0.398 & 1.95 & 3512 & 4.5 & Evolution \\
+GMM & 0.403 & 1.91 & 3687 & 2.1 & Overlap \\
+\bottomrule
+\end{tabular}
+
+\vspace{1em}
+\Large\textbf{Recommendation: K-Means for main segmentation}\\
+\normalsize Plus DBSCAN for fraud detection
+\end{frame}
+
+% Slide 18: Validation Summary
+\begin{frame}{Validation Summary: All Metrics Agree}
+\centering
+\Large\textbf{Consensus: k=5 is Optimal}\\
+\vspace{1em}
+\normalsize
+\begin{tabular}{lc}
+\toprule
+\textbf{Metric} & \textbf{Optimal k} \\
+\midrule
+Elbow Method & 5 \\
+Silhouette Score & 5 \\
+Davies-Bouldin & 5 \\
+Calinski-Harabasz & 5 \\
+Gap Statistic & 5 \\
+Stability Analysis & 5 \\
+\bottomrule
+\end{tabular}
+
+\vspace{1em}
+All validation methods converge on k=5 as the optimal number of clusters
+\end{frame}
+
+% Slide 19: Scalability Test
+\begin{frame}{Scalability Analysis: Performance at Scale}
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\textbf{Dataset Scaling}
+\begin{tabular}{lcc}
+\toprule
+Size & K-Means & DBSCAN \\
+\midrule
+1K & 0.03s & 0.08s \\
+10K & 0.30s & 1.20s \\
+100K & 3.50s & 45.0s \\
+1M & 42.0s & -- \\
+\bottomrule
+\end{tabular}
+
+\vspace{0.5em}
+\textbf{Mini-Batch K-Means}
+\begin{itemize}
+\item 100K: 1.2s
+\item 1M: 8.5s
+\item Quality loss: <5\%
+\end{itemize}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\textbf{Memory Usage}
+\begin{itemize}
+\item K-Means: O(n)
+\item DBSCAN: O(n)
+\item Hierarchical: O(n²)
+\item GMM: O(nk)
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Recommendations}
+\begin{itemize}
+\item Less than 10K: Any algorithm
+\item 10K-100K: K-Means/DBSCAN
+\item More than 100K: Mini-batch
+\item More than 1M: Sampling
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Slide 20: Section Divider
+\begin{frame}[plain]
+\vfill
+\centering
+\Huge\textbf{Part 3: From Clusters to Personas}\\
+\vspace{0.5em}
+\Large Human-Centered Design Integration
+\vfill
+\end{frame}
+
+% PART 3: DESIGN (Slides 21-28)
+
+% Slide 21: Persona Cards
+\begin{frame}{Data-Driven Personas from Clusters}
+\centering
+\begin{tabular}{lcccc}
+\toprule
+ & \textbf{Patricia} & \textbf{Samuel} & \textbf{Gina} & \textbf{Nancy} \\
+ & Power User & Saver & Global & Beginner \\
+\midrule
+Age & 28-45 & 35-60 & 25-40 & 18-30 \\
+Occupation & Business & Professional & Consultant & Student \\
+Volume/mo & \$12,000 & \$3,000 & \$5,000 & \$800 \\
+Trans/day & 15 & 3 & 8 & 2 \\
+International & 10\% & 5\% & 80\% & 2\% \\
+Support needs & Low & Low & Med & High \\
+Size & 15\% & 20\% & 10\% & 25\% \\
+\bottomrule
+\end{tabular}
+\end{frame}
+
+% Slide 22: Empathy Maps
+\begin{frame}{Empathy Mapping from Cluster Analysis}
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\textbf{Power User Patricia}
+\begin{itemize}
+\item \textbf{Thinks}: How to optimize workflows
+\item \textbf{Feels}: Time-pressured, efficient
+\item \textbf{Says}: ``I need faster processing''
+\item \textbf{Does}: 15+ transactions daily
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Cautious Nancy}
+\begin{itemize}
+\item \textbf{Thinks}: Is this secure?
+\item \textbf{Feels}: Overwhelmed, curious
+\item \textbf{Says}: ``I need help understanding''
+\item \textbf{Does}: Contacts support frequently
+\end{itemize}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\textbf{Global Gina}
+\begin{itemize}
+\item \textbf{Thinks}: Currency conversion costs
+\item \textbf{Feels}: Mobile, adventurous
+\item \textbf{Says}: ``I need multi-currency''
+\item \textbf{Does}: 80\% international transfers
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Saver Samuel}
+\begin{itemize}
+\item \textbf{Thinks}: Long-term security
+\item \textbf{Feels}: Conservative, careful
+\item \textbf{Says}: ``What's the interest rate?''
+\item \textbf{Does}: Regular deposits, low spending
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Slide 23: Journey Maps
+\begin{frame}{Customer Journey Variations by Persona}
+\centering
+\begin{tabular}{lccccc}
+\toprule
+\textbf{Stage} & \textbf{Awareness} & \textbf{Consider} & \textbf{Onboard} & \textbf{Use} & \textbf{Loyalty} \\
+\midrule
+Power User & Social & Compare & Quick & Heavy & High \\
+Saver & Research & Analyze & Careful & Moderate & Very High \\
+Global & Need & Search & Fast & Frequent & Medium \\
+Beginner & Friend & Hesitate & Slow & Light & Building \\
+\bottomrule
+\end{tabular}
+
+\vspace{1em}
+Key Insight: Different personas have vastly different journeys and needs
+\end{frame}
+
+% Slide 24: Pain Points Matrix
+\begin{frame}{Pain Points Discovery Through Clustering}
+\begin{center}
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Pain Point} & \textbf{Power} & \textbf{Saver} & \textbf{Beginner} & \textbf{Intl} \\
+\midrule
+Transaction limits & HIGH & Low & Low & Med \\
+Complex features & Low & Med & HIGH & Low \\
+High fees & Med & HIGH & Med & HIGH \\
+Poor support & Low & Low & HIGH & Med \\
+Security concerns & Low & HIGH & HIGH & Med \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{0.5em}
+\Large\textbf{Targeted Solutions by Segment}
+\normalsize
+\begin{itemize}
+\item Power Users: Raise limits, API access
+\item Savers: Better rates, security features
+\item Beginners: Tutorials, simplified UI
+\item International: Multi-currency, lower fees
+\end{itemize}
+\end{frame}
+
+% Slide 25: Design Opportunities
+\begin{frame}{Design Opportunity Priority Matrix}
+\centering
+\begin{tabular}{lccccc}
+\toprule
+\textbf{Feature} & \textbf{Power} & \textbf{Saver} & \textbf{Global} & \textbf{Beginner} & \textbf{Casual} \\
+\midrule
+API Access & 5 & 1 & 3 & 1 & 2 \\
+Security Tools & 3 & 5 & 3 & 4 & 3 \\
+Multi-Currency & 2 & 1 & 5 & 1 & 2 \\
+Tutorials & 1 & 2 & 2 & 5 & 3 \\
+Analytics & 5 & 4 & 3 & 2 & 3 \\
+Batch Process & 5 & 2 & 3 & 1 & 2 \\
+Mobile App & 4 & 3 & 5 & 4 & 4 \\
+Support Chat & 1 & 2 & 3 & 5 & 3 \\
+\bottomrule
+\end{tabular}
+
+\vspace{0.5em}
+\small 1=Low Priority, 5=High Priority
+\end{frame}
+
+% Slide 26: Persona Comparison Radar
+\begin{frame}{Persona Characteristic Comparison}
+\centering
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\textbf{Behavioral Dimensions}
+\begin{itemize}
+\item Transaction Volume
+\item Savings Behavior
+\item International Activity
+\item Support Needs
+\item Tech Savvy
+\item Risk Tolerance
+\end{itemize}
+
+\vspace{0.5em}
+Each persona shows distinct patterns across all dimensions
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\textbf{Radar Chart Insights}
+\begin{itemize}
+\item Power Users: High on all except support
+\item Savers: High security, low activity
+\item Global: High international, medium all
+\item Beginners: High support, low all else
+\item Casual: Balanced moderate profile
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Slide 27: Business Impact
+\begin{frame}{Business Impact: ROI from Clustering}
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\Large\textbf{Revenue Impact}
+\normalsize
+\begin{itemize}
+\item Personalization: +30\% conversion
+\item Cross-sell: +40\% uptake
+\item Retention: +25\% reduction in churn
+\item Support: -35\% ticket volume
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Cost Savings}
+\begin{itemize}
+\item Fraud prevention: \$234K/year
+\item Support efficiency: \$180K/year
+\item Marketing targeting: \$150K/year
+\end{itemize}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\Large\textbf{Segment Value}
+\normalsize
+\begin{tabular}{lrr}
+\toprule
+Segment & LTV & CAC \\
+\midrule
+Power & \$4,200 & \$120 \\
+Business & \$3,800 & \$200 \\
+Saver & \$2,100 & \$80 \\
+International & \$2,800 & \$150 \\
+Beginner & \$900 & \$50 \\
+\bottomrule
+\end{tabular}
+
+\vspace{0.5em}
+\textbf{Total Impact: \$1.2M annually}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Slide 28: Section Divider
+\begin{frame}[plain]
+\vfill
+\centering
+\Huge\textbf{Part 4: Implementation \& Practice}\\
+\vspace{0.5em}
+\Large Putting It All Together
+\vfill
+\end{frame}
+
+% PART 4: PRACTICE (Slides 29-35)
+
+% Slide 29: Python Implementation
+\begin{frame}[fragile]{Complete Python Implementation}
+\begin{lstlisting}
+import numpy as np
+from sklearn.cluster import KMeans, DBSCAN
+from sklearn.preprocessing import StandardScaler
+from sklearn.metrics import silhouette_score
+
+# Load and preprocess
+X = np.load('fintech_X.npy')  # Shape: (10000, 12)
+X_clean = np.nan_to_num(X, nan=np.nanmedian(X, axis=0))
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X_clean)
+
+# Find optimal k
+scores = []
+for k in range(2, 11):
+    km = KMeans(n_clusters=k, random_state=42)
+    labels = km.fit_predict(X_scaled)
+    scores.append(silhouette_score(X_scaled, labels))
+optimal_k = np.argmax(scores) + 2
+
+# Segment users
+kmeans = KMeans(n_clusters=optimal_k, random_state=42)
+segments = kmeans.fit_predict(X_scaled)
+
+# Detect fraud
+dbscan = DBSCAN(eps=0.8, min_samples=10)
+anomalies = dbscan.fit_predict(X_scaled)
+potential_fraud = anomalies == -1
+\end{lstlisting}
+\end{frame}
+
+% Slide 30: Distance Metrics
+\begin{frame}{Distance Metrics: Choosing the Right Measure}
+\begin{columns}[T]
+\begin{column}{0.33\textwidth}
+\textbf{Euclidean}
+$$d = \sqrt{\sum_{i=1}^{n}(x_i - y_i)^2}$$
+\begin{itemize}
+\item Most common
+\item Spherical clusters
+\item Scale-sensitive
+\end{itemize}
+Use for: Continuous features
+\end{column}
+
+\begin{column}{0.33\textwidth}
+\textbf{Manhattan}
+$$d = \sum_{i=1}^{n}|x_i - y_i|$$
+\begin{itemize}
+\item Grid-like
+\item Robust to outliers
+\item City-block
+\end{itemize}
+Use for: Discrete features
+\end{column}
+
+\begin{column}{0.33\textwidth}
+\textbf{Cosine}
+$$sim = \frac{x \cdot y}{||x|| \times ||y||}$$
+\begin{itemize}
+\item Angle-based
+\item Scale-invariant
+\item Direction focus
+\end{itemize}
+Use for: Text, high-dim
+\end{column}
+\end{columns}
+
+\vspace{0.5em}
+\begin{center}
+\colorbox{mlblue!20}{\textbf{FinTech data: Euclidean after scaling works best}}
+\end{center}
+\end{frame}
+
+% Slide 31: Feature Engineering
+\begin{frame}{Feature Engineering for Better Clusters}
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\Large\textbf{Derived Features}
+\normalsize
+\begin{itemize}
+\item Transaction velocity change
+\item Weekend vs weekday ratio
+\item Support efficiency score
+\item Credit growth rate
+\item Session consistency
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Feature Combinations}
+\begin{itemize}
+\item Value per transaction
+\item International percentage
+\item Engagement index
+\item Risk score composite
+\end{itemize}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\Large\textbf{Scaling Strategies}
+\normalsize
+\begin{itemize}
+\item StandardScaler: Default choice
+\item MinMaxScaler: Bounded features
+\item RobustScaler: With outliers
+\item Log transform: Skewed data
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Feature Selection}
+\begin{itemize}
+\item Variance threshold
+\item Correlation filtering
+\item PCA reduction
+\item Domain expertise
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Slide 32: Missing Data
+\begin{frame}{Handling Missing Data in Clustering}
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\Large\textbf{Detection}
+\normalsize
+\begin{itemize}
+\item Our dataset: 0.46\% missing
+\item Pattern: MAR (random)
+\item Features affected: 3 of 12
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Imputation Methods}
+\begin{itemize}
+\item Median: Robust, simple
+\item Mean: Assumes normal
+\item KNN: Uses similarity
+\item Forward fill: Time series
+\item Domain-specific: Business rules
+\end{itemize}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\Large\textbf{Strategy Used}
+\normalsize
+\begin{lstlisting}[basicstyle=\scriptsize\ttfamily]
+# Simple median imputation
+X_clean = np.nan_to_num(X,
+    nan=np.nanmedian(X, axis=0))
+
+# Alternative: KNN
+from sklearn.impute import KNNImputer
+imputer = KNNImputer(n_neighbors=5)
+X_clean = imputer.fit_transform(X)
+\end{lstlisting}
+
+\vspace{0.5em}
+\textbf{Impact on Clustering}
+\begin{itemize}
+\item Minimal with <1\% missing
+\item Consider missingness as feature
+\item Document approach
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Slide 33: Interactive Demo
+\begin{frame}{Interactive: Assign New Users to Segments}
+\centering
+\Large\textbf{Real-Time Cluster Assignment}
+\normalsize
+
+\vspace{0.5em}
+New user profile:
+\begin{itemize}
+\item Transactions: 8/day, \$3000/month
+\item International: 60\%
+\item Account age: 45 days
+\end{itemize}
+
+\vspace{0.5em}
+\begin{lstlisting}[basicstyle=\footnotesize\ttfamily]
+# Transform new user
+new_user = [[8, 3000, 25, 6, 0.6, 20, 45, 1, 3, 0.7, 12, 45]]
+new_user_scaled = scaler.transform(new_user)
+
+# Predict segment
+segment = kmeans.predict(new_user_scaled)[0]
+distance = kmeans.transform(new_user_scaled)[0]
+
+# Get probabilities (GMM)
+probs = gmm.predict_proba(new_user_scaled)[0]
+\end{lstlisting}
+
+Result: \textbf{International Traveler} (78\% confidence)
+\end{frame}
+
+% Slide 34: Key Takeaways
+\begin{frame}{Key Takeaways: Mastering Clustering}
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\Large\textbf{Technical Lessons}
+\normalsize
+\begin{itemize}
+\item Always validate with multiple metrics
+\item Scale features appropriately
+\item Try multiple algorithms
+\item Handle missing data properly
+\item Consider computational costs
+\item Document assumptions
+\end{itemize}
+
+\vspace{0.5em}
+\Large\textbf{Algorithm Selection}
+\normalsize
+\begin{itemize}
+\item K-Means: General segmentation
+\item DBSCAN: Anomaly detection
+\item Hierarchical: Evolution analysis
+\item GMM: Overlapping segments
+\end{itemize}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\Large\textbf{Business Value}
+\normalsize
+\begin{itemize}
+\item Personalization drives revenue
+\item Fraud detection saves money
+\item Personas guide product design
+\item Segmentation improves targeting
+\item Clustering reveals insights
+\end{itemize}
+
+\vspace{0.5em}
+\Large\textbf{Best Practices}
+\normalsize
+\begin{itemize}
+\item Start with business questions
+\item Iterate with domain experts
+\item Validate with holdout data
+\item Monitor segment drift
+\item Update regularly
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Slide 35: Next Week Preview
+\begin{frame}{Next Week: Classification \& Prediction}
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\Large\textbf{Topics}
+\normalsize
+\begin{itemize}
+\item Supervised learning
+\item Classification algorithms
+\item Model evaluation
+\item Feature importance
+\item Prediction confidence
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Algorithms}
+\begin{itemize}
+\item Logistic Regression
+\item Random Forest
+\item XGBoost
+\item Neural Networks
+\end{itemize}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\Large\textbf{Applications}
+\normalsize
+\begin{itemize}
+\item Churn prediction
+\item Fraud classification
+\item Credit scoring
+\item Customer lifetime value
+\item Response modeling
+\end{itemize}
+
+\vspace{0.5em}
+\begin{center}
+\colorbox{mlgreen!20}{\textbf{Building on clustering insights!}}
+\end{center}
+\end{column}
+\end{columns}
+
+\vspace{1em}
+\centering
+\Large\textbf{Thank You! Questions?}\\
+\normalsize
+Dataset \& code: \texttt{github.com/course/week2}
+\end{frame}
+
+\end{document}

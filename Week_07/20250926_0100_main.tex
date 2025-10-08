@@ -1,0 +1,116 @@
+% Week 7: Responsible AI & Ethical Innovation
+% Machine Learning for Smarter Innovation - BSc Course
+\documentclass[8pt,aspectratio=169]{beamer}
+\usetheme{Madrid}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{tikz}
+\usepackage{listings}
+\usepackage{booktabs}
+\usepackage{multicol}
+\usepackage{array}
+
+% Nature Professional Color Palette
+\definecolor{ForestGreen}{RGB}{20,83,45}
+\definecolor{Teal}{RGB}{13,148,136}
+\definecolor{Amber}{RGB}{245,158,11}
+\definecolor{Slate}{RGB}{71,85,105}
+\definecolor{MintCream}{RGB}{240,253,244}
+\definecolor{LightGreen}{RGB}{134,239,172}
+\definecolor{DarkTeal}{RGB}{15,118,110}
+\definecolor{LightAmber}{RGB}{252,211,77}
+
+% Apply Nature Professional colors to beamer
+\setbeamercolor{structure}{fg=ForestGreen}
+\setbeamercolor{normal text}{fg=ForestGreen,bg=white}
+\setbeamercolor{frametitle}{fg=ForestGreen,bg=LightGreen!20}
+\setbeamercolor{background canvas}{bg=MintCream}
+
+% Navigation and decoration
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{footline}[frame number]
+\setbeamerfont{frametitle}{series=\bfseries,size=\large}
+
+% Items with nature accent colors
+\setbeamercolor{item}{fg=Amber}
+\setbeamercolor{subitem}{fg=Teal}
+\setbeamercolor{subsubitem}{fg=DarkTeal}
+
+\title{\textcolor{ForestGreen}{Responsible AI \& Ethical Innovation}}
+\subtitle{\textcolor{Teal}{Week 7: Building Fair and Accountable ML Systems}}
+\author{\textcolor{Slate}{Machine Learning for Smarter Innovation}}
+\date{}
+
+\begin{document}
+
+% Title Slide
+\begin{frame}[plain]
+\vspace{2cm}
+\begin{center}
+{\Huge\textcolor{ForestGreen}{Responsible AI}}\\[0.3cm]
+{\Huge\textcolor{ForestGreen}{\& Ethical Innovation}}\\[0.8cm]
+{\Large\textcolor{Teal}{Building Fair and Accountable ML Systems}}\\[1.5cm]
+{\normalsize\textcolor{Amber}{Week 7: Machine Learning for Smarter Innovation}}
+\end{center}
+\end{frame}
+
+% Overview
+\begin{frame}{Today's Journey}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{ForestGreen}{\textbf{Part 1: Foundation}}
+\begin{itemize}
+\item Why ethics matters
+\item Real-world failures
+\item Ethical frameworks
+\item Stakeholder analysis
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{Teal}{\textbf{Part 2: Algorithms}}
+\begin{itemize}
+\item Bias in data
+\item Fairness metrics
+\item Detection methods
+\item Mitigation techniques
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{Amber}{\textbf{Part 3: Implementation}}
+\begin{itemize}
+\item Fairness toolkits
+\item Explainability tools
+\item Model documentation
+\item Privacy-preserving ML
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{DarkTeal}{\textbf{Parts 4-5: Design \& Practice}}
+\begin{itemize}
+\item Inclusive design
+\item Case studies
+\item Ethical audit framework
+\item Regulatory compliance
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\small\textcolor{Slate}{Ethics isn't optional -- it's essential for sustainable innovation}
+\end{frame}
+
+% Part 1: Foundation
+\input{part1_foundation}
+
+% Part 2: Algorithms
+\input{part2_algorithms}
+
+% Part 3: Implementation
+\input{part3_implementation}
+
+% Part 4: Design
+\input{part4_design}
+
+% Part 5: Practice
+\input{part5_practice}
+
+\end{document}

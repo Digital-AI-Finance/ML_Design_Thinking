@@ -1,0 +1,66 @@
+\documentclass[8pt,aspectratio=169]{beamer}
+\usetheme{Madrid}
+
+% Color definitions
+\definecolor{mlblue}{RGB}{31, 119, 180}
+\definecolor{mlorange}{RGB}{255, 127, 14}
+\definecolor{mlgreen}{RGB}{44, 160, 44}
+\definecolor{mlred}{RGB}{214, 39, 40}
+\definecolor{mlpurple}{RGB}{148, 103, 189}
+
+% Innovation stage colors
+\definecolor{challenge}{RGB}{148, 103, 189}
+\definecolor{explore}{RGB}{52, 152, 219}
+\definecolor{generate}{RGB}{46, 204, 113}
+\definecolor{peak}{RGB}{241, 196, 15}
+\definecolor{filter}{RGB}{230, 126, 34}
+\definecolor{refine}{RGB}{231, 76, 60}
+\definecolor{strategy}{RGB}{192, 57, 43}
+
+% Packages
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{booktabs}
+\usepackage{colortbl}
+\usepackage{array}
+\usepackage{xcolor}
+
+% Title information
+\title{Week 0e: Generative AI}
+\subtitle{The Creation Challenge}
+\author{Machine Learning for Smarter Innovation}
+\institute{BSc-Level Course}
+\date{\today}
+
+\begin{document}
+
+% Title slide
+\begin{frame}
+\titlepage
+\end{frame}
+
+% Table of contents
+\begin{frame}
+\frametitle{Outline}
+\tableofcontents
+\end{frame}
+
+% Act 1: The Challenge
+\section{Act 1: The Challenge}
+\input{act1_challenge.tex}
+
+% Act 2: VAEs
+\section{Act 2: Variational Autoencoders}
+\input{act2_vaes.tex}
+
+% Act 3: Adversarial \& Diffusion
+\section{Act 3: Adversarial \& Diffusion}
+\input{act3_adversarial_diffusion.tex}
+
+% Act 4: Synthesis
+\section{Act 4: Synthesis}
+\input{act4_synthesis.tex}
+
+\end{document}

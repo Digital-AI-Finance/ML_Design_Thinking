@@ -1,0 +1,584 @@
+% Part 5: Generative AI and Modern Applications
+\section{Generative AI and Modern Applications}
+
+% Section divider
+\begin{frame}[plain]
+\vfill
+\centering
+\begin{beamercolorbox}[sep=16pt,center]{title}
+\usebeamerfont{title}\Large Part 5: Generative AI and Modern Applications\par
+\vspace{0.5em}
+\large Creating New Content with Artificial Intelligence\par
+\end{beamercolorbox}
+\vfill
+\end{frame}
+
+% Generative vs Discriminative
+\begin{frame}{Generative vs Discriminative Models}
+\twocolslide{
+\Large\textbf{Discriminative Models}
+\normalsize
+\vspace{0.5em}
+
+\textbf{Goal:} Learn decision boundary
+\formula{p(y|x) = \frac{1}{1 + e^{-f(x)}}}
+
+\textbf{Examples:}
+\begin{itemize}
+\item Logistic regression
+\item Support Vector Machines
+\item Neural network classifiers
+\item Decision trees
+\end{itemize}
+
+\textbf{Applications:}
+\begin{itemize}
+\item Classification tasks
+\item Regression problems
+\item Prediction from features
+\item Pattern recognition
+\end{itemize}
+
+\textbf{Advantages:}
+\begin{itemize}
+\item Often better at classification
+\item More direct approach
+\item Typically faster training
+\end{itemize}
+}{
+\Large\textbf{Generative Models}
+\normalsize
+\vspace{0.5em}
+
+\textbf{Goal:} Learn data distribution
+\formula{p(x) \text{ or } p(x,y)}
+
+\textbf{Examples:}
+\begin{itemize}
+\item Generative Adversarial Networks
+\item Variational Autoencoders
+\item Autoregressive models
+\item Diffusion models
+\end{itemize}
+
+\textbf{Applications:}
+\begin{itemize}
+\item Data generation
+\item Image synthesis
+\item Text generation
+\item Data augmentation
+\end{itemize}
+
+\textbf{Advantages:}
+\begin{itemize}
+\item Can generate new samples
+\item Handle missing data
+\item Provide uncertainty estimates
+\end{itemize}
+}
+\end{frame}
+
+% Generative Adversarial Networks
+\begin{frame}{Generative Adversarial Networks: The Two-Player Game}
+\twocolslide{
+\Large\textbf{Mathematical Framework}
+\normalsize
+\vspace{0.5em}
+
+\textbf{Generator:} $G: \mathcal{Z} \rightarrow \mathcal{X}$
+\formula{G(z) \text{ where } z \sim p_z(z)}
+
+\textbf{Discriminator:} $D: \mathcal{X} \rightarrow [0,1]$
+\formula{D(x) = \text{Probability } x \text{ is real}}
+
+\textbf{Minimax Objective:}
+\formula{\min_G \max_D V(D,G)}
+
+where:
+\formula{V(D,G) = \mathbb{E}_{x \sim p_{data}}[\log D(x)] + \mathbb{E}_{z \sim p_z}[\log(1-D(G(z)))]}
+
+\textbf{Training Process:}
+\begin{enumerate}
+\item Train D to distinguish real vs fake
+\item Train G to fool D
+\item Alternate until convergence
+\end{enumerate}
+}{
+\centering
+\includegraphics[width=0.85\textwidth]{charts/gan_architecture.pdf}
+
+\vspace{0.5em}
+\textbf{Training Challenges:}
+\begin{itemize}
+\item Mode collapse
+\item Training instability
+\item Vanishing gradients
+\item Nash equilibrium difficult to reach
+\end{itemize}
+
+\textbf{GAN Variants:}
+\begin{itemize}
+\item DCGAN: Deep Convolutional GANs
+\item StyleGAN: Style-based generation
+\item CycleGAN: Unpaired image translation
+\item BigGAN: Large-scale high-quality images
+\end{itemize}
+}
+\end{frame}
+
+% Variational Autoencoders
+\begin{frame}{Variational Autoencoders: Probabilistic Generation}
+\twocolslide{
+\Large\textbf{Probabilistic Framework}
+\normalsize
+\vspace{0.5em}
+
+\textbf{Encoder (Recognition Model):}
+\formula{q_\phi(z|x) \approx p(z|x)}
+
+\textbf{Decoder (Generative Model):}
+\formula{p_\theta(x|z)}
+
+\textbf{Evidence Lower Bound (ELBO):}
+\formula{\log p(x) \geq \mathbb{E}_{q_\phi(z|x)}[\log p_\theta(x|z)] - KL(q_\phi(z|x)||p(z))}
+
+\textbf{Loss Function:}
+\formula{\mathcal{L} = \mathbb{E}_{q_\phi(z|x)}[\log p_\theta(x|z)] - \beta \cdot KL(q_\phi(z|x)||p(z))}
+
+\textbf{Reparameterization Trick:}
+\formula{z = \mu + \sigma \odot \epsilon, \quad \epsilon \sim \mathcal{N}(0,I)}
+
+Enables backpropagation through stochastic node
+}{
+\centering
+\includegraphics[width=0.85\textwidth]{charts/vae_architecture.pdf}
+
+\vspace{0.5em}
+\textbf{Key Advantages:}
+\begin{itemize}
+\item Stable training
+\item Meaningful latent space
+\item Principled probabilistic approach
+\item Good reconstruction quality
+\end{itemize}
+
+\textbf{Applications:}
+\begin{itemize}
+\item Image generation
+\item Data compression
+\item Anomaly detection
+\item Latent space interpolation
+\end{itemize>
+
+\textbf{VAE Variants:}
+\begin{itemize}
+\item $\beta$-VAE: Disentangled representations
+\item WAE: Wasserstein Autoencoders
+\end{itemize}
+}
+\end{frame}
+
+% Diffusion Models
+\begin{frame}{Diffusion Models: Iterative Denoising Generation}
+\twocolslide{
+\Large\textbf{Mathematical Formulation}
+\normalsize
+\vspace{0.5em}
+
+\textbf{Forward Process (Noise Addition):}
+\formula{q(x_t|x_{t-1}) = \mathcal{N}(x_t; \sqrt{1-\beta_t}x_{t-1}, \beta_t I)}
+
+\textbf{Reverse Process (Denoising):}
+\formula{p_\theta(x_{t-1}|x_t) = \mathcal{N}(x_{t-1}; \mu_\theta(x_t,t), \Sigma_\theta(x_t,t))}
+
+\textbf{Training Objective:}
+\formula{L = \mathbb{E}_{t,x_0,\epsilon}[||\epsilon - \epsilon_\theta(x_t,t)||^2]}
+
+where $\epsilon_\theta$ predicts noise added at step $t$
+
+\textbf{Sampling Process:}
+\begin{enumerate}
+\item Start with random noise $x_T \sim \mathcal{N}(0,I)$
+\item Iteratively denoise: $x_{t-1} = \mu_\theta(x_t,t) + \sigma_t \epsilon$
+\item Continue until $x_0$ (clean sample)
+\end{enumerate}
+}{
+\centering
+\includegraphics[width=0.85\textwidth]{charts/diffusion_process.pdf}
+
+\vspace{0.5em}
+\textbf{Key Properties:}
+\begin{itemize}
+\item High-quality generation
+\item Stable training
+\item Flexible conditioning
+\item Controllable generation process
+\end{itemize}
+
+\textbf{Applications:}
+\begin{itemize}
+\item Image synthesis (DALL-E 2)
+\item Video generation
+\item Audio synthesis
+\item 3D generation
+\end{itemize>
+
+\textbf{Variants:}
+\begin{itemize}
+\item DDPM: Denoising Diffusion Probabilistic Models
+\item DDIM: Deterministic sampling
+\end{itemize}
+}
+\end{frame}
+
+% Transformer Architecture
+\begin{frame}{Transformers: The Foundation of Modern AI}
+\twocolslide{
+\Large\textbf{Self-Attention Mechanism}
+\normalsize
+\vspace{0.5em}
+
+\textbf{Attention Formula:}
+\formula{\text{Attention}(Q,K,V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V}
+
+where:
+\begin{itemize}
+\item $Q$: Queries matrix
+\item $K$: Keys matrix
+\item $V$: Values matrix
+\item $d_k$: Dimension of keys
+\end{itemize}
+
+\textbf{Multi-Head Attention:}
+\formula{\text{MultiHead}(Q,K,V) = \text{Concat}(head_1, \ldots, head_h)W^O}
+
+where:
+\formula{head_i = \text{Attention}(QW_i^Q, KW_i^K, VW_i^V)}
+
+\textbf{Position Encoding:} Since no recurrence
+\formula{PE_{(pos,2i)} = \sin(pos/10000^{2i/d_{model}})}
+\formula{PE_{(pos,2i+1)} = \cos(pos/10000^{2i/d_{model}})}
+}{
+\centering
+\includegraphics[width=0.85\textwidth]{charts/transformer_architecture.pdf}
+
+\vspace{0.5em}
+\textbf{Architecture Components:}
+\begin{itemize}
+\item \textbf{Encoder:} Self-attention + Feed-forward
+\item \textbf{Decoder:} Masked self-attention + Cross-attention
+\item \textbf{Layer Norm:} Stabilizes training
+\item \textbf{Residual Connections:} Gradient flow
+\end{itemize>
+
+\textbf{Key Advantages:}
+\begin{itemize}
+\item Parallelizable training
+\item Long-range dependencies
+\item Transfer learning capability
+\item Attention interpretability
+\end{itemize}
+}
+\end{frame}
+
+% Large Language Models
+\begin{frame}{Large Language Models: Scaling Language AI}
+\twocolslide{
+\Large\textbf{Model Evolution}
+\normalsize
+\vspace{0.5em}
+
+\textbf{GPT (Generative Pre-trained Transformer):}
+\begin{itemize}
+\item Autoregressive generation
+\item Transformer decoder architecture
+\item Pre-train then fine-tune
+\end{itemize>
+
+\textbf{BERT (Bidirectional Encoder Representations):}
+\begin{itemize>
+\item Bidirectional context
+\item Masked language modeling
+\item Next sentence prediction
+\end{itemize>
+
+\textbf{Scaling Laws:}
+\formula{L(N) = \left(\frac{N_c}{N}\right)^{\alpha}}
+
+where $L$ is loss, $N$ is parameters, $\alpha \approx 0.076$
+
+\textbf{Key Findings:}
+\begin{itemize}
+\item Performance scales predictably with size
+\item Emergent abilities at scale
+\item Few-shot learning capabilities
+\end{itemize}
+}{
+\centering
+\includegraphics[width=0.85\textwidth]{charts/llm_evolution.pdf}
+
+\vspace{0.5em}
+\textbf{Model Sizes:}
+\begin{itemize}
+\item GPT-1: 117M parameters (2018)
+\item GPT-2: 1.5B parameters (2019)
+\item GPT-3: 175B parameters (2020)
+\item GPT-4: ~1.8T parameters (2023)
+\end{itemize>
+
+\textbf{Capabilities:}
+\begin{itemize}
+\item Text generation
+\item Question answering
+\item Code generation
+\item Reasoning tasks
+\end{itemize>
+
+\textbf{Training Techniques:}
+\begin{itemize}
+\item Self-supervised pre-training
+\item Supervised fine-tuning
+\item Reinforcement learning from human feedback
+\end{itemize}
+}
+\end{frame}
+
+% Modern Applications
+\begin{frame}{Generative AI Applications: Transforming Industries}
+\begin{columns}[T]
+\begin{column}{0.32\textwidth}
+\centering
+\textcolor{chartblue}{\Large\textbf{Content Creation}}
+\normalsize
+\vspace{0.3em}
+
+\textbf{Text Generation:}
+\begin{itemize}
+\item GPT-4: Advanced writing
+\item Claude: Helpful AI assistant
+\item Jasper: Marketing copy
+\end{itemize>
+
+\textbf{Image Generation:}
+\begin{itemize}
+\item DALL-E 2: Text-to-image
+\item Midjourney: Artistic images
+\item Stable Diffusion: Open-source
+\end{itemize>
+
+\textbf{Video Generation:}
+\begin{itemize}
+\item Runway: Video editing
+\item Synthesia: AI avatars
+\item Luma: 3D generation
+\end{itemize>
+\end{column>
+
+\begin{column}{0.32\textwidth}
+\centering
+\textcolor{chartteal}{\Large\textbf{Code \& Development}}
+\normalsize
+\vspace{0.3em}
+
+\textbf{Code Generation:}
+\begin{itemize}
+\item GitHub Copilot: AI pair programmer
+\item CodeT5: Code understanding
+\item AlphaCode: Competitive programming
+\end{itemize>
+
+\textbf{Software Engineering:}
+\begin{itemize}
+\item Automated testing
+\item Bug detection
+\item Code refactoring
+\item Documentation generation
+\end{itemize>
+
+\textbf{Low-code Platforms:}
+\begin{itemize}
+\item Natural language to app
+\item Automated UI generation
+\item Database query generation
+\end{itemize>
+\end{column>
+
+\begin{column}{0.32\textwidth}
+\centering
+\textcolor{chartorange}{\Large\textbf{Science \& Research}}
+\normalsize
+\vspace{0.3em}
+
+\textbf{Drug Discovery:}
+\begin{itemize}
+\item Molecule generation
+\item Protein folding (AlphaFold)
+\item Clinical trial optimization
+\end{itemize>
+
+\textbf{Scientific Writing:}
+\begin{itemize}
+\item Literature review
+\item Hypothesis generation
+\item Grant proposal writing
+\end{itemize>
+
+\textbf{Data Analysis:}
+\begin{itemize}
+\item Automated insights
+\item Report generation
+\item Visualization creation
+\end{itemize>
+\end{column>
+\end{columns>
+
+\vspace{1em}
+\textcolor{darkgray}{\small Generative AI is revolutionizing how we create, code, and conduct research}
+\end{frame}
+
+% Ethical Considerations
+\begin{frame}{Ethical Considerations in Generative AI}
+\twocolslide{
+\Large\textbf{Key Challenges}
+\normalsize
+\vspace{0.5em}
+
+\textbf{Bias and Fairness:}
+\begin{itemize}
+\item Training data bias propagation
+\item Underrepresentation of groups
+\item Stereotypical outputs
+\item Need for diverse datasets
+\end{itemize>
+
+\textbf{Misinformation:}
+\begin{itemize}
+\item Deepfakes and synthetic media
+\item Convincing false information
+\item Difficulty in detection
+\item Social and political implications
+\end{itemize>
+
+\textbf{Copyright and Ownership:}
+\begin{itemize}
+\item Training on copyrighted content
+\item Generated content ownership
+\item Artist and creator rights
+\item Legal framework gaps
+\end{itemize>
+
+\textbf{Privacy Concerns:}
+\begin{itemize}
+\item Memorization of training data
+\item Personal information leakage
+\item Data consent issues
+\end{itemize}
+}{
+\Large\textbf{Mitigation Strategies}
+\normalsize
+\vspace{0.5em}
+
+\textbf{Technical Solutions:}
+\begin{itemize}
+\item Bias detection and mitigation
+\item Differential privacy
+\item Adversarial testing
+\item Content authentication
+\end{itemize>
+
+\textbf{Regulatory Approaches:}
+\begin{itemize}
+\item AI governance frameworks
+\item Content labeling requirements
+\item Transparency mandates
+\item Algorithmic auditing
+\end{itemize>
+
+\textbf{Industry Standards:}
+\begin{itemize}
+\item Responsible AI principles
+\item Ethical review boards
+\item Impact assessments
+\item Stakeholder engagement
+\end{itemize>
+
+\textbf{Education and Awareness:}
+\begin{itemize}
+\item Media literacy programs
+\item AI literacy for general public
+\item Professional ethics training
+\item Critical thinking skills
+\end{itemize}
+}
+\end{frame}
+
+% Future Directions
+\begin{frame}{The Future of Generative AI}
+\twocolslide{
+\Large\textbf{Technical Frontiers}
+\normalsize
+\vspace{0.5em}
+
+\textbf{Multimodal Models:}
+\begin{itemize}
+\item GPT-4V: Vision and language
+\item DALL-E 3: Improved text-image
+\item Video-language models
+\item Audio-visual generation
+\end{itemize>
+
+\textbf{Efficiency Improvements:}
+\begin{itemize}
+\item Model compression techniques
+\item Efficient architectures
+\item Faster sampling methods
+\item Edge deployment
+\end{itemize>
+
+\textbf{Controllability:}
+\begin{itemize}
+\item Fine-grained control
+\item Style and content separation
+\item Interactive generation
+\item User-guided creation
+\end{itemize>
+
+\textbf{Reasoning Capabilities:}
+\begin{itemize}
+\item Chain-of-thought reasoning
+\item Mathematical problem solving
+\item Scientific reasoning
+\item Causal understanding
+\end{itemize}
+}{
+\Large\textbf{Societal Impact}
+\normalsize
+\vspace{0.5em}
+
+\textbf{Creative Industries:}
+\begin{itemize}
+\item AI-human collaboration
+\item New creative workflows
+\item Democratized content creation
+\item Novel art forms
+\end{itemize>
+
+\textbf{Education:}
+\begin{itemize}
+\item Personalized learning content
+\item AI tutoring systems
+\item Automated assessment
+\item Curriculum generation
+\end{itemize>
+
+\textbf{Business Transformation:}
+\begin{itemize}
+\item Automated content pipelines
+\item Personalized marketing
+\item Customer service automation
+\item Product design assistance
+\end{itemize>
+
+\keypoint{Key Insight:} Generative AI will become increasingly integrated into daily life, requiring thoughtful development and deployment
+}
+\end{frame}

@@ -1,0 +1,418 @@
+% ==================== PART 2: THE FRAMEWORK ====================
+\section{Part 2: Teaching Machines to Judge}
+
+% Slide 6: Start Simple - Binary Decisions
+\begin{frame}[t]{Let's Start Simple: Yes or No}
+\Large\textbf{Binary Classification - The Foundation}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{Familiar Examples:}
+\begin{itemize}
+\item Email: Spam or Not Spam
+\item Medical: Cancer or Healthy
+\item Credit: Approve or Reject
+\item Photo: Cat or Dog
+\item Review: Positive or Negative
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{How Humans Do It:}
+\begin{enumerate}
+\item Look for telltale signs
+\item Weigh evidence
+\item Make decision
+\item Binary: Yes or No
+\end{enumerate}
+
+\column{0.48\textwidth}
+\textbf{How Machines Learn It:}
+\begin{center}
+\begin{tikzpicture}[scale=0.8]
+% Draw axes
+\draw[->] (-0.5,0) -- (4,0) node[right] {Feature 1};
+\draw[->] (0,-0.5) -- (0,3.5) node[above] {Feature 2};
+
+% Draw points
+\foreach \x/\y in {0.5/0.5, 0.8/0.3, 0.3/0.8, 1.0/1.2} {
+    \node[circle,fill=mlred,inner sep=2pt] at (\x,\y) {};
+}
+\foreach \x/\y in {2.5/2.5, 3.0/2.8, 2.8/3.0, 3.2/2.3} {
+    \node[circle,fill=mlgreen,inner sep=2pt] at (\x,\y) {};
+}
+
+% Draw decision boundary
+\draw[thick,mlpurple,dashed] (-0.5,2) -- (4,0.5);
+
+% Labels
+\node[mlred] at (0.5,1.5) {Class A};
+\node[mlgreen] at (3,1.5) {Class B};
+\node[mlpurple] at (2,-0.3) {Decision Line};
+\end{tikzpicture}
+\end{center}
+
+\begin{tcolorbox}[colback=mllavender4, colframe=mlpurple]
+\footnotesize
+\textbf{Key Insight:} Classification is just drawing a line (or curve) that separates two groups
+\end{tcolorbox}
+\end{columns}
+
+\bottomnote{Every binary classification problem boils down to: which side of the line are you on?}
+\end{frame}
+
+% Slide 7: From Binary to Probability
+\begin{frame}[t]{From Yes/No to How Confident?}
+\Large\textbf{Probability - The Power of Uncertainty}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{Why Probability Matters:}
+
+\vspace{0.3em}
+\textbf{Binary Says:}
+\begin{itemize}
+\item Email IS spam ✗
+\item Loan WILL default ✗
+\item User WILL churn ✗
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Probability Says:}
+\begin{itemize}
+\item Email: 95\% likely spam ✓
+\item Loan: 73\% default risk ✓
+\item User: 41\% churn risk ✓
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{This Enables:}
+\begin{itemize}
+\item Risk-based decisions
+\item Threshold tuning
+\item Confidence ranking
+\end{itemize}
+
+\column{0.48\textwidth}
+\textbf{The Probability Transform:}
+\begin{center}
+\begin{tikzpicture}[scale=0.7]
+\begin{axis}[
+    xlabel={Distance from Line},
+    ylabel={Probability (\%)},
+    grid=major,
+    width=7cm,
+    height=5cm,
+    xmin=-3, xmax=3,
+    ymin=0, ymax=100
+]
+\addplot[mlpurple,ultra thick,domain=-3:3,samples=100] {100/(1+exp(-2*x))};
+\addplot[dashed,mlgray] coordinates {(-3,50) (3,50)};
+\node at (axis cs:0,50) [circle,fill=mlgreen,inner sep=2pt] {};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\begin{tcolorbox}[colback=mlgreen!10, colframe=mlgreen]
+\footnotesize
+\textbf{Example:} Innovation proposal\\
+Score: 82\% success probability\\
+Decision: Invest (threshold: 70\%)
+\end{tcolorbox}
+\end{columns}
+
+\bottomnote{Probability lets you say ``I'm 95\% sure'' instead of ``definitely yes'' - much more useful!}
+\end{frame}
+
+% Slide 8: Multi-Class - Beyond Binary
+\begin{frame}[t]{Beyond Binary: Multiple Categories}
+\Large\textbf{When Life Has More Than Two Options}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{Real World is Multi-Class:}
+\begin{itemize}
+\item Innovation: Failed / Moderate / Success / Unicorn
+\item Customer: Detractor / Passive / Promoter
+\item Risk: Low / Medium / High / Critical
+\item Emotion: Joy / Anger / Fear / Surprise / Sad
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Two Approaches:}
+
+\textbf{1. One-vs-Rest:}
+\begin{itemize}
+\footnotesize
+\item Is it A? (vs B,C,D)
+\item Is it B? (vs A,C,D)
+\item Is it C? (vs A,B,D)
+\item Pick highest confidence
+\end{itemize}
+
+\textbf{2. Direct Multi-Class:}
+\begin{itemize}
+\footnotesize
+\item Learn all boundaries at once
+\item More complex but often better
+\end{itemize}
+
+\column{0.48\textwidth}
+\begin{center}
+\includegraphics[width=0.9\textwidth]{charts/innovation_multiclass_analysis.pdf}
+\end{center}
+
+\textbf{Probability Distribution:}
+\begin{center}
+\begin{tabular}{lc}
+\toprule
+\textbf{Category} & \textbf{Probability} \\
+\midrule
+Failed & 12\% \\
+Moderate & 31\% \\
+Success & \textcolor{mlgreen}{\textbf{44\%}} \\
+Unicorn & 13\% \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{columns}
+
+\bottomnote{Multi-class gives nuanced predictions: ``44\% likely success, 31\% moderate, worth pursuing but hedge bets''}
+\end{frame}
+
+% Slide 9: Features - What Machines See
+\begin{frame}[t]{Features: Teaching Machines What to Look At}
+\Large\textbf{Converting Reality to Numbers}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{Innovation Proposal Features:}
+
+\vspace{0.3em}
+\textbf{Numerical (Direct):}
+\begin{itemize}
+\footnotesize
+\item Team size: 5 people
+\item Years experience: 12 years
+\item Market size: \$2.3B
+\item Development time: 18 months
+\item Funding requested: \$1.5M
+\end{itemize}
+
+\textbf{Categorical (Encoded):}
+\begin{itemize}
+\footnotesize
+\item Industry: Tech → [1, 0, 0, 0]
+\item Stage: Seed → [1, 0, 0]
+\item Location: SF → [0, 1, 0, 0, 0]
+\end{itemize}
+
+\textbf{Text (Extracted):}
+\begin{itemize}
+\footnotesize
+\item Sentiment score: 0.73
+\item Complexity: 8.2/10
+\item Keywords: 15 industry terms
+\end{itemize}
+
+\column{0.48\textwidth}
+\textbf{Feature Space Visualization:}
+\begin{center}
+\includegraphics[width=0.9\textwidth]{charts/feature_space_visualization.pdf}
+\end{center}
+
+\begin{tcolorbox}[colback=mllavender4, colframe=mlpurple]
+\footnotesize
+\textbf{27 Features} → \textbf{27 Dimensions}\\
+Humans see 3D max\\
+Machines handle 1000s easily
+\end{tcolorbox}
+\end{columns}
+
+\bottomnote{Good features are the secret: garbage in, garbage out - no algorithm can fix bad features}
+\end{frame}
+
+% Slide 10: Decision Boundaries
+\begin{frame}[t]{Decision Boundaries: Where the Magic Happens}
+\Large\textbf{Different Ways to Separate Classes}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\column{0.55\textwidth}
+\begin{center}
+\includegraphics[width=0.95\textwidth]{charts/decision_boundaries.pdf}
+\end{center}
+
+\column{0.43\textwidth}
+\textbf{Linear Boundary:}
+\begin{itemize}
+\footnotesize
+\item Simple straight line
+\item Fast to compute
+\item Easy to interpret
+\item Works when classes are ``linearly separable''
+\end{itemize}
+
+\vspace{0.3em}
+\textbf{Non-Linear Boundary:}
+\begin{itemize}
+\footnotesize
+\item Curves, circles, complex shapes
+\item Captures complex patterns
+\item More flexible
+\item Risk of overfitting
+\end{itemize}
+
+\vspace{0.3em}
+\textbf{The Trade-off:}
+\begin{itemize}
+\footnotesize
+\item Simple = Fast + Interpretable
+\item Complex = Accurate + Flexible
+\item Choose based on your needs
+\end{itemize}
+\end{columns}
+
+\vspace{0.5em}
+\begin{center}
+\textcolor{mlpurple}{\textbf{Different algorithms draw different types of boundaries}}
+\end{center}
+
+\bottomnote{Next: Let's explore 5 different algorithms and see how each draws its boundaries}
+\end{frame}
+
+% Slide 11: Training - How Machines Learn
+\begin{frame}[t]{Training: How Machines Learn to Classify}
+\Large\textbf{From Examples to Intelligence}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{The Learning Process:}
+
+\textbf{1. Start with Data:}
+\begin{itemize}
+\footnotesize
+\item 1000 past proposals
+\item Each labeled: Success/Fail
+\item 27 features per proposal
+\end{itemize}
+
+\textbf{2. Split for Training:}
+\begin{itemize}
+\footnotesize
+\item 70\% Training (700 examples)
+\item 15\% Validation (150 examples)
+\item 15\% Test (150 examples)
+\end{itemize}
+
+\textbf{3. Algorithm Learns:}
+\begin{itemize}
+\footnotesize
+\item Finds patterns in training data
+\item Adjusts decision boundary
+\item Tests on validation
+\item Repeats until optimal
+\end{itemize}
+
+\column{0.48\textwidth}
+\textbf{Learning in Action:}
+\begin{center}
+\begin{tikzpicture}[scale=0.7]
+% Iteration 1
+\node at (0,3) {\small Iteration 1: Random};
+\draw[->] (-0.5,2.5) -- (2.5,2.5);
+\draw[->] (0,2) -- (0,2.8);
+\draw[mlgray,dashed] (0,2.5) -- (2,2);
+\node[red] at (1,1.8) {\footnotesize 52\% accuracy};
+
+% Iteration 10
+\node at (4,3) {\small Iteration 10: Learning};
+\draw[->] (3.5,2.5) -- (6.5,2.5);
+\draw[->] (4,2) -- (4,2.8);
+\draw[mlorange,dashed] (3.5,2.3) -- (6.5,2.6);
+\node[orange] at (5,1.8) {\footnotesize 71\% accuracy};
+
+% Iteration 100
+\node at (0,0.5) {\small Iteration 100: Optimal};
+\draw[->] (-0.5,0) -- (2.5,0);
+\draw[->] (0,-0.5) -- (0,0.3);
+\draw[mlgreen,thick] plot[smooth] coordinates {(0,0) (0.5,-0.2) (1,0) (1.5,0.1) (2,-0.1)};
+\node[green] at (1,-0.7) {\footnotesize 89\% accuracy};
+\end{tikzpicture}
+\end{center}
+
+\vspace{0.3em}
+\begin{tcolorbox}[colback=mlgreen!10, colframe=mlgreen]
+\textbf{Result:} Machine learns optimal boundary from examples, achieving 89\% accuracy
+\end{tcolorbox}
+\end{columns}
+
+\bottomnote{Training is like teaching a child: show many examples, let them find the pattern}
+\end{frame}
+
+% Slide 12: Validation - Avoiding Overfitting
+\begin{frame}[t]{The Overfitting Trap}
+\Large\textbf{When Machines Learn Too Well}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{The Memorization Problem:}
+
+Imagine studying for an exam:
+\begin{itemize}
+\item Memorize all past questions ✗
+\item Score 100\% on those questions
+\item But fail on new questions
+\item You memorized, didn't understand
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Same with Machines:}
+\begin{itemize}
+\item Train too long/complex
+\item Perfect on training data (99\%)
+\item Terrible on new data (61\%)
+\item Memorized noise, not patterns
+\end{itemize}
+
+\column{0.48\textwidth}
+\begin{center}
+\includegraphics[width=0.9\textwidth]{charts/innovation_learning_curves.pdf}
+\end{center}
+
+\textbf{The Solution: Validation Set}
+\begin{itemize}
+\footnotesize
+\item Keep 15\% data hidden
+\item Never train on it
+\item Test periodically
+\item Stop when validation peaks
+\end{itemize}
+\end{columns}
+
+\vspace{0.5em}
+\begin{center}
+\textcolor{mlpurple}{\textbf{Golden Rule: If it's too good to be true on training data, it probably is}}
+\end{center}
+
+\bottomnote{Overfitting is the \#1 mistake in ML - always validate on unseen data!}
+\end{frame}
