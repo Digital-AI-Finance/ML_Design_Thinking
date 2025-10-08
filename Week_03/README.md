@@ -253,3 +253,53 @@ By the end of Week 3, students will be able to:
 *Created: January 2025*
 *Course: Machine Learning for Smarter Innovation*
 *Institution: BSc Design & AI Program*
+---
+
+## Meta-Knowledge Integration
+
+**NEW (2025-10-03)**: Week 3 now includes systematic meta-knowledge slide:
+
+**NLP Method Selection** (part4_synthesis.tex):
+- Decision tree chart: `nlp_method_decision.pdf`
+- When to use Rule-based vs Traditional ML vs Transformers
+- Judgment criteria: Speed/simplicity, balanced performance, maximum accuracy
+- Principle: "Start simple (rules/traditional ML), upgrade to transformers only when context and nuance are critical"
+- Bottom note: "Judgment criteria enable wise NLP method selection - balance accuracy needs against computational cost and data requirements"
+
+This meta-knowledge slide follows Week 9-10 pedagogical framework standard.
+
+---
+
+## Version History
+
+- **2025-10-03**: Pedagogical framework upgrade
+  - Added NLP method selection meta-knowledge slide (part4_synthesis.tex line 451)
+  - Created decision tree chart: `nlp_method_decision.pdf`
+  - Enhanced README with meta-knowledge documentation
+  - Archived 14 duplicate/old .tex files to archive/previous/
+  - Total: 463 lines meta-knowledge slide
+
+- **2025-09-29**: Act-based restructure
+  - Converted to 4-act dramatic structure (part1-5)
+  - Latest main: 20250929_1000_main.tex
+  - 52 total slides
+
+- **2025-09-19**: Original creation
+  - Traditional 5-part modular structure
+  - 75+ charts (PDF + PNG pairs)
+  - Twitter sentiment workshop
+
+---
+
+## Next Steps
+
+This README documents Week 3 structure. For comprehensive enhancement matching Weeks 1-2 format (500+ lines), key additions would include:
+- Detailed learning objectives (5 categories)
+- Chart-by-chart descriptions
+- Handout content summaries
+- Common questions/FAQ
+- Technical prerequisites
+- Quick start guide
+
+**Status**: Week 3 is pedagogically compliant (meta-knowledge slide ✅, bottom notes ⏳). Core documentation complete.
+**Last Updated**: 2025-10-03

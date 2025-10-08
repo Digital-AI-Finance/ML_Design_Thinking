@@ -209,3 +209,46 @@ Educational use only. Please cite when using these materials.
 
 ---
 *Last Updated: September 23, 2025*
+---
+
+## Meta-Knowledge Integration
+
+**NEW (2025-10-03)**: Week 4 now includes systematic meta-knowledge slide:
+
+**Classification Algorithm Selection** (part4_integration.tex line 449):
+- Decision tree chart: `classification_algorithm_decision.pdf`
+- When to use Logistic/Linear vs Random Forest vs Neural Networks
+- Judgment criteria: Interpretability, balanced performance, maximum accuracy
+- Additional considerations: Class balance, feature count, linearity, training time, deployment constraints, multi-class
+- Principle: "Start interpretable (logistic), add complexity (trees/SVM) only when accuracy demands it"
+- Bottom note: "Judgment criteria enable systematic algorithm selection - balance explainability, accuracy, and computational constraints"
+
+This meta-knowledge slide follows Week 9-10 pedagogical framework standard.
+
+---
+
+## Version History
+
+- **2025-10-03**: Pedagogical framework upgrade
+  - Added classification algorithm selection meta-knowledge slide
+  - Created decision tree chart: `classification_algorithm_decision.pdf`
+  - Enhanced README with meta-knowledge documentation
+  - Archived 20 duplicate/old .tex files (v2/v3/beginner variants) to archive/previous/
+  - Clean directory structure: 20250929_1530_main.tex + part1-5
+
+- **2025-09-29**: Latest revision
+  - 4-act dramatic structure conversion
+  - Latest main: 20250929_1530_main.tex
+  - 59 slides total
+  - Dual-track innovation complete
+
+- **2025-09-23**: Dual-track creation
+  - Advanced + Beginner versions
+  - v2 (advanced) and v3 (beginner) file structure
+  - Innovation in accessibility
+  - 3 handouts created
+
+---
+
+**Status**: Week 4 is pedagogically compliant (meta-knowledge slide ✅, dual-track ✅, handouts ✅). Accessibility innovation successful.
+**Last Updated**: 2025-10-03

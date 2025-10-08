@@ -1,0 +1,463 @@
+% Part 2: Algorithms - How Generative AI Works
+\section{Algorithms: The Magic Behind Generation}
+
+% GANs Introduction
+\begin{frame}{Generative Adversarial Networks (GANs)}
+\begin{columns}[T]
+\column{0.55\textwidth}
+\includegraphics[width=\textwidth]{gan_architecture.pdf}
+
+\column{0.43\textwidth}
+\textcolor{mlblue}{\Large The Creative Duel}\\[0.5cm]
+
+\small
+\textcolor{mlorange}{\textbf{Generator (G)}}
+\begin{itemize}
+\item Creates fake samples
+\item Learns from noise
+\item Tries to fool discriminator
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlred}{\textbf{Discriminator (D)}}
+\begin{itemize}
+\item Detects real vs fake
+\item Provides feedback
+\item Forces improvement
+\end{itemize}
+
+\vspace{\fill}
+{\footnotesize\textcolor{mlgray}{Adversarial training creates photorealistic outputs}}
+\end{columns}
+\end{frame}
+
+% GAN Mathematics
+\begin{frame}{GAN Training Dynamics}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{The Minimax Game}}
+
+\normalsize
+$$\min_G \max_D V(D,G)$$
+
+\small
+$$V(D,G) = \mathbb{E}_{x \sim p_{data}}[\log D(x)] + \mathbb{E}_{z \sim p_z}[\log(1-D(G(z)))]$$
+
+\vspace{0.3cm}
+\textcolor{mlorange}{\textbf{Training Process:}}
+\begin{enumerate}
+\item Update D to maximize V
+\item Update G to minimize V
+\item Repeat until equilibrium
+\end{enumerate}
+
+\column{0.48\textwidth}
+\textcolor{mlgreen}{\textbf{Common Variants}}
+
+\small
+\begin{itemize}
+\item \textbf{StyleGAN:} High-quality faces
+\item \textbf{CycleGAN:} Image translation
+\item \textbf{BigGAN:} Large-scale generation
+\item \textbf{ProGAN:} Progressive growing
+\item \textbf{WGAN:} Wasserstein distance
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlpurple}{\textbf{Applications:}}
+\begin{itemize}
+\item Photorealistic images
+\item Style transfer
+\item Super-resolution
+\item Data augmentation
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{GANs excel at high-fidelity image generation}
+\end{frame}
+
+% VAEs Introduction
+\begin{frame}{Variational Autoencoders (VAEs)}
+\begin{columns}[T]
+\column{0.55\textwidth}
+\includegraphics[width=\textwidth]{vae_latent_space.pdf}
+
+\column{0.43\textwidth}
+\textcolor{mlpurple}{\Large Latent Space Magic}\\[0.5cm]
+
+\small
+\textcolor{mlblue}{\textbf{Encoder}}
+\begin{itemize}
+\item Maps input to latent space
+\item Learns mean and variance
+\item Creates compressed representation
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlorange}{\textbf{Decoder}}
+\begin{itemize}
+\item Reconstructs from latent
+\item Generates variations
+\item Smooth interpolations
+\end{itemize}
+
+\vspace{\fill}
+{\footnotesize\textcolor{mlgray}{VAEs enable controlled generation via latent manipulation}}
+\end{columns}
+\end{frame}
+
+% VAE Mathematics
+\begin{frame}{VAE: Learning Representations}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{The ELBO Objective}}
+
+\small
+Maximize Evidence Lower Bound:
+
+$$\mathcal{L} = \mathbb{E}_{q(z|x)}[\log p(x|z)] - KL(q(z|x)||p(z))$$
+
+\vspace{0.3cm}
+\textcolor{mlorange}{Components:}
+\begin{itemize}
+\item Reconstruction term
+\item KL regularization
+\item Latent prior $p(z) = \mathcal{N}(0,I)$
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{mlgreen}{\textbf{Key Advantages}}
+
+\small
+\begin{itemize}
+\item Principled probabilistic framework
+\item Smooth latent space
+\item Interpolation capabilities
+\item Disentangled representations
+\item Fast generation
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlpurple}{\textbf{Limitations:}}
+\begin{itemize}
+\item Blurry outputs
+\item Posterior collapse
+\item Limited complexity
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{VAEs trade quality for controllability and speed}
+\end{frame}
+
+% Diffusion Models
+\begin{frame}{Diffusion Models: The New Paradigm}
+\begin{columns}[T]
+\column{0.55\textwidth}
+\includegraphics[width=\textwidth]{diffusion_process.pdf}
+
+\column{0.43\textwidth}
+\textcolor{mlcyan}{\Large Noise to Art}\\[0.5cm]
+
+\small
+\textcolor{mlblue}{\textbf{Forward Process}}
+\begin{itemize}
+\item Add Gaussian noise
+\item $T$ timesteps
+\item Destroys information
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlorange}{\textbf{Reverse Process}}
+\begin{itemize}
+\item Learn to denoise
+\item Predict noise at each step
+\item Generate from pure noise
+\end{itemize}
+
+\vspace{\fill}
+{\footnotesize\textcolor{mlgray}{Diffusion models achieve state-of-the-art quality}}
+\end{columns}
+\end{frame}
+
+% Diffusion Details
+\begin{frame}{How Diffusion Models Work}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Training Process}}
+
+\small
+\begin{enumerate}
+\item Sample image $x_0$
+\item Sample timestep $t$
+\item Add noise: $x_t = \sqrt{\alpha_t}x_0 + \sqrt{1-\alpha_t}\epsilon$
+\item Predict noise: $\epsilon_\theta(x_t, t)$
+\item Loss: $||\epsilon - \epsilon_\theta||^2$
+\end{enumerate}
+
+\vspace{0.3cm}
+\textcolor{mlorange}{\textbf{Key Innovations:}}
+\begin{itemize}
+\item DDPM: Denoising foundation
+\item DDIM: Deterministic sampling
+\item Classifier guidance
+\item Latent diffusion (Stable Diffusion)
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{mlgreen}{\textbf{Why Diffusion Wins}}
+
+\small
+\begin{itemize}
+\item Superior image quality
+\item Stable training
+\item Mode coverage
+\item Text conditioning natural
+\item Controllable generation
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlpurple}{\textbf{Leading Models:}}
+\begin{itemize}
+\item \textbf{DALL-E 3:} OpenAI's best
+\item \textbf{Stable Diffusion:} Open source
+\item \textbf{Imagen:} Google's approach
+\item \textbf{Midjourney:} Artistic focus
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Diffusion models dominate current image generation}
+\end{frame}
+
+% Transformers for Generation
+\begin{frame}{Transformers: The Universal Architecture}
+\begin{columns}[T]
+\column{0.55\textwidth}
+\includegraphics[width=\textwidth]{transformer_attention.pdf}
+
+\column{0.43\textwidth}
+\textcolor{mlblue}{\Large Attention is All You Need}\\[0.5cm]
+
+\small
+\textcolor{mlorange}{\textbf{Self-Attention}}
+\begin{itemize}
+\item Query, Key, Value
+\item Parallel processing
+\item Long-range dependencies
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{For Generation:}}
+\begin{itemize}
+\item Autoregressive decoding
+\item Context understanding
+\item Multi-modal fusion
+\end{itemize}
+
+\vspace{\fill}
+{\footnotesize\textcolor{mlgray}{Transformers unified NLP and vision}}
+\end{columns}
+\end{frame}
+
+% Transformer Variants
+\begin{frame}{Transformer Evolution for Generation}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Text Generation}}
+
+\small
+\begin{itemize}
+\item \textbf{GPT Series:} Decoder-only
+\item \textbf{T5:} Encoder-decoder
+\item \textbf{BERT:} Bidirectional (not generative)
+\item \textbf{XLNet:} Permutation language model
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlorange}{\textbf{Scaling Laws:}}
+
+\small
+Performance $\propto$ (Parameters)$^{0.5}$\\
+GPT-3: 175B $\rightarrow$ GPT-4: 1.76T
+
+\column{0.48\textwidth}
+\textcolor{mlgreen}{\textbf{Vision Transformers}}
+
+\small
+\begin{itemize}
+\item \textbf{ViT:} Image patches as tokens
+\item \textbf{CLIP:} Vision-language alignment
+\item \textbf{DALL-E:} Discrete VAE + GPT
+\item \textbf{Parti:} Autoregressive images
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlpurple}{\textbf{Multimodal:}}
+\begin{itemize}
+\item \textbf{Flamingo:} Few-shot vision-language
+\item \textbf{BLIP-2:} Efficient bridging
+\item \textbf{Gemini:} Native multimodal
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Transformers scale to trillions of parameters}
+\end{frame}
+
+% Algorithm Comparison
+\begin{frame}{Algorithm Comparison Matrix}
+\begin{columns}[T]
+\column{0.55\textwidth}
+\includegraphics[width=\textwidth]{quality_vs_speed_tradeoff.pdf}
+
+\column{0.43\textwidth}
+\textcolor{mlblue}{\Large Choose Your Fighter}\\[0.5cm]
+
+\small
+\textcolor{mlorange}{\textbf{Quality Leaders:}}
+\begin{itemize}
+\item Diffusion models
+\item Large transformers
+\end{itemize}
+
+\textcolor{mlgreen}{\textbf{Speed Champions:}}
+\begin{itemize}
+\item VAEs
+\item Distilled models
+\end{itemize}
+
+\textcolor{mlpurple}{\textbf{Control Masters:}}
+\begin{itemize}
+\item Conditional GANs
+\item Guided diffusion
+\end{itemize}
+
+\vspace{\fill}
+{\footnotesize\textcolor{mlgray}{No single best - depends on use case}}
+\end{columns}
+\end{frame}
+
+% Detailed Comparison Table
+\begin{frame}{Head-to-Head: Algorithm Showdown}
+\centering
+\small
+\begin{tabular}{lccccc}
+\toprule
+\textbf{Metric} & \textbf{GAN} & \textbf{VAE} & \textbf{Diffusion} & \textbf{Transformer} & \textbf{Flow} \\
+\midrule
+Quality & High & Medium & \textcolor{mlgreen}{Highest} & High & Medium \\
+Speed & Fast & \textcolor{mlgreen}{Fastest} & Slow & Medium & Slow \\
+Training Stability & Low & \textcolor{mlgreen}{High} & High & High & Medium \\
+Control & Medium & High & \textcolor{mlgreen}{Highest} & High & Low \\
+Diversity & Low & Medium & \textcolor{mlgreen}{Highest} & High & High \\
+Memory & Low & \textcolor{mlgreen}{Lowest} & High & Highest & Medium \\
+Interpretability & Low & High & Medium & \textcolor{mlgreen}{High} & Medium \\
+\bottomrule
+\end{tabular}
+
+\vspace{0.5cm}
+\textcolor{mlblue}{\textbf{Recommendations by Use Case:}}
+
+\small
+\begin{columns}[T]
+\column{0.33\textwidth}
+\textcolor{mlorange}{\textbf{Real-time:}} VAE, Small GAN
+
+\column{0.33\textwidth}
+\textcolor{mlgreen}{\textbf{Quality:}} Diffusion, Large Transformer
+
+\column{0.33\textwidth}
+\textcolor{mlpurple}{\textbf{Research:}} All architectures
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Hybrid approaches often combine strengths}
+\end{frame}
+
+% Emerging Techniques
+\begin{frame}{Emerging Techniques \& Future}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Current Frontiers}}
+
+\small
+\begin{itemize}
+\item \textbf{Consistency Models:} 1-step generation
+\item \textbf{Flow Matching:} Optimal transport
+\item \textbf{Score-Based:} Continuous time
+\item \textbf{Energy Models:} Physics-inspired
+\item \textbf{Neural ODEs:} Continuous depth
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlorange}{\textbf{Efficiency Focus:}}
+\begin{itemize}
+\item Model distillation
+\item Quantization (INT8, INT4)
+\item Sparse models
+\item Flash attention
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{mlgreen}{\textbf{Next 2 Years}}
+
+\small
+\begin{itemize}
+\item 10T parameter models
+\item Real-time video generation
+\item Perfect 3D synthesis
+\item Autonomous agents
+\item Multimodal natives
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlpurple}{\textbf{Research Directions:}}
+\begin{itemize}
+\item Controllable generation
+\item Compositional reasoning
+\item Efficient architectures
+\item Robust evaluation
+\item Alignment techniques
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{The field evolves weekly - continuous learning essential}
+\end{frame}
+
+% Section Summary
+\begin{frame}{Algorithm Summary}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Key Insights}}
+
+\small
+\begin{enumerate}
+\item Diffusion models lead quality
+\item Transformers dominate scale
+\item VAEs offer speed/control
+\item GANs excel at specific domains
+\item Hybrids emerging
+\end{enumerate}
+
+\column{0.48\textwidth}
+\textcolor{mlorange}{\textbf{Next: Implementation}}
+
+\small
+We'll explore:
+\begin{itemize}
+\item API integration
+\item Prompt engineering
+\item Fine-tuning strategies
+\item Production pipelines
+\item Cost optimization
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\begin{center}
+\Large\textcolor{mlpurple}{From Theory to Practice!}
+\end{center}
+\end{frame}

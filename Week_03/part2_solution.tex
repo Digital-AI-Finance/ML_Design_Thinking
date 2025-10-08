@@ -43,7 +43,7 @@
 \end{center}
 \end{columns}
 
-\bottomnote{This ``Bag of Words'' approach dominated NLP from 1960s-2010s - let's see why}
+\bottomnote{Simplicity enables initial progress - crude approximations provide baseline performance that reveals limitation patterns}
 \end{frame}
 
 % Slide 7: Bag of Words - Worked Example
@@ -99,7 +99,7 @@ quality & 1 & customer & 1 \\
 \end{tcolorbox}
 \end{columns}
 
-\bottomnote{Bag of Words: Treats text like a bag of marbles - count colors, ignore arrangement}
+\bottomnote{Discarding structure reduces complexity at cost of precision - positional information carries semantic weight}
 \end{frame}
 
 % Slide 8: TF-IDF Improvement
@@ -149,7 +149,7 @@ $$\text{TF-IDF} = \underbrace{\frac{\text{count in doc}}{\text{total words}}}_{\
 \end{tcolorbox}
 \end{columns}
 
-\bottomnote{TF-IDF: The Google PageRank of words - importance comes from being special, not just frequent}
+\bottomnote{Rarity signals importance - terms appearing selectively carry more discriminative power than ubiquitous vocabulary}
 \end{frame}
 
 % Slide 9: THE SUCCESS - Examples That Work
@@ -191,7 +191,7 @@ This is why Bag of Words dominated for 40 years!
 \end{tcolorbox}
 \end{center}
 
-\bottomnote{Success case: Direct, literal language with clear emotion words - the ``easy'' 20\% of reviews}
+\bottomnote{Explicit signals enable simple methods - literal expression reduces analytical complexity compared to implicit communication}
 \end{frame}
 
 % Slide 10: THE FAILURE PATTERN EMERGES
@@ -234,7 +234,7 @@ This is why Bag of Words dominated for 40 years!
 \end{tcolorbox}
 \end{columns}
 
-\bottomnote{80\% of real reviews have complexity that breaks traditional NLP - this is the crisis point}
+\bottomnote{Majority of natural language exhibits subtle complexity - simple methods handle edge cases well but miss mainstream patterns}
 \end{frame}
 
 % Slide 11: Diagnosis - Why It Fails
@@ -299,5 +299,5 @@ Contextual meaning & 890 bits \\
 \Large\textcolor{mlpurple}{\textbf{We need a fundamentally different approach}}
 \end{center}
 
-\bottomnote{The Bag of Words throws away 82\% of information - like reading a book with random page order}
+\bottomnote{Sequence encodes meaning - word order conveys relationships that frequency-based methods cannot capture}
 \end{frame}

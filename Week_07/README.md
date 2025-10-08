@@ -302,3 +302,46 @@ Ethics is presented as **essential for sustainable innovation**, not as a constr
 *Created: September 2025*
 *Course: Machine Learning for Smarter Innovation*
 *Institution: BSc Design & AI Program*
+---
+
+## Meta-Knowledge Integration
+
+**NEW (2025-10-03)**: Week 7 now includes systematic meta-knowledge slide:
+
+**Fairness Intervention Selection** (part4_synthesis.tex line 770):
+- Decision tree chart: `fairness_intervention_decision.pdf`
+- When to use Pre-processing vs In-processing vs Post-processing
+- Judgment criteria: Fix the data, fix the training, fix predictions
+- Additional considerations: Intervention stage, accuracy trade-off, fairness definition, computational cost, transparency, stakeholders
+- Principle: "Fix bias at the earliest stage possible - pre-processing preferred, post-processing as last resort"
+- Bottom note: "Judgment criteria enable systematic fairness intervention selection - intervene early for minimum accuracy loss and maximum transparency"
+
+This meta-knowledge slide follows Week 9-10 pedagogical framework standard.
+
+---
+
+## Version History
+
+- **2025-10-03**: Pedagogical framework upgrade
+  - Added fairness intervention selection meta-knowledge slide
+  - Created decision tree chart: `fairness_intervention_decision.pdf`
+  - Enhanced README with meta-knowledge documentation
+  - Archived 7 old/duplicate .tex files to archive/previous/
+  - Clean structure: 20251001_1800_main.tex + part1-4 + appendix
+
+- **2025-10-01**: Latest revision
+  - 4-act dramatic structure
+  - Latest main: 20251001_1800_main.tex
+  - Custom Nature Professional color theme
+  - Comprehensive ethical AI coverage
+
+- **2025-09-26**: Original creation
+  - Traditional 5-part modular structure
+  - EU AI Act and GDPR coverage
+  - Bias detection and fairness metrics
+  - Real-world case studies
+
+---
+
+**Status**: Week 7 is pedagogically compliant (meta-knowledge slide ✅, 4-act structure ✅, ethics focus ✅). Responsible AI foundation complete.
+**Last Updated**: 2025-10-03

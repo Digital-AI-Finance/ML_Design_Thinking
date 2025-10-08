@@ -1,4 +1,4 @@
-% Act 2: Linear + Regularization (6 slides)
+% Part 2: Linear + Regularization (6 slides)
 
 \begin{frame}{6. OLS with Worked Example}
 \begin{columns}
@@ -22,12 +22,11 @@ X &= \begin{pmatrix} 1 & 1 \\ 1 & 2 \\ 1 & 3 \end{pmatrix}, y = \begin{pmatrix} 
 \end{column}
 \begin{column}{0.48\textwidth}
 \includegraphics[width=\textwidth]{charts/ols_example.pdf}
-
-\vspace{0.2cm}
-\small
-Perfect fit when relationship is truly linear with minimal noise
 \end{column}
 \end{columns}
+
+\vspace{\fill}
+\small\textcolor{gray}{OLS provides minimum variance unbiased estimators under Gauss-Markov assumptions - closed-form solution enables fast computation for linear models}
 \end{frame}
 
 \begin{frame}{7. Ridge and LASSO Regularization}
@@ -49,15 +48,20 @@ Perfect fit when relationship is truly linear with minimal noise
 \item Automatic feature selection
 \item No closed-form solution
 \end{itemize}
+
+\textbf{Elastic Net}
+\begin{itemize}
+\item Combines L1 + L2: $\alpha||\beta||_1 + (1-\alpha)||\beta||^2$
+\item Balances selection and shrinkage
+\end{itemize}
 \end{column}
 \begin{column}{0.48\textwidth}
 \includegraphics[width=\textwidth]{charts/ridge_lasso_comparison.pdf}
-
-\vspace{0.2cm}
-\small
-Regularization prevents overfitting by constraining coefficient magnitudes
 \end{column}
 \end{columns}
+
+\vspace{\fill}
+\small\textcolor{gray}{Regularization adds penalty terms to loss function - L2 shrinks coefficients, L1 enforces sparsity, Elastic Net combines both strategies}
 \end{frame}
 
 \begin{frame}{8. {\color{mlgreen} SUCCESS: Perfect on Linearly Separable Data}}

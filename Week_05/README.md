@@ -240,3 +240,39 @@ By the end of Week 5, students will be able to:
 *Created: September 2025*
 *Course: Machine Learning for Smarter Innovation*
 *Institution: BSc Design & AI Program*
+---
+
+## Meta-Knowledge Integration
+
+**NEW (2025-10-03)**: Week 5 now includes systematic meta-knowledge slide:
+
+**Topic Modeling Method Selection**:
+- Decision tree chart: `topic_modeling_decision.pdf`
+- When to use LDA vs NMF vs BERTopic
+- Judgment criteria: Interpretable topics, speed & simplicity, best semantics
+- Additional considerations: Dataset size, topic count, languages, real-time needs, coherence, computation
+- Principle: "LDA for interpretable topics, NMF for speed, BERTopic for best coherence and modern semantics"
+- Bottom note: "Judgment criteria enable systematic topic modeling selection - balance interpretability, computational cost, and semantic quality"
+
+This meta-knowledge slide follows Week 9-10 pedagogical framework standard.
+
+---
+
+## Version History
+
+- **2025-10-03**: Pedagogical framework upgrade
+  - Added topic modeling method selection meta-knowledge slide
+  - Created decision tree chart: `topic_modeling_decision.pdf`
+  - Enhanced README with meta-knowledge documentation
+  - Week 5 now has systematic judgment criteria
+
+- **2025-09-25**: Latest revision
+  - 5-part modular structure
+  - Latest main: 20250925_1906_main.tex
+  - Innovation funnel integration
+  - Modern approaches (BERTopic) alongside classics
+
+---
+
+**Status**: Week 5 is pedagogically compliant (meta-knowledge slide ✅). Topic modeling foundation complete.
+**Last Updated**: 2025-10-03

@@ -9,14 +9,14 @@ Week 0d successfully created as a comprehensive 25-slide presentation covering n
 
 ## Structure Delivered
 
-### Act 1: The Challenge (5 slides)
+### Part 1: The Challenge (5 slides)
 1. **Image recognition needs hierarchical features** - Raw pixels → complexity hierarchy
 2. **Single perceptron: Linear only** - Mathematical limitations and geometric interpretation
 3. **XOR problem as concrete example** - The symbol of perceptron limitations
 4. **Universal approximation theorem** - Theoretical foundation with mathematical statement
 5. **Quantify: How many neurons/layers needed?** - Curse of width vs blessing of depth
 
-### Act 2: Shallow MLPs (6 slides)
+### Part 2: Shallow MLPs (6 slides)
 6. **Add hidden layer approach** - MLP architecture and forward pass equations
 7. **Worked example: XOR solved!** - Complete solution with actual weights
 8. **✅ SUCCESS: Nonlinearity achieved** - What was gained and applications unlocked
@@ -24,7 +24,7 @@ Week 0d successfully created as a comprehensive 25-slide presentation covering n
 10. **Diagnosis: Gradient multiplication → exponential decay** - Mathematical analysis
 11. **Gradient flow analysis** - Layer-by-layer gradient magnitude visualization
 
-### Act 3: Modern Architectures (10 slides)
+### Part 3: Modern Architectures (10 slides)
 12. **Human introspection: Vision is hierarchical** - Neuroscience insights (V1, V2/V4, IT cortex)
 13. **Hypothesis: Specialized architectures matching data structure** - Architecture-data alignment
 14. **Zero-jargon: Convolution as "sliding pattern detector"** - Intuitive explanation
@@ -36,7 +36,7 @@ Week 0d successfully created as a comprehensive 25-slide presentation covering n
 20. **Why it works: Inductive biases reduce search space** - Theoretical justification
 21. **Experimental validation: ImageNet accuracy over time** - Real performance data
 
-### Act 4: Synthesis (4 slides)
+### Part 4: Synthesis (4 slides)
 22. **Deep learning evolution timeline** - AlexNet (2012) → GPT-4 (2022)
 23. **Architecture design principles** - Locality, hierarchy, invariance, efficiency
 24. **Modern applications: Computer vision, NLP, multimodal** - Current capabilities
@@ -142,8 +142,8 @@ Week 0d successfully created as a comprehensive 25-slide presentation covering n
 
 ### Structure Validation
 - ✅ Exactly 25 slides as specified
-- ✅ Four-act structure maintained
-- ✅ Slide counts per act correct (5+6+10+4)
+- ✅ Four-part structure maintained
+- ✅ Slide counts per part correct (5+6+10+4)
 - ✅ Logical narrative progression
 - ✅ Clear learning objectives
 
@@ -161,10 +161,10 @@ Week 0d successfully created as a comprehensive 25-slide presentation covering n
 Week_00d_Neural_Networks/
 ├── 20250928_2100_main.tex          # Master file
 ├── 20250928_2100_main.pdf          # Final output (1.45 MB)
-├── act1_challenge.tex              # Act 1 (5 slides)
-├── act2_shallow_mlps.tex           # Act 2 (6 slides)
-├── act3_modern_architectures.tex   # Act 3 (10 slides)
-├── act4_synthesis.tex              # Act 4 (4 slides)
+├── act1_challenge.tex              # Part 1 (5 slides)
+├── act2_shallow_mlps.tex           # Part 2 (6 slides)
+├── act3_modern_architectures.tex   # Part 3 (10 slides)
+├── act4_synthesis.tex              # Part 4 (4 slides)
 ├── charts/                         # 50 chart files
 ├── scripts/                        # Chart generation
 ├── archive/                        # Auxiliary files

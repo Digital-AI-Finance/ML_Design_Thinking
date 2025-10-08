@@ -1,0 +1,141 @@
+% ACT 1: THE CHALLENGE (4 slides)
+% Theme: Production AI needs structure, not just accuracy
+% Pattern: Visual + Detailed dual-slide approach
+% NO UNVERIFIED NUMBERS
+
+\section{Act 1: The Challenge}
+
+% Slide 1: Visual - The Unpredictability Problem
+\begin{frame}[t]{The Unpredictability Problem: Same Input, Different Outputs}
+\vspace{-0.3cm}
+\begin{center}
+\includegraphics[width=0.85\textwidth]{unpredictability_problem.pdf}
+\end{center}
+
+\begin{center}
+\textbf{Key Insight}: AI outputs vary unpredictably - same input produces different formats, structures, and quality
+\end{center}
+
+\bottomnote{Without structure, AI generates inconsistent outputs that break system integrations}
+\end{frame}
+
+% Slide 2: Detail - Why Production Systems Need Structure
+\begin{frame}[t]{Why Production Systems Need Structure}
+\small
+\begin{columns}[T]
+\column{0.49\textwidth}
+\raggedright
+\textbf{What Production Systems Expect}:
+\begin{itemize}
+\item Consistent data formats
+\item Parseable structure (JSON, XML, CSV)
+\item Type-validated fields
+\item Required fields present
+\item Predictable error modes
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Examples}:
+\begin{itemize}
+\item Database: INSERT requires exact schema
+\item API: Endpoints expect specific JSON keys
+\item Dashboard: Charts need consistent data types
+\item Workflow: Next step depends on field presence
+\end{itemize}
+
+\column{0.49\textwidth}
+\raggedright
+\textbf{What Unstructured AI Delivers}:
+\begin{itemize}
+\item Variable text formats
+\item Inconsistent field names
+\item Mixed data types
+\item Optional fields randomly omitted
+\item Unpredictable failures
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Real Consequences}:
+\begin{itemize}
+\item Database rejections (schema mismatch)
+\item API failures (missing required fields)
+\item Broken automations (can't parse response)
+\item Manual intervention needed
+\end{itemize}
+\end{columns}
+
+\bottomnote{Production systems are contracts - they expect specific structures, not creative variations}
+\end{frame}
+
+% Slide 3: Visual - The Integration Challenge
+\begin{frame}[t]{The Integration Challenge: When Systems Collide}
+\vspace{-0.3cm}
+\begin{center}
+\includegraphics[width=0.85\textwidth]{integration_challenge.pdf}
+\end{center}
+
+\begin{center}
+\textbf{Key Insight}: AI generates text, but systems need structured data - the mismatch breaks integrations
+\end{center}
+
+\bottomnote{Every unparseable response requires expensive manual intervention or system failure}
+\end{frame}
+
+% Slide 4: Detail - The Current State
+\begin{frame}[t]{The Current State: Where AI Works and Where It Breaks}
+\small
+\begin{columns}[T]
+\column{0.49\textwidth}
+\raggedright
+\textcolor{mlgreen}{\textbf{Where AI Excels}}:
+
+\vspace{0.2cm}
+\textbf{Flexible, Creative Tasks}:
+\begin{itemize}
+\item Writing assistance
+\item Brainstorming ideas
+\item Explaining concepts
+\item Summarizing content
+\item Translation
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Why It Works}:
+\begin{itemize}
+\item Output variability is acceptable
+\item Human review is expected
+\item Creativity is valued
+\item No strict format requirements
+\end{itemize}
+
+\column{0.49\textwidth}
+\raggedright
+\textcolor{mlred}{\textbf{Where AI Breaks}}:
+
+\vspace{0.2cm}
+\textbf{Structured Data Extraction}:
+\begin{itemize}
+\item Form filling from documents
+\item Invoice data extraction
+\item Product catalog normalization
+\item Customer data parsing
+\item System-to-system integration
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Why It Fails}:
+\begin{itemize}
+\item Output must be parseable
+\item Fields must match schema
+\item Types must be validated
+\item No human in every loop
+\end{itemize}
+\end{columns}
+
+\vspace{0.5cm}
+\begin{center}
+\textcolor{mlpurple}{\textbf{The Gap:}} Prototypes work in demos, fail in production when integrated with real systems
+\end{center}
+
+\bottomnote{The challenge: Transform creative, flexible AI into reliable, structured data pipelines}
+\end{frame}

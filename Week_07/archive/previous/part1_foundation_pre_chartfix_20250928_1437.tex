@@ -1,0 +1,491 @@
+% Part 1: Foundation - Ethics in ML/AI
+
+\section{Foundation: Why Ethics Matters in ML}
+
+% Slide 1: The Scale of the Problem
+\begin{frame}{The Growing Ethics Crisis in AI}
+\begin{columns}[T]
+\column{0.55\textwidth}
+\includegraphics[width=\textwidth]{charts/ethics_timeline.pdf}
+
+\column{0.43\textwidth}
+\textcolor{ForestGreen}{\Large The Numbers}\\[0.5cm]
+
+\textcolor{Amber}{\textbf{2024 Statistics:}}
+\begin{itemize}
+\item 233 AI incidents reported
+\item 56\% increase from 2023
+\item \$10B+ in settlements
+\item 47 countries affected
+\end{itemize}
+
+\textcolor{Teal}{\textbf{Impact Areas:}}
+\begin{itemize}
+\item Healthcare: 34\%
+\item Finance: 28\%
+\item Law enforcement: 22\%
+\item Employment: 16\%
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{Slate}{Source: AI Incident Database, 2024}
+\end{frame}
+
+% Slide 2: Real-World Failures
+\begin{frame}{When AI Goes Wrong: 2024 Incidents}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{ForestGreen}{\textbf{Facial Recognition Bias}}
+
+\textcolor{Amber}{Detroit Settlement (2024)}
+\begin{itemize}
+\item Black man wrongfully arrested
+\item False facial recognition match
+\item Police now banned from arrests based solely on FR
+\end{itemize}
+
+\textcolor{Teal}{UK Facewatch Case (May 2024)}
+\begin{itemize}
+\item Woman wrongly ID'd as shoplifter
+\item Banned from all stores in network
+\item System failed on non-white individual
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{ForestGreen}{\textbf{Employment Discrimination}}
+
+\textcolor{DarkTeal}{Uber Eats (2024)}
+\begin{itemize}
+\item Driver dismissed by FR system
+\item Technology failed on darker skin
+\item No human review process
+\end{itemize}
+
+\textcolor{Amber}{Resume Screening}
+\begin{itemize}
+\item AI tools used for hiring decisions
+\item Women \& minorities disadvantaged
+\item Most managers untrained in fair use
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{Slate}{These aren't edge cases -- they're systemic failures}
+\end{frame}
+
+% Slide 3: Why Ethics Matters
+\begin{frame}{Three Reasons Ethics is Critical}
+\begin{columns}[T]
+\column{0.31\textwidth}
+\textcolor{ForestGreen}{\textbf{1. Human Impact}}
+
+Real people suffer:
+\begin{itemize}
+\item Lost opportunities
+\item Legal consequences
+\item Psychological harm
+\item Social stigma
+\item Financial loss
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{Amber}{\textbf{Scale:}}\\
+Millions affected daily by automated decisions
+
+\column{0.31\textwidth}
+\textcolor{Teal}{\textbf{2. Legal Risk}}
+
+Regulatory landscape:
+\begin{itemize}
+\item EU AI Act (2024)
+\item GDPR fines: up to 4\%
+\item US state laws
+\item Class action lawsuits
+\item Criminal liability
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{Amber}{\textbf{Cost:}}\\
+\$10B+ in settlements in 2024
+
+\column{0.31\textwidth}
+\textcolor{DarkTeal}{\textbf{3. Business Value}}
+
+Ethical AI drives:
+\begin{itemize}
+\item Customer trust
+\item Brand reputation
+\item Market access
+\item Talent attraction
+\item Innovation
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{Amber}{\textbf{ROI:}}\\
+73\% consumers prefer ethical brands
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{Slate}{Ethics is not a constraint -- it's a competitive advantage}
+\end{frame}
+
+% Slide 4: The ML Pipeline - Where Bias Enters
+\begin{frame}{Understanding Bias: The ML Pipeline}
+\begin{columns}[T]
+\column{0.55\textwidth}
+\includegraphics[width=\textwidth]{charts/bias_sources.pdf}
+
+\column{0.43\textwidth}
+\textcolor{ForestGreen}{\Large Bias Entry Points}\\[0.5cm]
+
+\textcolor{Amber}{\textbf{1. Data Collection}}
+\begin{itemize}
+\item Historical discrimination
+\item Sampling bias
+\item Missing populations
+\end{itemize}
+
+\textcolor{Teal}{\textbf{2. Feature Engineering}}
+\begin{itemize}
+\item Proxy variables
+\item Correlation artifacts
+\item Human assumptions
+\end{itemize}
+
+\textcolor{DarkTeal}{\textbf{3. Model Training}}
+\begin{itemize}
+\item Optimization bias
+\item Spurious correlations
+\item Overfitting to majority
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{Slate}{Bias can enter at any stage -- vigilance is required throughout}
+\end{frame}
+
+% Slide 5: Ethical Frameworks
+\begin{frame}{Ethical Frameworks for AI}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{ForestGreen}{\textbf{Consequentialist}}
+
+Focus on outcomes:
+\begin{itemize}
+\item Maximize benefit
+\item Minimize harm
+\item Utilitarian calculus
+\item Risk-benefit analysis
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{Amber}{\textbf{Example:}}\\
+Deploy system if overall benefit outweighs harm to affected groups
+
+\vspace{0.3cm}
+\textcolor{Teal}{\textbf{Deontological}}
+
+Focus on duties:
+\begin{itemize}
+\item Respect autonomy
+\item Honor rights
+\item Follow rules
+\item Categorical imperatives
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{DarkTeal}{\textbf{Virtue Ethics}}
+
+Focus on character:
+\begin{itemize}
+\item Cultivate wisdom
+\item Practice fairness
+\item Show compassion
+\item Demonstrate integrity
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{Amber}{\textbf{Example:}}\\
+Ask ``What would a fair person do?''
+
+\vspace{0.3cm}
+\textcolor{ForestGreen}{\textbf{Care Ethics}}
+
+Focus on relationships:
+\begin{itemize}
+\item Understand context
+\item Value relationships
+\item Address vulnerability
+\item Emphasize empathy
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{Slate}{No single framework is perfect -- combine perspectives for robust ethics}
+\end{frame}
+
+% Slide 6: Principles for Responsible AI
+\begin{frame}{Core Principles for Responsible AI}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{ForestGreen}{\textbf{Technical Principles}}
+
+\textcolor{Amber}{Fairness}
+\begin{itemize}
+\item Equal treatment across groups
+\item Measure disparate impact
+\item Mitigate bias systematically
+\end{itemize}
+
+\textcolor{Teal}{Robustness}
+\begin{itemize}
+\item Reliable performance
+\item Graceful degradation
+\item Security against attacks
+\end{itemize}
+
+\textcolor{DarkTeal}{Transparency}
+\begin{itemize}
+\item Explainable decisions
+\item Documented processes
+\item Auditable systems
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{ForestGreen}{\textbf{Social Principles}}
+
+\textcolor{Amber}{Accountability}
+\begin{itemize}
+\item Clear responsibility
+\item Redress mechanisms
+\item Governance structures
+\end{itemize}
+
+\textcolor{Teal}{Privacy}
+\begin{itemize}
+\item Data minimization
+\item User control
+\item Confidentiality
+\end{itemize}
+
+\textcolor{DarkTeal}{Beneficence}
+\begin{itemize}
+\item Human wellbeing first
+\item Social benefit
+\item Environmental sustainability
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{Slate}{These principles form the foundation of responsible AI development}
+\end{frame}
+
+% Slide 7: Stakeholder Analysis
+\begin{frame}{Identifying Stakeholders}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{ForestGreen}{\textbf{Direct Stakeholders}}
+
+\textcolor{Amber}{Users}
+\begin{itemize}
+\item Those who interact with system
+\item Experience direct consequences
+\item May lack agency or choice
+\end{itemize}
+
+\textcolor{Teal}{Developers}
+\begin{itemize}
+\item Design and build system
+\item Make technical choices
+\item Bear professional responsibility
+\end{itemize}
+
+\textcolor{DarkTeal}{Deployers}
+\begin{itemize}
+\item Organizations using AI
+\item Control deployment context
+\item Manage operational decisions
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{ForestGreen}{\textbf{Indirect Stakeholders}}
+
+\textcolor{Amber}{Affected Communities}
+\begin{itemize}
+\item Impacted without direct use
+\item May face systemic effects
+\item Often marginalized groups
+\end{itemize}
+
+\textcolor{Teal}{Society}
+\begin{itemize}
+\item Broader social impacts
+\item Norm shifts
+\item Democratic implications
+\end{itemize}
+
+\textcolor{DarkTeal}{Environment}
+\begin{itemize}
+\item Carbon footprint
+\item Resource consumption
+\item E-waste generation
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{Slate}{Map all stakeholders before deployment -- especially those without voice}
+\end{frame}
+
+% Slide 8: Power Asymmetries
+\begin{frame}{Recognizing Power Imbalances}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{ForestGreen}{\textbf{Who Has Power?}}
+
+\textcolor{Amber}{Tech Companies}
+\begin{itemize}
+\item Control system design
+\item Set defaults \& constraints
+\item Influence policy
+\item Access to resources
+\end{itemize}
+
+\textcolor{Teal}{Governments}
+\begin{itemize}
+\item Regulatory authority
+\item Procurement decisions
+\item Surveillance capabilities
+\item Enforcement power
+\end{itemize}
+
+\textcolor{DarkTeal}{Privileged Groups}
+\begin{itemize}
+\item Represented in data
+\item Cultural norms embedded
+\item Economic resources
+\item Political influence
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{ForestGreen}{\textbf{Who Lacks Power?}}
+
+\textcolor{Amber}{End Users}
+\begin{itemize}
+\item Limited choice
+\item Information asymmetry
+\item No opt-out options
+\item Captive audiences
+\end{itemize}
+
+\textcolor{Teal}{Marginalized Groups}
+\begin{itemize}
+\item Underrepresented in data
+\item Higher error rates
+\item Less recourse
+\item Compounded discrimination
+\end{itemize}
+
+\textcolor{DarkTeal}{Future Generations}
+\begin{itemize}
+\item No voice in decisions
+\item Inherit consequences
+\item Path dependencies
+\item Environmental debt
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{Slate}{Responsible AI requires actively empowering the powerless}
+\end{frame}
+
+% Slide 9: The Cost of Inaction
+\begin{frame}{What Happens Without Ethics}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{ForestGreen}{\textbf{Individual Harms}}
+
+\textcolor{Amber}{Documented Cases:}
+\begin{itemize}
+\item Wrongful arrests: 12+ cases
+\item Denied healthcare: 1000s
+\item Job discrimination: widespread
+\item Credit denial: systemic
+\item Deportation errors: 200+
+\end{itemize}
+
+\vspace{0.3cm}
+Each case represents:
+\begin{itemize}
+\item Personal trauma
+\item Career damage
+\item Family disruption
+\item Loss of trust
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{ForestGreen}{\textbf{Systemic Consequences}}
+
+\textcolor{Teal}{Societal Level:}
+\begin{itemize}
+\item Amplified inequality
+\item Eroded civil rights
+\item Reduced opportunity
+\item Surveillance normalization
+\item Democratic backsliding
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{DarkTeal}{Industry Level:}
+\begin{itemize}
+\item Regulatory backlash
+\item Market restrictions
+\item Talent exodus
+\item Innovation chilling
+\item Public distrust
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{Slate}{The cost of fixing problems later far exceeds prevention}
+\end{frame}
+
+% Slide 10: Foundation Summary
+\begin{frame}{Foundation Summary: Ethics First}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{ForestGreen}{\textbf{Key Takeaways}}
+
+\begin{enumerate}
+\item Ethics failures are increasing (56\% YoY)
+\item Real people face real harms
+\item Multiple ethical frameworks exist
+\item All stakeholders matter
+\item Power imbalances are structural
+\end{enumerate}
+
+\vspace{0.3cm}
+\textcolor{Amber}{\textbf{Critical Insight:}}\\
+Ethics isn't about constraining innovation -- it's about ensuring sustainable, legitimate, trustworthy progress.
+
+\column{0.48\textwidth}
+\textcolor{Teal}{\textbf{Next: Algorithms}}
+
+Moving from ``why'' to ``how'':
+\begin{itemize}
+\item Fairness metrics
+\item Bias detection
+\item Mitigation techniques
+\item Mathematical foundations
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{DarkTeal}{\textbf{Mindset Shift:}}\\
+From ``Can we build it?'' to ``Should we build it, and how do we build it responsibly?''
+\end{columns}
+
+\vspace{\fill}
+\begin{center}
+\Large\textcolor{ForestGreen}{Ethics is Engineering}
+\end{center}
+\end{frame}

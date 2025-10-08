@@ -55,6 +55,8 @@ You have customer data and want to find 3 natural groups:
 \item \highlight{Domain knowledge:} Often you know K
 \end{itemize}
 }
+
+\bottomnote{Iterative centroid refinement minimizes within-cluster variance - algorithm converges to local optimum dependent on initialization}
 \end{frame}
 
 % Hierarchical Clustering
@@ -101,6 +103,8 @@ You have customer data and want to find 3 natural groups:
 \item Difficult to handle large datasets
 \end{itemize}
 }
+
+\bottomnote{Hierarchical methods build complete cluster dendrograms - agglomerative merging reveals nested structure across all granularity levels}
 \end{frame}
 
 % DBSCAN
@@ -153,6 +157,8 @@ You have customer data and want to find 3 natural groups:
 \item Social network analysis
 \end{itemize}
 }
+
+\bottomnote{Density-based clustering identifies arbitrary-shaped groups - core point connectivity enables nonconvex cluster discovery with automatic noise detection}
 \end{frame}
 
 % Principal Component Analysis
@@ -202,6 +208,8 @@ where $W$ contains the first $k$ principal components.
 \item Compression
 \end{itemize}
 }
+
+\bottomnote{Principal component analysis projects data onto maximum variance directions - eigendecomposition provides optimal linear dimensionality reduction}
 \end{frame}
 
 % Autoencoders
@@ -250,6 +258,8 @@ where $W$ contains the first $k$ principal components.
 \item Feature learning
 \end{itemize}
 }
+
+\bottomnote{Neural autoencoders learn nonlinear compressions - encoder-decoder architecture discovers hierarchical representations beyond linear PCA}
 \end{frame}
 
 % t-SNE and UMAP
@@ -296,6 +306,8 @@ where $W$ contains the first $k$ principal components.
 \item \textbf{PCA:} Linear structure, fast
 \end{itemize}
 }
+
+\bottomnote{Nonlinear dimensionality reduction preserves local structure - t-SNE and UMAP optimize neighborhood preservation for visualization}
 \end{frame}
 
 % Clustering Evaluation
@@ -339,6 +351,8 @@ where $a(i)$ = avg distance within cluster, $b(i)$ = avg distance to nearest clu
 
 \keypoint{Note:} External metrics require ground truth labels
 }
+
+\bottomnote{Unsupervised evaluation lacks ground truth - internal metrics assess cluster cohesion and separation without external validation}
 \end{frame}
 
 % Applications Summary
@@ -431,4 +445,6 @@ where $a(i)$ = avg distance within cluster, $b(i)$ = avg distance to nearest clu
 
 \vspace{1em}
 \textcolor{darkgray}{\small Unsupervised learning reveals hidden patterns and structures in data without labeled examples}
+
+\bottomnote{Unsupervised methods discover latent structure - clustering, dimensionality reduction, and anomaly detection operate without supervisory signal}
 \end{frame}

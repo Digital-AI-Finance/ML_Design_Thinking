@@ -6,7 +6,7 @@
 \includegraphics[width=0.9\textwidth]{charts/json_schema_example.pdf}
 
 \vspace{\fill}
-\footnotesize\textcolor{mlgray}{Schema defines structure, types, constraints, and requirements}
+\footnotesize\textcolor{mlgray}{Schemas enforce structural contracts - type specifications and constraint declarations enable validation and error detection}
 \end{frame}
 
 % Slide 2: Prompt Engineering Patterns
@@ -14,7 +14,7 @@
 \includegraphics[width=0.85\textwidth]{charts/prompt_patterns_comparison.pdf}
 
 \vspace{\fill}
-\footnotesize\textcolor{mlgray}{More structured prompts yield more consistent outputs}
+\footnotesize\textcolor{mlgray}{Prompt structure influences output consistency - explicit instructions reduce variance across generations}
 \end{frame}
 
 % Slide 3: Prompt Pattern Examples
@@ -52,7 +52,7 @@
 \end{center}
 
 \vspace{\fill}
-\footnotesize\textcolor{mlgray}{Pattern selection depends on complexity and requirements}
+\footnotesize\textcolor{mlgray}{Pattern complexity matches task difficulty - sophisticated prompting techniques address proportionate challenges}
 \end{frame}
 
 % Slide 4: Temperature Impact
@@ -60,7 +60,7 @@
 \includegraphics[width=0.85\textwidth]{charts/temperature_reliability.pdf}
 
 \vspace{\fill}
-\footnotesize\textcolor{mlgray}{For structured outputs: Use temperature 0-0.3 for maximum reliability}
+\footnotesize\textcolor{mlgray}{Temperature controls stochastic variation - lower values increase determinism at the cost of creative diversity}
 \end{frame}
 
 % Slide 5: Function Calling Mechanics
@@ -68,7 +68,7 @@
 \includegraphics[width=0.85\textwidth]{charts/function_calling_flow.pdf}
 
 \vspace{\fill}
-\footnotesize\textcolor{mlgray}{Model decides which function to call and generates structured arguments}
+\footnotesize\textcolor{mlgray}{Function calling enables autonomous tool selection - models determine appropriate actions and generate conformant parameters}
 \end{frame}
 
 % Slide 6: Function Calling vs Tool Use
@@ -121,7 +121,7 @@
 \end{center}
 
 \vspace{\fill}
-\footnotesize\textcolor{mlgray}{Conceptually similar, API differences only}
+\footnotesize\textcolor{mlgray}{Provider terminology varies despite conceptual equivalence - implementation details differ while core mechanisms align}
 \end{frame}
 
 % Slide 7: Chain-of-Thought for Structured Output
@@ -161,7 +161,7 @@ Benefits:
 \end{columns}
 
 \vspace{\fill}
-\footnotesize\textcolor{mlgray}{CoT improves accuracy by 5-15\% for complex extractions}
+\footnotesize\textcolor{mlgray}{Intermediate reasoning improves complex task performance - explicit thought chains enhance output quality for multi-step problems}
 \end{frame}
 
 % Slide 8: Validation Strategies
@@ -169,7 +169,7 @@ Benefits:
 \includegraphics[width=0.85\textwidth]{charts/validation_pipeline.pdf}
 
 \vspace{\fill}
-\footnotesize\textcolor{mlgray}{Layer validations to catch different types of errors}
+\footnotesize\textcolor{mlgray}{Layered validation catches diverse error modes - multiple verification stages detect different failure types}
 \end{frame}
 
 % Slide 9: Validation Layers Explained
@@ -226,7 +226,7 @@ $<$ 70\% confidence\\
 \end{columns}
 
 \vspace{\fill}
-\footnotesize\textcolor{mlgray}{Each layer catches different failure modes}
+\footnotesize\textcolor{mlgray}{Validation layers target distinct failure categories - syntactic, semantic, and business constraints require separate verification}
 \end{frame}
 
 % Slide 10: Retry Logic with Exponential Backoff
@@ -234,7 +234,7 @@ $<$ 70\% confidence\\
 \includegraphics[width=0.85\textwidth]{charts/error_handling_strategies.pdf}
 
 \vspace{\fill}
-\footnotesize\textcolor{mlgray}{Graceful degradation: Retry → Simpler model → Rule-based → Human review}
+\footnotesize\textcolor{mlgray}{Graceful degradation preserves system function - fallback hierarchies maintain service quality through progressive simplification}
 \end{frame}
 
 % Slide 11: Technique Comparison Summary
@@ -264,5 +264,5 @@ Multi-Validation & 98-99\% & Medium & Critical data \\
 \textcolor{mlgreen}{\textbf{Result:}} 98\%+ reliability at reasonable speed
 
 \vspace{\fill}
-\footnotesize\textcolor{mlgray}{Combine techniques for production-grade reliability}
+\footnotesize\textcolor{mlgray}{Technique composition achieves production reliability - combining complementary methods addresses multiple failure modes simultaneously}
 \end{frame}

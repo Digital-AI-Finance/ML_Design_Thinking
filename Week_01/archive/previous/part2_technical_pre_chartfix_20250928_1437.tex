@@ -1,0 +1,1229 @@
+% PART 2: TECHNICAL CORE (10 slides)
+
+% Section Divider: Part 2
+\begin{frame}
+\begin{center}
+\vspace{2cm}
+{\Huge\textbf{PART 2}}
+
+\vspace{0.5cm}
+{\LARGE Technical Core}
+
+\vspace{1cm}
+{\large Machine Learning Algorithms \& Implementation}
+\end{center}
+\end{frame}
+
+% THE CLUSTERING PROBLEM
+\begin{frame}
+\frametitle{\Large The Innovation Classification Problem}
+\framesubtitle{5000 Ideas - How Do They Connect?}
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\begin{tcolorbox}[colback=mlred!10, colframe=mlred!50, title=The Pain]
+\textbf{Current Reality:}
+\begin{itemize}
+\item One-size-fits-all solutions
+\item Generic innovation categories
+\item Missed opportunities
+\item Unhappy edge cases
+\end{itemize}
+\vspace{0.5em}
+\textbf{The Cost:}
+\begin{itemize}
+\item Most innovations get misclassified
+\item Features with low adoption rates
+\item Inefficient resource allocation
+\end{itemize}
+\end{tcolorbox}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\begin{tcolorbox}[colback=mlgreen!10, colframe=mlgreen!50, title=The Question]
+\Large\textbf{What if we could...}
+\normalsize
+\begin{itemize}
+\item Find natural innovation clusters?
+\item Discover innovation patterns?
+\item Innovate at scale?
+\item Identify opportunity gaps?
+\end{itemize}
+\vspace{0.5em}
+\Large\textcolor{mlpurple}{\textbf{We can!}}\\
+\normalsize\textbf{Solution: Clustering}
+\end{tcolorbox}
+\end{column}
+\end{columns}
+\end{frame}
+
+% NEW: Current Reality Visualization
+\begin{frame}
+\frametitle{\Large Current Reality: The Problem}
+\framesubtitle{Why One-Size-Fits-All Doesn't Work}
+
+\begin{columns}[T]
+\begin{column}{0.75\textwidth}
+\begin{center}
+\includegraphics[width=\textwidth]{charts/current_reality_visual.pdf}
+\end{center}
+\end{column}
+
+
+\end{columns}
+
+\vspace{0.3em}
+\begin{center}
+\large\textcolor{mlpurple}{\textbf{ML clustering reveals the hidden structure in innovation chaos}}
+\end{center}
+\end{frame}
+
+
+% NEW: Discovery Exercise - Innovation Archetype Matching
+\begin{frame}
+\frametitle{\Large Discovery Exercise: Which Archetype?}
+\framesubtitle{Match Each Innovation to Its Type}
+
+\begin{columns}[T]
+\begin{column}{0.55\textwidth}
+\textbf{\large Innovation Examples:}
+\vspace{0.3em}
+
+\begin{enumerate}
+\item \textbf{Uber} - Connecting drivers with riders via app
+\item \textbf{Tesla Model 3} - Affordable electric vehicle
+\item \textbf{Amazon Prime} - Fast delivery subscription
+\item \textbf{iPhone Camera} - Annual improvements
+\item \textbf{ChatGPT} - AI conversation interface
+\end{enumerate}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mlgreen!10, colframe=mlgreen!50]
+\textbf{Think:} What makes each one similar or different?
+\end{tcolorbox}
+\end{column}
+
+\begin{column}{0.43\textwidth}
+\textbf{\large Match to Type:}
+\vspace{0.3em}
+
+\begin{tcolorbox}[colback=mlblue!10, colframe=mlblue!50]
+\small
+\textbf{A.} Disruptive Innovation\\
+\textbf{B.} Incremental Innovation\\
+\textbf{C.} Platform Innovation\\
+\textbf{D.} Service Innovation\\
+\textbf{E.} Business Model Innovation
+\end{tcolorbox}
+
+\vspace{0.3em}
+\textcolor{mlpurple}{\textbf{Answers:}}\\
+\small
+\textit{(Discuss with neighbor first)}\\
+\vspace{0.2em}
+\tiny
+1→C (Platform), 2→A (Disruptive),\\
+3→E (Business Model), 4→B (Incremental),\\
+5→D (Service)
+\end{column}
+\end{columns}
+
+\vspace{0.3em}
+\begin{center}
+\large\textcolor{mlpurple}{\textbf{ML can do this matching at scale - for thousands of innovations}}
+\end{center}
+\end{frame}
+
+% Slide 9: What is Clustering?
+\begin{frame}
+\frametitle{\Large What is Clustering?}
+\framesubtitle{Like Organizing a Messy Room - Finding Things That Belong Together}
+
+\begin{center}
+\includegraphics[width=0.75\textwidth]{charts/chaos_to_clarity.pdf}
+\end{center}
+
+\vspace{0.5em}
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\Large\textbf{Clustering Finds:}
+\normalsize
+\begin{itemize}
+\item Natural groupings
+\item Similar approaches  
+\item Hidden patterns
+\item Innovation relationships
+\end{itemize}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\begin{tcolorbox}[colback=mlgreen!10, colframe=mlgreen!50]
+\textbf{Key Insight:}\\
+Things that look similar often belong in the same group\\
+\textit{(Just like organizing books by topic on a shelf)}
+\end{tcolorbox}
+\end{column}
+\end{columns}
+\end{frame}
+
+% NEW: Discovery Slide 1 - Pattern Recognition
+\begin{frame}
+\frametitle{\Large Discovery: How Many Groups Do You See?}
+\framesubtitle{Visual Pattern Recognition Exercise}
+
+\vspace{-0.2em}
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\begin{center}
+\textbf{Look at this innovation data:}\\
+\vspace{0.3em}
+\includegraphics[width=\textwidth]{charts/discovery_patterns.pdf}
+\end{center}
+
+\begin{tcolorbox}[colback=mlblue!10, colframe=mlblue!50]
+\textbf{Questions:}
+\begin{itemize}
+\tiny
+\item How many distinct groups?
+\item What defines each group?
+\item Are there outliers?
+\end{itemize}
+\end{tcolorbox}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\textbf{Your Observations:}
+\vspace{0.5em}
+
+\begin{enumerate}
+\item Groups you see: \_\_\_\_\_
+\item Main pattern: \_\_\_\_\_\_\_
+\item Outliers: \_\_\_\_\_\_\_\_\_\_
+\end{enumerate}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mlgreen!10, colframe=mlgreen!50]
+\textbf{Key Insight:}\\
+\small
+Humans are good at 2D patterns.\\
+But innovation has 100+ dimensions!\\
+That's where ML helps.
+\end{tcolorbox}
+\end{column}
+\end{columns}
+
+\vspace{0.3em}
+\begin{center}
+\large\textcolor{mlpurple}{\textbf{ML can see patterns in dimensions we can't visualize}}
+\end{center}
+\end{frame}
+
+% NEW: Discovery Slide 2 - Feature Exploration
+\begin{frame}
+\frametitle{\Large Discovery: What Makes Things Similar?}
+\framesubtitle{Understanding Features That Matter}
+
+\begin{columns}[T]
+\begin{column}{0.55\textwidth}
+\textbf{For Innovations, What Features Matter?}
+\vspace{0.3em}
+
+\begin{tabular}{|l|c|c|c|}
+\hline
+\textbf{Innovation} & \textbf{Cost} & \textbf{Impact} & \textbf{Time} \\
+\hline
+Smart Thermostat & Low & Medium & Quick \\
+Electric Car & High & High & Long \\
+Mobile App & Low & Low & Quick \\
+Solar Panels & High & High & Long \\
+AI Chatbot & Medium & Medium & Medium \\
+\hline
+\end{tabular}
+
+\vspace{0.5em}
+\textbf{Which innovations group together?}
+\begin{itemize}
+\item By cost? (Low vs High)
+\item By impact? (Low vs High)
+\item By timeline? (Quick vs Long)
+\item All combined?
+\end{itemize}
+\end{column}
+
+\begin{column}{0.43\textwidth}
+\begin{tcolorbox}[colback=mlblue!10, colframe=mlblue!50, title=Discovery Exercise]
+\small
+\textbf{Group these by similarity:}
+\begin{enumerate}
+\small
+\item Smart Thermostat + ?
+\item Electric Car + ?
+\item Mobile App + ?
+\end{enumerate}
+\end{tcolorbox}
+
+\vspace{0.3em}
+\begin{tcolorbox}[colback=mlgreen!10, colframe=mlgreen!50]
+\textbf{The Challenge:}\\
+\small
+Real innovations have 100+ features!\\
+- Market size
+- Technology readiness
+- Regulatory requirements
+- User demographics
+- Competition level
+- And many more...
+\end{tcolorbox}
+\end{column}
+\end{columns}
+\end{frame}
+
+% NEW: Discovery Slide 3 - Manual Clustering Exercise
+\begin{frame}
+\frametitle{\Large Discovery: Manual Clustering Exercise}
+\framesubtitle{Try Clustering Yourself - Then See How ML Does It}
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\textbf{\large Your Task:}\\
+\small
+Group these 12 innovations into 3 clusters:
+\vspace{0.3em}
+
+\begin{enumerate}
+\scriptsize
+\item Blockchain payment system
+\item Voice-activated assistant
+\item Renewable energy storage
+\item Social media platform
+\item Autonomous vehicle
+\item Health tracking wearable
+\item Cloud computing service
+\item 3D printing technology
+\item Virtual reality training
+\item Drone delivery system
+\item Gene editing tool
+\item Quantum computing
+\end{enumerate}
+
+\vspace{0.3em}
+\small
+\textbf{Your Groups:}\\
+Group 1: \_\_\_\_\_\_\_\_\_\\
+Group 2: \_\_\_\_\_\_\_\_\_\\
+Group 3: \_\_\_\_\_\_\_\_\_
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\textbf{\large Think About:}
+\vspace{0.3em}
+
+\begin{itemize}
+\item What features did you consider?
+\item How did you decide on groups?
+\item Was it difficult to classify some items?
+\item Did any items fit multiple groups?
+\end{itemize}
+
+\vspace{1em}
+\textcolor{mlpurple}{\textbf{Let's see how ML approaches this...}}
+\end{column}
+\end{columns}
+\end{frame}
+
+% NEW: ML Answer on separate slide
+\begin{frame}
+\frametitle{\Large Discovery: How ML Clusters These Innovations}
+\framesubtitle{Based on 50+ Hidden Features}
+
+\begin{columns}[T]
+\begin{column}{0.3\textwidth}
+\begin{tcolorbox}[colback=mlblue!10, colframe=mlblue!50, title=Digital Platforms]
+\scriptsize
+4. Social media platform\\
+7. Cloud computing service\\
+2. Voice-activated assistant\\
+1. Blockchain payment system
+\end{tcolorbox}
+\end{column}
+
+\begin{column}{0.3\textwidth}
+\begin{tcolorbox}[colback=mlgreen!10, colframe=mlgreen!50, title=Physical Innovation]
+\scriptsize
+5. Autonomous vehicle\\
+10. Drone delivery system\\
+3. Renewable energy storage\\
+8. 3D printing technology
+\end{tcolorbox}
+\end{column}
+
+\begin{column}{0.3\textwidth}
+\begin{tcolorbox}[colback=mlorange!10, colframe=mlorange!50, title=Frontier Tech]
+\scriptsize
+11. Gene editing tool\\
+12. Quantum computing\\
+9. Virtual reality training\\
+6. Health tracking wearable
+\end{tcolorbox}
+\end{column}
+\end{columns}
+
+\vspace{0.5em}
+\begin{center}
+\textbf{ML considers features you might not think of:}
+\end{center}
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\small
+\begin{itemize}
+\item Development complexity
+\item Market readiness level
+\item Infrastructure requirements
+\item Regulatory complexity
+\end{itemize}
+\end{column}
+\begin{column}{0.48\textwidth}
+\small
+\begin{itemize}
+\item User behavior patterns
+\item Technology stack similarity
+\item Investment requirements
+\item Innovation lifecycle stage
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Slide 10: K-Means Algorithm Part 1
+\begin{frame}
+\frametitle{\Large K-Means: The Basic Clustering Method (Part 1)}
+\framesubtitle{Initial Setup - Like Choosing City Centers}
+
+\begin{center}
+\includegraphics[width=0.70\textwidth]{charts/kmeans_animation.pdf}
+\end{center}
+
+\vspace{0.5em}
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\small
+\textbf{Step 1: Choose K}
+\begin{itemize}
+\small
+\item Decide number of clusters
+\item Based on domain knowledge
+\item Or use elbow method
+\end{itemize}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\small
+\textbf{Step 2: Initialize Centroids}
+\begin{itemize}
+\small
+\item Place K random points
+\item These are initial cluster centers
+\item Random but spread out
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Slide 11: K-Means Algorithm Part 2
+\begin{frame}
+\frametitle{\Large K-Means: The Basic Clustering Method (Part 2)}
+\framesubtitle{Iteration Process - Finding Natural Groups}
+
+\begin{center}
+\includegraphics[width=0.70\textwidth]{charts/kmeans_animation.pdf}
+\end{center}
+
+\vspace{0.3em}
+\begin{columns}[T]
+\begin{column}{0.32\textwidth}
+\small
+\textbf{Step 3: Assign}
+\begin{itemize}
+\small
+\item Distance to centroids
+\item Assign to nearest
+\item Forms clusters
+\end{itemize}
+\end{column}
+
+\begin{column}{0.32\textwidth}
+\small
+\textbf{Step 4: Update}
+\begin{itemize}
+\small
+\item Calculate mean
+\item Move centroids
+\item Better positions
+\end{itemize}
+\end{column}
+
+\begin{column}{0.32\textwidth}
+\small
+\textbf{Step 5: Converge}
+\begin{itemize}
+\small
+\item Repeat 3-4
+\item Stop when stable
+\item 5-10 iterations
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+% PROBLEM: HOW MANY GROUPS?
+\begin{frame}
+\frametitle{\Large The Goldilocks Problem}
+\framesubtitle{Too Few vs. Too Many Groups}
+
+\begin{columns}[T]
+\begin{column}{0.32\textwidth}
+\begin{tcolorbox}[colback=mlred!10, colframe=mlred!50, title={Too Few (K=2)}]
+\begin{center}
+\textbf{Oversimplification}
+\end{center}
+\begin{itemize}
+\normalsize
+\item Mixed segments
+\item Lost nuance
+\item Generic solutions
+\end{itemize}
+\end{tcolorbox}
+\end{column}
+
+\begin{column}{0.32\textwidth}
+\begin{tcolorbox}[colback=mlgreen!10, colframe=mlgreen!50, title=Just Right (K=5)]
+\begin{center}
+\textbf{Optimal Balance}
+\end{center}
+\begin{itemize}
+\normalsize
+\item Clear segments
+\item Actionable insights
+\item Manageable complexity
+\end{itemize}
+\end{tcolorbox}
+\end{column}
+
+\begin{column}{0.32\textwidth}
+\begin{tcolorbox}[colback=mlorange!10, colframe=mlorange!50, title=Too Many (K=20)]
+\begin{center}
+\textbf{Analysis Paralysis}
+\end{center}
+\begin{itemize}
+\normalsize
+\item Overfitting
+\item Tiny segments
+\item Impossible to act on
+\end{itemize}
+\end{tcolorbox}
+\end{column}
+\end{columns}
+
+\vspace{1em}
+\begin{center}
+\Large\textcolor{mlpurple}{\textbf{How do we find the sweet spot?}}
+\end{center}
+\end{frame}
+
+% Slide 12: Choosing K - Elbow Method
+\begin{frame}
+\frametitle{\Large The Elbow Method}
+\framesubtitle{How Many Groups Should We Have? (Like Goldilocks - Not Too Few, Not Too Many)}
+
+\begin{center}
+\includegraphics[width=0.75\textwidth]{charts/elbow_method.pdf}
+\end{center}
+
+\vspace{0.5em}
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\small
+\textbf{Finding the Elbow:}
+\begin{itemize}
+\small
+\item Plot inertia vs K
+\item Look for the ``elbow''
+\item Balance simplicity vs accuracy
+\end{itemize}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\small
+\begin{tcolorbox}[colback=mlblue!10, colframe=mlblue!50]
+\textbf{Optimal K = 5}\\
+Best trade-off point
+\end{tcolorbox}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Slide 13: Distance Metrics
+\begin{frame}
+\frametitle{\Large Distance Metrics}
+\framesubtitle{Different Ways to Measure "How Close" Things Are}
+
+\begin{center}
+\includegraphics[width=0.9\textwidth]{charts/distance_metrics_detailed.pdf}
+\end{center}
+
+\vspace{0.5em}
+\begin{center}
+\large\textcolor{mlpurple}{\textbf{Each metric reveals different patterns in your data}}
+\end{center}
+\end{frame}
+
+% NEW: Sidestep - The Curse of Dimensionality
+\begin{frame}[plain]
+\frametitle{\Large Sidestep: The Curse of Dimensionality}
+\framesubtitle{Why High-Dimensional Spaces Are Strange and Empty}
+
+\begin{columns}[T]
+\begin{column}{0.55\textwidth}
+\begin{center}
+\includegraphics[width=\textwidth]{charts/curse_of_dimensionality.pdf}
+\end{center}
+
+\vspace{0.3em}
+\textbf{As dimensions increase:}
+\begin{itemize}
+\small
+\item Points become equally distant. Everything is on the edge. Volume concentrates at boundaries. Traditional intuition fails
+\end{itemize}
+\end{column}
+
+\begin{column}{0.43\textwidth}
+\begin{tcolorbox}[colback=mlred!10, colframe=mlred!50, title=The Paradox]
+\normalsize
+In 100 dimensions:
+\begin{itemize}
+\small
+\item 99.99\% of space is empty
+\item All points are outliers
+\item Nearest neighbors aren't near
+\end{itemize}
+\end{tcolorbox}
+
+\vspace{0.3em}
+\begin{tcolorbox}[colback=mlgreen!10, colframe=mlgreen!50, title=Why This Matters]
+\small
+\textbf{Innovation has 100+ features!}
+\begin{itemize}
+\scriptsize
+\item Distance metrics break down
+\item Need special techniques
+\item Dimensionality reduction crucial
+\item That's why we use PCA/t-SNE
+\end{itemize}
+\end{tcolorbox}
+\end{column}
+\end{columns}
+
+\vspace{0.3em}
+\begin{center}
+\large\textcolor{mlpurple}{\textbf{ML algorithms are designed to handle this curse}}
+\end{center}
+\end{frame}
+
+% Slide 14: Cluster Quality
+\begin{frame}
+\frametitle{\Large Cluster Quality Metrics}
+\framesubtitle{Are Our Groups Any Good? (Like Checking Your Work)}
+
+\begin{center}
+\includegraphics[width=0.60\textwidth]{charts/cluster_quality.pdf}
+\end{center}
+
+\vspace{0.5em}
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\Large\textbf{Silhouette Score:}
+\normalsize
+\begin{itemize}
+\item Ranges from -1 to +1
+\item Higher = better separation
+\item Our score: \textbf{0.73}
+\end{itemize}
+\textcolor{mlgreen}{\textbf{0.73 = Strong clusters!}}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\textbf{What it measures:}
+\begin{itemize}
+\item Within-cluster cohesion
+\item Between-cluster separation  
+\item Overall cluster validity
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Evaluation Metrics Slide 1: Silhouette Score
+\begin{frame}
+\frametitle{\Large Evaluation Metric 1: Silhouette Score}
+\framesubtitle{Measuring Cluster Cohesion and Separation}
+
+\begin{center}
+\includegraphics[width=0.70\textwidth]{charts/silhouette_score.pdf}
+\end{center}
+\end{frame}
+
+% NEW: Discovery - Finding the Right K
+\begin{frame}
+\frametitle{\Large Discovery: Finding the Right K}
+\framesubtitle{What Happens With Different Numbers of Clusters?}
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\textbf{\large Experiment with K:}
+\vspace{0.3em}
+
+\begin{center}
+\begin{tabular}{|c|l|}
+\hline
+\textbf{K} & \textbf{What Happens} \\
+\hline
+K=2 & Everything too mixed \\
+K=4 & Natural groups emerge \\
+K=8 & Some groups split unnecessarily \\
+K=20 & Too fragmented to use \\
+\hline
+\end{tabular}
+\end{center}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mlblue!10, colframe=mlblue!50]
+\textbf{Your Turn:}\\
+\small
+If you have 100 customer types, what K would you choose?\\
+\begin{itemize}
+\scriptsize
+\item K=100? (one per type)
+\item K=5? (major groups)
+\item K=20? (detailed segments)
+\end{itemize}
+\end{tcolorbox}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\textbf{\large The Trade-offs:}
+\vspace{0.3em}
+
+\begin{tcolorbox}[colback=mlred!10, colframe=mlred!50, title=Too Few (Under-fit)]
+\scriptsize
+\begin{itemize}
+\item Mixed segments
+\item Lost insights
+\item Generic solutions
+\end{itemize}
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=mlgreen!10, colframe=mlgreen!50, title=Just Right]
+\scriptsize
+\begin{itemize}
+\item Clear segments
+\item Actionable groups
+\item Meaningful patterns
+\end{itemize}
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=mlorange!10, colframe=mlorange!50, title=Too Many (Over-fit)]
+\scriptsize
+\begin{itemize}
+\item Fragmented insights
+\item Hard to implement
+\item Statistical noise
+\end{itemize}
+\end{tcolorbox}
+\end{column}
+\end{columns}
+
+\vspace{0.3em}
+\begin{center}
+\large\textcolor{mlpurple}{\textbf{The Elbow Method helps find the sweet spot automatically}}
+\end{center}
+\end{frame}
+
+% Evaluation Metrics Slide 2: Elbow Method
+\begin{frame}
+\frametitle{\Large Evaluation Metric 2: Elbow Method}
+\framesubtitle{Finding the Right Number of Clusters}
+
+\begin{center}
+\includegraphics[width=0.85\textwidth]{charts/elbow_method.pdf}
+\end{center}
+\end{frame}
+
+% Evaluation Metrics Slide 3: Davies-Bouldin Index
+\begin{frame}
+\frametitle{\Large Evaluation Metric 3: Davies-Bouldin Index}
+\framesubtitle{Balancing Within and Between Cluster Distances}
+
+\begin{center}
+\includegraphics[width=0.85\textwidth]{charts/davies_bouldin.pdf}
+\end{center}
+\end{frame}
+
+% PROBLEM: NON-SPHERICAL GROUPS
+\begin{frame}
+\frametitle{\Large When Circles Don't Work}
+\framesubtitle{Real Innovation Clusters Have Complex Shapes}
+
+\begin{center}
+\Large\textbf{K-Means Assumes Spherical Clusters}\\
+\vspace{1em}
+\normalsize But what about:\\
+\vspace{1em}
+\begin{itemize}
+\item Innovations connected through technology stacks
+\item Domain-specific innovation clusters
+\item Evolution patterns (incremental, disruptive)
+\item Outliers and noise points
+\end{itemize}
+\vspace{1em}
+\Large\textcolor{mlred}{\textbf{K-Means Forces Round Pegs into Round Holes}}\\
+\vspace{1em}
+\Large\textcolor{mlgreen}{\textbf{Solution: Density-Based Clustering}}
+\end{center}
+\end{frame}
+
+% NEW: Discovery - When K-Means Fails
+\begin{frame}
+\frametitle{\Large Discovery: When K-Means Fails}
+\framesubtitle{Can You Spot Why K-Means Won't Work Here?}
+
+\begin{columns}[T]
+\begin{column}{0.55\textwidth}
+\begin{center}
+\includegraphics[width=\textwidth]{charts/kmeans_fails.pdf}
+\end{center}
+
+\vspace{0.3em}
+\textbf{Look at these patterns:}
+\begin{itemize}
+\small
+\item Crescent shapes
+\item Nested circles
+\item Connected chains
+\item Scattered outliers
+\end{itemize}
+\end{column}
+
+\begin{column}{0.43\textwidth}
+\begin{tcolorbox}[colback=mlred!10, colframe=mlred!50, title=K-Means Problems]
+\small
+\textbf{K-Means assumes:}
+\begin{itemize}
+\scriptsize
+\item Spherical (round) clusters
+\item Similar sizes
+\item Similar densities
+\item No outliers
+\end{itemize}
+\end{tcolorbox}
+
+\vspace{0.3em}
+\begin{tcolorbox}[colback=mlgreen!10, colframe=mlgreen!50, title=Real Innovation Patterns]
+\small
+\textbf{But innovations have:}
+\begin{itemize}
+\scriptsize
+\item Evolution chains
+\item Technology ecosystems
+\item Varying market sizes
+\item Disruptive outliers
+\end{itemize}
+\end{tcolorbox}
+
+\vspace{0.3em}
+\textcolor{mlpurple}{\textbf{Exercise:}}\\
+\small
+Draw clusters on the left image.\\
+Where does K-means fail?
+\end{column}
+\end{columns}
+
+\vspace{0.3em}
+\begin{center}
+\large\textcolor{mlpurple}{\textbf{DBSCAN finds natural groups regardless of shape}}
+\end{center}
+\end{frame}
+
+% Slide 15: Beyond K-Means - DBSCAN
+\begin{frame}
+\frametitle{\Large DBSCAN: Finding Groups Naturally}
+\framesubtitle{Like Finding Groups of People at a Party - Where Are the Crowds?}
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\Large\textbf{DBSCAN Advantages:}
+\normalsize
+\begin{itemize}
+\item No need to specify K \textit{(finds groups automatically)}
+\item Finds arbitrary shapes \textit{(not just circles)}
+\item Identifies outliers \textit{(points that don't belong)}
+\item Handles noise well \textit{(robust to random points)}
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Perfect for:}
+\begin{itemize}
+\item Non-spherical patterns
+\item Varying densities
+\item Outlier detection
+\item Exploratory analysis
+\end{itemize}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\begin{center}
+\includegraphics[width=\textwidth]{charts/dbscan_shapes.pdf}
+\end{center}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Slide 16: DBSCAN Parameters Explained
+\begin{frame}
+\frametitle{\Large DBSCAN: Understanding Parameters}
+\framesubtitle{Two Simple Settings Control Everything}
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\begin{tcolorbox}[colback=mlgreen!10, colframe=mlgreen!50, title=Epsilon (Distance)]
+\normalsize
+\textbf{What it does:}\\
+Sets the maximum distance to consider points as neighbors
+
+\vspace{0.5em}
+\textbf{Think of it as:}\\
+How far can points be apart and still be friends?
+
+\vspace{0.5em}
+\textbf{Too small:} Many tiny clusters\\
+\textbf{Too large:} Everything merges
+\end{tcolorbox}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\begin{tcolorbox}[colback=mlorange!10, colframe=mlorange!50, title=MinPts (Density)]
+\normalsize
+\textbf{What it does:}\\
+Minimum neighbors needed to form a dense region
+
+\vspace{0.5em}
+\textbf{Think of it as:}\\
+How many friends make a group?
+
+\vspace{0.5em}
+\textbf{Too small:} Noise becomes clusters\\
+\textbf{Too large:} Small clusters vanish
+\end{tcolorbox}
+\end{column}
+\end{columns}
+
+\vspace{0.5em}
+\begin{center}
+\Large\textcolor{mlpurple}{\textbf{Rule of thumb: MinPts = 2 × dimensions}}
+\end{center}
+\end{frame}
+
+% Clustering Algorithm Comparison Table - Slide 1
+\begin{frame}
+\frametitle{\Large Clustering Algorithm Comparison}
+\framesubtitle{Technical Characteristics at a Glance}
+
+\vspace{0.5em}
+\begin{center}
+\normalsize
+\begin{tabular}{lccccc}
+\toprule
+\textbf{Algorithm} & \textbf{Speed} & \textbf{Shape} & \textbf{Outliers} & \textbf{Params} & \textbf{Best For} \\
+\midrule
+\textcolor{mlblue}{\textbf{K-Means}} & Fast & Spherical & Sensitive & K only & Quick segments \\
+& O(nkt) & clusters & & & \\
+\midrule
+\textcolor{mlgreen}{\textbf{DBSCAN}} & Medium & Any & Robust & eps, MinPts & Complex shapes \\
+& O(n log n) & shape & (detects) & & \\
+\midrule
+\textcolor{mlorange}{\textbf{Hierarchical}} & Slow & Any & Moderate & Distance & Multi-level \\
+& O(n²) & shape & & threshold & analysis \\
+\midrule
+\textcolor{mlpurple}{\textbf{GMM}} & Medium & Elliptical & Moderate & K, & Overlapping \\
+& O(nkt) & clusters & & covariance & groups \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{1em}
+\begin{center}
+\Large\textcolor{mlpurple}{\textbf{Each algorithm has its strengths - choose wisely!}}
+\end{center}
+\end{frame}
+
+% Clustering Algorithm Selection Guide - Slide 2
+\begin{frame}
+\frametitle{\Large When to Use Each Algorithm}
+\framesubtitle{Practical Decision Guide}
+
+\vspace{0.5em}
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\begin{tcolorbox}[colback=mlblue!10, colframe=mlblue!50, title=\textbf{K-Means}]
+\textbf{Perfect when:}
+\begin{itemize}
+\item Speed is critical
+\item Clusters are roughly equal size
+\item You know K in advance
+\item Data has spherical patterns
+\end{itemize}
+\end{tcolorbox}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mlgreen!10, colframe=mlgreen!50, title=\textbf{DBSCAN}]
+\textbf{Perfect when:}
+\begin{itemize}
+\item Clusters have irregular shapes
+\item Outliers need identification
+\item Density varies across data
+\item You don't know K
+\end{itemize}
+\end{tcolorbox}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\begin{tcolorbox}[colback=mlorange!10, colframe=mlorange!50, title=\textbf{Hierarchical}]
+\textbf{Perfect when:}
+\begin{itemize}
+\item Need multiple granularities
+\item Want to visualize relationships
+\item Small to medium datasets
+\item Exploring data structure
+\end{itemize}
+\end{tcolorbox}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mlpurple!10, colframe=mlpurple!50, title=\textbf{GMM}]
+\textbf{Perfect when:}
+\begin{itemize}
+\item Groups overlap
+\item Need probability scores
+\item Elliptical cluster shapes
+\item Soft assignments needed
+\end{itemize}
+\end{tcolorbox}
+\end{column}
+\end{columns}
+\end{frame}
+
+
+% NEW: Algorithm Visual Comparison - Charts Only
+\begin{frame}[plain]
+\begin{center}
+\includegraphics[width=0.85\textwidth]{charts/algorithm_visual_examples.pdf}
+\end{center}
+\end{frame}
+
+
+
+% NEW: Gaussian Mixture Models - Charts Only
+\begin{frame}[plain]
+\begin{center}
+\includegraphics[width=0.95\textwidth]{charts/gmm_detailed.pdf}
+\end{center}
+\end{frame}
+
+% PROBLEM: MULTIPLE GRANULARITIES
+\begin{frame}
+\frametitle{\Large The Granularity Challenge}
+\framesubtitle{When You Need Multiple Levels of Detail}
+
+\begin{center}
+\Large\textbf{Fixed K Gives One View}\\
+\vspace{1em}
+\normalsize But real relationships are hierarchical:\\
+\vspace{1em}
+\begin{itemize}
+\item Organization: Company → Department → Team → Individual
+\item Geography: Country → Region → City → Neighborhood
+\item Products: Category → Subcategory → Brand → SKU
+\item Innovations: All → Categories → Sub-types → Specific solutions
+\end{itemize}
+\vspace{1em}
+\Large\textcolor{mlred}{\textbf{K-means: Pick 5 groups and that's it}}\\
+\vspace{1em}
+\Large\textcolor{mlgreen}{\textbf{What if we need flexibility?}}\\
+\vspace{0.5em}
+\normalsize Solution: See the full hierarchy, cut where needed
+\end{center}
+\end{frame}
+
+% Slide 17: Hierarchical Clustering
+\begin{frame}
+\frametitle{\Large Hierarchical Clustering}
+\framesubtitle{Building a Tree of Relationships}
+
+\begin{center}
+\includegraphics[width=0.55\textwidth]{charts/dendrogram_example.pdf}
+\end{center}
+
+\vspace{0.3em}
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\small
+\textbf{Dendrogram Benefits:}
+\begin{itemize}
+\small
+\item Shows cluster hierarchy
+\item Multiple granularities
+\item Natural relationships
+\item No preset K needed
+\end{itemize}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\small
+\textbf{Cut the tree at any level:}
+\begin{itemize}
+\small
+\item High cut = Few clusters
+\item Low cut = Many clusters
+\item Choose based on needs
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Slide 18: Feature Importance
+\begin{frame}
+\frametitle{\Large What Drives the Clusters?}
+\framesubtitle{Feature Importance Analysis}
+
+\begin{center}
+\includegraphics[width=0.85\textwidth]{charts/feature_importance.pdf}
+\end{center}
+
+\begin{center}
+\Large\textcolor{mlpurple}{\textbf{Key Insight: Usage frequency matters most!}}
+\end{center}
+\end{frame}
+
+% NEW: Preprocessing Pipeline
+\begin{frame}
+\frametitle{\Large Data Preprocessing Pipeline}
+\framesubtitle{From Raw Data to Clustering-Ready Features}
+
+\begin{center}
+\includegraphics[width=0.85\textwidth]{charts/preprocessing_pipeline.pdf}
+\end{center}
+\end{frame}
+
+
+% NEW: Common Mistakes - Charts Only
+\begin{frame}[plain]
+\begin{center}
+\includegraphics[width=0.95\textwidth]{charts/common_mistakes.pdf}
+\end{center}
+\end{frame}
+
+% NEW: Parameter Tuning Guidelines - Part 1
+\begin{frame}
+\frametitle{\Large Parameter Tuning Guidelines (Part 1)}
+\framesubtitle{K-Means and DBSCAN Parameters}
+
+\begin{center}
+\includegraphics[width=0.85\textwidth]{charts/parameter_tuning_part1.pdf}
+\end{center}
+\end{frame}
+
+% NEW: Parameter Tuning Guidelines - Part 2
+\begin{frame}
+\frametitle{\Large Parameter Tuning Guidelines (Part 2)}
+\framesubtitle{Hierarchical and GMM Parameters}
+
+\begin{center}
+\includegraphics[width=0.85\textwidth]{charts/parameter_tuning_part2.pdf}
+\end{center}
+\end{frame}
+
+% CHECKPOINT SLIDE 2
+\begin{frame}
+\frametitle{\Large Check Your Understanding - Part 2}
+\framesubtitle{Technical Concepts Review}
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\begin{tcolorbox}[colback=mlblue!10, colframe=mlblue!50, title=Quick Quiz]
+\normalsize
+\begin{enumerate}
+\item K in K-means stands for:
+   \begin{itemize}
+   \small
+   \item[$\square$] Kernel
+   \item[$\checkmark$] Number of clusters
+   \item[$\square$] Constant
+   \end{itemize}
+\item DBSCAN finds:
+   \begin{itemize}
+   \small
+   \item[$\square$] Only circles
+   \item[$\checkmark$] Any shape clusters
+   \item[$\square$] Exactly K groups
+   \end{itemize}
+\end{enumerate}
+\end{tcolorbox}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\begin{tcolorbox}[colback=mlgreen!10, colframe=mlgreen!50, title=Can You Calculate?]
+\normalsize
+If Silhouette Score = 0.75:
+\begin{itemize}
+\item Is this good? \textcolor{mlgreen}{Yes!}
+\item Range is [-1, 1]
+\item Higher = better separation
+\end{itemize}
+\vspace{0.5em}
+\textbf{Remember:}
+\begin{itemize}
+\item Elbow method finds optimal K
+\item Scale your data first!
+\end{itemize}
+\end{tcolorbox}
+\end{column}
+\end{columns}
+
+\vspace{1em}
+\begin{center}
+\Large\textcolor{mlpurple}{\textbf{Great job! Now let's apply these concepts!}}\\
+\vspace{0.3em}
+\normalsize\textit{Next: Design Thinking integration, innovation patterns, and real-world applications}
+\end{center}
+\end{frame}
+
+% TRANSITION TO PART 3
+\begin{frame}
+\frametitle{\Large From Algorithms to Innovation Insights}
+\framesubtitle{What Does This Mean for Innovation Opportunities?}
+
+\begin{center}
+\Large\textbf{We've learned the technical tools:}\\
+\normalsize
+Clustering, metrics, quality measures\\
+\vspace{1em}
+\Large\textcolor{mlred}{\textbf{But clusters are just numbers...}}\\
+\vspace{1em}
+\normalsize
+Until we connect them to innovation opportunities\\
+\vspace{2em}
+\Large\textcolor{mlgreen}{\textbf{Let's transform data into innovation insights}}\\
+\vspace{1em}
+\normalsize
+Each cluster represents innovation opportunities and patterns
+\end{center}
+\end{frame}

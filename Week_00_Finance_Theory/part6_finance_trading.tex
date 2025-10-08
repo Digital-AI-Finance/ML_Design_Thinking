@@ -12,12 +12,192 @@
 \vfill
 \end{frame}
 
-\begin{frame}{High-Frequency Trading with ML}
-\Large\textbf{Microstructure Prediction}
+\begin{frame}{Alpha Signal Generation with ML}
+\begin{columns}[T]
+\begin{column}{0.55\textwidth}
+\Large\textbf{Predictive Trading Signals}
 \normalsize
+\vspace{0.5em}
 
-\textbf{Order Book Dynamics:}
-$$P_{t+\Delta t} = f(LOB_t, Trades_t, \text{Features}_t)$$
+\textbf{Signal Definition:}
+$$\alpha_{i,t} = \E[R_{i,t+1} | \mathcal{F}_t] - r_f$$
 
-ML captures complex non-linear microstructure patterns.
+Excess return prediction conditional on information set
+
+\textbf{Feature Engineering:}
+\begin{itemize}
+\item \textbf{Technical:} Moving averages, RSI, MACD, volume
+\item \textbf{Fundamental:} P/E, P/B, EPS growth, margins
+\item \textbf{Alternative:} Sentiment, news, satellite data
+\item \textbf{Market micro:} Bid-ask spread, order imbalance
+\end{itemize}
+
+\textbf{ML Models for Alpha:}
+\begin{enumerate}
+\item \textbf{Random Forest:} Feature interactions, non-linearity
+\item \textbf{XGBoost:} State-of-art for tabular data
+\item \textbf{LSTM:} Sequential dependencies, momentum
+\item \textbf{Transformer:} Attention over time series
+\end{enumerate}
+\end{column}
+
+\begin{column}{0.43\textwidth}
+\textbf{Signal Quality Metrics:}
+
+\textbf{Information Coefficient (IC):}
+$$IC = \text{Corr}(\alpha_t, R_{t+1})$$
+
+\textbf{Information Ratio:}
+$$IR = \frac{\text{Mean}(\alpha)}{\text{Std}(\alpha)} = IC \times \sqrt{\text{Breadth}}$$
+
+\textbf{Typical Performance:}
+\begin{center}
+\footnotesize
+\begin{tabular}{lc}
+\toprule
+\textbf{Metric} & \textbf{Value} \\
+\midrule
+IC (monthly) & 0.05-0.08 \\
+IR (annual) & 0.8-1.2 \\
+Sharpe & 1.5-2.0 \\
+Hit rate & 52-54\% \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{Signal Combination:}
+$$\alpha_{\text{combined}} = \sum_i w_i \alpha_i$$
+Ensemble of multiple signals improves robustness
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Optimal Execution Algorithms}
+\begin{columns}[T]
+\begin{column}{0.55\textwidth}
+\Large\textbf{Minimizing Market Impact}
+\normalsize
+\vspace{0.5em}
+
+\textbf{Execution Cost Components:}
+$$\text{Total Cost} = \text{Spread} + \text{Impact} + \text{Timing Risk}$$
+
+\textbf{VWAP (Volume-Weighted Average Price):}
+$$\text{VWAP} = \frac{\sum_t P_t V_t}{\sum_t V_t}$$
+Match historical volume profile
+
+\textbf{TWAP (Time-Weighted Average Price):}
+$$q_t = \frac{Q}{T}, \quad \text{for } t = 1, \ldots, T$$
+Uniform time slicing
+
+\textbf{Implementation Shortfall (Almgren-Chriss):}
+$$\min_{\{q_t\}} \E[\text{Cost}] + \lambda \Var[\text{Cost}]$$
+
+\textbf{Optimal Trade Schedule:}
+$$q_t = \frac{\sinh(\kappa(T-t))}{\sinh(\kappa T)} Q$$
+where $\kappa = \sqrt{\lambda \sigma^2 / \eta}$
+\end{column}
+
+\begin{column}{0.43\textwidth}
+\textbf{ML-Enhanced Execution:}
+
+\textcolor{finblue}{\textbf{Deep Reinforcement Learning:}}
+\begin{itemize}
+\item State: Order book, inventory, time
+\item Action: Trade size at each time step
+\item Reward: -Cost - $\lambda$ × Risk
+\item Policy: DDPG, PPO algorithms
+\end{itemize}
+
+\textbf{Performance vs Benchmarks:}
+\begin{center}
+\footnotesize
+\begin{tabular}{lc}
+\toprule
+\textbf{Strategy} & \textbf{Slippage (bps)} \\
+\midrule
+VWAP & 8.2 \\
+TWAP & 9.5 \\
+IS (Almgren-Chriss) & 6.8 \\
+Deep RL & 5.4 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{Advantages:}
+\begin{itemize}
+\item Adapts to market conditions
+\item Learns optimal urgency
+\item Handles constraints dynamically
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Market Making and HFT Microstructure}
+\begin{columns}[T]
+\begin{column}{0.55\textwidth}
+\Large\textbf{Providing Liquidity for Profit}
+\normalsize
+\vspace{0.5em}
+
+\textbf{Market Making Problem:}
+$$\max_{\delta^{bid}, \delta^{ask}} \E[\text{PnL}] - \lambda \Var[\text{PnL}]$$
+
+subject to inventory constraints
+
+\textbf{Bid-Ask Spread Optimization:}
+$$\delta^{bid} = S_0 - P^{bid}, \quad \delta^{ask} = P^{ask} - S_0$$
+
+\textbf{Inventory Management:}
+$$q_t^* = -\frac{\alpha}{\gamma \sigma^2}$$
+where $\alpha$ = alpha signal, $\gamma$ = risk aversion
+
+\textbf{Order Book Forecasting:}
+$$P_{t+\Delta t} = f(\text{LOB}_t, \text{Trades}_t, \text{Features}_t)$$
+
+\textbf{ML Features:}
+\begin{itemize}
+\item Order book imbalance
+\item Weighted mid-price
+\item Trade flow toxicity
+\item Volatility estimates
+\end{itemize}
+\end{column}
+
+\begin{column}{0.43\textwidth}
+\textbf{High-Frequency Strategies:}
+
+\textcolor{finblue}{\textbf{Statistical Arbitrage:}}
+\begin{itemize}
+\item Mean reversion at millisecond scale
+\item Cointegration pairs
+\item Lead-lag relationships
+\item Cross-venue arbitrage
+\end{itemize}
+
+\textbf{ML Techniques:}
+\begin{itemize}
+\item \textbf{LSTM:} Order flow prediction
+\item \textbf{CNN:} Limit order book patterns
+\item \textbf{RL:} Optimal quoting strategies
+\item \textbf{Transformers:} Multi-asset dependencies
+\end{itemize}
+
+\textbf{Performance Metrics:}
+\begin{center}
+\footnotesize
+\begin{tabular}{lc}
+\toprule
+\textbf{Metric} & \textbf{Value} \\
+\midrule
+Sharpe Ratio & 5-15 \\
+Latency & <1ms \\
+Prediction R² & 0.15-0.25 \\
+Fill rate & 85-95\% \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{column}
+\end{columns}
 \end{frame}

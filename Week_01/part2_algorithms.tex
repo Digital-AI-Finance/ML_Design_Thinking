@@ -65,6 +65,9 @@ Finds patterns you didn't know existed
 \textbf{Remember:} The computer doesn't know what the groups mean - it just finds things that are similar!
 \end{tcolorbox}
 \end{center}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Clustering is unsupervised learning - algorithms find patterns without labeled examples or predefined categories}
 \end{frame}
 
 % Enhanced K-Means Part 1 with detailed steps
@@ -120,6 +123,9 @@ Bad initialization = poor clusters
 \begin{center}
 \includegraphics[width=0.5\textwidth]{charts/kmeans_initialization.pdf}
 \end{center}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{K-means initialization matters - K-means++ spreads centers intelligently to avoid poor local optima}
 \end{frame}
 
 % Enhanced K-Means Part 2 with iteration details
@@ -185,6 +191,9 @@ Clusters finalized
 \textbf{Fun Fact:} K-means always converges! It's mathematically guaranteed to find a solution (though not always the best one).
 \end{tcolorbox}
 \end{center}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Lloyd's algorithm minimizes within-cluster variance iteratively - convergence guaranteed but solution depends on initialization}
 \end{frame}
 
 % The Goldilocks Problem with visual examples
@@ -252,6 +261,9 @@ Clusters finalized
 \textbf{Rule of Thumb:} Start with $K = \sqrt{n/2}$ where n is your sample size
 \end{tcolorbox}
 \end{center}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Choosing K balances granularity and actionability - too few clusters miss patterns, too many create analysis paralysis}
 \end{frame}
 
 % Enhanced Elbow Method with detailed explanation
@@ -293,6 +305,9 @@ K = 4 is optimal
 \textbf{Pro Tip:} If there's no clear elbow, try other methods like silhouette analysis
 \end{tcolorbox}
 \end{center}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Elbow method quantifies trade-off between cluster count and within-cluster variance - look for diminishing returns}
 \end{frame}
 
 % Enhanced Distance Metrics with real examples
@@ -356,6 +371,9 @@ $d = |x_2-x_1| + |y_2-y_1|$
 $cos(\theta) = \frac{A \cdot B}{||A|| \times ||B||}$
 \end{tcolorbox}
 \end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Distance metric choice affects cluster quality - match the metric to your data type and domain requirements}
 \end{frame}
 
 % Enhanced Evaluation Metrics - Silhouette Score
@@ -399,6 +417,9 @@ $cos(\theta) = \frac{A \cdot B}{||A|| \times ||B||}$
 \textbf{Think of it as:} A grade for your clustering - higher is better!
 \end{tcolorbox}
 \end{center}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Silhouette score validates cluster quality by measuring cohesion vs separation - essential for comparing different K values}
 \end{frame}
 
 % Enhanced DBSCAN explanation
@@ -447,6 +468,9 @@ $cos(\theta) = \frac{A \cdot B}{||A|| \times ||B||}$
 \textbf{Real Example:} DBSCAN can find galaxy clusters in astronomy data where K-means fails completely!
 \end{tcolorbox}
 \end{center}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Density-based clustering handles arbitrary shapes and outliers - connectivity definitions enable non-convex cluster discovery}
 \end{frame}
 
 % Algorithm Comparison with decision guide
@@ -501,4 +525,22 @@ $cos(\theta) = \frac{A \cdot B}{||A|| \times ||B||}$
 \textbf{Pro Tip:} Try K-means first for speed, then DBSCAN if results aren't satisfactory
 \end{tcolorbox}
 \end{center}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Algorithm selection framework: start simple (K-means), upgrade only when data characteristics demand it (shapes, outliers, unknown K)}
+\end{frame}
+
+% Slide: When to Use Which Algorithm - Judgment Criteria
+\begin{frame}[t]{When to Use Which Clustering Algorithm: Judgment Criteria}
+\vspace{-0.5cm}
+\begin{center}
+\includegraphics[width=0.75\textwidth]{charts/clustering_algorithm_decision.pdf}
+\end{center}
+
+\begin{center}
+\textcolor{mlpurple}{\textbf{The Principle:}} Start simple (K-means), upgrade if needed (DBSCAN for shapes, Hierarchical for structure)
+\end{center}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Judgment criteria enable wise algorithm selection - avoid over-engineering simple problems or under-powering complex ones}
 \end{frame}

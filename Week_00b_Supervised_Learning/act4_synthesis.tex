@@ -1,6 +1,6 @@
-% Act 4: Synthesis (4 slides)
+% Part 4: Synthesis (4 slides)
 
-\begin{frame}{22. Algorithm Landscape: Linear → Tree → Ensemble → SVM}
+\begin{frame}{22. Algorithm Landscape: Linear -> Tree -> Ensemble -> SVM}
 \begin{columns}
 \begin{column}{0.48\textwidth}
 \textbf{Complexity Progression}
@@ -31,48 +31,86 @@ Algorithms form a spectrum from simple linear to complex nonlinear methods
 \end{frame}
 
 \begin{frame}{23. When to Use Each: Interpretability vs Accuracy}
-\begin{columns}
+\small
+\begin{columns}[T]
 \begin{column}{0.48\textwidth}
 \textbf{Linear Models}
 \begin{itemize}
-\item High interpretability
-\item Fast training/prediction
-\item Few parameters
-\item Good baseline
-\item Use when: Regulatory requirements, simple relationships
+\item High interpretability, fast
+\item Use: Regulatory needs, simple patterns
 \end{itemize}
 
-\vspace{0.3cm}
 \textbf{Decision Trees}
 \begin{itemize}
 \item Moderate interpretability
-\item Handles missing values
-\item Feature selection automatic
-\item Use when: Rule extraction needed, mixed data types
+\item Use: Rule extraction, mixed data
 \end{itemize}
 \end{column}
 \begin{column}{0.48\textwidth}
 \textbf{Ensemble Methods}
 \begin{itemize}
-\item Lower interpretability
-\item Highest accuracy often
-\item Robust to overfitting
-\item Use when: Performance critical, sufficient data
+\item Highest accuracy, robust
+\item Use: Performance critical
+\end{itemize}
+
+\textbf{SVM}
+\begin{itemize}
+\item Kernel flexibility
+\item Use: High dimensions, small data
 \end{itemize}
 
 \vspace{0.3cm}
-\textbf{SVM}
-\begin{itemize}
-\item Low interpretability
-\item Kernel flexibility
-\item Memory efficient
-\item Use when: High dimensions, small datasets
-\end{itemize}
-
-\vspace{0.2cm}
 \includegraphics[width=\textwidth]{charts/interpretability_accuracy_tradeoff.pdf}
 \end{column}
 \end{columns}
+
+\vspace{\fill}
+\small\textcolor{gray}{Algorithm selection requires balancing interpretability, accuracy, and computational cost - no universally optimal choice exists}
+\end{frame}
+
+\begin{frame}{23.5 Common Pitfalls in Supervised Learning}
+\begin{columns}[c]
+\column{0.48\textwidth}
+\textbf{Pitfall 1: Data Leakage}
+\begin{itemize}
+\item Using test data during training
+\item Solution: Strict train/test separation
+\end{itemize}
+
+\textbf{Pitfall 2: Wrong Metric}
+\begin{itemize}
+\item Optimizing accuracy on imbalanced data
+\item Solution: Use F1, AUC-ROC for imbalanced cases
+\end{itemize}
+
+\textbf{Pitfall 3: Feature Scaling}
+\begin{itemize}
+\item Forgetting to normalize features
+\item Solution: StandardScaler before distance-based methods
+\end{itemize}
+
+\column{0.48\textwidth}
+\textbf{Pitfall 4: Overfitting}
+\begin{itemize}
+\item Too complex model for small data
+\item Solution: Regularization, cross-validation
+\end{itemize}
+
+\textbf{Pitfall 5: Ignoring Assumptions}
+\begin{itemize}
+\item Linear model on nonlinear data
+\item Solution: Validate assumptions, use nonlinear methods
+\end{itemize}
+
+\textbf{Pitfall 6: No Baseline}
+\begin{itemize}
+\item Not comparing to simple baseline
+\item Solution: Always start with logistic/linear regression
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\small\textcolor{gray}{Most supervised learning failures stem from data leakage, inappropriate metrics, or model mismatch - systematic validation prevents these errors}
 \end{frame}
 
 \begin{frame}{24. Modern Applications: Production ML Pipelines}
@@ -107,49 +145,3 @@ Modern ML systems integrate multiple algorithms in end-to-end pipelines
 \end{columns}
 \end{frame}
 
-\begin{frame}{25. Summary \& Preview: Unsupervised Learning}
-\begin{columns}
-\begin{column}{0.48\textwidth}
-\textbf{Supervised Learning Recap}
-\begin{itemize}
-\item Linear models: Fast, interpretable
-\item Regularization: Prevents overfitting
-\item Nonlinear methods: Handle complexity
-\item Ensembles: Often best performance
-\item No free lunch: Algorithm choice matters
-\end{itemize}
-
-\vspace{0.3cm}
-\textbf{Key Takeaways}
-\begin{itemize}
-\item Start simple, add complexity as needed
-\item Validate on unseen data
-\item Consider interpretability requirements
-\item Monitor performance in production
-\end{itemize}
-\end{column}
-\begin{column}{0.48\textwidth}
-\textbf{Next: Unsupervised Learning}
-\begin{itemize}
-\item No target variable
-\item Pattern discovery
-\item Clustering algorithms
-\item Dimensionality reduction
-\item Association rules
-\end{itemize}
-
-\vspace{0.3cm}
-\textbf{Preview Applications}
-\begin{itemize}
-\item Customer segmentation
-\item Market basket analysis
-\item Data visualization
-\item Feature engineering
-\item Anomaly detection
-\end{itemize}
-
-\vspace{0.2cm}
-\includegraphics[width=\textwidth]{charts/supervised_to_unsupervised.pdf}
-\end{column}
-\end{columns}
-\end{frame}

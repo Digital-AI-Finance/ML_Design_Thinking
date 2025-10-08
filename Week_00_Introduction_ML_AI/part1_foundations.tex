@@ -37,7 +37,7 @@ A program learns from \textbf{Experience} $E$ at \textbf{Task} $T$ measured by \
 \begin{itemize}
 \item[$E$:] 10,000 labeled emails
 \item[$T$:] Classify spam vs non-spam
-\item[$P$:] 85\% → 95\% accuracy after training
+\item[$P$:] 85\% -> 95\% accuracy after training
 \end{itemize}
 }{
 \Large\textbf{The Mathematical Pattern}
@@ -60,6 +60,8 @@ where $L$ measures mistakes, $R$ prevents overfitting
 \vspace{0.3em}
 \keypoint{This optimization is what ``learning'' means mathematically}
 }
+
+\bottomnote{Learning formalizes improvement through optimization - mathematical frameworks transform intuitive experience into tractable computational problems}
 \end{frame}
 
 % Types of Learning
@@ -146,6 +148,8 @@ where $L$ measures mistakes, $R$ prevents overfitting
 \end{itemize}
 \end{column}
 \end{columns}
+
+\bottomnote{Three paradigms partition problem space - supervised uses labels, unsupervised discovers structure, reinforcement optimizes through interaction}
 \end{frame}
 
 % The Learning Process
@@ -155,6 +159,8 @@ where $L$ measures mistakes, $R$ prevents overfitting
 
 \vspace{0.5em}
 \textcolor{darkgray}{\small Data Collection $\rightarrow$ Preprocessing $\rightarrow$ Feature Engineering $\rightarrow$ Model Training $\rightarrow$ Validation $\rightarrow$ Deployment}
+
+\bottomnote{Pipeline thinking prevents isolated optimization - holistic workflow design addresses data quality, model selection, and deployment constraints simultaneously}
 \end{frame}
 
 % Bias-Variance Tradeoff
@@ -187,6 +193,8 @@ For any learning algorithm, the expected error can be decomposed as:
 \item \textcolor{darkred}{High Variance:} Deep trees, k-NN with small k
 \end{itemize}
 }
+
+\bottomnote{Bias-variance decomposition reveals structural tension - no algorithm minimizes both error sources simultaneously requiring principled complexity management}
 \end{frame}
 
 % ML vs Traditional Programming
@@ -246,6 +254,8 @@ For any learning algorithm, the expected error can be decomposed as:
 \item Discovers hidden relationships
 \end{itemize}
 }
+
+\bottomnote{Machine learning excels where explicit programming fails - pattern complexity and adaptation requirements favor data-driven approaches over rule-based systems}
 \end{frame}
 
 % Training, Validation, Test
@@ -290,6 +300,8 @@ For any learning algorithm, the expected error can be decomposed as:
 \item More robust than single split
 \end{itemize}
 }
+
+\bottomnote{Data partitioning prevents optimistic bias - holdout validation estimates generalization performance on unseen examples}
 \end{frame}
 
 % Performance Metrics Overview
@@ -327,4 +339,6 @@ For any learning algorithm, the expected error can be decomposed as:
 \textbf{R-squared:}
 \formula{R^2 = 1 - \frac{SS_{res}}{SS_{tot}}}
 }
+
+\bottomnote{Evaluation metrics quantify model quality - metric selection aligns algorithmic optimization with domain-specific success criteria}
 \end{frame}

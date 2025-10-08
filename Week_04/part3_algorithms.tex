@@ -43,7 +43,7 @@
 \end{itemize}
 \end{columns}
 
-\bottomnote{Each algorithm has its sweet spot - there's no universal best, only best for your problem}
+\bottomnote{Context determines optimal method - algorithm selection requires matching approach characteristics to problem structure and constraints}
 \end{frame}
 
 % Slide 14: Logistic Regression
@@ -111,7 +111,7 @@ $$P = \frac{1}{1 + e^{-(0.5 \cdot \text{novelty} + 0.3 \cdot \text{market} - 2)}
 \textbf{Use when:} You need fast, interpretable results and relationships are roughly linear
 \end{tcolorbox}
 
-\bottomnote{Logistic regression: The Honda Civic of ML - reliable, efficient, gets the job done}
+\bottomnote{Linear simplicity enables interpretability - coefficient-based models provide transparent feature importance attribution}
 \end{frame}
 
 % Slide 15: Decision Trees
@@ -184,7 +184,7 @@ Each question splits the data into purer groups
 \textbf{Use when:} You need to explain decisions to non-technical stakeholders
 \end{tcolorbox}
 
-\bottomnote{Decision trees: Like a flowchart that learns its own rules from data}
+\bottomnote{Hierarchical partitioning mirrors human reasoning - sequential decision rules create interpretable classification paths}
 \end{frame}
 
 % Slide 16: Random Forest
@@ -259,7 +259,7 @@ gained 11\% accuracy
 \end{tcolorbox}
 \end{columns}
 
-\bottomnote{Random Forest: The most reliable general-purpose classifier - rarely the best, never the worst}
+\bottomnote{Ensemble averaging reduces variance - aggregating diverse models improves robustness over single estimator predictions}
 \end{frame}
 
 % Slide 17: Support Vector Machines
@@ -344,7 +344,7 @@ gained 11\% accuracy
 \textbf{Use when:} You have complex, non-linear patterns and don't need to explain why
 \end{tcolorbox}
 
-\bottomnote{SVM: The perfectionist of classifiers - finds the absolutely optimal boundary}
+\bottomnote{Maximum margin optimization seeks robust boundaries - maximizing separation distance reduces sensitivity to small perturbations}
 \end{frame}
 
 % Slide 18: Neural Networks
@@ -431,7 +431,7 @@ Can learn ANY pattern given enough data and layers
 \textbf{Use when:} Accuracy is everything and you have lots of data
 \end{tcolorbox}
 
-\bottomnote{Neural Networks: The Swiss Army knife of ML - can solve anything with enough data}
+\bottomnote{Universal approximation enables flexibility - layered nonlinearity learns arbitrary decision boundaries given sufficient capacity and examples}
 \end{frame}
 
 % Slide 19: Algorithm Comparison
@@ -481,7 +481,7 @@ Neural & \textcolor{mlgreen}{92\%} & \textcolor{mlred}{+} & \textcolor{mlred}{-}
 \textcolor{mlpurple}{\textbf{Pro tip: Always try Random Forest first - it's rarely wrong}}
 \end{center}
 
-\bottomnote{In practice: Try multiple algorithms, compare, choose based on your specific needs}
+\bottomnote{Empirical validation trumps theoretical preference - actual performance on validation data determines deployment choice}
 \end{frame}
 
 % Slide 20: Real Performance Numbers
@@ -552,7 +552,7 @@ Neural & 10s & 0.01s \\
 \textbf{Reality check:} 89\% accuracy means 11 wrong out of 100 - still need human oversight
 \end{tcolorbox}
 
-\bottomnote{These numbers are real - from actual runs on the innovation dataset}
+\bottomnote{Performance varies by problem - algorithm rankings change across datasets based on data structure and class separability}
 \end{frame}
 
 % Slide 21: Beyond Accuracy
@@ -603,7 +603,7 @@ Imagine: 95\% innovations fail
 \textcolor{mlpurple}{\textbf{Key insight: Choose metrics that align with business goals, not just accuracy}}
 \end{center}
 
-\bottomnote{Netflix optimizes for precision (don't recommend bad shows), Google for recall (find all relevant results)}
+\bottomnote{Metric selection reflects business priorities - precision minimizes false positives, recall minimizes false negatives based on error cost asymmetry}
 \end{frame}
 
 % Slide 22: Ensemble Methods
@@ -682,5 +682,5 @@ Imagine: 95\% innovations fail
 \end{itemize}
 \end{columns}
 
-\bottomnote{Kaggle secret: Winners almost always use ensembles - single algorithms rarely win}
+\bottomnote{Model combination reduces individual weaknesses - ensembles capture complementary strengths across diverse approaches}
 \end{frame}

@@ -44,7 +44,7 @@
 \end{itemize}
 \end{columns}
 
-\bottomnote{Each algorithm has its sweet spot - choose based on your specific needs}
+\bottomnote{Algorithm characteristics determine applicability - computational complexity, interpretability, and data requirements constrain method selection}
 \end{frame}
 
 % Slide 14: LDA Deep Dive
@@ -124,7 +124,7 @@ Location & parking, convenient \\
 \textbf{Use LDA when:} You need interpretable topics with probability estimates
 \end{tcolorbox}
 
-\bottomnote{LDA is the industry standard - used by Netflix, Amazon, and most recommendation systems}
+\bottomnote{Probabilistic generative models dominate production systems - Bayesian framework provides interpretable topic distributions with principled uncertainty quantification}
 \end{frame}
 
 % Slide 15: LDA Mathematics (Simplified)
@@ -172,7 +172,7 @@ Pick a word from that topic
 \end{itemize}
 \end{columns}
 
-\bottomnote{Don't worry about the Greek letters - most tools set them automatically}
+\bottomnote{Hyperparameter automation simplifies deployment - default configurations enable initial application while domain tuning optimizes performance}
 \end{frame}
 
 % Slide 16: NMF Deep Dive
@@ -250,7 +250,7 @@ Build & quality, solid, durable \\
 \textbf{Use NMF when:} You want clear, additive parts (perfect for product features)
 \end{tcolorbox}
 
-\bottomnote{NMF excels at finding product features - used by Amazon for review analysis}
+\bottomnote{Non-negative factorization produces sparse representations - part-based decomposition naturally aligns with additive feature structures}
 \end{frame}
 
 % Slide 17: LSA Deep Dive
@@ -340,7 +340,7 @@ A = U $\times$ $\Sigma$ $\times$ V$^T$
 \textbf{Use LSA when:} You need to find similar documents or reduce dimensions
 \end{tcolorbox}
 
-\bottomnote{LSA pioneered topic modeling - still great for search and similarity}
+\bottomnote{Singular value decomposition enables dimensionality reduction - low-rank approximations capture semantic structure through co-occurrence patterns}
 \end{frame}
 
 % Slide 18: BERTopic Deep Dive
@@ -432,7 +432,7 @@ A = U $\times$ $\Sigma$ $\times$ V$^T$
 \textbf{Use BERTopic when:} Quality matters more than speed, especially for short texts
 \end{tcolorbox}
 
-\bottomnote{BERTopic: State-of-the-art, used by cutting-edge research teams}
+\bottomnote{Transformer-based embeddings capture contextual semantics - neural representations enable nuanced topic discovery beyond bag-of-words assumptions}
 \end{frame}
 
 % Slide 19: Algorithm Comparison
@@ -489,7 +489,7 @@ A = U $\times$ $\Sigma$ $\times$ V$^T$
 \textcolor{mlpurple}{\textbf{Pro tip: Start with LDA, it's rarely wrong}}
 \end{center}
 
-\bottomnote{In practice: Try 2-3 algorithms, compare results, choose best for your use case}
+\bottomnote{Empirical comparison guides selection - algorithm performance varies by corpus characteristics, requiring domain-specific evaluation}
 \end{frame}
 
 % Slide 20: Real Performance Numbers
@@ -556,7 +556,7 @@ BERTopic & 15 min & 23 & \textcolor{mlgreen}{92\%} \\
 \textbf{Reality check:} All algorithms find useful patterns - perfect is enemy of good
 \end{tcolorbox}
 
-\bottomnote{These are actual performance numbers from real datasets}
+\bottomnote{Benchmark comparisons quantify trade-offs - controlled evaluation reveals relative strengths across speed, quality, and scalability dimensions}
 \end{frame}
 
 % Slide 21: Topic Evolution
@@ -616,7 +616,7 @@ BERTopic & 15 min & 23 & \textcolor{mlgreen}{92\%} \\
 \textcolor{mlpurple}{\textbf{Next: How to turn topics into innovation opportunities}}
 \end{center}
 
-\bottomnote{Companies tracking topic evolution have 3x better product-market fit}
+\bottomnote{Temporal topic tracking reveals trend dynamics - longitudinal analysis exposes emerging themes and declining concerns within user populations}
 \end{frame}
 
 % Slide 22: Implementation Tips
@@ -686,5 +686,5 @@ BERTopic & 15 min & 23 & \textcolor{mlgreen}{92\%} \\
 \end{tcolorbox}
 \end{columns}
 
-\bottomnote{Good topic modeling is 20\% algorithm, 80\% understanding your domain}
+\bottomnote{Domain expertise guides interpretation - algorithmic output requires contextual knowledge to transform statistical patterns into actionable insights}
 \end{frame}

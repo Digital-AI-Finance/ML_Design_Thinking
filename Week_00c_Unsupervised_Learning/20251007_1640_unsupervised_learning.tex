@@ -1,0 +1,88 @@
+\documentclass[8pt,aspectratio=169]{beamer}
+\usetheme{Madrid}
+
+% Color definitions
+\definecolor{primaryblue}{RGB}{0,82,155}
+\definecolor{accentorange}{RGB}{255,130,67}
+\definecolor{darkgray}{RGB}{64,64,64}
+\definecolor{lightgray}{RGB}{240,240,240}
+\definecolor{textgray}{RGB}{128,128,128}
+
+% Custom colors for Week 0c
+\definecolor{challengered}{RGB}{214,39,40}
+\definecolor{discoverblue}{RGB}{31,119,180}
+\definecolor{densitygreen}{RGB}{44,160,44}
+\definecolor{hierarchyorange}{RGB}{255,127,14}
+\definecolor{synthesispurple}{RGB}{148,103,189}
+
+% Font and spacing
+\setbeamerfont{title}{size=\Large}
+\setbeamerfont{frametitle}{size=\Large}
+\setbeamerfont{normal text}{size=\normalsize}
+
+% Custom title page
+\title[Week 0c: Unsupervised Learning]{Week 0c: Unsupervised Learning\\``The Discovery Challenge''}
+\subtitle{Finding Hidden Patterns Without Labels}
+\author{Machine Learning for Smarter Innovation}
+\institute{BSc Course Series}
+\date{\today}
+
+\begin{document}
+
+% Title slide
+\begin{frame}
+\titlepage
+\end{frame}
+
+% Table of contents
+\begin{frame}{Overview: The Discovery Challenge}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{\color{challengered}Part 1: The Challenge}
+\begin{itemize}
+\item Customer segmentation without labels
+\item Mathematical similarity definitions
+\item No ground truth validation
+\item Cluster number selection
+\item Quantitative evaluation metrics
+\end{itemize}
+
+\textbf{\color{densitygreen}Part 3: Density \& Hierarchy}
+\begin{itemize}
+\item Human clustering intuition
+\item DBSCAN: Finding neighborhoods
+\item Hierarchical: Building trees
+\item Handling arbitrary shapes
+\item Modern implementations
+\end{itemize}
+
+\column{0.48\textwidth}
+\textbf{\color{discoverblue}Part 2: K-means Algorithm}
+\begin{itemize}
+\item Nearest center assignment
+\item Worked coordinate examples
+\item Success: Spherical clusters
+\item Failure: Non-convex shapes
+\item Diagnostic insights
+\end{itemize}
+
+\textbf{\color{synthesispurple}Part 4: Synthesis}
+\begin{itemize}
+\item Method taxonomy
+\item Algorithm selection guide
+\item Modern applications
+\item Neural network preview
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+{\footnotesize \color{textgray}24 slides | Pattern discovery without supervision | Real-world clustering challenges}
+\end{frame}
+
+% Include content sections
+\input{act1_challenge}
+\input{act2_kmeans}
+\input{act3_density_hierarchy}
+\input{act4_synthesis}
+
+\end{document}

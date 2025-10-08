@@ -1,0 +1,489 @@
+% ACT 2: NAIVE SOLUTION & ITS LIMITS (6 slides)
+% Theme: "Just add better prompts" works then fails
+% CRITICAL: Success BEFORE failure for emotional arc
+
+\section{Act 2: The Naive Solution}
+
+% Slide 6: The Obvious Answer (Key insight from human behavior)
+\begin{frame}[fragile,t]{The Obvious Answer: Just Engineer Better Prompts}
+\textbf{How do humans solve reliability problems?}
+
+\vspace{0.3em}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlpurple}{\textbf{The Naive Hypothesis}}
+
+\small
+\textbf{Observation:}\\
+Bad outputs come from vague prompts\\
+$\rightarrow$ Better prompts = Better outputs
+
+\vspace{0.3cm}
+\textbf{The naive approach:}
+\begin{itemize}
+\item Add more details to prompt
+\item Include examples
+\item Specify output format
+\item Set temperature to 0
+\item Use few-shot learning
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Example transformation:}
+
+\textcolor{mlred}{Bad:} ``Extract product info''
+
+\textcolor{mlgreen}{Better:} ``Extract product name, price in USD, and storage capacity in GB. Return as text.''
+
+\vspace{0.2cm}
+\textcolor{mlgray}{\small This seems reasonable!}
+
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Prompt Engineering Techniques}}
+
+\small
+\includegraphics[width=\textwidth]{prompt_patterns_comparison.pdf}
+
+\vspace{0.3cm}
+\textbf{5 common patterns:}
+\begin{enumerate}
+\item Detailed instructions
+\item Few-shot examples
+\item Role-playing (``You are an expert...'')
+\item Step-by-step guidance
+\item Output format specification
+\end{enumerate}
+
+\vspace{0.3cm}
+\textbf{Temperature settings:}
+\begin{itemize}
+\item 1.0: Creative (unreliable)
+\item 0.3: Balanced
+\item 0.0: Deterministic (most reliable)
+\end{itemize}
+\end{columns}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mlblue!10, colframe=mlblue]
+\textbf{The Naive Insight:} If outputs are chaotic, make instructions clearer and more detailed
+\end{tcolorbox}
+
+\bottomnote{Prompt engineering: The obvious first solution - add clarity, examples, and constraints to prompts}
+\end{frame}
+
+% Slide 7: Initial Testing (Show examples working)
+\begin{frame}[fragile,t]{Initial Results: The Naive Approach Shows Promise}
+\textbf{Testing improved prompts on simple cases:}
+
+\vspace{0.3em}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlgreen}{\textbf{Test Case 1: Success}}
+
+\small
+\textbf{Input:} ``iPhone 15 Pro 128GB \$999''
+
+\textbf{Prompt:} ``Extract product, price, storage''
+
+\textbf{Output:}
+\begin{lstlisting}
+Product: iPhone 15 Pro
+Price: $999
+Storage: 128GB
+\end{lstlisting}
+
+\vspace{0.2cm}
+\textcolor{mlgreen}{[OK] Correct!}
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{Test Case 2: Success}}
+
+\small
+\textbf{Input:} ``MacBook Air M2 256GB costs \$1199''
+
+\textbf{Output:}
+\begin{lstlisting}
+Product: MacBook Air M2
+Price: $1199
+Storage: 256GB
+\end{lstlisting}
+
+\vspace{0.2cm}
+\textcolor{mlgreen}{[OK] Correct!}
+
+\column{0.48\textwidth}
+\textcolor{mlgreen}{\textbf{Test Case 3: Success}}
+
+\small
+\textbf{Input:} ``AirPods Pro (2nd gen) - \$249''
+
+\textbf{Output:}
+\begin{lstlisting}
+Product: AirPods Pro
+Price: $249
+Storage: N/A
+\end{lstlisting}
+
+\vspace{0.2cm}
+\textcolor{mlgreen}{[OK] Correct!}
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{Test Case 4: Success}}
+
+\small
+\textbf{Input:} ``iPad Mini 64GB - \$499 USD''
+
+\textbf{Output:}
+\begin{lstlisting}
+Product: iPad Mini
+Price: $499
+Storage: 64GB
+\end{lstlisting}
+
+\vspace{0.2cm}
+\textcolor{mlgreen}{[OK] Correct!}
+\end{columns}
+
+\vspace{0.5em}
+\textbf{Initial metrics (n=50 simple cases):}
+\begin{center}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Metric} & \textbf{Naive Prompts} & \textbf{Improved Prompts} \\
+\midrule
+Correct extractions & 68\% & 85\% \\
+Format consistency & 52\% & 78\% \\
+Missing fields & 25\% & 12\% \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{This looks promising!}} The approach seems to work.
+
+\bottomnote{Building hope: On simple, well-formatted inputs, improved prompts significantly boost reliability}
+\end{frame}
+
+% Slide 8: *** THE SUCCESS SLIDE *** (CRITICAL - build hope before showing failure)
+\begin{frame}[fragile,t]{The Success: Prompt Engineering Works on Simple Cases!}
+\textbf{Validation on 200 simple extractions - excellent results:}
+
+\vspace{0.3em}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlgreen}{\Large \textbf{85\% Success Rate!}}
+
+\vspace{0.3cm}
+\small
+\textbf{Success metrics (simple cases):}
+\begin{itemize}
+\item 85\% fully correct
+\item 12\% minor formatting issues
+\item 3\% complete failures
+\item Average confidence: 0.92
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{What's working:}
+\begin{itemize}
+\item Clear, structured inputs
+\item Standard product formats
+\item Simple field extraction
+\item Consistent patterns
+\item No edge cases
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{Team reaction:}}\\
+``This is production-ready!''\\
+``Ship it to customers!''\\
+``Problem solved!''
+
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Comparison to Baseline}}
+
+\small
+\begin{center}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Approach} & \textbf{Accuracy} & \textbf{Cost} \\
+\midrule
+Naive prompts & 68\% & Low \\
+Few-shot examples & 78\% & Medium \\
+\textbf{Engineered prompts} & \textbf{85\%} & \textbf{Medium} \\
+Manual extraction & 99\% & Very High \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{0.3cm}
+\includegraphics[width=\textwidth]{temperature_reliability.pdf}
+
+\vspace{0.3cm}
+\textbf{Cost analysis:}
+\begin{itemize}
+\item Reduced manual work: 85\%
+\item API costs: \$0.02/extraction
+\item Total savings: \$180K/year
+\end{itemize}
+
+\vspace{0.2cm}
+\textcolor{mlgreen}{\textbf{ROI looks excellent!}}
+\end{columns}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mlgreen!10, colframe=mlgreen]
+\textbf{Victory!} Prompt engineering achieved 85\% reliability on simple cases - appears production-ready!
+\end{tcolorbox}
+
+\bottomnote{Success first: The naive solution works well enough to build hope and validate the basic approach}
+\end{frame}
+
+% Slide 9: *** FAILURE PATTERN EMERGES *** (CRITICAL - show systematic degradation)
+\begin{frame}[fragile,t]{The Failure Pattern: Reality Crushes the Naive Approach}
+\textbf{Testing on production-realistic complexity - the pattern emerges:}
+
+\vspace{0.3em}
+
+\begin{center}
+\Large \textcolor{mlred}{\textbf{The Systematic Degradation}}
+\end{center}
+
+\vspace{0.3cm}
+
+\begin{center}
+\begin{tabular}{lccccc}
+\toprule
+\textbf{Complexity} & \textbf{Success} & \textbf{Drop} & \textbf{Cost/Fix} & \textbf{Status} \\
+\midrule
+Simple (clean) & \textcolor{mlgreen}{85\%} & Baseline & \$20K & Acceptable \\
+Medium (varied) & \textcolor{mlorange}{58\%} & -27\% & \$84K & Marginal \\
+Complex (messy) & \textcolor{mlred}{31\%} & -54\% & \$138K & Broken \\
+Production (real) & \textcolor{mlred}{18\%} & -67\% & \$164K & \textbf{Failed} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{0.5cm}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlred}{\textbf{The Degradation Pattern}}
+
+\small
+\textbf{As complexity increases:}
+\begin{itemize}
+\item Clean inputs: 85\% success
+\item Noisy inputs: 58\% success (-27\%)
+\item Multiple formats: 31\% success (-54\%)
+\item Real production: 18\% success (-67\%)
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Real production characteristics:}
+\begin{itemize}
+\item Mixed formatting
+\item Missing fields
+\item Extra information
+\item Unexpected structures
+\item Edge cases everywhere
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{mlpurple}{\textbf{Example Failures}}
+
+\small
+\textbf{Input:} ``iPhone 15 Pro Max 256 or 512GB options starting at \$1099 (with trade-in discount) See details''
+
+\textbf{Output:}
+\begin{lstlisting}
+Product: iPhone 15 Pro Max
+Price: $1099
+Storage: 256 or 512GB
+\end{lstlisting}
+
+\textcolor{mlred}{[X] Invalid: ``256 or 512GB'' not parseable}\\
+\textcolor{mlred}{[X] Missing: discount conditions}\\
+\textcolor{mlred}{[X] Ambiguous: which storage?}
+
+\vspace{0.2cm}
+\textbf{Database rejects:} Invalid storage format\\
+\textbf{Result:} Manual fix required (\$5 cost)
+
+\vspace{0.2cm}
+\textcolor{mlgray}{\small This happens 82\% of the time in production}
+\end{columns}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mlred!10, colframe=mlred]
+\textbf{Reality Check:} Prompt engineering alone degrades from 85\% to 18\% as real-world complexity emerges
+\end{tcolorbox}
+
+\bottomnote{Failure pattern: Clear systematic degradation with increasing complexity - the naive approach fails in production}
+\end{frame}
+
+% Slide 10: Root Cause Diagnosis (Trace example, two columns)
+\begin{frame}[fragile,t]{Diagnosing the Failure: What the Naive Approach Missing}
+\textbf{Tracing a specific failure to understand the root cause:}
+
+\vspace{0.3em}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlred}{\textbf{What Prompt Engineering Achieved}}
+
+\small
+\textbf{Strengths:}
+\begin{itemize}
+\item Clear instructions
+\item Few-shot examples
+\item Output format guidance
+\item Reduced temperature (0.0)
+\item Context about task
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{What it captured:}
+\begin{itemize}
+\item Intent of extraction
+\item Desired fields
+\item Example formatting
+\item Task description
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{This works when:}}
+\begin{itemize}
+\item Input is clean
+\item Format is standard
+\item Fields are present
+\item No ambiguity
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{mlpurple}{\textbf{What the Naive Approach Lacks}}
+
+\small
+\textbf{Missing components:}
+
+\vspace{0.2cm}
+\textbf{1. No Schema Validation}
+\begin{itemize}
+\item Can't enforce types
+\item Can't check required fields
+\item Can't validate formats
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{2. No Error Handling}
+\begin{itemize}
+\item No retry logic
+\item No fallback strategy
+\item Can't recover from failures
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{3. No Integration Contract}
+\begin{itemize}
+\item Output format varies
+\item Database expects strict schema
+\item API rejects invalid data
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{4. No Confidence Scoring}
+\begin{itemize}
+\item Can't identify uncertain extractions
+\item Can't flag for human review
+\end{itemize}
+\end{columns}
+
+\vspace{0.5em}
+\textbf{Root cause: Prompts describe intent, but can't enforce structure or handle failures}
+
+\vspace{0.3cm}
+\includegraphics[width=0.7\textwidth]{json_schema_example.pdf}
+
+\bottomnote{Diagnosis: Prompt engineering captures intent but lacks enforcement, validation, and error recovery}
+\end{frame}
+
+% Slide 11: The Mismatch Quantified (Capacity calculation)
+\begin{frame}[fragile,t]{Quantifying the Gap: Production Needs vs Naive Capabilities}
+\textbf{The fundamental mismatch between requirements and capabilities:}
+
+\vspace{0.3em}
+
+\begin{center}
+\begin{tabular}{p{3.5cm}p{4cm}p{4cm}}
+\toprule
+\textbf{Production Need} & \textbf{Naive Approach} & \textbf{Gap} \\
+\midrule
+95\% reliability & 18-58\% actual & \textcolor{mlred}{-37 to -77\%} \\
+Type safety & Text suggestions & \textcolor{mlred}{No enforcement} \\
+Schema validation & Format description & \textcolor{mlred}{Can't validate} \\
+Error recovery & Fails silently & \textcolor{mlred}{No retry} \\
+Database integration & Variable formats & \textcolor{mlred}{Breaks systems} \\
+Confidence scores & None & \textcolor{mlred}{Can't flag} \\
+Cost at scale & \$164K/year fixes & \textcolor{mlred}{Uneconomical} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{0.5cm}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlred}{\textbf{The Fundamental Problem}}
+
+\small
+\textbf{Prompts are suggestions:}
+\begin{itemize}
+\item AI can ignore them
+\item No enforcement mechanism
+\item Output varies randomly
+\item No guarantees
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Production needs contracts:}
+\begin{itemize}
+\item Guaranteed structure
+\item Type enforcement
+\item Validation before acceptance
+\item Predictable failures
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{What We Need}}
+
+\small
+\textbf{Missing layer: Structure}
+
+\vspace{0.2cm}
+$$\text{Prompt} + \textcolor{mlpurple}{\textbf{Schema}} = \text{Reliability}$$
+
+\vspace{0.3cm}
+\textbf{The breakthrough insight:}
+\begin{itemize}
+\item Don't just describe format
+\item \textbf{Enforce} format
+\item Validate before acceptance
+\item Retry on invalid outputs
+\item Integrate structure into AI
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlpurple}{\large Can we add structure to AI?}\\[0.2cm]
+\textcolor{mlgray}{\small Act 3 reveals the breakthrough...}
+\end{columns}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mlpurple!10, colframe=mlpurple]
+\textbf{The Gap:} Prompts suggest, production demands enforcement - we need structural contracts, not just descriptions
+\end{tcolorbox}
+
+\bottomnote{Quantified mismatch: 95\% needed vs 18-58\% achieved - prompts alone can't bridge the reliability gap}
+\end{frame}

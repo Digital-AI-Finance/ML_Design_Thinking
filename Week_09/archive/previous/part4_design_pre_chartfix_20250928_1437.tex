@@ -1,0 +1,625 @@
+% Part 4: Design - Communicating Model Performance
+\section{Design: Performance Communication}
+
+% Slide 1: Stakeholder Dashboards
+\begin{frame}{Stakeholder Dashboards: Non-Technical Visualization}
+\begin{columns}[T]
+\column{0.55\textwidth}
+\includegraphics[width=\textwidth]{charts/model_comparison_dashboard.pdf}
+
+\column{0.43\textwidth}
+\textcolor{mlblue}{\textbf{Dashboard Principles}}
+
+\small
+\textbf{For Executives:}
+\begin{itemize}
+\item Business impact first
+\item ROI, cost savings
+\item Simple visuals
+\item Green/red indicators
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{For Product Managers:}
+\begin{itemize}
+\item User impact metrics
+\item A/B test readiness
+\item Feature importance
+\item Trade-off clarity
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{For Engineers:}
+\begin{itemize}
+\item All technical metrics
+\item Confusion matrices
+\item Error distributions
+\item Latency, throughput
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Tailor communication to audience needs and expertise}
+\end{frame}
+
+% Slide 2: Confidence Intervals
+\begin{frame}{Showing Uncertainty: Confidence Intervals}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Why Show Uncertainty?}}
+
+\small
+\begin{itemize}
+\item Point estimates mislead
+\item Small test sets = high variance
+\item Stakeholders need reliability info
+\item Prevents overconfidence
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{How to Calculate}}
+
+\small
+\textbf{Bootstrap method:}
+\begin{enumerate}
+\item Resample test set 1000 times
+\item Calculate metric on each
+\item Report 95\% confidence interval
+\end{enumerate}
+
+\vspace{0.2cm}
+\textbf{Example:}\\
+F1 = 0.87 [0.83, 0.91]
+
+\vspace{0.2cm}
+Interpretation: 95\% confident true F1 between 0.83 and 0.91
+
+\column{0.48\textwidth}
+\textcolor{mlorange}{\textbf{Visualization}}
+
+\small
+\begin{tabular}{lcc}
+\toprule
+Model & F1 & 95\% CI \\
+\midrule
+LogReg & 0.83 & [0.79, 0.87] \\
+RF & 0.87 & [0.83, 0.91] \\
+XGB & 0.89 & [0.85, 0.93] \\
+\bottomrule
+\end{tabular}
+
+\vspace{0.3cm}
+\textcolor{mlpurple}{\textbf{Key Insights}}
+
+\small
+\begin{itemize}
+\item Wide CI = high uncertainty
+\item Overlapping CI = not significantly different
+\item Narrow CI = stable model
+\item Report both point and interval
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Uncertainty quantification builds stakeholder trust}
+\end{frame}
+
+% Slide 3: Model Comparison Tables
+\begin{frame}{Clear Decision Matrices for Model Selection}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Comprehensive Table}}
+
+\small
+\begin{tabular}{lrrr}
+\toprule
+\textbf{Model} & \textbf{F1} & \textbf{Latency} & \textbf{Cost} \\
+\midrule
+LogReg & 0.83 & 5ms & \$0.01 \\
+RF & 0.87 & 50ms & \$0.10 \\
+XGB & 0.89 & 80ms & \$0.15 \\
+Neural Net & 0.90 & 200ms & \$0.50 \\
+\bottomrule
+\end{tabular}
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{With Business Context}}
+
+\small
+\begin{tabular}{lrr}
+\toprule
+\textbf{Model} & \textbf{Revenue/Day} & \textbf{Profit} \\
+\midrule
+LogReg & \$10,200 & \$9,500 \\
+RF & \$11,500 & \$9,000 \\
+XGB & \$11,800 & \$8,500 \\
+Neural Net & \$12,000 & \$6,000 \\
+\bottomrule
+\end{tabular}
+
+\vspace{0.2cm}
+\textcolor{mlorange}{\small Best choice: RF (highest profit)}
+
+\column{0.48\textwidth}
+\textcolor{mlpurple}{\textbf{Decision Criteria}}
+
+\small
+\textbf{Include columns for:}
+\begin{itemize}
+\item Performance metrics (F1, AUC)
+\item Business metrics (revenue, cost)
+\item Operational (latency, memory)
+\item Maintainability (complexity)
+\item Risk (stability, explainability)
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Color coding:}
+\begin{itemize}
+\item Green: Best in category
+\item Yellow: Acceptable
+\item Red: Below threshold
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Final recommendation:}\\
+Bold row with rationale
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Multi-dimensional comparison reveals optimal choice}
+\end{frame}
+
+% Slide 4: Error Analysis Visualization
+\begin{frame}{Error Analysis: Where and Why Models Fail}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Error Distribution}}
+
+\small
+\textbf{By feature value:}
+\begin{itemize}
+\item High errors for income $<$ \$30K
+\item Low errors for income $>$ \$100K
+\item Model biased toward wealthy
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{By prediction confidence:}
+\begin{itemize}
+\item Low confidence $\rightarrow$ 60\% correct
+\item Medium $\rightarrow$ 85\% correct
+\item High confidence $\rightarrow$ 95\% correct
+\item Confidence well-calibrated
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{By subgroup:}
+\begin{itemize}
+\item Errors concentrated in young applicants
+\item Few training examples for this group
+\item Need more data or reweighting
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{mlgreen}{\textbf{Visualization Types}}
+
+\small
+\textbf{1. Error rate by bin:}
+\begin{itemize}
+\item Histogram of feature values
+\item Color by error rate
+\item Shows where model struggles
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{2. Confusion by subgroup:}
+\begin{itemize}
+\item Separate matrix per group
+\item Compare across demographics
+\item Identify fairness issues
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{3. Prediction calibration:}
+\begin{itemize}
+\item Predicted prob vs actual rate
+\item Perfect = diagonal line
+\item Shows over/underconfidence
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Error analysis guides model improvement and identifies risks}
+\end{frame}
+
+% Slide 5: Business Impact Translation
+\begin{frame}{Translating ML Metrics to Business Language}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{The Translation}}
+
+\small
+\textbf{Instead of:} ``95\% precision''
+
+\textbf{Say:} ``Of 100 alerts, 95 are real fraud, saving \$285K monthly''
+
+\vspace{0.3cm}
+\textbf{Instead of:} ``ROC-AUC of 0.92''
+
+\textbf{Say:} ``Model correctly ranks 92\% of fraud above legitimate transactions''
+
+\vspace{0.3cm}
+\textbf{Instead of:} ``85\% recall''
+
+\textbf{Say:} ``Catches 85 of every 100 fraud cases, missing 15''
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{Formula}}
+
+\small
+ML Metric + Context + Business Impact
+
+\column{0.48\textwidth}
+\textcolor{mlorange}{\textbf{Example Translations}}
+
+\small
+\begin{tabular}{p{2cm}p{4cm}}
+\toprule
+\textbf{ML Term} & \textbf{Business Translation} \\
+\midrule
+Accuracy & Correct decisions \\
+Precision & When we act, we're usually right \\
+Recall & We catch most problems \\
+F1 Score & Balance of correctness and completeness \\
+AUC & Overall ranking quality \\
+Confusion Matrix & Specific error patterns \\
+\bottomrule
+\end{tabular}
+
+\vspace{0.3cm}
+\textcolor{mlpurple}{\textbf{Always include:}}
+\begin{itemize}
+\item What it means in practice
+\item Cost or value in dollars
+\item Risk or opportunity
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Stakeholders care about business impact, not technical metrics}
+\end{frame}
+
+% Slide 6: A/B Test Readiness
+\begin{frame}{Pre-Deployment Validation: A/B Test Criteria}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Validation Gates}}
+
+\small
+\textbf{Gate 1: Performance}
+\begin{itemize}
+\item F1 $>$ 0.85
+\item Precision $>$ 0.80
+\item Recall $>$ 0.80
+\item All metrics above threshold
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Gate 2: Stability}
+\begin{itemize}
+\item CV std dev $<$ 0.05
+\item Narrow confidence intervals
+\item Consistent across folds
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Gate 3: Business}
+\begin{itemize}
+\item Positive expected ROI
+\item Cost per prediction acceptable
+\item Latency $<$ 100ms
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Gate 4: Fairness}
+\begin{itemize}
+\item No subgroup disparities
+\item Protected attributes checked
+\item Ethics review passed
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{mlgreen}{\textbf{A/B Test Plan}}
+
+\small
+\textbf{Test design:}
+\begin{itemize}
+\item 50/50 split (new vs old)
+\item 2-week duration
+\item 10,000 users minimum
+\item Primary: Conversion rate
+\item Secondary: User satisfaction
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Success criteria:}
+\begin{itemize}
+\item +5\% conversion (statistical sig)
+\item No decrease in satisfaction
+\item No increase in complaints
+\item Technical metrics match offline
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Rollback triggers:}
+\begin{itemize}
+\item Performance drop $>$ 10\%
+\item Error spike
+\item User complaints $>$ 5\%
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Rigorous offline validation enables confident A/B testing}
+\end{frame}
+
+% Slide 7: Model Cards for Performance
+\begin{frame}{Model Cards: Performance Section Best Practices}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Performance Section}}
+
+\small
+\textbf{1. Overall Metrics}
+\begin{itemize}
+\item Accuracy: 0.89 [0.86, 0.92]
+\item Precision: 0.87
+\item Recall: 0.85
+\item F1: 0.86
+\item AUC: 0.93
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{2. Per-Class Metrics}
+\begin{itemize}
+\item Class 0: F1 = 0.90
+\item Class 1: F1 = 0.82
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{3. Subgroup Performance}
+\begin{itemize}
+\item Age 18-30: F1 = 0.80
+\item Age 31-50: F1 = 0.88
+\item Age 51+: F1 = 0.86
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{4. Edge Cases}
+\begin{itemize}
+\item Low-income: F1 = 0.75
+\item International: F1 = 0.70
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{mlgreen}{\textbf{What to Include}}
+
+\small
+\textbf{Test Set Details:}
+\begin{itemize}
+\item Size: 10,000 samples
+\item Distribution: 60/40 split
+\item Time period: Jan-Mar 2025
+\item Representative: Yes
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Known Limitations:}
+\begin{itemize}
+\item Lower performance on young users
+\item Requires English text
+\item Struggles with short inputs
+\item Not validated for images
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Recommendations:}
+\begin{itemize}
+\item Use confidence thresholding
+\item Human review for $<$ 0.7 confidence
+\item Monitor for drift
+\item Retrain quarterly
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Model cards document performance transparently}
+\end{frame}
+
+% Slide 8: Explaining Precision-Recall to PMs
+\begin{frame}{Trade-Off Communication: Precision vs Recall for PMs}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{The Story}}
+
+\small
+Imagine spam filtering:
+
+\vspace{0.2cm}
+\textbf{High Precision, Low Recall:}
+\begin{itemize}
+\item Very confident = spam
+\item Catches obvious spam only
+\item Misses subtle spam
+\item \textbf{Never blocks real email}
+\item Users: ``I still get spam!''
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{High Recall, Low Precision:}
+\begin{itemize}
+\item Aggressive blocking
+\item Catches all spam
+\item Also blocks real email
+\item \textbf{Users frustrated}
+\item ``Where's my password reset?''
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{mlgreen}{\textbf{The Question}}
+
+\small
+``Which error is worse?''
+
+\vspace{0.2cm}
+\textbf{For spam:}
+\begin{itemize}
+\item FP (block real) = very bad
+\item FN (miss spam) = annoying
+\item Choose high precision
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{For fraud:}
+\begin{itemize}
+\item FP (false alarm) = annoying
+\item FN (miss fraud) = catastrophic
+\item Choose high recall
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlorange}{\textbf{PM Decision}}
+
+\small
+Set threshold based on:
+\begin{itemize}
+\item User impact
+\item Business cost
+\item Brand reputation
+\item Regulatory requirements
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Use concrete examples and business impact to explain trade-offs}
+\end{frame}
+
+% Slide 9: Interactive Validation Tools
+\begin{frame}{Interactive Dashboards with Plotly}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Why Interactive?}}
+
+\small
+\begin{itemize}
+\item Stakeholders explore themselves
+\item Adjust threshold in real-time
+\item See immediate impact
+\item Build intuition
+\item Collaborative decision-making
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{Features to Include}}
+
+\small
+\textbf{Threshold slider:}
+\begin{itemize}
+\item Adjust 0.1 to 0.9
+\item Live update metrics
+\item Show confusion matrix
+\item Display business impact
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Model comparison:}
+\begin{itemize}
+\item Toggle models on/off
+\item Overlay ROC curves
+\item Compare side-by-side
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{mlorange}{\textbf{Implementation}}
+
+\small
+\textbf{Plotly Dash:}
+\begin{itemize}
+\item Python web framework
+\item Interactive plots
+\item Real-time updates
+\item Shareable URL
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Streamlit alternative:}
+\begin{itemize}
+\item Simpler syntax
+\item Quick prototypes
+\item Good for demos
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlpurple}{\textbf{Best Practices}}
+
+\small
+\begin{itemize}
+\item Start simple, add features
+\item Explain every visualization
+\item Provide guidance tooltips
+\item Export current view
+\item Save scenarios
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Interactive tools make validation accessible to non-technical stakeholders}
+\end{frame}
+
+% Slide 10: Design Framework Summary
+\begin{frame}{Performance Communication: Design Principles}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Core Principles}}
+
+\small
+\begin{enumerate}
+\item \textbf{Know your audience}\\
+Execs, PMs, engineers need different info
+\item \textbf{Show uncertainty}\\
+Confidence intervals, not just points
+\item \textbf{Translate to business}\\
+Dollars, users, time - not just F1
+\item \textbf{Make it visual}\\
+Tables, charts, dashboards
+\item \textbf{Enable exploration}\\
+Interactive tools for discovery
+\item \textbf{Document everything}\\
+Model cards, assumptions, limitations
+\end{enumerate}
+
+\column{0.48\textwidth}
+\textcolor{mlgreen}{\textbf{Communication Checklist}}
+
+\small
+$\Box$ Executive summary (1 slide)\\
+$\Box$ Business impact translation\\
+$\Box$ Model comparison table\\
+$\Box$ Confidence intervals shown\\
+$\Box$ Error analysis included\\
+$\Box$ Subgroup performance documented\\
+$\Box$ Trade-offs explained clearly\\
+$\Box$ Recommendations actionable\\
+$\Box$ Limitations acknowledged\\
+$\Box$ Next steps defined
+
+\vspace{0.3cm}
+\textcolor{mlorange}{\textbf{Remember:}}\\
+Goal is informed decisions,\\
+not impressive metrics
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Part 5: Hands-on validation workshop with credit risk data}
+\end{frame}

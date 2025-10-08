@@ -12,23 +12,269 @@
 \vfill
 \end{frame}
 
-\begin{frame}{Modern Portfolio Theory with ML}
-\Large\textbf{Markowitz Optimization Enhanced}
-\normalsize
-
+\begin{frame}{Value at Risk (VaR): Three Approaches}
 \begin{columns}[T]
-\begin{column}{0.48\textwidth}
-\textbf{Classic Formulation:}
-$$\min_w \quad w^T\Sigma w$$
-$$\text{s.t.} \quad w^T\mu \geq r_{target}$$
-$$\quad\quad\quad w^T\mathbf{1} = 1$$
-\end{column}
-\begin{column}{0.48\textwidth}
-\textbf{ML Enhancements:}
+\begin{column}{0.55\textwidth}
+\Large\textbf{Risk Measurement Fundamentals}
+\normalsize
+\vspace{0.5em}
+
+\textbf{Definition:}
+$$\Prob(L > \text{VaR}_\alpha) = \alpha$$
+
+$\alpha$-quantile of loss distribution (typically $\alpha = 0.05$ or 0.01)
+
+\vspace{0.3em}
+\textbf{1. Historical VaR:}
 \begin{itemize}
-\item Shrinkage estimators for $\Sigma$
-\item Factor models for dimensionality
-\item Regime-switching covariance
+\item Use empirical quantile from historical data
+\item $\text{VaR}_{0.05}$ = 5th percentile of returns
+\item Non-parametric, distribution-free
+\item Assumes past predicts future
+\end{itemize}
+
+\textbf{2. Parametric VaR (Gaussian):}
+$$\text{VaR}_\alpha = \mu + \sigma \Phi^{-1}(\alpha)$$
+where $\Phi^{-1}$ is inverse normal CDF
+
+\textbf{3. Monte Carlo VaR:}
+\begin{itemize}
+\item Simulate 10,000+ scenarios
+\item Estimate empirical quantile
+\item Flexible for complex portfolios
+\end{itemize}
+\end{column}
+
+\begin{column}{0.43\textwidth}
+\textbf{ML-Enhanced VaR:}
+
+\textcolor{finblue}{\textbf{GARCH-based VaR:}}
+$$\sigma_t^2 = \omega + \alpha \epsilon_{t-1}^2 + \beta \sigma_{t-1}^2$$
+Time-varying volatility improves accuracy
+
+\textcolor{fingreen}{\textbf{Quantile Regression:}}
+$$\min_\beta \sum_i \rho_\alpha(r_i - x_i^T\beta)$$
+where $\rho_\alpha(u) = u(\alpha - \mathbb{1}_{u<0})$
+
+Directly estimates quantiles without distributional assumptions
+
+\textbf{Comparative Performance:}
+\begin{center}
+\footnotesize
+\begin{tabular}{lcc}
+\toprule
+\textbf{Method} & \textbf{Coverage} & \textbf{Violations} \\
+\midrule
+Historical & 95.2\% & 48/1000 \\
+Gaussian & 92.8\% & 72/1000 \\
+GARCH & 94.8\% & 52/1000 \\
+Quantile RF & 95.1\% & 49/1000 \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Conditional VaR (Expected Shortfall)}
+\begin{columns}[T]
+\begin{column}{0.55\textwidth}
+\Large\textbf{CVaR: Coherent Risk Measure}
+\normalsize
+\vspace{0.5em}
+
+\textbf{Definition:}
+$$\text{CVaR}_\alpha = \E[L | L > \text{VaR}_\alpha]$$
+
+Average loss beyond VaR threshold
+
+\vspace{0.3em}
+\textbf{Mathematical Properties:}
+\begin{itemize}
+\item \textbf{Sub-additivity:} $\text{CVaR}(X+Y) \leq \text{CVaR}(X) + \text{CVaR}(Y)$
+\item \textbf{Monotonicity:} $X \leq Y \Rightarrow \text{CVaR}(X) \leq \text{CVaR}(Y)$
+\item \textbf{Positive homogeneity:} $\text{CVaR}(\lambda X) = \lambda \text{CVaR}(X)$
+\item \textbf{Translation invariance:} $\text{CVaR}(X + c) = \text{CVaR}(X) + c$
+\end{itemize}
+
+\textbf{Optimization Form:}
+$$\text{CVaR}_\alpha = \min_t \left\{t + \frac{1}{\alpha}\E[\max(L-t, 0)]\right\}$$
+
+Enables portfolio optimization with CVaR constraints
+\end{column}
+
+\begin{column}{0.43\textwidth}
+\textbf{Why CVaR > VaR:}
+
+\textcolor{fingreen}{\textbf{Advantages:}}
+\begin{itemize}
+\item Captures tail risk severity
+\item Coherent risk measure
+\item Sub-additive (diversification)
+\item Optimization-friendly
+\end{itemize}
+
+\textcolor{finred}{\textbf{VaR Limitations:}}
+\begin{itemize}
+\item Not sub-additive
+\item Ignores tail losses
+\item Multiple local minima
+\end{itemize}
+
+\vspace{0.3em}
+\textbf{Example: Portfolio Loss}
+\begin{itemize}
+\item VaR$_{0.05}$: -\$1M (95th percentile)
+\item CVaR$_{0.05}$: -\$2.5M (avg beyond VaR)
+\item Tail risk: CVaR captures 2.5x worse scenarios
+\end{itemize}
+
+\textbf{Regulatory Adoption:}
+\begin{itemize}
+\item Basel III prefers ES over VaR
+\item Better capital adequacy
+\item Captures tail dependencies
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{ML-Based Stress Testing}
+\begin{columns}[T]
+\begin{column}{0.55\textwidth}
+\Large\textbf{Scenario Generation and Analysis}
+\normalsize
+\vspace{0.5em}
+
+\textbf{Traditional Stress Testing:}
+\begin{itemize}
+\item Historical scenarios (2008 crisis, COVID-19)
+\item Hypothetical shocks (+3 std vol, -20\% market)
+\item Reverse stress testing (find breaking point)
+\end{itemize}
+
+\textbf{ML-Enhanced Approaches:}
+
+\textcolor{finblue}{\textbf{1. VAE Scenario Generation:}}
+$$z \sim \mathcal{N}(0, I), \quad x = \text{Decoder}(z)$$
+Generate plausible but unseen market scenarios
+
+\textcolor{fingreen}{\textbf{2. GAN Stress Scenarios:}}
+\begin{itemize}
+\item Train on crisis periods
+\item Generate extreme but realistic scenarios
+\item Capture tail dependencies
+\end{itemize}
+
+\textbf{3. Random Forest Sensitivity:}
+\begin{itemize}
+\item Feature importance for risk drivers
+\item Partial dependence plots
+\item Interaction effects
+\end{itemize}
+\end{column}
+
+\begin{column}{0.43\textwidth}
+\textbf{Stress Testing Framework:}
+
+\textbf{Steps:}
+\begin{enumerate}
+\item Define risk factors (rates, spreads, FX)
+\item Generate stressed scenarios
+\item Revalue portfolio under stress
+\item Measure impact on P\&L, VaR, capital
+\end{enumerate}
+
+\textbf{Example Scenarios:}
+\begin{center}
+\footnotesize
+\begin{tabular}{lc}
+\toprule
+\textbf{Scenario} & \textbf{Portfolio Loss} \\
+\midrule
+Rate +200bp & -\$15M \\
+Equity -30\% & -\$45M \\
+Credit spread +150bp & -\$22M \\
+Combined (ML) & -\$68M \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{ML Advantages:}
+\begin{itemize}
+\item Discovers non-obvious correlations
+\item Generates tail scenarios
+\item Faster than Monte Carlo
+\item Learns from recent crises
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{GARCH Models for Volatility Forecasting}
+\begin{columns}[T]
+\begin{column}{0.55\textwidth}
+\Large\textbf{Time-Varying Volatility Models}
+\normalsize
+\vspace{0.5em}
+
+\textbf{GARCH(1,1) Specification:}
+$$r_t = \mu + \epsilon_t, \quad \epsilon_t = \sigma_t z_t, \quad z_t \sim \mathcal{N}(0,1)$$
+$$\sigma_t^2 = \omega + \alpha \epsilon_{t-1}^2 + \beta \sigma_{t-1}^2$$
+
+\textbf{Parameters:}
+\begin{itemize}
+\item $\omega$: Baseline variance (long-run vol)
+\item $\alpha$: ARCH effect (shock impact)
+\item $\beta$: GARCH effect (persistence)
+\item Stationarity: $\alpha + \beta < 1$
+\end{itemize}
+
+\textbf{Extensions:}
+\begin{itemize}
+\item \textbf{EGARCH:} Exponential (leverage effects)
+\item \textbf{GJR-GARCH:} Asymmetric (bad news > good news)
+\item \textbf{DCC-GARCH:} Dynamic conditional correlation
+\end{itemize}
+
+\textbf{Maximum Likelihood Estimation:}
+$$\ell(\theta) = \sum_{t=1}^T \left[-\frac{1}{2}\log(2\pi) - \frac{1}{2}\log(\sigma_t^2) - \frac{\epsilon_t^2}{2\sigma_t^2}\right]$$
+\end{column}
+
+\begin{column}{0.43\textwidth}
+\textbf{ML Hybrid Approaches:}
+
+\textcolor{finblue}{\textbf{Neural Network GARCH:}}
+$$\sigma_t^2 = NN(\epsilon_{t-1}, \ldots, \epsilon_{t-p}, \sigma_{t-1}, \ldots, \sigma_{t-q})$$
+
+Learns nonlinear volatility dynamics
+
+\textbf{LSTM-GARCH:}
+\begin{itemize}
+\item Captures long-memory effects
+\item Handles regime switches
+\item Outperforms standard GARCH
+\end{itemize}
+
+\textbf{Forecast Performance (S\&P 500):}
+\begin{center}
+\footnotesize
+\begin{tabular}{lcc}
+\toprule
+\textbf{Model} & \textbf{RMSE} & \textbf{MAE} \\
+\midrule
+GARCH(1,1) & 2.8\% & 1.9\% \\
+EGARCH & 2.6\% & 1.8\% \\
+LSTM-GARCH & 2.2\% & 1.5\% \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{Applications:}
+\begin{itemize}
+\item Option pricing (implied vol)
+\item Risk management (VaR forecasting)
+\item Portfolio allocation (volatility timing)
 \end{itemize}
 \end{column}
 \end{columns}

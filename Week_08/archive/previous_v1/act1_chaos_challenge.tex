@@ -1,0 +1,366 @@
+% ACT 1: THE CHAOS CHALLENGE (5 slides)
+% Theme: Production AI creates chaos without structure
+% Pedagogical approach: Build from zero, create tension
+
+\section{Act 1: The Chaos Challenge}
+
+% Slide 1: The Production Disaster Scenario (Statement title, concrete hook)
+\begin{frame}[fragile,t]{The Production Disaster: Your AI is Deployed and Failing}
+\textbf{A real scenario that reveals the chaos:}
+
+\vspace{0.3em}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlpurple}{\textbf{Your Deployed AI System}}
+
+\small
+\textbf{E-commerce product extractor:}
+\begin{itemize}
+\item Reads invoices
+\item Extracts: item, price, quantity
+\item Feeds accounting system
+\item Deployed to 1,000 users
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Month 1 results:}
+\begin{itemize}
+\item 85\% invoices processed correctly
+\item 15\% require manual fixes
+\item Users complain: ``Not reliable''
+\item Finance team overloaded
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlred}{\textbf{The Reality:}}\\
+What seemed good in testing\\
+Is chaos in production
+
+\column{0.48\textwidth}
+\textcolor{mlorange}{\textbf{The Hidden Cost}}
+
+\small
+\includegraphics[width=\textwidth]{reliability_cost_impact.pdf}
+
+\vspace{0.3cm}
+\textcolor{mlblue}{\Large \$310,000 Per Year}
+
+\vspace{0.2cm}
+\textbf{Breakdown:}
+\begin{itemize}
+\item Manual error correction: \$120K
+\item Customer churn: \$80K
+\item Support overload: \$60K
+\item Delayed launches: \$30K
+\item Refunds: \$20K
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlgray}{\small Per 1,000 users - typical AI service}
+\end{columns}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mlpurple!10, colframe=mlpurple]
+\textbf{Key Insight:} Unreliable AI in production creates exponential chaos - the 15\% failure rate costs \$310K/year
+\end{tcolorbox}
+
+\vspace{0.5em}
+\textbf{Key Question:} Why do AI prototypes that work in demos fail catastrophically in production?
+
+\bottomnote{The reliability gap: 85\% accuracy sounds good until you calculate the cost of 15\% chaos}
+\end{frame}
+
+% Slide 2: The 80% Problem - Why Projects Fail (Build concept from scratch)
+\begin{frame}[fragile,t]{The 80\% Problem: From Prototype to Production Chaos}
+\textbf{Building the concept: What is the prototype-production gap?}
+
+\vspace{0.3em}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlred}{\textbf{The Brutal Statistics}}
+
+\small
+\textbf{Industry reality (2024):}
+\begin{itemize}
+\item 80\% of AI projects never reach production
+\item Of the 20\% that deploy:
+  \begin{itemize}
+  \item 60\% are rolled back within 6 months
+  \item 30\% have major reliability issues
+  \item Only 10\% meet expectations
+  \end{itemize}
+\item Final success rate: \textbf{2\%}
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Why prototypes work in demos:}
+\begin{itemize}
+\item Cherry-picked examples
+\item Simple test cases
+\item Human validates every output
+\item Forgiving evaluation
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Why Production is Different}}
+
+\small
+\textbf{Production requirements:}
+
+\vspace{0.2cm}
+\textbf{1. Scale}
+\begin{itemize}
+\item 10 examples to 10,000/day
+\item Can't manually check each
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{2. Variability}
+\begin{itemize}
+\item Real-world edge cases
+\item Unexpected inputs
+\item Malformed data
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{3. Integration}
+\begin{itemize}
+\item Must feed other systems
+\item Databases expect specific formats
+\item APIs reject invalid data
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{4. Reliability}
+\begin{itemize}
+\item 95\%+ accuracy required
+\item Predictable error modes
+\item Graceful degradation
+\end{itemize}
+\end{columns}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mlred!10, colframe=mlred]
+\textbf{The Gap:} Prototypes optimize for demos, production demands reliability at scale with integration
+\end{tcolorbox}
+
+\bottomnote{The 80\% problem: Most AI never leaves the lab because reliability is treated as an afterthought}
+\end{frame}
+
+% Slide 3: Unstructured Outputs = Chaos (Concrete examples, build intuition)
+\begin{frame}[fragile,t]{The Root Cause: Unstructured Outputs Create Unpredictable Chaos}
+\textbf{Comparing structured vs unstructured - a concrete example:}
+
+\vspace{0.3em}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlred}{\textbf{Unstructured (Chaos)}}
+
+\small
+\textbf{Prompt:} ``Extract product info''
+
+\vspace{0.2cm}
+\textbf{Output 1:}\\
+``iPhone 15 Pro costs \$999 with 128GB storage''
+
+\vspace{0.2cm}
+\textbf{Output 2:}\\
+``Product: iPhone 15 Pro\\
+Price: 999 USD\\
+Storage: 128 GB''
+
+\vspace{0.2cm}
+\textbf{Output 3:}\\
+``\$999 - iPhone 15 Pro (128GB)''
+
+\vspace{0.3cm}
+\textcolor{mlred}{\textbf{The Problems:}}
+\begin{itemize}
+\item 3 different formats
+\item Can't parse automatically
+\item Requires custom logic for each
+\item Breaks integration
+\item Unpredictable failures
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{mlgreen}{\textbf{Structured (Reliable)}}
+
+\small
+\textbf{Prompt:} ``Extract to JSON schema''
+
+\vspace{0.2cm}
+\textbf{Output (always):}
+\begin{lstlisting}[language=Python]
+{
+  "product": "iPhone 15 Pro",
+  "price": 999,
+  "currency": "USD",
+  "storage": 128,
+  "storage_unit": "GB"
+}
+\end{lstlisting}
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{The Benefits:}}
+\begin{itemize}
+\item Same format every time
+\item Automatic parsing
+\item Type validation
+\item Database-ready
+\item Predictable integration
+\end{itemize}
+\end{columns}
+
+\vspace{0.5em}
+\includegraphics[width=0.9\textwidth]{structured_vs_unstructured.pdf}
+
+\bottomnote{Structure = predictability: Unstructured outputs force custom handling, structured outputs enable automation}
+\end{frame}
+
+% Slide 4: How Chaos Compounds (Show exponential problem)
+\begin{frame}[fragile,t]{The Exponential Chaos: How Unreliability Compounds}
+\textbf{Revealing the mathematical reality of chaos:}
+
+\vspace{0.3em}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlpurple}{\textbf{The Compounding Formula}}
+
+\small
+\textbf{Reliability chaos grows exponentially:}
+
+\vspace{0.2cm}
+$$\text{Chaos Cost} = U \times S \times I \times F$$
+
+\vspace{0.2cm}
+Where:
+\begin{itemize}
+\item $U$ = Users (1,000)
+\item $S$ = Scale factor (requests/user/day)
+\item $I$ = Integration points (systems)
+\item $F$ = Failure rate (15\%)
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Example calculation:}
+\begin{align*}
+\text{Daily failures} &= 1000 \times 10 \times 3 \times 0.15 \\
+                      &= 4,500 \text{ failures/day} \\
+\text{Annual failures} &= 1.6 \text{ million}
+\end{align*}
+
+\vspace{0.2cm}
+At \$0.20 per manual fix: \textcolor{mlred}{\textbf{\$320K/year}}
+
+\column{0.48\textwidth}
+\textcolor{mlorange}{\textbf{Real Failure Examples}}
+
+\small
+\textbf{E-commerce (2024):}
+\begin{itemize}
+\item AI product descriptions
+\item 12\% had invalid JSON
+\item Database rejected inserts
+\item \textbf{Cost:} 3,000 lost orders/month
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Form filling (2023):}
+\begin{itemize}
+\item AI auto-fill from documents
+\item 18\% wrong field mappings
+\item User frustration
+\item \textbf{Cost:} 40\% abandonment rate
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Report generation (2024):}
+\begin{itemize}
+\item AI financial summaries
+\item 25\% inconsistent formats
+\item Manual reformatting required
+\item \textbf{Cost:} 2 hours/report
+\end{itemize}
+\end{columns}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mlred!10, colframe=mlred]
+\textbf{Exponential Law:} Unreliability $\times$ Scale $\times$ Integration = Production chaos that kills projects
+\end{tcolorbox}
+
+\bottomnote{Chaos compounds: A 15\% failure rate seems manageable until you multiply by scale and integration points}
+\end{frame}
+
+% Slide 5: Quantifying the Gap (Data table, forward question)
+\begin{frame}[fragile,t]{Quantifying the Chaos: The Reliability Gap in Numbers}
+\textbf{The data reveals the systematic pattern:}
+
+\vspace{0.3em}
+
+\begin{center}
+\begin{tabular}{lccccc}
+\toprule
+\textbf{Complexity} & \textbf{Unstructured} & \textbf{Manual Fix} & \textbf{Annual Cost} & \textbf{User Impact} \\
+\midrule
+Simple invoices & 8\% fail & 800/month & \$19K & Annoying \\
+Medium forms & 15\% fail & 1,500/month & \$36K & Frustrating \\
+Complex reports & 28\% fail & 2,800/month & \$67K & Unusable \\
+Multi-system & 45\% fail & 4,500/month & \$108K & Project killed \\
+\textbf{Production scale} & \textbf{25\% avg} & \textbf{9,600/month} & \textbf{\$230K/year} & \textbf{Failure} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{0.5cm}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlred}{\textbf{The Pattern:}}
+
+\small
+\begin{itemize}
+\item Failure rate increases with complexity
+\item Costs compound at scale
+\item User frustration grows exponentially
+\item Most projects die at ``Multi-system''
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Current state:}\\
+85\% success $\rightarrow$ 15\% chaos\\
+Sounds good $\rightarrow$ \textbf{Kills projects}
+
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{The Question:}}
+
+\small
+\textbf{What we need:}
+\begin{itemize}
+\item 95\%+ reliability
+\item Predictable failures
+\item Automatic recovery
+\item System integration
+\item Production-grade quality
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Can we escape this chaos?}\\
+Can unstructured AI become\\
+structured and reliable?\\[0.3cm]
+
+\textcolor{mlpurple}{\large \textbf{Act 2 will show...}}\\
+\textcolor{mlgray}{\small Our first attempt and its limits}
+\end{columns}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mlpurple!10, colframe=mlpurple]
+\textbf{Key Insight:} The chaos gap is quantifiable - 15-45\% failure rates create \$230K+ annual costs and kill 80\% of projects
+\end{tcolorbox}
+
+\bottomnote{The challenge is clear: Transform chaotic, unreliable AI into structured, production-grade systems}
+\end{frame}

@@ -1,0 +1,191 @@
+% Part 3: Supervised Learning Methods
+\section{Supervised Learning Methods}
+
+% Section divider
+\begin{frame}[plain]
+\vfill
+\centering
+\begin{beamercolorbox}[sep=16pt,center]{title}
+\usebeamerfont{title}\Large Part 3: Supervised Learning Methods\par
+\vspace{0.5em}
+\large Prediction and Classification in Finance\par
+\end{beamercolorbox}
+\vfill
+\end{frame}
+
+% Linear Methods
+\begin{frame}{Linear Methods: The Foundation}
+\Large\textbf{Linear Regression Family}
+\normalsize
+\vspace{0.5em}
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\textbf{Ordinary Least Squares:}
+$$\hat{\beta} = (X^TX)^{-1}X^Ty$$
+$$\min_{\beta} ||y - X\beta||_2^2$$
+
+\textbf{Ridge Regression (L2):}
+$$\hat{\beta}_{ridge} = (X^TX + \lambda I)^{-1}X^Ty$$
+$$\min_{\beta} ||y - X\beta||_2^2 + \lambda||\beta||_2^2$$
+
+\textbf{LASSO (L1):}
+$$\min_{\beta} ||y - X\beta||_2^2 + \lambda||\beta||_1$$
+No closed form - use coordinate descent
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\textbf{Finance Applications:}
+
+\textcolor{finblue}{\textbf{Factor Models:}}
+$$R_{i,t} = \alpha_i + \sum_{j=1}^k \beta_{i,j} F_{j,t} + \epsilon_{i,t}$$
+
+\textcolor{fingreen}{\textbf{Risk Premia Estimation:}}
+Fama-MacBeth regression
+
+\textcolor{finorange}{\textbf{Elastic Net (Best of Both):}}
+$$\min_{\beta} ||y - X\beta||_2^2 + \lambda_1||\beta||_1 + \lambda_2||\beta||_2^2$$
+Useful for correlated predictors
+\end{column}
+\end{columns}
+\end{frame}
+
+% Support Vector Machines
+\begin{frame}{Support Vector Machines: Maximum Margin Classification}
+\begin{columns}[T]
+\begin{column}{0.55\textwidth}
+\Large\textbf{Optimization Problem}
+\normalsize
+\vspace{0.5em}
+
+\textbf{Primal Form:}
+$$\min_{w,b} \frac{1}{2}||w||^2$$
+$$\text{s.t. } y_i(w^Tx_i + b) \geq 1, \forall i$$
+
+\textbf{Dual Form:}
+$$\max_{\alpha} \sum_i \alpha_i - \frac{1}{2}\sum_{i,j} \alpha_i\alpha_j y_i y_j x_i^T x_j$$
+$$\text{s.t. } \alpha_i \geq 0, \sum_i \alpha_i y_i = 0$$
+
+\textbf{Kernel Trick:}
+$$K(x_i, x_j) = \phi(x_i)^T\phi(x_j)$$
+
+Common kernels:
+\begin{itemize}
+\item RBF: $K(x,z) = e^{-\gamma||x-z||^2}$
+\item Polynomial: $K(x,z) = (x^Tz + c)^d$
+\end{itemize}
+\end{column}
+
+\begin{column}{0.43\textwidth}
+\centering
+\includegraphics[width=\textwidth]{charts/svm_classification.pdf}
+
+\vspace{0.5em}
+\textbf{Credit Default Application:}
+\begin{itemize}
+\item Features: Financial ratios
+\item Target: Default/No default
+\item Kernel: RBF for non-linearity
+\item Result: 92\% accuracy
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Decision Trees and Ensembles
+\begin{frame}{Tree-Based Methods: From Single Trees to Forests}
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\Large\textbf{Decision Trees}
+\normalsize
+\vspace{0.5em}
+
+\textbf{Splitting Criterion:}
+
+\textit{Gini Impurity:}
+$$G = \sum_{k=1}^K p_k(1-p_k)$$
+
+\textit{Information Gain:}
+$$IG = H(parent) - \sum_{j} \frac{n_j}{n} H(child_j)$$
+
+\textbf{CART Algorithm:}
+\begin{enumerate}
+\item Find best split
+\item Partition data
+\item Recurse on children
+\item Prune tree
+\end{enumerate}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\Large\textbf{Ensemble Methods}
+\normalsize
+\vspace{0.5em}
+
+\textbf{Random Forest:}
+\begin{itemize}
+\item Bootstrap samples
+\item Random feature subsets
+\item Average predictions
+\end{itemize}
+
+\textbf{Gradient Boosting:}
+$$F_m(x) = F_{m-1}(x) + \gamma_m h_m(x)$$
+where $h_m$ fits residuals
+
+\textbf{XGBoost Objective:}
+$$\mathcal{L} = \sum_i l(y_i, \hat{y}_i) + \sum_k \Omega(f_k)$$
+$$\Omega(f) = \gamma T + \frac{1}{2}\lambda||w||^2$$
+\end{column}
+\end{columns}
+\end{frame}
+
+% Neural Networks
+\begin{frame}{Neural Networks: Universal Function Approximators}
+\Large\textbf{Architecture and Learning}
+\normalsize
+\vspace{0.5em}
+
+\begin{columns}[T]
+\begin{column}{0.55\textwidth}
+\textbf{Forward Propagation:}
+$$z^{[l]} = W^{[l]}a^{[l-1]} + b^{[l]}$$
+$$a^{[l]} = g^{[l]}(z^{[l]})$$
+
+\textbf{Backpropagation:}
+$$\frac{\partial \mathcal{L}}{\partial W^{[l]}} = \frac{\partial \mathcal{L}}{\partial z^{[l]}} \cdot a^{[l-1]T}$$
+
+\textbf{Update Rule (SGD):}
+$$W^{[l]} := W^{[l]} - \alpha \frac{\partial \mathcal{L}}{\partial W^{[l]}}$$
+
+\textbf{Activation Functions:}
+\begin{itemize}
+\item ReLU: $\max(0, x)$
+\item Sigmoid: $\frac{1}{1 + e^{-x}}$
+\item Tanh: $\frac{e^x - e^{-x}}{e^x + e^{-x}}$
+\end{itemize}
+\end{column}
+
+\begin{column}{0.43\textwidth}
+\textbf{Finance Applications:}
+
+\textcolor{finblue}{\textbf{Option Pricing NN:}}
+\begin{itemize}
+\item Input: $S, K, T, r, \sigma$
+\item Hidden: 3 layers, 100 units
+\item Output: Option price
+\item Loss: MSE vs Black-Scholes
+\end{itemize}
+
+\textcolor{fingreen}{\textbf{Universal Approximation:}}
+Any continuous function on compact set can be approximated to arbitrary accuracy
+
+\textcolor{finred}{\textbf{Regularization:}}
+\begin{itemize}
+\item Dropout: $p = 0.5$
+\item L2 weight decay
+\item Early stopping
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}

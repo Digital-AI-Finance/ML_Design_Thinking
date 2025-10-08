@@ -1,0 +1,173 @@
+\documentclass[8pt,aspectratio=169]{beamer}
+\usetheme{Madrid}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{adjustbox}
+\usepackage{multicol}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{tcolorbox}
+\usepackage{xcolor}
+\usepackage{listings}
+
+% Standard Template Colors (for Key Insight boxes)
+\definecolor{mlblue}{RGB}{0,102,204}
+\definecolor{mlpurple}{RGB}{51,51,178}
+\definecolor{mllavender}{RGB}{173,173,224}
+\definecolor{mllavender2}{RGB}{193,193,232}
+\definecolor{mllavender3}{RGB}{204,204,235}
+\definecolor{mllavender4}{RGB}{214,214,239}
+\definecolor{mlorange}{RGB}{255, 127, 14}
+\definecolor{mlgreen}{RGB}{44, 160, 44}
+\definecolor{mlred}{RGB}{214, 39, 40}
+\definecolor{mlgray}{RGB}{127, 127, 127}
+
+% Nature Professional Theme (Week 7 custom)
+\definecolor{ForestGreen}{RGB}{20,83,45}
+\definecolor{Teal}{RGB}{13,148,136}
+\definecolor{Amber}{RGB}{245,158,11}
+\definecolor{Slate}{RGB}{71,85,105}
+\definecolor{MintCream}{RGB}{240,253,244}
+\definecolor{LightGreen}{RGB}{134,239,172}
+\definecolor{DarkTeal}{RGB}{15,118,110}
+
+% Additional grays
+\definecolor{lightgray}{RGB}{240, 240, 240}
+\definecolor{midgray}{RGB}{180, 180, 180}
+
+% Apply Nature Professional to Madrid theme
+\setbeamercolor{palette primary}{bg=LightGreen!30,fg=ForestGreen}
+\setbeamercolor{palette secondary}{bg=LightGreen!20,fg=ForestGreen}
+\setbeamercolor{palette tertiary}{bg=LightGreen,fg=white}
+\setbeamercolor{palette quaternary}{bg=ForestGreen,fg=white}
+
+\setbeamercolor{structure}{fg=ForestGreen}
+\setbeamercolor{section in toc}{fg=ForestGreen}
+\setbeamercolor{subsection in toc}{fg=Teal}
+\setbeamercolor{title}{fg=ForestGreen}
+\setbeamercolor{frametitle}{fg=ForestGreen,bg=LightGreen!20}
+\setbeamercolor{block title}{bg=LightGreen!30,fg=ForestGreen}
+\setbeamercolor{block body}{bg=MintCream,fg=black}
+
+% Items with nature accent colors
+\setbeamercolor{item}{fg=Amber}
+\setbeamercolor{subitem}{fg=Teal}
+\setbeamercolor{subsubitem}{fg=DarkTeal}
+
+% Remove navigation symbols
+\setbeamertemplate{navigation symbols}{}
+
+% Clean itemize/enumerate
+\setbeamertemplate{itemize items}[circle]
+\setbeamertemplate{enumerate items}[default]
+
+% Reduce margins for more content space
+\setbeamersize{text margin left=5mm,text margin right=5mm}
+
+% Custom footer
+\setbeamertemplate{footline}{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.25\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
+    \usebeamerfont{author in head/foot}Week 7
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+    \usebeamerfont{title in head/foot}Hidden Bias to Visible Fairness
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.25\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    \usebeamerfont{date in head/foot}\insertframenumber{} / \inserttotalframenumber\hspace*{2ex}
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+
+% Command for bottom annotation
+\newcommand{\bottomnote}[1]{%
+\vfill
+\vspace{-2mm}
+\textcolor{Slate}{\rule{\textwidth}{0.4pt}}
+\vspace{1mm}
+\footnotesize
+\textcolor{Slate}{\textbf{#1}}
+}
+
+% Graphics path
+\graphicspath{{charts/}}
+
+% Title information
+\title{\Large Machine Learning for Smarter Innovation}
+\subtitle{Week 7: Responsible AI \& Ethical Innovation\\
+From Hidden Bias to Visible Fairness}
+\author{ML \& Design Thinking Course}
+\date{BSc Level - 2025}
+
+\begin{document}
+
+% Title slide with plain style
+\begin{frame}[plain]
+\vspace{2cm}
+\begin{center}
+{\Huge \textcolor{ForestGreen}{\textbf{Hidden Bias}}}\\[0.2cm]
+{\Huge \textcolor{ForestGreen}{\textbf{to}}}\\[0.2cm]
+{\Huge \textcolor{ForestGreen}{\textbf{Visible Fairness}}}\\[1cm]
+{\Large How Mathematics Reveals Invisible Discrimination}\\[1.5cm]
+{\large Week 7: Machine Learning for Smarter Innovation}\\[0.3cm]
+{\normalsize When Unmeasurable Harm Meets Mathematical Justice}\\[0.5cm]
+{\small Making the Invisible Visible Through AI Fairness}
+\end{center}
+\end{frame}
+
+% Table of contents with 4-act structure
+\begin{frame}[t]{Today's Journey: From Hidden to Visible}
+\Large\textbf{Four Acts of Discovery}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{enumerate}
+\item \textbf{Act 1: The Hidden Harm} - Invisible bias, unmeasurable discrimination
+\item \textbf{Act 2: First Measurements} - Metrics work... then impossibility reveals
+\item \textbf{Act 3: Mathematical Fairness} - Geometric understanding, optimization
+\item \textbf{Act 4: Production Systems} - Modern tools, ethical AI in practice
+\end{enumerate}
+
+\vspace{1em}
+
+\begin{center}
+\begin{tcolorbox}[colback=LightGreen!20, colframe=ForestGreen, width=0.8\textwidth]
+\centering
+\textbf{Unifying Theme:} MEASUREMENT transforms invisible discrimination into visible, solvable problems
+\end{tcolorbox}
+\end{center}
+
+\bottomnote{By the end: You'll understand the mathematics of fairness and how to build ethical AI systems}
+\end{frame}
+
+% Include the four acts
+\input{act1_hidden_harm}
+\input{act2_first_measurements}
+\input{act3_mathematical_fairness}
+\input{act4_production_systems}
+
+% Closing slide
+\begin{frame}[plain]
+\vspace{2cm}
+\begin{center}
+{\Huge \textcolor{ForestGreen}{\textbf{Fairness Mastered}}}\\[1cm]
+{\Large From Hidden to Visible:}\\[0.5cm]
+{\normalsize
+You now understand:
+\begin{itemize}
+\item Why invisible bias causes systemic harm (I(D; A) > 0)
+\item How metrics reveal discrimination (DP, EO, ROC space)
+\item Why impossibility theorems constrain solutions
+\item How optimization makes trade-offs explicit (Lagrangian)
+\item How to build fair AI systems (Fairlearn, AIF360)
+\end{itemize}
+}
+\vspace{1cm}
+{\large \textcolor{ForestGreen}{\textbf{Next Week: Structured Output and Prompt Engineering}}}\\
+{\normalsize Reliability requires constraints, just like fairness does}
+\end{center}
+\end{frame}
+
+\end{document}

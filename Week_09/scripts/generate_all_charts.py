@@ -517,8 +517,113 @@ def chart_validation_pyramid():
     plt.tight_layout()
     save_chart('validation_pyramid')
 
+def chart_validation_depth_decision():
+    """Decision tree for determining validation depth"""
+    fig, ax = plt.subplots(figsize=(14, 10))
+    ax.set_xlim(0, 14)
+    ax.set_ylim(0, 10)
+    ax.axis('off')
+
+    # Title
+    ax.text(7, 9.5, 'When to Use Multi-Metric Validation: Decision Framework',
+            ha='center', fontsize=16, fontweight='bold')
+
+    # Root question
+    root_box = FancyBboxPatch((5.5, 8.2), 3, 0.8, boxstyle="round,pad=0.1",
+                              facecolor='lightblue', edgecolor='black', linewidth=2)
+    ax.add_patch(root_box)
+    ax.text(7, 8.6, 'What are the stakes?', ha='center', va='center',
+            fontsize=12, fontweight='bold')
+
+    # Three main branches
+    # Branch 1: High Stakes
+    ax.arrow(6.5, 8.2, -2, -1.5, head_width=0.15, head_length=0.1, fc='black', ec='black')
+    high_box = FancyBboxPatch((2.5, 5.8), 3, 0.8, boxstyle="round,pad=0.1",
+                              facecolor='#F44336', edgecolor='black', linewidth=2, alpha=0.7)
+    ax.add_patch(high_box)
+    ax.text(4, 6.2, 'HIGH STAKES', ha='center', va='center',
+            fontsize=11, fontweight='bold', color='white')
+
+    ax.text(4, 5.4, 'Production deployment\nMedical/Financial/Legal\nRegulatory compliance\nCost-asymmetric errors',
+            ha='center', va='top', fontsize=9)
+
+    ax.arrow(4, 5.8, 0, -0.8, head_width=0.15, head_length=0.1, fc='black', ec='black')
+    result_high = FancyBboxPatch((2.5, 3.8), 3, 0.9, boxstyle="round,pad=0.1",
+                                 facecolor='#4CAF50', edgecolor='black', linewidth=2)
+    ax.add_patch(result_high)
+    ax.text(4, 4.5, 'COMPREHENSIVE', ha='center', va='center',
+            fontsize=11, fontweight='bold')
+    ax.text(4, 4.1, '10+ metrics\nCross-validation\nStatistical tests\nBusiness alignment',
+            ha='center', va='center', fontsize=8)
+
+    # Branch 2: Medium Stakes
+    ax.arrow(7, 8.2, 0, -1.5, head_width=0.15, head_length=0.1, fc='black', ec='black')
+    med_box = FancyBboxPatch((5.5, 5.8), 3, 0.8, boxstyle="round,pad=0.1",
+                             facecolor='#FF9800', edgecolor='black', linewidth=2, alpha=0.7)
+    ax.add_patch(med_box)
+    ax.text(7, 6.2, 'MEDIUM STAKES', ha='center', va='center',
+            fontsize=11, fontweight='bold', color='white')
+
+    ax.text(7, 5.4, 'Business critical\nModerate volume\nSome automation\nReversible decisions',
+            ha='center', va='top', fontsize=9)
+
+    ax.arrow(7, 5.8, 0, -0.8, head_width=0.15, head_length=0.1, fc='black', ec='black')
+    result_med = FancyBboxPatch((5.5, 3.8), 3, 0.9, boxstyle="round,pad=0.1",
+                                facecolor='#FFEB3B', edgecolor='black', linewidth=2)
+    ax.add_patch(result_med)
+    ax.text(7, 4.5, 'MODERATE', ha='center', va='center',
+            fontsize=11, fontweight='bold')
+    ax.text(7, 4.1, '3-5 key metrics\nBasic validation\nConfusion matrix\nStakeholder review',
+            ha='center', va='center', fontsize=8)
+
+    # Branch 3: Low Stakes
+    ax.arrow(7.5, 8.2, 2, -1.5, head_width=0.15, head_length=0.1, fc='black', ec='black')
+    low_box = FancyBboxPatch((8.5, 5.8), 3, 0.8, boxstyle="round,pad=0.1",
+                             facecolor='#9E9E9E', edgecolor='black', linewidth=2, alpha=0.7)
+    ax.add_patch(low_box)
+    ax.text(10, 6.2, 'LOW STAKES', ha='center', va='center',
+            fontsize=11, fontweight='bold', color='white')
+
+    ax.text(10, 5.4, 'Prototyping\nExploratory analysis\nQuick iterations\nAcademic/research',
+            ha='center', va='top', fontsize=9)
+
+    ax.arrow(10, 5.8, 0, -0.8, head_width=0.15, head_length=0.1, fc='black', ec='black')
+    result_low = FancyBboxPatch((8.5, 3.8), 3, 0.9, boxstyle="round,pad=0.1",
+                                facecolor='#E0E0E0', edgecolor='black', linewidth=2)
+    ax.add_patch(result_low)
+    ax.text(10, 4.5, 'LIGHTWEIGHT', ha='center', va='center',
+            fontsize=11, fontweight='bold')
+    ax.text(10, 4.1, 'Accuracy + 1-2 metrics\nSimple train/test split\nQuick assessment\nIterate rapidly',
+            ha='center', va='center', fontsize=8)
+
+    # Additional considerations box
+    consider_box = FancyBboxPatch((0.5, 0.5), 13, 2.5, boxstyle="round,pad=0.1",
+                                  facecolor='#F0F0F0', edgecolor='black', linewidth=2)
+    ax.add_patch(consider_box)
+    ax.text(7, 2.7, 'Additional Considerations', ha='center', va='center',
+            fontsize=12, fontweight='bold')
+
+    considerations_text = """
+Volume: High volume (1000+/day) → More rigorous validation needed
+Regulation: FDA, SEC, GDPR compliance → Mandatory comprehensive validation
+Cost Asymmetry: If FN costs >> FP costs → Multi-metric essential (optimize recall vs precision)
+Class Imbalance: Severe imbalance (>95:5) → Accuracy alone completely insufficient
+Stakeholders: Multiple non-technical stakeholders → Business metric translation critical
+Time Constraints: Tight deadlines → May need lightweight first, then iterate to comprehensive
+    """
+    ax.text(7, 1.5, considerations_text, ha='center', va='center', fontsize=8,
+            family='monospace')
+
+    # Bottom principle
+    ax.text(7, 0.2, 'Principle: Match validation rigor to decision consequences - comprehensive for production, lightweight for exploration',
+            ha='center', va='center', fontsize=10, style='italic',
+            bbox=dict(boxstyle='round', facecolor='yellow', alpha=0.3))
+
+    plt.tight_layout()
+    save_chart('validation_depth_decision')
+
 # Generate all charts
-print("Generating all 15 charts for Week 9...")
+print("Generating all 16 charts for Week 9...")
 print("=" * 50)
 
 chart_accuracy_trap()
@@ -537,7 +642,8 @@ chart_validation_pipeline()
 chart_business_metric_alignment()
 chart_validation_checklist()
 chart_validation_pyramid()
+chart_validation_depth_decision()
 
 print("=" * 50)
-print("All 15 charts generated successfully!")
+print("All 16 charts generated successfully!")
 print("Charts saved in Week_09/charts/ as both PDF and PNG")

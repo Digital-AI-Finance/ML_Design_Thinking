@@ -1,0 +1,87 @@
+\documentclass[8pt,aspectratio=169]{beamer}
+\usetheme{Madrid}
+\usecolortheme{default}
+
+% Package imports
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{hyperref}
+\usepackage{tcolorbox}
+
+% Path for graphics
+\graphicspath{{charts/}{figures/}}
+
+% Color definitions - ML course palette
+\definecolor{mlblue}{RGB}{31, 119, 180}
+\definecolor{mlorange}{RGB}{255, 127, 14}
+\definecolor{mlgreen}{RGB}{44, 160, 44}
+\definecolor{mlred}{RGB}{214, 39, 40}
+\definecolor{mlpurple}{RGB}{148, 103, 189}
+\definecolor{mlbrown}{RGB}{140, 86, 75}
+\definecolor{mlpink}{RGB}{227, 119, 194}
+\definecolor{mlgray}{RGB}{127, 127, 127}
+\definecolor{mlyellow}{RGB}{255, 187, 120}
+\definecolor{mlcyan}{RGB}{23, 190, 207}
+
+% Innovation colors
+\definecolor{challenge}{RGB}{148, 103, 189}
+\definecolor{explore}{RGB}{52, 152, 219}
+\definecolor{generate}{RGB}{46, 204, 113}
+\definecolor{peak}{RGB}{241, 196, 15}
+\definecolor{filter}{RGB}{230, 126, 34}
+\definecolor{refine}{RGB}{231, 76, 60}
+\definecolor{strategy}{RGB}{192, 57, 43}
+
+% Beamer settings
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{footline}[frame number]
+\setbeamerfont{caption}{size=\footnotesize}
+\setbeamercolor{frametitle}{bg=mlblue!10,fg=mlblue!90!black}
+\setbeamercolor{block title}{bg=mlblue!20,fg=black}
+\setbeamercolor{block body}{bg=mlblue!5,fg=black}
+
+% Math operators
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator{\sign}{sign}
+
+% Custom commands
+\newcommand{\datasplit}[2]{\textcolor{mlblue}{#1}\,|\,\textcolor{mlorange}{#2}}
+\newcommand{\accuracy}[1]{\textcolor{mlgreen}{\textbf{#1\%}}}
+\newcommand{\loss}[1]{\textcolor{mlred}{$\mathcal{L} = #1$}}
+
+% Title information
+\title{Machine Learning for Smarter Innovation}
+\subtitle{Week 4: Classification \& Definition}
+\author{BSc Design \& Innovation Program}
+\institute{Understanding Success Through Prediction}
+\date{2025}
+
+\begin{document}
+
+% Title slide
+\begin{frame}[plain]
+\titlepage
+\end{frame}
+
+% Table of contents
+\begin{frame}{Roadmap}
+\tableofcontents
+\end{frame}
+
+% Include modular parts
+\input{part1_foundation}
+\input{part2_technical}
+\input{part3_implementation}
+\input{part4_design}
+\input{part5_practice}
+\input{appendix_mathematics}
+
+\end{document}

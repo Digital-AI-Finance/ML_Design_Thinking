@@ -1,0 +1,688 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{tcolorbox}
+\usepackage{xcolor}
+\usepackage{geometry}
+\usepackage{multicol}
+\geometry{margin=0.7in}
+
+% Define colors
+\definecolor{mlblue}{RGB}{31, 119, 180}
+\definecolor{mlorange}{RGB}{255, 127, 14}
+\definecolor{mlgreen}{RGB}{44, 160, 44}
+\definecolor{mlred}{RGB}{214, 39, 40}
+\definecolor{mlpurple}{RGB}{148, 103, 189}
+\definecolor{mlgray}{RGB}{127, 127, 127}
+
+\title{\LARGE\textbf{Instructor Solutions Guide}\\
+\vspace{0.5em}
+\Large Discovery Worksheet: Introduction to ML \& AI\\
+\vspace{0.3em}
+\large Expected Answers, Common Responses, and Discussion Prompts}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{tcolorbox}[colback=mlred!10, colframe=mlred!70, title=Instructor Notes]
+\textbf{Purpose:} This guide provides expected answers, common student misconceptions, and discussion prompts for each discovery.
+
+\textbf{Time Allocation:}
+\begin{itemize}
+\item Discovery 1 (Overfitting): 12-15 minutes
+\item Discovery 2 (K-Means): 15-18 minutes
+\item Discovery 3 (Boundaries): 15-18 minutes
+\item Discovery 4 (Gradient): 10-12 minutes
+\item Discovery 5 (GANs): 10-12 minutes
+\item Discovery 6 (PCA): 10-12 minutes
+\item Reflection: 5 minutes
+\end{itemize}
+
+\textbf{Total: 75-90 minutes}
+\end{tcolorbox}
+
+\newpage
+
+% ================================================================
+% DISCOVERY 1 SOLUTIONS
+% ================================================================
+\section*{Discovery 1: The Overfitting Paradox - SOLUTIONS}
+
+\subsection*{Expected Answers}
+
+\textbf{Task 1: Training Errors}
+\begin{itemize}
+\item Model A (red line): $\sim$45 (high - constant prediction misses variation)
+\item Model B (green curve): $\sim$12 (medium - follows trend)
+\item Model C (purple wiggly): $\sim$0 (near perfect - hits every point)
+\item Lowest training error: \textbf{Model C}
+\end{itemize}
+
+\textbf{Task 2: Test Errors}
+\begin{itemize}
+\item Model A: $\sim$48 (similar to training)
+\item Model B: $\sim$15 (slight increase from training)
+\item Model C: $\sim$67 (huge increase - wildly wrong predictions)
+\item Lowest test error: \textbf{Model B}
+\end{itemize}
+
+\textbf{Task 3: The Paradox}
+
+\textit{Expected discovery:}
+``Model C memorizes the training data instead of learning the pattern. It fits noise, not signal. When new data comes, the noise is different, so predictions are terrible.''
+
+\textit{Common student responses:}
+\begin{itemize}
+\item ``Model C is trying too hard'' $\rightarrow$ Good intuition! Connect to ``overfitting''
+\item ``Model C doesn't generalize'' $\rightarrow$ Excellent! This is the key term
+\item ``Model C is cheating'' $\rightarrow$ Interesting framing, but clarify it's not intentional
+\end{itemize}
+
+\textbf{Task 4: Trade-off Plot}
+
+Students should plot points approximately at:
+\begin{itemize}
+\item Model A: (45, 48) - high bias corner
+\item Model B: (12, 15) - sweet spot
+\item Model C: (0, 67) - high variance corner
+\end{itemize}
+
+Pattern: U-shaped relationship - lowest training error does NOT mean lowest test error.
+
+\textbf{Task 5: Model D Prediction}
+\begin{itemize}
+\item Training error: $\sim$0 (even more complex, still memorizes)
+\item Test error: $>$67 (even worse than Model C - more complex = worse generalization)
+\end{itemize}
+
+\subsection*{Key Insights (Expected)}
+\begin{itemize}
+\item Model A: ``underfitting'' or ``high bias'' (too simple)
+\item Model C: ``overfitting'' or ``high variance'' (too complex)
+\item Model B: ``balanced'' or ``just right'' (optimal complexity)
+\end{itemize}
+
+\subsection*{Common Misconceptions}
+
+\begin{enumerate}
+\item \textbf{``More complex is always better''}\\
+\textit{Address:} Show that Model C fails dramatically on test data. Complexity must match data structure.
+
+\item \textbf{``Training error is what matters''}\\
+\textit{Address:} Emphasize: We care about predictions on NEW data, not memorizing old data.
+
+\item \textbf{``Model B just got lucky''}\\
+\textit{Address:} This is systematic - balanced complexity consistently wins.
+\end{enumerate}
+
+\subsection*{Discussion Prompts}
+
+\begin{itemize}
+\item ``If you only saw training error, which model would you choose? Why is that dangerous?''
+\item ``In real life, do you memorize facts or learn patterns? Which is more useful?''
+\item ``Where else have you seen the principle: 'simple enough to generalize, complex enough to capture reality'?''
+\end{itemize}
+
+\newpage
+
+% ================================================================
+% DISCOVERY 2 SOLUTIONS
+% ================================================================
+\section*{Discovery 2: The Moving Centers Algorithm - SOLUTIONS}
+
+\subsection*{Expected Answers}
+
+\textbf{Task 1: Center Movements}
+\begin{itemize}
+\item Red cluster point count in Step 1: 8 points
+\item Approximate center in Step 2: $(1.0, 6.0)$ (mean of assigned points)
+\item Movement distance: $\sqrt{(2-1)^2 + (7-6)^2} \approx 1.4$ units
+\end{itemize}
+
+\textbf{Task 2: Within-Cluster Variance}
+
+Sample calculations (will vary by which points students pick):
+\begin{itemize}
+\item Point 1 at $(0.8, 6.2)$ to center $(1, 6)$: distance $\approx 0.28$
+\item Point 2 at $(1.2, 5.8)$ to center: distance $\approx 0.28$
+\item Point 3 at $(1.5, 6.3)$ to center: distance $\approx 0.58$
+\item Average squared distance: $(0.28^2 + 0.28^2 + 0.58^2)/3 \approx 0.17$
+\end{itemize}
+
+\textbf{Task 3: Variance Reduction}
+
+From chart (approximate values):
+\begin{itemize}
+\item Step 0: 156.3
+\item Step 1: 89.2
+\item Step 2: 78.4
+\item Step 5: 78.4 (converged)
+\end{itemize}
+
+Variance is \textbf{decreasing} - algorithm is optimizing!
+
+\textbf{Task 4: Convergence Detection}
+
+\textit{Expected answer:}
+``The centers stop moving. When centers don't change position between iterations, the algorithm has converged.''
+
+\textit{Alternative good answers:}
+\begin{itemize}
+\item ``Variance stops decreasing''
+\item ``Point assignments stop changing''
+\item ``The distance centers move becomes very small (near zero)''
+\end{itemize}
+
+\textbf{Task 5: Discover the Rules}
+
+\textbf{Rule 1:} Each point \textbf{joins the nearest center} (or ``chooses closest center'')
+
+\textbf{Rule 2:} Each center \textbf{moves to the average position of its points} (or ``becomes the mean of its cluster'')
+
+\textbf{Task 6: Optimization Objective}
+
+The algorithm minimizes: \textbf{total within-cluster variance} (or ``sum of squared distances from points to their centers'')
+
+\subsection*{Key Insights (Expected)}
+\begin{itemize}
+\item K = number of \textbf{clusters} or \textbf{groups}
+\item Means = \textbf{average} or \textbf{centroid} position
+\item Minimizes \textbf{variance} or \textbf{distance} within clusters
+\end{itemize}
+
+\subsection*{Common Misconceptions}
+
+\begin{enumerate}
+\item \textbf{``Centers are data points''}\\
+\textit{Address:} Centers can be anywhere in space, not necessarily at existing points.
+
+\item \textbf{``K-means always finds the best solution''}\\
+\textit{Address:} Different random starts can give different results (local optima).
+
+\item \textbf{``You must know K in advance''}\\
+\textit{Address:} True limitation! Need domain knowledge or validation methods.
+\end{enumerate}
+
+\subsection*{Discussion Prompts}
+
+\begin{itemize}
+\item ``What would happen if we started with different random centers?''
+\item ``How would you choose K for a new problem?''
+\item ``Can you think of real-world applications where finding groups automatically would be useful?''
+\end{itemize}
+
+\newpage
+
+% ================================================================
+% DISCOVERY 3 SOLUTIONS
+% ================================================================
+\section*{Discovery 3: The Impossible Separation - SOLUTIONS}
+
+\subsection*{Expected Answers}
+
+\textbf{Task 1: Linear Boundary Errors}
+\begin{itemize}
+\item Dataset A: 0/30 = 0\% (perfect separation possible)
+\item Dataset B: 3/33 = 9\% (a few outliers)
+\item Dataset C: $\sim$8/30 = 27\% (circular pattern, linear fails)
+\item Dataset D: $\sim$15/30 = 50\% (XOR, cannot do better than random)
+\end{itemize}
+
+Datasets A and B can be (nearly) perfectly separated with straight line.
+
+\textbf{Task 2: Mathematical Proof}
+
+Point classifications:
+\begin{itemize}
+\item (1,1) Red: $a + b + c > 0$
+\item (1,9) Blue: $a + 9b + c < 0$
+\item (9,1) Blue: $9a + b + c < 0$
+\item (9,9) Red: $9a + 9b + c > 0$
+\end{itemize}
+
+\textit{Key insight:} Adding the two blue inequalities gives $10a + 10b + 2c < 0$, which contradicts the red requirements. Mathematical impossibility proven.
+
+\textbf{Task 3: Nonlinear Solutions}
+
+Dataset C:
+\begin{itemize}
+\item Boundary type: \textbf{Circle}
+\item Equation: $x^2 + y^2 = 9$ (or similar radius)
+\end{itemize}
+
+Dataset D:
+\begin{itemize}
+\item Line 1: $x = 5$
+\item Line 2: $y = 5$
+\item Combined rule: ``Red if $(x<5 \text{ AND } y<5)$ OR $(x>5 \text{ AND } y>5)$''
+\end{itemize}
+
+\textbf{Task 4: When Linearity Fails}
+
+\textit{Expected answers:}
+\begin{itemize}
+\item Linear works when: ``Classes can be separated by a straight line/plane''
+\item Linear fails when: ``Data has curved boundaries, circular patterns, or XOR structure''
+\item Solution: ``Use multiple lines/boundaries, nonlinear functions, or neural networks''
+\end{itemize}
+
+\subsection*{Common Misconceptions}
+
+\begin{enumerate}
+\item \textbf{``XOR is just hard, not impossible''}\\
+\textit{Address:} Show the mathematical proof - it's provably impossible for single line.
+
+\item \textbf{``We should just try more lines''}\\
+\textit{Address:} Correct intuition! This leads to neural networks (multiple layers).
+
+\item \textbf{``Nonlinear models are always better''}\\
+\textit{Address:} No - they can overfit (connects to Discovery 1). Use simplest model that works.
+\end{enumerate}
+
+\subsection*{Discussion Prompts}
+
+\begin{itemize}
+\item ``Why is XOR called the 'impossible problem' for perceptrons?''
+\item ``If one line fails, how could we combine TWO lines to solve XOR?''
+\item ``Where in the real world might you encounter non-linearly separable data?''
+\end{itemize}
+
+\newpage
+
+% ================================================================
+% DISCOVERY 4 SOLUTIONS
+% ================================================================
+\section*{Discovery 4: The Optimization Landscape - SOLUTIONS}
+
+\subsection*{Expected Answers}
+
+\textbf{Task 1: Read the Terrain}
+\begin{itemize}
+\item Path A starts: $(2, 8)$
+\item Path A ends with error: $\sim 5.2$ (local minimum)
+\item Path B starts: $(7, 8)$
+\item Path B ends with error: $\sim 6.1$ (different local minimum)
+\item Same minimum? \textbf{No} (different valleys)
+\item Global minimum error: $\sim 3.8$
+\end{itemize}
+
+\textbf{Task 2: Calculate Gradients}
+
+Reading from contours:
+\begin{itemize}
+\item $E(3.0, 7) \approx 6.5$
+\item $E(3.5, 7) \approx 6.3$
+\item $E(3, 7.5) \approx 6.7$
+\end{itemize}
+
+Gradients:
+\begin{itemize}
+\item $\frac{\partial E}{\partial x} \approx \frac{6.3-6.5}{0.5} = -0.4$
+\item $\frac{\partial E}{\partial y} \approx \frac{6.7-6.5}{0.5} = 0.4$
+\item Descent direction: $(+0.4, -0.4)$ (opposite of gradient)
+\end{itemize}
+
+\textbf{Task 3: Step Size Experiments}
+
+Too LARGE:
+\begin{itemize}
+\item Problem: ``Overshoot the minimum, bounce around''
+\item Risk: ``Divergence, never converges, unstable''
+\end{itemize}
+
+Too SMALL:
+\begin{itemize}
+\item Problem: ``Very slow convergence, takes forever''
+\item Risk: ``Gets stuck in local minimum, computationally expensive''
+\end{itemize}
+
+Optimal: ``Start with larger steps, decrease over time'' or ``adaptive learning rate''
+
+\textbf{Task 4: Local vs Global}
+
+\textit{Expected answer:}
+``Path A followed the gradient downhill and got trapped in the nearest valley. The gradient always points to the nearest minimum, not necessarily the best one.''
+
+\textit{Escape strategies:}
+\begin{itemize}
+\item ``Random restart from different location''
+\item ``Momentum to jump over small hills''
+\item ``Simulated annealing (occasionally accept uphill moves)''
+\item ``Multiple initializations and pick best result''
+\end{itemize}
+
+\textbf{Task 5: Optimization Strategy}
+
+Parameters = \textbf{model weights, coordinates}\\
+Learning rate = \textbf{step size, how far to move}\\
+Gradient = \textbf{slope, direction of steepest ascent}
+
+If gradient positive: move \textbf{left} (decrease parameter)\\
+If gradient negative: move \textbf{right} (increase parameter)
+
+\subsection*{Common Misconceptions}
+
+\begin{enumerate}
+\item \textbf{``Gradient descent always finds the best solution''}\\
+\textit{Address:} No - only finds local minimum. Global minimum not guaranteed.
+
+\item \textbf{``Bigger learning rate is always faster''}\\
+\textit{Address:} Too big causes overshooting. Need balance.
+
+\item \textbf{``All optimization landscapes are smooth''}\\
+\textit{Address:} Real problems can have plateaus, saddle points, discontinuities.
+\end{enumerate}
+
+\subsection*{Discussion Prompts}
+
+\begin{itemize}
+\item ``Imagine hiking down a mountain in fog - you can only see your feet. What strategy would you use?''
+\item ``Why might machine learning need to train the same model multiple times with different starting points?''
+\item ``What's the connection between this landscape and Discovery 1's overfitting problem?''
+\end{itemize}
+
+\newpage
+
+% ================================================================
+% DISCOVERY 5 SOLUTIONS
+% ================================================================
+\section*{Discovery 5: The Two-Player Game - SOLUTIONS}
+
+\subsection*{Expected Answers}
+
+\textbf{Task 1: Quality Tracking}
+\begin{itemize}
+\item Epoch 1: 12\% (noise blob)
+\item Epoch 10: 35\% (improvement: 23\%)
+\item Epoch 50: 68\% (improvement: 33\%)
+\item Epoch 100: 94\% (improvement: 26\%)
+\item Total improvement: 82\%
+\end{itemize}
+
+\textbf{Task 2: Loss Dynamics}
+\begin{itemize}
+\item Generator winning: Epochs 50-100 (loss decreasing faster)
+\item Discriminator winning: Epochs 1-20 (loss stable while G struggles)
+\item Equilibrium: Around epoch 60-70
+\item At equilibrium: Both losses $\approx 2-3$, roughly equal
+\end{itemize}
+
+\textbf{Task 3: Game Theory Table}
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+G & D & G success & D success & Winner \\
+\hline
+0.2 & 0.8 & 0.16 (16\%) & 0.64 (64\%) & Discriminator \\
+0.5 & 0.5 & 0.25 (25\%) & 0.25 (25\%) & Tie (equilibrium) \\
+0.8 & 0.2 & 0.64 (64\%) & 0.16 (16\%) & Generator \\
+0.9 & 0.1 & 0.81 (81\%) & 0.09 (9\%) & Generator \\
+\hline
+\end{tabular}
+\end{center}
+
+Nash equilibrium: $G = 0.5$, $D = 0.5$ (both equally successful)
+
+\textbf{Task 4: Training Evolution}
+\begin{itemize}
+\item Steepest improvement: Epochs 1-30
+\item Slows after: Epoch 50
+\item Reach 100\%? \textbf{No} - discriminator improves too, making task harder
+\end{itemize}
+
+\textbf{Task 5: Adversarial Insight}
+
+\textit{Why both improve:}
+``Generator gets better by trying to fool discriminator. Discriminator gets better by learning to detect fakes. Each improvement forces the other to improve. Competition drives mutual learning.''
+
+\textit{Generator alone:}
+``No feedback, no improvement. Generator needs discriminator to tell it what's wrong.''
+
+\textit{Analogy:}
+Generator = \textbf{art student}, Discriminator = \textbf{art teacher/critic}
+
+\subsection*{Common Misconceptions}
+
+\begin{enumerate}
+\item \textbf{``One player should win completely''}\\
+\textit{Address:} Equilibrium is the goal - both at 50/50 means generator creates perfect fakes.
+
+\item \textbf{``Training is competitive, so one fails''}\\
+\textit{Address:} Both improve! Competition drives mutual growth (cooperative-competitive).
+
+\item \textbf{``Generator loss should reach zero''}\\
+\textit{Address:} At equilibrium, discriminator is random (50/50) on real vs fake.
+\end{enumerate}
+
+\subsection*{Discussion Prompts}
+
+\begin{itemize}
+\item ``Why is this called 'adversarial' if both players benefit?''
+\item ``Can you think of other situations where competition leads to improvement?''
+\item ``What happens if discriminator trains much faster than generator?''
+\end{itemize}
+
+\newpage
+
+% ================================================================
+% DISCOVERY 6 SOLUTIONS
+% ================================================================
+\section*{Discovery 6: The Dimensionality Revelation - SOLUTIONS}
+
+\subsection*{Expected Answers}
+
+\textbf{Task 1: Variance Calculations}
+
+From 3D plot:
+\begin{itemize}
+\item Var(X) $\approx 4.2$
+\item Var(Y) $\approx 4.1$
+\item Var(Z) $\approx 1.05$
+\item Total $\approx 9.35$
+\end{itemize}
+
+From 2D projection:
+\begin{itemize}
+\item Var(PC1) $\approx 8.3$ (89\% of total)
+\item Var(PC2) $\approx 0.9$ (10\% of total)
+\item Total retained: 99\%
+\end{itemize}
+
+Information lost: 1\%
+
+\textbf{Task 2: Reconstruction Error}
+
+Example point:
+\begin{itemize}
+\item Original: $(2.0, 2.0, 1.0)$
+\item Projected: $(2.8, 0.2)$
+\item Reconstructed: $(2.0, 2.0, 1.0)$
+\item Error: $\approx 0$ (very small)
+\end{itemize}
+
+Average error from chart: $\sim 0.12$
+
+Reconstruction is \textbf{excellent} - only 1\% information loss.
+
+\textbf{Task 3: Compression Analysis}
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+Dimensions & Info Retained & Storage Saved & Good? \\
+\hline
+3 & 100\% & 0\% & N/A \\
+2 & 99\% & 33\% & YES (great trade-off) \\
+1 & 89\% & 67\% & Maybe (depends on use) \\
+\hline
+\end{tabular}
+\end{center}
+
+Compression for 2D:
+\begin{itemize}
+\item Original: 150 numbers
+\item Compressed: 100 numbers
+\item Ratio: 100/150 = 67\% (33\% reduction)
+\end{itemize}
+
+\textbf{Task 4: When PCA Works}
+
+\textit{Expected answer:}
+``Points lie near a 2D plane in 3D space. Most variation is along two diagonal directions, very little variation perpendicular to the plane. Data has intrinsic low-dimensional structure.''
+
+\textit{Random scatter:}
+``PCA would not compress well - would need all 3 dimensions to represent the data accurately.''
+
+\textbf{Task 5: Principal Components}
+
+From scree plot:
+\begin{itemize}
+\item PC1: 89\%
+\item PC2: 10\%
+\item PC3: 1\%
+\item Sum: 100\%
+\end{itemize}
+
+Elbow suggests keeping: \textbf{2 components}
+
+\subsection*{Key Insights (Expected)}
+\begin{itemize}
+\item PCA finds directions of \textbf{maximum} variance
+\item Data near lower-dimensional \textbf{subspace/plane} compresses well
+\item Trade-off: Storage vs \textbf{information loss/accuracy}
+\end{itemize}
+
+\subsection*{Common Misconceptions}
+
+\begin{enumerate}
+\item \textbf{``PCA creates new features from nothing''}\\
+\textit{Address:} No - PCA finds existing structure. It rotates axes to align with variance.
+
+\item \textbf{``First PC is always the best''}\\
+\textit{Address:} Depends on data. For random data, no PC is significantly better.
+
+\item \textbf{``PCA always compresses to 2D for visualization''}\\
+\textit{Address:} Can keep any number of components based on variance retained threshold.
+\end{enumerate}
+
+\subsection*{Discussion Prompts}
+
+\begin{itemize}
+\item ``Why is this data compressible from 3D to 2D with almost no loss?''
+\item ``If you had 100 features, how would you decide how many PCs to keep?''
+\item ``Can you think of applications where reducing dimensions would be useful?''
+\end{itemize}
+
+\newpage
+
+% ================================================================
+% ASSESSMENT RUBRIC
+% ================================================================
+\section*{Assessment Rubric}
+
+Use this rubric to gauge student understanding:
+
+\subsection*{Excellent Understanding (90-100\%)}
+\begin{itemize}
+\item Correctly calculates numerical answers
+\item Explains patterns in own words
+\item Makes connections across discoveries
+\item Predicts outcomes for new scenarios
+\item Asks sophisticated "what if" questions
+\end{itemize}
+
+\subsection*{Good Understanding (75-89\%)}
+\begin{itemize}
+\item Most calculations correct
+\item Identifies main patterns
+\item Answers conceptual questions adequately
+\item Makes some cross-discovery connections
+\end{itemize}
+
+\subsection*{Developing Understanding (60-74\%)}
+\begin{itemize}
+\item Some calculation errors
+\item Recognizes patterns with prompting
+\item Struggles with conceptual explanations
+\item Limited connections across topics
+\end{itemize}
+
+\subsection*{Needs Support (<60\%)}
+\begin{itemize}
+\item Frequent calculation errors
+\item Cannot articulate patterns independently
+\item Requires significant guidance
+\item Use 1-on-1 discussion to build foundation
+\end{itemize}
+
+\newpage
+
+% ================================================================
+% CLASS DISCUSSION GUIDE
+% ================================================================
+\section*{Class Discussion Guide}
+
+\subsection*{Opening (5 minutes)}
+
+\textit{``Before we start the lecture, let's share discoveries. Turn to your neighbor and compare answers for Discovery 1, Task 3 - why does Model C fail on test data?''}
+
+Listen for: students using words like ``memorization,'' ``overfitting,'' ``doesn't generalize''
+
+\subsection*{Mid-Lecture Checkpoints}
+
+After introducing each formal concept, connect to worksheet:
+
+\textbf{When introducing bias-variance:}\\
+``Who discovered the paradox in Chart 1? You already found the bias-variance tradeoff before I named it!''
+
+\textbf{When introducing K-means:}\\
+``In Discovery 2, what two rules did you discover? [Assignment and Update] Exactly - that's the K-means algorithm.''
+
+\textbf{When introducing neural networks:}\\
+``Discovery 3 showed you XOR is impossible for single line. How did you solve it? [Two lines] That's precisely what neural networks do - combine multiple simple boundaries.''
+
+\textbf{When introducing optimization:}\\
+``Chart 4 showed different starting points leading to different valleys. What's the solution? [Random restarts] Used in practice constantly.''
+
+\textbf{When introducing GANs:}\\
+``Your Nash equilibrium table showed equilibrium at 50/50. What does that mean for the generator? [Perfect fakes] Exactly!''
+
+\textbf{When introducing PCA:}\\
+``Discovery 6 showed 99\% info retained with 33\% storage savings. When is that worth it? [When storage/speed matters, small info loss OK]''
+
+\subsection*{Common Questions and Answers}
+
+\textbf{Q: ``How do we know which model complexity is right?''}\\
+A: Cross-validation (split data, test on held-out portion) - systematic version of Discovery 1.
+
+\textbf{Q: ``Does K-means always find the same clusters?''}\\
+A: No - depends on initialization. Run multiple times, pick best result (lowest variance).
+
+\textbf{Q: ``Can any nonlinear problem be solved with enough lines?''}\\
+A: Yes! Universal approximation theorem - enough neurons can approximate any function.
+
+\textbf{Q: ``Why not always use the most complex model?''}\\
+A: Discovery 1 showed this fails! Overfitting, computational cost, interpretability.
+
+\textbf{Q: ``Is Nash equilibrium always 50/50?''}\\
+A: For this game formulation, yes. Other GAN variants have different equilibria.
+
+\textbf{Q: ``How much variance should PCA retain?''}\\
+A: Common thresholds: 90-95\%, but depends on application. Visualization: 2-3 PCs. Compression: as low as tolerable.
+
+\subsection*{Closing (5 minutes)}
+
+\textit{``Look at your three most important insights from the final reflection. Turn to your neighbor - did you write similar things or different? Why might different people discover different patterns in the same charts?''}
+
+This reinforces: Multiple valid interpretations, discovery is personal, formal lecture codifies shared understanding.
+
+\vspace{2em}
+
+\begin{center}
+\Large\textbf{End of Instructor Guide}
+\end{center}
+
+\end{document}

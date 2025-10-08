@@ -1,12 +1,12 @@
-% Act 3: The Breakthrough - From Linear to Nonlinear
-\section{Act 3: The Breakthrough}
+% Part 3: The Breakthrough - From Linear to Nonlinear
+\section{Part 3: The Breakthrough}
 
 % Section divider
 \begin{frame}[plain]
 \vfill
 \centering
 \begin{beamercolorbox}[sep=16pt,center]{title}
-\usebeamerfont{title}\Large Act 3: The Breakthrough\par
+\usebeamerfont{title}\Large Part 3: The Breakthrough\par
 \vspace{0.5em}
 \large From Linear to Nonlinear: Three Solutions\par
 \end{beamercolorbox}
@@ -118,27 +118,28 @@ Model: $\text{Price} = w_0 + w_1 x + w_2 x^2$
 \vspace{0.5em}
 
 \textbf{Learned model:}
-\formula{\text{Price} = 50 + 0.08x + 0.00002x^2}
+\formula{\text{Price} = 20 + 0.06x + 0.000015x^2}
 
 \textbf{For house with 4000 sqft:}
 
-Linear part: $50 + 0.08 \times 4000 = 370$
+Intercept: $20$
 
-Quadratic part: $0.00002 \times 4000^2 = 0.00002 \times 16{,}000{,}000 = 320$
+Linear part: $0.06 \times 4000 = 240$
 
-\textbf{Wait, 320 is huge! Let me recalculate...}
+Quadratic part: $0.000015 \times 4000^2 = 0.000015 \times 16{,}000{,}000 = 240$
 
-Actually: $0.000002 \times 16{,}000{,}000 = 32$
-
-Total: $50 + 320 + 32 = 402$ (still wrong)
+\textbf{Total:} $20 + 240 + 240 = 500$ [OK]
 
 \vspace{0.3em}
-\textbf{Correct calculation:}
-\formula{\text{Price} = 20 + 0.06x + 0.000015x^2}
+\textbf{For house with 5000 sqft:}
 
-For 4000 sqft: $20 + 240 + 240 = 500$ (correct)
+Intercept: $20$
 
-For 5000 sqft: $20 + 300 + 375 = 695$ (correct)
+Linear: $0.06 \times 5000 = 300$
+
+Quadratic: $0.000015 \times 25{,}000{,}000 = 375$
+
+\textbf{Total:} $20 + 300 + 375 = 695$ [OK]
 
 \keypoint{Polynomial captures accelerating price growth}
 
@@ -153,7 +154,7 @@ For 5000 sqft: $20 + 300 + 375 = 695$ (correct)
 \normalsize
 \vspace{0.5em}
 
-\textbf{Example:} Image with 100 × 100 pixels = 10,000 features
+\textbf{Example:} Image with 100 x 100 pixels = 10,000 features
 
 \textbf{Quadratic features:}
 \formula{\binom{10{,}000 + 2}{2} = 50{,}005{,}000 \text{ features}}
@@ -362,7 +363,7 @@ where $\sigma$ is activation function (e.g., sigmoid, ReLU)
 \vspace{0.5em}
 \textbf{XOR solution with 2-layer network:}
 
-\textbf{Architecture:} 2 inputs → 2 hidden → 1 output
+\textbf{Architecture:} 2 inputs -> 2 hidden -> 1 output
 
 \textbf{Hidden layer learns:}
 \begin{itemize}
@@ -474,7 +475,7 @@ You give me any function (no matter how complex), and I can build a neural netwo
 \normalsize
 \vspace{0.5em}
 
-\textbf{Tiny network:} 2 → 2 → 1 on XOR
+\textbf{Tiny network:} 2 -> 2 -> 1 on XOR
 
 \textbf{Forward:}
 \begin{itemize}
@@ -491,7 +492,7 @@ You give me any function (no matter how complex), and I can build a neural netwo
 \item Weight updates: $W := W - 0.01 \times \text{gradients}$
 \end{itemize}
 
-\textbf{After 1000 iterations:} Loss 0.36 → 0.01, accuracy 50\% → 100\%
+\textbf{After 1000 iterations:} Loss 0.36 -> 0.01, accuracy 50\% -> 100\%
 
 \bottomnote{This is implemented in TensorFlow, PyTorch automatically}
 }
@@ -508,7 +509,7 @@ You give me any function (no matter how complex), and I can build a neural netwo
 \begin{itemize}
 \item 8-layer CNN
 \item GPU training
-\item 84\% → 63\% error rate (huge jump)
+\item 84\% -> 63\% error rate (huge jump)
 \end{itemize}
 
 \textbf{2014: VGGNet, GoogLeNet}
@@ -546,7 +547,7 @@ You give me any function (no matter how complex), and I can build a neural netwo
 
 \begin{enumerate}
 \item \textbf{Big Data:} ImageNet (14M images), Common Crawl (petabytes)
-\item \textbf{GPU Computing:} 100× faster than CPUs for matrix operations
+\item \textbf{GPU Computing:} 100x faster than CPUs for matrix operations
 \item \textbf{Better Architectures:} ResNet, Transformers, attention
 \item \textbf{Software Frameworks:} TensorFlow, PyTorch (automatic differentiation)
 \item \textbf{Regularization:} Dropout, batch norm, data augmentation

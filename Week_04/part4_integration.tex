@@ -75,7 +75,7 @@
 \textbf{Design Principle:} Classification invisible to user, value visible immediately
 \end{tcolorbox}
 
-\bottomnote{Netflix runs 100+ classification models simultaneously for each user visit}
+\bottomnote{Ensemble deployment scales complexity - parallel model execution delivers diverse predictions within strict latency constraints}
 \end{frame}
 
 % Slide 24: A/B Testing Automation
@@ -146,7 +146,7 @@
 \textcolor{mlpurple}{\textbf{Result: 10x faster iteration, 3x more experiments, continuous improvement}}
 \end{center}
 
-\bottomnote{Spotify runs thousands of experiments simultaneously using ML-powered allocation}
+\bottomnote{Automated experimentation enables continuous optimization - classification directs traffic allocation based on predicted outcomes}
 \end{frame}
 
 % Slide 25: Risk Assessment Dashboards
@@ -204,7 +204,7 @@
 \textbf{Design Rule:} Never show raw ML output - translate to business language
 \end{tcolorbox}
 
-\bottomnote{Good design makes ML accessible to non-technical users while maintaining transparency}
+\bottomnote{Interface design determines adoption - presenting predictions requires balancing simplicity with sufficient context for informed decisions}
 \end{frame}
 
 % Slide 26: Personalization Engines
@@ -288,7 +288,7 @@
 \textcolor{mlpurple}{\textbf{Classification enables 1-to-1 marketing at billion-user scale}}
 \end{center}
 
-\bottomnote{Amazon updates user classifications after every click - continuous learning}
+\bottomnote{Real-time model updating incorporates feedback immediately - continuous learning reduces prediction lag from user behavior changes}
 \end{frame}
 
 % Slide 27: Case Study - Airbnb
@@ -368,7 +368,7 @@ Retrained daily\\
 \end{itemize}
 \end{columns}
 
-\bottomnote{Smart Pricing generates \$2B+ additional revenue annually for Airbnb hosts}
+\bottomnote{Dynamic classification drives pricing optimization - predicting booking probability enables revenue maximization through rate adjustment}
 \end{frame}
 
 % Slide 28: Implementation Checklist
@@ -444,5 +444,19 @@ Ship at 80\%, improve to 95\%
 \end{tcolorbox}
 \end{columns}
 
-\bottomnote{Most successful ML projects start simple and improve incrementally}
+\bottomnote{Incremental deployment reduces risk - simple baseline models enable production learning before investing in complex approaches}
+\end{frame}
+% Slide: When to Use Which Classification Algorithm - Judgment Criteria
+\begin{frame}[t]{When to Use Which Classification Algorithm: Judgment Criteria}
+\vspace{-0.5cm}
+\begin{center}
+\includegraphics[width=0.75\textwidth]{charts/classification_algorithm_decision.pdf}
+\end{center}
+
+\begin{center}
+\textcolor{mlpurple}{\textbf{The Principle:}} Start interpretable (logistic), add complexity (trees/SVM) only when accuracy demands it
+\end{center}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Judgment criteria enable systematic algorithm selection - balance explainability, accuracy, and computational constraints}
 \end{frame}

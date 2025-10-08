@@ -1,0 +1,434 @@
+% Part 4: Design Applications (8 slides)
+\section{Design Applications: Human-Centered Classification}
+
+% Slide 36: Innovation Success Predictor Interface
+\begin{frame}{Innovation Success Predictor Interface}
+\Large\textbf{User-Facing Classification}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\begin{column}{0.55\textwidth}
+\begin{tikzpicture}[scale=0.8]
+% Interface mockup
+\draw[thick] (0,0) rectangle (8,5);
+\node[anchor=west] at (0.2,4.5) {\textbf{Innovation Success Predictor}};
+\draw[gray] (0.2,4.3) -- (7.8,4.3);
+
+% Input fields
+\node[anchor=west] at (0.5,3.8) {Novelty Score: [====----] 70\%};
+\node[anchor=west] at (0.5,3.3) {Market Size: [\$1.2M]};
+\node[anchor=west] at (0.5,2.8) {Team Experience: [5 years]};
+\node[anchor=west] at (0.5,2.3) {Development Time: [8 months]};
+
+% Predict button
+\draw[fill=mlblue!30] (3,1.5) rectangle (5,2);
+\node at (4,1.75) {PREDICT};
+
+% Results
+\draw[fill=mlgreen!20] (0.5,0.3) rectangle (7.5,1.2);
+\node at (4,0.9) {\textbf{Success Probability: 82\%}};
+\node at (4,0.5) {\small High confidence - Recommend proceed};
+\end{tikzpicture}
+\end{column}
+\begin{column}{0.43\textwidth}
+\textbf{Design Principles:}
+\begin{itemize}
+\item Clear input fields
+\item Real-time validation
+\item Confidence intervals
+\item Actionable insights
+\item Visual feedback
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{User Benefits:}
+\begin{itemize}
+\item Instant evaluation
+\item Objective assessment
+\item Risk quantification
+\item Decision support
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Slide 37: Confidence Scores and Uncertainty
+\begin{frame}{Confidence Scores and Uncertainty}
+\Large\textbf{Communicating Model Certainty}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\textbf{Probability vs Confidence:}
+\begin{center}
+\begin{tikzpicture}[scale=0.7]
+% High confidence
+\draw[thick,->] (0,3) -- (5,3);
+\draw[fill=mlgreen!60] (4,2.8) rectangle (4.8,3.2);
+\node[left] at (0,3) {High Conf:};
+\node[right] at (5,3) {85\% $\pm$ 3\%};
+
+% Medium confidence
+\draw[thick,->] (0,2) -- (5,2);
+\draw[fill=mlyellow!60] (2.5,1.8) rectangle (3.5,2.2);
+\node[left] at (0,2) {Med Conf:};
+\node[right] at (5,2) {60\% $\pm$ 15\%};
+
+% Low confidence
+\draw[thick,->] (0,1) -- (5,1);
+\draw[fill=mlred!60] (1,0.8) rectangle (4,1.2);
+\node[left] at (0,1) {Low Conf:};
+\node[right] at (5,1) {55\% $\pm$ 30\%};
+\end{tikzpicture}
+\end{center}
+
+\vspace{0.5em}
+\textbf{Sources of Uncertainty:}
+\begin{itemize}
+\item Limited training data
+\item Feature noise
+\item Model limitations
+\item Distribution shift
+\end{itemize}
+\end{column}
+\begin{column}{0.48\textwidth}
+\textbf{Design Guidelines:}
+\begin{itemize}
+\item Show confidence bands
+\item Use color coding
+\item Provide explanations
+\item Suggest actions based on certainty
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{User Actions by Confidence:}
+\begin{itemize}
+\item \textcolor{mlgreen}{High}: Proceed with plan
+\item \textcolor{mlyellow}{Medium}: Gather more data
+\item \textcolor{mlred}{Low}: Seek expert input
+\end{itemize}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mlblue!10,colframe=mlblue]
+Users trust systems that acknowledge uncertainty
+\end{tcolorbox}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Slide 38: Explainable AI for Designers
+\begin{frame}{Explainable AI for Designers}
+\Large\textbf{Making Black Boxes Transparent}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\textbf{What Designers Need:}
+\begin{itemize}
+\item Why this prediction?
+\item What factors matter most?
+\item How to improve outcome?
+\item What-if scenarios
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Explanation Types:}
+\begin{enumerate}
+\item Global: Overall model behavior
+\item Local: Specific prediction
+\item Contrastive: Why A not B?
+\item Counterfactual: What to change?
+\end{enumerate}
+\end{column}
+\begin{column}{0.48\textwidth}
+\begin{center}
+\begin{tikzpicture}[scale=0.7]
+% Feature contributions
+\node[anchor=west] at (0,4) {\textbf{Why 82\% Success?}};
+\draw[fill=mlgreen!60] (0,3) rectangle (3,3.3);
+\node[right] at (3.2,3.15) {+25\% Novelty};
+\draw[fill=mlgreen!40] (0,2.4) rectangle (2,2.7);
+\node[right] at (2.2,2.55) {+15\% Market};
+\draw[fill=mlgreen!30] (0,1.8) rectangle (1.5,2.1);
+\node[right] at (1.7,1.95) {+10\% Team};
+\draw[fill=mlred!30] (0,1.2) rectangle (-0.8,1.5);
+\node[right] at (0.2,1.35) {-5\% Time};
+\draw[gray,dashed] (0,0.6) -- (3.5,0.6);
+\node[right] at (0,0.3) {Base: 37\%};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Actionable Insights:}
+\begin{itemize}
+\item ``Increase team diversity +2 points''
+\item ``Reduce timeline → +8\% success''
+\item ``Add user testing → +5\% chance''
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Slide 39: A/B Testing with Classifiers
+\begin{frame}{A/B Testing with Classifiers}
+\Large\textbf{Data-Driven Design Decisions}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\textbf{Classification in A/B Tests:}
+\begin{center}
+\begin{tikzpicture}[scale=0.7]
+% Version A
+\draw[fill=mlblue!20] (0,0) rectangle (2,3);
+\node at (1,2.5) {\textbf{Version A}};
+\node at (1,1.5) {Users: 5000};
+\node at (1,0.5) {Success: 62\%};
+
+% Version B
+\draw[fill=mlorange!20] (3,0) rectangle (5,3);
+\node at (4,2.5) {\textbf{Version B}};
+\node at (4,1.5) {Users: 5000};
+\node at (4,0.5) {Success: 71\%};
+
+% Classifier
+\draw[fill=mlgreen!20] (1.5,-1.5) rectangle (3.5,-0.5);
+\node at (2.5,-1) {Classifier};
+
+% Arrows
+\draw[->] (1,-0.2) -- (2,-0.5);
+\draw[->] (4,-0.2) -- (3,-0.5);
+\draw[->] (2.5,-1.7) -- (2.5,-2.2);
+
+% Prediction
+\node at (2.5,-2.5) {\textbf{B wins: 95\% confidence}};
+\end{tikzpicture}
+\end{center}
+\end{column}
+\begin{column}{0.48\textwidth}
+\textbf{Applications:}
+\begin{itemize}
+\item Feature prioritization
+\item User segment targeting
+\item Conversion prediction
+\item Churn prevention
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Beyond Simple Metrics:}
+\begin{itemize}
+\item Predict long-term success
+\item Identify user segments
+\item Optimize for multiple goals
+\item Reduce test duration
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Real Example:}
+Spotify uses classifiers to predict playlist success before full rollout
+\end{column}
+\end{columns}
+\end{frame}
+
+% Slide 40: Real-Time Classification Systems
+\begin{frame}{Real-Time Classification Systems}
+\Large\textbf{Instant Decisions at Scale}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\textbf{Architecture:}
+\begin{center}
+\begin{tikzpicture}[scale=0.6,
+    box/.style={draw,rounded corners,minimum width=2cm}]
+
+\node[box,fill=mlblue!20] (user) at (0,3) {User Input};
+\node[box,fill=mlorange!20] (api) at (0,1.5) {API Gateway};
+\node[box,fill=mlgreen!20] (model) at (0,0) {Model Server};
+\node[box,fill=mlyellow!20] (cache) at (3,0) {Cache};
+\node[box,fill=mlpurple!20] (db) at (-3,0) {Database};
+
+\draw[->] (user) -- (api);
+\draw[->] (api) -- (model);
+\draw[<->] (model) -- (cache);
+\draw[<->] (model) -- (db);
+\draw[->] (model) -- (0,-1.5) node[below] {Response};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Performance Requirements:}
+\begin{itemize}
+\item Latency < 100ms
+\item 10,000 requests/second
+\item 99.9\% uptime
+\end{itemize}
+\end{column}
+\begin{column}{0.48\textwidth}
+\textbf{Design Patterns:}
+\begin{itemize}
+\item Model caching
+\item Feature stores
+\item Batch prediction
+\item Edge deployment
+\item Fallback strategies
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Use Cases:}
+\begin{itemize}
+\item Content recommendation
+\item Fraud detection
+\item Dynamic pricing
+\item Personalization
+\item Quality control
+\end{itemize}
+
+\vspace{0.5em}
+\accuracy{15ms} average response time achieved
+\end{column}
+\end{columns}
+\end{frame}
+
+% Slide 41: User Feedback Loop
+\begin{frame}{User Feedback Loop}
+\Large\textbf{Continuous Improvement}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.8,
+    box/.style={draw,rounded corners,fill=mlblue!20,minimum width=2.5cm,minimum height=0.8cm}]
+
+% Cycle
+\node[box] (predict) at (0,2) {Predict};
+\node[box] (act) at (3,0) {User Action};
+\node[box] (feedback) at (0,-2) {Feedback};
+\node[box] (retrain) at (-3,0) {Retrain};
+
+% Arrows with labels
+\draw[thick,->] (predict) -- node[right] {\small confidence} (act);
+\draw[thick,->] (act) -- node[right] {\small outcome} (feedback);
+\draw[thick,->] (feedback) -- node[left] {\small labels} (retrain);
+\draw[thick,->] (retrain) -- node[left] {\small improved} (predict);
+
+% Center
+\node at (0,0) {\textbf{Continuous Learning}};
+\end{tikzpicture}
+\end{center}
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\textbf{Feedback Collection:}
+\begin{itemize}
+\item Explicit ratings
+\item Implicit behavior
+\item Business outcomes
+\item Error reports
+\end{itemize}
+\end{column}
+\begin{column}{0.48\textwidth}
+\textbf{Model Updates:}
+\begin{itemize}
+\item Weekly retraining
+\item Online learning
+\item Transfer learning
+\item Active learning
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Slide 42: Portfolio Optimization
+\begin{frame}{Innovation Portfolio Optimization}
+\Large\textbf{Balancing Risk and Reward}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\begin{column}{0.55\textwidth}
+\begin{center}
+\includegraphics[width=\textwidth]{charts/innovation_success_dashboard.pdf}
+\end{center}
+\end{column}
+\begin{column}{0.43\textwidth}
+\textbf{Classification for Portfolios:}
+\begin{itemize}
+\item Risk assessment per project
+\item Success probability ranking
+\item Resource allocation
+\item Timeline optimization
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Optimal Mix:}
+\begin{itemize}
+\item 20\% High risk/reward
+\item 50\% Medium confidence
+\item 30\% Safe bets
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Dynamic Rebalancing:}
+Update portfolio based on new predictions and outcomes
+\end{column}
+\end{columns}
+\end{frame}
+
+% Slide 43: Design Summary
+\begin{frame}{Design Applications Summary}
+\Large\textbf{Bridging ML and User Experience}
+\normalsize
+
+\vspace{1em}
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\textbf{Key Design Principles:}
+\begin{itemize}
+\item Transparency over accuracy
+\item Actionable over abstract
+\item Confidence with humility
+\item Human in the loop
+\item Continuous improvement
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Integration Points:}
+\begin{itemize}
+\item Decision support tools
+\item Automated workflows
+\item Quality assurance
+\item Personalization engines
+\end{itemize}
+\end{column}
+\begin{column}{0.48\textwidth}
+\textbf{Success Factors:}
+\begin{itemize}
+\item Clear communication
+\item Trust building
+\item Graceful failures
+\item User control
+\item Value demonstration
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Next: Practice}
+\begin{tcolorbox}[colback=mlpurple!10,colframe=mlpurple]
+Real-world case study and hands-on exercises
+\end{tcolorbox}
+\end{column}
+\end{columns}
+\end{frame}

@@ -1,0 +1,187 @@
+% ACT 2: THE NAIVE APPROACH (4 slides)
+% Theme: Better prompts work... then fail
+% CRITICAL: SUCCESS (Slide 7) BEFORE FAILURE (Slide 8)
+% NO UNVERIFIED NUMBERS
+
+\section{Act 2: The Naive Approach}
+
+% Slide 5: Visual - The Obvious Solution
+\begin{frame}[t]{The Obvious Solution: Just Write Better Prompts}
+\vspace{-0.3cm}
+\begin{center}
+\includegraphics[width=0.85\textwidth]{prompt_engineering_patterns.pdf}
+\end{center}
+
+\begin{center}
+\textbf{Key Insight}: If AI outputs are messy, clearer instructions should produce cleaner, more consistent results
+\end{center}
+
+\bottomnote{The naive hypothesis: Vague prompts cause chaos, detailed prompts create consistency}
+\end{frame}
+
+% Slide 6: Detail - How Prompt Engineering Works
+\begin{frame}[t]{How Prompt Engineering Works: Five Common Techniques}
+\small
+\begin{columns}[T]
+\column{0.49\textwidth}
+\raggedright
+\textbf{The Techniques}:
+
+\vspace{0.2cm}
+\textbf{1. Detailed Instructions}
+\begin{itemize}
+\item Specify exactly what to extract
+\item List all required fields
+\item Describe desired format
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{2. Few-Shot Examples}
+\begin{itemize}
+\item Show 3-5 example outputs
+\item Demonstrate desired format
+\item Illustrate edge cases
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{3. Role-Playing}
+\begin{itemize}
+\item "You are an expert data analyst..."
+\item Sets context and expectations
+\item Encourages professional output
+\end{itemize}
+
+\column{0.49\textwidth}
+\raggedright
+\textbf{The Techniques (continued)}:
+
+\vspace{0.2cm}
+\textbf{4. Step-by-Step Guidance}
+\begin{itemize}
+\item Break task into steps
+\item "First identify..., then extract..."
+\item Chain of thought reasoning
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{5. Format Specification}
+\begin{itemize}
+\item "Return as JSON with keys..."
+\item Describe field types
+\item Request specific structure
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{When It Helps}:
+\begin{itemize}
+\item Simple, clean inputs
+\item Standard formats
+\item Well-structured source data
+\item Few edge cases
+\end{itemize}
+\end{columns}
+
+\bottomnote{Prompt engineering improves quality through clearer communication - but is it enough for production?}
+\end{frame}
+
+% Slide 7: Visual - SUCCESS (CRITICAL - Build Hope)
+\begin{frame}[t]{Success: When Prompt Engineering Works Beautifully}
+\vspace{-0.3cm}
+\begin{center}
+\includegraphics[width=0.85\textwidth]{success_examples.pdf}
+\end{center}
+
+\begin{center}
+\textcolor{mlgreen}{\textbf{On simple, well-formatted inputs, prompt engineering delivers consistent, high-quality results}}
+\end{center}
+
+\vspace{0.3cm}
+\begin{columns}[T]
+\column{0.32\textwidth}
+\small
+\textbf{Clean Data}:
+\begin{itemize}
+\item Standard formats
+\item All fields present
+\item No ambiguity
+\item Expected patterns
+\end{itemize}
+
+\column{0.32\textwidth}
+\small
+\textbf{Consistent Output}:
+\begin{itemize}
+\item Correct extractions
+\item Proper formatting
+\item All fields captured
+\item Parseable results
+\end{itemize}
+
+\column{0.32\textwidth}
+\small
+\textbf{Success Factors}:
+\begin{itemize}
+\item Simple inputs
+\item Clear examples
+\item Detailed prompts
+\item Standard cases
+\end{itemize}
+\end{columns}
+
+\bottomnote{This looks promising - detailed prompts produce reliable results on clean, simple data}
+\end{frame}
+
+% Slide 8: Visual - FAILURE (CRITICAL - Show Pattern)
+\begin{frame}[t]{Failure: When Real-World Complexity Reveals Fundamental Limits}
+\vspace{-0.3cm}
+\begin{center}
+\includegraphics[width=0.85\textwidth]{failure_pattern.pdf}
+\end{center}
+
+\begin{center}
+\textcolor{mlred}{\textbf{On complex, messy real-world data, prompt engineering breaks down systematically}}
+\end{center}
+
+\vspace{0.3cm}
+\begin{columns}[T]
+\column{0.32\textwidth}
+\small
+\textbf{Messy Data}:
+\begin{itemize}
+\item Multiple formats mixed
+\item Missing fields
+\item Extra information
+\item Ambiguous values
+\item Unexpected patterns
+\end{itemize}
+
+\column{0.32\textwidth}
+\small
+\textbf{Inconsistent Output}:
+\begin{itemize}
+\item Variable formats
+\item Wrong field names
+\item Type mismatches
+\item Parse failures
+\item Unpredictable errors
+\end{itemize}
+
+\column{0.32\textwidth}
+\small
+\textbf{Root Cause}:
+\begin{itemize}
+\item Prompts are suggestions
+\item No enforcement
+\item AI can ignore format
+\item No validation
+\item No recovery mechanism
+\end{itemize}
+\end{columns}
+
+\vspace{0.5cm}
+\begin{center}
+\textcolor{mlpurple}{\textbf{The Pattern:}} Simple cases work, complex cases fail - because prompts \textit{describe} but don't \textit{enforce}
+\end{center}
+
+\bottomnote{Failure pattern reveals fundamental limit: Suggestions can't guarantee structure when integrated systems demand it}
+\end{frame}

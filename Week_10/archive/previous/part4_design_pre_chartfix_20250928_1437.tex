@@ -1,0 +1,904 @@
+% Part 4: Design - Experimentation Culture & Communication
+\section{Design: Building Experimentation Culture}
+
+% Slide 1: Building Experimentation Culture
+\begin{frame}{Building Experimentation Culture: Leadership Principles}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Jeff Bezos on Experimentation}}
+
+\small
+``If you double the number of experiments you do per year, you're going to double your inventiveness.''
+
+\vspace{0.3cm}
+\textbf{Amazon's Approach:}
+\begin{itemize}
+\item Experiments are default, not exception
+\item Ship fast, iterate faster
+\item Celebrate ``failed'' experiments (learning)
+\item Data beats opinions
+\item Everyone empowered to test
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{Google's Philosophy}}
+
+\small
+``We're wrong a lot. Most experiments fail. That's OK—we learn fast and move on.''
+
+\vspace{0.2cm}
+\textbf{Key principles:}
+\begin{itemize}
+\item 10-20\% win rate is normal
+\item Compound small wins (1\% lift × 100 experiments)
+\item Avoid HiPPO (Highest Paid Person's Opinion)
+\item Test everything, assume nothing
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{mlorange}{\textbf{Characteristics of Strong Culture}}
+
+\small
+\textbf{1. Velocity:}
+\begin{itemize}
+\item 50-100+ experiments per year
+\item 1-2 week experiment cycle
+\item Automated pipelines
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{2. Psychological Safety:}
+\begin{itemize}
+\item OK to propose ``crazy'' ideas
+\item No punishment for failed experiments
+\item Learn from mistakes openly
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{3. Data Literacy:}
+\begin{itemize}
+\item Understand p-values, CI, effect sizes
+\item Know when to trust results
+\item Question unexpected findings
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{4. Infrastructure:}
+\begin{itemize}
+\item Feature flags in production
+\item Real-time dashboards
+\item 1-click deploy and rollback
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlpurple}{\textbf{Anti-Patterns:}}
+\begin{itemize}
+\item Shipping without testing (arrogance)
+\item Testing but ignoring results (confirmation bias)
+\item Only testing when forced (compliance mindset)
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Culture eats strategy for breakfast—experimentation must be in DNA}
+\end{frame}
+
+% Slide 2: Metric Selection
+\begin{frame}{Metric Selection: North Star \& Guardrails}
+\begin{columns}[T]
+\column{0.55\textwidth}
+\includegraphics[width=\textwidth]{charts/metric_tree_example.pdf}
+
+\column{0.43\textwidth}
+\textcolor{mlblue}{\textbf{North Star Metric}}
+
+\small
+\textbf{Definition:} Single metric that captures long-term value creation
+
+\vspace{0.2cm}
+\textbf{Examples:}
+\begin{itemize}
+\item Spotify: Weekly active users
+\item Netflix: Watch time per user
+\item Airbnb: Nights booked
+\item Amazon: Purchases per customer
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Criteria:}
+\begin{itemize}
+\item Aligns with business model
+\item Measurable in A/B tests
+\item Leading indicator (not lagging)
+\item Actionable by teams
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{Guardrail Metrics}}
+
+\small
+\textbf{Purpose:} Prevent optimization tunnel vision
+
+\vspace{0.2cm}
+\textbf{Examples:}
+\begin{itemize}
+\item Revenue: Must not drop $>$ 2\%
+\item Latency: p95 $<$ 300ms
+\item Error rate: $<$ 0.1\%
+\item User satisfaction: NPS $>$ 40
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Rule:} Ship only if North Star improves AND all guardrails pass
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Good metrics are specific, measurable, and aligned with long-term value}
+\end{frame}
+
+% Slide 3: Results Communication
+\begin{frame}{Communicating Results to Stakeholders}
+\begin{columns}[T]
+\column{0.32\textwidth}
+\textcolor{mlblue}{\textbf{For Executives}}
+
+\small
+\textbf{What they care about:}
+\begin{itemize}
+\item Bottom line impact
+\item Risk level
+\item Confidence level
+\item Timeline
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Example:}\\
+``Treatment increased revenue by 8\% (95\% CI: 5\%-11\%). Expected annual impact: \$2.4M. Recommend full rollout over 2 weeks. Risk: Low (guardrails passed).''
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{For Product Managers}}
+
+\small
+\textbf{What they care about:}
+\begin{itemize}
+\item User experience impact
+\item Segment differences
+\item Feature interactions
+\item Next iterations
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Example:}\\
+``Treatment improved CTR 15\% for new users, 5\% for power users. iOS stronger than Android. Suggests personalization opportunity.''
+
+\column{0.32\textwidth}
+\textcolor{mlorange}{\textbf{For Engineers}}
+
+\small
+\textbf{What they care about:}
+\begin{itemize}
+\item Implementation details
+\item Performance metrics
+\item Technical challenges
+\item Edge cases
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Example:}\\
+``Model latency p95: 180ms (vs 150ms baseline). Sample ratio 50.2/49.8 (acceptable). Bug in iOS $<$ 13 handling fixed day 3. Rerun analysis confirmed results.''
+
+\vspace{0.3cm}
+\textcolor{mlpurple}{\textbf{For Data Scientists}}
+
+\small
+\textbf{What they care about:}
+\begin{itemize}
+\item Statistical rigor
+\item Effect sizes
+\item Confidence intervals
+\item Methodology
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Example:}\\
+``Z = 4.2, p $<$ 0.001, Cohen's d = 0.28 (small-medium). Stratified by device. Sequential analysis stopped early (95\% power achieved at 75\% sample). Bayesian: P(B $>$ A) = 0.997.''
+
+\column{0.32\textwidth}
+\textcolor{mlblue}{\textbf{Universal Principles}}
+
+\small
+\textbf{Always include:}
+\begin{enumerate}
+\item Hypothesis tested
+\item Sample size achieved
+\item Primary metric result + CI
+\item Guardrail metric status
+\item Recommendation (ship/iterate/kill)
+\item Rationale for recommendation
+\end{enumerate}
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{Visualization Tips}}
+
+\small
+\begin{itemize}
+\item Show distributions, not just means
+\item Include confidence intervals
+\item Highlight guardrail bounds
+\item Use color coding (green/yellow/red)
+\item Keep it simple (no jargon)
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlorange}{\textbf{Red Flags to Call Out}}
+
+\small
+\begin{itemize}
+\item Sample ratio mismatch
+\item Novelty effects
+\item Simpson's paradox
+\item Guardrail violations
+\item Unexpected subgroup patterns
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Tailor communication to audience—same data, different emphasis}
+\end{frame}
+
+% Slide 4: Statistical Literacy for Non-Technical Teams
+\begin{frame}{Explaining Statistics to Non-Technical Stakeholders}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{P-Value Translation}}
+
+\small
+\textbf{Instead of:}\\
+``P-value is 0.03, so we reject the null hypothesis at $\alpha$ = 0.05.''
+
+\vspace{0.2cm}
+\textbf{Say:}\\
+``If there were truly no difference, we'd see a result this extreme only 3\% of the time by random chance. Since that's unlikely, we're confident treatment is better.''
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{Confidence Interval Translation}}
+
+\small
+\textbf{Instead of:}\\
+``95\% CI: 1.2\%-3.8\%''
+
+\vspace{0.2cm}
+\textbf{Say:}\\
+``We're 95\% confident the true improvement is between 1.2\% and 3.8\%. Best estimate: 2.5\%.''
+
+\vspace{0.3cm}
+\textcolor{mlorange}{\textbf{Statistical Power Translation}}
+
+\small
+\textbf{Instead of:}\\
+``80\% power to detect 0.5pp effect''
+
+\vspace{0.2cm}
+\textbf{Say:}\\
+``If there's a real 0.5 percentage point improvement, we'll detect it 80\% of the time. We might miss smaller improvements.''
+
+\column{0.48\textwidth}
+\textcolor{mlpurple}{\textbf{Common Misunderstandings}}
+
+\small
+\textbf{Wrong:} ``P = 0.03 means 97\% chance treatment is better''
+\begin{itemize}
+\item P-value is NOT probability hypothesis is true
+\item Use Bayesian methods for that
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Wrong:} ``Significant = Important''
+\begin{itemize}
+\item Statistical $\neq$ Practical significance
+\item 0.01\% lift might be significant but meaningless
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Wrong:} ``Not significant = No effect''
+\begin{itemize}
+\item Absence of evidence $\neq$ Evidence of absence
+\item Might just need larger sample
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlblue}{\textbf{Analogies That Work}}
+
+\small
+\textbf{Confidence Interval:}\\
+``Like a weather forecast: 70-80°F tomorrow means we're sure it won't be 50° or 100°, but exact temp uncertain.''
+
+\vspace{0.2cm}
+\textbf{Type I/II Errors:}\\
+``Fire alarm: False alarm (Type I) = evacuate unnecessarily. Missed fire (Type II) = danger goes undetected.''
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Invest in statistical literacy—it compounds over time}
+\end{frame}
+
+% Slide 4b: Simpson's Paradox
+\begin{frame}{Simpson's Paradox: When Aggregation Misleads}
+\begin{columns}[T]
+\column{0.55\textwidth}
+\includegraphics[width=\textwidth]{charts/simpsons_paradox.pdf}
+
+\column{0.43\textwidth}
+\textcolor{mlblue}{\textbf{The Paradox}}
+
+\small
+\textbf{What happens:}
+\begin{itemize}
+\item Treatment wins in segment A
+\item Treatment wins in segment B
+\item Control wins overall!
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Why:} Imbalanced sample sizes across segments distort the aggregate result.
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{Real Example}}
+
+\small
+\textbf{UC Berkeley Admission (1973):}
+\begin{itemize}
+\item Overall: Men 44\%, Women 35\% (bias?)
+\item But in most departments: Women had higher admit rate
+\item Explanation: Women applied to harder departments
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlorange}{\textbf{How to Detect}}
+
+\small
+\begin{itemize}
+\item Always analyze by key segments
+\item Check if segment sizes balanced
+\item Use stratified randomization
+\item Report both aggregate and segment results
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlred}{\textbf{What to Do}}
+
+\small
+\begin{itemize}
+\item Use weighted average (by segment size)
+\item Report heterogeneous effects
+\item Consider segment-specific rollouts
+\item Don't blindly trust aggregate metrics
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Simpson's Paradox appears in 5-10\% of A/B tests—always check segments}
+\end{frame}
+
+% Slide 5: Decision Frameworks
+\begin{frame}{Decision Frameworks: Ship, Iterate, or Kill?}
+\begin{columns}[T]
+\column{0.55\textwidth}
+\includegraphics[width=\textwidth]{charts/experiment_decision_matrix.pdf}
+
+\column{0.43\textwidth}
+\textcolor{mlblue}{\textbf{Ship Criteria}}
+
+\small
+\textbf{All must be true:}
+\begin{itemize}
+\item Statistically significant (p $<$ 0.05 or P(B $>$ A) $>$ 0.95)
+\item Practically significant (effect size meaningful)
+\item All guardrails passed
+\item Benefit $>$ cost (ROI positive)
+\item Implementation ready
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Example:}\\
+15\% CTR lift, p = 0.001, \$500K annual revenue, latency OK, error rate OK $\rightarrow$ SHIP
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{Iterate Criteria}}
+
+\small
+\textbf{When to iterate:}
+\begin{itemize}
+\item Directionally positive but not significant
+\item Significant but guardrail violated
+\item Strong in 1 segment, weak in others
+\item Good idea, poor execution
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Example:}\\
+3\% CTR lift, p = 0.12 (not sig), but iOS showed 8\% lift (p = 0.01) $\rightarrow$ ITERATE for iOS only
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Clear criteria prevent endless debates and enable fast decisions}
+\end{frame}
+
+% Slide 6: Long-Term Impact Measurement
+\begin{frame}{Measuring Long-Term Impact: Beyond the Experiment}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{The Long-Term Challenge}}
+
+\small
+\textbf{Problem:}
+\begin{itemize}
+\item Experiments run 1-2 weeks
+\item But true impact unfolds over months
+\item Short-term vs long-term trade-offs
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Example:}
+\begin{itemize}
+\item Treatment boosts Week 1 engagement +20\%
+\item Week 4: Back to baseline (novelty wore off)
+\item Month 6: -5\% (user fatigue)
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{Solution 1: Holdout Groups}}
+
+\small
+\textbf{Method:}
+\begin{itemize}
+\item Keep 10\% of users in control forever
+\item Compare treatment vs holdout over 6-12 months
+\item Measure long-term metrics
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Benefits:}
+\begin{itemize}
+\item Detect delayed effects
+\item Catch cumulative degradation
+\item Measure true business impact
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Cost:} 10\% users never get improvements
+
+\column{0.48\textwidth}
+\textcolor{mlorange}{\textbf{Solution 2: Cohort Analysis}}
+
+\small
+\textbf{Method:}
+\begin{itemize}
+\item Track users by week of experiment entry
+\item Compare Week 1, 2, 3 cohorts over time
+\item Look for retention/engagement patterns
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Example:}\\
+Week 1 cohort: 30-day retention 60\%\\
+Week 4 cohort: 30-day retention 55\% $\rightarrow$ Novelty effect
+
+\vspace{0.3cm}
+\textcolor{mlpurple}{\textbf{Solution 3: Synthetic Controls}}
+
+\small
+\textbf{Method:}
+\begin{itemize}
+\item Find similar users not in experiment
+\item Match on behavior pre-experiment
+\item Compare long-term trajectories
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Use case:}
+\begin{itemize}
+\item When holdout not feasible
+\item Geographic experiments
+\item Policy changes
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlblue}{\textbf{Key Metrics to Track}}
+
+\small
+\begin{itemize}
+\item Retention (7-day, 30-day, 90-day)
+\item Lifetime value (LTV)
+\item Churn rate
+\item Engagement trends
+\item Revenue per user over time
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Don't stop at experiment end—measure lasting impact}
+\end{frame}
+
+% Slide 7: Ethical Experimentation
+\begin{frame}{Ethical Experimentation: Do No Harm}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Core Principles}}
+
+\small
+\textbf{1. Informed Consent}
+\begin{itemize}
+\item Users should know they're in experiments
+\item Privacy policy disclosure
+\item Opt-out mechanisms
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{2. Minimize Harm}
+\begin{itemize}
+\item Don't test things that could hurt users
+\item Set guardrails (revenue, UX, safety)
+\item Monitor closely for negative effects
+\item Have kill switch ready
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{3. Fairness}
+\begin{itemize}
+\item Don't systematically disadvantage groups
+\item Check for disparate impact
+\item Ensure equal treatment opportunity
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{4. Transparency}
+\begin{itemize}
+\item Document methodology
+\item Share learnings internally
+\item Be honest about failures
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{5. Benefit Sharing}
+\begin{itemize}
+\item Roll out winners quickly
+\item Don't keep control groups in worse experience
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{mlred}{\textbf{What NOT to Test}}
+
+\small
+\textbf{Unethical Experiments:}
+\begin{itemize}
+\item Intentionally degrade user experience
+\item Manipulate emotions without consent
+\item Test discriminatory policies
+\item Hide critical information
+\item Exploit vulnerable populations
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Famous Missteps:}
+\begin{itemize}
+\item Facebook emotion study (2014): Manipulated newsfeeds to study emotional contagion without consent
+\item OkCupid compatibility test: Lied about match scores to see behavioral effects
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{Best Practices}}
+
+\small
+\begin{itemize}
+\item Ethics review for sensitive experiments
+\item Independent oversight for high-risk tests
+\item User research panel for feedback
+\item Regular audits of experiment portfolio
+\item Clear escalation paths for concerns
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Golden Rule:} Would you be OK if your experiment were on the front page of the news?
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Ethics isn't compliance—it's about respecting users and building trust}
+\end{frame}
+
+% Slide 8: Experiment Velocity
+\begin{frame}{Experiment Velocity: The Compounding Effect}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Why Velocity Matters}}
+
+\small
+\textbf{Scenario 1: Slow Team}
+\begin{itemize}
+\item 10 experiments per year
+\item 30\% win rate
+\item 3 wins per year
+\item Average lift per win: 5\%
+\item Annual improvement: 15\% (additive)
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Scenario 2: Fast Team}
+\begin{itemize}
+\item 100 experiments per year
+\item 30\% win rate (same)
+\item 30 wins per year
+\item Average lift per win: 1\% (smaller but more)
+\item Annual improvement: 35\% (compounding)
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{The Math}}
+
+\small
+$(1.01)^{30} = 1.35$ (35\% improvement)
+
+Many small wins compound faster than few large wins
+
+\vspace{0.2cm}
+\textbf{Google's approach:} Would rather ship 100 experiments with 1\% lifts than 10 with 10\% lifts
+
+\column{0.48\textwidth}
+\textcolor{mlorange}{\textbf{Bottlenecks to Address}}
+
+\small
+\textbf{1. Slow Implementation}
+\begin{itemize}
+\item Solution: Feature flags, modular code
+\item Goal: Idea $\rightarrow$ live experiment in 2 days
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{2. Long Experiment Duration}
+\begin{itemize}
+\item Solution: Higher traffic, sequential testing
+\item Goal: Results in 1-2 weeks max
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{3. Slow Analysis}
+\begin{itemize}
+\item Solution: Automated pipelines, dashboards
+\item Goal: Results available real-time
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{4. Decision Paralysis}
+\begin{itemize}
+\item Solution: Clear criteria, empowered teams
+\item Goal: Decision within 24 hours of results
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlpurple}{\textbf{Target Metrics}}
+
+\small
+\begin{itemize}
+\item Experiments per engineer per quarter: 5-10
+\item Average experiment duration: 1-2 weeks
+\item Time to decision: 1-3 days
+\item Experiment overhead: $<$ 20\% of engineering time
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Velocity × Win Rate × Effect Size = Innovation Speed}
+\end{frame}
+
+% Slide 9: Tools \& Infrastructure
+\begin{frame}{Tools \& Infrastructure for Experimentation at Scale}
+\begin{columns}[T]
+\column{0.32\textwidth}
+\textcolor{mlblue}{\textbf{Open Source}}
+
+\small
+\textbf{GrowthBook}
+\begin{itemize}
+\item Feature flags + A/B testing
+\item Bayesian statistics
+\item SQL-based metrics
+\item Self-hosted or cloud
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Unleash}
+\begin{itemize}
+\item Feature toggle management
+\item Gradual rollouts
+\item Real-time updates
+\item Lightweight
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Statsig (Free tier)}
+\begin{itemize}
+\item Feature gates
+\item Dynamic configs
+\item Autotune
+\item Built-in metrics
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{DIY Stack}
+\begin{itemize}
+\item Feature flags: Flagsmith, ConfigCat
+\item Analytics: Mixpanel, Amplitude
+\item Stats: Python (scipy, PyMC3)
+\item Viz: Streamlit, Grafana
+\end{itemize}
+
+\column{0.32\textwidth}
+\textcolor{mlgreen}{\textbf{Enterprise}}
+
+\small
+\textbf{Optimizely}
+\begin{itemize}
+\item Market leader
+\item Full-stack experimentation
+\item Visual editor
+\item Expensive (\$50K+/year)
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{LaunchDarkly}
+\begin{itemize}
+\item Feature management focus
+\item Targeting rules
+\item Fast flag updates
+\item Popular with DevOps
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{VWO}
+\begin{itemize}
+\item Web optimization
+\item Heatmaps, session replay
+\item A/B + multivariate
+\item Marketing-friendly
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Firebase A/B Testing}
+\begin{itemize}
+\item Mobile-first
+\item Free tier
+\item Google Analytics integration
+\item Easy to start
+\end{itemize}
+
+\column{0.32\textwidth}
+\textcolor{mlorange}{\textbf{Big Tech Internal}}
+
+\small
+\textbf{Google's Dapper}
+\begin{itemize}
+\item 1000s of concurrent experiments
+\item Automated metrics computation
+\item Novelty detection
+\item Not public
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Facebook's Gatekeeper}
+\begin{itemize}
+\item Feature gating
+\item Dynamic allocation
+\item Layered experiments
+\item Internal only
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlpurple}{\textbf{Build vs Buy}}
+
+\small
+\textbf{Buy (SaaS) if:}
+\begin{itemize}
+\item Small team ($<$ 10 engineers)
+\item Need to move fast
+\item Standard use cases
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Build (Custom) if:}
+\begin{itemize}
+\item Large scale (1M+ users)
+\item Complex use cases
+\item Existing infrastructure
+\item Cost-conscious
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Start with SaaS, graduate to custom as you scale}
+\end{frame}
+
+% Slide 10: Design Summary
+\begin{frame}{Design \& Culture Summary}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Key Principles}}
+
+\small
+\textbf{1. Culture}
+\begin{itemize}
+\item Experiments are default, not exception
+\item Psychological safety for ``failed'' tests
+\item Data beats opinions (no HiPPO)
+\item Celebrate learning, not just wins
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{2. Metrics}
+\begin{itemize}
+\item North Star: Long-term value proxy
+\item Guardrails: Prevent negative side effects
+\item Leading indicators, not lagging
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{3. Communication}
+\begin{itemize}
+\item Tailor to audience (exec/PM/eng/DS)
+\item Always include CI + effect size
+\item Plain English, no jargon
+\item Visual > numbers
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{4. Decision-Making}
+\begin{itemize}
+\item Clear ship/iterate/kill criteria
+\item Fast decisions (within 24 hours)
+\item Empower teams
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{mlgreen}{\textbf{Strategic Insights}}
+
+\small
+\textbf{5. Long-Term Thinking}
+\begin{itemize}
+\item Holdout groups for 6-12 month measurement
+\item Cohort analysis for retention
+\item Don't optimize away future value
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{6. Ethics}
+\begin{itemize}
+\item Informed consent
+\item Minimize harm
+\item Fairness across groups
+\item Transparency
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{7. Velocity}
+\begin{itemize}
+\item 50-100 experiments per year (target)
+\item Compound small wins
+\item Reduce bottlenecks
+\item Automate everything possible
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{8. Infrastructure}
+\begin{itemize}
+\item Feature flags in production
+\item Real-time dashboards
+\item Automated analysis
+\item 1-click rollback
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlorange}{\textbf{Next:}} Apply all concepts in recommendation engine A/B test workshop
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Part 5: Hands-on workshop with e-commerce recommendation comparison}
+\end{frame}

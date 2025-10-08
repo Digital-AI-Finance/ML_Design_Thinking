@@ -1,0 +1,471 @@
+% Part 5: Practice - Validation Workshop
+\section{Practice: Credit Risk Workshop}
+
+% Slide 1: Workshop Introduction
+\begin{frame}{Workshop: Credit Risk Model Validation Challenge}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Your Challenge}}
+
+\small
+Compare 5 ML models for credit risk prediction using comprehensive multi-metric evaluation
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{Why This Matters:}}
+\begin{itemize}
+\item Real-world imbalanced problem
+\item Cost-sensitive decisions
+\item Production-critical skill
+\item Portfolio project
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlorange}{\textbf{Success Criteria:}}
+\begin{itemize}
+\item All 10+ metrics calculated
+\item Statistical significance tested
+\item Business-aligned threshold
+\item Clear recommendation with rationale
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{mlpurple}{\textbf{What You'll Do}}
+
+\small
+\begin{enumerate}
+\item Baseline evaluation (5 models × 10 metrics)
+\item Confusion matrix analysis
+\item Threshold optimization for 10:1 cost ratio
+\item 5-fold cross-validation
+\item Statistical testing (McNemar)
+\item Business impact calculation
+\item Final model selection
+\end{enumerate}
+
+\vspace{0.3cm}
+\textcolor{mlgray}{\textbf{Time:}} 60 minutes\\
+\textcolor{mlgray}{\textbf{Deliverable:}} Jupyter notebook\\
+\textcolor{mlgray}{\textbf{Dataset:}} 10,000 loans, 5\% default
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Comprehensive validation for confident deployment decisions}
+\end{frame}
+
+% Slide 2: Dataset Description
+\begin{frame}{Workshop Dataset: 10,000 Loan Applications}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Features}}
+
+\small
+\textbf{Numerical:}
+\begin{itemize}
+\item income (annual, \$20K-\$200K)
+\item credit\_score (300-850)
+\item employment\_years (0-40)
+\item debt\_to\_income (0-1 ratio)
+\item loan\_amount (\$1K-\$50K)
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Target:}
+\begin{itemize}
+\item default (0 = repaid, 1 = defaulted)
+\item \textbf{Highly imbalanced: 5\% default rate}
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlgray}{\small Train: 7,000 | Val: 1,500 | Test: 1,500}
+
+\column{0.48\textwidth}
+\textcolor{mlgreen}{\textbf{Business Context}}
+
+\small
+\textbf{Costs per loan:}
+\begin{itemize}
+\item False Negative (miss default) = -\$50,000
+\item False Positive (reject good) = -\$5,000
+\item True Positive (catch default) = \$0
+\item True Negative (approve good) = +\$2,000
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlorange}{\textbf{The Challenge}}
+
+\small
+\begin{itemize}
+\item 95\% accuracy trivial (predict no default)
+\item But misses all defaults = catastrophic
+\item Need balanced precision-recall
+\item Optimize for business profit
+\item 10:1 FN:FP cost ratio matters
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Realistic dataset with clear business constraints}
+\end{frame}
+
+% Slide 3: Baseline Performance
+\begin{frame}{Step 1: Baseline Evaluation (5 Models × 10 Metrics)}
+\begin{columns}[T]
+\column{0.55\textwidth}
+\includegraphics[width=\textwidth]{charts/model_comparison_dashboard.pdf}
+
+\column{0.43\textwidth}
+\textcolor{mlblue}{\textbf{Models to Compare}}
+
+\small
+\begin{enumerate}
+\item Logistic Regression
+\item Random Forest
+\item XGBoost
+\item SVM (RBF kernel)
+\item Neural Network (2 layers)
+\end{enumerate}
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{Metrics to Calculate}}
+
+\small
+\begin{itemize}
+\item Accuracy
+\item Precision, Recall, F1, F2
+\item ROC-AUC
+\item PR-AUC
+\item Specificity
+\item NPV (Negative Predictive Value)
+\item Expected cost per 1000 loans
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Start with default threshold (0.5), then optimize}
+\end{frame}
+
+% Slide 4: Confusion Matrix Analysis
+\begin{frame}{Step 2: Understanding Failure Modes}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Confusion Matrix Per Model}}
+
+\small
+\textbf{Logistic Regression:}
+\begin{itemize}
+\item TP: 45, FN: 30
+\item FP: 120, TN: 1305
+\item High FP rate (conservative)
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Random Forest:}
+\begin{itemize}
+\item TP: 60, FN: 15
+\item FP: 90, TN: 1335
+\item Balanced performance
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{XGBoost:}
+\begin{itemize}
+\item TP: 65, FN: 10
+\item FP: 110, TN: 1315
+\item Highest recall
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{mlgreen}{\textbf{Analysis Questions}}
+
+\small
+\begin{enumerate}
+\item Which model has highest TP? (best at catching defaults)
+\item Which has lowest FN? (fewest missed defaults)
+\item Which has lowest FP? (fewest false alarms)
+\item Are errors systematic? (e.g., low-income applicants)
+\item Which aligns with 10:1 cost ratio?
+\end{enumerate}
+
+\vspace{0.3cm}
+\textcolor{mlorange}{\textbf{Key Insight}}
+
+\small
+Model with highest accuracy (LogReg) has worst business outcome due to high FN rate
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Confusion matrices reveal patterns metrics hide}
+\end{frame}
+
+% Slide 5: Threshold Optimization
+\begin{frame}{Step 3: Business-Aligned Threshold Selection}
+\begin{columns}[T]
+\column{0.55\textwidth}
+\includegraphics[width=\textwidth]{charts/threshold_optimization.pdf}
+
+\column{0.43\textwidth}
+\textcolor{mlblue}{\textbf{Threshold Sweep}}
+
+\small
+For each model:
+\begin{enumerate}
+\item Try thresholds 0.1 to 0.9
+\item Calculate confusion matrix
+\item Compute expected cost
+\item Find minimum cost threshold
+\end{enumerate}
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{Results Example}}
+
+\small
+\textbf{XGBoost:}
+\begin{itemize}
+\item Default (0.5): \$1.2M profit
+\item Optimal (0.3): \$1.5M profit
+\item 25\% improvement!
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Why 0.3?}
+\begin{itemize}
+\item More aggressive predictions
+\item Catches more defaults (higher recall)
+\item Increases FP but FN costs 10×
+\item Net: Higher profit
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Business constraints often require non-default thresholds}
+\end{frame}
+
+% Slide 6: Cross-Validation Results
+\begin{frame}{Step 4: Assessing Stability and Variance}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{5-Fold CV Results}}
+
+\small
+\begin{tabular}{lrrr}
+\toprule
+Model & Mean F1 & Std & CI \\
+\midrule
+LogReg & 0.83 & 0.04 & [0.79, 0.87] \\
+RF & 0.87 & 0.02 & [0.85, 0.89] \\
+XGB & 0.89 & 0.03 & [0.86, 0.92] \\
+SVM & 0.85 & 0.05 & [0.80, 0.90] \\
+NN & 0.88 & 0.06 & [0.82, 0.94] \\
+\bottomrule
+\end{tabular}
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{Observations}}
+
+\small
+\begin{itemize}
+\item RF most stable (low std)
+\item NN highest variance (risky)
+\item XGB best mean + acceptable std
+\item SVM wide CI (uncertain)
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{mlorange}{\textbf{Why Stability Matters}}
+
+\small
+\begin{itemize}
+\item Production data varies
+\item High variance = unreliable
+\item Wide CI = uncertain performance
+\item Stable models safer for deployment
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlpurple}{\textbf{Trade-Off Decision}}
+
+\small
+\textbf{Option A:} XGB
+\begin{itemize}
+\item Highest mean F1 (0.89)
+\item Moderate variance (0.03)
+\item Best overall
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Option B:} RF
+\begin{itemize}
+\item Slightly lower F1 (0.87)
+\item Lowest variance (0.02)
+\item Safest choice
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Cross-validation reveals performance stability across data splits}
+\end{frame}
+
+% Slide 7: Statistical Comparison
+\begin{frame}{Step 5: Which Model is Significantly Better?}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{McNemar Test Results}}
+
+\small
+\textbf{XGBoost vs Random Forest:}
+\begin{itemize}
+\item XGBoost correct, RF wrong: 45 cases
+\item RF correct, XGBoost wrong: 30 cases
+\item Chi-square = 3.0
+\item p-value = 0.08
+\item \textbf{Not significant (p $>$ 0.05)}
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{XGBoost vs Logistic Regression:}
+\begin{itemize}
+\item XGB correct, LR wrong: 90 cases
+\item LR correct, XGB wrong: 25 cases
+\item Chi-square = 36.7
+\item p-value $<$ 0.001
+\item \textbf{Highly significant!}
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{mlgreen}{\textbf{Interpretation}}
+
+\small
+\textbf{XGB vs RF:}\\
+No statistically significant difference despite F1 gap (0.89 vs 0.87). Could be random luck.
+
+\vspace{0.3cm}
+\textbf{XGB vs LogReg:}\\
+XGBoost clearly superior. Difference unlikely due to chance.
+
+\vspace{0.3cm}
+\textcolor{mlorange}{\textbf{Decision Implication}}
+
+\small
+\begin{itemize}
+\item XGB and RF both acceptable
+\item Choose based on: stability, interpretability, maintenance
+\item RF wins on stability
+\item XGB wins on mean performance
+\item Either defensible
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Statistical tests prevent overconfidence in small differences}
+\end{frame}
+
+% Slide 8: Best Practices Summary
+\begin{frame}{Pre-Deployment Validation Checklist}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Technical Validation}}
+
+\small
+$\Box$ Multiple metrics calculated\\
+$\Box$ Confusion matrix analyzed\\
+$\Box$ Threshold optimized for business\\
+$\Box$ Cross-validation performed\\
+$\Box$ Confidence intervals computed\\
+$\Box$ Statistical tests passed\\
+$\Box$ Error patterns understood\\
+$\Box$ Subgroup performance checked\\
+$\Box$ Edge cases tested\\
+$\Box$ Baseline comparison done
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{Remember:}}\\
+No single metric tells full story\\
+Context determines metric choice
+
+\column{0.48\textwidth}
+\textcolor{mlorange}{\textbf{Business Validation}}
+
+\small
+$\Box$ Business metric calculated\\
+$\Box$ ROI projected\\
+$\Box$ Cost-benefit analysis done\\
+$\Box$ Stakeholder review completed\\
+$\Box$ Deployment plan ready\\
+$\Box$ Monitoring strategy defined\\
+$\Box$ Rollback criteria set\\
+$\Box$ Documentation complete\\
+$\Box$ Model card created\\
+$\Box$ A/B test designed
+
+\vspace{0.3cm}
+\textcolor{mlpurple}{\textbf{Only deploy when:}}\\
+All checkboxes ticked\\
+Confidence high\\
+Risks understood
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Systematic validation prevents production disasters}
+\end{frame}
+
+% Slide 9: Key Takeaways
+\begin{frame}{Week 9 Key Takeaways}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Core Lessons}}
+
+\small
+\begin{enumerate}
+\item \textbf{Accuracy alone is dangerous}\\
+Can be 95\% and completely useless
+\item \textbf{Every metric has trade-offs}\\
+Precision vs recall is fundamental
+\item \textbf{Context determines metrics}\\
+Choose based on problem and costs
+\item \textbf{Statistical significance matters}\\
+Don't trust small differences
+\item \textbf{Business alignment essential}\\
+Translate ML to dollars and impact
+\end{enumerate}
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{Technical Skills Mastered:}}
+\begin{itemize}
+\item Comprehensive metric calculation
+\item Confusion matrix analysis
+\item ROC and PR curves
+\item Cross-validation
+\item Statistical testing
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{mlorange}{\textbf{Strategic Skills Mastered:}}
+
+\small
+\begin{itemize}
+\item Metric selection for problems
+\item Model comparison frameworks
+\item Threshold optimization
+\item Performance communication
+\item Deployment decision-making
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlpurple}{\textbf{Remember:}}
+\begin{itemize}
+\item Validate comprehensively
+\item Test statistically
+\item Align with business
+\item Communicate clearly
+\item Deploy confidently
+\end{itemize}
+\end{columns}
+
+\vspace{0.5cm}
+\begin{center}
+\textcolor{mlred}{\large You can now validate models like a production engineer!}
+\end{center}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Next: Week 10 - A/B Testing for Iterative Improvement}
+\end{frame}

@@ -1,0 +1,456 @@
+% Part 3: Implementation (10 slides)
+\section{Implementation: From Theory to Practice}
+
+% Slide 26: Feature Engineering
+\begin{frame}{Feature Engineering for Innovation}
+\Large\textbf{Creating Meaningful Predictors}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\textbf{Raw Features → Engineered}
+\begin{itemize}
+\item Team size → Team diversity index
+\item Launch date → Market timing score
+\item Budget → Resource efficiency
+\item User count → Growth rate
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Feature Creation:}
+\begin{itemize}
+\item Polynomial features
+\item Interaction terms
+\item Domain-specific ratios
+\item Time-based aggregations
+\end{itemize}
+\end{column}
+\begin{column}{0.48\textwidth}
+\includegraphics[width=\textwidth]{charts/innovation_multiclass_analysis.pdf}
+
+\small
+Feature importance varies by outcome class
+\end{column}
+\end{columns}
+\end{frame}
+
+% Slide 27: Data Preprocessing Pipeline
+\begin{frame}{Data Preprocessing Pipeline}
+\Large\textbf{Preparing for Success}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.8,
+    box/.style={draw,rounded corners,fill=mlblue!20,minimum width=2.5cm,minimum height=0.8cm}]
+
+% Pipeline stages
+\node[box] (raw) at (0,0) {Raw Data};
+\node[box] (clean) at (3,0) {Cleaning};
+\node[box] (encode) at (6,0) {Encoding};
+\node[box] (scale) at (9,0) {Scaling};
+\node[box] (split) at (12,0) {Split};
+
+% Arrows
+\draw[thick,->] (raw) -- (clean);
+\draw[thick,->] (clean) -- (encode);
+\draw[thick,->] (encode) -- (scale);
+\draw[thick,->] (scale) -- (split);
+
+% Details below
+\node[text width=2.5cm,align=center] at (0,-1.5) {\small Missing values, Outliers};
+\node[text width=2.5cm,align=center] at (3,-1.5) {\small One-hot, Label encoding};
+\node[text width=2.5cm,align=center] at (6,-1.5) {\small StandardScaler, MinMax};
+\node[text width=2.5cm,align=center] at (9,-1.5) {\small 80/20, Stratified};
+\node[text width=2.5cm,align=center] at (12,-1.5) {\small Train/Test};
+\end{tikzpicture}
+\end{center}
+
+\vspace{0.5em}
+
+\textbf{Code Example:}
+\begin{small}
+\texttt{from sklearn.preprocessing import StandardScaler} \\
+\texttt{from sklearn.model\_selection import train\_test\_split} \\
+~\\
+\texttt{X\_train, X\_test, y\_train, y\_test = train\_test\_split(} \\
+\texttt{~~~~X, y, test\_size=0.2, random\_state=42, stratify=y)} \\
+~\\
+\texttt{scaler = StandardScaler()} \\
+\texttt{X\_train\_scaled = scaler.fit\_transform(X\_train)} \\
+\texttt{X\_test\_scaled = scaler.transform(X\_test)}
+\end{small}
+\end{frame}
+
+% Slide 28: Cross-Validation Strategies
+\begin{frame}{Cross-Validation Strategies}
+\Large\textbf{Robust Model Evaluation}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{center}
+\includegraphics[width=0.85\textwidth]{charts/cross_validation_comparison.pdf}
+\end{center}
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\textbf{K-Fold Cross-Validation:}
+\begin{itemize}
+\item Split data into k folds
+\item Train on k-1, test on 1
+\item Rotate and average
+\item Standard: k=5 or k=10
+\end{itemize}
+\end{column}
+\begin{column}{0.48\textwidth}
+\textbf{Stratified K-Fold:}
+\begin{itemize}
+\item Maintains class distribution
+\item Essential for imbalanced data
+\item More reliable estimates
+\item Use for final evaluation
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Slide 29: Hyperparameter Tuning
+\begin{frame}{Hyperparameter Tuning}
+\Large\textbf{Finding the Sweet Spot}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{center}
+\includegraphics[width=0.85\textwidth]{charts/hyperparameter_sensitivity.pdf}
+\end{center}
+
+\vspace{0.5em}
+
+\textbf{Grid Search vs Random Search:}
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\textbf{Grid Search:}
+\begin{itemize}
+\item Exhaustive search
+\item Guaranteed to find best in grid
+\item Computationally expensive
+\end{itemize}
+\end{column}
+\begin{column}{0.48\textwidth}
+\textbf{Random Search:}
+\begin{itemize}
+\item Sample parameter space
+\item Often finds good solutions faster
+\item Better for many parameters
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Slide 30: Model Selection Criteria
+\begin{frame}{Model Selection Criteria}
+\Large\textbf{Choosing the Winner}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\begin{column}{0.55\textwidth}
+\includegraphics[width=\textwidth]{charts/innovation_algorithm_comparison.pdf}
+\end{column}
+\begin{column}{0.43\textwidth}
+\textbf{Selection Factors:}
+\begin{enumerate}
+\item Accuracy metrics
+\item Training time
+\item Prediction speed
+\item Interpretability needs
+\item Data characteristics
+\item Deployment constraints
+\end{enumerate}
+
+\vspace{0.5em}
+\textbf{Business Constraints:}
+\begin{itemize}
+\item Real-time requirements?
+\item Explainability needed?
+\item Retraining frequency?
+\item Resource limitations?
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Slide 31: Production Deployment
+\begin{frame}{Production Deployment Considerations}
+\Large\textbf{From Notebook to Production}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\textbf{Model Serialization:}
+\begin{small}
+\texttt{import joblib} \\
+~\\
+\texttt{\# Save model} \\
+\texttt{joblib.dump(model, 'model.pkl')} \\
+\texttt{joblib.dump(scaler, 'scaler.pkl')} \\
+~\\
+\texttt{\# Load model} \\
+\texttt{model = joblib.load('model.pkl')} \\
+\texttt{scaler = joblib.load('scaler.pkl')}
+\end{small}
+
+\textbf{API Development:}
+\begin{itemize}
+\item REST endpoints
+\item Input validation
+\item Error handling
+\item Response formatting
+\end{itemize}
+\end{column}
+\begin{column}{0.48\textwidth}
+\textbf{Monitoring \& Maintenance:}
+\begin{itemize}
+\item Performance tracking
+\item Data drift detection
+\item Model versioning
+\item A/B testing
+\item Retraining triggers
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Deployment Options:}
+\begin{itemize}
+\item Cloud services (AWS, GCP, Azure)
+\item Containerization (Docker)
+\item Serverless functions
+\item Edge deployment
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Slide 32: Common Implementation Pitfalls
+\begin{frame}{Common Implementation Pitfalls}
+\Large\textbf{Learn from Others' Mistakes}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\textbf{Data Leakage:}
+\begin{itemize}
+\item Training on test data
+\item Using future information
+\item Improper cross-validation
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Overfitting:}
+\begin{itemize}
+\item Too complex models
+\item Insufficient regularization
+\item Not enough data
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Poor Generalization:}
+\begin{itemize}
+\item Training/test mismatch
+\item Temporal shifts ignored
+\item Selection bias
+\end{itemize}
+\end{column}
+\begin{column}{0.48\textwidth}
+\textbf{How to Avoid:}
+\begin{enumerate}
+\item Always split before preprocessing
+\item Use proper validation strategy
+\item Monitor validation metrics
+\item Test on truly unseen data
+\item Consider temporal validation
+\item Document assumptions
+\end{enumerate}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mlred!10,colframe=mlred]
+\centering
+\textbf{Golden Rule:} \\
+Never touch test data until final evaluation
+\end{tcolorbox}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Slide 33: Performance Optimization
+\begin{frame}{Performance Optimization}
+\Large\textbf{Speed and Efficiency}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\textbf{Training Optimization:}
+\begin{itemize}
+\item Use sampling for prototyping
+\item Parallel processing (n\_jobs=-1)
+\item GPU acceleration (deep learning)
+\item Early stopping
+\item Incremental learning
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Code Example:}
+\begin{small}
+\texttt{\# Parallel processing} \\
+\texttt{rf = RandomForestClassifier(} \\
+\texttt{~~~~n\_estimators=100,} \\
+\texttt{~~~~n\_jobs=-1)} \\
+~\\
+\texttt{\# Early stopping} \\
+\texttt{gb = GradientBoostingClassifier(} \\
+\texttt{~~~~n\_iter\_no\_change=5,} \\
+\texttt{~~~~validation\_fraction=0.2)}
+\end{small}
+\end{column}
+\begin{column}{0.48\textwidth}
+\textbf{Inference Optimization:}
+\begin{itemize}
+\item Model compression
+\item Feature selection
+\item Caching predictions
+\item Batch processing
+\item Model quantization
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Memory Management:}
+\begin{itemize}
+\item Use sparse matrices
+\item Data type optimization
+\item Chunked processing
+\item Garbage collection
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Benchmarks:}
+\begin{itemize}
+\item Training: 2.3s → 0.8s
+\item Prediction: 120ms → 15ms
+\item Memory: 4GB → 1.2GB
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Slide 34: Interpretability Tools
+\begin{frame}{Model Interpretability}
+\Large\textbf{Understanding Predictions}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\textbf{Feature Importance:}
+\begin{center}
+\begin{tikzpicture}[scale=0.7]
+\begin{axis}[
+    xbar,
+    width=7cm,
+    height=5cm,
+    xlabel={Importance},
+    symbolic y coords={Funding,Time,Market,Team,Novelty},
+    ytick=data,
+    nodes near coords,
+]
+\addplot[fill=mlblue] coordinates {
+    (0.08,Funding)
+    (0.12,Time)
+    (0.18,Market)
+    (0.25,Team)
+    (0.37,Novelty)
+};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+\end{column}
+\begin{column}{0.48\textwidth}
+\textbf{Interpretation Methods:}
+\begin{itemize}
+\item Permutation importance
+\item Partial dependence plots
+\item SHAP values
+\item LIME explanations
+\item Decision tree surrogates
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{For Stakeholders:}
+\begin{itemize}
+\item ``Novelty drove this prediction''
+\item ``Market size had negative impact''
+\item ``Team experience was neutral''
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Slide 35: Implementation Summary
+\begin{frame}{Implementation Summary}
+\Large\textbf{From Data to Deployment}
+\normalsize
+
+\vspace{1em}
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\textbf{Key Steps:}
+\begin{enumerate}
+\item Feature engineering
+\item Data preprocessing
+\item Model selection
+\item Hyperparameter tuning
+\item Validation strategy
+\item Performance optimization
+\item Deployment preparation
+\end{enumerate}
+
+\vspace{0.5em}
+\textbf{Best Practices:}
+\begin{itemize}
+\item Automate pipeline
+\item Version everything
+\item Monitor continuously
+\item Document thoroughly
+\end{itemize}
+\end{column}
+\begin{column}{0.48\textwidth}
+\textbf{Tools \& Libraries:}
+\begin{itemize}
+\item \textbf{Modeling:} scikit-learn, XGBoost
+\item \textbf{Validation:} cross-validation, GridSearchCV
+\item \textbf{Deployment:} Flask, FastAPI
+\item \textbf{Monitoring:} MLflow, Weights\&Biases
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Next: Design Applications}
+\begin{tcolorbox}[colback=mlgreen!10,colframe=mlgreen]
+How to integrate classification into design workflows?
+\end{tcolorbox}
+\end{column}
+\end{columns}
+\end{frame}

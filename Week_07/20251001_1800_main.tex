@@ -1,0 +1,177 @@
+\documentclass[8pt,aspectratio=169]{beamer}
+\usetheme{Madrid}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{adjustbox}
+\usepackage{multicol}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{tcolorbox}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{tikz}
+\usetikzlibrary{arrows,shapes}
+
+% Standard Template Colors (mllavender/mlpurple palette)
+\definecolor{mlblue}{RGB}{0,102,204}
+\definecolor{mlpurple}{RGB}{51,51,178}
+\definecolor{mllavender}{RGB}{173,173,224}
+\definecolor{mllavender2}{RGB}{193,193,232}
+\definecolor{mllavender3}{RGB}{204,204,235}
+\definecolor{mllavender4}{RGB}{214,214,239}
+\definecolor{mlorange}{RGB}{255, 127, 14}
+\definecolor{mlgreen}{RGB}{44, 160, 44}
+\definecolor{mlred}{RGB}{214, 39, 40}
+\definecolor{mlgray}{RGB}{127, 127, 127}
+\definecolor{Slate}{RGB}{71,85,105}
+
+% Apply template theme (mllavender palette)
+\setbeamercolor{palette primary}{bg=mllavender3,fg=mlpurple}
+\setbeamercolor{palette secondary}{bg=mllavender4,fg=mlpurple}
+\setbeamercolor{palette tertiary}{bg=mllavender,fg=white}
+\setbeamercolor{palette quaternary}{bg=mlpurple,fg=white}
+
+\setbeamercolor{structure}{fg=mlpurple}
+\setbeamercolor{section in toc}{fg=mlpurple}
+\setbeamercolor{subsection in toc}{fg=mlblue}
+\setbeamercolor{title}{fg=mlpurple}
+\setbeamercolor{frametitle}{fg=mlpurple,bg=mllavender!20}
+\setbeamercolor{block title}{bg=mllavender!30,fg=mlpurple}
+\setbeamercolor{block body}{bg=mllavender!10,fg=black}
+
+% Items with template accent colors
+\setbeamercolor{item}{fg=mlorange}
+\setbeamercolor{subitem}{fg=mlblue}
+\setbeamercolor{subsubitem}{fg=mlpurple}
+
+% Remove navigation symbols
+\setbeamertemplate{navigation symbols}{}
+
+% Clean itemize/enumerate
+\setbeamertemplate{itemize items}[circle]
+\setbeamertemplate{enumerate items}[default]
+
+% Reduce margins for more content space
+\setbeamersize{text margin left=5mm,text margin right=5mm}
+
+% Custom footer
+\setbeamertemplate{footline}{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.25\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
+    \usebeamerfont{author in head/foot}Week 7
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+    \usebeamerfont{title in head/foot}Responsible AI and Ethical Innovation
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.25\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    \usebeamerfont{date in head/foot}\insertframenumber{} / \inserttotalframenumber\hspace*{2ex}
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+
+% Command for bottom annotation
+\newcommand{\bottomnote}[1]{%
+\vfill
+\vspace{-2mm}
+\textcolor{Slate}{\rule{\textwidth}{0.4pt}}
+\vspace{1mm}
+\footnotesize
+\textcolor{Slate}{\textbf{#1}}
+}
+
+% Graphics path
+\graphicspath{{charts/}}
+
+% Title information
+\title{\Large Machine Learning for Smarter Innovation}
+\subtitle{Week 7: Responsible AI and Ethical Innovation\\
+Hidden Bias to Visible Fairness Through Mathematical Optimization}
+\author{ML and Design Thinking Course}
+\date{BSc Level - October 2025}
+
+\begin{document}
+
+% Title slide with plain style
+\begin{frame}[plain]
+\vspace{2cm}
+\begin{center}
+{\Huge \textcolor{mlpurple}{\textbf{Responsible AI}}}\\[0.2cm]
+{\Huge \textcolor{mlpurple}{\textbf{and}}}\\[0.2cm]
+{\Huge \textcolor{mlpurple}{\textbf{Ethical Innovation}}}\\[1cm]
+{\Large From Hidden Bias to Visible Fairness}\\[1.5cm]
+{\large Week 7: Machine Learning for Smarter Innovation}\\[0.3cm]
+{\normalsize Mathematical Optimization Makes Trade-offs Explicit}\\[0.5cm]
+{\small BSc Level - October 2025}
+\end{center}
+\end{frame}
+
+% Table of contents with 4-part structure
+\begin{frame}[t]{Today's Journey: From Hidden to Visible to Optimized}
+\Large\textbf{Four-Part Structure}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{enumerate}
+\item \textbf{Part 1: The Hidden Challenge} (11 slides)\\
+      Invisible discrimination, measurement bottleneck, real harm
+
+\item \textbf{Part 2: First Solutions and Impossibility} (13 slides)\\
+      Metrics work, then impossibility theorems reveal fundamental trade-offs
+
+\item \textbf{Part 3: Mathematical Breakthrough} (17 slides)\\
+      Geometric intuition, Lagrangian optimization, production tools
+
+\item \textbf{Part 4: Production and Synthesis} (10 slides)\\
+      4-layer architecture, modern tools, transferable lessons
+\end{enumerate}
+
+\vspace{0.5em}
+\textbf{Appendix:} Mathematical Foundations (5 slides) - Deep proofs and derivations
+
+\vspace{1em}
+
+\begin{center}
+\begin{tcolorbox}[colback=mllavender!30, colframe=mlpurple, width=0.8\textwidth]
+\centering
+\textbf{Unifying Theme:} Measurement transforms invisible discrimination\\
+into visible, optimizable, auditable problems
+\end{tcolorbox}
+\end{center}
+
+\bottomnote{Measurement transforms ethical concerns into technical problems - quantification enables optimization where qualitative assessment permits only documentation}
+\end{frame}
+
+% Include the four parts
+\input{part1_challenge}
+\input{part2_solution}
+\input{part3_breakthrough}
+\input{part4_synthesis}
+
+% Include appendix
+\input{appendix_mathematics}
+
+% Closing slide
+\begin{frame}[plain]
+\vspace{2cm}
+\begin{center}
+{\Huge \textcolor{mlpurple}{\textbf{Fairness Mastered}}}\\[1cm]
+{\Large From Hidden to Visible to Optimized:}\\[0.5cm]
+{\normalsize
+You now understand:
+\begin{itemize}
+\item Why invisible bias causes systemic harm (I(D; A) > 0, 21.2 bits)
+\item How metrics reveal discrimination (DP: 30\%, EO: 4\%, ROC: 7.2\%)
+\item Why impossibility theorems constrain solutions (Chouldechova, Pearl)
+\item How optimization makes trade-offs explicit ($\lambda=0.3$ → 9.3x ROI)
+\item How to build fair AI systems (Fairlearn, AIF360, 4-layer architecture)
+\end{itemize}
+}
+\vspace{1cm}
+{\large \textcolor{mlpurple}{\textbf{Next Week: Structured Output and Prompt Engineering}}}\\
+{\normalsize Reliability requires constraints, just like fairness does}
+\end{center}
+\end{frame}
+
+\end{document}

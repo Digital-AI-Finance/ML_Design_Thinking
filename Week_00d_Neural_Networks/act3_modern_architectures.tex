@@ -1,9 +1,9 @@
-% Act 3: Modern Architectures (10 slides)
+% Part 3: Modern Architectures (10 slides)
 
 \begin{frame}{12. Human Introspection: Vision is Hierarchical}
 \begin{columns}[c]
 \column{0.48\textwidth}
-\textbf{How Humans See:}
+\textbf{How Humans See (Hubel \& Wiesel 1959):}
 \begin{itemize}
 \item \textbf{Level 1}: Edge detection (V1 cortex)
   \begin{itemize}
@@ -20,6 +20,7 @@
   \item Faces, cars, animals
   \item Invariant recognition
   \end{itemize}
+\item \textbf{Inspiration}: Fukushima's Neocognitron (1980) - precursor to modern CNNs
 \end{itemize}
 
 \column{0.48\textwidth}
@@ -29,7 +30,7 @@
 \end{columns}
 
 \vspace{\fill}
-\small\textcolor{gray}{Neuroscience insight: Vision builds complexity through specialized layers}
+\small\textcolor{gray}{Hubel \& Wiesel (1959 Nobel Prize): Discovered hierarchical processing in cat visual cortex - inspired modern neural network architectures}
 \end{frame}
 
 \begin{frame}{13. Hypothesis: Specialized Architectures Matching Data Structure}
@@ -39,14 +40,16 @@
 \begin{itemize}
 \item \textcolor{mlred}{Problem}: Generic MLPs ignore data structure
 \item \textcolor{mlgreen}{Solution}: Architecture matches inductive bias
+\item \textbf{No Free Lunch Theorem}: No single architecture optimal for all problems
+\item Architecture choice encodes prior knowledge about problem structure
 \end{itemize}
 
 \textbf{Examples:}
 \begin{itemize}
-\item \textbf{Images}: Spatial locality → CNNs
-\item \textbf{Sequences}: Temporal order → RNNs
-\item \textbf{Graphs}: Node relationships → GNNs
-\item \textbf{Language}: Long-range dependencies → Transformers
+\item \textbf{Images}: Spatial locality -> CNNs
+\item \textbf{Sequences}: Temporal order -> RNNs
+\item \textbf{Graphs}: Node relationships -> GNNs
+\item \textbf{Language}: Long-range dependencies -> Transformers
 \end{itemize}
 
 \column{0.48\textwidth}
@@ -111,6 +114,11 @@
 \item Complex patterns
 \end{itemize}
 
+\textbf{Visualization Technique:}
+\begin{itemize}
+\item Apply filter to white noise to see what pattern it detects
+\end{itemize}
+
 \column{0.48\textwidth}
 \begin{center}
 \includegraphics[width=\textwidth]{charts/filter_hierarchy.pdf}
@@ -130,7 +138,7 @@
 \begin{itemize}
 \item Multiple filters per layer
 \item Shared weights across spatial locations
-\item Parameter sharing reduces overfitting
+\item Parameter sharing: Same filter applied to all spatial locations - reduces parameters by 1000x
 \end{itemize}
 
 \textbf{2. Pooling Layers}
@@ -144,6 +152,12 @@
 \begin{itemize}
 \item Final classification
 \item Combines all learned features
+\end{itemize}
+
+\textbf{Example Parameters:}
+\begin{itemize}
+\item AlexNet: 60M parameters
+\item VGG: 138M, ResNet: 25M
 \end{itemize}
 
 \column{0.48\textwidth}
@@ -189,7 +203,7 @@ $\begin{bmatrix} -1 & 0 & 1 \\ -2 & 0 & 2 \\ -1 & 0 & 1 \end{bmatrix}$
 \begin{frame}{18. RNN and Transformer Architectures}
 \begin{columns}[c]
 \column{0.48\textwidth}
-\textbf{Recurrent Neural Networks (RNNs):}
+\textbf{Recurrent Neural Networks:}
 \begin{align}
 h_t &= \tanh(W_{hh}h_{t-1} + W_{xh}x_t + b_h) \\
 y_t &= W_{hy}h_t + b_y
@@ -197,27 +211,37 @@ y_t &= W_{hy}h_t + b_y
 
 \begin{itemize}
 \item Hidden state carries memory
-\item Sequential processing
+\item Sequential processing ($O(n)$ path length)
 \item Good for: Time series, NLP
 \item Problem: Vanishing gradients over time
 \end{itemize}
 
-\textbf{Transformers (2017):}
+\textbf{Transformers (``Attention Is All You Need'' 2017):}
+
+\textbf{Attention Mechanism:}
+$$\text{Attention}(Q,K,V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V$$
 \begin{itemize}
-\item Self-attention mechanism
-\item Parallel processing
-\item Long-range dependencies
-\item State-of-the-art for language
+\item Query: What I'm looking for
+\item Key: What I have to offer
+\item Value: What I'll return if matched
 \end{itemize}
 
 \column{0.48\textwidth}
 \begin{center}
 \includegraphics[width=\textwidth]{charts/rnn_transformer_comparison.pdf}
 \end{center}
+
+\textbf{Key Advantages:}
+\begin{itemize}
+\item Self-attention: $O(1)$ path length
+\item Parallel processing (no sequential bottleneck)
+\item Long-range dependencies without vanishing gradients
+\item State-of-the-art for language (GPT, BERT)
+\end{itemize}
 \end{columns}
 
 \vspace{\fill}
-\small\textcolor{gray}{RNNs: Sequential memory, Transformers: Parallel attention}
+\small\textcolor{gray}{Transformers enable O(1) path length vs O(n) for RNNs - revolutionized NLP and beyond}
 \end{frame}
 
 \begin{frame}{19. Visualization: Feature Maps, Attention Heatmaps}
@@ -238,6 +262,8 @@ y_t &= W_{hy}h_t + b_y
 \item Shows which words influence others
 \item Different heads learn different patterns
 \item Interpretable relationships
+\item \textbf{Technique}: Grad-CAM visualizes which regions influenced decision
+\item Attention weights reveal learned linguistic structure (syntax trees emerge naturally)
 \end{itemize}
 
 \column{0.48\textwidth}
@@ -316,5 +342,58 @@ Year & Model & Top-5 Error \\
 \end{columns}
 
 \vspace{\fill}
-\small\textcolor{gray}{CNNs achieved superhuman performance in just 5 years}
+\small\textcolor{gray}{ResNet (2015): First to surpass human performance (3.6\% vs 5.1\%) - CNNs achieved superhuman vision in just 5 years}
+\end{frame}
+
+\begin{frame}{22. Solutions to Vanishing Gradients}
+\begin{columns}[c]
+\column{0.48\textwidth}
+\textbf{1. ReLU Activation:}
+\begin{align}
+\text{ReLU}(x) &= \max(0, x) \\
+\frac{d}{dx}\text{ReLU}(x) &= \begin{cases} 1 & x > 0 \\ 0 & x \leq 0 \end{cases}
+\end{align}
+
+\textbf{Comparison:}
+\begin{itemize}
+\item Sigmoid: $\sigma'(x) \leq 0.25$ (vanishes)
+\item ReLU: gradient = 1 (constant for $x>0$)
+\item Enables training 100+ layer networks
+\end{itemize}
+
+\textbf{2. Other Solutions:}
+\begin{itemize}
+\item Batch Normalization (2015): Stabilize distributions
+\item Skip connections (ResNet 2015): Shortcut paths
+\item Xavier/He initialization: Preserve variance
+\end{itemize}
+
+\column{0.48\textwidth}
+\textbf{Gradient Flow Comparison:}
+
+\textbf{Sigmoid Network (10 layers):}
+\begin{itemize}
+\item Layer 10 gradient: $1.0$
+\item Layer 5 gradient: $0.001$
+\item Layer 1 gradient: $0.000001$
+\end{itemize}
+
+\textbf{ReLU Network (10 layers):}
+\begin{itemize}
+\item Layer 10 gradient: $1.0$
+\item Layer 5 gradient: $1.0$
+\item Layer 1 gradient: $1.0$
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Result:}
+\begin{itemize}
+\item ReLU: All layers learn at similar rates
+\item Deep networks become trainable
+\item 2012 breakthrough: AlexNet (8 layers with ReLU)
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\small\textcolor{gray}{ReLU's constant gradient solved the vanishing gradient problem - enabling the deep learning revolution}
 \end{frame}

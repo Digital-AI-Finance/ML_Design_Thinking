@@ -56,7 +56,7 @@ f1\_score(y\_true, y\_pred, average='macro')\\
 \end{columns}
 
 \vspace{\fill}
-\footnotesize\textcolor{mlgray}{sklearn.metrics provides everything needed for validation}
+\footnotesize\textcolor{mlgray}{Standardized metric libraries enable consistent validation - uniform implementations prevent calculation errors and ensure comparable results}
 \end{frame}
 
 % Slide 2: Cross-Validation Strategies
@@ -201,7 +201,7 @@ plt.legend()}
 \end{columns}
 
 \vspace{\fill}
-\footnotesize\textcolor{mlgray}{Overlay multiple models to compare visually}
+\footnotesize\textcolor{mlgray}{Visual comparison reveals performance differences - overlaid curves enable direct model assessment across threshold ranges}
 \end{frame}
 
 % Slide 5: Statistical Significance Testing
@@ -322,7 +322,7 @@ SVM & 0.90 & 0.87 & 0.85 & 0.86 & 0.93 \\
 \end{columns}
 
 \vspace{\fill}
-\footnotesize\textcolor{mlgray}{Pandas DataFrames organize multi-metric comparisons}
+\footnotesize\textcolor{mlgray}{Tabular organization enables systematic model comparison - structured data formats support sorting, filtering, and stakeholder communication}
 \end{frame}
 
 % Slide 7: Hyperparameter Impact on Metrics
@@ -361,7 +361,7 @@ Fraud detection optimal at 0.3\\
 \end{columns}
 
 \vspace{\fill}
-\footnotesize\textcolor{mlgray}{Hyperparameters affect metrics differently - tune for your metric}
+\footnotesize\textcolor{mlgray}{Hyperparameter optimization aligns with evaluation objectives - threshold tuning maximizes target metric rather than arbitrary defaults}
 \end{frame}
 
 % Slide 8: Validation Pipeline Architecture
@@ -407,7 +407,7 @@ Fraud detection optimal at 0.3\\
 \end{columns}
 
 \vspace{\fill}
-\footnotesize\textcolor{mlgray}{Proper data splits prevent overfitting to validation set}
+\footnotesize\textcolor{mlgray}{Isolated test sets prevent optimization bias - held-out data provides unbiased performance estimates when validation guides development}
 \end{frame}
 
 % Slide 9: Common Pitfalls
@@ -478,7 +478,7 @@ Optimizing inappropriate metric
 \end{columns}
 
 \vspace{\fill}
-\footnotesize\textcolor{mlgray}{These pitfalls create false confidence in poor models}
+\footnotesize\textcolor{mlgray}{Validation errors systematically inflate performance estimates - data leakage, test contamination, and metric mismatch produce unreliable assessments}
 \end{frame}
 
 % Slide 10: Implementation Checklist
@@ -529,5 +529,5 @@ $\Box$ Rollback strategy defined
 \end{columns}
 
 \vspace{\fill}
-\footnotesize\textcolor{mlgray}{Part 4: Communicating validation results to stakeholders}
+\footnotesize\textcolor{mlgray}{Stakeholder communication translates technical metrics into business value - effective presentation drives informed deployment decisions}
 \end{frame}

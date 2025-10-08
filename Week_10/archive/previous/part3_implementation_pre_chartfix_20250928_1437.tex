@@ -1,0 +1,777 @@
+% Part 3: Implementation - Production Experiment Systems
+\section{Implementation: Building A/B Test Infrastructure}
+
+% Slide 1: Experiment Infrastructure Overview
+\begin{frame}{Production Experiment Infrastructure}
+\begin{columns}[T]
+\column{0.55\textwidth}
+\includegraphics[width=\textwidth]{charts/canary_deployment_timeline.pdf}
+
+\column{0.43\textwidth}
+\textcolor{mlblue}{\textbf{Core Components}}
+
+\small
+\textbf{1. Traffic Splitting}
+\begin{itemize}
+\item Assign users to control/treatment
+\item Consistent hashing (same user, same group)
+\item 50/50, 90/10, or custom splits
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{2. Feature Flags}
+\begin{itemize}
+\item Toggle experiments on/off
+\item Gradual rollouts (1\% $\rightarrow$ 5\% $\rightarrow$ 25\% $\rightarrow$ 100\%)
+\item Instant kill switch
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{3. Experiment Tracking}
+\begin{itemize}
+\item Log user assignment
+\item Track metrics per group
+\item Store for analysis
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{4. Analysis Pipeline}
+\begin{itemize}
+\item Automated statistical tests
+\item Real-time dashboards
+\item Alert on guardrail violations
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Modern stacks: LaunchDarkly, Optimizely, GrowthBook, or custom}
+\end{frame}
+
+% Slide 2: Python A/B Test Implementation
+\begin{frame}[fragile]{Python: Classical A/B Test}
+\begin{columns}[T]
+\column{0.55\textwidth}
+\small
+\textbf{Classical A/B Test Implementation:}
+
+\begin{itemize}
+\item Import required libraries: \texttt{scipy.stats}, \texttt{statsmodels}
+\item Define sample data: control and treatment groups
+\item Calculate proportions for each group
+\item Perform Z-test for proportions using \texttt{proportions\_ztest}
+\item Compare p-value to significance threshold (0.05)
+\item Calculate and display key metrics:
+  \begin{itemize}
+  \item Control rate, treatment rate
+  \item Lift percentage
+  \item Z-statistic and p-value
+  \item Significance decision
+  \end{itemize}
+\end{itemize}
+
+\column{0.43\textwidth}
+\textcolor{mlblue}{\textbf{Output Example}}
+
+\small
+\textbf{Sample Output:}
+
+\begin{itemize}
+\item Control: 0.050 (5.0\% conversion)
+\item Treatment: 0.062 (6.2\% conversion)
+\item Lift: 24.0\% improvement
+\item Z-statistic: 4.72
+\item P-value: 0.0001
+\item Result: Significant improvement!
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{Confidence Interval}}
+
+\small
+\textbf{Confidence Interval Calculation:}
+
+\begin{itemize}
+\item Import \texttt{confint\_proportions\_2indep} from statsmodels
+\item Calculate 95\% confidence interval using Wald method
+\item Parameters: treatment successes/total, control successes/total
+\item Output: lower and upper bounds of difference
+\end{itemize}
+
+\vspace{0.2cm}
+\textcolor{mlorange}{\textbf{Interpretation}}
+
+\small
+If CI excludes 0, treatment significantly better than control
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{scipy and statsmodels provide complete A/B test toolkit}
+\end{frame}
+
+% Slide 3: Bayesian A/B Testing Code
+\begin{frame}[fragile]{Python: Bayesian A/B Testing with PyMC3}
+\begin{columns}[T]
+\column{0.55\textwidth}
+\small
+\textbf{Bayesian A/B Test with PyMC3:}
+
+\begin{itemize}
+\item Import PyMC3 and numpy libraries
+\item Define observed data: clicks and trials for groups A and B
+\item Set up Bayesian model:
+  \begin{itemize}
+  \item Beta priors for conversion rates (non-informative)
+  \item Binomial likelihoods for observed data
+  \item Deterministic variable for difference (delta)
+  \end{itemize}
+\item Sample from posterior distribution (2000 samples)
+\item Calculate probability that B outperforms A
+\item Direct probability statements without p-value confusion
+\end{itemize}
+
+\column{0.43\textwidth}
+\textcolor{mlblue}{\textbf{Output}}
+
+\small
+\textbf{Bayesian Results:}
+
+\begin{itemize}
+\item P(B $>$ A) = 0.997 (99.7\% confidence)
+\item Posterior mean delta: 0.012
+\item 95\% Credible Interval: [0.008, 0.016]
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{Interpretation}}
+
+\small
+\begin{itemize}
+\item 99.7\% probability B is better
+\item Expected lift: 1.2 pp
+\item 95\% sure lift between 0.8-1.6pp
+\item High confidence to ship
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlorange}{\textbf{Advantages}}
+
+\small
+\begin{itemize}
+\item Direct probability statements
+\item No p-value confusion
+\item Can stop early if P(B $>$ A) $>$ 0.95
+\item Incorporates prior knowledge
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Bayesian approach increasingly adopted for faster iteration}
+\end{frame}
+
+% Slide 4: Multi-Armed Bandit Implementation
+\begin{frame}[fragile]{Python: Thompson Sampling Bandit}
+\begin{columns}[T]
+\column{0.55\textwidth}
+\small
+\textbf{Thompson Sampling Bandit Implementation:}
+
+\begin{itemize}
+\item Class initialization with number of arms
+\item Maintain success/failure counts per arm (Beta parameters)
+\item Selection algorithm:
+  \begin{itemize}
+  \item Sample from Beta distribution for each arm
+  \item Select arm with highest sample value
+  \end{itemize}
+\item Update mechanism:
+  \begin{itemize}
+  \item Increment success count for reward = 1
+  \item Increment failure count for reward = 0
+  \end{itemize}
+\item Main loop: select arm, observe reward, update beliefs
+\item Converges to optimal arm while balancing exploration
+\end{itemize}
+
+\column{0.43\textwidth}
+\textcolor{mlblue}{\textbf{How It Works}}
+
+\small
+\textbf{1. Initialize:}
+\begin{itemize}
+\item Each arm: Beta(1, 1) = uniform prior
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{2. Select arm:}
+\begin{itemize}
+\item Sample from each Beta distribution
+\item Pick arm with highest sample
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{3. Observe reward:}
+\begin{itemize}
+\item If success: $\alpha$ + 1
+\item If failure: $\beta$ + 1
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{4. Repeat}
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{Convergence}}
+
+\small
+\begin{itemize}
+\item Best arm gets pulled more often
+\item Exploration decreases over time
+\item Minimizes cumulative regret
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Use case:} Ad creative testing (50 variants, continuous optimization)
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Thompson sampling: Simple, effective, Bayesian bandit algorithm}
+\end{frame}
+
+% Slide 5: Stratified Randomization Implementation
+\begin{frame}[fragile]{Python: Stratified Randomization with sklearn}
+\begin{columns}[T]
+\column{0.55\textwidth}
+\small
+\textbf{Stratified Randomization Implementation:}
+
+\begin{itemize}
+\item Import \texttt{StratifiedShuffleSplit} from sklearn
+\item Create user dataframe with stratification variables
+\item Set up stratified split:
+  \begin{itemize}
+  \item 50/50 split between control and treatment
+  \item Stratify by device type (iOS/Android)
+  \item Use fixed random state for reproducibility
+  \end{itemize}
+\item Apply split to create balanced groups
+\item Verify stratification worked:
+  \begin{itemize}
+  \item Check device distribution in both groups
+  \item Should be identical proportions
+  \end{itemize}
+\item Can extend to multiple stratification variables
+\end{itemize}
+
+\column{0.43\textwidth}
+\textcolor{mlblue}{\textbf{Output}}
+
+\small
+\textbf{Verification Results:}
+
+\begin{itemize}
+\item \textbf{Control device distribution:}
+  \begin{itemize}
+  \item iOS: 0.50 (50\%)
+  \item Android: 0.50 (50\%)
+  \end{itemize}
+\item \textbf{Treatment device distribution:}
+  \begin{itemize}
+  \item iOS: 0.50 (50\%)
+  \item Android: 0.50 (50\%)
+  \end{itemize}
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{Why This Matters}}
+
+\small
+\textbf{Without stratification:}
+\begin{itemize}
+\item Control might be 55\% iOS
+\item Treatment might be 45\% iOS
+\item Device becomes confounder
+\item Results biased
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{With stratification:}
+\begin{itemize}
+\item Both groups exactly 50\% iOS
+\item Device balanced
+\item Removes confounding
+\item Higher statistical power
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Can stratify on multiple variables:} Device, region, user tenure
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Stratification reduces variance and increases power}
+\end{frame}
+
+% Slide 6: Sequential Testing Implementation
+\begin{frame}[fragile]{Python: Sequential Testing with Early Stopping}
+\begin{columns}[T]
+\column{0.55\textwidth}
+\small
+\textbf{Sequential Testing with O'Brien-Fleming:}
+
+\begin{itemize}
+\item Import numpy and scipy.stats.norm
+\item Define O'Brien-Fleming boundary function:
+  \begin{itemize}
+  \item Input: current analysis number (k), total analyses (K)
+  \item Calculate alpha spending based on information fraction
+  \item Conservative early, liberal late
+  \end{itemize}
+\item Plan interim analyses (e.g., 25\%, 50\%, 75\%, 100\%)
+\item For each analysis:
+  \begin{itemize}
+  \item Calculate current p-value
+  \item Compare to adjusted alpha threshold
+  \item Stop if significant, continue otherwise
+  \end{itemize}
+\item Maintains overall Type I error rate at 0.05
+\item Enables early stopping without ``peeking'' penalty
+\end{itemize}
+
+\column{0.43\textwidth}
+\textcolor{mlblue}{\textbf{Alpha Spending}}
+
+\small
+\textbf{Alpha Spending Schedule:}
+
+\begin{itemize}
+\item Look 1 (25\%): alpha = 0.0005
+\item Look 2 (50\%): alpha = 0.0139
+\item Look 3 (75\%): alpha = 0.0303
+\item Look 4 (100\%): alpha = 0.0455
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{Interpretation}}
+
+\small
+\begin{itemize}
+\item Very conservative early (0.0005)
+\item More liberal late (0.0455)
+\item Total $\alpha$ still 0.05
+\item Can stop early if clear winner
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlorange}{\textbf{Benefits}}
+
+\small
+\begin{itemize}
+\item Valid p-values at each look
+\item Can stop for futility (clear loser)
+\item Faster decisions on average
+\item Maintains Type I error control
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Cost:} Slightly larger sample needed vs fixed design
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Sequential testing enables early stopping without ``peeking'' penalty}
+\end{frame}
+
+% Slide 7: Experiment Monitoring Dashboard
+\begin{frame}{Real-Time Experiment Monitoring}
+\begin{columns}[T]
+\column{0.55\textwidth}
+\includegraphics[width=\textwidth]{charts/experiment_velocity_dashboard.pdf}
+
+\column{0.43\textwidth}
+\textcolor{mlblue}{\textbf{Key Metrics to Monitor}}
+
+\small
+\textbf{Primary Metric:}
+\begin{itemize}
+\item Current estimate
+\item Confidence interval
+\item P-value or P(B $>$ A)
+\item Sample size achieved
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Guardrail Metrics:}
+\begin{itemize}
+\item Revenue (must not drop $>$ 2\%)
+\item Latency (p95 $<$ 200ms)
+\item Error rate ($<$ 0.1\%)
+\item Automatic alerts if violated
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Diagnostic Metrics:}
+\begin{itemize}
+\item Sample ratio mismatch
+\item Traffic allocation balance
+\item Novelty effects
+\item Time-of-day patterns
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{Automated Actions}}
+
+\small
+\begin{itemize}
+\item Stop if guardrail violated
+\item Alert if sample imbalanced
+\item Flag if novelty detected
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Continuous monitoring prevents disasters and enables fast decisions}
+\end{frame}
+
+% Slide 8: Common Pitfalls
+\begin{frame}{Common A/B Testing Pitfalls}
+\begin{columns}[T]
+\column{0.32\textwidth}
+\textcolor{mlred}{\textbf{Peeking Problem}}
+
+\small
+\textbf{What:} Check results daily, stop when p $<$ 0.05
+
+\vspace{0.2cm}
+\textbf{Why bad:}
+\begin{itemize}
+\item Inflates false positive rate
+\item Random fluctuations look significant
+\item Not reproducible
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Fix:}
+\begin{itemize}
+\item Wait for planned sample
+\item Use sequential testing
+\item Or Bayesian methods
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlorange}{\textbf{Multiple Testing}}
+
+\small
+\textbf{What:} Test 20 variants, report winner
+
+\vspace{0.2cm}
+\textbf{Why bad:}
+\begin{itemize}
+\item 1 false positive expected
+\item Winner likely spurious
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Fix:}
+\begin{itemize}
+\item Bonferroni correction
+\item Control family-wise error rate
+\item Or use bandits
+\end{itemize}
+
+\column{0.32\textwidth}
+\textcolor{mlblue}{\textbf{Simpson's Paradox}}
+
+\small
+\textbf{What:} Treatment wins overall, loses in every segment
+
+\vspace{0.2cm}
+\textbf{Example:}
+\begin{itemize}
+\item iOS: Control 10\%, Treatment 9\%
+\item Android: Control 8\%, Treatment 7\%
+\item Overall: Treatment wins (imbalance in device mix)
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Fix:}
+\begin{itemize}
+\item Stratified randomization
+\item Analyze by segment
+\item Check for confounders
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{Novelty Effects}}
+
+\small
+\textbf{What:} Users react to change itself, not treatment
+
+\vspace{0.2cm}
+\textbf{Signs:}
+\begin{itemize}
+\item Week 1: Treatment wins
+\item Week 2: Effect shrinks
+\item Week 3: No difference
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Fix:}
+\begin{itemize}
+\item Run longer (2-4 weeks)
+\item Analyze by user cohort
+\item Exclude early days
+\end{itemize}
+
+\column{0.32\textwidth}
+\textcolor{mlpurple}{\textbf{Sample Ratio Mismatch}}
+
+\small
+\textbf{What:} 50/50 split becomes 52/48
+
+\vspace{0.2cm}
+\textbf{Causes:}
+\begin{itemize}
+\item Bot traffic
+\item Implementation bugs
+\item Sampling bias
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Why bad:}
+\begin{itemize}
+\item Groups not comparable
+\item Results invalid
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Fix:}
+\begin{itemize}
+\item Monitor ratio daily
+\item Investigate deviations
+\item Filter bots
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlorange}{\textbf{Ignoring Variance}}
+
+\small
+\textbf{What:} Focus only on means, ignore spread
+
+\vspace{0.2cm}
+\textbf{Why bad:}
+\begin{itemize}
+\item High variance = unreliable
+\item May hurt some users badly
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Fix:}
+\begin{itemize}
+\item Report quantiles (p10, p50, p90)
+\item Check for outliers
+\item Analyze subgroups
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Awareness of pitfalls is half the battle—set up checks proactively}
+\end{frame}
+
+% Slide 9: Production Deployment Patterns
+\begin{frame}{Production Deployment Patterns}
+\begin{columns}[T]
+\column{0.32\textwidth}
+\textcolor{mlblue}{\textbf{Canary Release}}
+
+\small
+\textbf{Process:}
+\begin{enumerate}
+\item Deploy to 1\% users
+\item Monitor for 24 hours
+\item If stable, 5\%
+\item Then 25\%, 50\%, 100\%
+\end{enumerate}
+
+\vspace{0.2cm}
+\textbf{When:}
+\begin{itemize}
+\item High-risk changes
+\item New algorithms
+\item Large refactors
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Benefits:}
+\begin{itemize}
+\item Early error detection
+\item Minimal blast radius
+\item Easy rollback
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Guardrails:}
+\begin{itemize}
+\item Error rate $<$ 0.5\%
+\item Latency $<$ baseline + 20\%
+\item Revenue $>$ baseline - 5\%
+\end{itemize}
+
+\column{0.32\textwidth}
+\textcolor{mlgreen}{\textbf{Blue-Green Deploy}}
+
+\small
+\textbf{Process:}
+\begin{enumerate}
+\item Green: Current (100\%)
+\item Blue: New (0\%)
+\item Gradually shift traffic
+\item Blue becomes 100\%
+\end{enumerate}
+
+\vspace{0.2cm}
+\textbf{When:}
+\begin{itemize}
+\item Infrastructure changes
+\item Database migrations
+\item Zero-downtime deploys
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Benefits:}
+\begin{itemize}
+\item Instant rollback (flip traffic)
+\item Both versions running
+\item Compare metrics live
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Challenges:}
+\begin{itemize}
+\item 2$	imes$ infrastructure cost
+\item Data consistency
+\item State management
+\end{itemize}
+
+\column{0.32\textwidth}
+\textcolor{mlorange}{\textbf{Shadow Mode}}
+
+\small
+\textbf{Process:}
+\begin{enumerate}
+\item Send traffic to both models
+\item Serve old model to users
+\item Log new model predictions
+\item Compare offline
+\end{enumerate}
+
+\vspace{0.2cm}
+\textbf{When:}
+\begin{itemize}
+\item Validating new model
+\item Zero risk testing
+\item Performance benchmarking
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Benefits:}
+\begin{itemize}
+\item No user impact
+\item Real traffic testing
+\item Can run indefinitely
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Use case:}
+\begin{itemize}
+\item Test before A/B test
+\item Validate offline metrics
+\item Check for bugs
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Limitation:} Can't measure business metrics (users don't see it)
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Modern deployments combine all three: Shadow $\rightarrow$ Canary $\rightarrow$ Blue-Green}
+\end{frame}
+
+% Slide 10: Implementation Summary
+\begin{frame}{Implementation Summary \& Best Practices}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Implementation Checklist}}
+
+\small
+\textbf{Before Experiment:}
+\begin{itemize}
+\item Hypothesis pre-registered
+\item Sample size calculated
+\item Randomization strategy chosen
+\item Guardrails defined
+\item Monitoring dashboard ready
+\item Kill switch tested
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{During Experiment:}
+\begin{itemize}
+\item Monitor metrics daily
+\item Check sample ratio balance
+\item Watch for guardrail violations
+\item No peeking at p-values (unless sequential)
+\item Document any issues
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{After Experiment:}
+\begin{itemize}
+\item Run statistical tests
+\item Calculate confidence intervals
+\item Check subgroup analyses
+\item Review guardrails
+\item Make ship/iterate/kill decision
+\item Document learnings
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{mlgreen}{\textbf{Python Tools Ecosystem}}
+
+\small
+\textbf{Statistical Testing:}
+\begin{itemize}
+\item scipy: t-tests, z-tests
+\item statsmodels: Advanced tests, power analysis
+\item PyMC3: Bayesian methods
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Experimentation Platforms:}
+\begin{itemize}
+\item GrowthBook: Open-source, feature flags
+\item Optimizely: Enterprise A/B testing
+\item LaunchDarkly: Feature management
+\item Firebase: Mobile experiments
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Visualization:}
+\begin{itemize}
+\item matplotlib/seaborn: Static plots
+\item Plotly: Interactive dashboards
+\item Streamlit: Quick apps
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlorange}{\textbf{Key Takeaways}}
+
+\small
+\begin{itemize}
+\item Automate as much as possible
+\item Monitor continuously
+\item Plan for early stopping
+\item Always have guardrails
+\item Document everything
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Part 4: Building experimentation culture and communicating results}
+\end{frame}

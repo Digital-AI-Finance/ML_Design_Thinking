@@ -1,0 +1,51 @@
+
+    FinTech User Behavior Dataset
+    =============================
+
+    Dataset for demonstrating advanced clustering techniques
+    Designed for MSc-level machine learning education
+
+    Size: 10,000 users
+    Features: 12 behavioral and transactional metrics
+    Segments: 7 (including fraudulent and noise)
+
+    Segments:
+    - Digital Natives (25%): Tech-savvy heavy users
+    - Traditional Savers (20%): Conservative, high deposits
+    - Business Users (15%): High volume, business hours
+    - International Travelers (10%): Cross-border focus
+    - Cautious Beginners (25%): New users, learning phase
+    - Fraudulent (3%): Anomalous patterns for outlier detection
+    - Noise (2%): Random patterns
+
+    Features:
+    1. transaction_frequency: Daily average transactions
+    2. transaction_volume: Monthly total in USD
+    3. session_duration: Average app usage in minutes
+    4. payment_diversity: Number of different payment types (1-10)
+    5. international_activity: Cross-border transaction ratio (0-1)
+    6. savings_behavior: Deposit frequency score (0-100)
+    7. credit_utilization: Credit line usage percentage (0-100)
+    8. support_contacts: Monthly customer service interactions
+    9. device_switches: Multi-device usage score (0-10)
+    10. peak_hour_usage: Business hours activity ratio (0-1)
+    11. merchant_categories: Spending category diversity (1-20)
+    12. account_age: Days since registration
+
+    Clustering Challenges:
+    - Varying cluster densities
+    - Overlapping segments (GMM suitable)
+    - Outliers and anomalies (DBSCAN suitable)
+    - Natural hierarchy (Hierarchical suitable)
+    - Different cluster shapes
+    - Missing values (2% in some features)
+    - Temporal correlations
+    - Skewed distributions
+
+    Files:
+    - fintech_user_behavior_full.csv: Complete dataset with labels
+    - fintech_X.npy: Feature matrix (10000, 12)
+    - fintech_y_true.npy: True segment labels
+    - fintech_segments.npy: Segment names
+    - fintech_features.txt: Feature names list
+    

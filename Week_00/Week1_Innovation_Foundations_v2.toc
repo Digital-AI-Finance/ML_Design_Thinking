@@ -1,8 +1,0 @@
-\beamer@sectionintoc {1}{The Innovation Challenge}{3}{0}{1}
-\beamer@sectionintoc {2}{Learning Paradigms in ML}{5}{0}{2}
-\beamer@sectionintoc {3}{Integration with Design Thinking}{10}{0}{3}
-\beamer@sectionintoc {4}{Practical Applications}{13}{0}{4}
-\beamer@sectionintoc {5}{Algorithm Fundamentals}{16}{0}{5}
-\beamer@sectionintoc {6}{Emerging Challenge}{20}{0}{6}
-\beamer@sectionintoc {7}{Summary}{23}{0}{7}
-\beamer@sectionintoc {8}{Appendix}{27}{1}{8}

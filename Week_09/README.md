@@ -23,8 +23,8 @@ By the end of Week 9, students will be able to:
 
 ## Modular Structure
 
-**Total Slides**: 50 (across 5 parts)
-**Charts**: 15 visualizations
+**Total Slides**: 51 (across 5 parts) - V1.1 updated for pedagogical framework compliance
+**Charts**: 16 visualizations
 **Handouts**: 3 skill-level guides
 **Workshop**: Credit Risk Model Validation (60 minutes)
 
@@ -94,26 +94,28 @@ By the end of Week 9, students will be able to:
 - threshold_optimization.pdf: Cost vs threshold curve showing optimal point
 - validation_pipeline.pdf: Flowchart from raw data to deployment decision
 
-### Part 4: Design - Communicating Model Performance (10 slides)
+### Part 4: Design - Communicating Model Performance (11 slides)
 **File**: `part4_design.tex`
 **Purpose**: Translate technical metrics for non-technical stakeholders
 
 **Content**:
 1. Stakeholder-specific dashboards: Executives (ROI), PMs (features vs metrics), engineers (debugging)
 2. Confidence intervals: Bootstrap resampling for metric uncertainty quantification
-3. Error analysis: Which samples fail? Systematic patterns? Subgroup disparities?
-4. Business impact translation: "95% precision" → "$2M saved annually from reduced false alarms"
-5. Threshold selection communication: Why 0.3 instead of 0.5? Show cost curve.
-6. Model comparison storytelling: "Model A wins on recall but Model B is more stable"
-7. Deployment readiness: Green/yellow/red criteria for go/no-go decision
-8. A/B test planning: Baseline metrics, success criteria, sample size, monitoring plan
-9. Documentation requirements: Model card, performance report, validation log, rollback plan
-10. Communicating uncertainty: Confidence intervals, worst-case scenarios, edge case coverage
+3. Model comparison tables: Clear decision matrices for model selection
+4. Error analysis: Which samples fail? Systematic patterns? Subgroup disparities?
+5. Business impact translation: "95% precision" → "$2M saved annually from reduced false alarms"
+6. A/B test readiness: Pre-deployment validation gates
+7. Model cards: Performance section best practices
+8. Explaining precision-recall to PMs: Trade-off communication
+9. Interactive validation tools: Plotly Dash dashboards
+10. **NEW (V1.1)**: When to use multi-metric validation - Judgment criteria for validation depth selection
+11. Design framework summary: Core principles and communication checklist
 
 **Key Visualizations**:
 - model_comparison_dashboard.pdf: Executive summary with 5 models × 10 metrics
 - business_metric_alignment.pdf: ML metrics mapped to business KPIs
 - validation_checklist.pdf: Visual checklist of 20 pre-deployment requirements
+- validation_depth_decision.pdf: **NEW (V1.1)** - Decision tree for choosing validation rigor
 
 ### Part 5: Practice - Credit Risk Workshop (9 slides)
 **File**: `part5_practice.tex`
@@ -146,7 +148,7 @@ By the end of Week 9, students will be able to:
 - Statistical significance tests
 - Final recommendation with business justification
 
-## Key Visualizations (15 Charts)
+## Key Visualizations (16 Charts)
 
 All charts generated programmatically via `scripts/generate_all_charts.py`:
 
@@ -165,7 +167,8 @@ All charts generated programmatically via `scripts/generate_all_charts.py`:
 13. **validation_pipeline.pdf**: Data split → training → validation → testing → deployment
 14. **business_metric_alignment.pdf**: ML metrics (precision, recall) → business KPIs (profit, risk)
 15. **validation_checklist.pdf**: 20-item pre-deployment verification
-16. **validation_pyramid.pdf** (bonus): 4-level hierarchy from business to technical validation
+16. **validation_pyramid.pdf**: 4-level hierarchy from business to technical validation
+17. **validation_depth_decision.pdf** **NEW (V1.1)**: Decision tree for matching validation rigor to problem stakes
 
 **Chart Generation**:
 ```bash
@@ -511,6 +514,14 @@ Week_09/
 ```
 
 ## Version History
+
+- **2025-10-03 V1.1**: Pedagogical framework compliance upgrade
+  - Added "When to Use Multi-Metric Validation" judgment criteria slide to Part 4
+  - New chart: validation_depth_decision.pdf (decision tree for validation rigor)
+  - Total slides: 50 → 51
+  - Total charts: 15 → 16
+  - Satisfies pedagogical_framework_Template.md requirements (Anti-Pattern #5)
+  - Matches Week 8 V2.1 meta-knowledge standard
 
 - **2025-09-27 10:21**: Initial release
   - 50 slides across 5 modular parts

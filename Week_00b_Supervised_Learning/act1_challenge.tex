@@ -1,4 +1,4 @@
-% Act 1: The Challenge (5 slides)
+% Part 1: The Challenge (5 slides)
 
 \begin{frame}{1. Real Estate Price Prediction}
 \begin{columns}
@@ -25,12 +25,11 @@ Size & Beds & Age & Price \\
 \end{column}
 \begin{column}{0.48\textwidth}
 \includegraphics[width=\textwidth]{charts/real_estate_scatter.pdf}
-
-\vspace{0.2cm}
-\small
-Multiple features create complex relationships requiring mathematical modeling
 \end{column}
 \end{columns}
+
+\vspace{\fill}
+\small\textcolor{gray}{Supervised learning transforms labeled examples into predictive models - regression predicts continuous values from multiple correlated features}
 \end{frame}
 
 \begin{frame}{2. Linear Regression as Baseline}
@@ -55,12 +54,11 @@ Multiple features create complex relationships requiring mathematical modeling
 \end{column}
 \begin{column}{0.48\textwidth}
 \includegraphics[width=\textwidth]{charts/linear_regression_fit.pdf}
-
-\vspace{0.2cm}
-\small
-Linear model assumes additive relationships between all features
 \end{column}
 \end{columns}
+
+\vspace{\fill}
+\small\textcolor{gray}{Linear regression assumes additive relationships - optimal under Gauss-Markov conditions but restrictive for real-world complexity}
 \end{frame}
 
 \begin{frame}{3. Classification vs Regression}
@@ -85,12 +83,11 @@ Linear model assumes additive relationships between all features
 \end{column}
 \begin{column}{0.48\textwidth}
 \includegraphics[width=\textwidth]{charts/regression_vs_classification.pdf}
-
-\vspace{0.2cm}
-\small
-Different problem types require different algorithms and evaluation metrics
 \end{column}
 \end{columns}
+
+\vspace{\fill}
+\small\textcolor{gray}{Problem formulation determines algorithm choice - continuous targets require regression, discrete categories need classification with appropriate loss functions}
 \end{frame}
 
 \begin{frame}{4. The Curse of Dimensionality}
@@ -110,17 +107,16 @@ Different problem types require different algorithms and evaluation metrics
 \item High-dimensional space is mostly empty
 \item Distance metrics become meaningless
 \item Overfitting becomes inevitable
-\item ``Hughes phenomenon'' in pattern recognition
+\item ``Hughes phenomenon'' (Hughes 1968): Performance degrades as features increase beyond sample capacity
 \end{itemize}
 \end{column}
 \begin{column}{0.48\textwidth}
 \includegraphics[width=\textwidth]{charts/curse_dimensionality.pdf}
-
-\vspace{0.2cm}
-\small
-As dimensions increase, all points become equidistant and patterns disappear
 \end{column}
 \end{columns}
+
+\vspace{\fill}
+\small\textcolor{gray}{Curse of dimensionality: volume grows exponentially while data remains sparse - distances become uninformative and nearest neighbors lose meaning (Bellman 1961)}
 \end{frame}
 
 \begin{frame}{5. Feature Interactions Explode Combinatorially}
@@ -145,10 +141,9 @@ As dimensions increase, all points become equidistant and patterns disappear
 \end{column}
 \begin{column}{0.48\textwidth}
 \includegraphics[width=\textwidth]{charts/feature_combinations.pdf}
-
-\vspace{0.2cm}
-\small
-{\color{mlred} Feature interactions grow exponentially, requiring regularization or feature selection}
 \end{column}
 \end{columns}
+
+\vspace{\fill}
+\small\textcolor{gray}{Combinatorial explosion creates $2^n$ possible interactions - regularization and feature selection become necessary to prevent overfitting in high dimensions}
 \end{frame}

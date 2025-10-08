@@ -1,14 +1,21 @@
 {
   "permissions": {
     "allow": [
-      "WebSearch",
-      "Bash(findstr:*)",
-      "Bash(dir:*)",
+      "Bash(Measure-Object)",
+      "Bash(Select-Object Count)",
+      "Bash(Select-Object -First 15)",
+      "Bash(for:*)",
+      "Bash(do echo \"=== $week ===\")",
+      "Bash(ls $week/*.tex)",
+      "Bash(done)",
+      "Bash(grep:*)",
+      "Bash(awk:*)",
+      "Bash(do echo \"=== $file ===\")",
+      "Bash(do echo \"=== $dir ===\")",
       "Bash(pdflatex:*)",
-      "Bash(start:*)",
-      "Bash(python:*)",
-      "Read(//d/**)",
-      "Bash(xargs:*)"
+      "WebSearch",
+      "Bash(pdfinfo:*)",
+      "Bash(start \"D:\\Joerg\\Research\\slides\\ML_Design_Thinking_16\\Week_00e_Generative_AI\\20250928_2200_main.pdf\")"
     ],
     "deny": [],
     "ask": []

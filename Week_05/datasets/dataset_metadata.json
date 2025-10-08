@@ -1,0 +1,64 @@
+{
+  "generated_date": "2025-09-25T19:34:19.596832",
+  "datasets": {
+    "startup_ideas.csv": {
+      "rows": 5000,
+      "columns": [
+        "startup_id",
+        "name",
+        "category",
+        "description",
+        "founded_date",
+        "funding_stage",
+        "funding_amount",
+        "team_size",
+        "location",
+        "status",
+        "website",
+        "success_score"
+      ],
+      "categories": [
+        "Healthcare AI",
+        "Sustainable Tech",
+        "EdTech",
+        "FinTech",
+        "Food Delivery",
+        "Remote Work",
+        "IoT & Smart Home",
+        "AI & ML Services",
+        "Social Media",
+        "E-commerce",
+        "Cybersecurity",
+        "Gaming",
+        "Travel Tech",
+        "Legal Tech",
+        "Real Estate Tech"
+      ],
+      "description": "Main startup dataset with descriptions for topic modeling"
+    },
+    "customer_feedback.csv": {
+      "rows": 6279,
+      "columns": [
+        "startup_id",
+        "feedback",
+        "rating",
+        "date"
+      ],
+      "description": "Customer feedback for sentiment and topic analysis"
+    },
+    "innovation_ideas.csv": {
+      "rows": 2000,
+      "columns": [
+        "idea_id",
+        "title",
+        "description",
+        "category",
+        "feasibility",
+        "impact",
+        "effort",
+        "priority_score"
+      ],
+      "description": "Innovation ideas for ideation workshop"
+    }
+  }
+}

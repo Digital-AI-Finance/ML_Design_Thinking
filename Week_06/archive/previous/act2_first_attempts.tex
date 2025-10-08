@@ -1,0 +1,476 @@
+% ACT 2: FIRST ATTEMPTS & LIMITS (6 slides)
+% Show success THEN failure - critical for emotional arc
+
+% Slide 6: Key Insight - What if AI could create?
+\begin{frame}[t]{Key Insight: What If AI Could Create?}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Human Observation}}
+
+\small
+How do humans create prototypes?
+
+\vspace{0.3cm}
+\textbf{We combine learned patterns:}
+\begin{itemize}
+\item Designers learn from 1000s of examples
+\item Writers learn from millions of texts
+\item Coders learn from billions of lines
+\item We mix and recombine patterns
+\end{itemize}
+
+\vspace{0.5cm}
+\textcolor{mlpurple}{\textbf{The Breakthrough Idea:}}
+
+\small
+What if AI could learn these patterns?
+
+\begin{itemize}
+\item Train on millions of designs
+\item Learn writing patterns
+\item Understand code structures
+\item Generate new combinations
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Generative AI:} Models that create\\
+by sampling from learned patterns
+
+\column{0.48\textwidth}
+\textcolor{mlorange}{\textbf{Simple Architecture}}
+
+\small
+\begin{center}
+\begin{tcolorbox}[colback=lightgray, colframe=mlgray, width=0.9\textwidth]
+\centering
+\textbf{Input:} Description\\
+$\downarrow$\\
+\textbf{AI Model}\\
+(Learned patterns)\\
+$\downarrow$\\
+\textbf{Output:} Created content
+\end{tcolorbox}
+\end{center}
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{The Promise:}}
+
+\small
+\begin{itemize}
+\item \textbf{Text:} ``Create app description'' → Full text
+\item \textbf{Images:} ``Design logo'' → Visual assets
+\item \textbf{Code:} ``Build function'' → Working code
+\item \textbf{Speed:} Seconds instead of hours
+\end{itemize}
+
+\vspace{0.5cm}
+\begin{tcolorbox}[colback=mlblue!10, colframe=mlblue]
+\centering
+\small
+\textbf{Hope:} Could this solve our\\bottleneck problem?
+\end{tcolorbox}
+\end{columns}
+
+\bottomnote{Generative AI = Models that create by learning and recombining patterns}
+\end{frame}
+
+% Slide 7: First Success - Text Generation Works!
+\begin{frame}[t]{First Success: Text Generation Works!}
+\begin{columns}[T]
+\column{0.55\textwidth}
+\textcolor{mlgreen}{\textbf{Testing with EcoTrack App}}
+
+\small
+\textbf{Task:} Generate app description\\
+\textbf{Model:} GPT-3.5\\
+\textbf{Time:} 10 seconds
+
+\vspace{0.5cm}
+\textbf{Example 1: Feature List}
+\begin{tcolorbox}[colback=lightgray, colframe=mlgreen, width=0.95\textwidth]
+\tiny
+Track your carbon footprint in real-time\\
+Set reduction goals and monitor progress\\
+Compare with friends and community\\
+Discover eco-friendly alternatives\\
+Earn rewards for sustainable choices
+\end{tcolorbox}
+
+\vspace{0.3cm}
+\textbf{Example 2: User Onboarding}
+\begin{tcolorbox}[colback=lightgray, colframe=mlgreen, width=0.95\textwidth]
+\tiny
+Welcome to EcoTrack! Let's understand your current impact.\\
+First, tell us about your daily commute...\\
+Great! Now let's look at your home energy usage...
+\end{tcolorbox}
+
+\vspace{0.3cm}
+\textbf{Example 3: Error Message}
+\begin{tcolorbox}[colback=lightgray, colframe=mlgreen, width=0.95\textwidth}
+\tiny
+Oops! We couldn't calculate that. Please check your internet connection and try again.
+\end{tcolorbox}
+
+\column{0.43\textwidth}
+\textbf{Example 4: Email Template}
+\begin{tcolorbox}[colback=lightgray, colframe=mlgreen, width=0.95\textwidth]
+\tiny
+Subject: Your Weekly Impact Report\\
+\\
+Hi [Name],\\
+\\
+This week you saved 12kg of CO2! That's equivalent to planting 3 trees. Keep it up!
+\end{tcolorbox}
+
+\vspace{0.3cm}
+\textbf{Example 5: Social Media Post}
+\begin{tcolorbox}[colback=lightgray, colframe=mlgreen, width=0.95\textwidth]
+\tiny
+Just reduced my carbon footprint by 15\% this month with @EcoTrack! Small changes, big impact. \#SustainableLiving
+\end{tcolorbox}
+
+\vspace{0.5cm}
+\textcolor{mlblue}{\textbf{Quality Metrics:}}
+
+\small
+\begin{itemize}
+\item Coherent: \textcolor{mlgreen}{95\%}
+\item On-brand: \textcolor{mlgreen}{85\%}
+\item Usable: \textcolor{mlgreen}{90\%}
+\item Time saved: \textcolor{mlgreen}{3 hours → 10 seconds}
+\end{itemize}
+
+\vspace{0.3cm}
+\begin{tcolorbox}[colback=mlgreen!20, colframe=mlgreen]
+\centering
+\textbf{This is amazing!}\\Professional copy in seconds
+\end{tcolorbox}
+\end{columns}
+
+\bottomnote{Success: AI generates high-quality text for simple, well-defined tasks}
+\end{frame}
+
+% Slide 8: Success Spreads - Images, Code, UI
+\begin{frame}[t]{Success Spreads to Images, Code, and Design}
+\begin{columns}[T]
+\column{0.32\textwidth}
+\textcolor{mlpurple}{\textbf{Image Generation}}
+
+\small
+\textbf{Task:} EcoTrack logo\\
+\textbf{Prompt:} ``Green leaf icon, minimalist''\\
+\textbf{Tool:} DALL-E 3\\
+\textbf{Time:} 15 seconds
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{Results:}}
+\begin{itemize}
+\item 4 variations generated
+\item Professional quality
+\item Multiple styles
+\item Instant iterations
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlblue}{\textbf{Metrics:}}\\
+Quality: 8/10\\
+Time: 5 min vs 5 hours\\
+Cost: \$0.04 vs \$500
+
+\vspace{0.3cm}
+\textit{``This would have taken\\my designer a full day''}
+
+\column{0.32\textwidth}
+\textcolor{mlcyan}{\textbf{Code Generation}}
+
+\small
+\textbf{Task:} Carbon calculator\\
+\textbf{Prompt:} ``Function to compute CO2''\\
+\textbf{Tool:} GitHub Copilot\\
+\textbf{Time:} 20 seconds
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{Results:}}
+\begin{itemize}
+\item Working function
+\item Proper error handling
+\item Type hints included
+\item Comments added
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlblue}{\textbf{Metrics:}}\\
+Compiles: Yes\\
+Tests pass: 4/5\\
+Time: 30 min vs 2 hours\\
+Cost: \$0.01 vs \$200
+
+\vspace{0.3cm}
+\textit{``Saved me 90 minutes\\of coding''}
+
+\column{0.32\textwidth}
+\textcolor{mlorange}{\textbf{UI Design}}
+
+\small
+\textbf{Task:} Dashboard mockup\\
+\textbf{Prompt:} ``Carbon tracking dashboard''\\
+\textbf{Tool:} v0 by Vercel\\
+\textbf{Time:} 30 seconds
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{Results:}}
+\begin{itemize}
+\item Interactive prototype
+\item React code included
+\item Responsive design
+\item Modern aesthetic
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlblue}{\textbf{Metrics:}}\\
+Usability: 7/10\\
+Time: 2 hours vs 2 days\\
+Cost: \$0 vs \$2000
+
+\vspace{0.3cm}
+\textit{``I have a working\\prototype already!''}
+\end{columns}
+
+\vspace{0.3cm}
+\begin{center}
+\Large\textcolor{mlgreen}{\textbf{EcoTrack prototype: 1 hour vs 2 weeks traditionally}}
+\end{center}
+
+\bottomnote{Success pattern: AI handles text, images, code, and UI - the complete prototype toolkit}
+\end{frame}
+
+% Slide 9: THE SUCCESS SLIDE (Build hope - CRITICAL PEDAGOGICAL BEAT)
+\begin{frame}[t]{The First Success: Validation of the Approach}
+\begin{columns}[T]
+\column{0.55\textwidth}
+\textcolor{mlgreen}{\Large\textbf{It Works!}}
+
+\small
+\textbf{EcoTrack Prototype Completed:}
+
+\vspace{0.3cm}
+\begin{center}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Component} & \textbf{Traditional} & \textbf{With AI} \\
+\midrule
+App description & 3 hours & 10 sec \\
+Logo design & 5 hours & 15 sec \\
+UI mockups & 16 hours & 2 min \\
+Code structure & 40 hours & 5 min \\
+Landing page & 8 hours & 30 sec \\
+\midrule
+\textbf{Total} & \textbf{72 hours} & \textbf{8 minutes} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{0.5cm}
+\textcolor{mlblue}{\textbf{Quality Assessment:}}
+
+\small
+\begin{itemize}
+\item \textbf{Usability:} 85\% (excellent for first try)
+\item \textbf{Professional:} 80\% (looks legitimate)
+\item \textbf{Functional:} 70\% (basic features work)
+\item \textbf{On-brand:} 75\% (consistent identity)
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textit{``This is revolutionary! I can test 100 ideas now instead of 3!''}}
+
+\column{0.43\textwidth}
+\textcolor{mlpurple}{\textbf{Success Metrics}}
+
+\small
+\vspace{0.3cm}
+\textbf{Speed Improvement:}\\
+$72 \text{ hours} \rightarrow 8 \text{ minutes}$\\
+\textcolor{mlgreen}{\textbf{540x faster}}
+
+\vspace{0.3cm}
+\textbf{Cost Reduction:}\\
+\$12,000 → \$2\\
+\textcolor{mlgreen}{\textbf{6000x cheaper}}
+
+\vspace{0.3cm}
+\textbf{Iteration Capacity:}\\
+3 ideas/year → 1000 ideas/year\\
+\textcolor{mlgreen}{\textbf{333x more}}\vspace{0.3cm}
+
+\vspace{0.5cm}
+\begin{tcolorbox}[colback=mlgreen!20, colframe=mlgreen]
+\centering
+\textbf{The bottleneck is solved!}\\
+\\
+\small
+AI democratizes creation.\\
+Anyone can prototype.\\
+Innovation unlocked.
+\end{tcolorbox}
+
+\vspace{0.3cm}
+\textcolor{mlgray}{\small
+\textit{``For simple prototypes, this approach\\validates the core concept perfectly''}
+}
+\end{columns}
+
+\bottomnote{CRITICAL: Show success and build hope BEFORE revealing limitations}
+\end{frame}
+
+% Slide 10: FAILURE PATTERN EMERGES (CRITICAL PEDAGOGICAL BEAT - Must have data table)
+\begin{frame}[t]{But Then... The Failure Pattern Emerges}
+\begin{columns}[T]
+\column{0.55\textwidth}
+\textcolor{mlred}{\Large\textbf{The Pattern}}
+
+\small
+Testing with more complex requirements:
+
+\vspace{0.5cm}
+\begin{center}
+\begin{tabular}{lccc}
+\toprule
+\textbf{Complexity} & \textbf{Success} & \textbf{Drop} & \textbf{Issue} \\
+\midrule
+Simple task & \textcolor{mlgreen}{85\%} & - & Works well \\
+& \textcolor{mlgray}{(generic copy)} & & \\
+\midrule
+Medium task & \textcolor{mlorange}{45\%} & \textcolor{mlred}{-40\%} & Inconsistent \\
+& \textcolor{mlgray}{(logo variations)} & & style \\
+\midrule
+Complex task & \textcolor{mlred}{15\%} & \textcolor{mlred}{-70\%} & Hallucinations \\
+& \textcolor{mlgray}{(integrated code)} & & errors \\
+\midrule
+Full integration & \textcolor{mlred}{5\%} & \textcolor{mlred}{-80\%} & Doesn't work \\
+& \textcolor{mlgray}{(complete app)} & & together \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{0.5cm}
+\textcolor{mlpurple}{\textbf{The Trend is Clear:}}
+
+\small
+\begin{itemize}
+\item Quality \textcolor{mlred}{drops sharply} with complexity
+\item \textcolor{mlred}{No consistency} across components
+\item \textcolor{mlred}{Integration fails} completely
+\item \textcolor{mlred}{Domain knowledge} missing
+\end{itemize}
+
+\column{0.43\textwidth}
+\textcolor{mlorange}{\textbf{Specific Failures}}
+
+\small
+\textbf{1. Logo Inconsistency}\\
+10 different styles generated\\
+\textcolor{mlred}{No brand coherence}
+
+\vspace{0.3cm}
+\textbf{2. Code Hallucinations}\\
+Function uses non-existent API\\
+\textcolor{mlred}{Doesn't compile}
+
+\vspace{0.3cm}
+\textbf{3. Wrong Tone}\\
+Marketing copy too formal\\
+\textcolor{mlred}{Misses millennial audience}
+
+\vspace{0.3cm}
+\textbf{4. Missing Context}\\
+Health advice with wrong units\\
+\textcolor{mlred}{Factually incorrect}
+
+\vspace{0.3cm}
+\textbf{5. Integration Breaks}\\
+Logo colors ≠ UI colors\\
+Code structure ≠ design\\
+\textcolor{mlred}{Pieces don't fit}
+
+\vspace{0.5cm}
+\begin{tcolorbox}[colback=mlred!20, colframe=mlred]
+\centering
+\textbf{We thought we solved it...}\\
+\textbf{but it breaks on real projects}
+\end{tcolorbox}
+\end{columns}
+
+\bottomnote{CRITICAL: Failure pattern with quantified degradation - not just "it fails" but HOW it fails}
+\end{frame}
+
+% Slide 11: Diagnosis - Root Cause Analysis
+\begin{frame}[t]{Diagnosing the Root Cause}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Trace Specific Example}}
+
+\small
+\textbf{Task:} Create EcoTrack homepage
+
+\vspace{0.3cm}
+\textbf{Prompt given:}\\
+\textit{``Create a homepage for EcoTrack''}
+
+\vspace{0.5cm}
+\textcolor{mlgreen}{\textbf{What AI Captured:}}
+\begin{itemize}
+\item Generic app homepage structure
+\item Standard navigation menu
+\item Hero section with image
+\item Feature list layout
+\item Call-to-action button
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlgray}{Result: Looks like every other app homepage}
+
+\column{0.48\textwidth}
+\textcolor{mlred}{\textbf{What AI Missed:}}
+
+\small
+\begin{itemize}
+\item \textbf{Brand Identity}\\
+EcoTrack's earth-tone palette\\
+Minimalist, trustworthy style
+
+\item \textbf{Target Audience}\\
+Environmentally-conscious millennials\\
+Professional tone, not playful
+
+\item \textbf{Technical Constraints}\\
+Must be mobile-first\\
+Load time < 2 seconds
+
+\item \textbf{Domain Knowledge}\\
+Carbon footprint terminology\\
+Scientific accuracy required
+
+\item \textbf{Integration}\\
+Must connect to carbon API\\
+Match existing logo colors
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlred}{\textbf{Root Cause:}}\\
+AI has \textcolor{mlred}{\textbf{no context}} about:\\
+our specific project
+\end{columns}
+
+\vspace{0.3cm}
+\begin{center}
+\begin{tcolorbox}[colback=mlorange!20, colframe=mlorange, width=0.85\textwidth]
+\centering
+\textbf{The Mismatch:} 90\% of domain-specific requirements lost\\
+AI generates from general patterns, not project-specific context
+\end{tcolorbox}
+\end{center}
+
+\bottomnote{Diagnosis: AI lacks project context, constraints, brand guidelines, and domain knowledge}
+\end{frame}

@@ -1,0 +1,553 @@
+% Part 2: Techniques - Validation Metrics
+\section{Techniques: Comprehensive Metrics}
+
+% Slide 1: Confusion Matrix Mechanics
+\begin{frame}{Confusion Matrix: Building Block of All Metrics}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Medical Diagnosis Example}}
+
+\small
+\textbf{Test 1000 patients for disease:}
+\begin{itemize}
+\item 100 actually have disease
+\item 900 actually healthy
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Model predictions:}
+\begin{itemize}
+\item TP = 85 (correctly identified sick)
+\item FN = 15 (missed sick patients)
+\item TN = 810 (correctly identified healthy)
+\item FP = 90 (false alarms)
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlgray}{\small Accuracy:} (85+810)/1000 = 89.5\%\\
+\textcolor{mlgray}{\small But is this good enough?}
+
+\column{0.48\textwidth}
+\includegraphics[width=\textwidth]{charts/confusion_matrix_anatomy.pdf}
+
+\vspace{0.3cm}
+\textcolor{mlred}{\textbf{Critical Questions:}}
+
+\small
+\begin{itemize}
+\item Which error is worse?
+\item Missing disease (FN) vs false alarm (FP)?
+\item For screening: minimize FN
+\item For confirmatory: minimize FP
+\item Context determines metric choice
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Same confusion matrix, different optimal metrics per use case}
+\end{frame}
+
+% Slide 2: Precision vs Recall Deep Dive
+\begin{frame}{Precision vs Recall: The Fundamental Trade-Off}
+\begin{columns}[T]
+\column{0.55\textwidth}
+\includegraphics[width=\textwidth]{charts/precision_recall_tradeoff.pdf}
+
+\column{0.43\textwidth}
+\textcolor{mlblue}{\textbf{The Mathematics}}
+
+\small
+\textbf{Precision} = TP / (TP + FP)\\
+= Correctness of positive predictions\\
+= 85 / (85 + 90) = 48.6\%
+
+\vspace{0.3cm}
+\textbf{Recall} = TP / (TP + FN)\\
+= Completeness of detection\\
+= 85 / (85 + 15) = 85\%
+
+\vspace{0.3cm}
+\textcolor{mlorange}{\textbf{The Inverse Relationship}}
+
+\small
+\begin{itemize}
+\item Lower threshold $\rightarrow$ more predictions
+\item More predictions $\rightarrow$ higher recall
+\item But also more false positives
+\item More FP $\rightarrow$ lower precision
+\item \textbf{Cannot optimize both simultaneously}
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Trade-off is fundamental to binary classification}
+\end{frame}
+
+% Slide 3: F-Beta Family
+\begin{frame}{F-Beta Family: Balancing Precision and Recall}
+\begin{columns}[T]
+\column{0.55\textwidth}
+\includegraphics[width=\textwidth]{charts/f_beta_family.pdf}
+
+\column{0.43\textwidth}
+\textcolor{mlblue}{\textbf{F-Beta Formula}}
+
+\small
+$F_\beta = (1 + \beta^2) \cdot \frac{P \cdot R}{\beta^2 \cdot P + R}$
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{When to Use Each:}}
+
+\small
+\textbf{F1 ($\beta$ = 1):}
+\begin{itemize}
+\item Equal weight to P and R
+\item Balanced scenarios
+\item General purpose
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{F2 ($\beta$ = 2):}
+\begin{itemize}
+\item 2× weight to recall
+\item Disease screening
+\item Don't miss positives
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{F0.5 ($\beta$ = 0.5):}
+\begin{itemize}
+\item 2× weight to precision
+\item Spam filtering
+\item Avoid false alarms
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Choose beta based on relative cost of FP vs FN}
+\end{frame}
+
+% Slide 4: ROC Curves Explained
+\begin{frame}{ROC Curves: Threshold-Independent Evaluation}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{What is ROC?}}
+
+\small
+\textbf{ROC = Receiver Operating Characteristic}
+
+\vspace{0.2cm}
+Plots:
+\begin{itemize}
+\item X-axis: False Positive Rate (FPR)
+\item Y-axis: True Positive Rate (TPR = Recall)
+\item Each point = one threshold value
+\item Curve shows all possible thresholds
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{Reading the Curve}}
+
+\small
+\begin{itemize}
+\item Top-left corner = perfect (TPR=1, FPR=0)
+\item Diagonal line = random guessing
+\item Above diagonal = better than random
+\item Closer to top-left = better model
+\end{itemize}
+
+\column{0.48\textwidth}
+\includegraphics[width=\textwidth]{charts/roc_curve_explained.pdf}
+
+\vspace{0.3cm}
+\textcolor{mlorange}{\textbf{Key Points}}
+
+\small
+\textbf{Point A:} High threshold
+\begin{itemize}
+\item Conservative predictions
+\item Low FPR, low TPR
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Point B:} Balanced
+\begin{itemize}
+\item Moderate FPR and TPR
+\item Often near 0.5 threshold
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Point C:} Low threshold
+\begin{itemize}
+\item Aggressive predictions
+\item High TPR, high FPR
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{ROC shows performance across all thresholds simultaneously}
+\end{frame}
+
+% Slide 5: AUC Interpretation
+\begin{frame}{AUC: Summarizing ROC in One Number}
+\begin{columns}[T]
+\column{0.55\textwidth}
+\includegraphics[width=\textwidth]{charts/auc_interpretation.pdf}
+
+\column{0.43\textwidth}
+\textcolor{mlblue}{\textbf{What is AUC?}}
+
+\small
+\textbf{AUC = Area Under the ROC Curve}
+
+\vspace{0.2cm}
+Range: 0 to 1\\
+Interpretation: Probability that model ranks random positive higher than random negative
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{AUC Benchmarks}}
+
+\small
+\begin{itemize}
+\item \textbf{0.5:} Random guessing (useless)
+\item \textbf{0.7:} Fair performance
+\item \textbf{0.8:} Good performance
+\item \textbf{0.9:} Excellent performance
+\item \textbf{0.95+:} Outstanding (check for leakage!)
+\item \textbf{1.0:} Perfect (suspicious)
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlorange}{\textbf{When AUC Helps}}\\
+Comparing models threshold-free
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{AUC aggregates performance across all thresholds}
+\end{frame}
+
+% Slide 6: Precision-Recall Curves
+\begin{frame}{Precision-Recall Curves: Better for Imbalanced Data}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Why PR Curves?}}
+
+\small
+\textbf{Problem with ROC:}
+\begin{itemize}
+\item Imbalanced data (1\% positive)
+\item High TN count inflates performance
+\item Model looks great on ROC
+\item But terrible at finding positives
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{PR Curve Solution:}
+\begin{itemize}
+\item Ignores TN completely
+\item Focuses on positive class
+\item X-axis: Recall
+\item Y-axis: Precision
+\item Shows trade-off directly
+\end{itemize}
+
+\column{0.48\textwidth}
+\includegraphics[width=\textwidth]{charts/pr_vs_roc.pdf}
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{When to Use Each}}
+
+\small
+\textbf{Use ROC when:}
+\begin{itemize}
+\item Balanced classes
+\item Both classes matter equally
+\item Standard evaluation
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Use PR when:}
+\begin{itemize}
+\item Highly imbalanced ($<$ 10\% positive)
+\item Positive class more important
+\item Fraud, disease, anomalies
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{PR curves reveal problems ROC curves can hide}
+\end{frame}
+
+% Slide 7: Multi-Class Extensions
+\begin{frame}{Multi-Class Metrics: Macro, Micro, Weighted}
+\begin{columns}[T]
+\column{0.55\textwidth}
+\includegraphics[width=\textwidth]{charts/multi_class_strategies.pdf}
+
+\column{0.43\textwidth}
+\textcolor{mlblue}{\textbf{Three Averaging Methods}}
+
+\small
+\textbf{Macro Average:}
+\begin{itemize}
+\item Calculate metric per class
+\item Average all classes equally
+\item Treats rare classes equally
+\item Use when all classes matter
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Micro Average:}
+\begin{itemize}
+\item Aggregate all TP, FP, FN
+\item Calculate single metric
+\item Dominated by frequent classes
+\item Use for overall accuracy
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Weighted Average:}
+\begin{itemize}
+\item Weight by class frequency
+\item Balances macro and micro
+\item Most commonly used
+\item Best for imbalanced
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Choice depends on whether rare classes are critical}
+\end{frame}
+
+% Slide 8: Regression Metrics
+\begin{frame}{Regression Metrics: MSE, RMSE, MAE, R²}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Error-Based Metrics}}
+
+\small
+\textbf{MAE (Mean Absolute Error):}
+\begin{itemize}
+\item Average absolute difference
+\item Same units as target
+\item Robust to outliers
+\item Easy to interpret
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{MSE (Mean Squared Error):}
+\begin{itemize}
+\item Average squared difference
+\item Penalizes large errors heavily
+\item Sensitive to outliers
+\item Optimization-friendly
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{RMSE (Root MSE):}
+\begin{itemize}
+\item Square root of MSE
+\item Same units as target
+\item Combines MSE benefits
+\item Most popular regression metric
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{mlgreen}{\textbf{Variance-Based Metrics}}
+
+\small
+\textbf{R² (Coefficient of Determination):}
+\begin{itemize}
+\item Proportion of variance explained
+\item Range: 0 to 1 (higher better)
+\item 0 = predict mean always
+\item 1 = perfect predictions
+\item 0.7+ typically good
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlorange}{\textbf{When to Use Each}}
+
+\small
+\begin{itemize}
+\item \textbf{MAE:} Outliers shouldn't dominate
+\item \textbf{RMSE:} Large errors very bad
+\item \textbf{R²:} Communicate to stakeholders
+\item \textbf{Multiple:} Report all three
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Regression needs different metrics than classification}
+\end{frame}
+
+% Slide 9: Ranking Metrics
+\begin{frame}{Ranking Metrics: NDCG and MRR for Recommenders}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Mean Reciprocal Rank (MRR)}}
+
+\small
+\textbf{Definition:}\\
+Average of (1 / rank of first relevant item)
+
+\vspace{0.2cm}
+\textbf{Example:}\\
+Query: ``machine learning books''
+\begin{itemize}
+\item User 1: First relevant at rank 2 $\rightarrow$ 1/2
+\item User 2: First relevant at rank 1 $\rightarrow$ 1/1
+\item User 3: First relevant at rank 5 $\rightarrow$ 1/5
+\item MRR = (0.5 + 1.0 + 0.2) / 3 = 0.57
+\end{itemize}
+
+\vspace{0.2cm}
+\textcolor{mlgray}{\small Use when:} First result most important\\
+\textcolor{mlgray}{\small Example:} Search engines
+
+\column{0.48\textwidth}
+\textcolor{mlgreen}{\textbf{NDCG (Normalized DCG)}}
+
+\small
+\textbf{Definition:}\\
+Discounted cumulative gain, normalized
+
+\vspace{0.2cm}
+\textbf{Key idea:}
+\begin{itemize}
+\item Relevance scores (not binary)
+\item Position matters (discount factor)
+\item Earlier results weighted more
+\item Normalized to [0,1]
+\end{itemize}
+
+\vspace{0.2cm}
+Formula: Complex, but intuitive
+
+\vspace{0.2cm}
+\textcolor{mlgray}{\small Use when:} Graded relevance\\
+\textcolor{mlgray}{\small Example:} Product recommendations
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Ranking metrics consider order, not just presence}
+\end{frame}
+
+% Slide 10: Custom Business Metrics
+\begin{frame}{Custom Business Metrics: Align ML with ROI}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Why Business Metrics?}}
+
+\small
+\begin{itemize}
+\item ML metrics don't equal business value
+\item 90\% precision means what in dollars?
+\item Stakeholders care about ROI
+\item Custom metrics bridge the gap
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{Example: Credit Risk}}
+
+\small
+\textbf{Business constraints:}
+\begin{itemize}
+\item False negative (missed default) = -\$50,000
+\item False positive (rejected customer) = -\$5,000
+\item True positive (caught default) = \$0
+\item True negative (approved good) = +\$2,000
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Custom metric:}\\
+Expected profit per 1000 loans
+
+\column{0.48\textwidth}
+\textcolor{mlorange}{\textbf{Calculating Business Impact}}
+
+\small
+\textbf{Model A:} 95\% accuracy
+\begin{itemize}
+\item 10 FN × -\$50K = -\$500K
+\item 40 FP × -\$5K = -\$200K
+\item 950 correct × \$2K = +\$1.9M
+\item \textbf{Net: +\$1.2M per 1000}
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Model B:} 92\% accuracy
+\begin{itemize}
+\item 5 FN × -\$50K = -\$250K
+\item 75 FP × -\$5K = -\$375K
+\item 920 correct × \$2K = +\$1.84M
+\item \textbf{Net: +\$1.215M per 1000}
+\end{itemize}
+
+\vspace{0.2cm}
+\textcolor{mlgreen}{\small Model B wins despite lower accuracy!}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Business metrics often contradict ML metrics}
+\end{frame}
+
+% Slide 11: Metric Selection Decision Tree
+\begin{frame}{Technique Comparison: Choosing the Right Metrics}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Decision Tree}}
+
+\small
+\textbf{Problem Type?}
+\begin{itemize}
+\item Classification $\rightarrow$ Binary or Multi-class?
+\item Regression $\rightarrow$ MSE, RMSE, MAE, R²
+\item Ranking $\rightarrow$ NDCG, MRR
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Binary Classification:}
+\begin{itemize}
+\item Balanced? $\rightarrow$ Accuracy, ROC-AUC
+\item Imbalanced? $\rightarrow$ PR-AUC, F1
+\item Cost asymmetry? $\rightarrow$ Custom business metric
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Multi-class:}
+\begin{itemize}
+\item All classes equal? $\rightarrow$ Macro avg
+\item Frequent classes matter? $\rightarrow$ Micro avg
+\item Balanced view? $\rightarrow$ Weighted avg
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{mlgreen}{\textbf{Best Practices}}
+
+\small
+\begin{enumerate}
+\item \textbf{Never use accuracy alone}
+\item Report multiple metrics
+\item Include confusion matrix
+\item Show precision-recall trade-off
+\item Calculate business impact
+\item Compare across thresholds
+\item Test statistical significance
+\item Validate on holdout set
+\end{enumerate}
+
+\vspace{0.3cm}
+\textcolor{mlorange}{\textbf{Common Combinations}}
+
+\small
+\begin{itemize}
+\item Balanced: Accuracy + F1 + ROC-AUC
+\item Imbalanced: Precision + Recall + PR-AUC
+\item Production: Above + Business metric
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Part 3: Implementing these metrics with sklearn}
+\end{frame}

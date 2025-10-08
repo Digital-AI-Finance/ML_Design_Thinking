@@ -47,6 +47,8 @@ No closed form - use coordinate descent
 \textcolor{chartorange}{\textbf{Elastic Net (Best of Both):}}
 \formula{\min_{\beta} ||y - X\beta||_2^2 + \lambda_1||\beta||_1 + \lambda_2||\beta||_2^2}
 }
+
+\bottomnote{Regularization controls model complexity - L1 enables sparsity through exact zeros while L2 provides smooth shrinkage}
 \end{frame}
 
 % Logistic Regression
@@ -87,6 +89,8 @@ No closed form - use coordinate descent
 \item Credit approval
 \end{itemize}
 }
+
+\bottomnote{Logistic regression transforms linear regression to probabilistic classification - sigmoid function maps unbounded scores to valid probabilities}
 \end{frame}
 
 % Support Vector Machines
@@ -131,6 +135,8 @@ Common kernels:
 \item Versatile (different kernels)
 \end{itemize}
 }
+
+\bottomnote{Maximum margin principle provides geometric intuition - kernel trick enables nonlinear boundaries while maintaining convex optimization guarantees}
 \end{frame}
 
 % Decision Trees
@@ -178,6 +184,8 @@ Common kernels:
 \item Biased toward features with more levels
 \end{itemize}
 }
+
+\bottomnote{Decision trees partition feature space recursively - greedy splitting creates interpretable rules but risks overfitting without pruning}
 \end{frame}
 
 % Random Forest
@@ -226,6 +234,8 @@ Common kernels:
 \item Out-of-bag importance
 \end{itemize}
 }
+
+\bottomnote{Bootstrap aggregation reduces variance through averaging - random feature selection decorrelates trees enabling effective ensemble combination}
 \end{frame}
 
 % Gradient Boosting
@@ -272,6 +282,8 @@ where $h_m$ is trained on residuals:
 \item Ranking problems
 \end{itemize}
 }
+
+\bottomnote{Gradient boosting combines weak learners sequentially - each iteration fits residuals from previous ensemble reducing bias systematically}
 \end{frame}
 
 % k-Nearest Neighbors
@@ -323,6 +335,8 @@ where $h_m$ is trained on residuals:
 \item Sensitive to data scaling
 \end{itemize}
 }
+
+\bottomnote{Instance-based learning requires no training phase - predictions use entire dataset making inference expensive but adaptation trivial}
 \end{frame}
 
 % Model Comparison
@@ -347,4 +361,6 @@ k-NN & Medium & Fast & Slow & Medium-High \\
 
 \vspace{0.5em}
 \textcolor{darkgray}{\small No single algorithm dominates all scenarios - choice depends on problem requirements}
+
+\bottomnote{Algorithm selection balances competing objectives - interpretability, speed, accuracy, and scalability trade off against each other requiring problem-specific optimization}
 \end{frame}

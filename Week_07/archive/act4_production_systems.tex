@@ -1,0 +1,384 @@
+% ACT 4: PRODUCTION FAIRNESS SYSTEMS (4 slides)
+% Theme: From mathematics to deployed ethical AI
+
+% Slide 22: Complete Fairness Architecture
+\begin{frame}[t]{The Complete Production Fairness Architecture}
+\textbf{Four-layer system for ethical AI in production:}
+
+\vspace{0.3em}
+
+\begin{center}
+\begin{tcolorbox}[colback=LightGreen!20, colframe=ForestGreen, width=0.85\textwidth]
+\small
+
+\textcolor{ForestGreen}{\textbf{Layer 1: Bias Detection}}\\
+\textcolor{Slate}{\textit{(Make invisible visible)}}\\
+\textbf{Components:} Disaggregated metrics, statistical tests, drift detection\\
+\textbf{Tools:} Fairlearn MetricFrame, AIF360 metrics\\
+\textbf{Output:} Bias reports, violation alerts\\
+\textbf{Time:} Real-time monitoring
+
+\vspace{0.3cm}
+$\downarrow$ \textit{Detected violations trigger mitigation}
+
+\vspace{0.3cm}
+\textcolor{Teal}{\textbf{Layer 2: Fairness Optimization}}\\
+\textcolor{Slate}{\textit{(Constrained learning)}}\\
+\textbf{Components:} Lagrangian optimization, threshold tuning, reweighing\\
+\textbf{Tools:} Fairlearn ExponentiatedGradient, AIF360 mitigation\\
+\textbf{Output:} Fair models (DP/EO constraints satisfied)\\
+\textbf{Time:} Training pipeline
+
+\vspace{0.3cm}
+$\downarrow$ \textit{Fair predictions need explanation}
+
+\vspace{0.3cm}
+\textcolor{Amber}{\textbf{Layer 3: Explainability}}\\
+\textcolor{Slate}{\textit{(Interpretable decisions)}}\\
+\textbf{Components:} SHAP values, counterfactual explanations, feature importance\\
+\textbf{Tools:} SHAP, LIME, What-If Tool, Fairlearn dashboards\\
+\textbf{Output:} Per-decision explanations, model cards\\
+\textbf{Time:} Inference + documentation
+
+\vspace{0.3cm}
+$\downarrow$ \textit{Continuous monitoring ensures drift detection}
+
+\vspace{0.3cm}
+\textcolor{DarkTeal}{\textbf{Layer 4: Production Monitoring}}\\
+\textcolor{Slate}{\textit{(Auditing \& accountability)}}\\
+\textbf{Components:} Continuous auditing, performance tracking, incident response\\
+\textbf{Tools:} MLflow, TensorBoard, custom dashboards\\
+\textbf{Output:} Audit trails, compliance reports, alerts\\
+\textbf{Time:} 24/7 automated
+
+\vspace{0.3cm}
+\textbf{Complete Pipeline Time: Detection (real-time) + Mitigation (training) + Explanation (<100ms) + Monitoring (continuous)}
+\end{tcolorbox}
+\end{center}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mlblue!10, colframe=mlblue]
+\textbf{Key Insight:} Production fairness requires 4 layers working together - not just algorithms, but complete systems
+\end{tcolorbox}
+
+\vspace{0.5em}
+\textbf{Key Question:} What modern tools implement these layers?
+
+\bottomnote{Four-layer architecture parallels Week 6 structure pattern: Detection/Optimization/Explanation/Monitoring}
+\end{frame}
+
+% Slide 23: Modern Fairness Tools (2024-2025)
+\begin{frame}[t]{Modern Fairness Tools in Production (2024-2025)}
+\textbf{Three major platforms with 4-layer breakdown:}
+
+\vspace{0.3em}
+
+\begin{columns}[T]
+\column{0.31\textwidth}
+\textcolor{ForestGreen}{\textbf{Microsoft Fairlearn}}
+
+\small
+\textbf{Detection Layer:}
+\begin{itemize}
+\item MetricFrame (disaggregated)
+\item 40+ fairness metrics
+\item Drift detection
+\end{itemize}
+
+\textbf{Optimization Layer:}
+\begin{itemize}
+\item ExponentiatedGradient
+\item GridSearch
+\item ThresholdOptimizer
+\item 5+ mitigation algorithms
+\end{itemize}
+
+\textbf{Explainability Layer:}
+\begin{itemize}
+\item Interactive dashboards
+\item Group fairness plots
+\item Trade-off visualization
+\end{itemize}
+
+\textbf{Monitoring Layer:}
+\begin{itemize}
+\item Model comparison
+\item A/B testing support
+\item Logging integration
+\end{itemize}
+
+\vspace{0.2cm}
+\textcolor{Amber}{\textbf{Best for:}}\\
+Azure ML, sklearn integration,\\
+enterprise deployment
+
+\column{0.31\textwidth}
+\textcolor{Teal}{\textbf{IBM AIF360}}
+
+\small
+\textbf{Detection Layer:}
+\begin{itemize}
+\item 70+ bias metrics
+\item Intersectional analysis
+\item Pre/in/post-processing
+\end{itemize}
+
+\textbf{Optimization Layer:}
+\begin{itemize}
+\item 10+ mitigation algorithms
+\item Prejudice remover
+\item Adversarial debiasing
+\item Calibrated eq. odds
+\end{itemize}
+
+\textbf{Explainability Layer:}
+\begin{itemize}
+\item Contrastive explanations
+\item Prototypes/criticisms
+\item Local/global interpretability
+\end{itemize}
+
+\textbf{Monitoring Layer:}
+\begin{itemize}
+\item Benchmark datasets
+\item Performance tracking
+\item Compliance reporting
+\end{itemize}
+
+\vspace{0.2cm}
+\textcolor{Amber}{\textbf{Best for:}}\\
+Research, comprehensive\\
+metrics, legal compliance
+
+\column{0.31\textwidth}
+\textcolor{DarkTeal}{\textbf{Google What-If Tool}}
+
+\small
+\textbf{Detection Layer:}
+\begin{itemize}
+\item Visual exploration
+\item Slice-based analysis
+\item Performance gaps
+\end{itemize}
+
+\textbf{Optimization Layer:}
+\begin{itemize}
+\item Interactive threshold tuning
+\item Cost/benefit analysis
+\item Real-time adjustment
+\end{itemize}
+
+\textbf{Explainability Layer:}
+\begin{itemize}
+\item Individual counterfactuals
+\item Feature attribution
+\item Partial dependence
+\item SHAP integration
+\end{itemize}
+
+\textbf{Monitoring Layer:}
+\begin{itemize}
+\item TensorBoard integration
+\item Dataset comparison
+\item Model versioning
+\end{itemize}
+
+\vspace{0.2cm}
+\textcolor{Amber}{\textbf{Best for:}}\\
+Interactive exploration,\\
+TensorFlow/Keras models
+\end{columns}
+
+\vspace{0.3cm}
+\begin{center}
+\Large\textcolor{mlgreen}{\textbf{All three implement constrained optimization + monitoring!}}
+\end{center}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mlblue!10, colframe=mlblue]
+\textbf{Key Insight:} Modern tools (Fairlearn, AIF360, What-If) all provide 4-layer architecture - mathematics to production
+\end{tcolorbox}
+
+\vspace{0.5em}
+\textbf{Key Question:} What lessons transfer beyond AI fairness?
+
+\bottomnote{2024-2025 production tools: Fairlearn (Azure), AIF360 (IBM), What-If Tool (Google) - all open source}
+\end{frame}
+
+% Slide 24: Transferable Lessons
+\begin{frame}[t]{Four Transferable Lessons Beyond AI Fairness}
+\textbf{Universal principles that apply across domains:}
+
+\vspace{0.3em}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{ForestGreen}{\textbf{Lesson 1: Invisible Problems Need Measurement Frameworks}}
+
+\small
+\textbf{Principle:}\\
+Can't manage what you can't measure\\
+Hidden discrimination requires explicit metrics
+
+\textbf{AI Fairness:}\\
+I(D; A), demographic parity, equal opportunity
+
+\textbf{Transfers to:}
+\begin{itemize}
+\item \textbf{Climate change:} Carbon accounting, GHG metrics
+\item \textbf{Inequality:} Gini coefficient, wealth gaps
+\item \textbf{Health disparities:} Life expectancy by demographics
+\item \textbf{Education:} Achievement gaps, access metrics
+\item \textbf{Organizational:} Pay equity audits, promotion rates
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{ForestGreen}{\textbf{Lesson 2: Multiple Metrics Reveal Trade-offs}}
+
+\small
+\textbf{Principle:}\\
+No single metric captures full picture\\
+Multiple perspectives reveal tensions
+
+\textbf{AI Fairness:}\\
+DP vs EO vs calibration impossibility
+
+\textbf{Transfers to:}
+\begin{itemize}
+\item \textbf{Policy:} Efficiency vs equity vs sustainability
+\item \textbf{Business:} Profit vs growth vs risk
+\item \textbf{Engineering:} Speed vs quality vs cost
+\item \textbf{Healthcare:} Individual vs population outcomes
+\item \textbf{Security:} Privacy vs surveillance vs safety
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{Teal}{\textbf{Lesson 3: Mathematics Constrains, Values Choose}}
+
+\small
+\textbf{Principle:}\\
+Math reveals what's possible\\
+Humans choose what matters
+
+\textbf{AI Fairness:}\\
+Impossibility theorems + stakeholder values → λ
+
+\textbf{Transfers to:}
+\begin{itemize}
+\item \textbf{Resource allocation:} Pareto efficiency + priorities
+\item \textbf{Risk management:} VaR limits + risk appetite
+\item \textbf{Urban planning:} Capacity constraints + community goals
+\item \textbf{Budgeting:} Financial limits + strategic priorities
+\item \textbf{Triage:} Medical capacity + ethical frameworks
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{DarkTeal}{\textbf{Lesson 4: Optimization Makes Trade-offs Explicit}}
+
+\small
+\textbf{Principle:}\\
+Implicit choices create hidden bias\\
+Explicit optimization creates accountability
+
+\textbf{AI Fairness:}\\
+Lagrangian L(θ, λ) makes λ visible
+
+\textbf{Transfers to:}
+\begin{itemize}
+\item \textbf{Government:} Transparent policy trade-offs
+\item \textbf{Finance:} Explicit risk-return preferences
+\item \textbf{Procurement:} Multi-objective decision criteria
+\item \textbf{Design:} User needs vs technical constraints
+\item \textbf{Strategy:} Cost-benefit analysis documentation
+\end{itemize}
+\end{columns}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mlblue!10, colframe=mlblue]
+\textbf{Key Insight:} Four lessons transcend AI - fundamental principles for managing complexity with measurement and optimization
+\end{tcolorbox}
+
+\vspace{0.5em}
+\textbf{Key Question:} What have we learned from this complete journey?
+
+\bottomnote{Transferable principles: Measurement, trade-offs, values, optimization - apply to policy, business, design, systems}
+\end{frame}
+
+% Slide 25: Summary - The Complete Journey
+\begin{frame}[t]{From Hidden Bias to Visible Fairness: The Complete Journey}
+\textbf{What you now understand about fairness and ethical AI:}
+
+\vspace{0.3em}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{ForestGreen}{\textbf{The Problem (Acts 1-2)}}
+
+\small
+\textbf{Act 1: The Hidden Harm}
+\begin{itemize}
+\item Invisible discrimination (I(D; A) > 0)
+\item Unmeasurable at scale (21.2 bits, only 4.2 measured)
+\item 233 incidents, \$10.4B, 6.2M people affected (2024)
+\item Can't fix what you can't see
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Act 2: First Measurements}
+\begin{itemize}
+\item Success: DP reveals 30\% bias, EO shows 6.3\%
+\item Failure: Impossibility theorem (can't have all metrics)
+\item Diagnosis: Metrics capture correlations, miss causation
+\item Dilemma: 5 scenarios where metrics conflict
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlgray}{\textit{``Measurement makes visible, but reveals trade-offs''}}
+
+\column{0.48\textwidth}
+\textcolor{mlgreen}{\textbf{The Solution (Acts 3-4)}}
+
+\small
+\textbf{Act 3: Mathematical Fairness}
+\begin{itemize}
+\item Geometric view: ROC space, 7.2\% distance
+\item Optimization: Lagrangian L(θ, λ), λ = 0.3 optimal
+\item Validation: -2.7\% accuracy, -84\% bias (31x return)
+\item Code: 30 lines Fairlearn implementation
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Act 4: Production Systems}
+\begin{itemize}
+\item 4-layer architecture: Detection/Optimization/Explanation/Monitoring
+\item Modern tools: Fairlearn, AIF360, What-If Tool
+\item Transferable lessons: Measurement, trade-offs, values, optimization
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlgray}{\textit{``Mathematics transforms impossible choice into auditable trade-off''}}
+\end{columns}
+
+\vspace{0.3cm}
+\begin{center}
+\begin{tcolorbox}[colback=mlgreen!20, colframe=mlgreen, width=0.85\textwidth]
+\centering
+\textbf{Core Takeaway:}\\
+\\
+Hidden discrimination (invisible) + Measurement (metrics)\\
++ Mathematics (optimization) = Visible fairness (auditable systems)\\
+\\
+\textbf{You can now build ethical AI that balances fairness and accuracy!}
+\end{tcolorbox}
+\end{center}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mlblue!10, colframe=mlblue]
+\textbf{Key Insight:} Complete journey: Invisible → Measurable → Optimizable → Deployable - fairness through mathematics
+\end{tcolorbox}
+
+\vspace{0.5em}
+\textbf{Next Week:} Structured Output and Prompt Engineering - Reliability requires constraints (like fairness does)
+
+\bottomnote{Journey complete: Hidden bias (21.2 bits) to Visible metrics (DP, EO) to Mathematical optimization to Production systems}
+\end{frame}

@@ -1,0 +1,369 @@
+% ACT 4: SYNTHESIS (4 slides)
+% Connect everything, show broader context, look forward
+
+% Slide 22: Unified Architecture - All Components Together
+\begin{frame}[t]{The Complete System: All Pieces Together}
+\begin{center}
+\begin{tikzpicture}[
+  node distance=1.2cm,
+  bigbox/.style={rectangle, draw, fill=mllavender3, text width=3cm, text centered, minimum height=1cm, font=\small},
+  smallbox/.style={rectangle, draw, fill=mllavender4, text width=2cm, text centered, minimum height=0.7cm, font=\tiny},
+  arrow/.style={->, >=stealth, thick, mlpurple}
+]
+
+% Top level
+\node[bigbox, fill=challenge!20] (challenge) {\textbf{Challenge}\\97\% ideas untested};
+
+% Middle level - Solution components
+\node[bigbox, below=1.5cm of challenge, fill=mlblue!20] (context) {\textbf{1. Context Layer}\\RAG System};
+\node[bigbox, right=0.5cm of context, fill=mlpurple!20] (prompt) {\textbf{2. Generation Layer}\\Structured Prompts};
+\node[bigbox, right=0.5cm of prompt, fill=mlgreen!20] (eval) {\textbf{3. Evaluation Layer}\\Validation};
+\node[bigbox, right=0.5cm of eval, fill=mlorange!20] (integrate) {\textbf{4. Integration Layer}\\Coherence};
+
+% Bottom level
+\node[bigbox, below=1.5cm of prompt, fill=strategy!20] (output) {\textbf{Solution}\\100 prototypes tested};
+
+% Arrows
+\draw[arrow] (challenge) -- (context);
+\draw[arrow] (challenge) -- (prompt);
+\draw[arrow] (challenge) -- (eval);
+\draw[arrow] (challenge) -- (integrate);
+\draw[arrow] (context) -- (output);
+\draw[arrow] (prompt) -- (output);
+\draw[arrow] (eval) -- (output);
+\draw[arrow] (integrate) -- (output);
+
+\end{tikzpicture}
+\end{center}
+
+\vspace{0.5cm}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{The 5 Key Innovations}}
+
+\small
+\begin{enumerate}
+\item \textbf{RAG provides missing context}\\
+Retrieves project-specific knowledge
+\item \textbf{Structured prompts ensure consistency}\\
+Enforces brand and style guidelines
+\item \textbf{Multiple variants enable selection}\\
+Explore options, pick best
+\item \textbf{Validation prevents bad outputs}\\
+Automated quality control
+\item \textbf{Integration creates coherence}\\
+All pieces work together
+\end{enumerate}
+
+\column{0.48\textwidth}
+\textcolor{mlorange}{\textbf{Information Flow}}
+
+\small
+\textbf{Input:} 1 idea (10 words)\\
+$\downarrow$\\
+\textbf{Context:} +500 words from RAG\\
+$\downarrow$\\
+\textbf{Prompt:} 510 words structured\\
+$\downarrow$\\
+\textbf{Generation:} 10 variants\\
+$\downarrow$\\
+\textbf{Evaluation:} Ranked by quality\\
+$\downarrow$\\
+\textbf{Integration:} Coherent prototype\\
+$\downarrow$\\
+\textbf{Output:} Validated, ready to test
+
+\vspace{0.3cm}
+\textcolor{mlgray}{\small
+Each layer adds value,\\
+together they transform\\
+raw AI into reliable tool
+}
+\end{columns}
+
+\bottomnote{Complete system: Challenge → 4 layers → Solution addresses every diagnosed problem}
+\end{frame}
+
+% Slide 23: Conceptual Lessons - Beyond Implementation
+\begin{frame}[t]{What We Learned: Transferable Principles}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlpurple}{\Large\textbf{Principle 1}}
+
+\small
+\textbf{AI as Collaborator, Not Magic Button}
+
+\vspace{0.3cm}
+Human provides:
+\begin{itemize}
+\item Structure (context, constraints)
+\item Judgment (evaluation, selection)
+\item Integration (coherence)
+\end{itemize}
+
+AI provides:
+\begin{itemize}
+\item Speed (seconds vs hours)
+\item Scale (10 variants easily)
+\item Execution (actual creation)
+\end{itemize}
+
+\textcolor{mlblue}{\textbf{Why it matters:}}\\
+Removes fear of ``AI replacing designers''\\
+Humans and AI have complementary strengths
+
+\vspace{0.5cm}
+\textcolor{mlcyan}{\Large\textbf{Principle 2}}
+
+\small
+\textbf{Structure > Raw Power}
+
+\vspace{0.3cm}
+GPT-4 with bad prompts\\
+< GPT-3.5 with good structure
+
+\vspace{0.3cm}
+\textcolor{mlblue}{\textbf{Why it matters:}}\\
+Technique beats technology\\
+Focus on framework, not model size
+
+\column{0.48\textwidth}
+\textcolor{mlgreen}{\Large\textbf{Principle 3}}
+
+\small
+\textbf{Iteration is Now Free}
+
+\vspace{0.3cm}
+Traditional cost of change:\\
+\$5,000 + 2 weeks
+
+AI cost of change:\\
+\$0.50 + 30 seconds
+
+\vspace{0.3cm}
+\textcolor{mlblue}{\textbf{Why it matters:}}\\
+Unlocks exploration mindset\\
+Test 100 ideas instead of 3\\
+Fail fast, learn faster
+
+\vspace{0.5cm}
+\textcolor{mlorange}{\Large\textbf{Principle 4}}
+
+\small
+\textbf{Validation Still Human}
+
+\vspace{0.3cm}
+AI creates options\\
+Humans decide
+
+\vspace{0.3cm}
+Framework:
+\begin{itemize}
+\item AI generates 10 variants
+\item Auto-filter rules (60\% pass)
+\item Human selects from top 3
+\item AI refines based on feedback
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlblue}{\textbf{Why it matters:}}\\
+Quality control in human hands\\
+Build evaluation criteria, not blind trust
+\end{columns}
+
+\bottomnote{These principles apply beyond prototyping - to any AI-augmented creative work}
+\end{frame}
+
+% Slide 24: Modern Applications (2024 Production Systems)
+\begin{frame}[t]{Modern Applications: 2024 Production Systems}
+\begin{columns}[T]
+\column{0.32\textwidth}
+\textcolor{mlblue}{\textbf{Code Generation}}
+
+\small
+\textbf{GitHub Copilot}
+\begin{itemize}
+\item 1M+ developers
+\item 40\% code AI-generated
+\item \$10/month
+\item GPT-4 Turbo powered
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Replit Agent}
+\begin{itemize}
+\item Full apps from description
+\item Node.js, Python, React
+\item Deploy in minutes
+\item Context-aware generation
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Cursor}
+\begin{itemize}
+\item AI-first IDE
+\item Codebase understanding
+\item Multi-file edits
+\item Test generation
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlgray}{\tiny All use structured generation\\with codebase context (RAG)}
+
+\column{0.32\textwidth}
+\textcolor{mlpurple}{\textbf{Design Tools}}
+
+\small
+\textbf{Figma AI}
+\begin{itemize}
+\item Auto-layout suggestions
+\item Component generation
+\item Design system enforcement
+\item 5M+ users
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{v0 by Vercel}
+\begin{itemize}
+\item UI from description
+\item React + Tailwind
+\item Interactive prototypes
+\item Copy-paste code
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Midjourney v6}
+\begin{itemize}
+\item Commercial-quality images
+\item Style consistency
+\item 15M+ users
+\item Structured prompting critical
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlgray}{\tiny Consistency through\\prompt engineering}
+
+\column{0.32\textwidth}
+\textcolor{mlgreen}{\textbf{Content \& Prototyping}}
+
+\small
+\textbf{Claude Artifacts}
+\begin{itemize}
+\item Interactive prototypes
+\item HTML/React/SVG
+\item Iterative refinement
+\item Context preservation
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{ChatGPT Canvas}
+\begin{itemize}
+\item Collaborative writing
+\item Side-by-side editing
+\item Version control
+\item Structured feedback
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Notion AI}
+\begin{itemize}
+\item Content generation
+\item Brand voice training
+\item 10M+ users
+\item Workspace context
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlgray}{\tiny Integration + context\\= production quality}
+\end{columns}
+
+\vspace{0.5cm}
+\begin{center}
+\textcolor{mlblue}{\textbf{Timeline:} 2022 (GPT-3 toys) → 2024 (Production tools)}\\
+\textcolor{mlorange}{\small Evolution from novelty to necessity - \$1T market by 2030 (McKinsey)}
+\end{center}
+
+\bottomnote{All 2024 tools use the framework principles: context + structure + validation + integration}
+\end{frame}
+
+% Slide 25: Summary & Next Week
+\begin{frame}[t]{Summary \& Next Week}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlpurple}{\Large\textbf{What You Now Understand}}
+
+\small
+\textbf{The Theory:}
+\begin{itemize}
+\item Generative AI learns probability distributions $P(x)$
+\item Latent space = compressed knowledge (512D)
+\item Sampling = creation (controlled randomness)
+\item Context narrows distribution → better outputs
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{The Framework:}
+\begin{itemize}
+\item Context layer (RAG)
+\item Generation layer (structured prompts)
+\item Evaluation layer (validation)
+\item Integration layer (coherence)
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{The Reality:}
+\begin{itemize}
+\item Structure beats raw power
+\item Human-AI collaboration > either alone
+\item Iteration now free
+\item 540x faster prototyping
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{mlblue}{\Large\textbf{What You Can Now Do}}
+
+\small
+\begin{enumerate}
+\item Build RAG-enhanced prototyping pipelines
+\item Write effective structured prompts
+\item Evaluate AI outputs systematically
+\item Prototype 100 ideas instead of 3
+\item Test complex concepts in hours
+\item Iterate based on real feedback
+\item Integrate AI into creative workflow
+\end{enumerate}
+
+\vspace{0.5cm}
+\textcolor{mlgreen}{\Large\textbf{Next Week: Responsible AI}}
+
+\small
+\textbf{With great power comes great responsibility:}
+\begin{itemize}
+\item Bias detection and mitigation
+\item Fairness metrics and evaluation
+\item Transparency and explainability
+\item Legal and ethical considerations
+\item Building trustworthy AI systems
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlorange}{\textbf{Lab Assignment:}}\\
+Build complete prototype of your app idea\\
+using structured generation framework.\\
+Due: Next week
+\end{columns}
+
+\vspace{0.3cm}
+\begin{center}
+\begin{tcolorbox}[colback=mlpurple!20, colframe=mlpurple, width=0.9\textwidth]
+\centering
+\textbf{The Innovation Bottleneck is Broken}\\
+\\
+\small
+You can now test every idea. The question is no longer\\
+``Can I afford to prototype?'' but ``Which ideas should I test first?''
+\end{tcolorbox}
+\end{center}
+
+\bottomnote{From 3 ideas/year to 100 ideas/year - innovation at scale is now possible}
+\end{frame}

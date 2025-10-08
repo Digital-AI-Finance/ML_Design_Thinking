@@ -1,4 +1,4 @@
-% Act 2: Shallow MLPs (6 slides)
+% Part 2: Shallow MLPs (6 slides)
 
 \begin{frame}{6. Add Hidden Layer Approach}
 \begin{columns}[c]
@@ -12,9 +12,11 @@ y &= \sigma(\mathbf{w}_2^T\mathbf{h} + b_2)
 \textbf{Key Innovation:}
 \begin{itemize}
 \item Hidden layer creates feature combinations
+\item Hidden layer creates new representation where linear separation becomes possible
 \item Non-linear activation $\sigma$ (sigmoid, tanh, ReLU)
 \item Each neuron = learned feature detector
 \item Output combines these features
+\item \textbf{Training}: Backpropagation (Rumelhart et al., 1986) computes gradients via chain rule
 \end{itemize}
 
 \column{0.48\textwidth}
@@ -24,7 +26,7 @@ y &= \sigma(\mathbf{w}_2^T\mathbf{h} + b_2)
 \end{columns}
 
 \vspace{\fill}
-\small\textcolor{gray}{Hidden layer transforms input space to make linear separation possible}
+\small\textcolor{gray}{Hidden layer transforms input space to make linear separation possible - learned features replace manual engineering}
 \end{frame}
 
 \begin{frame}{7. Worked Example: XOR Solved!}
@@ -56,10 +58,17 @@ h_1 &= \sigma(20x_1 + 20x_2 - 10) \\
 h_2 &= \sigma(20x_1 + 20x_2 - 30) \\
 y &= \sigma(20h_1 - 20h_2 - 10)
 \end{align}
+
+\textbf{Verification:}
+\begin{itemize}
+\item (0,0): $h_1 \approx 0, h_2 \approx 0, y \approx 0$ [OK]
+\item (1,0): $h_1 \approx 1, h_2 \approx 0, y \approx 1$ [OK]
+\item This proves 2 hidden neurons suffice for XOR
+\end{itemize}
 \end{columns}
 
 \vspace{\fill}
-\small\textcolor{gray}{Two hidden neurons sufficient to solve any 2D non-linear problem}
+\small\textcolor{gray}{Two hidden neurons sufficient to solve any 2D non-linear problem through strategic feature combinations}
 \end{frame}
 
 \begin{frame}{8. \textcolor{mlgreen}{SUCCESS}: Nonlinearity Achieved}
@@ -75,10 +84,16 @@ y &= \sigma(20h_1 - 20h_2 - 10)
 
 \textbf{Applications Unlocked:}
 \begin{itemize}
-\item Image classification (MNIST)
+\item Image classification (MNIST 1998: 99.2\%)
 \item Function approximation
 \item Pattern recognition
 \item Control systems
+\end{itemize}
+
+\textbf{Historical Impact:}
+\begin{itemize}
+\item 1986-2006: MLPs dominated pattern recognition tasks
+\item Universal approximation unlocked $\sim$10x more problem classes
 \end{itemize}
 
 \column{0.48\textwidth}
@@ -124,7 +139,7 @@ Deeper networks perform \textcolor{mlred}{worse}, not better!
 \small\textcolor{gray}{Real data from 1990s experiments - deeper meant worse performance}
 \end{frame}
 
-\begin{frame}{10. Diagnosis: Gradient Multiplication → Exponential Decay}
+\begin{frame}{10. Diagnosis: Gradient Multiplication -> Exponential Decay}
 \begin{columns}[c]
 \column{0.48\textwidth}
 \textbf{Chain Rule in Deep Networks:}
@@ -143,6 +158,12 @@ Each layer multiplies by $\leq 0.25$
 \begin{itemize}
 \item 5 layers: $(0.25)^5 = 0.001$
 \item 10 layers: $(0.25)^{10} = 0.000001$
+\end{itemize}
+
+\textbf{Comparison:}
+\begin{itemize}
+\item Tanh: $\tanh'(x) = 1 - \tanh^2(x) \leq 1$, still problematic
+\item \textbf{Solution preview}: ReLU has constant gradient of 1 for positive inputs
 \end{itemize}
 
 \column{0.48\textwidth}
@@ -178,6 +199,14 @@ $$\left|\frac{\partial L}{\partial W_1}\right| \leq C \cdot (0.25)^{L-1}$$
 \item Deep learning winter until 2006
 \end{itemize}
 
+\textbf{Solutions (Part 3 Preview):}
+\begin{itemize}
+\item ReLU activation (constant gradient)
+\item Batch normalization (stabilize distributions)
+\item Skip connections (ResNet shortcut paths)
+\item Better initialization (Xavier, He)
+\end{itemize}
+
 \column{0.48\textwidth}
 \begin{center}
 \includegraphics[width=\textwidth]{charts/gradient_flow_layers.pdf}
@@ -185,5 +214,5 @@ $$\left|\frac{\partial L}{\partial W_1}\right| \leq C \cdot (0.25)^{L-1}$$
 \end{columns}
 
 \vspace{\fill}
-\small\textcolor{gray}{Understanding this problem was crucial for the deep learning breakthrough}
+\small\textcolor{gray}{Understanding this problem enabled three key innovations: ReLU activations, skip connections, and batch normalization}
 \end{frame}

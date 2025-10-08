@@ -12,15 +12,205 @@
 \vfill
 \end{frame}
 
-\begin{frame}{Algorithmic Fairness in Finance}
-\Large\textbf{Preventing Discrimination}
+\begin{frame}{Model Risk Management: SR 11-7 Framework}
+\begin{columns}[T]
+\begin{column}{0.55\textwidth}
+\Large\textbf{Federal Reserve Supervisory Guidance}
 \normalsize
+\vspace{0.5em}
 
-\textbf{Fairness Metrics:}
+\textbf{SR 11-7 Requirements:}
+\begin{enumerate}
+\item \textbf{Model Development:} Documentation, assumptions, limitations
+\item \textbf{Model Validation:} Independent review, backtesting
+\item \textbf{Model Governance:} Approval, monitoring, controls
+\end{enumerate}
+
+\textbf{Three Lines of Defense:}
 \begin{itemize}
-\item Demographic Parity: $P(\hat{Y}=1|A=0) = P(\hat{Y}=1|A=1)$
-\item Equal Opportunity: $P(\hat{Y}=1|Y=1,A=0) = P(\hat{Y}=1|Y=1,A=1)$
+\item \textbf{1st Line:} Model developers and users
+\item \textbf{2nd Line:} Model risk management function
+\item \textbf{3rd Line:} Internal audit
 \end{itemize}
 
-Regulators require explainable and fair ML models.
+\textbf{Validation Components:}
+\begin{itemize}
+\item Conceptual soundness review
+\item Ongoing monitoring (champion-challenger)
+\item Outcomes analysis (backtesting)
+\item Stress testing and scenario analysis
+\end{itemize}
+\end{column}
+
+\begin{column}{0.43\textwidth}
+\textbf{ML-Specific Challenges:}
+
+\textcolor{finred}{\textbf{Black Box Problem:}}
+\begin{itemize}
+\item Deep networks lack interpretability
+\item Regulatory explainability requirements
+\item Need for model-agnostic explanations
+\end{itemize}
+
+\textbf{Mitigation Strategies:}
+\begin{itemize}
+\item SHAP values for feature importance
+\item LIME for local explanations
+\item Attention visualization
+\item Simplified surrogate models
+\end{itemize}
+
+\textbf{Documentation Requirements:}
+\begin{itemize}
+\item Training data provenance
+\item Hyperparameter selection rationale
+\item Performance metrics (in/out-sample)
+\item Limitations and failure modes
+\item Monitoring thresholds
+\end{itemize}
+
+\textbf{Annual Review Mandate:}
+\begin{itemize}
+\item Performance degradation checks
+\item Distribution shifts
+\item Assumption validation
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Explainability and Fairness Requirements}
+\begin{columns}[T]
+\begin{column}{0.55\textwidth}
+\Large\textbf{MiFID II, GDPR, and ECOA Compliance}
+\normalsize
+\vspace{0.5em}
+
+\textbf{Right to Explanation (GDPR Article 22):}
+\begin{itemize}
+\item Automated decisions require human review
+\item Meaningful information about logic
+\item Consequences of processing
+\item Applies to EU customers
+\end{itemize}
+
+\textbf{Equal Credit Opportunity Act (ECOA):}
+\begin{itemize}
+\item Prohibits discrimination on protected attributes
+\item Adverse action notices required
+\item Must provide specific reasons for denial
+\end{itemize}
+
+\textbf{Fairness Metrics:}
+$$\text{Demographic Parity: } P(\hat{Y}=1|A=0) = P(\hat{Y}=1|A=1)$$
+$$\text{Equal Opportunity: } P(\hat{Y}=1|Y=1,A=0) = P(\hat{Y}=1|Y=1,A=1)$$
+
+\textbf{Trade-offs:}
+Impossible to satisfy all fairness criteria simultaneously (Chouldechova impossibility theorem)
+\end{column}
+
+\begin{column}{0.43\textwidth}
+\textbf{Explainability Techniques:}
+
+\textcolor{finblue}{\textbf{Global Explanations:}}
+\begin{itemize}
+\item Feature importance rankings
+\item Partial dependence plots
+\item Model-agnostic summaries
+\end{itemize}
+
+\textcolor{fingreen}{\textbf{Local Explanations:}}
+\begin{itemize}
+\item SHAP values for individual predictions
+\item LIME: Local linear approximations
+\item Counterfactual examples
+\end{itemize}
+
+\textbf{Bias Mitigation:}
+\begin{enumerate}
+\item Pre-processing: Reweighting, resampling
+\item In-processing: Fairness constraints
+\item Post-processing: Threshold optimization
+\end{enumerate}
+
+\textbf{Model Cards:}
+\begin{itemize}
+\item Intended use and limitations
+\item Training data characteristics
+\item Performance across subgroups
+\item Fairness metrics
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Algorithmic Trading Regulation}
+\begin{columns}[T]
+\begin{column}{0.55\textwidth}
+\Large\textbf{MiFID II and Market Abuse Regulation}
+\normalsize
+\vspace{0.5em}
+
+\textbf{MiFID II Requirements:}
+\begin{itemize}
+\item Algo trading registration and authorization
+\item Pre- and post-trade controls
+\item Kill switches and circuit breakers
+\item Audit trail for 5 years
+\item Annual self-assessment
+\end{itemize}
+
+\textbf{Market Abuse Regulation (MAR):}
+\begin{itemize}
+\item Prohibition of market manipulation
+\item Layering, spoofing illegal
+\item Insider trading detection
+\item Suspicious transaction reporting (STR)
+\end{itemize}
+
+\textbf{Testing Requirements:}
+\begin{itemize}
+\item Development environment testing
+\item Conformance testing (exchange rules)
+\item Stress testing under extreme conditions
+\item Kill switch functionality
+\end{itemize}
+\end{column}
+
+\begin{column}{0.43\textwidth}
+\textbf{ML Compliance Challenges:}
+
+\textcolor{finred}{\textbf{Risks:}}
+\begin{itemize}
+\item Inadvertent market manipulation
+\item Flash crashes from feedback loops
+\item Unintended discrimination
+\item Model brittleness
+\end{itemize}
+
+\textbf{Best Practices:}
+\begin{itemize}
+\item Robust validation framework
+\item Continuous monitoring
+\item Human oversight requirements
+\item Graceful degradation
+\end{itemize}
+
+\textbf{Regulatory Technology (RegTech):}
+\begin{itemize}
+\item Automated compliance monitoring
+\item NLP for regulatory change detection
+\item ML for suspicious activity detection
+\item Real-time reporting automation
+\end{itemize}
+
+\textbf{Future Trends:}
+\begin{itemize}
+\item Global regulatory harmonization
+\item Real-time surveillance systems
+\item AI-powered reg reporting
+\item Sandboxes for innovation
+\end{itemize}
+\end{column}
+\end{columns}
 \end{frame}

@@ -1,0 +1,158 @@
+\documentclass[8pt,aspectratio=169]{beamer}
+\usetheme{Madrid}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{adjustbox}
+\usepackage{multicol}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{tcolorbox}
+\usepackage{xcolor}
+\usepackage{listings}
+
+% Color definitions - Template Beamer Final style
+\definecolor{mlblue}{RGB}{0,102,204}
+\definecolor{mlpurple}{RGB}{51,51,178}
+\definecolor{mllavender}{RGB}{173,173,224}
+\definecolor{mllavender2}{RGB}{193,193,232}
+\definecolor{mllavender3}{RGB}{204,204,235}
+\definecolor{mllavender4}{RGB}{214,214,239}
+\definecolor{mlorange}{RGB}{255, 127, 14}
+\definecolor{mlgreen}{RGB}{44, 160, 44}
+\definecolor{mlred}{RGB}{214, 39, 40}
+\definecolor{mlgray}{RGB}{127, 127, 127}
+\definecolor{mlyellow}{RGB}{255, 206, 84}
+\definecolor{mlcyan}{RGB}{23, 190, 207}
+
+% Additional grays for template
+\definecolor{lightgray}{RGB}{240, 240, 240}
+\definecolor{midgray}{RGB}{180, 180, 180}
+
+% Apply custom colors to Madrid theme
+\setbeamercolor{palette primary}{bg=mllavender3,fg=mlpurple}
+\setbeamercolor{palette secondary}{bg=mllavender2,fg=mlpurple}
+\setbeamercolor{palette tertiary}{bg=mllavender,fg=white}
+\setbeamercolor{palette quaternary}{bg=mlpurple,fg=white}
+
+\setbeamercolor{structure}{fg=mlpurple}
+\setbeamercolor{section in toc}{fg=mlpurple}
+\setbeamercolor{subsection in toc}{fg=mlblue}
+\setbeamercolor{title}{fg=mlpurple}
+\setbeamercolor{frametitle}{fg=mlpurple,bg=mllavender3}
+\setbeamercolor{block title}{bg=mllavender2,fg=mlpurple}
+\setbeamercolor{block body}{bg=mllavender4,fg=black}
+
+% Remove navigation symbols
+\setbeamertemplate{navigation symbols}{}
+
+% Clean itemize/enumerate
+\setbeamertemplate{itemize items}[circle]
+\setbeamertemplate{enumerate items}[default]
+
+% Reduce margins for more content space
+\setbeamersize{text margin left=5mm,text margin right=5mm}
+
+% Custom footer
+\setbeamertemplate{footline}{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.25\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
+    \usebeamerfont{author in head/foot}Week 6
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+    \usebeamerfont{title in head/foot}From Chaos to Structure
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.25\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    \usebeamerfont{date in head/foot}\insertframenumber{} / \inserttotalframenumber\hspace*{2ex}
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+
+% Command for bottom annotation (Madrid-style)
+\newcommand{\bottomnote}[1]{%
+\vfill
+\vspace{-2mm}
+\textcolor{mllavender2}{\rule{\textwidth}{0.4pt}}
+\vspace{1mm}
+\footnotesize
+\textbf{#1}
+}
+
+% Graphics path
+\graphicspath{{charts/}}
+
+% Title information
+\title{\Large Machine Learning for Smarter Innovation}
+\subtitle{Week 6: From Chaos to Structure\\
+How AI Learns to Prototype}
+\author{ML \& Design Thinking Course}
+\date{BSc Level - 2025}
+
+\begin{document}
+
+% Title slide with plain style
+\begin{frame}[plain]
+\vspace{2cm}
+\begin{center}
+{\Huge \textcolor{mlpurple}{\textbf{From Chaos to Structure}}}\\[0.5cm]
+{\Large How AI Learns to Prototype}\\[1.5cm]
+{\large Week 6: Machine Learning for Smarter Innovation}\\[0.3cm]
+{\normalsize When Unstructured Creativity Meets Structured Generation}\\[0.5cm]
+{\small Transform Creative Chaos into 100 Working Prototypes}
+\end{center}
+\end{frame}
+
+% Table of contents with 4-act structure
+\begin{frame}[t]{Today's Journey: From Chaos to Structure}
+\Large\textbf{Four Acts of Transformation}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{enumerate}
+\item \textbf{Act 1: The Chaos of Unstructured Prototyping} - Why chaos is expensive
+\item \textbf{Act 2: Creative Chaos Without Constraints} - AI creates... then fails
+\item \textbf{Act 3: Imposing Structure on Chaos} - The structured generation breakthrough
+\item \textbf{Act 4: Structured Systems in Production} - Modern AI tools
+\end{enumerate}
+
+\vspace{1em}
+
+\begin{center}
+\begin{tcolorbox}[colback=mllavender4, colframe=mlpurple, width=0.8\textwidth]
+\centering
+\textbf{Unifying Theme:} STRUCTURE transforms chaos into reliable creation
+\end{tcolorbox}
+\end{center}
+
+\bottomnote{By the end: You'll understand how structure turns unreliable AI into production-ready tools}
+\end{frame}
+
+% Include the four acts
+\input{act1_chaos_challenge}
+\input{act2_creative_chaos}
+\input{act3_imposing_structure}
+\input{act4_structured_systems}
+
+% Closing slide
+\begin{frame}[plain]
+\vspace{2cm}
+\begin{center}
+{\Huge \textcolor{mlpurple}{\textbf{Structure Mastered}}}\\[1cm]
+{\Large From Chaos to Order:}\\[0.5cm]
+{\normalsize
+You now understand:
+\begin{itemize}
+\item Why unstructured approaches fail (chaos = expensive)
+\item How structure transforms AI reliability
+\item The 4-layer framework (Context/Generation/Evaluation/Integration)
+\item How to build production-ready systems
+\end{itemize}
+}
+\vspace{1cm}
+{\large \textcolor{mlpurple}{\textbf{Next Week: Responsible AI}}}\\
+{\normalsize Structure must include ethics, fairness, and transparency}
+\end{center}
+\end{frame}
+
+\end{document}

@@ -1,0 +1,480 @@
+% ACT 1: THE HIDDEN HARM (5 slides)
+% Theme: Invisible bias = unmeasurable discrimination = systemic injustice
+
+% Slide 1: The Invisible Discrimination Scenario
+\begin{frame}[t]{The Invisible Discrimination: You Can't Fix What You Can't See}
+\textbf{A real scenario that reveals the hidden harm:}
+
+\vspace{0.3em}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{ForestGreen}{\textbf{The Hidden Pattern}}
+
+\small
+**Bank loan system, 2024:**\\
+10,000 applications processed
+
+\vspace{0.3cm}
+\textbf{Observable outcomes:}
+\begin{itemize}
+\item Group A: 7,500 approved (75\%)
+\item Group B: 4,500 approved (45\%)
+\item Overall: 60\% approval rate
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{Amber}{\textbf{The Question:}}\\
+Is this discrimination?\\
+How would you even know?
+
+\vspace{0.3cm}
+\textbf{Hidden factors:}
+\begin{itemize}
+\item Can't see: Intent, causation, counterfactuals
+\item Can only see: Outcomes, rates, patterns
+\item Qualification differences?
+\item Historical bias?
+\item Proxy variables?
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{Teal}{\textbf{The Invisibility Problem}}
+
+\small
+\textbf{Why discrimination stays hidden:}
+
+\vspace{0.3cm}
+\textbf{1. No Ground Truth}
+\begin{itemize}
+\item Can't observe "fair" counterfactual
+\item What WOULD have happened?
+\item Intent is unobservable
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{2. Aggregate Masks Disparities}
+\begin{itemize}
+\item 60\% overall looks reasonable
+\item 30\% gap hidden in average
+\item Simpson's paradox
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{3. Proxy Variables Conceal}
+\begin{itemize}
+\item Zip code → Race (95\% correlation)
+\item Name → Gender (98\% correlation)
+\item School → Socioeconomic status
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlred}{\textbf{Real harm:}}\\
+4,500 people denied opportunities\\
+System appears "objective"\\
+Discrimination is \textbf{invisible}
+\end{columns}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mlblue!10, colframe=mlblue]
+\textbf{Key Insight:} Invisible discrimination is unmeasurable discrimination - you can't fix what you can't see or quantify
+\end{tcolorbox}
+
+\vspace{0.5em}
+\textbf{Key Question:} How do we make invisible bias visible enough to measure and fix?
+
+\bottomnote{233 documented AI discrimination incidents in 2024 - \$10B+ settlements - all started invisible}
+\end{frame}
+
+% Slide 2: What IS Bias? (Built from zero with information theory)
+\begin{frame}[t]{What IS Bias? Building the Concept from Information Theory}
+\textbf{Defining bias mathematically (from zero knowledge):}
+
+\vspace{0.3em}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{ForestGreen}{\textbf{Human Analogy: Blind Auditions}}
+
+\small
+\textbf{Symphony orchestras, 1970s-1990s:}
+
+\vspace{0.3cm}
+Before blind auditions:
+\begin{itemize}
+\item 5\% women in orchestras
+\item Judges could see candidates
+\item Implicit bias affected decisions
+\end{itemize}
+
+\vspace{0.3cm}
+After blind auditions:
+\begin{itemize}
+\item 40\% women in orchestras
+\item Screen hides gender
+\item Decisions based on skill only
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{Amber}{\textbf{Key observation:}}\\
+Removing visibility of protected\\
+attribute changed outcomes
+
+\vspace{0.3cm}
+\textcolor{Teal}{\textbf{This means:}}\\
+Decision correlated with\\
+irrelevant attribute = BIAS
+
+\column{0.48\textwidth}
+\textcolor{ForestGreen}{\textbf{Computer/Math Equivalent}}
+
+\small
+\textbf{Protected attribute} $A$: Race, gender, age, etc.\\
+\textbf{Decision} $D$: Hire, approve loan, admit, etc.\\
+\textbf{True qualification} $Y$: Actual merit/ability
+
+\vspace{0.3cm}
+\textcolor{Amber}{\textbf{Information Theory Definition:}}
+
+Bias exists when decision carries\\
+information about protected attribute:
+
+$$\textcolor{Teal}{I(D; A) > 0}$$
+
+Where $I$ = mutual information
+
+\vspace{0.3cm}
+\textbf{Expanded form:}
+$$I(D; A) = H(D) - H(D|A)$$
+$$= H(A) - H(A|D)$$
+
+\vspace{0.3cm}
+\textcolor{ForestGreen}{\textbf{Intuition:}}
+\begin{itemize}
+\item $H(D)$: Uncertainty in decisions
+\item $H(D|A)$: Uncertainty after seeing group
+\item Difference = information leaked
+\item $I(D; A) = 0$ means independence
+\item $I(D; A) > 0$ means bias
+\end{itemize}
+\end{columns}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mlblue!10, colframe=mlblue]
+\textbf{Key Insight:} Bias is statistical dependence between decisions and protected attributes - measurable via mutual information
+\end{tcolorbox}
+
+\vspace{0.5em}
+\textbf{Key Question:} If we can define bias with I(D; A), can we measure it in real systems?
+
+\bottomnote{Mutual information I(D; A) quantifies "how much knowing A tells you about D" - core of fairness mathematics}
+\end{frame}
+
+% Slide 3: Why Bias is Hidden (Observability problem with Simpson's paradox)
+\begin{frame}[t]{Why Bias Stays Hidden: The Observability Problem}
+\textbf{Three reasons discrimination remains invisible:}
+
+\vspace{0.3em}
+
+\begin{columns}[T]
+\column{0.31\textwidth}
+\textcolor{ForestGreen}{\textbf{1. Counterfactuals}}
+
+\small
+\textbf{Can't directly observe:}
+\begin{itemize}
+\item What WOULD have happened
+\item Alternative universe
+\item Fair outcome for comparison
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Example:}\\
+Person denied loan
+
+Question: "Would they have\\
+been approved if different race?"
+
+\textcolor{mlred}{Impossible to know!}
+
+\vspace{0.3cm}
+\textbf{Mathematics:}\\
+Need $P(D|A=a, X)$ and\\
+$P(D|A=a', X)$ for same $X$
+
+But can only observe one\\
+$A$ value per person
+
+\vspace{0.3cm}
+\textcolor{Amber}{\textbf{Result:}}\\
+Causal discrimination\\
+stays hidden
+
+\column{0.31\textwidth}
+\textcolor{Teal}{\textbf{2. Aggregation}}
+
+\small
+\textbf{Simpson's Paradox:}
+
+\vspace{0.3cm}
+\textbf{Department A:}
+\begin{itemize}
+\item Men: 80\% admit
+\item Women: 85\% admit
+\item No bias!
+\end{itemize}
+
+\textbf{Department B:}
+\begin{itemize}
+\item Men: 60\% admit
+\item Women: 65\% admit
+\item No bias!
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlred}{\textbf{Combined:}}
+\begin{itemize}
+\item Men: 70\% admit
+\item Women: 65\% admit
+\item BIAS APPEARS!
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Why:}\\
+Men apply to easier dept
+
+\vspace{0.3cm}
+\textcolor{Amber}{\textbf{Result:}}\\
+Aggregation hides or\\
+creates false patterns
+
+\column{0.31\textwidth}
+\textcolor{DarkTeal}{\textbf{3. Proxy Variables}}
+
+\small
+\textbf{Indirect discrimination:}
+
+\vspace{0.3cm}
+\textbf{High correlation:}
+\begin{itemize}
+\item Zip code → Race (95\%)
+\item Name → Gender (98\%)
+\item School → Class (92\%)
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Model never sees $A$}\\
+but uses proxy $P$
+
+\vspace{0.3cm}
+\textbf{Mathematics:}
+$$I(D; A|P) < I(D; A)$$
+
+But still $I(D; A) > 0$\\
+through indirect path
+
+\vspace{0.3cm}
+\textcolor{mlred}{\textbf{Example:}}\\
+Remove "gender" from\\
+hiring algorithm
+
+Still biased via:
+\begin{itemize}
+\item Sports: football vs volleyball
+\item Hobbies: different patterns
+\item Language: subtle cues
+\end{itemize}
+
+\textcolor{Amber}{\textbf{Result:}}\\
+Hidden in 1000+ features
+\end{columns}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mlblue!10, colframe=mlblue]
+\textbf{Key Insight:} Bias stays hidden through unobservable counterfactuals, aggregation paradoxes, and proxy variables
+\end{tcolorbox}
+
+\vspace{0.5em}
+\textbf{Key Question:} If bias is so well-hidden, how can we possibly measure it at scale?
+
+\bottomnote{Simpson's paradox shows bias can appear or disappear depending on aggregation level - no single "truth"}
+\end{frame}
+
+% Slide 4: The Measurement Challenge (Quantified with Shannon entropy)
+\begin{frame}[t]{The Measurement Challenge: Capacity Overflow}
+\textbf{Information-theoretic analysis of the measurement problem:}
+
+\vspace{0.3em}
+
+\begin{columns}[T]
+\column{0.55\textwidth}
+\textcolor{ForestGreen}{\textbf{The Combinatorial Explosion}}
+
+\small
+\textbf{Step 1: Count protected attributes}
+
+Legally protected in US/EU:
+\begin{itemize}
+\item Race: 6 categories
+\item Gender: 3+ categories
+\item Age: 7 bins (decades)
+\item Disability: 2 (yes/no)
+\item Religion: 10+ categories
+\item National origin: 195 countries
+\end{itemize}
+
+Just these 6: $6 \times 3 \times 7 \times 2 \times 10 \times 195$\\
+= \textcolor{mlred}{\textbf{490,140 subgroups}}
+
+\vspace{0.3cm}
+\textbf{Step 2: Calculate entropy}
+
+Shannon entropy of subgroups:\\
+$H(\text{Subgroups}) = \log_2(490{,}140)$\\
+$= 18.9$ bits of discrimination information
+
+\vspace{0.3cm}
+\textbf{Step 3: Intersectionality}
+
+Add socioeconomic (5 levels):\\
+$490{,}140 \times 5 = 2{,}450{,}700$ subgroups\\
+$H = \log_2(2{,}450{,}700) = 21.2$ bits
+
+\column{0.43\textwidth}
+\textcolor{Teal}{\textbf{The Capacity Problem}}
+
+\small
+\textbf{Measurement bandwidth:}
+
+\vspace{0.3cm}
+Typical fairness audit:
+\begin{itemize}
+\item Sample size: 10,000
+\item Disaggregate by: Race × Gender
+\item Subgroups measured: 18
+\item Capacity: $\log_2(18) = 4.2$ bits
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlred}{\textbf{Information loss:}}
+
+$$\text{Loss} = H - B$$
+$$= 21.2 - 4.2$$
+$$= 17.0 \text{ bits UNMEASURED}$$
+
+\vspace{0.3cm}
+\textbf{Opportunity cost:}\\
+$2^{17} = 131{,}072$ subgroups\\
+with invisible discrimination
+
+\vspace{0.3cm}
+\textcolor{Amber}{\textbf{Result:}}
+\begin{itemize}
+\item 99.999\% of discrimination unmeasured
+\item Subgroup harm stays hidden
+\item Most vulnerable: smallest groups
+\end{itemize}
+\end{columns}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mlblue!10, colframe=mlblue]
+\textbf{Key Insight:} Measurement capacity (4.2 bits) vastly insufficient for discrimination space (21.2 bits) - 17 bits lost
+\end{tcolorbox}
+
+\vspace{0.5em}
+\textbf{Key Question:} Given this measurement bottleneck, can we still make bias visible?
+
+\bottomnote{Shannon entropy quantifies: 21.2 bits discrimination space, only 4.2 bits measurable = 80\% invisible harm}
+\end{frame}
+
+% Slide 5: The Stakes (Real-world harm with quantification)
+\begin{frame}[t]{The Stakes: Real Harm from Invisible Discrimination}
+\textbf{Quantifying the human and economic cost of hidden bias:}
+
+\vspace{0.3em}
+
+\begin{columns}[T]
+\column{0.55\textwidth}
+\textcolor{ForestGreen}{\textbf{2024 AI Discrimination Incidents}}
+
+\small
+\begin{center}
+\begin{tabular}{lccc}
+\toprule
+\textbf{Sector} & \textbf{Incidents} & \textbf{People} & \textbf{Cost} \\
+\midrule
+Healthcare & 79 & 2.3M & \$3.2B \\
+Finance & 65 & 1.8M & \$4.1B \\
+Criminal Justice & 51 & 890K & \$1.7B \\
+Employment & 38 & 1.2M & \$1.4B \\
+\midrule
+\textbf{Total} & \textbf{233} & \textbf{6.2M} & \textbf{\$10.4B} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{0.3cm}
+\textcolor{Amber}{\textbf{Trend Analysis:}}
+\begin{itemize}
+\item 2022: 148 incidents (+27\% from 2021)
+\item 2023: 184 incidents (+24\% from 2022)
+\item 2024: 233 incidents (+27\% from 2023)
+\item Exponential growth: $1.26^t$
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Geographic distribution:}
+\begin{itemize}
+\item North America: 112 (48\%)
+\item Europe: 78 (33\%)
+\item Asia: 31 (13\%)
+\item Other: 12 (5\%)
+\item \textbf{47 countries} affected
+\end{itemize}
+
+\column{0.43\textwidth}
+\textcolor{Teal}{\textbf{Individual Harm}}
+
+\small
+\textbf{Case: Detroit facial recognition (2024)}
+\begin{itemize}
+\item Black man wrongfully arrested
+\item 30 hours in custody
+\item False FR match (12\% confidence)
+\item Now: FR banned for sole arrest basis
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Case: UK Facewatch (May 2024)}
+\begin{itemize}
+\item Woman misidentified as shoplifter
+\item Banned from all stores in network
+\item \$1,200 settlement
+\item Systemic bias on darker skin (32\% error rate vs 1.2\%)
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{DarkTeal}{\textbf{Systemic Patterns:}}
+\begin{itemize}
+\item Facial recognition: 34x higher error rate for Black women
+\item Resume screening: 1.8x lower callback for non-white names
+\item Healthcare algorithms: \$2,500 less spent per Black patient
+\item Recidivism tools: 2.1x false positive rate for Black defendants
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlred}{\textbf{The Common Thread:}}\\
+All started invisible, became\\
+visible only after harm occurred
+\end{columns}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mlblue!10, colframe=mlblue]
+\textbf{Key Insight:} 233 incidents, 6.2M people, \$10.4B cost in 2024 alone - hidden bias causes measurable, preventable harm
+\end{tcolorbox}
+
+\vspace{0.5em}
+\textbf{Key Question:} Can we develop measurement frameworks to make bias visible BEFORE harm occurs?
+
+\bottomnote{AI Incident Database 2024: 56\% increase from 2023, exponential growth continues - measurement is urgent}
+\end{frame}

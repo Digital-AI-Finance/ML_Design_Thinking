@@ -1,0 +1,456 @@
+% Part 4: Design - User Experience with Reliable AI
+\section{Design: UX for Structured AI Systems}
+
+% Slide 1: UX Patterns Overview
+\begin{frame}{UX Patterns for Reliable AI}
+\includegraphics[width=\textwidth]{charts/ux_reliability_patterns.pdf}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Four core patterns for building trust through consistency}
+\end{frame}
+
+% Slide 2: Progressive Enhancement
+\begin{frame}{Progressive Enhancement: Start Simple, Add AI}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{The Pattern}}
+
+\small
+\begin{enumerate}
+\item Start with manual form
+\item Add AI suggestions
+\item User reviews and edits
+\item Final submit
+\end{enumerate}
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{Why It Works:}}
+\begin{itemize}
+\item User stays in control
+\item AI failures don't block
+\item Trust builds gradually
+\item Works without AI
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{mlorange}{\textbf{Example: Form Filling}}
+
+\small
+\begin{enumerate}
+\item User uploads invoice
+\item AI extracts fields
+\item Shows in editable form
+\item User corrects mistakes
+\item Saves valid data
+\end{enumerate}
+
+\vspace{0.3cm}
+\textcolor{mlpurple}{\textbf{Result:}}
+\begin{itemize}
+\item 90\% time saved
+\item 100\% accuracy
+\item User confident
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Never make AI a single point of failure}
+\end{frame}
+
+% Slide 3: Loading States
+\begin{frame}{Communicating AI Processing}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Stage-by-Stage Feedback}}
+
+\small
+\begin{enumerate}
+\item ``Analyzing document...''
+\item ``Extracting data...''
+\item ``Validating fields...''
+\item ``Ready for review!''
+\end{enumerate}
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{User Benefits:}}
+\begin{itemize}
+\item Knows what's happening
+\item Expected wait time
+\item Can cancel if needed
+\item Reduces anxiety
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{mlorange}{\textbf{Progress Indicators}}
+
+\small
+\begin{itemize}
+\item Spinner for $<$ 2s
+\item Progress bar for 2-10s
+\item Stage labels for $>$ 10s
+\item Time estimates when available
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlred}{\textbf{What NOT to Do:}}
+\begin{itemize}
+\item Blank screen
+\item Generic ``Loading...''
+\item No cancel option
+\item False progress bars
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Clear feedback builds trust during AI processing}
+\end{frame}
+
+% Slide 4: Error Messaging
+\begin{frame}{User-Friendly Error Messages}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlred}{\textbf{Bad Error Messages}}
+
+\small
+\texttt{Error: Schema validation failed at line 42}
+
+\texttt{API returned 500}
+
+\texttt{Unexpected token in JSON}
+
+\vspace{0.3cm}
+\textcolor{mlgray}{Problems:}
+\begin{itemize}
+\item Technical jargon
+\item No action suggested
+\item Scary and confusing
+\item User feels helpless
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{mlgreen}{\textbf{Good Error Messages}}
+
+\small
+\texttt{We couldn't process this document. Please try:}
+\begin{itemize}
+\item Upload a clearer image
+\item Enter data manually instead
+\item Contact support if this persists
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlblue}{Features:}
+\begin{itemize}
+\item Plain language
+\item Actionable steps
+\item Alternative paths
+\item Reassuring tone
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Error messages should help, not frustrate}
+\end{frame}
+
+% Slide 5: Confidence Display
+\begin{frame}{Showing AI Confidence}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{When to Show Confidence}}
+
+\small
+\begin{itemize}
+\item High-stakes decisions
+\item Ambiguous inputs
+\item User needs assurance
+\item Learning/training scenarios
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{How to Display:}}
+\begin{itemize}
+\item Color coding (green/yellow/red)
+\item Percentage (``85\% confident'')
+\item Stars or bars
+\item Textual (``High confidence'')
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{mlorange}{\textbf{Confidence-Based Actions}}
+
+\small
+\begin{tabular}{ll}
+\toprule
+\textbf{Confidence} & \textbf{Action} \\
+\midrule
+$>$ 95\% & Auto-accept \\
+80-95\% & Suggest, allow edit \\
+60-80\% & Show for review \\
+$<$ 60\% & Request manual entry \\
+\bottomrule
+\end{tabular}
+
+\vspace{0.3cm}
+\textcolor{mlpurple}{\textbf{Benefits:}}
+\begin{itemize}
+\item Appropriate review level
+\item User knows when to check
+\item Builds calibrated trust
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Confidence scores help users make informed decisions}
+\end{frame}
+
+% Slide 6: Human-in-the-Loop
+\begin{frame}{Human-in-the-Loop Patterns}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Three Levels of Human Control}}
+
+\small
+\begin{enumerate}
+\item \textcolor{mlgreen}{High automation} --- AI decides, human monitors
+\item \textcolor{mlorange}{Shared control} --- AI suggests, human approves
+\item \textcolor{mlpurple}{Human primary} --- AI assists, human decides
+\end{enumerate}
+
+\vspace{0.3cm}
+\textcolor{mlgray}{\textbf{Choose based on:}}
+\begin{itemize}
+\item Risk level
+\item AI confidence
+\item User expertise
+\item Task complexity
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{mlgreen}{\textbf{Example: Data Review Interface}}
+
+\small
+\textbf{AI Extraction:}
+\begin{itemize}
+\item Shows extracted data
+\item Highlights low confidence
+\item Inline editing
+\item Accept/reject/edit options
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{User Actions:}
+\begin{itemize}
+\item Quick accept if all good
+\item Edit specific fields
+\item Reject and re-extract
+\item Manual entry if AI fails
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Give users control appropriate to the task risk}
+\end{frame}
+
+% Slide 7: Form Filling UX
+\begin{frame}{Structured Input/Output UX}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Smart Form Filling}}
+
+\small
+\textbf{User uploads document}
+
+$\downarrow$
+
+\textbf{AI extracts fields}
+
+$\downarrow$
+
+\textbf{Shows in form with indicators:}
+\begin{itemize}
+\item Green check: High confidence
+\item Yellow warning: Please review
+\item Red X: Couldn't extract
+\end{itemize}
+
+$\downarrow$
+
+\textbf{User edits as needed}
+
+$\downarrow$
+
+\textbf{Validates before submit}
+
+\column{0.48\textwidth}
+\textcolor{mlgreen}{\textbf{Key UX Features}}
+
+\small
+\begin{itemize}
+\item Pre-filled, not read-only
+\item Clear confidence indicators
+\item Easy inline editing
+\item Field-level validation
+\item Show original source
+\item Undo/redo
+\item Save draft
+\item Skip AI option
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlorange}{\textbf{Result:}}\\
+90\% time saved\\
+User stays in control
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Make AI suggestions obvious but easy to override}
+\end{frame}
+
+% Slide 8: Accessibility
+\begin{frame}{Accessibility with Structured AI}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Why Structured Outputs Help}}
+
+\small
+\begin{itemize}
+\item Predictable format
+\item Screen reader friendly
+\item Keyboard navigation
+\item Clear structure
+\item Consistent patterns
+\item Alt text generation
+\item Semantic HTML
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{Benefits:}}
+\begin{itemize}
+\item WCAG 2.1 compliance easier
+\item Better for all users
+\item Legal requirements met
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{mlorange}{\textbf{Implementation Tips}}
+
+\small
+\begin{itemize}
+\item Use semantic elements
+\item ARIA labels for AI status
+\item Announce confidence levels
+\item Keyboard shortcuts
+\item Skip to error
+\item Focus management
+\item High contrast mode
+\item Text alternatives
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlpurple}{\textbf{Example:}}\\
+\texttt{\textless div role="status" aria-live="polite"\textgreater\\
+\hspace{0.5cm}AI extracted 8 of 10 fields\\
+\textless/div\textgreater}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Structured data makes accessible AI easier to build}
+\end{frame}
+
+% Slide 9: Building Trust
+\begin{frame}{Design for Trust}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Trust Through Consistency}}
+
+\small
+\begin{itemize}
+\item Predictable behavior
+\item Clear capabilities
+\item Honest about limits
+\item Graceful failures
+\item User stays in control
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{Trust Builders:}}
+\begin{itemize}
+\item Show confidence scores
+\item Explain AI decisions
+\item Easy to override
+\item Consistent patterns
+\item No surprises
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{mlred}{\textbf{Trust Destroyers:}}
+
+\small
+\begin{itemize}
+\item Inconsistent outputs
+\item Hidden AI decisions
+\item No way to correct
+\item Mysterious errors
+\item Overconfident claims
+\item Blocking failures
+\item No human override
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlorange}{\textbf{Golden Rule:}}\\
+Underpromise and overdeliver
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Trust is earned through consistent, reliable behavior}
+\end{frame}
+
+% Slide 10: Design Framework Summary
+\begin{frame}{Design Framework: Key Principles}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Core Principles}}
+
+\small
+\begin{enumerate}
+\item User always in control
+\item Progressive enhancement
+\item Clear feedback
+\item Graceful degradation
+\item Accessibility first
+\item Build trust through consistency
+\end{enumerate}
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{Structured AI Advantages:}}
+\begin{itemize}
+\item Predictable UI
+\item Easier to verify
+\item Clear error states
+\item Consistent patterns
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{mlorange}{\textbf{Checklist}}
+
+\small
+$\Box$ Works without AI\\
+$\Box$ Shows confidence\\
+$\Box$ Easy to edit\\
+$\Box$ Clear error messages\\
+$\Box$ Loading states\\
+$\Box$ Keyboard accessible\\
+$\Box$ Screen reader tested\\
+$\Box$ No blocking failures\\
+$\Box$ Cancel option\\
+$\Box$ User can override
+\end{columns}
+
+\vspace{0.5cm}
+\begin{center}
+\textcolor{mlpurple}{\normalsize Next: Put it all into practice with a workshop}
+\end{center}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Part 5: Hands-on workshop and best practices}
+\end{frame}

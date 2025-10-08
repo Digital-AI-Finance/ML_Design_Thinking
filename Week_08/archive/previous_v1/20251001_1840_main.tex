@@ -1,0 +1,177 @@
+% Week 8: Structured Output & Reliable AI Systems
+% Machine Learning for Smarter Innovation - BSc Course
+% REWRITTEN: 4-Act Dramatic Structure (from 5-part linear)
+% Date: 2025-10-01
+\documentclass[8pt,aspectratio=169]{beamer}
+\usetheme{Madrid}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{adjustbox}
+\usepackage{multicol}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{tcolorbox}
+\usepackage{xcolor}
+\usepackage{listings}
+
+% Template Beamer Final Color Definitions (mllavender palette)
+\definecolor{mlblue}{RGB}{0,102,204}
+\definecolor{mlpurple}{RGB}{51,51,178}
+\definecolor{mllavender}{RGB}{173,173,224}
+\definecolor{mllavender2}{RGB}{193,193,232}
+\definecolor{mllavender3}{RGB}{204,204,235}
+\definecolor{mllavender4}{RGB}{214,214,239}
+\definecolor{mlorange}{RGB}{255, 127, 14}
+\definecolor{mlgreen}{RGB}{44, 160, 44}
+\definecolor{mlred}{RGB}{214, 39, 40}
+\definecolor{mlgray}{RGB}{127, 127, 127}
+
+% Additional colors for template compatibility
+\definecolor{lightgray}{RGB}{240, 240, 240}
+\definecolor{midgray}{RGB}{180, 180, 180}
+
+% Apply template theme (mllavender palette)
+\setbeamercolor{palette primary}{bg=mllavender3,fg=mlpurple}
+\setbeamercolor{palette secondary}{bg=mllavender2,fg=mlpurple}
+\setbeamercolor{palette tertiary}{bg=mllavender,fg=white}
+\setbeamercolor{palette quaternary}{bg=mlpurple,fg=white}
+
+\setbeamercolor{structure}{fg=mlpurple}
+\setbeamercolor{section in toc}{fg=mlpurple}
+\setbeamercolor{subsection in toc}{fg=mlblue}
+\setbeamercolor{title}{fg=mlpurple}
+\setbeamercolor{frametitle}{fg=mlpurple,bg=mllavender3}
+\setbeamercolor{block title}{bg=mllavender2,fg=mlpurple}
+\setbeamercolor{block body}{bg=mllavender4,fg=black}
+
+% Items with template accent colors
+\setbeamercolor{item}{fg=mlorange}
+\setbeamercolor{subitem}{fg=mlblue}
+\setbeamercolor{subsubitem}{fg=mlpurple}
+
+% Remove navigation symbols
+\setbeamertemplate{navigation symbols}{}
+
+% Clean itemize/enumerate
+\setbeamertemplate{itemize items}[circle]
+\setbeamertemplate{enumerate items}[default]
+
+% Reduce margins for more content space
+\setbeamersize{text margin left=5mm,text margin right=5mm}
+
+% Custom footer
+\setbeamertemplate{footline}{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.25\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
+    \usebeamerfont{author in head/foot}Week 8
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+    \usebeamerfont{title in head/foot}From Chaos to Reliability
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.25\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    \usebeamerfont{date in head/foot}\insertframenumber{} / \inserttotalframenumber\hspace*{2ex}
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+
+% Command for bottom annotation (template_beamer_final style)
+\newcommand{\bottomnote}[1]{%
+\vfill
+\vspace{-2mm}
+\textcolor{mllavender2}{\rule{\textwidth}{0.4pt}}
+\vspace{1mm}
+\footnotesize
+\textbf{#1}%
+}
+
+% Graphics path
+\graphicspath{{charts/}}
+
+% Listings configuration for code
+\lstset{
+  basicstyle=\ttfamily\footnotesize,
+  breaklines=true,
+  frame=single,
+  backgroundcolor=\color{mllavender4}
+}
+
+% Title information
+\title{\Large Machine Learning for Smarter Innovation}
+\subtitle{Week 8: From Chaos to Reliability\\
+When AI Needs Structure}
+\author{ML and Design Thinking Course}
+\date{BSc Level - October 2025}
+
+\begin{document}
+
+% Title slide with plain style
+\begin{frame}[plain]
+\vspace{2cm}
+\begin{center}
+{\Huge \textcolor{mlpurple}{\textbf{From Chaos}}}\\[0.2cm]
+{\Huge \textcolor{mlpurple}{\textbf{to}}}\\[0.2cm]
+{\Huge \textcolor{mlpurple}{\textbf{Reliability}}}\\[0.8cm]
+{\Large When AI Needs Structure}\\[1.5cm]
+{\large Week 8: Machine Learning for Smarter Innovation}\\[0.3cm]
+{\normalsize Transforming Unpredictable Prototypes into Production Systems}\\[0.5cm]
+\end{center}
+\end{frame}
+
+% Overview slide
+\begin{frame}{Today's Journey: A Dramatic Arc}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlpurple}{\textbf{Act 1: The Challenge}}
+\begin{itemize}
+\item Production reliability crisis
+\item The 80\% failure problem
+\item Chaos compounds exponentially
+\item Quantifying the gap
+\end{itemize}
+
+\vspace{0.5cm}
+\textcolor{mlorange}{\textbf{Act 2: First Solution}}
+\begin{itemize}
+\item Naive approach: Better prompts
+\item Initial success (hope!)
+\item Failure pattern emerges
+\item Root cause diagnosis
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{mlgreen}{\textbf{Act 3: The Breakthrough}}
+\begin{itemize}
+\item Human introspection
+\item Structured validation framework
+\item Multi-layer architecture
+\item Experimental validation
+\end{itemize}
+
+\vspace{0.5cm}
+\textcolor{mlblue}{\textbf{Act 4: Synthesis}}
+\begin{itemize}
+\item Production systems
+\item Conceptual lessons
+\item Modern applications
+\item Workshop preview
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\small\textcolor{mlgray}{From unpredictable chaos to reliable production AI}
+\end{frame}
+
+% Act 1: The Challenge
+\input{act1_chaos_challenge}
+
+% Act 2: First Solution & Its Limits
+\input{act2_naive_solution}
+
+% Act 3: The Breakthrough
+\input{act3_structured_breakthrough}
+
+% Act 4: Synthesis
+\input{act4_production_synthesis}
+
+\end{document}

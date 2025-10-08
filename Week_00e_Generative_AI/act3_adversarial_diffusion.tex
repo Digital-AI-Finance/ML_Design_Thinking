@@ -4,36 +4,31 @@
 \framesubtitle{How Artists Develop Mastery}
 
 \begin{center}
-\includegraphics[width=0.9\textwidth]{charts/artist_learning_process.pdf}
+\includegraphics[width=0.55\textwidth]{charts/artist_learning_process.pdf}
 \end{center}
 
-\vspace{0.3cm}
-
-\begin{columns}[c]
+\footnotesize
+\begin{columns}[T]
 \column{0.48\textwidth}
-\textbf{Traditional Art Education:}
+\textbf{Art Education:}
 \begin{itemize}
-\item Student creates artwork
-\item Teacher provides critique
-\item ``This needs more contrast''
-\item ``The proportions are off''
-\item Student improves iteratively
+\item Student creates
+\item Teacher critiques
+\item Student improves
+\item Competitive dynamics: Both improve through opposition
 \end{itemize}
 
 \column{0.48\textwidth}
-\textbf{Key Insights:}
+\textbf{Insights:}
 \begin{itemize}
-\item \textcolor{mlgreen}{\textbf{Adversarial feedback}} drives improvement
-\item Critic must be \textbf{expert-level}
-\item Student learns to \textbf{fool the critic}
-\item Process is \textbf{iterative}
-\item Both student \& critic improve
+\item Adversarial feedback drives improvement
+\item Both improve together
 \end{itemize}
 \end{columns}
 
 \vspace{\fill}
-\small \textcolor{gray}{
-This adversarial learning process inspired Generative Adversarial Networks (GANs)
+\footnotesize \textcolor{gray}{
+Adversarial learning mirrors competitive skill development - discriminator pressure forces generator improvement, creating arms race driving both toward excellence (inspired GANs - Goodfellow et al. 2014)
 }
 \end{frame}
 
@@ -43,36 +38,31 @@ This adversarial learning process inspired Generative Adversarial Networks (GANs
 \framesubtitle{Beyond VAEs to Better Generation}
 
 \begin{center}
-\includegraphics[width=0.9\textwidth]{charts/two_approaches.pdf}
+\includegraphics[width=0.55\textwidth]{charts/two_approaches.pdf}
 \end{center}
 
-\vspace{0.3cm}
-
-\begin{columns}[c]
+\footnotesize
+\begin{columns}[T]
 \column{0.48\textwidth}
-\textcolor{mlred}{\Large \textbf{Approach 1: Adversarial}}
+\textcolor{mlred}{\textbf{Adversarial}}
 \begin{itemize}
 \item Two networks compete
-\item Generator vs Discriminator
-\item Minimax game theory
-\item ``Forger vs Detective''
-\item Sharp, realistic outputs
+\item Sharp, realistic
+\item No explicit likelihood
 \end{itemize}
 
 \column{0.48\textwidth}
-\textcolor{mlblue}{\Large \textbf{Approach 2: Diffusion}}
+\textcolor{mlblue}{\textbf{Diffusion}}
 \begin{itemize}
-\item Iterative denoising process
-\item Learn to reverse corruption
-\item Gradual refinement
-\item ``Sculptor revealing statue''
-\item Stable, controllable generation
+\item Iterative denoising
+\item Stable, controllable
+\item Likelihood-based, traceable gradients
 \end{itemize}
 \end{columns}
 
 \vspace{\fill}
-\small \textcolor{gray}{
-Both approaches address VAE limitations but through fundamentally different mechanisms
+\footnotesize \textcolor{gray}{
+Adversarial and diffusion approaches overcome VAE's MSE averaging problem through different mechanisms - competition vs iterative refinement both avoid explicit averaging
 }
 \end{frame}
 
@@ -82,40 +72,34 @@ Both approaches address VAE limitations but through fundamentally different mech
 \framesubtitle{Adversarial Training in Plain English}
 
 \begin{center}
-\includegraphics[width=0.9\textwidth]{charts/forger_detective_analogy.pdf}
+\includegraphics[width=0.55\textwidth]{charts/forger_detective_analogy.pdf}
 \end{center}
 
-\vspace{0.3cm}
-
-\begin{columns}[c]
+\footnotesize
+\begin{columns}[T]
 \column{0.48\textwidth}
-\textcolor{mlred}{\textbf{The Forger (Generator):}}
+\textcolor{mlred}{\textbf{Forger:}}
 \begin{itemize}
-\item Creates fake paintings
-\item Starts with random noise
-\item Tries to fool the detective
-\item Gets better over time
-\item Goal: perfect forgeries
+\item Creates fakes
+\item Fools detective
 \end{itemize}
 
 \column{0.48\textwidth}
-\textcolor{mlblue}{\textbf{The Detective (Discriminator):}}
+\textcolor{mlblue}{\textbf{Detective:}}
 \begin{itemize}
-\item Examines paintings
-\item Decides: real or fake?
-\item Learns from mistakes
-\item Gets better at spotting fakes
-\item Goal: catch all forgeries
+\item Examines: real/fake?
+\item Gets better at detection
 \end{itemize}
 \end{columns}
 
-\vspace{0.5cm}
-\Large
-\textcolor{mlgreen}{\textbf{Result:}} Forger becomes so good that detective can't tell real from fake!
+\vspace{0.2cm}
+\textcolor{mlgreen}{\textbf{Result:}} Detective can't tell fake from real!
+
+\textbf{Equilibrium:} When forger succeeds 50\% of time
 
 \vspace{\fill}
-\small \textcolor{gray}{
-This competitive process drives both networks to excellence
+\footnotesize \textcolor{gray}{
+Competition drives both to excellence
 }
 \end{frame}
 
@@ -125,77 +109,69 @@ This competitive process drives both networks to excellence
 \framesubtitle{Denoising in Plain English}
 
 \begin{center}
-\includegraphics[width=0.9\textwidth]{charts/reverse_corruption_analogy.pdf}
+\includegraphics[width=0.55\textwidth]{charts/reverse_corruption_analogy.pdf}
 \end{center}
 
-\vspace{0.3cm}
-
-\begin{columns}[c]
+\footnotesize
+\begin{columns}[T]
 \column{0.48\textwidth}
-\textbf{Forward Process (Corruption):}
+\textbf{Forward:}
 \begin{itemize}
-\item Start with clean image
-\item Add noise gradually
-\item 1000 tiny steps
-\item End with pure noise
-\item Like: painting → static
+\item Clean -> noise
+\item 1000 steps
 \end{itemize}
 
 \column{0.48\textwidth}
-\textbf{Reverse Process (Generation):}
+\textbf{Reverse:}
 \begin{itemize}
-\item Start with pure noise
-\item Remove noise gradually
-\item 1000 tiny steps
-\item End with clean image
-\item Like: static → painting
+\item Noise -> clean
+\item 1000 steps
+\item Training: Learn to predict noise at each step
+\item Inference: Start from pure noise, denoise 1000 times
 \end{itemize}
 \end{columns}
 
-\vspace{0.5cm}
-\Large
-\textcolor{mlgreen}{\textbf{Key Insight:}} Learn to undo corruption step by step
+\vspace{0.2cm}
+\textcolor{mlgreen}{\textbf{Key:}} Learn to undo corruption
 
 \vspace{\fill}
-\small \textcolor{gray}{
-Like a sculptor revealing a statue by removing marble, one chip at a time
+\footnotesize \textcolor{gray}{
+Diffusion inverts gradual noise corruption process - learning reverse process enables sampling by denoising pure noise, avoiding VAE averaging through iterative refinement
 }
 \end{frame}
 
 % Slide 16: Geometric intuition: Generator/discriminator dynamics
 \begin{frame}
 \frametitle{GAN Dynamics: Geometric View}
-\framesubtitle{Understanding the Adversarial Process}
+\framesubtitle{Understanding the Adversarial Process (Goodfellow et al. 2014)}
 
 \begin{center}
-\includegraphics[width=0.9\textwidth]{charts/gan_geometric_dynamics.pdf}
+\includegraphics[width=0.5\textwidth]{charts/gan_geometric_dynamics.pdf}
 \end{center}
 
-\vspace{0.3cm}
-
-\begin{columns}[c]
+\footnotesize
+\begin{columns}[T]
 \column{0.48\textwidth}
-\textbf{Generator Learning:}
+\textbf{Generator:}
 \begin{itemize}
-\item Maps noise $z$ to data $x$
-\item Learns data manifold
-\item Pushes fake samples toward real data
-\item Adversarial loss: $-\log D(G(z))$
+\item Maps $z$ to $x$
+\item Loss: $-\log D(G(z))$
 \end{itemize}
 
+\textbf{Minimax objective:}
+$$\min_G \max_D V(D,G)$$
+
 \column{0.48\textwidth}
-\textbf{Discriminator Learning:}
+\textbf{Discriminator:}
 \begin{itemize}
-\item Learns decision boundary
-\item Separates real from fake
-\item Provides gradient signal
-\item Binary loss: $-\log D(x) - \log(1-D(G(z)))$
+\item Separates real/fake
+\item Loss: $-\log D(x) - \log(1-D(G))$
 \end{itemize}
 \end{columns}
 
 \vspace{\fill}
-\small \textcolor{gray}{
-Nash equilibrium: Generator distribution = Real data distribution, Discriminator accuracy = 50\%
+\footnotesize \textcolor{gray}{
+Nash equilibrium occurs when $p_g = p_{data}$ and discriminator accuracy equals 50\% - adversarial objective mathematically guarantees convergence under ideal conditions
 }
 \end{frame}
 
@@ -205,72 +181,78 @@ Nash equilibrium: Generator distribution = Real data distribution, Discriminator
 \framesubtitle{Real Loss Values from MNIST Training}
 
 \begin{center}
-\includegraphics[width=0.9\textwidth]{charts/gan_training_walkthrough.pdf}
+\includegraphics[width=0.5\textwidth]{charts/gan_training_walkthrough.pdf}
 \end{center}
 
-\vspace{0.3cm}
-
-\begin{columns}[c]
+\footnotesize
+\begin{columns}[T]
 \column{0.48\textwidth}
-\textbf{Epoch 1 (Early Training):}
+\textbf{Epoch 1:}
 \begin{itemize}
-\item D\_loss: 1.386 (random guessing)
-\item G\_loss: 0.693 (can't fool D)
-\item D\_accuracy: 50.2\%
-\item Generated images: pure noise
+\item D: 1.386, G: 0.693
+\item Images: noise
 \end{itemize}
 
 \column{0.48\textwidth}
-\textbf{Epoch 100 (Converged):}
+\textbf{Epoch 100:}
 \begin{itemize}
-\item D\_loss: 0.695 (balanced)
-\item G\_loss: 0.698 (balanced)
-\item D\_accuracy: 51.3\%
-\item Generated images: realistic digits
+\item D: 0.695, G: 0.698
+\item Images: realistic
 \end{itemize}
 \end{columns}
 
-\vspace{0.3cm}
-\textbf{Training Dynamics:} D\_loss + G\_loss $\approx$ 1.4 indicates healthy competition
+\textbf{Healthy:} Total $\approx$ 1.4
+
+\textbf{Interpretation:}
+\begin{itemize}
+\item D loss $\approx$ 0.7 = balanced (both fooling each other)
+\item Unhealthy: D$\to$0 (G wins), D$\to$1.4 (D wins) = failure
+\end{itemize}
 
 \vspace{\fill}
-\small \textcolor{gray}{
-Sweet spot: Both networks are equally strong, neither dominates
+\footnotesize \textcolor{gray}{
+Training dynamics reveal health - balanced losses near 0.69 indicate Nash equilibrium, divergence signals mode collapse or vanishing gradients requiring intervention
 }
 \end{frame}
 
 % Slide 18: Diffusion forward/reverse process
 \begin{frame}
 \frametitle{Diffusion Mathematical Framework}
-\framesubtitle{Forward and Reverse Processes}
+\framesubtitle{Forward and Reverse Processes (Ho et al. 2020 - DDPM)}
 
 \begin{center}
-\includegraphics[width=0.9\textwidth]{charts/diffusion_mathematics.pdf}
+\includegraphics[width=0.5\textwidth]{charts/diffusion_mathematics.pdf}
 \end{center}
 
-\vspace{0.3cm}
-
-\begin{columns}[c]
+\footnotesize
+\begin{columns}[T]
 \column{0.48\textwidth}
-\textbf{Forward Process (Fixed):}
-\begin{align}
-q(x_t|x_{t-1}) &= \mathcal{N}(x_t; \sqrt{1-\beta_t}x_{t-1}, \beta_t I) \\
-x_t &= \sqrt{1-\beta_t}x_{t-1} + \sqrt{\beta_t}\epsilon
-\end{align}
-$\beta_t$: noise schedule (0.0001 → 0.02)
+\textbf{Forward:}
+$$q(x_t|x_{t-1}) = \mathcal{N}(\sqrt{1-\beta_t}x_{t-1}, \beta_t I)$$
+
+\textbf{Noise Schedule:}
+\begin{itemize}
+\item $\beta_t$ controls noise schedule
+\item Linear: 0.0001 -> 0.02
+\item Cosine: Variable rate
+\item Matters: Smooth degradation
+\end{itemize}
 
 \column{0.48\textwidth}
-\textbf{Reverse Process (Learned):}
-\begin{align}
-p_\theta(x_{t-1}|x_t) &= \mathcal{N}(x_{t-1}; \mu_\theta(x_t,t), \Sigma_\theta(x_t,t)) \\
-\mu_\theta(x_t,t) &= \frac{1}{\sqrt{\alpha_t}}(x_t - \frac{\beta_t}{\sqrt{1-\bar{\alpha}_t}}\epsilon_\theta(x_t,t))
-\end{align}
-Neural network $\epsilon_\theta$ predicts noise
+\textbf{Reverse:}
+$$p_\theta(x_{t-1}|x_t) = \mathcal{N}(\mu_\theta, \Sigma_\theta)$$
+
+\textbf{Training:}
+$$L = E[||\epsilon - \epsilon_\theta(x_t,t)||^2]$$
+
+\textbf{Denoising objective:} Predict noise $\epsilon$, not image $x_0$
+
+\textbf{Intuition:} Predict noise, subtract it
 \end{columns}
 
 \vspace{\fill}
-\small \textcolor{gray}{
-Key insight: If you can predict the noise, you can reverse the corruption process
+\footnotesize \textcolor{gray}{
+Noise prediction objective enables stable training - predicting $\epsilon_\theta(x_t,t)$ instead of $x_0$ reduces variance, noise schedule controls diffusion speed (linear $\beta_t: 10^{-4} \to 2 \times 10^{-2}$ standard)
 }
 \end{frame}
 
@@ -280,19 +262,18 @@ Key insight: If you can predict the noise, you can reverse the corruption proces
 \framesubtitle{Smooth Transitions in Generated Content}
 
 \begin{center}
-\includegraphics[width=0.9\textwidth]{charts/latent_interpolation.pdf}
+\includegraphics[width=0.5\textwidth]{charts/latent_interpolation.pdf}
 \end{center}
 
-\vspace{0.3cm}
-
-\begin{columns}[c]
+\footnotesize
+\begin{columns}[T]
 \column{0.48\textwidth}
-\textbf{GAN Interpolation:}
+\textbf{Method:}
 \begin{itemize}
-\item Sample $z_1, z_2 \sim \mathcal{N}(0,I)$
-\item Linear interpolation: $z_t = (1-t)z_1 + tz_2$
+\item Sample $z_1, z_2$
+\item Interpolate: $z_t = (1-t)z_1 + tz_2$
 \item Generate: $x_t = G(z_t)$
-\item Result: smooth morphing
+\item Spherical interpolation: Better than linear for normalized spaces
 \end{itemize}
 
 \column{0.48\textwidth}
@@ -300,15 +281,14 @@ Key insight: If you can predict the noise, you can reverse the corruption proces
 \begin{itemize}
 \item Style transfer
 \item Face morphing
-\item Character animation
-\item Drug discovery (molecular interpolation)
-\item Creative AI tools
+\item Molecule generation (drug discovery latent optimization)
+\item Drug discovery
 \end{itemize}
 \end{columns}
 
 \vspace{\fill}
-\small \textcolor{gray}{
-Well-trained generative models create semantically meaningful latent spaces
+\footnotesize \textcolor{gray}{
+Continuous latent spaces enable semantic interpolation - walking along manifold generates smooth transitions revealing learned structure organization and enabling controlled generation
 }
 \end{frame}
 
@@ -318,35 +298,32 @@ Well-trained generative models create semantically meaningful latent spaces
 \framesubtitle{From Noise to Image in 1000 Steps}
 
 \begin{center}
-\includegraphics[width=0.9\textwidth]{charts/denoising_steps.pdf}
+\includegraphics[width=0.5\textwidth]{charts/denoising_steps.pdf}
 \end{center}
 
-\vspace{0.3cm}
-
-\begin{columns}[c]
+\footnotesize
+\begin{columns}[T]
 \column{0.48\textwidth}
-\textbf{Key Time Steps:}
+\textbf{Steps:}
 \begin{itemize}
-\item T=1000: Pure noise
-\item T=750: Rough shapes emerge
-\item T=500: Clear structure
-\item T=250: Fine details
-\item T=0: High-quality image
+\item T=1000: Noise
+\item T=500: Structure
+\item T=0: High quality
+\item Controllable: Stop early for variations
+\item DDIM (Song et al. 2020): 50 steps, 20x speedup
 \end{itemize}
 
 \column{0.48\textwidth}
-\textbf{Process Control:}
+\textbf{Control:}
 \begin{itemize}
-\item Guidance scale: creativity vs adherence
-\item Step count: quality vs speed
-\item Noise schedule: $\beta_t$ profile
-\item Classifier guidance: conditional generation
+\item Guidance scale
+\item Step count
 \end{itemize}
 \end{columns}
 
 \vspace{\fill}
-\small \textcolor{gray}{
-Each step removes a small amount of noise, gradually revealing the final image
+\footnotesize \textcolor{gray}{
+Progressive denoising reveals hierarchical generation - coarse structure emerges early (T=1000->500), fine details refine late (T=500->0), enabling quality-speed trade-offs
 }
 \end{frame}
 
@@ -356,74 +333,85 @@ Each step removes a small amount of noise, gradually revealing the final image
 \framesubtitle{The Mathematical Guarantee}
 
 \begin{center}
-\includegraphics[width=0.9\textwidth]{charts/adversarial_theory.pdf}
+\includegraphics[width=0.5\textwidth]{charts/adversarial_theory.pdf}
 \end{center}
 
-\vspace{0.3cm}
-
-\begin{columns}[c]
+\footnotesize
+\begin{columns}[T]
 \column{0.48\textwidth}
-\textbf{Theoretical Foundation:}
+\textbf{Theory:}
 \begin{itemize}
-\item Minimax objective ensures convergence
-\item Optimal discriminator: $D^*(x) = \frac{p_{data}(x)}{p_{data}(x) + p_g(x)}$
-\item At equilibrium: $p_g = p_{data}$
-\item Jensen-Shannon divergence minimized
+\item Minimax convergence
+\item Equilibrium: $p_g = p_{data}$
+\item JS Divergence: Original GAN minimizes JS($p_{data} || p_g$)
+\item Wasserstein: Modern GANs use Earth Mover distance (more stable)
 \end{itemize}
 
 \column{0.48\textwidth}
-\textbf{Practical Benefits:}
+\textbf{Benefits:}
 \begin{itemize}
-\item Sharp, realistic images
-\item No blurring effect
-\item Captures fine details
-\item Mode coverage (with proper training)
-\item Implicit density modeling
+\item Sharp, realistic
+\item Fine details
+\item No averaging
 \end{itemize}
 \end{columns}
 
 \vspace{\fill}
-\small \textcolor{gray}{
-Adversarial pressure prevents the averaging problem that plagues other approaches
+\footnotesize \textcolor{gray}{
+Adversarial objective minimizes distributional divergence - discriminator estimates density ratio enabling generator gradient toward real data manifold, avoiding MSE's averaging through adversarial pressure
 }
 \end{frame}
 
 % Slide 22: Experimental validation: Image quality metrics over time
 \begin{frame}
 \frametitle{Experimental Validation}
-\framesubtitle{Quality Metrics Throughout Training}
+\framesubtitle{Quality Metrics vs Training Progress}
 
 \begin{center}
-\includegraphics[width=0.9\textwidth]{charts/quality_metrics_over_time.pdf}
+\includegraphics[width=0.5\textwidth]{charts/quality_metrics_over_time.pdf}
 \end{center}
 
-\vspace{0.3cm}
-
-\begin{columns}[c]
+\vspace{-0.3cm}
+\footnotesize
+\begin{columns}[T]
 \column{0.48\textwidth}
-\textbf{GAN Training Progress:}
+\textbf{Results (MNIST):}
+\scriptsize
+\begin{tabular}{lccc}
+\toprule
+\textbf{Method} & \textbf{IS} & \textbf{FID} & \textbf{Time} \\
+\midrule
+Random & 1.0 & 500 & - \\
+VAE & 5.2 & 48 & 30min \\
+GAN & 9.1 & 9 & 2hr \\
+Diffusion & 9.3 & 3 & 8hr \\
+Real & 9.7 & 0 & - \\
+\bottomrule
+\end{tabular}
+
+\column{0.48\textwidth}
+\textbf{Observations:}
 \begin{itemize}
-\item Epoch 0: IS=1.2, FID=450
-\item Epoch 25: IS=2.8, FID=180
-\item Epoch 50: IS=7.2, FID=45
-\item Epoch 100: IS=8.9, FID=12.3
-\item Convergence: IS=9.1, FID=8.7
+\item Diffusion: Best
+\item GAN: 4x faster
+\item VAE: Fast, blurry
 \end{itemize}
 
-\column{0.48\textwidth}
-\textbf{Diffusion Model Progress:}
+\textbf{Patterns:}
 \begin{itemize}
-\item Step 0: Pure noise
-\item Step 100k: Basic shapes (FID=200)
-\item Step 500k: Clear structure (FID=50)
-\item Step 1M: Fine details (FID=15)
-\item Final: Photorealistic (FID=3.2)
+\item VAE: Monotonic
+\item GAN: Oscillates
+\end{itemize}
+
+\textbf{Human baseline:}
+\begin{itemize}
+\item IS=9.8, FID=0.5 (perceptual comparison)
 \end{itemize}
 \end{columns}
 
 \vspace{\fill}
-\small \textcolor{gray}{
-Both approaches show dramatic improvement, but diffusion models achieve superior final quality
+\footnotesize \textcolor{gray}{
+Empirical validation confirms theoretical predictions - diffusion achieves best quality (FID=3), GAN balances quality-speed (FID=9, 4x faster), VAE trades quality for stability and speed
 }
 \end{frame}
 
@@ -433,47 +421,36 @@ Both approaches show dramatic improvement, but diffusion models achieve superior
 \framesubtitle{Production-Ready Generative AI}
 
 \begin{center}
-\includegraphics[width=0.9\textwidth]{charts/stable_diffusion_api.pdf}
+\includegraphics[width=0.45\textwidth]{charts/stable_diffusion_api.pdf}
 \end{center}
 
-\vspace{0.3cm}
-
-\begin{columns}[c]
+\footnotesize
+\begin{columns}[T]
 \column{0.48\textwidth}
-\small
-\textbf{Basic Usage:}
+\textbf{Usage:}
 \begin{verbatim}
-import requests
-
-url = "https://api.stability.ai/v1/generation/stable-diffusion-xl-1024-v1-0/text-to-image"
-
-response = requests.post(url,
-    headers={"Authorization": f"Bearer {api_key}"},
+response = requests.post(
+    api_url,
+    headers={"Auth": key},
     json={
-        "text_prompts": [{"text": "A futuristic city"}],
+        "text_prompts": [{"text": "city"}],
         "cfg_scale": 7,
-        "steps": 30,
-        "width": 1024,
-        "height": 1024
+        "steps": 30
     })
 \end{verbatim}
 
 \column{0.48\textwidth}
-\textbf{Advanced Parameters:}
+\textbf{Parameters:}
 \begin{itemize}
-\item \texttt{cfg\_scale}: Prompt adherence (1-20)
-\item \texttt{steps}: Quality vs speed (10-150)
-\item \texttt{seed}: Reproducible results
-\item \texttt{style\_preset}: Artistic styles
-\item \texttt{negative\_prompt}: Avoid unwanted elements
+\item cfg scale: 1-20 (balance prompt adherence vs diversity)
+\item steps: 10-150 (quality-speed trade-off: 10=fast/rough, 150=slow/perfect)
 \end{itemize}
 
-\vspace{0.3cm}
-\textbf{Cost:} \$0.004 per image (1024x1024)
+\textbf{Cost:} \$0.004/image
 \end{columns}
 
 \vspace{\fill}
-\small \textcolor{gray}{
-Production diffusion models available via API: DALL-E 3, Midjourney, Stable Diffusion
+\footnotesize \textcolor{gray}{
+Production APIs abstract complexity - configuration parameters control guidance strength and quality-speed tradeoffs, enabling accessible deployment without deep technical expertise
 }
 \end{frame}

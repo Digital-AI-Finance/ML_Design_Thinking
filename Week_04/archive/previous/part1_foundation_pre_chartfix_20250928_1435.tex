@@ -1,0 +1,429 @@
+% Part 1: Foundation - Problem & Context (10 slides)
+\section{Foundation: The Definition Challenge}
+
+% Slide 1: Opening Power Chart
+\begin{frame}[plain]
+\centering
+\includegraphics[width=0.95\textwidth]{charts/innovation_success_dashboard.pdf}
+\end{frame}
+
+% Slide 2: The Definition Challenge
+\begin{frame}{The Definition Challenge}
+\Large\textbf{Why Classification Matters in Innovation}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\textbf{Human Intuition}
+\begin{itemize}
+\item ``I know success when I see it''
+\item Based on experience
+\item Subjective criteria
+\item Limited by bias
+\item Inconsistent across evaluators
+\end{itemize}
+\end{column}
+\begin{column}{0.48\textwidth}
+\textbf{Machine Classification}
+\begin{itemize}
+\item Data-driven definitions
+\item Objective metrics
+\item Consistent criteria
+\item Learns from patterns
+\item Scalable evaluation
+\end{itemize}
+\end{column}
+\end{columns}
+
+\vspace{1em}
+\begin{tcolorbox}[colback=mlblue!10,colframe=mlblue]
+\centering
+Classification transforms subjective judgments into objective, repeatable decisions
+\end{tcolorbox}
+\end{frame}
+
+% Slide 3: From Intuition to Data
+\begin{frame}{From Intuition to Data-Driven Decisions}
+\Large\textbf{The Evolution of Innovation Assessment}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{tikzpicture}[scale=0.9, transform shape]
+% Timeline
+\draw[thick,->] (0,0) -- (12,0);
+\foreach \x/\year/\label in {0/Past/Gut Feel, 4/Present/Metrics, 8/Today/ML Models, 12/Future/AI Prediction} {
+    \draw (\x,0) -- (\x,-0.1) node[below] {\small \year};
+    \draw (\x,0.5) node[above,text width=2.5cm,align=center] {\small \label};
+}
+
+% Boxes above timeline
+\node[draw,fill=mlred!20,rounded corners] at (0,1.5) {Experience-Based};
+\node[draw,fill=mlorange!20,rounded corners] at (4,1.5) {KPI-Driven};
+\node[draw,fill=mlgreen!20,rounded corners] at (8,1.5) {Pattern Recognition};
+\node[draw,fill=mlblue!20,rounded corners] at (12,1.5) {Predictive Analytics};
+
+% Accuracy percentages
+\node at (0,2.5) {\accuracy{45}};
+\node at (4,2.5) {\accuracy{65}};
+\node at (8,2.5) {\accuracy{82}};
+\node at (12,2.5) {\accuracy{94}};
+\end{tikzpicture}
+
+\vspace{1em}
+\begin{columns}[T]
+\begin{column}{0.32\textwidth}
+\small
+\textbf{Traditional}: Individual expertise, limited scale
+\end{column}
+\begin{column}{0.32\textwidth}
+\small
+\textbf{Analytics}: Dashboards, retrospective analysis
+\end{column}
+\begin{column}{0.32\textwidth}
+\small
+\textbf{ML-Powered}: Real-time, predictive, adaptive
+\end{column}
+\end{columns}
+\end{frame}
+
+% Slide 4: Success Patterns in Innovation
+\begin{frame}{Success Patterns in Innovation}
+\Large\textbf{What Makes Innovation Succeed?}
+\normalsize
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\includegraphics[width=\textwidth]{charts/feature_space_visualization.pdf}
+
+\small
+Different features reveal different patterns
+\end{column}
+\begin{column}{0.48\textwidth}
+\textbf{Key Success Factors}
+\begin{itemize}
+\item \textcolor{mlblue}{Novelty Score}: How unique?
+\item \textcolor{mlgreen}{Market Size}: How big is opportunity?
+\item \textcolor{mlorange}{Team Experience}: Who's building?
+\item \textcolor{mlred}{Development Time}: How fast?
+\item \textcolor{mlpurple}{User Testing}: How validated?
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{The Classification Question:}
+\begin{tcolorbox}[colback=mlyellow!20,colframe=mlorange]
+Can we predict success from early indicators?
+\end{tcolorbox}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Slide 5: Binary vs Multi-Class Perspective
+\begin{frame}{Binary vs Multi-Class Perspectives}
+\Large\textbf{Different Lenses for Success}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\textbf{Binary Classification}
+\begin{center}
+\begin{tikzpicture}[scale=0.8]
+\draw[fill=mlred!30] (0,0) circle (1.5cm);
+\draw[fill=mlgreen!30] (3,0) circle (1.5cm);
+\node at (0,0) {\textbf{Fail}};
+\node at (3,0) {\textbf{Success}};
+\node at (0,-2) {40\%};
+\node at (3,-2) {60\%};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Simple Decision:}
+\begin{itemize}
+\item Launch or not?
+\item Invest or pass?
+\item Continue or pivot?
+\end{itemize}
+\end{column}
+\begin{column}{0.48\textwidth}
+\textbf{Multi-Class Classification}
+\begin{center}
+\begin{tikzpicture}[scale=0.8]
+\draw[fill=mlred!30] (0,0) -- (1,0) -- (1,1) -- (0,1) -- cycle;
+\draw[fill=mlorange!30] (1,0) -- (2,0) -- (2,1) -- (1,1) -- cycle;
+\draw[fill=mlblue!30] (0,1) -- (1,1) -- (1,2) -- (0,2) -- cycle;
+\draw[fill=mlgreen!30] (1,1) -- (2,1) -- (2,2) -- (1,2) -- cycle;
+\node at (0.5,0.5) {\small Failed};
+\node at (1.5,0.5) {\small Struggling};
+\node at (0.5,1.5) {\small Growing};
+\node at (1.5,1.5) {\small Breakthrough};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Nuanced Understanding:}
+\begin{itemize}
+\item Resource allocation
+\item Support intensity
+\item Risk assessment
+\end{itemize}
+\end{column}
+\end{columns}
+
+\vspace{0.5em}
+\begin{center}
+\textit{Same data, different questions → different insights}
+\end{center}
+\end{frame}
+
+% Slide 6: The Innovation Dataset
+\begin{frame}{The Innovation Dataset}
+\Large\textbf{9,500 Real Innovation Products}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\begin{column}{0.55\textwidth}
+\includegraphics[width=\textwidth]{charts/innovation_dataset_overview.pdf}
+\end{column}
+\begin{column}{0.43\textwidth}
+\textbf{Dataset Characteristics:}
+\begin{itemize}
+\item \textbf{Products}: 9,500 innovations
+\item \textbf{Features}: 27 dimensions
+\item \textbf{Timespan}: 2015-2023
+\item \textbf{Segments}: 6 categories
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Feature Categories:}
+\begin{enumerate}
+\small
+\item Innovation metrics
+\item Market factors
+\item Team attributes
+\item Development process
+\item Financial indicators
+\end{enumerate}
+
+\vspace{0.5em}
+\textcolor{mlgray}{\small Note: Simulated for educational purposes}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Slide 7: Learning Objectives
+\begin{frame}{Learning Objectives}
+\Large\textbf{What You'll Master Today}
+\normalsize
+
+\vspace{1em}
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\textbf{Technical Skills}
+\begin{itemize}
+\item Build classification models
+\item Evaluate model performance
+\item Handle imbalanced data
+\item Tune hyperparameters
+\item Interpret predictions
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Algorithms Covered}
+\begin{itemize}
+\item Logistic Regression
+\item Decision Trees
+\item Random Forests
+\item Support Vector Machines
+\item Neural Networks
+\end{itemize}
+\end{column}
+\begin{column}{0.48\textwidth}
+\textbf{Design Applications}
+\begin{itemize}
+\item Product success prediction
+\item User segment classification
+\item Risk assessment tools
+\item A/B test evaluation
+\item Portfolio optimization
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Key Metrics}
+\begin{itemize}
+\item Accuracy \& Precision
+\item Recall \& F1-Score
+\item ROC-AUC
+\item Confusion Matrices
+\item Learning Curves
+\end{itemize}
+\end{column}
+\end{columns}
+
+\vspace{1em}
+\begin{tcolorbox}[colback=mlgreen!10,colframe=mlgreen]
+\centering
+By session end: Build a complete innovation success predictor
+\end{tcolorbox}
+\end{frame}
+
+% Slide 8: Real-World Impact
+\begin{frame}{Real-World Impact}
+\Large\textbf{Where Classification Drives Innovation}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\begin{column}{0.32\textwidth}
+\textbf{Startup Funding}
+\begin{center}
+\includegraphics[width=0.8\textwidth]{charts/precision_recall_curves.pdf}
+\end{center}
+\small
+VCs use ML to predict unicorns from pitch decks
+\end{column}
+\begin{column}{0.32\textwidth}
+\textbf{Product Launch}
+\begin{itemize}
+\small
+\item Feature prioritization
+\item Market timing
+\item Resource allocation
+\item Risk mitigation
+\end{itemize}
+\vspace{0.5em}
+\accuracy{85} prediction accuracy
+\end{column}
+\begin{column}{0.32\textwidth}
+\textbf{User Experience}
+\begin{itemize}
+\small
+\item Personalization
+\item Churn prediction
+\item Satisfaction scoring
+\item Behavior clustering
+\end{itemize}
+\vspace{0.5em}
+3x improvement in retention
+\end{column}
+\end{columns}
+
+\vspace{1em}
+\begin{center}
+\begin{tikzpicture}
+\node[draw,fill=challenge!20,rounded corners,text width=10cm,align=center] {
+\textbf{Classification in Practice:} Amazon uses 100+ classifiers for product recommendations,
+Netflix for content suggestions, Spotify for music discovery
+};
+\end{tikzpicture}
+\end{center}
+\end{frame}
+
+% Slide 9: The Innovation Diamond Connection
+\begin{frame}{Connecting to the Innovation Diamond}
+\Large\textbf{Classification in the Innovation Journey}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.8, transform shape]
+% Diamond shape
+\coordinate (top) at (0,3);
+\coordinate (left) at (-3,0);
+\coordinate (right) at (3,0);
+\coordinate (bottom) at (0,-3);
+
+% Draw diamond
+\draw[thick,fill=challenge!10] (top) -- (left) -- (bottom) -- (right) -- cycle;
+
+% Labels at vertices
+\node[above] at (top) {\textbf{5000 Ideas}};
+\node[left] at (left) {\textbf{Diverge}};
+\node[right] at (right) {\textbf{Converge}};
+\node[below] at (bottom) {\textbf{5 Strategies}};
+
+% Classification points
+\node[draw,circle,fill=mlred!50] at (-1.5,1.5) {1};
+\node[draw,circle,fill=mlorange!50] at (0,1) {2};
+\node[draw,circle,fill=mlgreen!50] at (1.5,1.5) {3};
+\node[draw,circle,fill=mlblue!50] at (0,-1) {4};
+
+% Legend
+\node[right,text width=4cm] at (4,2) {
+\small
+\textcolor{mlred}{\textbf{1. Initial Filter:}} Binary classification of viable ideas
+};
+\node[right,text width=4cm] at (4,0.5) {
+\small
+\textcolor{mlorange}{\textbf{2. Category Sort:}} Multi-class by innovation type
+};
+\node[right,text width=4cm] at (4,-1) {
+\small
+\textcolor{mlgreen}{\textbf{3. Quality Score:}} Probability of success
+};
+\node[right,text width=4cm] at (4,-2.5) {
+\small
+\textcolor{mlblue}{\textbf{4. Final Selection:}} Top 5 predictions
+};
+\end{tikzpicture}
+\end{center}
+\end{frame}
+
+% Slide 10: Section Summary
+\begin{frame}{Foundation Summary}
+\Large\textbf{Key Takeaways}
+\normalsize
+
+\vspace{1em}
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\textbf{The Problem}
+\begin{itemize}
+\item Innovation success is hard to predict
+\item Human judgment is biased
+\item Scale requires automation
+\item Patterns exist in data
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{The Opportunity}
+\begin{itemize}
+\item Learn from historical data
+\item Identify success patterns
+\item Make consistent decisions
+\item Scale evaluation process
+\end{itemize}
+\end{column}
+\begin{column}{0.48\textwidth}
+\textbf{The Approach}
+\begin{itemize}
+\item Classification algorithms
+\item Multiple perspectives (binary/multi)
+\item Rigorous evaluation
+\item Interpretable results
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Next: Technical Deep Dive}
+\begin{tcolorbox}[colback=mlblue!10,colframe=mlblue]
+How do classification algorithms actually work?
+\end{tcolorbox}
+\end{column}
+\end{columns}
+
+\vspace{1em}
+\begin{center}
+\Large
+\textit{``Prediction is difficult, especially about the future''} \\
+\normalsize
+- But ML makes it systematically better
+\end{center}
+\end{frame}

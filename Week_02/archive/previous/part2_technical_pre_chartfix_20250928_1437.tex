@@ -1,0 +1,337 @@
+% Part 2: Technical Deep Dive
+\section{Technical Deep Dive: Clustering Algorithms}
+
+% Section divider
+\begin{frame}[plain]
+\vfill
+\centering
+\begin{beamercolorbox}[sep=16pt,center]{title}
+\usebeamerfont{title}\Large Part 2: Technical Deep Dive\par
+\vspace{0.5em}
+\large Mastering Clustering Algorithms\par
+\end{beamercolorbox}
+\vfill
+\end{frame}
+
+% K-means Algorithm Overview
+\begin{frame}{K-Means Algorithm: The Workhorse of Clustering}
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\Large\textbf{How K-Means Works}
+\normalsize
+\vspace{0.5em}
+\begin{enumerate}
+\item \textbf{Initialize:} Random K centroids
+\item \textbf{Assign:} Points to nearest centroid
+\item \textbf{Update:} Centroids to cluster mean
+\item \textbf{Repeat:} Until convergence
+\end{enumerate}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mlblue!10, colframe=mlblue!50]
+\centering\textbf{Key Concept}\\
+Minimize within-cluster sum of squares (WCSS)
+\end{tcolorbox}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\begin{tikzpicture}[scale=0.7, transform shape]
+\tikzstyle{point} = [circle, minimum width=0.3cm, fill=mlblue!30, draw=mlblue]
+\tikzstyle{centroid} = [star, star points=5, minimum width=0.5cm, fill=mlorange, draw=black, thick]
+\tikzstyle{arrow} = [thick,->,>=stealth]
+
+% Draw points and centroids
+\node[point] (p1) at (0,0) {};
+\node[point] (p2) at (1,0.5) {};
+\node[point] (p3) at (0.5,1) {};
+\node[centroid] (c1) at (0.5,0.5) {};
+
+\node[point] (p4) at (3,0) {};
+\node[point] (p5) at (4,0.5) {};
+\node[point] (p6) at (3.5,1) {};
+\node[centroid] (c2) at (3.5,0.5) {};
+
+% Draw assignments
+\draw[arrow, mlblue] (p1) -- (c1);
+\draw[arrow, mlblue] (p2) -- (c1);
+\draw[arrow, mlblue] (p3) -- (c1);
+\draw[arrow, mlgreen] (p4) -- (c2);
+\draw[arrow, mlgreen] (p5) -- (c2);
+\draw[arrow, mlgreen] (p6) -- (c2);
+
+% Labels
+\node at (2,-1) {\textbf{Cluster Assignment}};
+\end{tikzpicture}
+\end{column}
+\end{columns}
+
+\vspace{0.5em}
+\begin{center}
+\textbf{Complexity:} O(n × k × i × d) where n=points, k=clusters, i=iterations, d=dimensions
+\end{center}
+\end{frame}
+
+% Distance Metrics
+\begin{frame}{Distance Metrics: Measuring Similarity}
+\begin{columns}[T]
+\begin{column}{0.3\textwidth}
+\centering
+\textbf{Euclidean}\\
+\vspace{0.3em}
+$d = \sqrt{\sum_{i=1}^{n}(x_i - y_i)^2}$\\
+\vspace{0.5em}
+\includegraphics[width=0.8\textwidth]{charts/clustering_comparison.pdf}\\
+\small Most common\\
+Spherical clusters
+\end{column}
+
+\begin{column}{0.3\textwidth}
+\centering
+\textbf{Manhattan}\\
+\vspace{0.3em}
+$d = \sum_{i=1}^{n}|x_i - y_i|$\\
+\vspace{0.5em}
+\includegraphics[width=0.8\textwidth]{charts/clustering_comparison.pdf}\\
+\small Grid-like data\\
+City block distance
+\end{column}
+
+\begin{column}{0.3\textwidth}
+\centering
+\textbf{Cosine}\\
+\vspace{0.3em}
+$sim = \frac{x \cdot y}{||x|| \times ||y||}$\\
+\vspace{0.5em}
+\includegraphics[width=0.8\textwidth]{charts/clustering_comparison.pdf}\\
+\small Text data\\
+Orientation matters
+\end{column}
+\end{columns}
+
+\vspace{1em}
+\begin{tcolorbox}[colback=mlyellow!20, colframe=mlorange!50]
+\centering
+\textbf{Pro Tip:} Choose distance metric based on your data characteristics!
+\end{tcolorbox}
+\end{frame}
+
+% Determining Optimal K
+\begin{frame}{Finding the Sweet Spot: Optimal Number of Clusters}
+\centering
+\includegraphics[width=0.9\textwidth]{charts/elbow_silhouette_analysis.pdf}
+\vspace{0.5em}
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\centering
+\textcolor{mlblue}{\textbf{Elbow Method}}\\
+\small Look for the ``elbow'' in the curve\\
+Diminishing returns after K=5
+\end{column}
+\begin{column}{0.48\textwidth}
+\centering
+\textcolor{mlgreen}{\textbf{Silhouette Analysis}}\\
+\small Maximum score indicates best K\\
+Measures cluster cohesion \& separation
+\end{column}
+\end{columns}
+\end{frame}
+
+% Silhouette Deep Dive
+\begin{frame}{Silhouette Analysis: Detailed View}
+\centering
+\includegraphics[width=0.85\textwidth]{charts/silhouette_detailed.pdf}
+\vspace{0.5em}
+\Large\textcolor{mlpurple}{\textbf{K=5 shows optimal cluster separation}}\\
+\normalsize
+\textbf{Interpretation:} Width = cluster size, Height = silhouette coefficient
+\end{frame}
+
+% Implementation in Python
+\begin{frame}[fragile]{Implementation: K-Means in Python}
+\begin{lstlisting}
+import numpy as np
+from sklearn.cluster import KMeans
+import matplotlib.pyplot as plt
+
+# Load and prepare data
+X = load_user_behavior_data()  # Your user data
+X_scaled = StandardScaler().fit_transform(X)
+
+# Find optimal K using elbow method
+inertias = []
+for k in range(2, 11):
+    kmeans = KMeans(n_clusters=k, random_state=42)
+    kmeans.fit(X_scaled)
+    inertias.append(kmeans.inertia_)
+
+# Apply K-means with optimal K
+optimal_k = 5
+kmeans = KMeans(n_clusters=optimal_k, random_state=42)
+user_segments = kmeans.fit_predict(X_scaled)
+
+# Analyze segments
+for i in range(optimal_k):
+    segment_users = X[user_segments == i]
+    print(f"Segment {i}: {len(segment_users)} users")
+    print(f"  Avg engagement: {segment_users[:, 0].mean():.2f}")
+\end{lstlisting}
+\end{frame}
+
+% Advanced Algorithms Comparison
+\begin{frame}{Beyond K-Means: Advanced Clustering Methods}
+\centering
+\includegraphics[width=0.95\textwidth]{charts/clustering_algorithm_comparison.pdf}
+\vspace{0.3em}
+\small
+\textbf{Key Insight:} Different algorithms excel at different data patterns
+\end{frame}
+
+% DBSCAN Deep Dive
+\begin{frame}{DBSCAN: Density-Based Clustering}
+\centering
+\includegraphics[width=0.9\textwidth]{charts/dbscan_detailed.pdf}
+\vspace{0.3em}
+\begin{columns}[T]
+\begin{column}{0.3\textwidth}
+\centering
+\textbf{Core Points}\\
+\small Dense regions\\
+\textcolor{mlblue}{Large circles}
+\end{column}
+\begin{column}{0.3\textwidth}
+\centering
+\textbf{Border Points}\\
+\small Edge of clusters\\
+\textcolor{mlorange}{Small circles}
+\end{column}
+\begin{column}{0.3\textwidth}
+\centering
+\textbf{Noise Points}\\
+\small Outliers\\
+\textcolor{mlred}{X markers}
+\end{column}
+\end{columns}
+
+\vspace{0.5em}
+\textbf{Parameters:} eps (radius) and min\_samples (density threshold)
+\end{frame}
+
+% Hierarchical Clustering
+\begin{frame}{Hierarchical Clustering: Building a Dendrogram}
+\centering
+\includegraphics[width=0.85\textwidth]{charts/hierarchical_detailed.pdf}
+\vspace{0.3em}
+\Large\textbf{Bottom-up approach reveals natural hierarchy}\\
+\normalsize
+\textcolor{mlred}{Red line} = cut for desired number of clusters
+\end{frame}
+
+% Gaussian Mixture Models
+\begin{frame}{Gaussian Mixture Models: Probabilistic Clustering}
+\centering
+\includegraphics[width=0.9\textwidth]{charts/gmm_detailed.pdf}
+\vspace{0.3em}
+\textbf{Soft clustering:} Points belong to multiple clusters with probabilities\\
+\small Ellipses show cluster shapes and orientations
+\end{frame}
+
+% Algorithm Selection Guide
+\begin{frame}{Choosing the Right Algorithm: Decision Framework}
+\centering
+\includegraphics[width=0.85\textwidth]{charts/clustering_selection_guide.pdf}
+\vspace{0.5em}
+\Large\textcolor{mlpurple}{\textbf{Match algorithm to your data characteristics}}
+\end{frame}
+
+% Performance Considerations
+\begin{frame}{Performance \& Scalability Considerations}
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\Large\textbf{Computational Complexity}
+\normalsize
+\vspace{0.5em}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Algorithm} & \textbf{Time} & \textbf{Space} \\
+\midrule
+K-Means & O(nki) & O(n) \\
+DBSCAN & O(n log n) & O(n) \\
+Hierarchical & O(n²) & O(n²) \\
+GMM & O(nk²) & O(nk) \\
+\bottomrule
+\end{tabular}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mlblue!10, colframe=mlblue!50]
+\textbf{For large datasets:}\\
+Use K-Means or Mini-batch K-Means
+\end{tcolorbox}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\Large\textbf{Practical Guidelines}
+\normalsize
+\vspace{0.5em}
+\begin{itemize}
+\item \textbf{< 10K points:} Any algorithm works
+\item \textbf{10K - 100K:} K-Means, DBSCAN
+\item \textbf{100K - 1M:} Mini-batch K-Means
+\item \textbf{> 1M:} Sampling + K-Means
+\end{itemize}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mlgreen!10, colframe=mlgreen!50]
+\textbf{Speed tips:}\\
+• Use PCA for dimensionality reduction\\
+• Sample first, then apply to full data
+\end{tcolorbox}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Common Pitfalls
+\begin{frame}{Common Pitfalls \& How to Avoid Them}
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\Large\textcolor{mlred}{\textbf{Pitfalls}}
+\normalsize
+\begin{enumerate}
+\item \textbf{Not scaling features}\\
+\small Different units dominate distance
+\vspace{0.3em}
+\item \textbf{Ignoring outliers}\\
+\small Can skew centroids significantly
+\vspace{0.3em}
+\item \textbf{Wrong K selection}\\
+\small Over or under-segmentation
+\vspace{0.3em}
+\item \textbf{Assuming spherical clusters}\\
+\small K-Means limitation
+\vspace{0.3em}
+\item \textbf{Not validating stability}\\
+\small Results change with random seed
+\end{enumerate}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\Large\textcolor{mlgreen}{\textbf{Solutions}}
+\normalsize
+\begin{enumerate}
+\item \textbf{Always standardize}\\
+\small Use StandardScaler or MinMaxScaler
+\vspace{0.3em}
+\item \textbf{Detect \& handle outliers}\\
+\small Use DBSCAN or isolation forest
+\vspace{0.3em}
+\item \textbf{Multiple validation methods}\\
+\small Elbow + Silhouette + Domain knowledge
+\vspace{0.3em}
+\item \textbf{Try different algorithms}\\
+\small DBSCAN for arbitrary shapes
+\vspace{0.3em}
+\item \textbf{Run multiple times}\\
+\small Check consistency across seeds
+\end{enumerate}
+\end{column}
+\end{columns}
+\end{frame}

@@ -1,0 +1,882 @@
+% Part 2: Techniques - Experiment Design & Analysis
+\section{Techniques: Rigorous Experiment Design}
+
+% Slide 1: Hypothesis Formulation
+\begin{frame}{Hypothesis Formulation: The Starting Point}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Anatomy of a Good Hypothesis}}
+
+\small
+\textbf{SMART Framework:}
+\begin{itemize}
+\item \textbf{S}pecific: Clearly defined change
+\item \textbf{M}easurable: Quantifiable outcome
+\item \textbf{A}ctionable: You can implement it
+\item \textbf{R}elevant: Aligns with business goals
+\item \textbf{T}ime-bound: Experiment duration set
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{Good Example}}
+
+\small
+\textbf{Hypothesis:} Switching from content-based to collaborative filtering recommendations will increase click-through rate by at least 1 percentage point (from 5\% to 6\%) over a 2-week test period with 100,000 users.
+
+\vspace{0.2cm}
+\textbf{Why good:}
+\begin{itemize}
+\item Specific change (CF algorithm)
+\item Measurable outcome (CTR, 1 pp)
+\item Actionable (can deploy CF)
+\item Relevant (engagement goal)
+\item Time-bound (2 weeks, 100K users)
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{mlred}{\textbf{Bad Examples}}
+
+\small
+\textbf{Vague:} ``New algorithm will be better''
+\begin{itemize}
+\item Not specific (which algorithm?)
+\item Not measurable (better how?)
+\item Not time-bound
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Unmeasurable:} ``Users will like recommendations more''
+\begin{itemize}
+\item ``Like'' not quantified
+\item No success criterion
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Too ambitious:} ``Will 10$	imes$ revenue''
+\begin{itemize}
+\item Unrealistic expectation
+\item Sets up for disappointment
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlorange}{\textbf{Null vs Alternative Hypothesis}}
+
+\small
+\textbf{Null} (H$_0$): No difference between control and treatment\\
+$CTR_{treatment} = CTR_{control}$
+
+\vspace{0.2cm}
+\textbf{Alternative} (H$_1$): Treatment is better\\
+$CTR_{treatment} > CTR_{control}$ (one-tailed)\\
+$CTR_{treatment} \neq CTR_{control}$ (two-tailed)
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Pre-register hypothesis before experiment to avoid p-hacking}
+\end{frame}
+
+% Slide 2: Sample Size Calculation
+\begin{frame}{Sample Size Calculation: How Many Users?}
+\begin{columns}[T]
+\column{0.55\textwidth}
+\includegraphics[width=\textwidth]{charts/statistical_power_curves.pdf}
+
+\column{0.43\textwidth}
+\textcolor{mlblue}{\textbf{Key Parameters}}
+
+\small
+\textbf{1. Significance Level} ($\alpha$)
+\begin{itemize}
+\item Type I error rate (false positive)
+\item Standard: 0.05 (5\%)
+\item Probability of detecting difference when none exists
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{2. Statistical Power} (1 - $\beta$)
+\begin{itemize}
+\item Type II error rate (false negative)
+\item Standard: 0.80 (80\%)
+\item Probability of detecting true difference
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{3. Minimum Detectable Effect (MDE)}
+\begin{itemize}
+\item Smallest difference you care about
+\item Example: 5\% $
+
+\rightarrow$ 6\% CTR (1 pp absolute, 20\% relative)
+\item Smaller MDE needs larger sample
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{4. Baseline Metric}
+\begin{itemize}
+\item Current performance level
+\item Variance affects sample size
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Formula: $n = \frac{(z_{\alpha/2} + z_{\beta})^2 \cdot 2\sigma^2}{\delta^2}$ where $\delta$ = effect size}
+\end{frame}
+
+% Slide 3: Randomization Strategies
+\begin{frame}{Randomization Strategies: More Than Just Coin Flips}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Simple Randomization}}
+
+\small
+\textbf{Method:} Coin flip per user (50/50)
+
+\vspace{0.2cm}
+\textbf{Pros:}
+\begin{itemize}
+\item Easy to implement
+\item Unbiased in expectation
+\item Good for large samples
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Cons:}
+\begin{itemize}
+\item Group sizes may differ
+\item Imbalanced covariates possible
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{Stratified Randomization}}
+
+\small
+\textbf{Method:} Balance within strata (device, region)
+
+\vspace{0.2cm}
+\textbf{Example:}
+\begin{itemize}
+\item Split iOS users 50/50
+\item Split Android users 50/50
+\item Ensures device balance
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Benefits:}
+\begin{itemize}
+\item Reduces variance
+\item Controls confounders
+\item More statistical power
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{mlorange}{\textbf{Blocked Randomization}}
+
+\small
+\textbf{Method:} Randomize within fixed blocks
+
+\vspace{0.2cm}
+\textbf{Example:}
+\begin{itemize}
+\item Block 1: AABBA (2A, 2B)
+\item Block 2: BAABB (2A, 2B)
+\item Guarantees equal sizes
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Use case:} Sequential enrollment
+
+\vspace{0.3cm}
+\textcolor{mlpurple}{\textbf{Clustered Randomization}}
+
+\small
+\textbf{Method:} Randomize groups, not individuals
+
+\vspace{0.2cm}
+\textbf{Example:}
+\begin{itemize}
+\item User sessions (not individual actions)
+\item Geographic regions (not cities)
+\item Social networks (friends together)
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Why:}
+\begin{itemize}
+\item Prevent contamination
+\item Network effects
+\item Administrative ease
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Drawback:} Larger sample size needed
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Choice depends on experimental context and confounding structure}
+\end{frame}
+
+% Slide 4: A/B Testing Math
+\begin{frame}{A/B Testing Math: Statistical Tests}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Z-Test for Proportions}}
+
+\small
+\textbf{When:} Binary outcome (click/no click)
+
+\vspace{0.2cm}
+\textbf{Formula:}
+$$z = \frac{p_B - p_A}{\sqrt{p(1-p)(\frac{1}{n_A} + \frac{1}{n_B})}}$$
+
+where $p = \frac{n_A p_A + n_B p_B}{n_A + n_B}$ (pooled proportion)
+
+\vspace{0.2cm}
+\textbf{Example:}
+\begin{itemize}
+\item Control: 500/10,000 clicked (5\%)
+\item Treatment: 620/10,000 clicked (6.2\%)
+\item z = 4.72, p $<$ 0.001
+\item Conclusion: Significant improvement
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{T-Test for Means}}
+
+\small
+\textbf{When:} Continuous outcome (revenue, time)
+
+\vspace{0.2cm}
+\textbf{Formula:}
+$$t = \frac{\bar{x}_B - \bar{x}_A}{\sqrt{\frac{s_A^2}{n_A} + \frac{s_B^2}{n_B}}}$$
+
+\vspace{0.2cm}
+\textbf{Use Welch's t-test:} Unequal variances OK
+
+\column{0.48\textwidth}
+\textcolor{mlorange}{\textbf{Confidence Intervals}}
+
+\small
+\textbf{95\% CI for difference:}
+$$(\bar{x}_B - \bar{x}_A) \pm 1.96 \cdot SE$$
+
+\vspace{0.2cm}
+\textbf{Interpretation:}
+\begin{itemize}
+\item If CI excludes 0 $
+
+\rightarrow$ Significant
+\item CI shows practical range
+\item More informative than p-value alone
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Example:}
+\begin{itemize}
+\item Difference: 1.2 percentage points
+\item 95\% CI: [0.8, 1.6]
+\item Excludes 0 $
+
+\rightarrow$ Significant
+\item Likely between 0.8-1.6pp lift
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlpurple}{\textbf{Effect Size}}
+
+\small
+\textbf{Cohen's d:}
+$$d = \frac{\bar{x}_B - \bar{x}_A}{s_{pooled}}$$
+
+\vspace{0.2cm}
+\textbf{Interpretation:}
+\begin{itemize}
+\item 0.2: Small
+\item 0.5: Medium
+\item 0.8: Large
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Why it matters:} Statistical significance $\neq$ practical significance
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Always report effect size and CI, not just p-value}
+\end{frame}
+
+% Slide 5: Statistical Significance
+\begin{frame}{Statistical Significance: Interpreting P-Values}
+\begin{columns}[T]
+\column{0.55\textwidth}
+\includegraphics[width=\textwidth]{charts/type_i_ii_errors.pdf}
+
+\column{0.43\textwidth}
+\textcolor{mlblue}{\textbf{What is a P-Value?}}
+
+\small
+\textbf{Definition:} Probability of observing data this extreme if null hypothesis were true.
+
+\vspace{0.2cm}
+\textbf{NOT:}
+\begin{itemize}
+\item Probability null is true
+\item Probability you're wrong
+\item Size of effect
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Example:}
+\begin{itemize}
+\item p = 0.03
+\item If no real difference exists, 3\% chance of seeing this result by luck
+\item Since 3\% $<$ 5\%, reject null
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{Type I vs Type II Errors}}
+
+\small
+\textbf{Type I (False Positive):}
+\begin{itemize}
+\item Declare winner when none exists
+\item Rate: $\alpha$ (typically 5\%)
+\item ``Ship a loser''
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Type II (False Negative):}
+\begin{itemize}
+\item Miss real improvement
+\item Rate: $\beta$ (typically 20\%)
+\item ``Kill a winner''
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Trade-off: Lowering $\alpha$ increases $\beta$ (requires larger sample)}
+\end{frame}
+
+% Slide 6: Bayesian A/B Testing
+\begin{frame}{Bayesian A/B Testing: Probability of Being Best}
+\begin{columns}[T]
+\column{0.55\textwidth}
+\includegraphics[width=\textwidth]{charts/bayesian_ab_posterior.pdf}
+
+\column{0.43\textwidth}
+\textcolor{mlblue}{\textbf{Bayesian Approach}}
+
+\small
+\textbf{Instead of p-values:}
+\begin{itemize}
+\item Calculate P(B $>$ A)
+\item Direct probability interpretation
+\item Incorporate prior knowledge
+\item No arbitrary 0.05 threshold
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Example:}
+\begin{itemize}
+\item P(B $>$ A) = 0.97
+\item 97\% sure treatment is better
+\item Can ship with 95\% confidence
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{Advantages}}
+
+\small
+\begin{itemize}
+\item Intuitive interpretation
+\item Earlier stopping (faster decisions)
+\item Handles small samples better
+\item Can update continuously
+\item No ``peeking problem''
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlorange}{\textbf{When to Use}}
+
+\small
+\begin{itemize}
+\item Need fast decisions
+\item Low traffic (small samples)
+\item Prior knowledge available
+\item Continuous monitoring
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Bayesian methods increasingly popular at Google, Netflix, Etsy}
+\end{frame}
+
+% Slide 6b: Understanding Confidence Intervals
+\begin{frame}{Understanding Confidence Intervals Through Repetition}
+\begin{columns}[T]
+\column{0.55\textwidth}
+\includegraphics[width=\textwidth]{charts/confidence_intervals.pdf}
+
+\column{0.43\textwidth}
+\textcolor{mlblue}{\textbf{What 95\% CI Means}}
+
+\small
+\textbf{Definition:} If we repeated the experiment 100 times, 95 of the intervals would contain the true value.
+
+\vspace{0.2cm}
+\textbf{Key Insights:}
+\begin{itemize}
+\item Each experiment produces a different interval
+\item True value is fixed (but unknown)
+\item Some intervals miss (by design!)
+\item Wider intervals = more uncertainty
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{Common Misconceptions}}
+
+\small
+\textbf{Wrong:} ``95\% chance true value is in this interval''
+\begin{itemize}
+\item True value either is or isn't in it
+\item It's about the procedure, not this interval
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Right:} ``95\% of intervals constructed this way contain the true value''
+
+\vspace{0.3cm}
+\textcolor{mlorange}{\textbf{Practical Use}}
+
+\small
+\begin{itemize}
+\item If CI includes 0: Not significant
+\item If CI excludes 0: Significant
+\item Width shows precision of estimate
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Visualization: 30 repeated experiments, each with 95\% CI}
+\end{frame}
+
+% Slide 7: Sequential Testing
+\begin{frame}{Sequential Testing: Early Stopping Without Peeking}
+\begin{columns}[T]
+\column{0.55\textwidth}
+\includegraphics[width=\textwidth]{charts/sequential_testing_boundaries.pdf}
+
+\column{0.43\textwidth}
+\textcolor{mlblue}{\textbf{The Peeking Problem}}
+
+\small
+\textbf{Bad practice:}
+\begin{itemize}
+\item Check results daily
+\item Stop when p $<$ 0.05
+\item False positive rate $>$ 50\%!
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Why bad:}
+\begin{itemize}
+\item Multiple testing inflates $\alpha$
+\item Random fluctuations look significant
+\item Results not reproducible
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{Sequential Testing Solution}}
+
+\small
+\textbf{Method:} Alpha spending functions
+\begin{itemize}
+\item Plan interim analyses (e.g., 25\%, 50\%, 75\%, 100\%)
+\item Adjust $\alpha$ at each look
+\item Control overall Type I error
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{O'Brien-Fleming:}
+\begin{itemize}
+\item Conservative early, liberal late
+\item First look: $\alpha$ = 0.0005
+\item Last look: $\alpha$ = 0.0455
+\item Total $\alpha$ still 0.05
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Benefit:} Stop early if clear winner/loser
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Sequential testing enables early stopping while maintaining statistical validity}
+\end{frame}
+
+% Slide 8: Multi-Armed Bandits
+\begin{frame}{Multi-Armed Bandits: Exploration vs Exploitation}
+\begin{columns}[T]
+\column{0.55\textwidth}
+\includegraphics[width=\textwidth]{charts/thompson_sampling_demo.pdf}
+
+\column{0.43\textwidth}
+\textcolor{mlblue}{\textbf{The Bandit Problem}}
+
+\small
+\textbf{Scenario:} Slot machines (arms) with unknown payouts. Goal: Maximize total reward.
+
+\vspace{0.2cm}
+\textbf{Trade-off:}
+\begin{itemize}
+\item \textbf{Explore:} Try arms to learn
+\item \textbf{Exploit:} Use best-known arm
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{Thompson Sampling}}
+
+\small
+\textbf{Algorithm:}
+\begin{enumerate}
+\item Maintain Beta($\alpha$, $\beta$) for each arm
+\item Sample from each distribution
+\item Pick arm with highest sample
+\item Update winner's distribution
+\end{enumerate}
+
+\vspace{0.2cm}
+\textbf{Why it works:}
+\begin{itemize}
+\item Automatically balances exploration/exploitation
+\item Converges to best arm
+\item Minimizes regret
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlorange}{\textbf{A/B Test vs Bandit}}
+
+\small
+\textbf{A/B Test:}
+\begin{itemize}
+\item Fixed allocation (50/50)
+\item Learn at end
+\item Higher regret during test
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Bandit:}
+\begin{itemize}
+\item Adaptive allocation
+\item Learn continuously
+\item Lower regret (shift traffic to winner)
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Use bandits when minimizing regret $>$ statistical rigor}
+\end{frame}
+
+% Slide 8b: Bandit Performance Analysis
+\begin{frame}{Bandit Performance: Exploration vs Regret}
+\begin{columns}[T]
+\column{0.55\textwidth}
+\includegraphics[width=\textwidth]{charts/multi_armed_bandit_exploration.pdf}
+
+\column{0.43\textwidth}
+\textcolor{mlblue}{\textbf{How Bandits Learn}}
+
+\small
+\textbf{Left Panel: Cumulative Pulls}
+\begin{itemize}
+\item Initially: Explore all arms
+\item Middle: Identify good arms
+\item End: Exploit best arm
+\item Bad arms stop getting traffic
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{Right Panel: Regret}}
+
+\small
+\textbf{Regret:} Total reward lost by not always picking best arm
+
+\vspace{0.2cm}
+\textbf{Key Insight:}
+\begin{itemize}
+\item Regret grows logarithmically
+\item Much slower than linear
+\item Thompson Sampling is near-optimal
+\item A/B test has linear regret
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlorange}{\textbf{When to Use Bandits}}
+
+\small
+\begin{itemize}
+\item High traffic (fast learning)
+\item Multiple variants ($>$ 3)
+\item Cost of regret is high
+\item Can tolerate adaptive allocation
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{When A/B is better:}
+\begin{itemize}
+\item Need clean statistical test
+\item Network effects present
+\item Regulatory requirements
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Bandits reduce regret by 30-50\% vs fixed A/B tests}
+\end{frame}
+
+% Slide 9: Causal Inference Basics
+\begin{frame}{Causal Inference: Correlation is Not Causation}
+\begin{columns}[T]
+\column{0.55\textwidth}
+\includegraphics[width=\textwidth]{charts/causal_inference_dag.pdf}
+
+\column{0.43\textwidth}
+\textcolor{mlblue}{\textbf{The Fundamental Problem}}
+
+\small
+\textbf{Correlation:} X and Y move together
+
+\textbf{Causation:} X causes Y
+
+\vspace{0.2cm}
+\textbf{Why different:}
+\begin{itemize}
+\item Confounders (Z affects both X and Y)
+\item Reverse causation (Y causes X)
+\item Spurious correlation (coincidence)
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{Example: Ice Cream \& Drowning}}
+
+\small
+\begin{itemize}
+\item Correlation: High
+\item Causation: None
+\item Confounder: Hot weather
+\item Weather causes both ice cream sales and swimming (drowning risk)
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlorange}{\textbf{Randomization Solves This}}
+
+\small
+\textbf{How:}
+\begin{itemize}
+\item Random assignment breaks confounding
+\item Only difference is treatment
+\item Can infer causation
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Without randomization:}
+\begin{itemize}
+\item Must control for confounders
+\item Assume no unmeasured confounding
+\item Causal claims weaker
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{RCTs (A/B tests) are gold standard for causal inference}
+\end{frame}
+
+% Slide 10: Multi-Objective Optimization
+\begin{frame}{Multi-Objective Optimization: Trade-Offs}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{The Real-World Problem}}
+
+\small
+\textbf{Single metric is rare:}
+\begin{itemize}
+\item CTR vs revenue
+\item Short-term vs long-term
+\item Engagement vs satisfaction
+\item Speed vs accuracy
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Example:} Recommendation algorithm
+\begin{itemize}
+\item Control: Higher revenue, lower engagement
+\item Treatment: Lower revenue, higher engagement
+\item Which is better?
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{Solution 1: Primary + Guardrails}}
+
+\small
+\textbf{Method:}
+\begin{itemize}
+\item Primary: Metric you optimize (revenue)
+\item Guardrails: Metrics that must not degrade
+\item Example: Maximize revenue, but engagement must not drop $>$ 2\%
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Decision rule:}
+\begin{itemize}
+\item Ship if primary improves AND guardrails met
+\item Else, iterate or kill
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{mlorange}{\textbf{Solution 2: Weighted Utility}}
+
+\small
+\textbf{Method:} Combine metrics into single score
+
+$$U = w_1 \cdot revenue + w_2 \cdot engagement$$
+
+\vspace{0.2cm}
+\textbf{Example weights:}
+\begin{itemize}
+\item Revenue: 0.7 (70\% weight)
+\item Engagement: 0.3 (30\% weight)
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Challenge:} Choosing weights
+
+\vspace{0.3cm}
+\textcolor{mlpurple}{\textbf{Solution 3: Pareto Frontier}}
+
+\small
+\textbf{Method:} Find non-dominated solutions
+\begin{itemize}
+\item Solution A dominates B if better on all metrics
+\item Pareto frontier: Set of non-dominated solutions
+\item Business decides among frontier
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{When to use:}
+\begin{itemize}
+\item Cannot agree on weights
+\item Want to see trade-off space
+\item Explore multiple strategies
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Real experiments almost always involve trade-offs—plan for it}
+\end{frame}
+
+% Slide 11: Technique Comparison
+\begin{frame}{Technique Comparison: When to Use Each}
+\begin{columns}[T]
+\column{0.32\textwidth}
+\textcolor{mlblue}{\textbf{Classical A/B Test}}
+
+\small
+\textbf{When:}
+\begin{itemize}
+\item High traffic
+\item Need causal rigor
+\item Low risk
+\item Regulatory requirements
+\item Can wait for full sample
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Pros:}
+\begin{itemize}
+\item Rigorous
+\item Well understood
+\item Easy to interpret
+\item Reproducible
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Cons:}
+\begin{itemize}
+\item Slow (fixed duration)
+\item Higher regret
+\item Can't peek
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Example:}\\
+Major algorithm change, need 95\% confidence, 2-week test
+
+\column{0.32\textwidth}
+\textcolor{mlgreen}{\textbf{Bayesian A/B Test}}
+
+\small
+\textbf{When:}
+\begin{itemize}
+\item Need faster decisions
+\item Low traffic
+\item Can update continuously
+\item Prior knowledge exists
+\item Stakeholders prefer probabilities
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Pros:}
+\begin{itemize}
+\item Intuitive (P(B $>$ A))
+\item Earlier stopping
+\item Handles small samples
+\item No peeking problem
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Cons:}
+\begin{itemize}
+\item Prior selection subjective
+\item Less familiar to stakeholders
+\item Requires Bayesian tooling
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Example:}\\
+Startup with 1K daily users, need quick wins
+
+\column{0.32\textwidth}
+\textcolor{mlorange}{\textbf{Multi-Armed Bandit}}
+
+\small
+\textbf{When:}
+\begin{itemize}
+\item Minimize regret
+\item Continuous optimization
+\item Many variants (A/B/C/D/E)
+\item Cost of losing high
+\item Real-time personalization
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Pros:}
+\begin{itemize}
+\item Lowest regret
+\item Adaptive allocation
+\item Scales to many arms
+\item Always optimizing
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Cons:}
+\begin{itemize}
+\item Less statistical rigor
+\item Harder to interpret
+\item Complex implementation
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Example:}\\
+Ad creative testing (50 variants), email subject lines
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Choice depends on traffic, risk tolerance, and business goals}
+\end{frame}

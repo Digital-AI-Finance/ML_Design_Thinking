@@ -1,0 +1,12 @@
+transaction_frequency
+transaction_volume
+session_duration
+payment_diversity
+international_activity
+savings_behavior
+credit_utilization
+support_contacts
+device_switches
+peak_hour_usage
+merchant_categories
+account_age

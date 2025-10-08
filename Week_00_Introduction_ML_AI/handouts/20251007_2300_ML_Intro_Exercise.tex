@@ -1,0 +1,528 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{tcolorbox}
+\usepackage{xcolor}
+\usepackage{geometry}
+\usepackage{tikz}
+\usepackage{multicol}
+\usepackage{array}
+\geometry{margin=0.7in}
+
+% Define colors
+\definecolor{mlblue}{RGB}{31, 119, 180}
+\definecolor{mlorange}{RGB}{255, 127, 14}
+\definecolor{mlgreen}{RGB}{44, 160, 44}
+\definecolor{mlred}{RGB}{214, 39, 40}
+\definecolor{mlpurple}{RGB}{148, 103, 189}
+\definecolor{mlgray}{RGB}{127, 127, 127}
+
+\title{\LARGE\textbf{Discovery Worksheet}\\
+\vspace{0.5em}
+\Large Introduction to Machine Learning \& AI\\
+\vspace{0.3em}
+\large Pattern Recognition Through Visual Analysis}
+\author{Machine Learning for Smarter Innovation\\
+Week 0: Pre-Lecture Activity}
+\date{}
+
+\begin{document}
+\maketitle
+
+\newpage
+
+% ================================================================
+% CHART 1: OVERFITTING
+% ================================================================
+\section*{Chart 1: Model Complexity}
+
+\begin{center}
+\includegraphics[width=0.95\textwidth]{../charts/discovery_chart_1_overfitting.pdf}
+\end{center}
+
+\subsection*{Observation}
+
+Three models predict house prices from square footage. Blue dots represent training data. Orange squares represent new test data the models have not seen.
+
+\subsection*{Tasks}
+
+\textbf{Task 1: Rank model complexity}
+
+Rank the three models from simplest to most complex:
+
+Simplest: \underline{\hspace{2cm}} $\rightarrow$ \underline{\hspace{2cm}} $\rightarrow$ Most complex: \underline{\hspace{2cm}}
+
+\vspace{0.5em}
+
+\textbf{Task 2: Identify performance pattern}
+
+Which model performs worst on the new orange test points?
+
+Answer: \underline{\hspace{3cm}}
+
+Why does this model struggle with new data?
+
+\vspace{0.3em}
+\underline{\hspace{14cm}}
+
+\vspace{0.3em}
+\underline{\hspace{14cm}}
+
+\vspace{0.5em}
+
+\textbf{Task 3: Explain the trade-off}
+
+Model C fits the training data perfectly (zero error), yet performs poorly on test data.
+
+What is the risk of creating a model that fits training data too closely?
+
+\vspace{0.3em}
+\underline{\hspace{14cm}}
+
+\vspace{0.3em}
+\underline{\hspace{14cm}}
+
+\vspace{0.5em}
+
+\textbf{Task 4: Optimal complexity}
+
+Which model achieves the best balance between simplicity and accuracy?
+
+Answer: \underline{\hspace{3cm}}
+
+What makes this model better than the other two?
+
+\vspace{0.3em}
+\underline{\hspace{14cm}}
+
+\vspace{0.5em}
+
+\begin{tcolorbox}[colback=mlgray!10, colframe=mlgray!50]
+\textbf{Summary:}
+A model that fits training data perfectly may fail on new data. The optimal model balances simplicity with predictive accuracy. This trade-off is fundamental to machine learning.
+\end{tcolorbox}
+
+\newpage
+
+% ================================================================
+% CHART 2: K-MEANS
+% ================================================================
+\section*{Chart 2: Clustering Algorithm}
+
+\begin{center}
+\includegraphics[width=0.95\textwidth]{../charts/discovery_chart_2_kmeans.pdf}
+\end{center}
+
+\subsection*{Observation}
+
+The chart shows six steps of an algorithm that groups data points into clusters. Centers are marked with stars.
+
+\subsection*{Tasks}
+
+\textbf{Task 1: Describe center movement}
+
+How do centers move from Step 1 to Step 2?
+
+\vspace{0.3em}
+\underline{\hspace{14cm}}
+
+\vspace{0.3em}
+\underline{\hspace{14cm}}
+
+\vspace{0.5em}
+
+\textbf{Task 2: Observe point-to-center distances}
+
+From Step 0 to Step 5, what happens to the distance between points and their assigned centers?
+
+Distances: \underline{\hspace{3cm}} (increasing/decreasing/staying same)
+
+What does this suggest about the algorithm's objective?
+
+\vspace{0.3em}
+\underline{\hspace{14cm}}
+
+\vspace{0.5em}
+
+\textbf{Task 3: Identify assignment rule}
+
+How does the algorithm decide which cluster a point belongs to?
+
+\vspace{0.3em}
+\underline{\hspace{14cm}}
+
+\vspace{0.3em}
+\underline{\hspace{14cm}}
+
+\vspace{0.5em}
+
+\textbf{Task 4: Detect convergence}
+
+How can the algorithm determine when to stop iterating?
+
+\vspace{0.3em}
+\underline{\hspace{14cm}}
+
+\vspace{0.5em}
+
+\begin{tcolorbox}[colback=mlgray!10, colframe=mlgray!50]
+\textbf{Summary:}
+The algorithm alternates between two steps: assigning points to the nearest center, then moving centers to the average position of their assigned points. This process minimizes the total distance from points to their cluster centers.
+\end{tcolorbox}
+
+\newpage
+
+% ================================================================
+% CHART 3: BOUNDARIES
+% ================================================================
+\section*{Chart 3: Classification Boundaries}
+
+\begin{center}
+\includegraphics[width=0.95\textwidth]{../charts/discovery_chart_3_boundaries.pdf}
+\end{center}
+
+\subsection*{Observation}
+
+Four datasets show red and blue points. The goal is to separate the two colors.
+
+\subsection*{Tasks}
+
+\textbf{Task 1: Attempt linear separation}
+
+Using a ruler or mentally, try to draw a straight line that separates red from blue in each dataset.
+
+Which datasets allow perfect or near-perfect separation with a straight line?
+
+Possible: \underline{\hspace{8cm}}
+
+\vspace{0.5em}
+
+\textbf{Task 2: Identify impossible cases}
+
+Which dataset(s) cannot be separated by any straight line?
+
+Answer: \underline{\hspace{3cm}}
+
+What pattern in the data makes linear separation impossible?
+
+\vspace{0.3em}
+\underline{\hspace{14cm}}
+
+\vspace{0.3em}
+\underline{\hspace{14cm}}
+
+\vspace{0.5em}
+
+\textbf{Task 3: Propose alternative solutions}
+
+For Dataset D (the impossible case), what alternative approach could work?
+
+\vspace{0.3em}
+\underline{\hspace{14cm}}
+
+\vspace{0.3em}
+\underline{\hspace{14cm}}
+
+\textit{Optional challenge: Can you prove mathematically that Dataset D is impossible for a single line?}
+
+\vspace{0.5em}
+
+\begin{tcolorbox}[colback=mlgray!10, colframe=mlgray!50]
+\textbf{Summary:}
+Linear models work when data classes can be separated by a straight line or plane. Some patterns require more complex decision boundaries. This limitation motivates the development of nonlinear models such as neural networks.
+\end{tcolorbox}
+
+\newpage
+
+% ================================================================
+% CHART 4: GRADIENT DESCENT
+% ================================================================
+\section*{Chart 4: Optimization Paths}
+
+\begin{center}
+\includegraphics[width=0.75\textwidth]{../charts/discovery_chart_4_gradient.pdf}
+\end{center}
+
+\subsection*{Observation}
+
+This topographic map shows an error landscape where elevation represents error value. Two paths descend from different starting points.
+
+\subsection*{Tasks}
+
+\textbf{Task 1: Compare final destinations}
+
+Do Path A (red) and Path B (blue) end in the same valley?
+
+Answer: \underline{\hspace{3cm}}
+
+What does this tell us about the importance of starting position?
+
+\vspace{0.3em}
+\underline{\hspace{14cm}}
+
+\vspace{0.5em}
+
+\textbf{Task 2: Identify the better solution}
+
+Which path finds the valley with lower error?
+
+Answer: \underline{\hspace{3cm}}
+
+Is this the global minimum (lowest point on the entire landscape)?
+
+Answer: \underline{\hspace{3cm}}
+
+\vspace{0.5em}
+
+\textbf{Task 3: Analyze step size effects}
+
+What would happen if steps were too large?
+
+\vspace{0.3em}
+\underline{\hspace{14cm}}
+
+What would happen if steps were too small?
+
+\vspace{0.3em}
+\underline{\hspace{14cm}}
+
+\vspace{0.5em}
+
+\textbf{Task 4: Propose improvement strategies}
+
+How might the algorithm escape from a suboptimal local minimum?
+
+\vspace{0.3em}
+\underline{\hspace{14cm}}
+
+\vspace{0.5em}
+
+\begin{tcolorbox}[colback=mlgray!10, colframe=mlgray!50]
+\textbf{Summary:}
+Optimization algorithms follow the gradient downhill to find error minima. Different starting points can lead to different solutions. The learning rate (step size) must balance speed with stability. Complex landscapes may contain multiple local minima.
+\end{tcolorbox}
+
+\newpage
+
+% ================================================================
+% CHART 5: GANs
+% ================================================================
+\section*{Chart 5: Adversarial Training}
+
+\begin{center}
+\includegraphics[width=0.95\textwidth]{../charts/discovery_chart_5_gan.pdf}
+\end{center}
+
+\subsection*{Observation}
+
+The chart shows two programs competing over 100 training epochs. The Generator creates synthetic data while the Discriminator attempts to detect fakes.
+
+\subsection*{Tasks}
+
+\textbf{Task 1: Track quality progression}
+
+Describe how generated samples change from Epoch 1 to Epoch 100.
+
+\vspace{0.3em}
+\underline{\hspace{14cm}}
+
+\vspace{0.3em}
+\underline{\hspace{14cm}}
+
+\vspace{0.5em}
+
+\textbf{Task 2: Analyze competitive dynamics}
+
+Examine the middle training dynamics panel showing loss curves.
+
+In Phase 1 (Epochs 1-10), which program has the advantage?
+
+Answer: \underline{\hspace{5cm}}
+
+In Phase 3 (Epochs 50-100), what happens to both loss curves?
+
+Answer: \underline{\hspace{5cm}}
+
+\vspace{0.5em}
+
+\textbf{Task 3: Explain mutual improvement}
+
+Both programs are competing, yet both improve. How is this possible?
+
+\vspace{0.3em}
+\underline{\hspace{14cm}}
+
+\vspace{0.3em}
+\underline{\hspace{14cm}}
+
+\vspace{0.5em}
+
+\textbf{Task 4: Predict equilibrium outcome}
+
+When both programs reach equilibrium, the Discriminator cannot reliably distinguish real from fake data. What does this imply about the Generator's performance?
+
+\vspace{0.3em}
+\underline{\hspace{14cm}}
+
+\vspace{0.5em}
+
+\begin{tcolorbox}[colback=mlgray!10, colframe=mlgray!50]
+\textbf{Summary:}
+Adversarial training uses competition between two programs to drive improvement. The Generator learns to create realistic data by attempting to fool the Discriminator. The Discriminator improves its detection ability, which forces the Generator to improve further. At equilibrium, the Generator produces data indistinguishable from real examples.
+\end{tcolorbox}
+
+\newpage
+
+% ================================================================
+% CHART 6: PCA
+% ================================================================
+\section*{Chart 6: Dimensionality Reduction}
+
+\begin{center}
+\includegraphics[width=0.95\textwidth]{../charts/discovery_chart_6_pca_v2.pdf}
+\end{center}
+
+\subsection*{Observation}
+
+The chart shows data transformation from three dimensions to two dimensions, then reconstruction back to three dimensions.
+
+\subsection*{Tasks}
+
+\textbf{Task 1: Assess data structure}
+
+Examine the left panel showing 3D data.
+
+Do the points fill the entire 3D space, or do they lie near a flat surface?
+
+Answer: \underline{\hspace{8cm}}
+
+\vspace{0.5em}
+
+\textbf{Task 2: Evaluate compression feasibility}
+
+The middle panel shows the same data represented with only 2 numbers per point instead of 3.
+
+Is this compression possible without major information loss?
+
+Answer: \underline{\hspace{3cm}}
+
+Why or why not?
+
+\vspace{0.3em}
+\underline{\hspace{14cm}}
+
+\vspace{0.5em}
+
+\textbf{Task 3: Analyze reconstruction quality}
+
+The right panel overlays original points (blue) with reconstructed points (red).
+
+Are the reconstructed points close to the original positions?
+
+Answer: \underline{\hspace{3cm}}
+
+What does this indicate about the quality of the 2D representation?
+
+\vspace{0.3em}
+\underline{\hspace{14cm}}
+
+\vspace{0.5em}
+
+\textbf{Task 4: Generalize the principle}
+
+Under what conditions can high-dimensional data be compressed to fewer dimensions?
+
+\vspace{0.3em}
+\underline{\hspace{14cm}}
+
+\vspace{0.3em}
+\underline{\hspace{14cm}}
+
+\vspace{0.5em}
+
+\begin{tcolorbox}[colback=mlgray!10, colframe=mlgray!50]
+\textbf{Summary:}
+Data lying near a lower-dimensional structure can be compressed by projecting onto principal directions of variance. This reduces storage requirements and computational complexity while preserving most information. The technique is particularly effective when original dimensions are correlated.
+\end{tcolorbox}
+
+\newpage
+
+% ================================================================
+% REFLECTION AND CONNECTION
+% ================================================================
+\section*{Connections Across Charts}
+
+\subsection*{Recurring Patterns}
+
+Examine the six charts and identify common themes:
+
+\textbf{1. Optimization objectives}
+
+Multiple charts show algorithms minimizing some quantity:
+\begin{itemize}
+\item Chart 1: Minimizing \underline{\hspace{6cm}}
+\item Chart 2: Minimizing \underline{\hspace{6cm}}
+\item Chart 4: Minimizing \underline{\hspace{6cm}}
+\end{itemize}
+
+\vspace{0.5em}
+
+\textbf{2. Complexity trade-offs}
+
+Several charts illustrate balancing competing objectives:
+\begin{itemize}
+\item Chart 1: Simple models vs complex models
+\item Chart 3: Linear boundaries vs nonlinear boundaries
+\item Chart 6: Full dimensions vs compressed dimensions
+\end{itemize}
+
+What general principle connects these trade-offs?
+
+\vspace{0.3em}
+\underline{\hspace{14cm}}
+
+\vspace{0.5em}
+
+\textbf{3. Iterative improvement}
+
+Which charts show algorithms that improve through repeated steps?
+
+Charts: \underline{\hspace{10cm}}
+
+\vspace{0.5em}
+
+\subsection*{Key Insights}
+
+What are the three most important patterns observed across all charts?
+
+\begin{enumerate}
+\item \underline{\hspace{14cm}}
+
+\vspace{0.3em}
+\underline{\hspace{14cm}}
+
+\item \underline{\hspace{14cm}}
+
+\vspace{0.3em}
+\underline{\hspace{14cm}}
+
+\item \underline{\hspace{14cm}}
+
+\vspace{0.3em}
+\underline{\hspace{14cm}}
+\end{enumerate}
+
+\subsection*{Questions for Lecture}
+
+List 2-3 questions to ask during the lecture:
+
+\begin{enumerate}
+\item \underline{\hspace{14cm}}
+
+\item \underline{\hspace{14cm}}
+
+\item \underline{\hspace{14cm}}
+\end{enumerate}
+
+\end{document}

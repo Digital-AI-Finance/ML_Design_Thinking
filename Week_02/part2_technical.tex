@@ -69,6 +69,9 @@ Minimize within-cluster sum of squares (WCSS)
 \begin{center}
 \textbf{Complexity:} O(n × k × i × d) where n=points, k=clusters, i=iterations, d=dimensions
 \end{center}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Iterative optimization drives unsupervised learning - alternating between assignment and update steps converges to local solutions across algorithm families}
 \end{frame}
 
 % Distance Metrics
@@ -113,6 +116,9 @@ Orientation matters
 \centering
 \textbf{Pro Tip:} Choose distance metric based on your data characteristics!
 \end{tcolorbox}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Distance metric selection fundamentally shapes cluster results - Euclidean for spherical, Manhattan for grid-like, Cosine for directional/text data}
 \end{frame}
 
 % Determining Optimal K
@@ -134,6 +140,9 @@ Diminishing returns after K=5
 Measures cluster cohesion \& separation
 \end{column}
 \end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Multiple validation metrics reduce selection bias - single measures optimize for method assumptions rather than data structure}
 \end{frame}
 
 % Silhouette Deep Dive
@@ -144,6 +153,9 @@ Measures cluster cohesion \& separation
 \normalsize\textcolor{mlpurple}{\textbf{K=5 shows optimal cluster separation}}\\
 \small
 \textbf{Interpretation:} Width = cluster size, Height = silhouette coefficient
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Visual validation exposes numerical blind spots - charts reveal cluster imbalance and boundary ambiguity that aggregate scores mask}
 \end{frame}
 
 % Implementation in Python
@@ -175,6 +187,9 @@ for i in range(optimal_k):
     print(f"Segment {i}: {len(segment_users)} users")
     print(f"  Avg engagement: {segment_users[:, 0].mean():.2f}")
 \end{lstlisting}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Implementation simplicity enables experimentation - minimal code barriers accelerate the iteration cycles that refine understanding}
 \end{frame}
 
 % Advanced Algorithms Comparison
@@ -184,6 +199,9 @@ for i in range(optimal_k):
 \vspace{0.2em}
 \small
 \textbf{Key Insight:} Different algorithms excel at different data patterns
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Algorithm comparison shows complementary strengths - no single method dominates all scenarios, match algorithm to data structure}
 \end{frame}
 
 % DBSCAN Deep Dive
@@ -214,6 +232,9 @@ for i in range(optimal_k):
 
 \vspace{0.5em}
 \textbf{Parameters:} eps (radius) and min\_samples (density threshold)
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Density-based thinking reveals shape-agnostic patterns - relaxing spherical assumptions exposes structures distance-based methods cannot detect}
 \end{frame}
 
 % Hierarchical Clustering
@@ -224,6 +245,9 @@ for i in range(optimal_k):
 \Large\textbf{Bottom-up approach reveals natural hierarchy}\\
 \normalsize
 \textcolor{mlred}{Red line} = cut for desired number of clusters
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Hierarchical structure preserves relationships across scales - tree representations enable zooming between strategic and tactical pattern views}
 \end{frame}
 
 % Gaussian Mixture Models
@@ -233,14 +257,24 @@ for i in range(optimal_k):
 \vspace{0.3em}
 \textbf{Soft clustering:} Points belong to multiple clusters with probabilities\\
 \small Ellipses show cluster shapes and orientations
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Soft clustering reflects real-world ambiguity - probabilistic membership models the gradual transitions hard boundaries artificially impose}
 \end{frame}
 
-% Algorithm Selection Guide
-\begin{frame}{Choosing the Right Algorithm: Decision Framework}
-\centering
-\includegraphics[width=0.65\textwidth]{charts/clustering_selection_guide.pdf}\\
-\vspace{0.3em}
-\normalsize\textcolor{mlpurple}{\textbf{Match algorithm to your data characteristics}}
+% Algorithm Selection Guide - Judgment Criteria
+\begin{frame}[t]{When to Use Which Clustering Algorithm: Judgment Criteria}
+\vspace{-0.5cm}
+\begin{center}
+\includegraphics[width=0.75\textwidth]{charts/clustering_selection_guide.pdf}
+\end{center}
+
+\begin{center}
+\textcolor{mlpurple}{\textbf{The Principle:}} Match algorithm to your data characteristics - shape, size, noise tolerance, and computational constraints
+\end{center}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Judgment criteria enable systematic algorithm selection - consider data properties (shape, outliers, density) before computational efficiency}
 \end{frame}
 
 % Performance Considerations
@@ -287,6 +321,9 @@ Use K-Means or Mini-batch K-Means
 \end{tcolorbox}
 \end{column}
 \end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Scalability determines production viability - K-means O(nki) enables million-point clustering, Hierarchical O(n²) limited to thousands}
 \end{frame}
 
 % Common Pitfalls
@@ -334,4 +371,7 @@ Use K-Means or Mini-batch K-Means
 \end{enumerate}
 \end{column}
 \end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Systematic process prevents predictable failures - checklists transform experience into replicable quality regardless of analyst expertise}
 \end{frame}

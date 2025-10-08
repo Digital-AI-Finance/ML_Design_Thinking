@@ -1,0 +1,405 @@
+% Part 1: Foundation - Why Classification? (10 slides)
+\section{Part 1: Foundation - Why Classification?}
+
+% Slide 1: Hook - Opening visualization without title
+\begin{frame}[plain]
+\centering
+\includegraphics[width=0.95\textwidth]{charts/innovation_success_dashboard.pdf}
+\end{frame}
+
+% Slide 2: Problem - The human judgment challenge
+\begin{frame}{Why Human Judgment Fails at Scale}
+\Large\textbf{The Definition Challenge}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\textbf{Current Reality:}
+\begin{itemize}
+\item 1000+ innovation ideas per year
+\item 10 evaluators = 10 different opinions
+\item Decisions based on ``gut feel''
+\item Success rate: 2-5\%
+\item Millions lost on wrong bets
+\end{itemize}
+\end{column}
+\begin{column}{0.48\textwidth}
+\textbf{The Problem:}
+\begin{itemize}
+\item \textcolor{mlred}{Subjective}: ``I know it when I see it''
+\item \textcolor{mlred}{Inconsistent}: Changes with mood/time
+\item \textcolor{mlred}{Biased}: Favors familiar patterns
+\item \textcolor{mlred}{Limited}: Can't process volume
+\item \textcolor{mlred}{Expensive}: Expert time = \$\$\$
+\end{itemize}
+\end{column}
+\end{columns}
+
+\vspace{1em}
+\begin{tcolorbox}[colback=mlred!10,colframe=mlred]
+\centering
+\textbf{Question:} Can we make innovation evaluation objective, consistent, and scalable?
+\end{tcolorbox}
+\end{frame}
+
+% Slide 3: Evolution - Timeline of progress
+\begin{frame}{The Journey from Intuition to Intelligence}
+\Large\textbf{How Innovation Assessment Evolved}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.9, transform shape]
+% Timeline arrow
+\draw[ultra thick,->,mlgray] (0,0) -- (12,0);
+
+% Time periods
+\foreach \x/\year/\era in {1/1950s/Gut Feel, 4/1980s/Metrics, 7/2010s/Analytics, 10/2020s/ML, 12/Now/AI} {
+    \draw[thick] (\x,0) -- (\x,-0.2);
+    \node[below] at (\x,-0.3) {\small\textbf{\year}};
+    \node[below] at (\x,-0.7) {\tiny \era};
+}
+
+% Evolution boxes
+\node[draw,fill=mlred!20,rounded corners,minimum width=2cm] at (1,1.5) {Experience};
+\node[draw,fill=mlorange!20,rounded corners,minimum width=2cm] at (4,1.5) {Spreadsheets};
+\node[draw,fill=mlyellow!20,rounded corners,minimum width=2cm] at (7,1.5) {Dashboards};
+\node[draw,fill=mlgreen!20,rounded corners,minimum width=2cm] at (10,1.5) {Algorithms};
+\node[draw,fill=mlblue!20,rounded corners,minimum width=2cm] at (12,1.5) {Predictions};
+
+% Success rates
+\node[mlred] at (1,2.3) {\textbf{45\%}};
+\node[mlorange] at (4,2.3) {\textbf{55\%}};
+\node[mlyellow] at (7,2.3) {\textbf{65\%}};
+\node[mlgreen] at (10,2.3) {\textbf{82\%}};
+\node[mlblue] at (12,2.3) {\textbf{94\%}};
+
+% Key innovations
+\node[text width=2cm,align=center] at (1,0.7) {\tiny Individual expertise};
+\node[text width=2cm,align=center] at (4,0.7) {\tiny Basic KPIs};
+\node[text width=2cm,align=center] at (7,0.7) {\tiny Big Data};
+\node[text width=2cm,align=center] at (10,0.7) {\tiny Machine Learning};
+\node[text width=2cm,align=center] at (12,0.7) {\tiny Deep Learning};
+\end{tikzpicture}
+\end{center}
+
+\vspace{0.5em}
+\begin{center}
+\Large\textit{Each leap forward = Better pattern recognition}
+\end{center}
+\end{frame}
+
+% Slide 4: Patterns - Show that data reveals patterns
+\begin{frame}{Success Patterns Hide in Plain Sight}
+\Large\textbf{What 9,500 Innovations Taught Us}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\begin{column}{0.55\textwidth}
+\includegraphics[width=\textwidth]{charts/feature_space_visualization.pdf}
+\end{column}
+\begin{column}{0.43\textwidth}
+\textbf{Hidden Patterns Found:}
+\begin{itemize}
+\item \textcolor{mlgreen}{\textbf{Sweet spot:}} Novelty 70-85\%
+\item \textcolor{mlblue}{\textbf{Team magic:}} Experience + Diversity
+\item \textcolor{mlorange}{\textbf{Timing:}} 6-9 months optimal
+\item \textcolor{mlred}{\textbf{Market size:}} \$1-5M best start
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{The Revelation:}
+\begin{tcolorbox}[colback=mlgreen!10,colframe=mlgreen]
+Success isn't random - it follows discoverable patterns
+\end{tcolorbox}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Slide 5: Dataset - Our laboratory
+\begin{frame}{Our Innovation Laboratory}
+\Large\textbf{Learning from Real-World Data}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\begin{column}{0.55\textwidth}
+\includegraphics[width=\textwidth]{charts/innovation_dataset_overview.pdf}
+\end{column}
+\begin{column}{0.43\textwidth}
+\textbf{The Dataset:}
+\begin{itemize}
+\item \textbf{9,500} innovation products
+\item \textbf{8 years} of outcomes (2015-2023)
+\item \textbf{27 features} per product
+\item \textbf{6 segments} (Tech, Consumer, B2B...)
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{What We Track:}
+\begin{enumerate}
+\item Innovation metrics
+\item Market conditions
+\item Team composition
+\item Development process
+\item Financial indicators
+\end{enumerate}
+
+\vspace{0.5em}
+\small\textcolor{mlgray}{Note: Simulated for educational purposes}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Slide 6: Perspectives - Different ways to frame success
+\begin{frame}{Two Lenses for Looking at Success}
+\Large\textbf{Binary vs Multi-Class Perspectives}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\textbf{Binary: Yes or No?}
+\begin{center}
+\begin{tikzpicture}[scale=0.8]
+\draw[ultra thick,->] (0,0) -- (4,0);
+\draw[fill=mlred!50] (0,-0.5) rectangle (1.8,0.5);
+\draw[fill=mlgreen!50] (2.2,-0.5) rectangle (4,0.5);
+\node at (0.9,0) {\textbf{FAIL}};
+\node at (3.1,0) {\textbf{SUCCESS}};
+\node at (0.9,-1) {40\%};
+\node at (3.1,-1) {60\%};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Use When:}
+\begin{itemize}
+\item Go/No-go decisions
+\item Limited resources
+\item Clear threshold needed
+\item Quick filtering required
+\end{itemize}
+\end{column}
+\begin{column}{0.48\textwidth}
+\textbf{Multi-Class: How Successful?}
+\begin{center}
+\begin{tikzpicture}[scale=0.7]
+\draw[fill=mlred!50] (0,0) rectangle (1.5,1);
+\node at (0.75,0.5) {\tiny Failed};
+\node at (0.75,-0.3) {24\%};
+
+\draw[fill=mlorange!50] (1.5,0) rectangle (3,1);
+\node at (2.25,0.5) {\tiny Struggling};
+\node at (2.25,-0.3) {16\%};
+
+\draw[fill=mlblue!50] (0,1) rectangle (1.5,2);
+\node at (0.75,1.5) {\tiny Growing};
+\node at (0.75,2.3) {39\%};
+
+\draw[fill=mlgreen!50] (1.5,1) rectangle (3,2);
+\node at (2.25,1.5) {\tiny Breakthrough};
+\node at (2.25,2.3) {21\%};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Use When:}
+\begin{itemize}
+\item Resource allocation
+\item Risk assessment
+\item Support prioritization
+\item Nuanced understanding
+\end{itemize}
+\end{column}
+\end{columns}
+
+\vspace{0.5em}
+\begin{center}
+\textit{Same data, different questions → different insights}
+\end{center}
+\end{frame}
+
+% Slide 7: Diamond - Connect to course theme
+\begin{frame}{Classification Powers the Innovation Diamond}
+\Large\textbf{From 5000 Ideas to 5 Winners}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.8, transform shape]
+% Diamond shape
+\coordinate (top) at (0,3);
+\coordinate (left) at (-3,0);
+\coordinate (right) at (3,0);
+\coordinate (bottom) at (0,-3);
+
+% Draw diamond with gradient effect
+\draw[ultra thick,fill=challenge!10] (top) -- (left) -- (bottom) -- (right) -- cycle;
+
+% Add classification stages
+\node[draw,circle,fill=mlred!70,minimum size=1cm] at (-1.5,1.5) {\textbf{1}};
+\node[draw,circle,fill=mlorange!70,minimum size=1cm] at (0,1) {\textbf{2}};
+\node[draw,circle,fill=mlgreen!70,minimum size=1cm] at (1.5,1.5) {\textbf{3}};
+\node[draw,circle,fill=mlblue!70,minimum size=1cm] at (0,-1) {\textbf{4}};
+
+% Labels
+\node[above] at (top) {\Large\textbf{5000 Ideas}};
+\node[left] at (left) {\textbf{Diverge}};
+\node[right] at (right) {\textbf{Converge}};
+\node[below] at (bottom) {\Large\textbf{5 Strategies}};
+
+% Classification roles
+\node[right,text width=4cm] at (4,2) {
+\textcolor{mlred}{\textbf{1. Quick Filter:}} Remove obvious failures (Binary)
+};
+\node[right,text width=4cm] at (4,0.5) {
+\textcolor{mlorange}{\textbf{2. Categorize:}} Group by type (Multi-class)
+};
+\node[right,text width=4cm] at (4,-1) {
+\textcolor{mlgreen}{\textbf{3. Rank:}} Success probability scores
+};
+\node[right,text width=4cm] at (4,-2.5) {
+\textcolor{mlblue}{\textbf{4. Select:}} Top 5 with confidence
+};
+\end{tikzpicture}
+\end{center}
+\end{frame}
+
+% Slide 8: Impact - Real-world examples
+\begin{frame}{Real Companies, Real Results}
+\Large\textbf{Classification in Action}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\begin{column}{0.32\textwidth}
+\textbf{Amazon}
+\begin{center}
+\includegraphics[width=0.6\textwidth]{charts/precision_recall_curves.pdf}
+\end{center}
+\begin{itemize}
+\small
+\item 100M+ products classified
+\item 35\% better recommendations
+\item \$30B revenue impact
+\end{itemize}
+\end{column}
+\begin{column}{0.32\textwidth}
+\textbf{Netflix}
+\begin{itemize}
+\small
+\item Content success prediction
+\item User taste classification
+\item 75\% of views from ML
+\item Saved \$1B/year in content
+\end{itemize}
+\vspace{0.5em}
+\begin{center}
+\accuracy{93} prediction accuracy
+\end{center}
+\end{column}
+\begin{column}{0.32\textwidth}
+\textbf{Spotify}
+\begin{itemize}
+\small
+\item 4B+ playlists evaluated
+\item Music mood classification
+\item Weekly discovery success
+\item 40\% engagement increase
+\end{itemize}
+\vspace{0.5em}
+\begin{center}
+30M+ songs classified
+\end{center}
+\end{column}
+\end{columns}
+
+\vspace{1em}
+\begin{center}
+\begin{tikzpicture}
+\node[draw,fill=mlblue!20,rounded corners,text width=10cm,align=center] {
+\textbf{Common Thread:} Transform subjective taste into objective, scalable decisions
+};
+\end{tikzpicture}
+\end{center}
+\end{frame}
+
+% Slide 9: Objectives - What students will learn
+\begin{frame}{Your Learning Journey Today}
+\Large\textbf{From Novice to Practitioner}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\textbf{You Will Master:}
+\begin{enumerate}
+\item \textcolor{mlblue}{Understand} why classification matters
+\item \textcolor{mlgreen}{Build} real classifiers
+\item \textcolor{mlorange}{Evaluate} model performance
+\item \textcolor{mlred}{Deploy} to production
+\item \textcolor{mlpurple}{Design} user interfaces
+\end{enumerate}
+
+\vspace{0.5em}
+\textbf{Algorithms You'll Use:}
+\begin{itemize}
+\item Logistic Regression
+\item Decision Trees \& Random Forests
+\item Support Vector Machines
+\item Neural Networks
+\end{itemize}
+\end{column}
+\begin{column}{0.48\textwidth}
+\textbf{Skills You'll Gain:}
+\begin{itemize}
+\item Feature engineering
+\item Model selection
+\item Hyperparameter tuning
+\item Cross-validation
+\item Production deployment
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Your Deliverable:}
+\begin{tcolorbox}[colback=mlgreen!10,colframe=mlgreen]
+Complete innovation success predictor ready for real-world use
+\end{tcolorbox}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Slide 10: Transition - Bridge to technical section
+\begin{frame}{Ready to Learn How?}
+\Large\textbf{From Problem to Solution}
+\normalsize
+
+\vspace{1em}
+
+\begin{center}
+We've seen the problem and opportunity.\\
+\vspace{0.5em}
+We have the data and motivation.\\
+\vspace{1em}
+
+\Huge\textbf{Now let's learn the algorithms!}
+
+\vspace{1em}
+\begin{tikzpicture}
+\draw[ultra thick,->,mlblue] (0,0) -- (4,0);
+\node[above] at (2,0.2) {\Large Next: Part 2 - How Classification Works};
+\end{tikzpicture}
+
+\vspace{1em}
+\Large\textit{``Understanding the machine behind the magic''}
+\end{center}
+\end{frame}

@@ -54,6 +54,8 @@ where $\eta$ is the learning rate
 \item Foundation for modern deep learning
 \end{itemize}
 }
+
+\bottomnote{Single-layer perceptrons solve only linearly separable problems - XOR impossibility triggered first AI winter revealing fundamental limitations}
 \end{frame}
 
 % Multi-layer Perceptron
@@ -94,6 +96,8 @@ can approximate any continuous function on a compact set to arbitrary accuracy.
 \item \textbf{Leaky ReLU:} $\text{LeakyReLU}(x) = \max(0.01x, x)$
 \end{itemize}
 }
+
+\bottomnote{Multi-layer perceptrons enable universal approximation - hidden layers learn nonlinear feature transformations solving problems beyond perceptron capacity}
 \end{frame}
 
 % Backpropagation
@@ -139,6 +143,8 @@ can approximate any continuous function on a compact set to arbitrary accuracy.
 \item Saddle points
 \end{itemize}
 }
+
+\bottomnote{Backpropagation applies chain rule systematically - automatic differentiation computes exact gradients enabling efficient multi-layer optimization}
 \end{frame}
 
 % Activation Functions
@@ -183,6 +189,8 @@ Fixes dying ReLU, $\alpha = 0.01$ typically
 \item Multiclass: Softmax
 \end{itemize}
 }
+
+\bottomnote{Activation functions introduce nonlinearity - ReLU family dominates modern architectures through sparse activations and efficient gradients}
 \end{frame}
 
 % Convolutional Neural Networks
@@ -237,6 +245,8 @@ Fixes dying ReLU, $\alpha = 0.01$ typically
 \item Computer vision
 \end{itemize}
 }
+
+\bottomnote{Convolutional architectures exploit spatial locality - parameter sharing and hierarchical feature extraction match image structure}
 \end{frame}
 
 % Recurrent Neural Networks
@@ -285,6 +295,8 @@ Fixes dying ReLU, $\alpha = 0.01$ typically
 \item Time series prediction
 \end{itemize}
 }
+
+\bottomnote{Recurrent connections maintain hidden state - LSTM gates solve vanishing gradients enabling long-range temporal dependency modeling}
 \end{frame}
 
 % Training Dynamics
@@ -311,7 +323,7 @@ Fixes dying ReLU, $\alpha = 0.01$ typically
 \item Step decay
 \item Exponential decay
 \item Cosine annealing
-\end{itemize>
+\end{itemize}
 }{
 \centering
 \includegraphics[width=0.85\textwidth]{charts/training_curves.pdf}
@@ -332,6 +344,8 @@ Fixes dying ReLU, $\alpha = 0.01$ typically
 \item Proper initialization prevents gradient problems
 \end{itemize}
 }
+
+\bottomnote{Optimization algorithms adapt learning rates - momentum and adaptive methods accelerate convergence while regularization prevents overfitting}
 \end{frame}
 
 % Deep Learning Revolution
@@ -362,7 +376,7 @@ Fixes dying ReLU, $\alpha = 0.01$ typically
 \item 152 layers deep
 \item Solved vanishing gradient
 \item Skip connections: $y = F(x) + x$
-\end{itemize>
+\end{itemize}
 
 \textbf{2017: Transformer}
 \begin{itemize}
@@ -381,7 +395,7 @@ Fixes dying ReLU, $\alpha = 0.01$ typically
 \item \textbf{GPU Computing:} Parallel processing
 \item \textbf{Algorithmic Advances:} Better optimizers
 \item \textbf{Software Frameworks:} TensorFlow, PyTorch
-\end{itemize>
+\end{itemize}
 
 \textbf{Impact:}
 \begin{itemize}
@@ -391,6 +405,8 @@ Fixes dying ReLU, $\alpha = 0.01$ typically
 \item Foundation for modern AI
 \end{itemize}
 }
+
+\bottomnote{Deep learning revolution enabled by convergent factors - big data, GPU computing, architectural innovations, and software frameworks combined}
 \end{frame}
 
 % Modern Architectures
@@ -422,7 +438,7 @@ Fixes dying ReLU, $\alpha = 0.01$ typically
 \item Patch-based processing
 \item Competitive with CNNs
 \end{itemize}
-\end{column>
+\end{column}
 
 \begin{column}{0.32\textwidth}
 \centering
@@ -442,7 +458,7 @@ Fixes dying ReLU, $\alpha = 0.01$ typically
 \item Bidirectional encoding
 \item Pre-trained representations
 \item Fine-tuning for tasks
-\end{itemize>
+\end{itemize}
 
 \textbf{GPT:}
 \begin{itemize}
@@ -463,14 +479,14 @@ Fixes dying ReLU, $\alpha = 0.01$ typically
 \item Vision-language understanding
 \item Contrastive learning
 \item Zero-shot classification
-\end{itemize>
+\end{itemize}
 
 \textbf{DALL-E:}
 \begin{itemize}
 \item Text-to-image generation
 \item Multimodal creativity
 \item Large-scale training
-\end{itemize>
+\end{itemize}
 
 \textbf{Flamingo:}
 \begin{itemize}
@@ -483,4 +499,6 @@ Fixes dying ReLU, $\alpha = 0.01$ typically
 
 \vspace{1em}
 \textcolor{darkgray}{\small Modern architectures combine multiple techniques for state-of-the-art performance across domains}
+
+\bottomnote{Specialized architectures encode domain-specific inductive biases - CNNs for vision, RNNs for sequences, Transformers for attention}
 \end{frame}

@@ -70,7 +70,7 @@
 \end{tcolorbox}
 \end{columns}
 
-\bottomnote{This mixing is why forcing documents into single categories loses so much information}
+\bottomnote{Proportional mixture representations preserve information - hard category assignment discards distributional structure present in multithematic content}
 \end{frame}
 
 % Slide 7: Topics as Probability Distributions
@@ -129,7 +129,7 @@ team & 6\% \\
 \end{tcolorbox}
 \end{columns}
 
-\bottomnote{A topic is just a probability distribution over vocabulary - which words tend to appear together}
+\bottomnote{Probabilistic representation enables soft clustering - co-occurrence patterns define themes without rigid category boundaries}
 \end{frame}
 
 % Slide 8: Documents as Topic Mixtures
@@ -184,7 +184,7 @@ P(word|doc) = $\sum$ P(word|topic) × P(topic|doc)
 \end{tcolorbox}
 \end{columns}
 
-\bottomnote{This mixture approach captures how humans actually write - we naturally blend topics}
+\bottomnote{Proportional topic mixing reflects natural communication patterns - written expression typically combines multiple thematic elements rather than maintaining topical purity}
 \end{frame}
 
 % Slide 9: The Unmixing Challenge
@@ -262,7 +262,7 @@ P(word|doc) = $\sum$ P(word|topic) × P(topic|doc)
 \end{tcolorbox}
 \end{columns}
 
-\bottomnote{Topic modeling is essentially sophisticated pattern recognition at massive scale}
+\bottomnote{Scale enables precision - larger corpus sizes reveal subtler thematic distinctions invisible in smaller samples}
 \end{frame}
 
 % Slide 10: Matrix View (Simplified)
@@ -343,7 +343,7 @@ Review 4 & 1 & 0 & 5 \\
 \end{tcolorbox}
 \end{columns}
 
-\bottomnote{Matrix decomposition: Like compressing a huge spreadsheet into its essential patterns}
+\bottomnote{Dimensionality reduction preserves signal while eliminating noise - low-rank approximations capture dominant patterns efficiently}
 \end{frame}
 
 % Slide 11: Topic Quality - How We Know It Works
@@ -406,7 +406,7 @@ Review 4 & 1 & 0 & 5 \\
 \end{tcolorbox}
 \end{columns}
 
-\bottomnote{Unlike classification, we don't have "correct" answers - quality is measured by usefulness}
+\bottomnote{Unsupervised evaluation lacks ground truth - quality assessment requires domain-specific coherence and utility criteria rather than accuracy metrics}
 \end{frame}
 
 % Slide 12: Setting Up for Algorithms
@@ -454,5 +454,5 @@ Each algorithm unmixes topics differently - like different chefs approaching the
 \textcolor{mlpurple}{\textbf{Next: Deep dive into each algorithm}}
 \end{center}
 
-\bottomnote{You now understand the problem - let's see how different algorithms solve it}
+\bottomnote{Problem formulation enables algorithmic solutions - understanding mixture decomposition requirements guides method selection and evaluation}
 \end{frame}

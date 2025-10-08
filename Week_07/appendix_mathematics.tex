@@ -1,0 +1,449 @@
+% Appendix: Mathematical Foundations (5 slides)
+% Deep proofs and derivations for advanced students
+% Colors: mllavender/mlpurple (template_beamer_final)
+
+\appendix
+\section*{Appendix: Mathematical Foundations}
+
+% Slide A1: Information Theory Proofs
+\begin{frame}[t]{Appendix A: Information Theory - Complete Derivations}
+\textbf{Formal proofs for bias as mutual information:}
+
+\vspace{0.3em}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlpurple}{\textbf{Theorem 1: Mutual Information as Bias}}
+
+\small
+\textbf{Statement:} Bias exists iff $I(D; A) > 0$
+
+\vspace{0.3cm}
+\textbf{Proof:}
+
+Define mutual information:
+$$I(D; A) = \sum_{d,a} P(d, a) \log \frac{P(d,a)}{P(d)P(a)}$$
+
+\vspace{0.3cm}
+Equivalently:
+$$I(D; A) = H(D) - H(D|A)$$
+$$= H(A) - H(A|D)$$
+
+where $H(X) = -\sum_x P(x) \log P(x)$
+
+\vspace{0.3cm}
+\textcolor{mlorange}{\textbf{Forward direction:}}\\
+If $D \perp A$ (no bias), then:
+$$P(D, A) = P(D)P(A)$$
+
+Therefore:
+$$I(D; A) = \sum_{d,a} P(d)P(a) \log \frac{P(d)P(a)}{P(d)P(a)} = 0$$
+
+\vspace{0.3cm}
+\textcolor{mlblue}{\textbf{Reverse direction:}}\\
+If $I(D; A) = 0$, then:
+$$\frac{P(d,a)}{P(d)P(a)} = 1$$ for all $d, a$
+
+Thus: $P(d,a) = P(d)P(a)$ (independence)
+
+QED.
+
+\column{0.48\textwidth}
+\textcolor{mlpurple}{\textbf{Theorem 2: Measurement Capacity}}
+
+\small
+\textbf{Statement:} Measuring $k$ of $n$ attributes loses $\log_2(n) - \log_2(k)$ bits
+
+\vspace{0.3cm}
+\textbf{Proof:}
+
+Full discrimination space:
+$$H_{\text{full}} = \log_2(n_1 \times n_2 \times \cdots \times n_m)$$
+$$= \sum_{i=1}^m \log_2(n_i)$$
+
+where $n_i$ = levels of attribute $i$
+
+\vspace{0.3cm}
+Measured subspace (k attributes):
+$$H_{\text{measured}} = \sum_{i=1}^k \log_2(n_i)$$
+
+\vspace{0.3cm}
+Information loss:
+$$L = H_{\text{full}} - H_{\text{measured}}$$
+$$= \sum_{i=k+1}^m \log_2(n_i)$$
+
+\vspace{0.3cm}
+\textcolor{mlorange}{\textbf{Example (from Part 1):}}
+
+Full: 6 attributes $	o$ $\log_2(490{,}140) = 18.9$ bits\\
+Measured: Race $	imes$ Gender $	o$ $\log_2(18) = 4.2$ bits\\
+Loss: $18.9 - 4.2 = 14.7$ bits
+
+QED.
+
+\vspace{0.3cm}
+\textcolor{mlblue}{\textbf{Corollary:}}\\
+Unmeasured subgroups: $2^L = 2^{14.7} \approx 26{,}000$
+\end{columns}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mllavender!30, colframe=mlpurple]
+\textbf{Key Result:} $I(D; A) = 0 \Leftrightarrow$ Independence - rigorous definition of fairness as information-theoretic concept
+\end{tcolorbox}
+
+\bottomnote{Entropy-based formulations quantify information leakage - mutual information measures how much knowing decisions reveals about protected attributes}
+\end{frame}
+
+% Slide A2: Chouldechova Full Proof
+\begin{frame}[t]{Appendix B: Chouldechova Impossibility - Complete Proof}
+\textbf{Full mathematical proof of calibration-based impossibility:}
+
+\vspace{0.3em}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlpurple}{\textbf{Theorem (Chouldechova 2017)}}
+
+\small
+Let $S$ be a risk score, $Y$ the true label, $A$ the protected attribute with prevalence $P(Y=1|A=a) \neq P(Y=1|A=b)$.
+
+If $S$ is calibrated:
+$$P(Y=1|S=s, A=a) = P(Y=1|S=s, A=b) = s$$
+
+then at least one of the following must be violated:
+\begin{itemize}
+\item Demographic parity: $P(S>t|A=a) = P(S>t|A=b)$
+\item Equal opportunity: $P(S>t|Y=1, A=a) = P(S>t|Y=1, A=b)$
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Proof:}
+
+\textcolor{mlorange}{Step 1:} Law of total probability
+
+$$P(Y=1|A=a) = \int_0^1 P(Y=1|S=s, A=a) P(S=s|A=a) \, ds$$
+
+\textcolor{mlblue}{Step 2:} Apply calibration assumption
+
+$$= \int_0^1 s \cdot P(S=s|A=a) \, ds$$
+
+$$= E[S|A=a]$$
+
+Similarly: $P(Y=1|A=b) = E[S|A=b]$
+
+\column{0.48\textwidth}
+\textcolor{mlpurple}{\textbf{Proof Continued}}
+
+\small
+\textcolor{mlorange}{Step 3:} Use prevalence assumption
+
+$$P(Y=1|A=a) \neq P(Y=1|A=b)$$
+
+Therefore from Step 2:
+$$E[S|A=a] \neq E[S|A=b]$$
+
+\vspace{0.3cm}
+\textcolor{mlblue}{Step 4:} Demographic parity violation
+
+If means differ, then for some threshold $t$:
+$$P(S>t|A=a) \neq P(S>t|A=b)$$
+
+This is demographic parity violation. $\square$
+
+\vspace{0.3cm}
+\textcolor{mlpurple}{Step 5:} Equal opportunity violation
+
+By Bayes theorem:
+$$P(S|Y=1, A=a) = \frac{P(Y=1|S, A=a)P(S|A=a)}{P(Y=1|A=a)}$$
+
+Using calibration and Step 3:
+$$= \frac{S \cdot P(S|A=a)}{E[S|A=a]}$$
+
+Similarly for group $b$. Since $E[S|A=a] \neq E[S|A=b]$:
+
+$$P(S|Y=1, A=a) \neq P(S|Y=1, A=b)$$
+
+Therefore: $\text{TPR}(t|A=a) \neq \text{TPR}(t|A=b)$
+
+Equal opportunity violated. $\square$
+
+\textbf{QED}
+\end{columns}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mllavender!30, colframe=mlpurple]
+\textbf{Key Result:} Calibration + different base rates $	o$ impossibility of DP/EO - rigorous proof via Bayes theorem
+\end{tcolorbox}
+
+\bottomnote{Bayesian derivations expose structural constraints - calibration combined with unequal base rates mathematically precludes simultaneous demographic and opportunity parity}
+\end{frame}
+
+% Slide A3: Lagrangian Theory
+\begin{frame}[t]{Appendix C: Lagrangian Optimization Theory}
+\textbf{Complete mathematical framework for constrained fairness optimization:}
+
+\vspace{0.3em}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlpurple}{\textbf{General Constrained Problem}}
+
+\small
+\textbf{Primal problem:}
+$$\min_\theta f(\theta)$$
+$$\text{subject to } g_i(\theta) \leq 0, \quad i=1,\ldots,m$$
+$$h_j(\theta) = 0, \quad j=1,\ldots,p$$
+
+\vspace{0.3cm}
+\textbf{Lagrangian:}
+$$L(\theta, \lambda, \nu) = f(\theta) + \sum_i \lambda_i g_i(\theta) + \sum_j \nu_j h_j(\theta)$$
+
+where $\lambda_i \geq 0$ (inequality multipliers), $\nu_j$ (equality multipliers)
+
+\vspace{0.3cm}
+\textcolor{mlorange}{\textbf{KKT Conditions:}}
+
+Necessary conditions for $\theta^*$ optimal:
+
+1. Stationarity:
+$$\nabla_\theta L(\theta^*, \lambda^*, \nu^*) = 0$$
+
+2. Primal feasibility:
+$$g_i(\theta^*) \leq 0, \quad h_j(\theta^*) = 0$$
+
+3. Dual feasibility:
+$$\lambda_i^* \geq 0$$
+
+4. Complementary slackness:
+$$\lambda_i^* g_i(\theta^*) = 0$$
+
+\column{0.48\textwidth}
+\textcolor{mlpurple}{\textbf{Fairness Application}}
+
+\small
+\textbf{Fairness-constrained problem:}
+$$\min_\theta \mathcal{L}_{\text{pred}}(\theta)$$
+$$\text{s.t. } |P(\hat{Y}=1|A=a) - P(\hat{Y}=1|A=b)| \leq \epsilon$$
+
+\vspace{0.3cm}
+\textbf{Reformulation:}
+
+Let $F(\theta) = |P(\hat{Y}=1|A=a) - P(\hat{Y}=1|A=b)|$
+
+Constraint: $F(\theta) - \epsilon \leq 0$
+
+\vspace{0.3cm}
+\textbf{Lagrangian:}
+$$L(\theta, \lambda) = \mathcal{L}_{\text{pred}}(\theta) + \lambda(F(\theta) - \epsilon)$$
+
+\vspace{0.3cm}
+\textcolor{mlorange}{\textbf{Solving:}}
+
+Gradient descent:
+$$\theta_{t+1} = \theta_t - \eta \nabla_\theta L$$
+$$= \theta_t - \eta (\nabla \mathcal{L}_{\text{pred}} + \lambda \nabla F)$$
+
+Dual update (if $F(\theta) > \epsilon$):
+$$\lambda_{t+1} = \max(0, \lambda_t + \alpha(F(\theta_t) - \epsilon))$$
+
+\vspace{0.3cm}
+\textcolor{mlblue}{\textbf{Convergence:}}\\
+Under convexity, converges to KKT point\\
+$\lambda^*$ encodes constraint tightness
+\end{columns}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mllavender!30, colframe=mlpurple]
+\textbf{Key Result:} Lagrangian method converts constrained problem to unconstrained - KKT conditions guarantee optimality
+\end{tcolorbox}
+
+\bottomnote{Constraint incorporation transforms ethical requirements into optimization objectives - dual variables encode fairness violation penalties enabling gradient-based solutions}
+\end{frame}
+
+% Slide A4: ROC Geometry
+\begin{frame}[t]{Appendix D: ROC Space Geometry and Fairness}
+\textbf{Geometric interpretation of fairness in ROC space:}
+
+\vspace{0.3em}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlpurple}{\textbf{ROC Space Properties}}
+
+\small
+\textbf{Coordinate system:}
+
+Point $(x, y) = (\text{FPR}, \text{TPR})$ where:
+$$\text{FPR} = \frac{FP}{FP + TN} = P(\hat{Y}=1|Y=0)$$
+$$\text{TPR} = \frac{TP}{TP + FN} = P(\hat{Y}=1|Y=1)$$
+
+\vspace{0.3cm}
+\textbf{Key points:}
+\begin{itemize}
+\item $(0, 0)$: Reject all (trivial)
+\item $(1, 1)$: Accept all (trivial)
+\item $(0, 1)$: Perfect classifier
+\item $(p, p)$: Random guessing with rate $p$
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlorange}{\textbf{ROC Curve:}}
+
+For threshold-based classifier $\hat{Y} = \mathbb{I}[s(X) > t]$:
+
+ROC curve = $\{(\text{FPR}(t), \text{TPR}(t)) : t \in \mathbb{R}\}$
+
+\vspace{0.3cm}
+\textbf{Properties:}
+\begin{itemize}
+\item Starts at $(0, 0)$ (t = $\infty$)
+\item Ends at $(1, 1)$ (t = $-\infty$)
+\item Monotone increasing
+\item Above diagonal = better than random
+\item AUC = area under ROC curve
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{mlpurple}{\textbf{Fairness Metrics in ROC Space}}
+
+\small
+\textbf{Equalized odds:}
+
+Groups $a$, $b$ at same ROC point:
+$$(\text{FPR}_a, \text{TPR}_a) = (\text{FPR}_b, \text{TPR}_b)$$
+
+Euclidean distance = fairness violation:
+$$d = \sqrt{(\text{FPR}_b - \text{FPR}_a)^2 + (\text{TPR}_b - \text{TPR}_a)^2}$$
+
+\vspace{0.3cm}
+\textcolor{mlorange}{\textbf{Equal opportunity:}}
+
+Only TPR constraint:
+$$\text{TPR}_a = \text{TPR}_b$$
+
+Vertical distance in ROC space
+
+\vspace{0.3cm}
+\textcolor{mlblue}{\textbf{Geometric optimization:}}
+
+Find threshold pair $(t_a, t_b)$ minimizing:
+$$d = ||(\text{FPR}(t_a), \text{TPR}(t_a)) - (\text{FPR}(t_b), \text{TPR}(t_b))||$$
+
+Subject to: Accuracy $\geq \alpha$
+
+\vspace{0.3cm}
+\textbf{Solution:} Intersection or nearest points of ROC curves
+
+\vspace{0.3cm}
+\textcolor{mlpurple}{\textbf{Example (from Part 3):}}\\
+Group A: $(0.08, 0.90)$\\
+Group B: $(0.14, 0.86)$\\
+Distance: $d = 7.2\%$
+\end{columns}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mllavender!30, colframe=mlpurple]
+\textbf{Key Result:} ROC space provides geometric interpretation of fairness - distance = violation magnitude
+\end{tcolorbox}
+
+\bottomnote{Spatial visualization reveals metric relationships - geometric distance quantifies fairness violations making abstract trade-offs visually interpretable}
+\end{frame}
+
+% Slide A5: Causal Inference Framework
+\begin{frame}[t]{Appendix E: Causal Fairness - Pearl's Framework}
+\textbf{Causal inference approach to fairness using DAGs:}
+
+\vspace{0.3em}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlpurple}{\textbf{Causal DAG Notation}}
+
+\small
+\textbf{Variables:}
+\begin{itemize}
+\item $A$: Protected attribute (race, gender, etc.)
+\item $X$: Legitimate features
+\item $Y$: True outcome
+\item $\hat{Y}$: Prediction
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Causal paths:}
+\begin{itemize}
+\item $A \to \hat{Y}$: Direct discrimination
+\item $A \to X \to \hat{Y}$: Mediated (proxy)
+\item $A \leftarrow C \to Y$: Confounding
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlorange}{\textbf{Counterfactual fairness:}}
+
+$$P(\hat{Y}_{A \leftarrow a} | X=x, A=a) = P(\hat{Y}_{A \leftarrow a'} | X=x, A=a)$$
+
+Intuition: Prediction unchanged if we intervene to change $A$
+
+\vspace{0.3cm}
+\textcolor{mlblue}{\textbf{Path-specific effects:}}
+
+Total effect:
+$$\text{TE} = E[Y_{A \leftarrow 1}] - E[Y_{A \leftarrow 0}]$$
+
+Direct effect (no mediation through $X$):
+$$\text{DE} = E[Y_{A \leftarrow 1, X \leftarrow X_0}] - E[Y_{A \leftarrow 0, X \leftarrow X_0}]$$
+
+Indirect effect:
+$$\text{IE} = \text{TE} - \text{DE}$$
+
+\column{0.48\textwidth}
+\textcolor{mlpurple}{\textbf{Pearl's Sufficiency Theorems}}
+
+\small
+\textbf{Three causal independence conditions:}
+
+1. Independence: $\hat{Y} \perp A$\\
+(No path $A \to \hat{Y}$)
+
+2. Separation: $\hat{Y} \perp A | Y$\\
+(All paths $A \to \hat{Y}$ blocked by $Y$)
+
+3. Sufficiency: $Y \perp A | \hat{Y}$\\
+(All paths $A \to Y$ blocked by $\hat{Y}$)
+
+\vspace{0.3cm}
+\textcolor{mlorange}{\textbf{Impossibility (Pearl 2009):}}
+
+Cannot satisfy all three unless:
+\begin{itemize}
+\item $Y \perp A$ (base rates equal), OR
+\item $\hat{Y}$ is perfect predictor
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Proof sketch:}
+
+Assume Independence: $\hat{Y} \perp A$\\
+Assume Sufficiency: $Y \perp A | \hat{Y}$
+
+Then by law of total probability:
+$$P(Y|A=a) = \sum_{\hat{y}} P(Y|\hat{Y}=\hat{y}) P(\hat{Y}=\hat{y})$$
+$$= P(Y|A=b)$$
+
+Therefore $Y \perp A$. Contradiction with base rate assumption. QED.
+
+\vspace{0.3cm}
+\textcolor{mlblue}{\textbf{Connection to metrics:}}\\
+Independence = DP\\
+Separation = EO\\
+Sufficiency = Calibration\\
+
+Same impossibility, causal lens!
+\end{columns}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mllavender!30, colframe=mlpurple]
+\textbf{Key Result:} Causal fairness via DAGs - counterfactuals, path-specific effects, same impossibility from causal perspective
+\end{tcolorbox}
+
+\bottomnote{Causal graphical models formalize intervention logic - directed acyclic graphs separate correlation from causation revealing why statistical fairness impossibilities persist}
+\end{frame}

@@ -1,0 +1,378 @@
+% Part 3: Implementation - Practical NLP
+\section{Implementation: Building NLP Systems}
+
+% Slide 1: Section Divider
+\begin{frame}[plain]
+\vfill
+\centering
+\begin{beamercolorbox}[sep=16pt,center]{title}
+\usebeamerfont{title}\Large Part 3: Implementation\\
+\normalsize From Theory to Practice
+\end{beamercolorbox}
+\vfill
+\end{frame}
+
+% Slide 2: Data Collection & Preparation
+\begin{frame}{Data Collection: Where to Find Text}
+\Large\textbf{Sources of User Language}
+\normalsize
+
+\begin{columns}[T]
+\begin{column}{0.55\textwidth}
+\includegraphics[width=\textwidth]{charts/data_sources_pyramid.pdf}
+\end{column}
+\begin{column}{0.43\textwidth}
+\textbf{Internal Sources:}
+\begin{itemize}
+\item Customer reviews
+\item Support tickets
+\item Survey responses
+\item Chat transcripts
+\item Forum posts
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{External Sources:}
+\begin{itemize}
+\item Social media
+\item App store reviews
+\item Reddit discussions
+\item News mentions
+\end{itemize}
+\end{column}
+\end{columns}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mlorange!10,colframe=mlorange]
+\centering
+\small\textbf{Tip:} Start with your richest data source, then expand
+\end{tcolorbox}
+\end{frame}
+
+% Slide 3: Text Cleaning & Normalization
+\begin{frame}[fragile]{Text Cleaning: Real-world Messiness}
+\Large\textbf{Handling Imperfect Data}
+\normalsize
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\textbf{Common Issues:}
+\begin{itemize}
+\item HTML tags: \texttt{<p>text</p>}
+\item Emojis: 😊 ❤️ 😭
+\item URLs: http://example.com
+\item Mentions: @user
+\item Hashtags: \#awesome
+\item Special chars: \&\#8230;
+\end{itemize}
+\end{column}
+\begin{column}{0.48\textwidth}
+\textbf{Python Cleaning:}
+\begin{lstlisting}[basicstyle=\tiny]
+import re
+from bs4 import BeautifulSoup
+
+def clean_text(text):
+    # Remove HTML
+    text = BeautifulSoup(text, "html.parser").text
+    # Remove URLs
+    text = re.sub(r'http\S+', '', text)
+    # Remove mentions
+    text = re.sub(r'@\w+', '', text)
+    # Normalize whitespace
+    text = ' '.join(text.split())
+    return text
+\end{lstlisting}
+\end{column}
+\end{columns}
+
+\vspace{0.5em}
+\includegraphics[width=\textwidth]{charts/text_cleaning_pipeline.pdf}
+\end{frame}
+
+% Slide 4: Feature Engineering for NLP
+\begin{frame}{Feature Engineering: Beyond Raw Text}
+\Large\textbf{Creating Meaningful Features}
+\normalsize
+
+\begin{columns}[T]
+\begin{column}{0.55\textwidth}
+\textbf{Text Features:}
+\begin{itemize}
+\item Length statistics
+\item Punctuation patterns
+\item Capitalization ratio
+\item N-grams (bigrams, trigrams)
+\item Part-of-speech tags
+\item Named entities
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Sentiment Features:}
+\begin{itemize}
+\item Polarity scores
+\item Subjectivity measures
+\item Emotion intensities
+\item Negation handling
+\end{itemize}
+\end{column}
+\begin{column}{0.43\textwidth}
+\includegraphics[width=\textwidth]{charts/feature_engineering_nlp.pdf}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Slide 5: Model Selection Guide
+\begin{frame}{Model Selection: Right Tool for the Task}
+\Large\textbf{Decision Framework}
+\normalsize
+
+\begin{center}
+\includegraphics[width=0.85\textwidth]{charts/model_selection_flowchart.pdf}
+\end{center}
+
+\begin{columns}[T]
+\begin{column}{0.32\textwidth}
+\textbf{Small Data (<1K)}
+\begin{itemize}
+\small
+\item Rule-based
+\item TextBlob
+\item Transfer learning
+\item Few-shot BERT
+\end{itemize}
+\end{column}
+\begin{column}{0.32\textwidth}
+\textbf{Medium (1K-10K)}
+\begin{itemize}
+\small
+\item Classical ML
+\item DistilBERT
+\item Fine-tuning
+\item Ensemble
+\end{itemize}
+\end{column}
+\begin{column}{0.32\textwidth}
+\textbf{Large (>10K)}
+\begin{itemize}
+\small
+\item BERT/RoBERTa
+\item Custom training
+\item GPT models
+\item Multi-task
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Slide 6: Python Implementation with Transformers
+\begin{frame}[fragile]{Implementation: Using Hugging Face}
+\Large\textbf{Modern NLP in 10 Lines}
+\normalsize
+
+\begin{lstlisting}[basicstyle=\small]
+from transformers import pipeline
+
+# Load pre-trained sentiment model
+classifier = pipeline("sentiment-analysis")
+
+# Single prediction
+result = classifier("I love this product!")
+# [{'label': 'POSITIVE', 'score': 0.9998}]
+
+# Batch processing
+texts = ["Great service!", "Terrible experience", "It's okay"]
+results = classifier(texts)
+
+# Custom model
+classifier = pipeline("sentiment-analysis", 
+                     model="nlptown/bert-base-multilingual-uncased-sentiment")
+\end{lstlisting}
+
+\vspace{0.5em}
+\begin{center}
+\includegraphics[width=0.6\textwidth]{charts/huggingface_models.pdf}
+\end{center}
+\end{frame}
+
+% Slide 7: Batch Processing & Optimization
+\begin{frame}{Scaling Up: Batch Processing}
+\Large\textbf{From Prototype to Production}
+\normalsize
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\textbf{Optimization Strategies:}
+\begin{itemize}
+\item Batch inference
+\item GPU acceleration
+\item Model quantization
+\item Caching predictions
+\item Async processing
+\item Model distillation
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Performance Gains:}
+\begin{itemize}
+\item Single: 100 texts/min
+\item Batch: 5,000 texts/min
+\item GPU: 20,000 texts/min
+\item Distilled: 2x faster
+\end{itemize}
+\end{column}
+\begin{column}{0.48\textwidth}
+\includegraphics[width=\textwidth]{charts/batch_processing_speed.pdf}
+\vspace{0.5em}
+\includegraphics[width=\textwidth]{charts/gpu_cpu_comparison.pdf}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Slide 8: Result Interpretation
+\begin{frame}{Interpreting Results: Beyond Scores}
+\Large\textbf{Making Sense of Model Output}
+\normalsize
+
+\begin{center}
+\includegraphics[width=0.85\textwidth]{charts/result_interpretation.pdf}
+\end{center}
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\textbf{What to Look For:}
+\begin{itemize}
+\item Confidence scores
+\item Class probabilities
+\item Attention weights
+\item Important tokens
+\item Edge cases
+\end{itemize}
+\end{column}
+\begin{column}{0.48\textwidth}
+\textbf{Red Flags:}
+\begin{itemize}
+\item Low confidence (<0.6)
+\item Close probabilities
+\item Contradictions
+\item Unusual patterns
+\item Domain mismatch
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Slide 9: Confidence & Uncertainty
+\begin{frame}{Confidence Calibration: Knowing When to Trust}
+\Large\textbf{Uncertainty Quantification}
+\normalsize
+
+\begin{columns}[T]
+\begin{column}{0.55\textwidth}
+\includegraphics[width=\textwidth]{charts/confidence_calibration.pdf}
+\end{column}
+\begin{column}{0.43\textwidth}
+\textbf{Calibration Techniques:}
+\begin{itemize}
+\item Temperature scaling
+\item Platt scaling
+\item Isotonic regression
+\item Ensemble uncertainty
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Decision Rules:}
+\begin{itemize}
+\item High conf (>0.9): Auto-process
+\item Medium (0.6-0.9): Flag for review
+\item Low (<0.6): Human review
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Slide 10: Production Deployment
+\begin{frame}{Production Deployment: Going Live}
+\Large\textbf{From Notebook to API}
+\normalsize
+
+\begin{center}
+\includegraphics[width=0.85\textwidth]{charts/deployment_architecture.pdf}
+\end{center}
+
+\begin{columns}[T]
+\begin{column}{0.32\textwidth}
+\textbf{API Setup}
+\begin{itemize}
+\small
+\item FastAPI/Flask
+\item Model serving
+\item Request handling
+\item Response caching
+\end{itemize}
+\end{column}
+\begin{column}{0.32\textwidth}
+\textbf{Monitoring}
+\begin{itemize}
+\small
+\item Latency tracking
+\item Error rates
+\item Model drift
+\item Usage patterns
+\end{itemize}
+\end{column}
+\begin{column}{0.32\textwidth}
+\textbf{Maintenance}
+\begin{itemize}
+\small
+\item A/B testing
+\item Model updates
+\item Feedback loop
+\item Retraining schedule
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Slide 11: API Integration
+\begin{frame}[fragile]{API Integration: Connecting Systems}
+\Large\textbf{Making NLP Accessible}
+\normalsize
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\textbf{REST API Example:}
+\begin{lstlisting}[basicstyle=\tiny]
+from fastapi import FastAPI
+from pydantic import BaseModel
+
+app = FastAPI()
+model = load_model()
+
+class TextRequest(BaseModel):
+    text: str
+    
+@app.post("/sentiment")
+def analyze(request: TextRequest):
+    result = model(request.text)
+    return {
+        "sentiment": result["label"],
+        "confidence": result["score"]
+    }
+\end{lstlisting}
+\end{column}
+\begin{column}{0.48\textwidth}
+\textbf{Integration Points:}
+\begin{itemize}
+\item CRM systems
+\item Analytics dashboards
+\item Support tickets
+\item Product reviews
+\item Social media feeds
+\end{itemize}
+
+\vspace{0.5em}
+\includegraphics[width=\textwidth]{charts/api_integration_flow.pdf}
+\end{column}
+\end{columns}
+\end{frame}

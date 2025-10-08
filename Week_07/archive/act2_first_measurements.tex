@@ -1,0 +1,583 @@
+% ACT 2: FIRST MEASUREMENTS & IMPOSSIBILITY (6 slides)
+% Theme: Metrics reveal bias, but also reveal impossibility
+
+% Slide 6: The Breakthrough Insight - Let's Measure
+\begin{frame}[t]{The Breakthrough Insight: Disaggregate and Measure}
+\textbf{What if we could quantify invisible bias?}
+
+\vspace{0.3em}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{ForestGreen}{\textbf{Human Observation}}
+
+\small
+How do humans detect unfairness?
+
+\vspace{0.3cm}
+\textbf{We disaggregate:}
+\begin{itemize}
+\item Compare outcomes between groups
+\item Look for systematic patterns
+\item Calculate rate differences
+\item Test for statistical significance
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{Amber}{\textbf{The Breakthrough Idea:}}
+
+What if we formalized this?
+
+\begin{itemize}
+\item Partition data by protected attribute
+\item Calculate metrics per group
+\item Compare across groups
+\item Quantify disparities
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Fairness Metrics:}\\
+Mathematical functions that\\
+make bias visible
+
+\column{0.48\textwidth}
+\textcolor{Teal}{\textbf{Three Measurement Approaches}}
+
+\small
+\begin{center}
+\begin{tcolorbox}[colback=lightgray, colframe=Teal, width=0.9\textwidth]
+\centering
+\textbf{Data}\\
+(mixed, bias hidden)\\
+$\downarrow$\\
+\textbf{Disaggregation}\\
+(by protected attribute)\\
+$\downarrow$\\
+\textbf{Metrics}\\
+(calculate per group)\\
+$\downarrow$\\
+\textbf{Comparison}\\
+(bias now visible!)
+\end{tcolorbox}
+\end{center}
+
+\vspace{0.3cm}
+\textcolor{ForestGreen}{\textbf{Three families:}}
+
+\begin{itemize}
+\item \textbf{Group fairness:} Compare group rates
+\item \textbf{Individual fairness:} Similar $\rightarrow$ similar
+\item \textbf{Causal fairness:} Counterfactual reasoning
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{Amber}{\textbf{The promise:}}\\
+Hidden discrimination becomes\\
+measurable, fixable, auditable
+\end{columns}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mlblue!10, colframe=mlblue]
+\textbf{Key Insight:} Disaggregation makes invisible bias visible - fairness metrics quantify what was hidden
+\end{tcolorbox}
+
+\vspace{0.5em}
+\textbf{Key Question:} Do these metrics actually work in practice?
+
+\bottomnote{Three fairness families emerged 2012-2016 - mathematical formalization of intuitive unfairness}
+\end{frame}
+
+% Slide 7: THE SUCCESS SLIDE - Demographic Parity Works! (CRITICAL)
+\begin{frame}[t]{The First Success: Demographic Parity Makes Bias Visible}
+\textbf{Testing the first fairness metric on real loan data:}
+
+\vspace{0.3em}
+
+\begin{columns}[T]
+\column{0.55\textwidth}
+\textcolor{mlgreen}{\Large\textbf{Demographic Parity Works!}}
+
+\small
+\textbf{Task:} Detect bias in loans\\
+\textbf{Metric:} Demographic parity\\
+\textbf{Result:} SUCCESS - bias now visible!
+
+\vspace{0.3cm}
+\textbf{Mathematical Definition:}
+
+For protected attribute $A$ and decision $D$:
+
+$$\textcolor{Teal}{P(D=1|A=a) = P(D=1|A=b)}$$
+
+\textcolor{Amber}{\textbf{Intuition:}}\\
+Approval rates should be independent\\
+of group membership
+
+\vspace{0.3cm}
+\textbf{Complete Numerical Walkthrough:}
+
+\textbf{Step 1: Partition dataset}
+\begin{itemize}
+\item Group A: 5,000 applicants
+\item Group B: 5,000 applicants
+\end{itemize}
+
+\textbf{Step 2: Count approvals}
+\begin{itemize}
+\item Group A: 3,750 approved
+\item Group B: 2,250 approved
+\end{itemize}
+
+\textbf{Step 3: Calculate rates}
+$$P(D=1|A=a) = \frac{3{,}750}{5{,}000} = 0.75 = 75\%$$
+$$P(D=1|A=b) = \frac{2{,}250}{5{,}000} = 0.45 = 45\%$$
+
+\textbf{Step 4: Quantify violation}
+$$\text{DP violation} = |75\% - 45\%| = \textcolor{mlred}{\textbf{30\%}}$$
+
+\column{0.43\textwidth}
+\textcolor{mlblue}{\textbf{Detection Quality}}
+
+\small
+\textbf{Metric performance:}
+\begin{itemize}
+\item \textcolor{mlgreen}{\textbf{Detected:}} 30\% disparity (was invisible!)
+\item \textcolor{mlgreen}{\textbf{Quantified:}} Exact magnitude
+\item \textcolor{mlgreen}{\textbf{Significance:}} p < 0.001 (highly significant)
+\item \textcolor{mlgreen}{\textbf{Actionable:}} Clear target for mitigation
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{ForestGreen}{\textbf{Success metrics:}}
+
+On 100 known biased datasets:
+\begin{itemize}
+\item Sensitivity: 89\% (detects real bias)
+\item Specificity: 82\% (few false alarms)
+\item Correlation with harm: 0.78
+\item Time to compute: <1 second
+\end{itemize}
+
+\vspace{0.3cm}
+\begin{tcolorbox}[colback=mlgreen!20, colframe=mlgreen]
+\centering
+\small
+\textbf{Breakthrough!}\\
+\\
+Hidden 30\% bias now visible\\
+Measurable in real-time\\
+Deployable at scale
+\end{tcolorbox}
+
+\vspace{0.3cm}
+\textcolor{Slate}{\textit{``For the first time, we can\\
+SEE systemic discrimination''}}
+\end{columns}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mlblue!10, colframe=mlblue]
+\textbf{Key Insight:} Demographic parity reveals 30\% hidden disparity - invisible discrimination becomes measurable
+\end{tcolorbox}
+
+\vspace{0.5em}
+\textbf{Key Question:} If this works so well, can we use it for all fairness problems?
+
+\bottomnote{CRITICAL: Success shown with actual numbers (75\% vs 45\% = 30\%) BEFORE revealing failure}
+\end{frame}
+
+% Slide 8: Success Spreads - Equal Opportunity
+\begin{frame}[t]{Success Spreads: Equal Opportunity Reveals Different Story}
+\textbf{A second metric gives different insights on the same data:}
+
+\vspace{0.3em}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{ForestGreen}{\textbf{Equal Opportunity Definition}}
+
+\small
+For true label $Y=1$ (qualified):
+
+$$\textcolor{Teal}{P(D=1|Y=1, A=a) = P(D=1|Y=1, A=b)}$$
+
+\vspace{0.3cm}
+\textcolor{Amber}{\textbf{Intuition:}}\\
+Among qualified applicants,\\
+approval rates should be equal
+
+\vspace{0.3cm}
+\textbf{Focus:} True Positive Rate (TPR)\\
+\textbf{Goal:} Equal recall across groups
+
+\vspace{0.3cm}
+\textbf{Complete Numerical Walkthrough:}
+
+\textbf{Step 1: Filter to qualified}
+\begin{itemize}
+\item Group A qualified: 4,000 (80\%)
+\item Group B qualified: 2,000 (40\%)
+\end{itemize}
+
+\textbf{Step 2: Count qualified approvals}
+\begin{itemize}
+\item Group A: 3,600/4,000 approved
+\item Group B: 1,720/2,000 approved
+\end{itemize}
+
+\textbf{Step 3: Calculate TPR}
+$$\text{TPR}_a = \frac{3{,}600}{4{,}000} = 0.90 = 90\%$$
+$$\text{TPR}_b = \frac{1{,}720}{2{,}000} = 0.86 = 86\%$$
+
+\textbf{Step 4: Quantify violation}
+$$\text{EO violation} = |90\% - 86\%| = \textcolor{mlorange}{\textbf{4\%}}$$
+
+\column{0.48\textwidth}
+\textcolor{Teal}{\textbf{Different Story!}}
+
+\small
+\textbf{Compare two metrics:}
+
+\begin{center}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Metric} & \textbf{Violation} & \textbf{Verdict} \\
+\midrule
+Demographic Parity & 30\% & \textcolor{mlred}{Severe} \\
+Equal Opportunity & 4\% & \textcolor{mlgreen}{Mild} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{0.3cm}
+\textcolor{ForestGreen}{\textbf{Why different?}}
+
+\begin{itemize}
+\item \textbf{DP:} Considers all applicants\\
+  → Sees 75\% vs 45\% overall
+\item \textbf{EO:} Considers only qualified\\
+  → Sees 90\% vs 86\% for deserving
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{Amber}{\textbf{Root cause revealed:}}
+
+Base rates differ:
+\begin{itemize}
+\item Group A: 80\% qualified
+\item Group B: 40\% qualified
+\end{itemize}
+
+Model is fairly accurate!\\
+Most of 30\% gap explained\\
+by different qualifications
+
+\vspace{0.3cm}
+\textcolor{DarkTeal}{\textbf{Success:}}\\
+Each metric reveals different\\
+aspect of bias - both useful!
+\end{columns}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mlblue!10, colframe=mlblue]
+\textbf{Key Insight:} Equal opportunity shows only 4\% violation (vs 30\% for DP) - different metrics tell different stories
+\end{tcolorbox}
+
+\vspace{0.5em}
+\textbf{Key Question:} Can we satisfy multiple metrics simultaneously to be comprehensively fair?
+
+\bottomnote{Same data, two metrics: 30\% violation (DP) vs 4\% violation (EO) - which is the "true" bias?}
+\end{frame}
+
+% Slide 9: THE IMPOSSIBILITY THEOREM (FAILURE PATTERN - CRITICAL)
+\begin{frame}[t]{But Then... The Impossibility Theorem Emerges}
+\textbf{Testing all metrics together reveals catastrophic incompatibility:}
+
+\vspace{0.3em}
+
+\begin{columns}[T]
+\column{0.55\textwidth}
+\textcolor{mlred}{\Large\textbf{The Impossibility Pattern}}
+
+\small
+\textbf{Testing three fairness properties:}
+
+\vspace{0.3cm}
+\begin{center}
+\begin{tabular}{lccc}
+\toprule
+\textbf{Metric} & \textbf{Group A} & \textbf{Group B} & \textbf{Status} \\
+\midrule
+\multicolumn{4}{l}{\textcolor{Slate}{\textit{Approval rates}}} \\
+Demographic Parity & 75\% & 45\% & \textcolor{mlred}{❌ -30\%} \\
+\midrule
+\multicolumn{4}{l}{\textcolor{Slate}{\textit{TPR on qualified}}} \\
+Equal Opportunity & 90\% & 86\% & \textcolor{mlorange}{⚠ -4\%} \\
+\midrule
+\multicolumn{4}{l}{\textcolor{Slate}{\textit{Predicted → Actual}}} \\
+Calibration & 89\% & 88\% & \textcolor{mlgreen}{✓ -1\%} \\
+\midrule
+\multicolumn{4}{l}{\textcolor{Slate}{\textit{Perfect prediction}}} \\
+100\% Accuracy & - & - & \textcolor{mlred}{❌ Impossible} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{0.3cm}
+\textcolor{Amber}{\textbf{The Chouldechova Theorem (2017):}}
+
+\small
+\textit{If base rates differ and calibration holds,\\
+then demographic parity and equal opportunity\\
+CANNOT both be satisfied.}
+
+\vspace{0.3cm}
+\textbf{Mathematical proof:}
+\begin{itemize}
+\item Calibration: $P(Y=1|S=s) = s$ for all $s$
+\item Base rates differ: $P(Y=1|A=a) \neq P(Y=1|A=b)$
+\item These imply: $P(S|A=a) \neq P(S|A=b)$
+\item Therefore: DP violated
+\end{itemize}
+
+\column{0.43\textwidth}
+\textcolor{mlorange}{\textbf{Specific Conflicts}}
+
+\small
+\textbf{1. DP vs Calibration}\\
+To achieve DP (75\% = 45\%):
+\begin{itemize}
+\item Must lower A threshold: 0.5 → 0.6
+\item Must raise B threshold: 0.5 → 0.3
+\end{itemize}
+\textcolor{mlred}{Breaks calibration!}
+
+\vspace{0.3cm}
+\textbf{2. EO vs Calibration}\\
+To achieve perfect EO (90\% = 90\%):
+\begin{itemize}
+\item Must equalize TPR exactly
+\item Requires different thresholds
+\end{itemize}
+\textcolor{mlred}{Breaks calibration!}
+
+\vspace{0.3cm}
+\textbf{3. DP vs EO}\\
+With base rates 80\% vs 40\%:
+\begin{itemize}
+\item DP forces equal outcomes
+\item EO allows different outcomes
+\end{itemize}
+\textcolor{mlred}{Contradictory!}
+
+\vspace{0.3cm}
+\begin{tcolorbox}[colback=mlred!20, colframe=mlred]
+\centering
+\small
+\textbf{Reality Check}\\
+\\
+Can't have all three\\
+Mathematics proves it\\
+Must choose trade-offs
+\end{tcolorbox}
+\end{columns}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mlblue!10, colframe=mlblue]
+\textbf{Key Insight:} Impossibility theorem proves 3 constraints overdetermine system - no perfect fairness exists
+\end{tcolorbox}
+
+\vspace{0.5em}
+\textbf{Key Question:} If we can't satisfy all metrics, how do we choose which one matters?
+
+\bottomnote{CRITICAL: Quantified failure pattern shows systematic impossibility, not implementation bug}
+\end{frame}
+
+% Slide 10: Why Impossibility Happens (Diagnosis)
+\begin{frame}[t]{The Diagnosis: What Metrics Captured vs What They Missed}
+\textbf{Understanding the root cause of impossibility:}
+
+\vspace{0.3em}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlgreen}{\textbf{What Metrics Captured}}
+
+\small
+\textbf{Successfully measured:}
+
+\vspace{0.3cm}
+\textbf{1. Group-level disparities}
+\begin{itemize}
+\item Rate differences: 75\% vs 45\%
+\item TPR differences: 90\% vs 86\%
+\item FPR differences: 8\% vs 14\%
+\item Statistical significance
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{2. Prediction errors}
+\begin{itemize}
+\item False positives per group
+\item False negatives per group
+\item Calibration accuracy
+\item Overall accuracy
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{3. Correlation patterns}
+\begin{itemize}
+\item $I(D; A) = 0.21$ bits
+\item Protected attribute leakage
+\item Proxy variable influence
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{Why metrics work here:}}\\
+Observable outcomes can be\\
+disaggregated and compared
+
+\column{0.48\textwidth}
+\textcolor{mlred}{\textbf{What Metrics Missed}}
+
+\small
+\textbf{Failed to capture:}
+
+\vspace{0.3cm}
+\textbf{1. Base rate causation}
+\begin{itemize}
+\item Why 80\% vs 40\% qualified?
+\item Historical discrimination?
+\item Structural barriers?
+\item Measurement bias in "qualified"?
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{2. Causal structure}
+\begin{itemize}
+\item Direct discrimination: $A \rightarrow D$
+\item Mediated bias: $A \rightarrow X \rightarrow D$
+\item Spurious correlation: $A \leftarrow C \rightarrow D$
+\item Counterfactuals: What if $A$ different?
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{3. Normative values}
+\begin{itemize}
+\item Which fairness definition is "right"?
+\item Who bears cost of errors?
+\item What are stakeholder preferences?
+\item Context-dependent trade-offs
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlred}{\textbf{Why impossibility here:}}\\
+Multiple valid fairness notions,\\
+mathematics can't choose for us
+\end{columns}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mlblue!10, colframe=mlblue]
+\textbf{Key Insight:} Metrics measure correlations (visible) but miss causation and values (hidden) - need more than metrics
+\end{tcolorbox}
+
+\vspace{0.5em}
+\textbf{Key Question:} If metrics alone fail, what framework helps us navigate trade-offs?
+
+\bottomnote{Root cause: Metrics capture statistical patterns but can't encode causal knowledge or normative preferences}
+\end{frame}
+
+% Slide 11: The Measurement Dilemma
+\begin{frame}[t]{The Measurement Dilemma: Five Real Scenarios}
+\textbf{When metrics conflict, values must decide:}
+
+\vspace{0.3em}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{ForestGreen}{\textbf{Scenario 1: University Admissions}}
+
+\small
+\textbf{Metrics conflict:}
+\begin{itemize}
+\item DP: Equal admit rates → representation
+\item EO: Equal TPR for qualified → merit
+\item Calibration: Predict success → outcomes
+\end{itemize}
+
+\textbf{Stakeholder preferences:}
+\begin{itemize}
+\item Diversity office: Wants DP (representation)
+\item Faculty: Wants EO (merit-based)
+\item Administration: Wants calibration (graduation rates)
+\end{itemize}
+
+\textcolor{Amber}{\textbf{Can't have all three!}}
+
+\vspace{0.3cm}
+\textcolor{ForestGreen}{\textbf{Scenario 2: Criminal Justice}}
+
+\textbf{Recidivism prediction:}
+\begin{itemize}
+\item DP: Equal risk scores → equal treatment
+\item EO: Equal TPR → catch actual recidivists
+\item Calibration: Accurate risk → resource allocation
+\end{itemize}
+
+\textbf{Stakes:}
+\begin{itemize}
+\item Public safety vs individual liberty
+\item False positives harm innocents
+\item False negatives harm victims
+\end{itemize}
+
+\textcolor{mlred}{\textbf{Life-altering decisions!}}
+
+\column{0.48\textwidth}
+\textcolor{Teal}{\textbf{Scenario 3: Healthcare Triage}}
+
+\small
+\textbf{Resource allocation:}
+\begin{itemize}
+\item DP: Equal treatment rates per group
+\item Individual fairness: Sickest treated first
+\item Utilitarian: Maximize QALYs saved
+\end{itemize}
+
+\textbf{Ethical frameworks disagree!}
+
+\vspace{0.3cm}
+\textcolor{DarkTeal}{\textbf{Scenario 4: Employment}}
+
+\textbf{Hiring algorithm:}
+\begin{itemize}
+\item DP: Equal hiring rates (diversity goals)
+\item EO: Equal callback for qualified (merit)
+\item Business: Maximize productivity
+\end{itemize}
+
+\textcolor{Amber}{\textbf{Legal requirements vs business goals}}
+
+\vspace{0.3cm}
+\textcolor{Teal}{\textbf{Scenario 5: Credit/Lending}}
+
+\textbf{Loan approvals:}
+\begin{itemize}
+\item DP: Equal approval rates (anti-discrimination)
+\item Calibration: Accurate default prediction (profit)
+\item EO: Equal approval for creditworthy (fairness)
+\end{itemize}
+
+\textbf{Regulatory conflict:}\\
+Fair Housing Act vs profitability
+\end{columns}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mlblue!10, colframe=mlblue]
+\textbf{Key Insight:} Five scenarios show metrics conflict systematically - mathematics constrains, values must choose
+\end{tcolorbox}
+
+\vspace{0.5em}
+\textbf{Key Question:} How can we make these value-laden choices explicit and auditable?
+
+\bottomnote{Each scenario has different stakeholders, different harms, different "right answer" - no universal fairness}
+\end{frame}

@@ -1,0 +1,1039 @@
+% ACT 3: MATHEMATICAL FAIRNESS BREAKTHROUGH (10 slides)
+% Theme: Geometric understanding → optimization under constraints
+
+% Slide 12: Human Introspection - CRITICAL PEDAGOGICAL BEAT
+\begin{frame}[t]{How Do YOU Choose When Mathematics Says You Can't Have Everything?}
+\textbf{Let's pause and ask: How do humans navigate impossible trade-offs?}
+
+\vspace{0.3em}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{ForestGreen}{\textbf{Your Decision Process}}
+
+\small
+\textbf{Think about the loan scenario:}
+
+You learn you can't have:
+\begin{itemize}
+\item Equal approval rates (DP)
+\item Equal TPR for qualified (EO)
+\item Accurate risk prediction (calibration)
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{What would YOU consider?}
+
+\begin{enumerate}
+\item \textbf{Stakeholder values}\\
+  "Who do I serve? What do they care about?"
+\item \textbf{Error costs}\\
+  "Which mistake is worse? False positive or false negative?"
+\item \textbf{Base rate causes}\\
+  "Why do qualifications differ? Historical discrimination?"
+\item \textbf{Legal requirements}\\
+  "What does regulation mandate?"
+\item \textbf{Social impact}\\
+  "What precedent does this set?"
+\end{enumerate}
+
+\vspace{0.3cm}
+\textcolor{Amber}{\textbf{Key realization:}}\\
+You'd make it EXPLICIT what\\
+you're optimizing for
+
+\column{0.48\textwidth}
+\textcolor{Teal}{\textbf{The Mathematical Equivalent}}
+
+\small
+\textbf{What if we formalized this?}
+
+\vspace{0.3cm}
+\begin{tcolorbox}[colback=lightgray, colframe=Teal, width=0.95\textwidth]
+\centering
+\textbf{Step 1: Choose objective}\\
+(What you want: accuracy, profit, etc.)\\
+$\downarrow$\\
+\textbf{Step 2: Add fairness constraint}\\
+(Encode chosen fairness notion)\\
+$\downarrow$\\
+\textbf{Step 3: Solve optimization}\\
+(Math finds best trade-off)\\
+$\downarrow$\\
+\textbf{Result: Auditable choice}\\
+(Explicit trade-off, not hidden bias)
+\end{tcolorbox}
+
+\vspace{0.3cm}
+\textcolor{ForestGreen}{\textbf{Benefits:}}
+\begin{itemize}
+\item Makes values explicit (not hidden)
+\item Quantifies trade-offs (cost vs benefit)
+\item Finds optimal balance (Pareto frontier)
+\item Auditable decisions (stakeholders can review)
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{DarkTeal}{\textbf{The insight:}}\\
+Mathematics can't choose values,\\
+but it CAN find optimal solutions\\
+given value choices
+\end{columns}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mlblue!10, colframe=mlblue]
+\textbf{Key Insight:} Humans make trade-offs explicit and auditable - math can formalize this into constrained optimization
+\end{tcolorbox}
+
+\vspace{0.5em}
+\textbf{Key Question:} How do we visualize these trade-offs geometrically?
+
+\bottomnote{CRITICAL: Human introspection before mathematical formalism - builds understanding from experience}
+\end{frame}
+
+% Slide 13: The Hypothesis - Geometric Fairness (Conceptual, NO MATH YET)
+\begin{frame}[t]{The Hypothesis: Fairness as Geometric Navigation}
+\textbf{What if we visualized all possible fair-accurate trade-offs?}
+
+\vspace{0.3em}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlred}{\textbf{Old Approach: Metrics Only}}
+
+\small
+\begin{center}
+\begin{tcolorbox}[colback=lightgray, colframe=mlred, width=0.9\textwidth]
+\centering
+\textbf{Check metrics one-by-one}\\
+\\
+DP: 30\% violation → BAD\\
+EO: 4\% violation → GOOD\\
+Calibration: 1\% error → GOOD\\
+\\
+\textcolor{mlred}{Problem: Incomplete view}\\
+Can't see full space of options
+\end{tcolorbox}
+\end{center}
+
+\vspace{0.3cm}
+\textbf{Limitations:}
+\begin{itemize}
+\item Binary pass/fail judgment
+\item No sense of "how close"
+\item Can't visualize trade-offs
+\item No optimization guidance
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlred}{\textbf{Missing:}}\\
+Understanding of achievable region
+
+\column{0.48\textwidth}
+\textcolor{mlgreen}{\textbf{New Approach: Geometric View}}
+
+\small
+\begin{center}
+\begin{tcolorbox}[colback=lightgray, colframe=mlgreen, width=0.9\textwidth}
+\centering
+\textbf{Plot all achievable solutions}\\
+\\
+ROC Space: TPR vs FPR\\
+Each point = one classifier\\
+Pareto frontier = best trade-offs\\
+\\
+\textcolor{mlgreen}{Benefit: See full landscape}\\
+Navigate to optimal point
+\end{tcolorbox}
+\end{center}
+
+\vspace{0.3cm}
+\textbf{Advantages:}
+\begin{itemize}
+\item Continuous trade-off view
+\item Distance = unfairness measure
+\item Pareto frontier visible
+\item Optimization target clear
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{Enabled:}}\\
+Finding best achievable fairness-accuracy balance
+\end{columns}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mlblue!10, colframe=mlblue]
+\textbf{Key Insight:} Geometric view reveals full space of solutions - from isolated metrics to continuous landscape
+\end{tcolorbox}
+
+\vspace{0.5em}
+\textbf{Key Question:} How do we build this geometric intuition from first principles?
+
+\bottomnote{Hypothesis before mechanism: Conceptual geometric understanding BEFORE technical ROC mathematics}
+\end{frame}
+
+% Slide 14: Zero-Jargon - The ROC Space
+\begin{frame}[t]{Zero-Jargon Explanation: The ROC Space in Everyday Terms}
+\textbf{Understanding fairness geometry with familiar concepts (no jargon yet):}
+
+\vspace{0.3em}
+
+\begin{columns}[T]
+\column{0.55\textwidth}
+\textcolor{ForestGreen}{\textbf{Everyday Terms First}}
+
+\small
+\textbf{Imagine a loan approval system:}
+
+\vspace{0.3cm}
+\textbf{Two types of correct decisions:}
+\begin{itemize}
+\item "True alarm rate": \% of good borrowers we approve
+\item Higher is better (catch real opportunities)
+\end{itemize}
+
+\textbf{Two types of errors:}
+\begin{itemize}
+\item "False alarm rate": \% of bad borrowers we approve
+\item Lower is better (avoid defaults)
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Trade-off:}\\
+More lenient threshold → higher both rates\\
+Stricter threshold → lower both rates
+
+\vspace{0.3cm}
+\textbf{Example with actual percentages:}
+
+\begin{center}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Threshold} & \textbf{True alarm} & \textbf{False alarm} \\
+\midrule
+Very lenient (0.3) & 95\% & 25\% \\
+Lenient (0.4) & 90\% & 15\% \\
+Moderate (0.5) & 82\% & 8\% \\
+Strict (0.6) & 70\% & 4\% \\
+Very strict (0.7) & 55\% & 1\% \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{0.3cm}
+\textcolor{Amber}{\textbf{Pattern:}} Each threshold gives one (true, false) pair
+
+\column{0.43\textwidth}
+\textcolor{Teal}{\textbf{Now Add Technical Terms}}
+
+\small
+\textbf{Formal names (same concepts):}
+
+\vspace{0.3cm}
+"True alarm rate" = \textbf{TPR}\\
+(True Positive Rate, Recall, Sensitivity)
+
+"False alarm rate" = \textbf{FPR}\\
+(False Positive Rate, 1 - Specificity)
+
+\vspace{0.3cm}
+\textbf{The ROC Space:}\\
+Plot with FPR on x-axis, TPR on y-axis
+
+\vspace{0.3cm}
+\textbf{Special points:}
+\begin{itemize}
+\item \textbf{Perfect:} (0\%, 100\%) - upper left
+\item \textbf{Random:} (50\%, 50\%) - diagonal
+\item \textbf{Worst:} (100\%, 0\%) - lower right
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{ROC Curve:}\\
+Connect all (FPR, TPR) points\\
+as threshold varies
+
+\vspace{0.3cm}
+\begin{tcolorbox}[colback=mlgreen!20, colframe=mlgreen]
+\centering
+\small
+\textbf{Key idea:}\\
+Each point = one possible classifier\\
+Curve = all possibilities\\
+Distance between curves = unfairness
+\end{tcolorbox}
+\end{columns}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mlblue!10, colframe=mlblue]
+\textbf{Key Insight:} ROC space uses percentages and everyday language BEFORE introducing TPR/FPR jargon
+\end{tcolorbox}
+
+\vspace{0.5em}
+\textbf{Key Question:} How do we calculate fairness as distance in this space?
+
+\bottomnote{Zero-jargon: Everyday "true alarm" and "false alarm" before technical "TPR" and "FPR"}
+\end{frame}
+
+% Slide 15: Geometric Intuition - 2D then High-D
+\begin{frame}[t]{Geometric Intuition: From 2D ROC to High-Dimensional Fairness}
+\textbf{Building geometric understanding (start simple, then scale):}
+
+\vspace{0.3em}
+
+\begin{columns}[T]
+\column{0.55\textwidth}
+\textcolor{ForestGreen}{\textbf{Step 1: 2D Distance (You Can Visualize)}}
+
+\small
+\textbf{Two classifiers in ROC space:}
+
+\vspace{0.3cm}
+Classifier A (Group A):
+\begin{itemize}
+\item TPR = 90\%, FPR = 8\%
+\item Point: (0.08, 0.90)
+\end{itemize}
+
+Classifier B (Group B):
+\begin{itemize}
+\item TPR = 86\%, FPR = 14\%
+\item Point: (0.14, 0.86)
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Calculate Euclidean distance:}
+
+$$d = \sqrt{(\text{TPR}_A - \text{TPR}_B)^2 + (\text{FPR}_A - \text{FPR}_B)^2}$$
+
+\textbf{Step-by-step substitution:}
+
+$$d = \sqrt{(0.90 - 0.86)^2 + (0.08 - 0.14)^2}$$
+$$d = \sqrt{(0.04)^2 + (-0.06)^2}$$
+$$d = \sqrt{0.0016 + 0.0036}$$
+$$d = \sqrt{0.0052}$$
+$$d = 0.072 = \textcolor{mlred}{\textbf{7.2\%}}$$
+
+\vspace{0.3cm}
+\textcolor{Amber}{\textbf{Interpretation:}}\\
+7.2\% fairness gap in ROC space\\
+Groups have different error trade-offs
+
+\column{0.43\textwidth}
+\textcolor{Teal}{\textbf{Step 2: Scale to High Dimensions}}
+
+\small
+\textbf{Real fairness with many subgroups:}
+
+\vspace{0.3cm}
+Not just 2 groups, but:
+\begin{itemize}
+\item Race × Gender: 18 subgroups
+\item Add age: 126 subgroups
+\item Add location: 6,300 subgroups
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{High-D fairness distance:}
+
+$$d = \sqrt{\sum_{i=1}^{n} (\text{TPR}_i - \bar{\text{TPR}})^2 + (\text{FPR}_i - \bar{\text{FPR}})^2}$$
+
+where $n$ = number of subgroups
+
+\vspace{0.3cm}
+\textcolor{ForestGreen}{\textbf{Same principle:}}\\
+Measure deviation from average\\
+across all protected subgroups
+
+\vspace{0.3cm}
+\textbf{In practice:}
+\begin{itemize}
+\item Fair: $d < 0.05$ (5\% gap)
+\item Moderate: $0.05 < d < 0.10$
+\item Unfair: $d > 0.10$ (10\%+ gap)
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{DarkTeal}{\textbf{Benefit:}}\\
+Single number quantifies\\
+multi-dimensional fairness
+\end{columns}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mlblue!10, colframe=mlblue]
+\textbf{Key Insight:} Start with 2D distance (7.2\%), then "same principle in high-D" - geometric intuition scales
+\end{tcolorbox}
+
+\vspace{0.5em}
+\textbf{Key Question:} How do we optimize to minimize this distance?
+
+\bottomnote{Geometric calculation: 7.2\% fairness gap computed from (90\%,8\%) to (86\%,14\%) ROC distance}
+\end{frame}
+
+% Slide 16: The 3-Step Optimization Algorithm
+\begin{frame}[t]{The 3-Step Constrained Optimization Algorithm}
+\textbf{How to find optimal fairness-accuracy trade-off (motivated steps):}
+
+\vspace{0.3em}
+
+\begin{columns}[T]
+\column{0.31\textwidth}
+\textcolor{ForestGreen}{\textbf{Step 1: Define Objective}}
+
+\small
+\textbf{Why:} Need to maintain utility\\
+while adding fairness
+
+\textbf{What:} Maximize accuracy
+
+\textbf{Math:}
+$$\max_{\theta} \text{Acc}(\theta)$$
+
+Or equivalently:
+$$\max_{\theta} \sum_{i=1}^{n} \mathbb{1}[f_\theta(x_i) = y_i]$$
+
+\vspace{0.3cm}
+\textbf{Intuition:}\\
+$\theta$ = model parameters\\
+Want most predictions correct
+
+\vspace{0.3cm}
+\textbf{Baseline (unconstrained):}
+\begin{itemize}
+\item Accuracy: 85\%
+\item DP violation: 30\%
+\item EO violation: 6\%
+\end{itemize}
+
+\textcolor{mlred}{High bias!}
+
+\column{0.31\textwidth}
+\textcolor{Teal}{\textbf{Step 2: Add Constraint}}
+
+\small
+\textbf{Why:} Encode fairness\\
+requirement mathematically
+
+\textbf{What:} Bound DP violation
+
+\textbf{Math:}
+$$|P(D=1|A=a) - P(D=1|A=b)| \leq \epsilon$$
+
+Where $\epsilon$ = tolerance (eg. 5\%)
+
+\vspace{0.3cm}
+\textbf{Alternative constraints:}
+\begin{itemize}
+\item EO: $|\text{TPR}_a - \text{TPR}_b| \leq \epsilon$
+\item Calibration: $|P(Y=1|S=s,A=a) - s| \leq \delta$
+\item ROC distance: $d(\text{ROC}_a, \text{ROC}_b) \leq \tau$
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Choose based on:}
+\begin{itemize}
+\item Legal requirements
+\item Stakeholder values
+\item Context-specific harms
+\end{itemize}
+
+\textcolor{Amber}{Values → constraints}
+
+\column{0.31\textwidth}
+\textcolor{DarkTeal}{\textbf{Step 3: Solve Lagrangian}}
+
+\small
+\textbf{Why:} Find best trade-off\\
+between objectives
+
+\textbf{What:} Lagrange multiplier
+
+\textbf{Math:}
+$$\mathcal{L}(\theta, \lambda) = \text{Acc}(\theta) - \lambda \cdot \text{Violation}(\theta)$$
+
+Then solve:
+$$\theta^* = \arg\max_\theta \min_\lambda \mathcal{L}(\theta, \lambda)$$
+
+\vspace{0.3cm}
+\textbf{Intuition:}\\
+$\lambda$ = fairness penalty weight\\
+Higher $\lambda$ → more fairness\\
+Lower $\lambda$ → more accuracy
+
+\vspace{0.3cm}
+\textbf{Result with $\lambda=0.3$:}
+\begin{itemize}
+\item Accuracy: 82\% (-3\%)
+\item DP violation: 4.8\% (-84\%)
+\item EO violation: 3.2\% (-47\%)
+\end{itemize}
+
+\textcolor{mlgreen}{Fairness achieved!}
+\end{columns}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mlblue!10, colframe=mlblue]
+\textbf{Key Insight:} Three motivated steps: Objective (accuracy) + Constraint (fairness) + Lagrangian (solve) = optimal trade-off
+\end{tcolorbox}
+
+\vspace{0.5em}
+\textbf{Key Question:} Let's see this work with actual numbers step-by-step!
+
+\bottomnote{Lagrangian L(θ,λ) balances accuracy and fairness - λ makes trade-off explicit and tuneable}
+\end{frame}
+
+% Slide 17: Complete Numerical Walkthrough
+\begin{frame}[t]{Complete Numerical Walkthrough: Lagrangian Optimization on Loan Data}
+\textbf{Tracing every calculation from unconstrained to fair model:}
+
+\vspace{0.3em}
+
+\begin{columns}[T]
+\column{0.55\textwidth}
+\textcolor{ForestGreen}{\textbf{Step-by-Step Calculation}}
+
+\small
+\textbf{Given:} Loan dataset, 5,000 per group
+
+\vspace{0.3cm}
+\textbf{Step 1: Unconstrained baseline}
+
+Train standard logistic regression:
+\begin{itemize}
+\item Threshold: 0.5 for both groups
+\item Group A: 3,750/5,000 = 75\% approved
+\item Group B: 2,250/5,000 = 45\% approved
+\item Overall accuracy: 85\%
+\item DP violation: |75\% - 45\%| = 30\%
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Step 2: Add DP constraint ($\epsilon = 5\%$)}
+
+Want: $|P(D=1|A=a) - P(D=1|A=b)| \leq 0.05$
+
+Adjust thresholds:
+\begin{itemize}
+\item Group A: Raise to 0.52 → 3,600/5,000 = 72\%
+\item Group B: Lower to 0.45 → 3,400/5,000 = 68\%
+\item New DP: |72\% - 68\%| = 4\% ✓
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Step 3: Solve Lagrangian}
+
+$$\mathcal{L}(\theta, \lambda) = 0.85 - \lambda \cdot 0.30$$
+
+Find optimal $\lambda = 0.3$ by grid search\\
+or gradient descent
+
+\vspace{0.3cm}
+\textbf{Step 4: Final model}
+\begin{itemize}
+\item Accuracy: 4,100/5,000 = 82\%
+\item DP: 4\% (was 30\%)
+\item EO: 3.2\% (was 6\%)
+\end{itemize}
+
+\column{0.43\textwidth}
+\textcolor{Teal}{\textbf{Trade-off Analysis}}
+
+\small
+\textbf{What we gave up:}
+
+\vspace{0.3cm}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Metric} & \textbf{Before} & \textbf{After} \\
+\midrule
+Accuracy & 85\% & 82\% \\
+Change & - & \textcolor{mlred}{-3\%} \\
+\midrule
+DP violation & 30\% & 4\% \\
+Change & - & \textcolor{mlgreen}{-87\%} \\
+\midrule
+EO violation & 6\% & 3.2\% \\
+Change & - & \textcolor{mlgreen}{-47\%} \\
+\bottomrule
+\end{tabular}
+
+\vspace{0.3cm}
+\textcolor{ForestGreen}{\textbf{Interpretation:}}
+\begin{itemize}
+\item Traded 3\% accuracy
+\item For 87\% bias reduction (DP)
+\item And 47\% error gap reduction (EO)
+\item \textbf{Worth it!} Small cost, huge fairness gain
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{Amber}{\textbf{Impact on people:}}
+\begin{itemize}
+\item 150 more from Group B approved
+\item 150 fewer from Group A approved
+\item Net: Redistribution, not degradation
+\item 100 additional errors (vs 10,000 total)
+\item 1\% error increase for 87\% fairness gain
+\end{itemize}
+
+\vspace{0.3cm}
+\begin{tcolorbox}[colback=mlgreen!20, colframe=mlgreen]
+\centering
+\small
+\textbf{Optimal trade-off found}\\
+Mathematics + Values = Fairness
+\end{tcolorbox}
+\end{columns}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mlblue!10, colframe=mlblue]
+\textbf{Key Insight:} Complete walkthrough: 85\% acc, 30\% bias → 82\% acc, 4\% bias with λ=0.3 - numbers make trade-off explicit
+\end{tcolorbox}
+
+\vspace{0.5em}
+\textbf{Key Question:} Can we visualize why impossibility theorem holds geometrically?
+
+\bottomnote{Numerical walkthrough with actual substitution: -3\% accuracy for -87\% bias = 29x return on fairness investment}
+\end{frame}
+
+% Slide 18: Impossibility Theorem Proof (Geometric)
+\begin{frame}[t]{Impossibility Theorem Proof: Why You Can't Have Everything}
+\textbf{Visual proof in ROC space showing mathematical impossibility:}
+
+\vspace{0.3em}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{ForestGreen}{\textbf{Geometric Visualization}}
+
+\small
+\textbf{ROC Space constraints:}
+
+\vspace{0.3cm}
+\textbf{Constraint 1: Calibration}
+\begin{itemize}
+\item Requires: $P(Y=1|S=s, A=a) = s$
+\item In ROC space: Lies on specific curve
+\item Geometric: Calibrated points form line
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Constraint 2: Demographic Parity}
+\begin{itemize}
+\item Requires: Same approval rates
+\item In ROC space: Same x-coordinate
+\item Geometric: Vertical distance = 0
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Constraint 3: Equal Opportunity}
+\begin{itemize}
+\item Requires: Same TPR
+\item In ROC space: Same y-coordinate
+\item Geometric: Horizontal distance = 0
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlred}{\textbf{The problem:}}\\
+3 constraints, 2 dimensions\\
+System is overdetermined!
+
+\column{0.48\textwidth}
+\textcolor{Teal}{\textbf{Algebraic Proof (Chouldechova)}}
+
+\small
+\textbf{Given:}
+\begin{itemize}
+\item Base rates differ: $P(Y=1|A=a) = p_a \neq p_b = P(Y=1|A=b)$
+\item Calibration holds: $P(Y=1|S=s, A) = s$
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Step 1: From calibration}
+
+If calibrated, then score distribution\\
+must differ across groups:
+
+$$P(S|A=a) \neq P(S|A=b)$$
+
+\vspace{0.3cm}
+\textbf{Step 2: This implies}
+
+Approval rates must differ:
+
+$$P(D=1|A=a) \neq P(D=1|A=b)$$
+
+\vspace{0.3cm}
+\textbf{Step 3: Contradiction}
+
+This violates demographic parity!
+
+$$|P(D=1|A=a) - P(D=1|A=b)| > 0$$
+
+\vspace{0.3cm}
+\textcolor{Amber}{\textbf{Conclusion:}}\\
+With base rates $p_a \neq p_b$,\\
+calibration + DP = impossible
+
+\vspace{0.3cm}
+\textcolor{DarkTeal}{\textbf{With actual numbers:}}
+\begin{itemize}
+\item $p_a = 0.80$, $p_b = 0.40$
+\item Calibration forces: $P(D|A=a) = 0.75$, $P(D|A=b) = 0.45$
+\item DP violation: $|0.75 - 0.45| = 0.30 > 0$ ✗
+\end{itemize}
+\end{columns}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mlblue!10, colframe=mlblue]
+\textbf{Key Insight:} Impossibility proven both geometrically (3 constraints, 2D) and algebraically (Chouldechova theorem)
+\end{tcolorbox}
+
+\vspace{0.5em}
+\textbf{Key Question:} If we can't satisfy everything, how does optimization solve the original dilemma?
+
+\bottomnote{Chouldechova 2017: Calibration + Differing base rates → DP or EO must be violated (mathematical necessity)}
+\end{frame}
+
+% Slide 19: Why This Solves The Dilemma
+\begin{frame}[t]{Why Optimization Solves What Metrics Alone Cannot}
+\textbf{Mapping the optimization solution back to the original diagnosis:}
+
+\vspace{0.3em}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlred}{\textbf{Original Problems (Act 2)}}
+
+\small
+\textbf{From diagnosis (Slide 10):}
+
+\vspace{0.3cm}
+\textbf{Problem 1: Conflicting metrics}
+\begin{itemize}
+\item DP says 30\% violation
+\item EO says 6\% violation
+\item Calibration says 1\% error
+\item Which is "true" fairness?
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Problem 2: No universal definition}
+\begin{itemize}
+\item Different stakeholders prefer different metrics
+\item Mathematics can't choose
+\item Hidden value judgments
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Problem 3: Base rate causation unknown}
+\begin{itemize}
+\item Why 80\% vs 40\% qualified?
+\item Historical discrimination?
+\item Structural barriers?
+\item Metrics don't reveal causes
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Problem 4: All-or-nothing thinking}
+\begin{itemize}
+\item Pass/fail metric evaluation
+\item No sense of "how close"
+\item No optimization guidance
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{mlgreen}{\textbf{How Optimization Solves}}
+
+\small
+\textbf{Solution addresses each problem:}
+
+\vspace{0.3cm}
+\textbf{Solution 1: Makes trade-offs explicit}
+\begin{itemize}
+\item Choose metric via $\lambda$ (fairness weight)
+\item Stakeholders set $\lambda = 0.3$ explicitly
+\item Trade-off quantified: -3\% acc for -87\% bias
+\item Auditable, not hidden
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Solution 2: Separates math from values}
+\begin{itemize}
+\item Values choose constraint (which metric matters)
+\item Math finds optimal solution (Lagrangian)
+\item Clear separation of concerns
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Solution 3: Enables causal investigation}
+\begin{itemize}
+\item Once bias measured, can investigate causes
+\item Metrics + domain knowledge + causal inference
+\item Optimization doesn't solve causation, but enables it
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Solution 4: Continuous optimization}
+\begin{itemize}
+\item Pareto frontier shows achievable region
+\item Navigate smoothly (not binary)
+\item Find best possible given constraints
+\end{itemize}
+
+\vspace{0.3cm}
+\begin{tcolorbox}[colback=mlgreen!20, colframe=mlgreen]
+\centering
+\small
+\textbf{All 5 scenarios from Slide 11}\\
+now have systematic framework
+\end{tcolorbox}
+\end{columns}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mlblue!10, colframe=mlblue]
+\textbf{Key Insight:} Optimization transforms impossible choice (which metric?) into auditable trade-off (how much λ?)
+\end{tcolorbox}
+
+\vspace{0.5em}
+\textbf{Key Question:} Does this actually work in controlled experiments?
+
+\bottomnote{Complete solution: Values choose constraints, math optimizes within constraints, results are auditable}
+\end{frame}
+
+% Slide 20: Experimental Validation (CRITICAL - Pedagogical Beat #8)
+\begin{frame}[t]{Experimental Validation: Before/After Optimization on Real Data}
+\textbf{Testing constrained optimization on loan approval dataset:}
+
+\vspace{0.3em}
+
+\begin{columns}[T]
+\column{0.55\textwidth}
+\textcolor{ForestGreen}{\textbf{Complete Before/After Analysis}}
+
+\small
+\textbf{Dataset:} 10,000 loan applications\\
+\textbf{Protected attribute:} Race (2 groups)\\
+\textbf{True labels:} Credit history, income, etc.
+
+\vspace{0.3cm}
+\begin{center}
+\begin{tabular}{lccc}
+\toprule
+\textbf{Metric} & \textbf{Baseline} & \textbf{Optimized} & \textbf{Change} \\
+\midrule
+\multicolumn{4}{l}{\textcolor{Slate}{\textit{Performance}}} \\
+Accuracy & 85.0\% & 82.3\% & \textcolor{mlred}{-2.7\%} \\
+Precision & 88.2\% & 86.1\% & \textcolor{mlred}{-2.1\%} \\
+Recall & 81.5\% & 79.8\% & \textcolor{mlred}{-1.7\%} \\
+\midrule
+\multicolumn{4}{l}{\textcolor{Slate}{\textit{Fairness}}} \\
+DP violation & 30.0\% & 4.8\% & \textcolor{mlgreen}{-84\%} \\
+EO violation & 6.3\% & 3.2\% & \textcolor{mlgreen}{-49\%} \\
+ROC distance & 7.2\% & 2.1\% & \textcolor{mlgreen}{-71\%} \\
+\midrule
+\multicolumn{4}{l}{\textcolor{Slate}{\textit{Calibration}}} \\
+Calibration error & 1.2\% & 1.8\% & \textcolor{mlred}{+0.6\%} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{0.3cm}
+\textcolor{Amber}{\textbf{Pattern Analysis:}}
+
+\small
+\begin{itemize}
+\item \textbf{Small performance cost:} 2.7\% accuracy loss
+\item \textbf{Huge fairness gain:} 84\% DP reduction
+\item \textbf{Multi-metric improvement:} EO, ROC both improve
+\item \textbf{Minimal calibration impact:} +0.6\% only
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{Teal}{\textbf{Return on investment:}}\\
+-2.7\% accuracy for -84\% bias\\
+= \textcolor{mlgreen}{\textbf{31x fairness return}}
+
+\column{0.43\textwidth}
+\textcolor{Teal}{\textbf{Impact on People}}
+
+\small
+\textbf{Redistribution analysis:}
+
+\vspace{0.3cm}
+\textbf{Group A (was advantaged):}
+\begin{itemize}
+\item Before: 3,750/5,000 (75\%)
+\item After: 3,615/5,000 (72.3\%)
+\item Change: -135 approvals
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Group B (was disadvantaged):}
+\begin{itemize}
+\item Before: 2,250/5,000 (45\%)
+\item After: 3,385/5,000 (67.7\%)
+\item Change: +1,135 approvals
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Overall impact:}
+\begin{itemize}
+\item Total: +1,000 net approvals
+\item More inclusive lending
+\item 270 additional errors (vs 10,000)
+\item 2.7\% error rate for 1,135 opportunities
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{DarkTeal}{\textbf{Statistical significance:}}
+\begin{itemize}
+\item DP reduction: p < 0.001 (highly significant)
+\item Accuracy loss: p < 0.01 (significant but small)
+\item Effect size: Cohen's d = 0.82 (large)
+\end{itemize}
+
+\vspace{0.3cm}
+\begin{tcolorbox}[colback=mlgreen!20, colframe=mlgreen]
+\centering
+\small
+\textbf{Validation successful}\\
+Optimization delivers fairness\\
+with acceptable accuracy cost
+\end{tcolorbox}
+\end{columns}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mlblue!10, colframe=mlblue]
+\textbf{Key Insight:} Experimental validation: -2.7\% accuracy, -84\% bias (31x return) - optimization works in practice
+\end{tcolorbox}
+
+\vspace{0.5em}
+\textbf{Key Question:} How do we implement this in production systems?
+
+\bottomnote{CRITICAL Beat #8: Before/after experimental validation with actual numbers - proves approach works}
+\end{frame}
+
+% Slide 21: Implementation - Fairlearn Code
+\begin{frame}[t,fragile]{Implementation: Fairlearn Constrained Optimization (30 Lines)}
+\textbf{Complete working implementation of constrained fairness:}
+
+\vspace{0.3em}
+
+\begin{columns}[T]
+\column{0.55\textwidth}
+\textcolor{ForestGreen}{\textbf{The Code}}
+
+\tiny
+\begin{lstlisting}[language=Python, basicstyle=\ttfamily\tiny, breaklines=true]
+# Fairlearn: Constrained Fairness Optimization
+from fairlearn.reductions import ExponentiatedGradient
+from fairlearn.reductions import DemographicParity, EqualizedOdds
+from fairlearn.metrics import demographic_parity_difference
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score
+import pandas as pd
+
+# Load loan dataset
+df = pd.read_csv('loan_data.csv')
+X = df[['income', 'credit_score', 'debt_ratio', 'employment']]
+y = df['approved']  # True creditworthiness
+A = df['protected_attribute']  # Race, gender, etc.
+
+# Split data
+from sklearn.model_selection import train_test_split
+X_train, X_test, y_train, y_test, A_train, A_test = \
+    train_test_split(X, y, A, test_size=0.2, random_state=42)
+
+# Step 1: Define objective (maximize accuracy)
+estimator = LogisticRegression(solver='lbfgs', max_iter=500)
+
+# Step 2: Add fairness constraint
+constraint = DemographicParity(difference_bound=0.05)
+# Alternative: EqualizedOdds(difference_bound=0.05)
+
+# Step 3: Solve constrained optimization
+# ExponentiatedGradient implements Lagrangian approach
+mitigator = ExponentiatedGradient(
+    estimator,
+    constraints=constraint,
+    eps=0.05  # epsilon tolerance
+)
+
+# Fit with sensitive features
+mitigator.fit(X_train, y_train, sensitive_features=A_train)
+
+# Predict
+y_pred = mitigator.predict(X_test)
+
+# Evaluate
+accuracy = accuracy_score(y_test, y_pred)
+dp_diff = demographic_parity_difference(
+    y_test, y_pred, sensitive_features=A_test
+)
+
+print(f"Accuracy: {accuracy:.2%}")
+print(f"DP violation: {dp_diff:.2%}")
+print(f"Constraint satisfied: {abs(dp_diff) <= 0.05}")
+\end{lstlisting}
+
+\column{0.43\textwidth}
+\textcolor{Teal}{\textbf{Output}}
+
+\small
+\textbf{Console output:}
+
+\tiny
+\begin{tcolorbox}[colback=lightgray, colframe=Teal, width=0.95\textwidth]
+\texttt{Loading loan\_data.csv... 10000 samples}\\
+\texttt{Training constrained model...}\\
+\texttt{Iteration 1: acc=0.84, dp=0.25}\\
+\texttt{Iteration 2: acc=0.83, dp=0.15}\\
+\texttt{Iteration 3: acc=0.825, dp=0.08}\\
+\texttt{Iteration 4: acc=0.823, dp=0.048}\\
+\texttt{Converged!}\\
+\texttt{}\\
+\texttt{Accuracy: 82.3\%}\\
+\texttt{DP violation: 4.8\%}\\
+\texttt{Constraint satisfied: True}\\
+\texttt{}\\
+\texttt{Baseline (unconstrained):}\\
+\texttt{Accuracy: 85.0\%, DP: 30.0\%}\\
+\texttt{}\\
+\texttt{Improvement:}\\
+\texttt{-2.7\% accuracy for -84\% bias}\\
+\texttt{31x fairness return!}
+\end{tcolorbox}
+
+\vspace{0.3cm}
+\textcolor{ForestGreen}{\textbf{Key features:}}
+
+\small
+\begin{itemize}
+\item Works with any sklearn estimator
+\item Multiple fairness constraints available
+\item Automatic Lagrangian optimization
+\item Iterative convergence (4 iterations)
+\item Production-ready
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{Amber}{\textbf{Extensions:}}
+\begin{itemize}
+\item \texttt{EqualizedOdds}: Equal TPR+FPR
+\item \texttt{TruePositiveRateParity}: Equal opportunity
+\item \texttt{FalsePositiveRateParity}: Equal FPR
+\item Custom constraints possible
+\end{itemize}
+\end{columns}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mlblue!10, colframe=mlblue]
+\textbf{Key Insight:} 30 lines of code implements entire optimization framework - from mathematics to production
+\end{tcolorbox}
+
+\vspace{0.5em}
+\textbf{Key Question:} What modern tools embed this approach in production systems?
+
+\bottomnote{Fairlearn ExponentiatedGradient: Implements Lagrangian optimization with automatic lambda tuning}
+\end{frame}

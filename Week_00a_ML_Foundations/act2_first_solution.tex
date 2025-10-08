@@ -1,12 +1,12 @@
-% Act 2: First Solution and Limits - Linear Models
-\section{Act 2: First Solution and Limits}
+% Part 2: First Solution and Limits - Linear Models
+\section{Part 2: First Solution and Limits}
 
 % Section divider
 \begin{frame}[plain]
 \vfill
 \centering
 \begin{beamercolorbox}[sep=16pt,center]{title}
-\usebeamerfont{title}\Large Act 2: First Solution and Limits\par
+\usebeamerfont{title}\Large Part 2: First Solution and Limits\par
 \vspace{0.5em}
 \large Linear Models: Success Before Failure\par
 \end{beamercolorbox}
@@ -45,7 +45,7 @@ Every 500 sqft adds roughly \$50,000
 \formula{\text{Price} = 50 + 0.1 \times \text{Size}}
 
 \textbf{Test:} New house with 1800 sqft
-\textbf{Prediction:} \$50k + 0.1 × 1800 = \$230k
+\textbf{Prediction:} \$50k + 0.1 x 1800 = \$230k
 \textbf{Actual:} \$235k (error: 2\%)
 
 \keypoint{Linear model works beautifully for this problem}
@@ -196,16 +196,16 @@ R-squared & 0.00 \\
 
 \textbf{Attempt 1:} Try to find $w_1, w_2, b$ that work
 
-For point (0, 0) → Blue, we need:
+For point (0, 0) -> Blue, we need:
 \formula{w_1(0) + w_2(0) + b < 0 \quad \Rightarrow \quad b < 0}
 
-For point (0, 1) → Red, we need:
+For point (0, 1) -> Red, we need:
 \formula{w_1(0) + w_2(1) + b > 0 \quad \Rightarrow \quad w_2 + b > 0}
 
-For point (1, 0) → Red, we need:
+For point (1, 0) -> Red, we need:
 \formula{w_1(1) + w_2(0) + b > 0 \quad \Rightarrow \quad w_1 + b > 0}
 
-For point (1, 1) → Blue, we need:
+For point (1, 1) -> Blue, we need:
 \formula{w_1(1) + w_2(1) + b < 0 \quad \Rightarrow \quad w_1 + w_2 + b < 0}
 
 \vspace{0.3em}
@@ -295,14 +295,14 @@ Total error can be split:
 
 \textbf{You cannot minimize both simultaneously:}
 \begin{itemize}
-\item Increase model complexity → Bias ↓, Variance ↑
-\item Decrease model complexity → Bias ↑, Variance ↓
+\item Increase model complexity -> Bias down, Variance up
+\item Decrease model complexity -> Bias up, Variance down
 \end{itemize}
 
 \vspace{0.3em}
 \keypoint{The challenge: Find the sweet spot in the middle}
 
-\textbf{Act 3 will show how to navigate this tradeoff}
+\textbf{Part 3 shows how to navigate this tradeoff}
 
 \bottomnote{This is the most fundamental concept in machine learning}
 }
@@ -364,8 +364,8 @@ Total error can be split:
 \end{itemize}
 
 \vspace{0.3em}
-\textcolor{mlpurple}{\textbf{Act 3 reveals the breakthrough: The kernel trick and deep learning}}
+\textcolor{mlpurple}{\textbf{Part 3 reveals the breakthrough: The kernel trick and deep learning}}
 
-\bottomnote{The journey from linear to nonlinear is the history of modern AI}
+\bottomnote{The evolution from linear to nonlinear is the history of modern AI}
 }
 \end{frame}

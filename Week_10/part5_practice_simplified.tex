@@ -1,0 +1,806 @@
+% Part 5: Practice - ML Model A/B Test Workshop
+\section{Practice: Recommendation Engine A/B Test}
+
+% Slide 1: Workshop Introduction
+\begin{frame}{Workshop: E-Commerce Recommendation Engine Comparison}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Your Challenge}}
+
+\small
+Design and analyze an A/B test comparing 3 recommendation algorithms for an e-commerce site with 100,000 daily users.
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{Why This Matters:}}
+\begin{itemize}
+\item Real-world ML deployment decision
+\item Multi-model comparison
+\item Statistical rigor + business alignment
+\item Portfolio project for interviews
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlorange}{\textbf{Success Criteria:}}
+\begin{itemize}
+\item Correct sample size calculation
+\item Proper statistical tests applied
+\item Guardrail metrics checked
+\item Clear recommendation with rationale
+\item Rollout plan with risk mitigation
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{mlpurple}{\textbf{What You'll Do}}
+
+\small
+\begin{enumerate}
+\item Design experiment (hypothesis, metrics, sample size)
+\item Conduct power analysis (duration calculation)
+\item Run simulation (3 models, 30K users)
+\item Perform statistical analysis (t-tests, Bayesian)
+\item Check guardrails (revenue, latency)
+\item Make deployment decision (ship/iterate/kill)
+\item Create rollout plan (1\% $
+
+\rightarrow$ 100\%)
+\end{enumerate}
+
+\vspace{0.3cm}
+\textcolor{mlgray}{\textbf{Time:}} 60 minutes\\\\\textcolor{mlgray}{\textbf{Deliverable:}} Jupyter notebook\\\\\textcolor{mlgray}{\textbf{Format:}} Individual or pairs\\\\\textcolor{mlgray}{\textbf{Tools:}} Python (scipy, PyMC3)
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Validation establishes baseline quality while iteration drives improvement - measurement cycles enable optimization}
+\end{frame}
+
+% Slide 2: Business Context
+\begin{frame}{Business Context \& Baseline Performance}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Current State}}
+
+\small
+\textbf{E-Commerce Site:}
+\begin{itemize}
+\item 100,000 daily active users
+\item 1M product catalog
+\item Average order value: \$50
+\item Revenue: \$2M per day
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Existing Recommendation System:}
+\begin{itemize}
+\item Algorithm: Popularity-based
+\item CTR (click-through rate): 5.0\%
+\item Conversion rate: 2.0\%
+\item Revenue per user: \$20
+\item Latency: p95 = 150ms
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Business Goal:}
+\begin{itemize}
+\item Increase engagement (CTR)
+\item Maintain or improve conversion
+\item Don't degrade revenue
+\item Keep latency $<$ 200ms
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{mlgreen}{\textbf{Candidate Algorithms}}
+
+\small
+\textbf{Model A: Collaborative Filtering (CF)}
+\begin{itemize}
+\item Offline CTR estimate: 6.2\%
+\item Conversion: 2.1\% (expected)
+\item Latency: 180ms
+\item Complexity: Medium
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Model B: Content-Based (CB)}
+\begin{itemize}
+\item Offline CTR estimate: 5.8\%
+\item Conversion: 2.0\% (expected)
+\item Latency: 160ms
+\item Complexity: Low
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Model C: Hybrid (CF + CB)}
+\begin{itemize}
+\item Offline CTR estimate: 6.5\%
+\item Conversion: 2.2\% (expected)
+\item Latency: 190ms
+\item Complexity: High
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlorange}{\textbf{Key Question}}
+
+\small
+Which model should we deploy? Or should we iterate further?
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Offline evaluation approximates online performance - live experimentation reveals true user behavior}
+\end{frame}
+
+% Slide 3: Experiment Design
+\begin{frame}{Task 1: Experiment Design (10 minutes)}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Hypothesis Formulation}}
+
+\small
+\textbf{Task:} Write 3 hypotheses (one per model)
+
+\vspace{0.2cm}
+\textbf{Example (Model A - CF):}\\
+``Switching from popularity-based to collaborative filtering will increase CTR by at least 1 percentage point (from 5\% to 6\%) over a 2-week test with 100,000 users, without decreasing revenue per user by more than 2\%.''
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{Primary Metric}}
+
+\small
+\textbf{Choose one:}
+\begin{itemize}
+\item Click-through rate (CTR)
+\item Conversion rate
+\item Revenue per user
+\item Engagement time
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Recommendation:} CTR
+\begin{itemize}
+\item Most sensitive (changes fastest)
+\item Leading indicator for conversion/revenue
+\item Easier to detect statistically
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{mlorange}{\textbf{Guardrail Metrics}}
+
+\small
+\textbf{Task:} Define guardrails
+
+\vspace{0.2cm}
+\textbf{Recommended:}
+\begin{itemize}
+\item Revenue per user: Must not drop $>$ 2\%
+\item Latency p95: Must stay $<$ 200ms
+\item Error rate: Must stay $<$ 0.1\%
+\item Conversion rate: Must not drop $>$ 0.2pp
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlpurple}{\textbf{Experimental Design}}
+
+\small
+\textbf{Traffic Allocation:}
+\begin{itemize}
+\item Control (Popularity): 25\%
+\item Treatment A (CF): 25\%
+\item Treatment B (CB): 25\%
+\item Treatment C (Hybrid): 25\%
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Randomization:}
+\begin{itemize}
+\item User-level (consistent experience)
+\item Stratified by device (iOS/Android)
+\item Hash-based assignment
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Duration:} TBD (power analysis next)
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Hypothesis pre-registration prevents selective reporting - documented predictions preclude post-hoc rationalization}
+\end{frame}
+
+% Slide 4: Power Analysis
+\begin{frame}{Task 2: Power Analysis (10 minutes)}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Sample Size Calculation}}
+
+\small
+\textbf{Parameters:}
+\begin{itemize}
+\item Baseline CTR: 5\% ($p_1$)
+\item Target CTR: 6\% ($p_2$)
+\item MDE (Minimum Detectable Effect): 1pp
+\item Significance level ($\alpha$): 0.05
+\item Statistical power (1 - $\beta$): 0.80
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Formula (proportions test):}
+$$n = \frac{(z_{\alpha/2} + z_{\beta})^2 \cdot [p_1(1-p_1) + p_2(1-p_2)]}{(p_2 - p_1)^2}$$
+
+\vspace{0.2cm}
+\textbf{Calculation:}
+\begin{itemize}
+\item $z_{0.025} = 1.96$, $z_{0.20} = 0.84$
+\item $n \approx 9{,}800$ per group
+\item 4 groups $
+
+\rightarrow$ 39,200 total users
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Duration:}
+\begin{itemize}
+\item Daily users: 100,000
+\item Required: 39,200
+\item Duration: 0.4 days (too short!)
+\item Recommendation: Run 2 weeks for stability
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{mlgreen}{\textbf{Python Code}}
+
+\small
+\texttt{from statsmodels.stats.power import\newline
+hspace{1cm}zt\newline
+_ind\newline
+_solve\newline
+_power\newline
+import numpy as np\newline
+\newline
+
+\newline
+# Parameters\newline
+p1 = 0.05 \newline
+# baseline CTR\newline
+p2 = 0.06 \newline
+# target CTR\newline
+alpha = 0.05\newline
+power = 0.80\newline
+\newline
+
+\newline
+# Effect size (Cohen's h)\newline
+effect\newline
+_size = 2 * (np.arcsin(np.sqrt(p2)) \newline
+\newline
+hspace{3cm}- np.arcsin(np.sqrt(p1)))\newline
+\newline
+
+\newline
+# Sample size per group\newline
+n = zt\newline
+_ind\newline
+_solve\newline
+_power(\newline
+\newline
+hspace{0.5cm}effect\newline
+_size=effect\newline
+_size,\newline
+\newline
+hspace{0.5cm}alpha=alpha,\newline
+\newline
+hspace{0.5cm}power=power,\newline
+\newline
+hspace{0.5cm}alternative='two-sided')\newline
+\newline
+
+print(f``Sample size per group: \newline
+{n:.0f\newline
+}'')\\print(f``Total sample needed: \\{n*4:.0f\\}'')\\print(f``Days needed: \\{n*4/100000:.2f\\}'')}
+
+\vspace{0.2cm}
+\textcolor{mlorange}{\textbf{Output}}
+
+\small
+\texttt{Sample size per group: 9800\newline
+
+Total sample needed: 39200\newline
+
+Days needed: 0.39\newline
+
+\newline
+
+Recommendation: Run for 14 days\newline
+
+to capture weekly patterns}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Extended observation periods capture temporal dynamics - novelty effects and cyclical patterns require sustained measurement}
+\end{frame}
+
+% Slide 5: Simulation
+\begin{frame}{Task 3: Simulation (15 minutes)}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Generate Synthetic Data}}
+
+\small
+\textbf{Task:} Simulate user interactions
+
+\vspace{0.2cm}
+\textbf{Setup:}
+\begin{itemize}
+\item 30,000 users (more than minimum for confidence)
+\item 7,500 per group
+\item Bernoulli trials (click = 1, no click = 0)
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{True CTRs (ground truth):}
+\begin{itemize}
+\item Control: 5.0\%
+\item Treatment A (CF): 6.2\%
+\item Treatment B (CB): 5.8\%
+\item Treatment C (Hybrid): 6.5\%
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{Python Simulation}}
+
+\small
+\texttt{import numpy as np\newline
+
+np.random.seed(42)\newline
+n\newline
+_per\newline
+_group = 7500\newline
+
+\newline
+# Simulate clicks\newline
+control = np.random.binomial(1, 0.050, n\newline
+_per\newline
+_group)\newline
+treatment\newline
+_a = np.random.binomial(1, 0.062, n\newline
+_per\newline
+_group)\newline
+treatment\newline
+_b = np.random.binomial(1, 0.058, n\newline
+_per\newline
+_group)\newline
+treatment\newline
+_c = np.random.binomial(1, 0.065, n\newline
+_per\newline
+_group)\newline
+
+\newline
+# Observed CTRs\newline
+print(f``Control: \newline
+{control.mean():.3f\newline
+}'')\\print(f``Treatment A: \\{treatment\\_a.mean():.3f\\}'')\\print(f``Treatment B: \\{treatment\\_b.mean():.3f\\}'')\\print(f``Treatment C: \\{treatment\\_c.mean():.3f\\}'')}
+
+\column{0.48\textwidth}
+\textcolor{mlorange}{\textbf{Expected Output}}
+
+\small
+\texttt{Control: 0.051\newline
+
+Treatment A: 0.061\newline
+
+Treatment B: 0.058\newline
+
+Treatment C: 0.066}
+
+\vspace{0.2cm}
+\textbf{Observations:}
+\begin{itemize}
+\item Slight variation from true CTR (sampling noise)
+\item Treatment C highest (6.6\%)
+\item Treatment A second (6.1\%)
+\item Treatment B marginal (5.8\%)
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlpurple}{\textbf{Add Guardrail Metrics}}
+
+\small
+\texttt{\newline
+# Simulate revenue per user\newline
+revenue\newline
+_control = np.random.normal(20, 5, n\newline
+_per\newline
+_group)\newline
+revenue\newline
+_a = np.random.normal(20.5, 5, n\newline
+_per\newline
+_group)\newline
+revenue\newline
+_b = np.random.normal(20, 5, n\newline
+_per\newline
+_group)\newline
+revenue\newline
+_c = np.random.normal(21, 5, n\newline
+_per\newline
+_group)\newline
+
+\newline
+# Simulate latency (p95)\newline
+latency\newline
+_control = 150\newline
+latency\newline
+_a = 180\newline
+latency\newline
+_b = 160\newline
+latency\newline
+_c = 190}
+
+\vspace{0.2cm}
+\textbf{Task:} Check if guardrails met
+\begin{itemize}
+\item Revenue: $>$ \$19.60 (not -2\%)
+\item Latency: $<$ 200ms
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Synthetic experiments enable risk-free planning - simulated trials inform real deployment strategies}
+\end{frame}
+
+% Slide 6: Statistical Analysis
+\begin{frame}{Task 4: Statistical Analysis (15 minutes)}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Classical Z-Test}}
+
+\small
+\textbf{Task:} Compare each treatment vs control
+
+\vspace{0.2cm}
+\texttt{from statsmodels.stats.proportion import\newline
+hspace{1cm}proportions\newline
+_ztest\newline
+\newline
+
+\newline
+# Treatment A vs Control\newline
+count = [treatment\newline
+_a.sum(), control.sum()]\newline
+nobs = [len(treatment\newline
+_a), len(control)]\newline
+z\newline
+_stat, p\newline
+_value = proportions\newline
+_ztest(count, nobs)\newline
+\newline
+
+print(f``Treatment A vs Control:'')\newline
+print(f`` Z-statistic: \newline
+{z\newline
+_stat:.2f\newline
+}'')\\print(f`` P-value: \\{p\\_value:.4f\\}'')\\if p\\_value $<$ 0.05:\\\\hspace{0.5cm}print(f`` Result: Significant!'')\\\\
+\\# Repeat for B and C}
+
+\vspace{0.2cm}
+\textbf{Expected Results:}
+\begin{itemize}
+\item A vs Control: p $<$ 0.001 (sig)
+\item B vs Control: p $\approx$ 0.08 (not sig)
+\item C vs Control: p $<$ 0.001 (sig)
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{mlgreen}{\textbf{Bayesian Analysis}}
+
+\small
+\textbf{Task:} Calculate P(Treatment $>$ Control)
+
+\vspace{0.2cm}
+\texttt{import pymc3 as pm\newline
+
+with pm.Model() as model:\newline
+
+\hspace{0.5cm}\# Priors\newline
+
+\hspace{0.5cm}p\_control = pm.Beta('p\_control', 1, 1)\newline
+
+\hspace{0.5cm}p\_treatment\_c = pm.Beta('p\_treatment\_c', 1, 1)\newline
+
+\hspace{0.5cm}\# Likelihoods\newline
+
+\hspace{0.5cm}pm.Binomial('obs\_control', n=len(control),\newline
+
+\hspace{2cm}p=p\_control, observed=control.sum())\newline
+
+\hspace{0.5cm}pm.Binomial('obs\_c', n=len(treatment\_c),\newline
+
+\hspace{2cm}p=p\_treatment\_c, observed=treatment\_c.sum())\newline
+
+\hspace{0.5cm}\# Sample\newline
+
+\hspace{0.5cm}trace = pm.sample(2000)\newline
+
+\# Probability C $>$ Control\newline
+
+prob = (trace['p\_treatment\_c'] $>$ trace['p\_control']).mean()\newline
+
+print(f``P(C $>$ Control) = \{prob:.3f\}'')}
+
+\vspace{0.2cm}
+\textbf{Expected:} P(C $>$ Control) = 0.998
+
+\vspace{0.2cm}
+\textbf{Interpretation:} 99.8\% confidence C is better
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Methodological convergence strengthens conclusions - independent analytical approaches yielding consistent results increase confidence}
+\end{frame}
+
+% Slide 7: Guardrail Check \& Decision
+\begin{frame}{Task 5: Guardrail Check \& Decision (10 minutes)}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Guardrail Metrics Check}}
+
+\small
+\textbf{Task:} Verify all guardrails passed
+
+\vspace{0.2cm}
+\textbf{Treatment C (Hybrid) - Winner Candidate:}
+
+\vspace{0.2cm}
+\texttt{\newline
+# Primary metric\newline
+ctr\newline
+_control = control.mean()\newline
+ctr\newline
+_c = treatment\newline
+_c.mean()\newline
+lift = (ctr\newline
+_c / ctr\newline
+_control - 1) * 100\newline
+print(f``CTR Lift: \newline
+{lift:.1f\newline
+}\\%'') \\# 29\\%\\\\
+\\# Guardrail 1: Revenue\\rev\\_control = revenue\\_control.mean()\\rev\\_c = revenue\\_c.mean()\\rev\\_change = (rev\\_c / rev\\_control - 1) * 100\\print(f``Revenue change: \\{rev\\_change:.1f\\}\\%'')\\if rev\\_change $>$ -2:\\\\hspace{0.5cm}print(``Guardrail PASSED'')\\\\
+\\# Guardrail 2: Latency\\if latency\\_c $<$ 200:\\\\hspace{0.5cm}print(``Latency PASSED (190ms $<$ 200ms)'')\\\\
+\\# Guardrail 3: Error rate (assume 0.05\\%)\\print(``Error rate PASSED (0.05\\% $<$ 0.1\\%)'')}
+
+\column{0.48\textwidth}
+\textcolor{mlgreen}{\textbf{Decision Matrix}}
+
+\small
+\begin{tabular}{lcccc}
+\toprule
+Model & CTR & Rev \& Lat & Sig? & Decision \\\\
+\midrule
+Control & 5.0\% & Baseline & - & Baseline \\\\
+CF (A) & 6.1\% & Pass & Yes & Consider \\\\
+CB (B) & 5.8\% & Pass & No & Kill \\\\
+Hybrid (C) & 6.6\% & Pass & Yes & SHIP \\\\
+\bottomrule
+\end{tabular}
+
+\vspace{0.3cm}
+\textcolor{mlorange}{\textbf{Final Recommendation}}
+
+\small
+\textbf{Ship Treatment C (Hybrid)}
+
+\vspace{0.2cm}
+\textbf{Rationale:}
+\begin{itemize}
+\item Highest CTR: 6.6\% (29\% lift)
+\item Statistically significant (p $<$ 0.001)
+\item Bayesian: 99.8\% confidence
+\item All guardrails passed:
+  \begin{itemize}
+  \item Revenue: +5\% ($>$ -2\% threshold)
+  \item Latency: 190ms ($<$ 200ms)
+  \item Error rate: 0.05\% ($<$ 0.1\%)
+  \end{itemize}
+\item Expected annual value: \$3.6M additional revenue
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Alternative:} Could also ship CF (A) as it also wins, but Hybrid is stronger
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Multi-dimensional success criteria determine deployment - statistical significance, practical impact, and safety constraints must align}
+\end{frame}
+
+% Slide 8: Rollout Plan
+\begin{frame}{Task 6: Rollout Plan (5 minutes)}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Gradual Rollout Strategy}}
+
+\small
+\textbf{Phase 1: Canary (Days 1-2)}
+\begin{itemize}
+\item Deploy to 1\% of users
+\item Monitor error rate, latency, revenue
+\item If stable after 24 hours $
+
+\rightarrow$ proceed
+\item Kill switch ready
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Phase 2: Expansion (Days 3-5)}
+\begin{itemize}
+\item 1\% $
+
+\rightarrow$ 5\% $
+
+\rightarrow$ 25\%
+\item Each step: 24-hour monitoring
+\item Check guardrails at each step
+\item If any guardrail violated $
+
+\rightarrow$ rollback
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Phase 3: Majority (Days 6-10)}
+\begin{itemize}
+\item 25\% $
+
+\rightarrow$ 50\% $
+
+\rightarrow$ 100\%
+\item Maintain 10\% holdout for long-term measurement
+\item Monitor cohort retention over 30 days
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Phase 4: Holdout Analysis (Days 11-40)}
+\begin{itemize}
+\item Compare 90\% treatment vs 10\% control
+\item Measure 30-day retention, LTV
+\item Confirm long-term impact positive
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{mlgreen}{\textbf{Monitoring Dashboard}}
+
+\small
+\textbf{Real-Time Metrics:}
+\begin{itemize}
+\item CTR (hourly)
+\item Revenue per user (daily)
+\item Latency p50/p95/p99 (5-min intervals)
+\item Error rate (1-min intervals)
+\item Traffic distribution (control vs treatment)
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlorange}{\textbf{Rollback Criteria}}
+
+\small
+\textbf{Immediate rollback if:}
+\begin{itemize}
+\item Error rate $>$ 0.5\% (5× baseline)
+\item Latency p95 $>$ 250ms (sustained 10 min)
+\item Revenue per user drops $>$ 10\%
+\item User complaints spike $>$ 50/hour
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Investigate if:}
+\begin{itemize}
+\item CTR plateaus or decreases
+\item Revenue flat despite CTR increase
+\item Latency creeps above 200ms
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlpurple}{\textbf{Success Criteria}}
+
+\small
+\textbf{Declare success after:}
+\begin{itemize}
+\item 100\% rollout stable for 7 days
+\item 30-day retention $\geq$ control
+\item LTV projection positive
+\item No major incidents
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Progressive deployment reduces implementation risk - incremental exposure enables early detection and rapid reversal}
+\end{frame}
+
+% Slide 9: Key Takeaways
+\begin{frame}{Workshop Takeaways \& Course Conclusion}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Week 10 Key Lessons}}
+
+\small
+\textbf{1. Iteration is competitive advantage}
+\begin{itemize}
+\item Winners ship 100+ experiments/year
+\item Losers deploy once and hope
+\item Velocity × win rate = innovation speed
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{2. Rigorous A/B testing prevents disasters}
+\begin{itemize}
+\item Randomization enables causal inference
+\item Statistical significance $\neq$ practical significance
+\item Always include guardrails
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{3. Bayesian methods accelerate learning}
+\begin{itemize}
+\item P(B $>$ A) more intuitive than p-values
+\item Earlier stopping possible
+\item Incorporates prior knowledge
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{4. Culture trumps tools}
+\begin{itemize}
+\item Psychological safety for ``failed'' experiments
+\item Data beats opinions
+\item Fast decisions, slow reversions
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{mlgreen}{\textbf{Full Course Journey}}
+
+\small
+\textbf{10 Weeks, Complete ML Innovation Loop:}
+
+\vspace{0.2cm}
+\textbf{Empathize (Weeks 1-3):}
+\begin{itemize}
+\item Clustering for user segmentation
+\item NLP for emotional context
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Define (Week 4):}
+\begin{itemize}
+\item Classification for problem framing
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Ideate (Week 5):}
+\begin{itemize}
+\item Topic modeling for idea generation
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Prototype (Week 6):}
+\begin{itemize}
+\item Generative AI for rapid prototyping
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Test (Weeks 7-9):}
+\begin{itemize}
+\item Responsible AI (ethics)
+\item Structured outputs (reliability)
+\item Multi-metric validation (rigor)
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Iterate (Week 10):}
+\begin{itemize}
+\item A/B testing for continuous improvement
+\end{itemize}
+\end{columns}
+
+\vspace{0.3cm}
+\begin{center}
+\Large\textcolor{mlred}{You now have the complete ML innovation toolkit.}\\
+\vspace{0.2cm}
+\normalsize\textcolor{mlblue}{Go build, deploy, measure, learn, and iterate!}
+\end{center}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Human-centered discovery precedes data-driven optimization - empathic understanding informs what to measure and improve}
+\end{frame}
