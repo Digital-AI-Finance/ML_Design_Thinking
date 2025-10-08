@@ -1,13 +1,22 @@
-# Week 0 Finance Track: Machine Learning in Finance - Theory & Applications
+# Week 00 Finance Track: Machine Learning in Finance - Theory & Applications
 
-## 4-Hour Comprehensive Workshop on ML Finance Theory
-
-### Overview
-A rigorous, mathematics-focused introduction to machine learning in finance with **NO Python code on slides** - pure theory, formulas, and financial applications.
+## Overview
+**Duration**: 4 hours (can be split into 2 × 2-hour sessions)
+**Format**: Pure theory - NO Python code on slides
+**Slides**: 45+ (across 10 parts)
+**Structure**: Mathematical rigor for quant students
 
 **Note**: This is a separate finance-focused track, distinct from the Week 0a-0e narrative series. Previously named `Week_00b_ML_Finance_Applications`, renamed to `Week_00_Finance_Theory` to avoid confusion with `Week_00b_Supervised_Learning`.
 
-### Structure
+## Learning Objectives
+- Master statistical learning theory foundations
+- Apply supervised methods to financial prediction
+- Understand risk management with ML
+- Implement algorithmic trading strategies
+- Build credit scoring and fraud detection models
+- Navigate financial regulation (SR 11-7, MiFID II)
+
+## Structure
 ```
 Week_00_Finance_Theory/
 ├── 20250118_0745_main.tex         # Master controller
