@@ -1,0 +1,504 @@
+% Part 4: Neural Networks and Deep Learning
+\section{Neural Networks and Deep Learning}
+
+% Section divider
+\begin{frame}[plain]
+\vfill
+\centering
+\begin{beamercolorbox}[sep=16pt,center]{title}
+\usebeamerfont{title}\Large Part 4: Neural Networks and Deep Learning\par
+\vspace{0.5em}
+\large From Perceptrons to Modern Architectures\par
+\end{beamercolorbox}
+\vfill
+\end{frame}
+
+% Perceptron
+\begin{frame}{The Perceptron: Foundation of Neural Networks}
+\twocolslide{
+\Large\textbf{Mathematical Model}
+\normalsize
+\vspace{0.5em}
+
+\textbf{Linear Combination:}
+\formula{z = w_1x_1 + w_2x_2 + \ldots + w_nx_n + b}
+\formula{z = \mathbf{w}^T\mathbf{x} + b}
+
+\textbf{Activation Function:}
+\formula{y = \sigma(z) = \begin{cases} 1 & \text{if } z \geq 0 \\ 0 & \text{if } z < 0 \end{cases}}
+
+\textbf{Decision Boundary:}
+\formula{\mathbf{w}^T\mathbf{x} + b = 0}
+
+\textbf{Learning Rule (Perceptron Algorithm):}
+\formula{w_i := w_i + \eta(y - \hat{y})x_i}
+\formula{b := b + \eta(y - \hat{y})}
+
+where $\eta$ is the learning rate
+}{
+\centering
+\includegraphics[width=0.85\textwidth]{charts/perceptron_model.pdf}
+
+\vspace{0.5em}
+\textbf{Perceptron Limitations:}
+\begin{itemize}
+\item Can only learn linearly separable functions
+\item Cannot solve XOR problem
+\item Single decision boundary
+\end{itemize}
+
+\textbf{Historical Impact:}
+\begin{itemize}
+\item First neural network model (1943)
+\item Led to ``AI Winter'' when limitations discovered
+\item Foundation for modern deep learning
+\end{itemize}
+}
+
+\bottomnote{Single-layer perceptrons solve only linearly separable problems - XOR impossibility triggered first AI winter revealing fundamental limitations}
+\end{frame}
+
+% Multi-layer Perceptron
+\begin{frame}{Multi-Layer Perceptron: Universal Approximator}
+\twocolslide{
+\Large\textbf{Architecture}
+\normalsize
+\vspace{0.5em}
+
+\textbf{Forward Propagation:}
+\formula{z^{[l]} = W^{[l]}a^{[l-1]} + b^{[l]}}
+\formula{a^{[l]} = g^{[l]}(z^{[l]})}
+
+\textbf{Universal Approximation Theorem:}
+A neural network with:
+\begin{itemize}
+\item One hidden layer
+\item Finite number of neurons
+\item Non-linear activation function
+\end{itemize}
+can approximate any continuous function on a compact set to arbitrary accuracy.
+
+\textbf{Key Insight:} Width vs depth tradeoff
+\begin{itemize}
+\item Wide shallow networks: Exponential width needed
+\item Deep narrow networks: Polynomial parameters
+\end{itemize}
+}{
+\centering
+\includegraphics[width=0.85\textwidth]{charts/mlp_architecture.pdf}
+
+\vspace{0.5em}
+\textbf{Activation Functions:}
+\begin{itemize}
+\item \textbf{Sigmoid:} $\sigma(x) = \frac{1}{1 + e^{-x}}$
+\item \textbf{Tanh:} $\tanh(x) = \frac{e^x - e^{-x}}{e^x + e^{-x}}$
+\item \textbf{ReLU:} $\text{ReLU}(x) = \max(0, x)$
+\item \textbf{Leaky ReLU:} $\text{LeakyReLU}(x) = \max(0.01x, x)$
+\end{itemize}
+}
+
+\bottomnote{Multi-layer perceptrons enable universal approximation - hidden layers learn nonlinear feature transformations solving problems beyond perceptron capacity}
+\end{frame}
+
+% Backpropagation
+\begin{frame}{Backpropagation: Training Neural Networks}
+\twocolslide{
+\Large\textbf{Algorithm}
+\normalsize
+\vspace{0.5em}
+
+\textbf{Chain Rule Application:}
+\formula{\frac{\partial L}{\partial W^{[l]}} = \frac{\partial L}{\partial z^{[l]}} \frac{\partial z^{[l]}}{\partial W^{[l]}}}
+
+\textbf{Backward Pass:}
+\formula{\delta^{[l]} = \frac{\partial L}{\partial z^{[l]}}}
+
+\formula{\delta^{[l-1]} = (W^{[l]})^T \delta^{[l]} \odot g'(z^{[l-1]})}
+
+\textbf{Parameter Updates:}
+\formula{\frac{\partial L}{\partial W^{[l]}} = \delta^{[l]} (a^{[l-1]})^T}
+
+\formula{\frac{\partial L}{\partial b^{[l]}} = \delta^{[l]}}
+
+\textbf{Gradient Descent:}
+\formula{W^{[l]} := W^{[l]} - \alpha \frac{\partial L}{\partial W^{[l]}}}
+}{
+\centering
+\includegraphics[width=0.85\textwidth]{charts/backpropagation.pdf}
+
+\vspace{0.5em}
+\textbf{Computational Graph:}
+\begin{itemize}
+\item Forward pass: Compute outputs
+\item Backward pass: Compute gradients
+\item Automatic differentiation
+\item Memory vs computation tradeoff
+\end{itemize}
+
+\textbf{Challenges:}
+\begin{itemize}
+\item Vanishing gradients
+\item Exploding gradients
+\item Local minima
+\item Saddle points
+\end{itemize}
+}
+
+\bottomnote{Backpropagation applies chain rule systematically - automatic differentiation computes exact gradients enabling efficient multi-layer optimization}
+\end{frame}
+
+% Activation Functions
+\begin{frame}{Activation Functions: Nonlinearity in Neural Networks}
+\twocolslide{
+\Large\textbf{Common Activations}
+\normalsize
+\vspace{0.5em}
+
+\textbf{Sigmoid:}
+\formula{\sigma(x) = \frac{1}{1 + e^{-x}}}
+Range: $(0, 1)$, smooth, vanishing gradients
+
+\textbf{Tanh:}
+\formula{\tanh(x) = \frac{e^x - e^{-x}}{e^x + e^{-x}}}
+Range: $(-1, 1)$, zero-centered, still vanishing gradients
+
+\textbf{ReLU:}
+\formula{\text{ReLU}(x) = \max(0, x)}
+Simple, fast, sparse activations, dying ReLU problem
+
+\textbf{Leaky ReLU:}
+\formula{\text{LeakyReLU}(x) = \max(\alpha x, x)}
+Fixes dying ReLU, $\alpha = 0.01$ typically
+}{
+\centering
+\includegraphics[width=0.85\textwidth]{charts/activation_functions.pdf}
+
+\vspace{0.5em}
+\textbf{Modern Activations:}
+\begin{itemize}
+\item \textbf{ELU:} $f(x) = \begin{cases} x & x > 0 \\ \alpha(e^x - 1) & x \leq 0 \end{cases}$
+\item \textbf{Swish:} $f(x) = x \cdot \sigma(\beta x)$
+\item \textbf{GELU:} $f(x) = x \cdot \Phi(x)$
+\end{itemize}
+
+\textbf{Choice Guidelines:}
+\begin{itemize}
+\item Hidden layers: ReLU or variants
+\item Output: Depends on problem type
+\item Binary classification: Sigmoid
+\item Multiclass: Softmax
+\end{itemize}
+}
+
+\bottomnote{Activation functions introduce nonlinearity - ReLU family dominates modern architectures through sparse activations and efficient gradients}
+\end{frame}
+
+% Convolutional Neural Networks
+\begin{frame}{Convolutional Neural Networks: Spatial Feature Learning}
+\twocolslide{
+\Large\textbf{Architecture Components}
+\normalsize
+\vspace{0.5em}
+
+\textbf{Convolution Operation:}
+\formula{(I * K)_{ij} = \sum_m \sum_n I_{i+m,j+n} K_{m,n}}
+
+\textbf{Key Concepts:}
+\begin{itemize}
+\item \textbf{Local Connectivity:} Neurons connect to local regions
+\item \textbf{Parameter Sharing:} Same filter across all positions
+\item \textbf{Translation Invariance:} Features detected anywhere
+\end{itemize}
+
+\textbf{Typical CNN Architecture:}
+\begin{enumerate}
+\item Convolution + ReLU
+\item Pooling (max or average)
+\item Repeat multiple times
+\item Flatten and fully connected layers
+\item Final classification layer
+\end{enumerate}
+
+\textbf{Filter Parameters:}
+\begin{itemize}
+\item Kernel size (3x3, 5x5, 7x7)
+\item Stride (step size)
+\item Padding (border handling)
+\end{itemize}
+}{
+\centering
+\includegraphics[width=0.85\textwidth]{charts/cnn_architecture.pdf}
+
+\vspace{0.5em}
+\textbf{Pooling Operations:}
+\begin{itemize}
+\item \textbf{Max Pooling:} Take maximum in region
+\item \textbf{Average Pooling:} Take average in region
+\item \textbf{Global Pooling:} Pool entire feature map
+\end{itemize}
+
+\textbf{Applications:}
+\begin{itemize}
+\item Image classification
+\item Object detection
+\item Medical imaging
+\item Computer vision
+\end{itemize}
+}
+
+\bottomnote{Convolutional architectures exploit spatial locality - parameter sharing and hierarchical feature extraction match image structure}
+\end{frame}
+
+% Recurrent Neural Networks
+\begin{frame}{Recurrent Neural Networks: Sequential Data Processing}
+\twocolslide{
+\Large\textbf{RNN Architecture}
+\normalsize
+\vspace{0.5em}
+
+\textbf{Recurrence Relation:}
+\formula{h_t = \tanh(W_h h_{t-1} + W_x x_t + b)}
+
+\textbf{Output:}
+\formula{y_t = W_y h_t + b_y}
+
+\textbf{Unfolded in Time:}
+\begin{itemize}
+\item Share parameters across time steps
+\item Process variable-length sequences
+\item Memory of previous inputs
+\end{itemize}
+
+\textbf{Training: Backpropagation Through Time (BPTT)}
+\formula{\frac{\partial L}{\partial W_h} = \sum_{t=1}^T \frac{\partial L_t}{\partial W_h}}
+
+\textbf{Vanishing Gradient Problem:}
+\formula{\frac{\partial h_t}{\partial h_{t-k}} = \prod_{i=1}^k \frac{\partial h_{t-i+1}}{\partial h_{t-i}}}
+}{
+\centering
+\includegraphics[width=0.85\textwidth]{charts/rnn_architecture.pdf}
+
+\vspace{0.5em}
+\textbf{LSTM (Long Short-Term Memory):}
+\begin{itemize}
+\item Forget gate: What to forget from cell state
+\item Input gate: What new info to store
+\item Output gate: What parts to output
+\item Cell state: Long-term memory
+\end{itemize}
+
+\textbf{Applications:}
+\begin{itemize}
+\item Language modeling
+\item Machine translation
+\item Speech recognition
+\item Time series prediction
+\end{itemize}
+}
+
+\bottomnote{Recurrent connections maintain hidden state - LSTM gates solve vanishing gradients enabling long-range temporal dependency modeling}
+\end{frame}
+
+% Training Dynamics
+\begin{frame}{Training Neural Networks: Optimization and Regularization}
+\twocolslide{
+\Large\textbf{Optimization Algorithms}
+\normalsize
+\vspace{0.5em}
+
+\textbf{Stochastic Gradient Descent:}
+\formula{\theta_{t+1} = \theta_t - \eta \nabla_\theta L(\theta_t)}
+
+\textbf{Momentum:}
+\formula{v_t = \gamma v_{t-1} + \eta \nabla_\theta L(\theta_t)}
+\formula{\theta_{t+1} = \theta_t - v_t}
+
+\textbf{Adam (Adaptive Moment Estimation):}
+\formula{m_t = \beta_1 m_{t-1} + (1-\beta_1) g_t}
+\formula{v_t = \beta_2 v_{t-1} + (1-\beta_2) g_t^2}
+\formula{\theta_{t+1} = \theta_t - \frac{\eta}{\sqrt{v_t} + \epsilon} m_t}
+
+\textbf{Learning Rate Scheduling:}
+\begin{itemize}
+\item Step decay
+\item Exponential decay
+\item Cosine annealing
+\end{itemize}
+}{
+\centering
+\includegraphics[width=0.85\textwidth]{charts/training_curves.pdf}
+
+\vspace{0.5em}
+\textbf{Regularization Techniques:}
+\begin{itemize}
+\item \textbf{L1/L2 Regularization:} Add penalty to weights
+\item \textbf{Dropout:} Randomly set neurons to zero
+\item \textbf{Batch Normalization:} Normalize layer inputs
+\item \textbf{Early Stopping:} Stop when validation error increases
+\end{itemize}
+
+\textbf{Initialization:}
+\begin{itemize}
+\item Xavier/Glorot initialization
+\item He initialization (for ReLU)
+\item Proper initialization prevents gradient problems
+\end{itemize}
+}
+
+\bottomnote{Optimization algorithms adapt learning rates - momentum and adaptive methods accelerate convergence while regularization prevents overfitting}
+\end{frame}
+
+% Deep Learning Revolution
+\begin{frame}{The Deep Learning Revolution: Key Milestones}
+\twocolslide{
+\Large\textbf{Historical Timeline}
+\normalsize
+\vspace{0.5em}
+
+\textbf{2012: AlexNet}
+\begin{itemize}
+\item Won ImageNet competition
+\item 8-layer CNN
+\item GPU acceleration
+\item Dropout regularization
+\end{itemize}
+
+\textbf{2014: VGGNet}
+\begin{itemize}
+\item Deeper networks (16-19 layers)
+\item Small 3x3 filters
+\item Showed depth importance
+\end{itemize}
+
+\textbf{2015: ResNet}
+\begin{itemize}
+\item Residual connections
+\item 152 layers deep
+\item Solved vanishing gradient
+\item Skip connections: $y = F(x) + x$
+\end{itemize}
+
+\textbf{2017: Transformer}
+\begin{itemize}
+\item Attention mechanism
+\item Parallelizable architecture
+\item Foundation for modern NLP
+\end{itemize}
+}{
+\centering
+\includegraphics[width=0.85\textwidth]{charts/deep_learning_timeline.pdf}
+
+\vspace{0.5em}
+\textbf{Key Enablers:}
+\begin{itemize}
+\item \textbf{Big Data:} ImageNet, large text corpora
+\item \textbf{GPU Computing:} Parallel processing
+\item \textbf{Algorithmic Advances:} Better optimizers
+\item \textbf{Software Frameworks:} TensorFlow, PyTorch
+\end{itemize}
+
+\textbf{Impact:}
+\begin{itemize}
+\item Computer vision breakthrough
+\item Natural language processing revolution
+\item Game-playing AI (AlphaGo)
+\item Foundation for modern AI
+\end{itemize}
+}
+
+\bottomnote{Deep learning revolution enabled by convergent factors - big data, GPU computing, architectural innovations, and software frameworks combined}
+\end{frame}
+
+% Modern Architectures
+\begin{frame}{Modern Neural Network Architectures}
+\begin{columns}[T]
+\begin{column}{0.32\textwidth}
+\centering
+\textcolor{chartblue}{\Large\textbf{Vision}}
+\normalsize
+\vspace{0.3em}
+
+\textbf{ResNet:}
+\begin{itemize}
+\item Skip connections
+\item Very deep networks
+\item Identity mapping
+\end{itemize}
+
+\textbf{EfficientNet:}
+\begin{itemize}
+\item Compound scaling
+\item Balanced depth/width/resolution
+\item Mobile-friendly
+\end{itemize}
+
+\textbf{Vision Transformer:}
+\begin{itemize}
+\item Self-attention for images
+\item Patch-based processing
+\item Competitive with CNNs
+\end{itemize}
+\end{column}
+
+\begin{column}{0.32\textwidth}
+\centering
+\textcolor{chartteal}{\Large\textbf{Language}}
+\normalsize
+\vspace{0.3em}
+
+\textbf{Transformer:}
+\begin{itemize}
+\item Self-attention mechanism
+\item Encoder-decoder architecture
+\item Parallelizable training
+\end{itemize}
+
+\textbf{BERT:}
+\begin{itemize}
+\item Bidirectional encoding
+\item Pre-trained representations
+\item Fine-tuning for tasks
+\end{itemize}
+
+\textbf{GPT:}
+\begin{itemize}
+\item Autoregressive generation
+\item Scaling laws
+\item Few-shot learning
+\end{itemize}
+\end{column}
+
+\begin{column}{0.32\textwidth}
+\centering
+\textcolor{chartorange}{\Large\textbf{Multimodal}}
+\normalsize
+\vspace{0.3em}
+
+\textbf{CLIP:}
+\begin{itemize}
+\item Vision-language understanding
+\item Contrastive learning
+\item Zero-shot classification
+\end{itemize}
+
+\textbf{DALL-E:}
+\begin{itemize}
+\item Text-to-image generation
+\item Multimodal creativity
+\item Large-scale training
+\end{itemize}
+
+\textbf{Flamingo:}
+\begin{itemize}
+\item Few-shot multimodal learning
+\item Vision-language tasks
+\item In-context learning
+\end{itemize}
+\end{column}
+\end{columns}
+
+\vspace{1em}
+\textcolor{darkgray}{\small Modern architectures combine multiple techniques for state-of-the-art performance across domains}
+
+\bottomnote{Specialized architectures encode domain-specific inductive biases - CNNs for vision, RNNs for sequences, Transformers for attention}
+\end{frame}

@@ -1,0 +1,149 @@
+% Part 1: The Challenge (5 slides)
+
+\begin{frame}{1. Real Estate Price Prediction}
+\begin{columns}
+\begin{column}{0.48\textwidth}
+\textbf{The Business Problem}
+\begin{itemize}
+\item Predict house prices from features
+\item Features: size, bedrooms, location, age
+\item Target: price in thousands
+\item Training data: 10,000 historical sales
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Sample Data Points}
+\begin{tabular}{|c|c|c|c|}
+\hline
+Size & Beds & Age & Price \\
+\hline
+1200 & 2 & 5 & 250k \\
+2500 & 4 & 10 & 450k \\
+1800 & 3 & 2 & 380k \\
+\hline
+\end{tabular}
+\end{column}
+\begin{column}{0.48\textwidth}
+\includegraphics[width=\textwidth]{charts/real_estate_scatter.pdf}
+\end{column}
+\end{columns}
+
+\vspace{\fill}
+\small\textcolor{gray}{Supervised learning transforms labeled examples into predictive models - regression predicts continuous values from multiple correlated features}
+\end{frame}
+
+\begin{frame}{2. Linear Regression as Baseline}
+\begin{columns}
+\begin{column}{0.48\textwidth}
+\textbf{Mathematical Foundation}
+\begin{itemize}
+\item Model: $y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + ... + \epsilon$
+\item Where $y$ = price, $x_i$ = features
+\item Goal: Find best-fitting line/plane
+\item Method: Minimize squared errors
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Assumptions}
+\begin{itemize}
+\item Linear relationship
+\item Independent features
+\item Constant variance
+\item Normal errors
+\end{itemize}
+\end{column}
+\begin{column}{0.48\textwidth}
+\includegraphics[width=\textwidth]{charts/linear_regression_fit.pdf}
+\end{column}
+\end{columns}
+
+\vspace{\fill}
+\small\textcolor{gray}{Linear regression assumes additive relationships - optimal under Gauss-Markov conditions but restrictive for real-world complexity}
+\end{frame}
+
+\begin{frame}{3. Classification vs Regression}
+\begin{columns}
+\begin{column}{0.48\textwidth}
+\textbf{Regression Problems}
+\begin{itemize}
+\item Predict continuous values
+\item Examples: price, temperature, stock return
+\item Output: Real numbers
+\item Metrics: MSE, MAE, R-squared
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Classification Problems}
+\begin{itemize}
+\item Predict discrete categories
+\item Examples: spam/ham, buy/sell/hold
+\item Output: Class labels
+\item Metrics: Accuracy, precision, recall
+\end{itemize}
+\end{column}
+\begin{column}{0.48\textwidth}
+\includegraphics[width=\textwidth]{charts/regression_vs_classification.pdf}
+\end{column}
+\end{columns}
+
+\vspace{\fill}
+\small\textcolor{gray}{Problem formulation determines algorithm choice - continuous targets require regression, discrete categories need classification with appropriate loss functions}
+\end{frame}
+
+\begin{frame}{4. The Curse of Dimensionality}
+\begin{columns}
+\begin{column}{0.48\textwidth}
+\textbf{Feature Explosion Problem}
+\begin{itemize}
+\item Real estate: 20+ features
+\item Interactions: $2^{20} = 1,048,576$ combinations
+\item Sample: 10,000 data points
+\item Ratio: 104 interactions per data point
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Mathematical Challenge}
+\begin{itemize}
+\item High-dimensional space is mostly empty
+\item Distance metrics become meaningless
+\item Overfitting becomes inevitable
+\item ``Hughes phenomenon'' (Hughes 1968): Performance degrades as features increase beyond sample capacity
+\end{itemize}
+\end{column}
+\begin{column}{0.48\textwidth}
+\includegraphics[width=\textwidth]{charts/curse_dimensionality.pdf}
+\end{column}
+\end{columns}
+
+\vspace{\fill}
+\small\textcolor{gray}{Curse of dimensionality: volume grows exponentially while data remains sparse - distances become uninformative and nearest neighbors lose meaning (Bellman 1961)}
+\end{frame}
+
+\begin{frame}{5. Feature Interactions Explode Combinatorially}
+\begin{columns}
+\begin{column}{0.48\textwidth}
+\textbf{Combinatorial Mathematics}
+\begin{itemize}
+\item Linear terms: $n$ features
+\item Pairwise: $\binom{n}{2} = \frac{n(n-1)}{2}$
+\item Three-way: $\binom{n}{3} = \frac{n(n-1)(n-2)}{6}$
+\item All subsets: $2^n - 1$
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Real Estate Example (n=20)}
+\begin{itemize}
+\item Linear: 20 terms
+\item Pairwise: 190 interactions
+\item Three-way: 1,140 interactions
+\item Total possible: 1,048,575 terms
+\end{itemize}
+\end{column}
+\begin{column}{0.48\textwidth}
+\includegraphics[width=\textwidth]{charts/feature_combinations.pdf}
+\end{column}
+\end{columns}
+
+\vspace{\fill}
+\small\textcolor{gray}{Combinatorial explosion creates $2^n$ possible interactions - regularization and feature selection become necessary to prevent overfitting in high dimensions}
+\end{frame}

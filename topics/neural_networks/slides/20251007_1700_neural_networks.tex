@@ -1,0 +1,83 @@
+\documentclass[8pt,aspectratio=169]{beamer}
+\usetheme{Madrid}
+
+% Define colors
+\definecolor{mlblue}{RGB}{31, 119, 180}
+\definecolor{mlorange}{RGB}{255, 127, 14}
+\definecolor{mlgreen}{RGB}{44, 160, 44}
+\definecolor{mlred}{RGB}{214, 39, 40}
+\definecolor{mlpurple}{RGB}{148, 103, 189}
+\definecolor{mlbrown}{RGB}{140, 86, 75}
+\definecolor{mlpink}{RGB}{227, 119, 194}
+\definecolor{mlgray}{RGB}{127, 127, 127}
+\definecolor{mlyellow}{RGB}{188, 189, 34}
+\definecolor{mlcyan}{RGB}{23, 190, 207}
+
+% Innovation stage colors
+\definecolor{challenge}{RGB}{148, 103, 189}
+\definecolor{explore}{RGB}{52, 152, 219}
+\definecolor{generate}{RGB}{46, 204, 113}
+\definecolor{peak}{RGB}{241, 196, 15}
+\definecolor{filter}{RGB}{230, 126, 34}
+\definecolor{refine}{RGB}{231, 76, 60}
+\definecolor{strategy}{RGB}{192, 57, 43}
+
+% Packages
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tikz}
+\usepackage{listings}
+\usepackage{xcolor}
+
+% Code styling
+\lstset{
+    basicstyle=\small\ttfamily,
+    keywordstyle=\color{mlblue},
+    commentstyle=\color{mlgray},
+    stringstyle=\color{mlred},
+    backgroundcolor=\color{gray!10},
+    frame=single,
+    breaklines=true,
+    showstringspaces=false
+}
+
+% Title page information
+\title{Week 0d: Neural Networks}
+\subtitle{The Depth Challenge}
+\author{Machine Learning for Smarter Innovation}
+\institute{BSc Course - Theory Foundation}
+\date{\today}
+
+\begin{document}
+
+% Title slide
+\begin{frame}
+\titlepage
+\end{frame}
+
+% Table of contents
+\begin{frame}{Course Outline}
+\tableofcontents
+\end{frame}
+
+% Part 1: The Challenge
+\section{Part 1: The Challenge}
+\input{act1_challenge.tex}
+
+% Part 2: Shallow MLPs
+\section{Part 2: Shallow MLPs}
+\input{act2_shallow_mlps.tex}
+
+% Part 3: Modern Architectures
+\section{Part 3: Modern Architectures}
+\input{act3_modern_architectures.tex}
+
+% Part 4: Synthesis
+\section{Part 4: Synthesis}
+\input{act4_synthesis.tex}
+
+\end{document}

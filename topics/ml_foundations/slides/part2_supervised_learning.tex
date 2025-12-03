@@ -1,0 +1,366 @@
+% Part 2: Supervised Learning Methods
+\section{Supervised Learning Methods}
+
+% Section divider
+\begin{frame}[plain]
+\vfill
+\centering
+\begin{beamercolorbox}[sep=16pt,center]{title}
+\usebeamerfont{title}\Large Part 2: Supervised Learning Methods\par
+\vspace{0.5em}
+\large Prediction and Classification Algorithms\par
+\end{beamercolorbox}
+\vfill
+\end{frame}
+
+% Linear Methods
+\begin{frame}{Linear Methods: The Foundation}
+\Large\textbf{Linear Regression Family}
+\normalsize
+\vspace{0.5em}
+
+\twocolslide{
+\textbf{Ordinary Least Squares:}
+\formula{\hat{\beta} = (X^TX)^{-1}X^Ty}
+\formula{\min_{\beta} ||y - X\beta||_2^2}
+
+\textbf{Ridge Regression (L2):}
+\formula{\hat{\beta}_{ridge} = (X^TX + \lambda I)^{-1}X^Ty}
+\formula{\min_{\beta} ||y - X\beta||_2^2 + \lambda||\beta||_2^2}
+
+\textbf{LASSO (L1):}
+\formula{\min_{\beta} ||y - X\beta||_2^2 + \lambda||\beta||_1}
+No closed form - use coordinate descent
+}{
+\centering
+\includegraphics[width=0.85\textwidth]{charts/linear_regression_comparison.pdf}
+
+\vspace{0.5em}
+\textbf{Applications:}
+\begin{itemize}
+\item House price prediction
+\item Sales forecasting
+\item Medical diagnosis
+\item Scientific modeling
+\end{itemize}
+
+\textcolor{chartorange}{\textbf{Elastic Net (Best of Both):}}
+\formula{\min_{\beta} ||y - X\beta||_2^2 + \lambda_1||\beta||_1 + \lambda_2||\beta||_2^2}
+}
+
+\bottomnote{Regularization controls model complexity - L1 enables sparsity through exact zeros while L2 provides smooth shrinkage}
+\end{frame}
+
+% Logistic Regression
+\begin{frame}{Logistic Regression: Linear Classification}
+\twocolslide{
+\Large\textbf{Mathematical Framework}
+\normalsize
+\vspace{0.5em}
+
+\textbf{Logistic Function:}
+\formula{p(y=1|x) = \frac{1}{1 + e^{-(\beta_0 + \beta^T x)}}}
+
+\textbf{Odds Ratio:}
+\formula{\frac{p}{1-p} = e^{\beta_0 + \beta^T x}}
+
+\textbf{Log-Likelihood:}
+\formula{\ell(\beta) = \sum_{i=1}^n [y_i \log p_i + (1-y_i) \log(1-p_i)]}
+
+\textbf{No closed form solution}
+\begin{itemize}
+\item Use gradient descent
+\item Newton-Raphson method
+\item Iteratively reweighted least squares
+\end{itemize}
+}{
+\centering
+\includegraphics[width=0.85\textwidth]{charts/logistic_regression.pdf}
+
+\vspace{0.5em}
+\textbf{Decision Boundary:}
+\formula{\beta_0 + \beta^T x = 0}
+
+\textbf{Applications:}
+\begin{itemize}
+\item Email spam detection
+\item Medical diagnosis
+\item Marketing response
+\item Credit approval
+\end{itemize}
+}
+
+\bottomnote{Logistic regression transforms linear regression to probabilistic classification - sigmoid function maps unbounded scores to valid probabilities}
+\end{frame}
+
+% Support Vector Machines
+\begin{frame}{Support Vector Machines: Maximum Margin Classification}
+\twocolslide{
+\Large\textbf{Optimization Problem}
+\normalsize
+\vspace{0.5em}
+
+\textbf{Primal Form:}
+\formula{\min_{w,b} \frac{1}{2}||w||^2}
+\formula{\text{s.t. } y_i(w^Tx_i + b) \geq 1, \forall i}
+
+\textbf{Dual Form:}
+\formula{\max_{\alpha} \sum_i \alpha_i - \frac{1}{2}\sum_{i,j} \alpha_i\alpha_j y_i y_j x_i^T x_j}
+\formula{\text{s.t. } \alpha_i \geq 0, \sum_i \alpha_i y_i = 0}
+
+\textbf{Kernel Trick:}
+\formula{K(x_i, x_j) = \phi(x_i)^T\phi(x_j)}
+
+Common kernels:
+\begin{itemize}
+\item RBF: $K(x,z) = e^{-\gamma||x-z||^2}$
+\item Polynomial: $K(x,z) = (x^Tz + c)^d$
+\end{itemize}
+}{
+\centering
+\includegraphics[width=0.85\textwidth]{charts/svm_classification.pdf}
+
+\vspace{0.5em}
+\textbf{Key Concepts:}
+\begin{itemize}
+\item \highlight{Support Vectors:} Data points on margin
+\item \highlight{Maximum Margin:} Optimal separating hyperplane
+\item \highlight{Kernel Trick:} Nonlinear classification
+\end{itemize}
+
+\textbf{Advantages:}
+\begin{itemize}
+\item Works well in high dimensions
+\item Memory efficient
+\item Versatile (different kernels)
+\end{itemize}
+}
+
+\bottomnote{Maximum margin principle provides geometric intuition - kernel trick enables nonlinear boundaries while maintaining convex optimization guarantees}
+\end{frame}
+
+% Decision Trees
+\begin{frame}{Decision Trees: Interpretable Nonlinear Models}
+\twocolslide{
+\Large\textbf{Tree Construction}
+\normalsize
+\vspace{0.5em}
+
+\textbf{Splitting Criterion:}
+
+\textit{Gini Impurity:}
+\formula{G = \sum_{k=1}^K p_k(1-p_k)}
+
+\textit{Information Gain:}
+\formula{IG = H(parent) - \sum_{j} \frac{n_j}{n} H(child_j)}
+
+\textit{Entropy:}
+\formula{H = -\sum_{k=1}^K p_k \log_2 p_k}
+
+\textbf{CART Algorithm:}
+\begin{enumerate}
+\item Find best split across all features
+\item Partition data based on split
+\item Recursively apply to children
+\item Prune tree to avoid overfitting
+\end{enumerate}
+}{
+\centering
+\includegraphics[width=0.85\textwidth]{charts/decision_tree.pdf}
+
+\vspace{0.5em}
+\textbf{Advantages:}
+\begin{itemize}
+\item Highly interpretable
+\item Handles mixed data types
+\item No assumptions about distribution
+\item Captures interactions automatically
+\end{itemize}
+
+\textbf{Disadvantages:}
+\begin{itemize}
+\item Prone to overfitting
+\item Unstable (small data changes)
+\item Biased toward features with more levels
+\end{itemize}
+}
+
+\bottomnote{Decision trees partition feature space recursively - greedy splitting creates interpretable rules but risks overfitting without pruning}
+\end{frame}
+
+% Random Forest
+\begin{frame}{Random Forest: Ensemble of Trees}
+\twocolslide{
+\Large\textbf{Ensemble Method}
+\normalsize
+\vspace{0.5em}
+
+\textbf{Bootstrap Aggregating (Bagging):}
+\begin{enumerate}
+\item Draw B bootstrap samples
+\item Train tree on each sample
+\item Average predictions (regression)
+\item Vote on class (classification)
+\end{enumerate}
+
+\textbf{Random Feature Selection:}
+\begin{itemize}
+\item At each split, randomly select $m$ features
+\item Typically $m = \sqrt{p}$ for classification
+\item Typically $m = p/3$ for regression
+\end{itemize}
+
+\textbf{Final Prediction:}
+\formula{\hat{y} = \frac{1}{B}\sum_{b=1}^B T_b(x)}
+
+\keypoint{Key insight:} Averaging reduces variance while maintaining low bias
+}{
+\centering
+\includegraphics[width=0.85\textwidth]{charts/random_forest.pdf}
+
+\vspace{0.5em}
+\textbf{Advantages:}
+\begin{itemize}
+\item Reduces overfitting
+\item Handles missing values
+\item Provides feature importance
+\item Works well out-of-the-box
+\end{itemize}
+
+\textbf{Feature Importance:}
+\begin{itemize}
+\item Mean decrease in impurity
+\item Permutation importance
+\item Out-of-bag importance
+\end{itemize}
+}
+
+\bottomnote{Bootstrap aggregation reduces variance through averaging - random feature selection decorrelates trees enabling effective ensemble combination}
+\end{frame}
+
+% Gradient Boosting
+\begin{frame}{Gradient Boosting: Sequential Learning}
+\twocolslide{
+\Large\textbf{Boosting Algorithm}
+\normalsize
+\vspace{0.5em}
+
+\textbf{Sequential Model Building:}
+\formula{F_m(x) = F_{m-1}(x) + \gamma_m h_m(x)}
+
+where $h_m$ is trained on residuals:
+\formula{r_{im} = -\frac{\partial L(y_i, F_{m-1}(x_i))}{\partial F_{m-1}(x_i)}}
+
+\textbf{XGBoost Objective:}
+\formula{\mathcal{L} = \sum_i l(y_i, \hat{y}_i) + \sum_k \Omega(f_k)}
+\formula{\Omega(f) = \gamma T + \frac{1}{2}\lambda||w||^2}
+
+\textbf{Key Features:}
+\begin{itemize}
+\item Regularization prevents overfitting
+\item Second-order derivatives
+\item Handles missing values
+\item Parallel tree construction
+\end{itemize}
+}{
+\centering
+\includegraphics[width=0.85\textwidth]{charts/gradient_boosting.pdf}
+
+\vspace{0.5em}
+\textbf{Popular Implementations:}
+\begin{itemize}
+\item \highlight{XGBoost:} Extreme Gradient Boosting
+\item \highlight{LightGBM:} Fast gradient boosting
+\item \highlight{CatBoost:} Categorical features
+\end{itemize}
+
+\textbf{Applications:}
+\begin{itemize}
+\item Kaggle competitions
+\item Click-through rate prediction
+\item Risk modeling
+\item Ranking problems
+\end{itemize}
+}
+
+\bottomnote{Gradient boosting combines weak learners sequentially - each iteration fits residuals from previous ensemble reducing bias systematically}
+\end{frame}
+
+% k-Nearest Neighbors
+\begin{frame}{k-Nearest Neighbors: Instance-Based Learning}
+\twocolslide{
+\Large\textbf{Non-parametric Method}
+\normalsize
+\vspace{0.5em}
+
+\textbf{Algorithm:}
+\begin{enumerate}
+\item Store all training data
+\item For new point, find k nearest neighbors
+\item Classification: majority vote
+\item Regression: average target values
+\end{enumerate}
+
+\textbf{Distance Metrics:}
+\begin{itemize}
+\item Euclidean: $d(x,z) = \sqrt{\sum_i (x_i - z_i)^2}$
+\item Manhattan: $d(x,z) = \sum_i |x_i - z_i|$
+\item Minkowski: $d(x,z) = (\sum_i |x_i - z_i|^p)^{1/p}$
+\end{itemize}
+
+\textbf{Choosing k:}
+\begin{itemize}
+\item Small k: Low bias, high variance
+\item Large k: High bias, low variance
+\item Use cross-validation to select
+\end{itemize}
+}{
+\centering
+\includegraphics[width=0.85\textwidth]{charts/knn_classification.pdf}
+
+\vspace{0.5em}
+\textbf{Advantages:}
+\begin{itemize}
+\item Simple to understand and implement
+\item No assumptions about data distribution
+\item Adapts to local patterns
+\item Works well with small datasets
+\end{itemize}
+
+\textbf{Disadvantages:}
+\begin{itemize}
+\item Computationally expensive for large datasets
+\item Sensitive to irrelevant features
+\item Curse of dimensionality
+\item Sensitive to data scaling
+\end{itemize}
+}
+
+\bottomnote{Instance-based learning requires no training phase - predictions use entire dataset making inference expensive but adaptation trivial}
+\end{frame}
+
+% Model Comparison
+\begin{frame}{Supervised Learning: Algorithm Comparison}
+\centering
+\includegraphics[width=0.85\textwidth]{charts/algorithm_comparison.pdf}
+
+\vspace{0.5em}
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+\textbf{Algorithm} & \textbf{Interpretability} & \textbf{Training Speed} & \textbf{Prediction Speed} & \textbf{Accuracy} \\
+\hline
+Linear Regression & High & Fast & Fast & Low-Medium \\
+Logistic Regression & High & Fast & Fast & Medium \\
+Decision Tree & High & Medium & Fast & Medium \\
+Random Forest & Medium & Slow & Medium & High \\
+XGBoost & Low & Slow & Medium & Very High \\
+SVM & Low & Slow & Fast & High \\
+k-NN & Medium & Fast & Slow & Medium-High \\
+\hline
+\end{tabular}
+
+\vspace{0.5em}
+\textcolor{darkgray}{\small No single algorithm dominates all scenarios - choice depends on problem requirements}
+
+\bottomnote{Algorithm selection balances competing objectives - interpretability, speed, accuracy, and scalability trade off against each other requiring problem-specific optimization}
+\end{frame}

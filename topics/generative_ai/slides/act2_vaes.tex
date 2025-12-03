@@ -1,0 +1,234 @@
+% Slide 6: Autoencoder: Encode -> Latent -> Decode
+\begin{frame}
+\frametitle{Autoencoders: The Foundation}
+\framesubtitle{Learning Compressed Representations}
+
+\begin{center}
+\includegraphics[width=0.55\textwidth]{charts/autoencoder_architecture.pdf}
+\end{center}
+
+\footnotesize
+\begin{columns}[T]
+\column{0.32\textwidth}
+\textbf{Encoder}
+\begin{itemize}
+\item 784D -> 128D
+\item Learns $q(z|x)$ mapping
+\item Forces selective encoding
+\item Filters noise
+\end{itemize}
+
+\column{0.32\textwidth}
+\textbf{Latent}
+\begin{itemize}
+\item 128D bottleneck
+\item Key features only
+\item 6.1x compressed
+\end{itemize}
+
+\column{0.32\textwidth}
+\textbf{Decoder}
+\begin{itemize}
+\item 128D -> 784D
+\item Learns $p(x|z)$ mapping
+\item Lossy reconstruction
+\item Preserves essentials
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize \textcolor{gray}{
+Bottleneck architecture forces dimensionality reduction - information bottleneck principle requires encoding only essential features for reconstruction
+}
+\end{frame}
+
+% Slide 7: Worked example: Compress image to 128D
+\begin{frame}
+\frametitle{Worked Example: MNIST Compression}
+\framesubtitle{From 784 Pixels to 128 Features}
+
+\begin{center}
+\includegraphics[width=0.7\textwidth]{charts/mnist_compression_example.pdf}
+\end{center}
+
+\small
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{Architecture:}
+\begin{itemize}
+\item Input: 784 pixels
+\item Encoder: 784 -> 128
+\item Decoder: 128 -> 784
+\end{itemize}
+
+\column{0.48\textwidth}
+\textbf{Training:}
+\begin{itemize}
+\item Loss: $L = ||x - \hat{x}||^2$
+\item Optimizer: Adam
+\item Epoch 1: MSE=0.45
+\item Epoch 100: MSE=0.03
+\item Compression: 6.125x
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize \textcolor{gray}{
+Reconstruction loss decreases monotonically with training - 6x compression ratio demonstrates learned features capture digit essence while discarding pixel-level noise
+}
+\end{frame}
+
+% Slide 8: ✅ SUCCESS: Learns compact representations
+\begin{frame}
+\frametitle{Autoencoder Successes}
+\framesubtitle{What Works Well}
+
+\begin{center}
+\includegraphics[width=0.55\textwidth]{charts/autoencoder_successes.pdf}
+\end{center}
+
+\footnotesize
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlgreen}{\textbf{[+] SUCCESSES:}}
+\begin{itemize}
+\item Dimensionality reduction: 784D -> 128D
+\item Feature learning, denoising
+\item Anomaly detection
+\end{itemize}
+
+\column{0.48\textwidth}
+\textbf{Results:}
+\begin{itemize}
+\item MSE: 0.031
+\item MNIST test: 99.1\% recognizable
+\item Compression: 6.1x
+\item Training: 2.3 min
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize \textcolor{gray}{
+Autoencoders learn meaningful representations without labels - unsupervised learning discovers structure through reconstruction objective forcing information preservation
+}
+\end{frame}
+
+% Slide 9: ❌ FAILURE PATTERN: Blurry outputs, lack of diversity
+\begin{frame}
+\frametitle{Autoencoder Limitations}
+\framesubtitle{The Generation Problem}
+
+\begin{center}
+\includegraphics[width=0.55\textwidth]{charts/autoencoder_failures.pdf}
+\end{center}
+
+\footnotesize
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlred}{\textbf{[-] FAILURES:}}
+\begin{itemize}
+\item Blurry outputs
+\item Poor generation
+\item Random sampling from latent space produces garbage
+\item Latent space has holes (non-continuous)
+\item Holes in latent space
+\end{itemize}
+
+\column{0.48\textwidth}
+\textbf{Metrics:}
+\begin{tabular}{lr}
+\toprule
+IS & 2.1 \\
+FID & 127 \\
+\bottomrule
+\end{tabular}
+
+Real: IS=9.7, FID=3.2
+\end{columns}
+
+\vspace{\fill}
+\footnotesize \textcolor{gray}{
+Deterministic encoding creates discontinuous latent space - gaps between training examples yield invalid generations when sampled, revealing fundamental limitation for generative tasks
+}
+\end{frame}
+
+% Slide 10: Diagnosis: Reconstruction loss encourages averaging
+\begin{frame}
+\frametitle{Root Cause Analysis}
+\framesubtitle{Why Autoencoders Generate Poorly}
+
+\begin{center}
+\includegraphics[width=0.55\textwidth]{charts/averaging_problem.pdf}
+\end{center}
+
+\footnotesize
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{Problem:}
+\begin{itemize}
+\item Loss: $L = ||x - \hat{x}||^2$
+\item Multiple inputs -> same code
+\item Decoder outputs average
+\item Minimizing MSE yields expectation as optimal solution
+\item Expectation of digits = blurry average (e.g., avg of 3s and 8s = blob)
+\end{itemize}
+
+\column{0.48\textwidth}
+\textbf{Math:}
+\begin{itemize}
+\item $\hat{x} = \arg\min E[||x - \hat{x}||^2]$
+\item Solution: $\hat{x} = E[x]$
+\item Need probabilistic approach
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize \textcolor{gray}{
+Mean squared error loss function mathematically forces averaging - $E[||x-\hat{x}||^2]$ minimized when $\hat{x} = E[x]$, explaining blurriness of deterministic reconstructions
+}
+\end{frame}
+
+% Slide 11: VAE mathematical framework
+\begin{frame}
+\frametitle{Variational Autoencoders (VAEs)}
+\framesubtitle{The Probabilistic Solution (Kingma \& Welling 2013, Rezende et al. 2014)}
+
+\begin{center}
+\includegraphics[width=0.5\textwidth]{charts/vae_framework.pdf}
+\end{center}
+
+\vspace{-0.2cm}
+\footnotesize
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{Key Innovation:}
+\begin{itemize}
+\item Encode to distribution: $q_\phi(z|x) = \mathcal{N}(\mu, \sigma^2)$
+\item Sample: $z = \mu + \sigma \odot \epsilon$
+\end{itemize}
+
+\textbf{Reparameterization:}
+\begin{itemize}
+\item Make $z$ deterministic
+\item Gradient flows
+\end{itemize}
+
+\column{0.48\textwidth}
+\textbf{VAE Loss (ELBO):}
+$$\mathcal{L} = -E[\log p(x|z)] + KL(q||p)$$
+
+\textbf{Two terms:}
+\begin{itemize}
+\item Reconstruction quality
+\item KL forces $q(z|x)$ close to prior $p(z) = \mathcal{N}(0,I)$
+\item $\beta$-VAE balances
+\end{itemize}
+
+ELBO = Evidence Lower Bound: Tractable objective
+\end{columns}
+
+\vspace{\fill}
+\footnotesize \textcolor{gray}{
+Reparameterization trick $z = \mu + \sigma \odot \epsilon$ separates stochasticity enabling backpropagation through sampling - VAEs optimize variational lower bound on log-likelihood
+}
+\end{frame}

@@ -1,0 +1,50 @@
+% Appendix: Mathematical Foundations
+\section*{Appendix: Mathematical Foundations}
+
+\begin{frame}[plain]
+\vfill
+\centering
+\begin{beamercolorbox}[sep=16pt,center]{title}
+\usebeamerfont{title}\Large Appendix: Mathematical Foundations\par
+\vspace{0.5em}
+\large Proofs, Derivations, and Advanced Theory\par
+\end{beamercolorbox}
+\vfill
+\end{frame}
+
+\begin{frame}{Black-Scholes Derivation}
+\Large\textbf{From Stochastic Calculus to Option Pricing}
+\normalsize
+
+\textbf{Stock Price Dynamics:}
+$$dS_t = \mu S_t dt + \sigma S_t dW_t$$
+
+\textbf{Ito's Lemma Application:}
+$$df = \left(\frac{\partial f}{\partial t} + \mu S \frac{\partial f}{\partial S} + \frac{1}{2}\sigma^2 S^2 \frac{\partial^2 f}{\partial S^2}\right)dt + \sigma S \frac{\partial f}{\partial S} dW_t$$
+
+\textbf{Risk-Neutral Valuation:}
+$$\frac{\partial V}{\partial t} + rS\frac{\partial V}{\partial S} + \frac{1}{2}\sigma^2 S^2 \frac{\partial^2 V}{\partial S^2} = rV$$
+
+\textbf{Solution (European Call):}
+$$C = S_0\Phi(d_1) - Ke^{-rT}\Phi(d_2)$$
+where:
+$$d_1 = \frac{\ln(S_0/K) + (r + \sigma^2/2)T}{\sigma\sqrt{T}}, \quad d_2 = d_1 - \sigma\sqrt{T}$$
+\end{frame}
+
+\begin{frame}{Optimization Theory: KKT Conditions}
+\Large\textbf{Karush-Kuhn-Tucker Conditions}
+\normalsize
+
+For optimization problem:
+$$\min_{x} f(x) \quad \text{s.t.} \quad g_i(x) \leq 0, \quad h_j(x) = 0$$
+
+KKT conditions (necessary for optimality):
+\begin{enumerate}
+\item Stationarity: $\nabla f(x^*) + \sum_i \lambda_i \nabla g_i(x^*) + \sum_j \mu_j \nabla h_j(x^*) = 0$
+\item Primal feasibility: $g_i(x^*) \leq 0, h_j(x^*) = 0$
+\item Dual feasibility: $\lambda_i \geq 0$
+\item Complementary slackness: $\lambda_i g_i(x^*) = 0$
+\end{enumerate}
+
+\textbf{Application: Portfolio Optimization with Constraints}
+\end{frame}

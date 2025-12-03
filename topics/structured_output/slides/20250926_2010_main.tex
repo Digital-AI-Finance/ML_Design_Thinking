@@ -1,0 +1,113 @@
+% Week 8: Structured Output & Reliable AI Systems
+% Machine Learning for Smarter Innovation - BSc Course
+\documentclass[8pt,aspectratio=169]{beamer}
+\usetheme{Madrid}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{tikz}
+\usepackage{listings}
+\usepackage{booktabs}
+\usepackage{multicol}
+\usepackage{array}
+
+% Standard ML Color Palette
+\definecolor{mlblue}{RGB}{31, 119, 180}
+\definecolor{mlorange}{RGB}{255, 127, 14}
+\definecolor{mlgreen}{RGB}{44, 160, 44}
+\definecolor{mlred}{RGB}{214, 39, 40}
+\definecolor{mlpurple}{RGB}{148, 103, 189}
+\definecolor{mlgray}{RGB}{128, 128, 128}
+
+% Apply colors to beamer
+\setbeamercolor{structure}{fg=mlblue}
+\setbeamercolor{normal text}{fg=black,bg=white}
+\setbeamercolor{frametitle}{fg=mlblue,bg=mlblue!10}
+
+% Navigation and decoration
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{footline}[frame number]
+\setbeamerfont{frametitle}{series=\bfseries,size=\large}
+
+% Items with color accents
+\setbeamercolor{item}{fg=mlorange}
+\setbeamercolor{subitem}{fg=mlgreen}
+\setbeamercolor{subsubitem}{fg=mlpurple}
+
+\title{\textcolor{mlblue}{Structured Output \& Reliable AI Systems}}
+\subtitle{\textcolor{mlorange}{Week 8: From Prototype to Production}}
+\author{\textcolor{mlgray}{Machine Learning for Smarter Innovation}}
+\date{}
+
+\begin{document}
+
+% Title Slide
+\begin{frame}[plain]
+\vspace{2cm}
+\begin{center}
+{\Huge\textcolor{mlblue}{Structured Output}}\\[0.3cm]
+{\Huge\textcolor{mlblue}{\& Reliable AI Systems}}\\[0.8cm]
+{\Large\textcolor{mlorange}{From Prototype to Production}}\\[1.5cm]
+{\normalsize\textcolor{mlgray}{Week 8: Machine Learning for Smarter Innovation}}
+\end{center}
+\end{frame}
+
+% Overview
+\begin{frame}{Today's Journey}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Part 1: Foundation}}
+\begin{itemize}
+\item The reliability challenge
+\item Prototype vs production gap
+\item Why structure matters
+\item Production requirements
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlorange}{\textbf{Part 2: Techniques}}
+\begin{itemize}
+\item JSON schema fundamentals
+\item Prompt engineering patterns
+\item Function calling mechanics
+\item Validation strategies
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{mlgreen}{\textbf{Part 3: Implementation}}
+\begin{itemize}
+\item OpenAI function calling
+\item Pydantic validation
+\item Error handling
+\item Production deployment
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlpurple}{\textbf{Parts 4-5: Design \& Practice}}
+\begin{itemize}
+\item UX for reliable AI
+\item Workshop exercise
+\item Best practices
+\item Key takeaways
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\small\textcolor{mlgray}{Making AI systems production-ready and trustworthy}
+\end{frame}
+
+% Part 1: Foundation
+\input{part1_foundation}
+
+% Part 2: Techniques
+\input{part2_algorithms}
+
+% Part 3: Implementation
+\input{part3_implementation}
+
+% Part 4: Design
+\input{part4_design}
+
+% Part 5: Practice
+\input{part5_practice}
+
+\end{document}

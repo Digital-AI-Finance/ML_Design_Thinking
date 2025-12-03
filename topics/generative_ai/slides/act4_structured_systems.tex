@@ -1,0 +1,400 @@
+% ACT 4: STRUCTURED SYSTEMS IN PRODUCTION (4 slides)
+% Theme: Structure in real-world tools (2024-2025)
+
+% Slide 22: Unified Architecture - The Complete Picture
+\begin{frame}[t]{The Complete Structured Generation System}
+\textbf{All components working together in production:}
+
+\vspace{0.3em}
+
+\begin{center}
+\begin{tcolorbox}[colback=mllavender4, colframe=mlpurple, width=0.9\textwidth]
+\small
+
+\textbf{\textcolor{mlpurple}{The Four-Layer Structured Architecture}}
+
+\vspace{0.3cm}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Input Side}}
+
+\textbf{Layer 1: Context Preparation}
+\begin{itemize}
+\item Knowledge base (Vector DB)
+\item Retrieval system (RAG)
+\item Structured formatting
+\item Relevance ranking
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Layer 2: Structured Generation}
+\begin{itemize}
+\item Language model (LLM)
+\item Attention mechanism
+\item Context-guided sampling
+\item Temperature control
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{mlorange}{\textbf{Output Side}}
+
+\textbf{Layer 3: Quality Evaluation}
+\begin{itemize}
+\item Reward models
+\item Constraint verification
+\item Scoring algorithms
+\item Accept/reject logic
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Layer 4: Integration}
+\begin{itemize}
+\item Consistency checks
+\item Cross-component verification
+\item Coherence enforcement
+\item Production deployment
+\end{itemize}
+\end{columns}
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{Key Properties:}}
+
+\begin{center}
+\begin{tabular}{lll}
+\textbf{Speed:} <1 second & \textbf{Quality:} 85-95\% & \textbf{Consistency:} ±5\% \\
+\end{tabular}
+\end{center}
+\end{tcolorbox}
+\end{center}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mlblue!10, colframe=mlblue]
+\textbf{Key Insight:} Structure transforms unreliable chaos (5-85\%) into production-ready systems (85-95\%)
+\end{tcolorbox}
+
+\vspace{0.5em}
+\textbf{Key Question:} What tools use this architecture today?
+
+\bottomnote{System integration requires architectural coherence - unified design patterns enable seamless component interaction across layers}
+\end{frame}
+
+% Slide 23: Conceptual Lessons - The Transferable Principles
+\begin{frame}[t]{Four Transferable Lessons (Beyond Prototyping)}
+\textbf{Universal principles that work across domains:}
+
+\vspace{0.3em}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlpurple}{\textbf{Lesson 1: Chaos Needs Constraints}}
+
+\small
+\textbf{Principle:}\\
+Unconstrained creativity produces\\inconsistent mediocrity
+
+\textbf{Why:}\\
+Infinite possibility space → random selection
+
+\textbf{Solution:}\\
+Add structure to narrow the space
+
+\textbf{Applies to:}
+\begin{itemize}
+\item Design systems
+\item Content creation
+\item Software architecture
+\item Innovation processes
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlpurple}{\textbf{Lesson 2: Context Guides Generation}}
+
+\small
+\textbf{Principle:}\\
+Quality depends on relevant\\contextual information
+
+\textbf{Why:}\\
+Models can't invent missing constraints
+
+\textbf{Solution:}\\
+Provide structure upfront
+
+\textbf{Applies to:}
+\begin{itemize}
+\item Writing (audience, tone, purpose)
+\item Coding (specs, constraints, style)
+\item Teaching (prerequisites, goals, level)
+\item Design (brand, audience, medium)
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Lesson 3: Evaluation Enforces Structure}}
+
+\small
+\textbf{Principle:}\\
+Without verification, structure\\degrades over time
+
+\textbf{Why:}\\
+Generation alone doesn't guarantee constraints
+
+\textbf{Solution:}\\
+Explicit quality gates
+
+\textbf{Applies to:}
+\begin{itemize}
+\item Code review (style, quality, tests)
+\item Design critique (consistency, brand)
+\item Content editing (tone, accuracy)
+\item System monitoring (SLAs, metrics)
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlblue}{\textbf{Lesson 4: Integration Requires Coordination}}
+
+\small
+\textbf{Principle:}\\
+Individual quality doesn't\\guarantee coherent systems
+
+\textbf{Why:}\\
+Pieces must fit together structurally
+
+\textbf{Solution:}\\
+Cross-component consistency checks
+
+\textbf{Applies to:}
+\begin{itemize}
+\item Microservices (APIs, contracts)
+\item Design systems (components, tokens)
+\item Documentation (voice, structure)
+\item Teams (communication, alignment)
+\end{itemize}
+\end{columns}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mlblue!10, colframe=mlblue]
+\textbf{Key Insight:} These principles transcend AI - they're fundamental to managing complexity with structure
+\end{tcolorbox}
+
+\vspace{0.5em}
+\textbf{Key Question:} How are companies using this in 2024-2025?
+
+\bottomnote{Domain-specific solutions reveal transferable principles - concrete implementations expose abstract patterns applicable across contexts}
+\end{frame}
+
+% Slide 24: Modern Applications (2024-2025 Tools)
+\begin{frame}[t]{Structured Generation in Production: Real Tools (2024-2025)}
+\textbf{How modern AI products implement the 4-layer framework:}
+
+\vspace{0.3em}
+
+\begin{columns}[T]
+\column{0.32\textwidth}
+\textcolor{mlpurple}{\textbf{GitHub Copilot}}
+
+\small
+\textbf{Context Layer:}
+\begin{itemize}
+\item Current file structure
+\item Repository conventions
+\item Imported libraries
+\item Comment context
+\end{itemize}
+
+\textbf{Generation Layer:}
+\begin{itemize}
+\item Codex (GPT-4 variant)
+\item Context-aware suggestions
+\item Multiple candidates
+\end{itemize}
+
+\textbf{Evaluation Layer:}
+\begin{itemize}
+\item Syntax checking
+\item Type validation
+\item Style compliance
+\end{itemize}
+
+\textbf{Integration:}
+\begin{itemize}
+\item IDE integration
+\item Version control
+\item Team consistency
+\end{itemize}
+
+\vspace{0.2cm}
+\textcolor{mlgreen}{\textbf{Result:}}\\
+46\% of code written by AI\\
+(GitHub data, 2024)
+
+\column{0.32\textwidth}
+\textcolor{mlcyan}{\textbf{Vercel v0}}
+
+\small
+\textbf{Context Layer:}
+\begin{itemize}
+\item Design system tokens
+\item Component library
+\item Brand guidelines
+\item Accessibility rules
+\end{itemize}
+
+\textbf{Generation Layer:}
+\begin{itemize}
+\item GPT-4 + DALL-E 3
+\item React/Tailwind output
+\item Responsive design
+\end{itemize}
+
+\textbf{Evaluation Layer:}
+\begin{itemize}
+\item A11y validation
+\item Design system checks
+\item Browser compatibility
+\end{itemize}
+
+\textbf{Integration:}
+\begin{itemize}
+\item Vercel deployment
+\item Git integration
+\item Preview environments
+\end{itemize}
+
+\vspace{0.2cm}
+\textcolor{mlgreen}{\textbf{Result:}}\\
+UI prototypes in 30 seconds\\
+(production-ready code)
+
+\column{0.32\textwidth}
+\textcolor{mlorange}{\textbf{Claude Artifacts}}
+
+\small
+\textbf{Context Layer:}
+\begin{itemize}
+\item Conversation history
+\item User preferences
+\item Task requirements
+\item Output format specs
+\end{itemize}
+
+\textbf{Generation Layer:}
+\begin{itemize}
+\item Claude 3.5 Sonnet
+\item Interactive content
+\item Real-time updates
+\end{itemize}
+
+\textbf{Evaluation Layer:}
+\begin{itemize}
+\item Syntax validation
+\item Sandbox testing
+\item Security checks
+\end{itemize}
+
+\textbf{Integration:}
+\begin{itemize}
+\item Live preview
+\item Iterative refinement
+\item Export/share
+\end{itemize}
+
+\vspace{0.2cm}
+\textcolor{mlgreen}{\textbf{Result:}}\\
+Interactive apps in chat\\
+(HTML/React/SVG)
+\end{columns}
+
+\vspace{0.3cm}
+\begin{center}
+\Large\textcolor{mlgreen}{\textbf{All three use the 4-layer structured framework!}}
+\end{center}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mlblue!10, colframe=mlblue]
+\textbf{Key Insight:} Modern AI products succeed by adding structure (context/evaluation/integration) to chaos (generation)
+\end{tcolorbox}
+
+\vspace{0.5em}
+\textbf{Key Question:} What should you remember from today?
+
+\bottomnote{Contemporary tools validate theoretical frameworks - production implementations demonstrate practical viability of academic concepts}
+\end{frame}
+
+% Slide 25: Summary - What You Learned Today
+\begin{frame}[t]{From Chaos to Structure: Your Complete Journey}
+\textbf{What you now understand about AI and prototyping:}
+
+\vspace{0.3em}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlred}{\textbf{The Problem (Acts 1-2)}}
+
+\small
+\textbf{Act 1: Why chaos is expensive}
+\begin{itemize}
+\item Unstructured prototyping: \$24K, 240 hours
+\item 97\% of ideas lost to bottleneck
+\item Skills × Time × Iterations = exponential cost
+\item Information loss: 5.06 bits (Shannon)
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Act 2: Why pure AI fails}
+\begin{itemize}
+\item Creative chaos works at first (85\%)
+\item Collapses with complexity (→5\%)
+\item Missing: context, consistency, integration
+\item Diagnosis: General patterns vs specific structure
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlgray}{\textit{``You can't just throw AI at chaos''}}
+
+\column{0.48\textwidth}
+\textcolor{mlgreen}{\textbf{The Solution (Acts 3-4)}}
+
+\small
+\textbf{Act 3: How structure transforms chaos}
+\begin{itemize}
+\item 4-layer framework: Context/Gen/Eval/Integration
+\item Geometric intuition: 2D → 512D space narrowing
+\item Numerical proof: 20/100 → 95/100 quality
+\item Speed maintained: +4 min overhead only
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Act 4: Real-world structured systems}
+\begin{itemize}
+\item Modern tools: Copilot, v0, Artifacts
+\item All use 4-layer architecture
+\item Production quality: 85-95\% consistent
+\item Transferable lessons for any domain
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlgray}{\textit{``Structure is the missing ingredient''}}
+\end{columns}
+
+\vspace{0.3cm}
+\begin{center}
+\begin{tcolorbox}[colback=mlgreen!20, colframe=mlgreen, width=0.85\textwidth]
+\centering
+\textbf{Core Takeaway:}\\
+\\
+Chaos (generation) + Structure (context/eval/integration)\\
+= Production-ready AI systems\\
+\\
+\textbf{You can now prototype 100 ideas instead of 3!}
+\end{tcolorbox}
+\end{center}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mlblue!10, colframe=mlblue]
+\textbf{Key Insight:} Structure doesn't slow down AI - it makes AI actually work at scale
+\end{tcolorbox}
+
+\vspace{0.5em}
+\textbf{Next Week:} Responsible AI - Structure must include ethics, fairness, and transparency
+
+\bottomnote{Quantified progression clarifies transformation - numerical benchmarks anchor abstract improvement claims in concrete measurements}
+\end{frame}

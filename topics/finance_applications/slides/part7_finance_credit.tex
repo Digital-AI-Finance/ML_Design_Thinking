@@ -1,0 +1,232 @@
+% Part 7: Credit Risk & Fraud Detection
+\section{Credit Risk \& Fraud Detection}
+
+\begin{frame}[plain]
+\vfill
+\centering
+\begin{beamercolorbox}[sep=16pt,center]{title}
+\usebeamerfont{title}\Large Part 7: Credit \& Fraud\par
+\vspace{0.5em}
+\large Protecting Financial Systems\par
+\end{beamercolorbox}
+\vfill
+\end{frame}
+
+\begin{frame}{Credit Scoring: From FICO to Machine Learning}
+\begin{columns}[T]
+\begin{column}{0.55\textwidth}
+\Large\textbf{Probability of Default Modeling}
+\normalsize
+\vspace{0.5em}
+
+\textbf{Traditional FICO Score:}
+\begin{itemize}
+\item Payment history: 35\%
+\item Amounts owed: 30\%
+\item Length of history: 15\%
+\item Credit mix: 10\%
+\item New credit: 10\%
+\end{itemize}
+
+Linear scorecard: 300-850 range
+
+\textbf{Logistic Regression Baseline:}
+$$PD = \frac{1}{1 + e^{-(\beta_0 + \beta^TX)}}$$
+
+where $X$ includes debt-to-income, payment history, utilization
+
+\textbf{ML Enhancements:}
+\begin{itemize}
+\item \textbf{Random Forest:} Non-linear interactions
+\item \textbf{XGBoost:} Best predictive performance
+\item \textbf{Neural Networks:} Deep feature learning
+\item \textbf{Ensemble:} Combine multiple models
+\end{itemize}
+\end{column}
+
+\begin{column}{0.43\textwidth}
+\textbf{Model Comparison:}
+
+\begin{center}
+\footnotesize
+\begin{tabular}{lcc}
+\toprule
+\textbf{Model} & \textbf{AUC} & \textbf{Gini} \\
+\midrule
+FICO & 0.72 & 0.44 \\
+Logistic & 0.78 & 0.56 \\
+Random Forest & 0.84 & 0.68 \\
+XGBoost & 0.87 & 0.74 \\
+Deep NN & 0.86 & 0.72 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{Alternative Data:}
+\begin{itemize}
+\item Mobile phone usage patterns
+\item Social media activity
+\item Transaction history
+\item Geolocation data
+\end{itemize}
+
+\textbf{Regulatory Considerations:}
+\begin{itemize}
+\item Model explainability (GDPR, ECOA)
+\item Fairness constraints
+\item Adverse action notices
+\item Validation requirements
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Loss Given Default (LGD) and Recovery Modeling}
+\begin{columns}[T]
+\begin{column}{0.55\textwidth}
+\Large\textbf{Expected Loss Framework}
+\normalsize
+\vspace{0.5em}
+
+\textbf{Expected Loss Decomposition:}
+$$\text{EL} = \text{EAD} \times \text{PD} \times \text{LGD}$$
+
+\begin{itemize}
+\item \textbf{EAD:} Exposure at Default
+\item \textbf{PD:} Probability of Default
+\item \textbf{LGD:} Loss Given Default (1 - Recovery Rate)
+\end{itemize}
+
+\textbf{LGD Modeling Challenges:}
+\begin{itemize}
+\item Bimodal distribution (full loss or high recovery)
+\item Limited default data
+\item Collateral valuation uncertainty
+\item Economic cycle dependencies
+\end{itemize}
+
+\textbf{ML Approaches:}
+\begin{enumerate}
+\item \textbf{Two-stage:} Logistic (default?) + Regression (LGD)
+\item \textbf{Beta regression:} LGD $\in$ (0,1) naturally
+\item \textbf{Quantile regression:} Estimate LGD distribution
+\item \textbf{Survival analysis:} Time-to-recovery modeling
+\end{enumerate}
+\end{column}
+
+\begin{column}{0.43\textwidth}
+\textbf{Feature Engineering:}
+
+\textbf{Borrower Characteristics:}
+\begin{itemize}
+\item Industry sector
+\item Firm size, leverage
+\item Credit rating history
+\item Management quality
+\end{itemize}
+
+\textbf{Loan Characteristics:}
+\begin{itemize}
+\item Seniority (secured vs unsecured)
+\item Collateral type and quality
+\item Loan-to-value ratio
+\item Covenants and protections
+\end{itemize}
+
+\textbf{Macroeconomic Conditions:}
+\begin{itemize}
+\item GDP growth, unemployment
+\item Interest rate environment
+\item Sectoral stress indicators
+\end{itemize}
+
+\textbf{Typical LGD Estimates:}
+\begin{center}
+\footnotesize
+\begin{tabular}{lc}
+\toprule
+\textbf{Loan Type} & \textbf{LGD} \\
+\midrule
+Senior secured & 25-35\% \\
+Senior unsecured & 45-55\% \\
+Subordinated & 65-75\% \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Fraud Detection with ML}
+\begin{columns}[T]
+\begin{column}{0.55\textwidth}
+\Large\textbf{Real-Time Transaction Monitoring}
+\normalsize
+\vspace{0.5em}
+
+\textbf{Fraud Detection Pipeline:}
+\begin{enumerate}
+\item Feature extraction from transaction
+\item Real-time scoring (< 100ms)
+\item Rule engine + ML model ensemble
+\item Human review for high-risk cases
+\end{enumerate}
+
+\textbf{Key Features:}
+\begin{itemize}
+\item \textbf{Transaction:} Amount, location, merchant, time
+\item \textbf{Behavioral:} Deviation from normal patterns
+\item \textbf{Historical:} Past fraud, dispute history
+\item \textbf{Network:} Graph-based (connected accounts)
+\end{itemize}
+
+\textbf{Class Imbalance Problem:}
+\begin{itemize}
+\item Fraud rate: 0.1-0.5\% of transactions
+\item SMOTE oversampling for minority class
+\item Cost-sensitive learning (FP vs FN)
+\item Precision-recall optimization
+\end{itemize}
+\end{column}
+
+\begin{column}{0.43\textwidth}
+\textbf{ML Techniques:}
+
+\textcolor{finblue}{\textbf{Supervised Models:}}
+\begin{itemize}
+\item Random Forest: Feature interactions
+\item XGBoost: Best precision-recall
+\item Neural Networks: Deep patterns
+\end{itemize}
+
+\textcolor{fingreen}{\textbf{Unsupervised Anomaly:}}
+\begin{itemize}
+\item Isolation Forest
+\item One-class SVM
+\item Autoencoders (reconstruction error)
+\end{itemize}
+
+\textbf{Performance Metrics:}
+\begin{center}
+\footnotesize
+\begin{tabular}{lcc}
+\toprule
+\textbf{Model} & \textbf{Precision} & \textbf{Recall} \\
+\midrule
+Rules only & 45\% & 62\% \\
+Logistic & 68\% & 75\% \\
+XGBoost & 82\% & 84\% \\
+Ensemble & 85\% & 86\% \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{Business Impact:}
+\begin{itemize}
+\item Reduced false positives (better CX)
+\item Faster detection (lower losses)
+\item Adaptive to new fraud patterns
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}

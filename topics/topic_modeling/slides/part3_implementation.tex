@@ -1,0 +1,435 @@
+% Part 3: Implementation - From Theory to Practice
+\section{Implementation: Building Topic Models}
+
+% Data Collection Strategy
+\begin{frame}{Data Collection for Ideation}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Internal Sources}}
+\begin{itemize}
+\item Innovation workshops notes
+\item Employee suggestions
+\item R\&D documentation
+\item Meeting transcripts
+\item Project proposals
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlorange}{\textbf{External Sources}}
+\begin{itemize}
+\item Customer feedback
+\item Social media mentions
+\item Competitor analysis
+\item Patent databases
+\item Academic research
+\end{itemize}
+
+\column{0.48\textwidth}
+\includegraphics[width=0.85\textwidth]{data_sources_hierarchy.pdf}
+
+\vspace{0.3cm}
+\small\textcolor{mlgreen}{\textbf{Volume Guidelines:}}
+\begin{itemize}
+\item Minimum: 1,000 documents
+\item Optimal: 10,000+ documents
+\item Per topic: 100+ documents
+\end{itemize}
+\end{columns}
+\end{frame}
+
+% Python Implementation - LDA
+\begin{frame}{LDA Implementation with Gensim}
+\begin{columns}[T]
+\column{0.55\textwidth}
+\footnotesize
+\texttt{
+from gensim import corpora, models\\
+import pandas as pd\\
+\\
+\# Load and preprocess\\
+docs = load\_innovation\_data()\\
+texts = [preprocess(doc) for doc in docs]\\
+\\
+\# Create dictionary and corpus\\
+dictionary = corpora.Dictionary(texts)\\
+corpus = [dictionary.doc2bow(text)\\
+~~~~~~~~~~for text in texts]\\
+\\
+\# Build LDA model\\
+lda\_model = models.LdaModel(\\
+~~~~corpus=corpus,\\
+~~~~id2word=dictionary,\\
+~~~~num\_topics=20,\\
+~~~~alpha='auto',\\
+~~~~eta='auto',\\
+~~~~passes=10,\\
+~~~~random\_state=42\\
+)\\
+\\
+\# Get topics\\
+topics = lda\_model.print\_topics(\\
+~~~~num\_words=10\\
+)
+}
+
+\column{0.43\textwidth}
+\textcolor{mlblue}{\textbf{Key Parameters}}
+
+\small
+\begin{itemize}
+\item \texttt{num\_topics}: Start with $\sqrt{N/2}$
+\item \texttt{alpha}: Document-topic density
+\item \texttt{eta}: Topic-word density
+\item \texttt{passes}: Training iterations
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlorange}{\textbf{Output Example:}}
+\footnotesize
+\texttt{Topic 0: sustainability, eco, green, renewable...}\\
+\texttt{Topic 1: digital, app, mobile, user...}\\
+\texttt{Topic 2: health, wellness, fitness...}
+\end{columns}
+\end{frame}
+
+% NMF Implementation
+\begin{frame}{NMF Implementation with Scikit-learn}
+\begin{columns}[T]
+\column{0.55\textwidth}
+\footnotesize
+\texttt{
+from sklearn.decomposition import NMF\\
+from sklearn.feature\_extraction.text \\
+~~~~import TfidfVectorizer\\
+\\
+\# Vectorize documents\\
+vectorizer = TfidfVectorizer(\\
+~~~~max\_features=1000,\\
+~~~~min\_df=5,\\
+~~~~max\_df=0.8,\\
+~~~~ngram\_range=(1, 2)\\
+)\\
+doc\_term\_matrix = vectorizer.fit\_transform(\\
+~~~~documents\\
+)\\
+\\
+\# Apply NMF\\
+nmf = NMF(\\
+~~~~n\_components=15,\\
+~~~~init='nndsvd',\\
+~~~~max\_iter=200,\\
+~~~~random\_state=42\\
+)\\
+W = nmf.fit\_transform(doc\_term\_matrix)\\
+H = nmf.components\_\\
+\\
+\# Extract topics\\
+feature\_names = vectorizer.get\_feature\_names\_out()\\
+top\_words = extract\_top\_words(\\
+~~~~H, feature\_names, n\_top\_words=10\\
+)
+}
+
+\column{0.43\textwidth}
+\textcolor{mlgreen}{\textbf{Advantages for Ideation:}}
+\begin{itemize}
+\item Faster than LDA
+\item Better for short texts
+\item More stable results
+\item Easier interpretation
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlorange}{\textbf{Best Practices:}}
+\small
+\begin{itemize}
+\item Use TF-IDF weighting
+\item Include bigrams
+\item Filter extremes carefully
+\item Validate with coherence
+\end{itemize}
+
+\vspace{0.3cm}
+\includegraphics[width=0.85\textwidth]{nmf_topics_visualization.pdf}
+\end{columns}
+\end{frame}
+
+% Topic Visualization
+\begin{frame}{Visualizing Topics}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{pyLDAvis}}\\
+\includegraphics[width=0.85\textwidth]{pyldavis_example.pdf}
+
+\small
+Interactive topic exploration:
+\begin{itemize}
+\item Topic distances
+\item Word relevance
+\item Topic prevalence
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{mlorange}{\textbf{Custom Visualizations}}\\
+\includegraphics[width=0.85\textwidth]{topic_heatmap.pdf}
+
+\small
+Design-focused views:
+\begin{itemize}
+\item Innovation heatmaps
+\item Opportunity matrices
+\item Theme evolution
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Good visualization makes topics actionable for design teams}
+\end{frame}
+
+% Production Pipeline
+\begin{frame}{Production Pipeline}
+\begin{center}
+\includegraphics[width=0.9\textwidth]{production_pipeline.pdf}
+\end{center}
+
+\vspace{-0.2cm}
+\begin{columns}[T]
+\column{0.25\textwidth}
+\centering\small
+\textcolor{mlblue}{\textbf{Ingestion}}\\
+\footnotesize APIs, Databases\\
+Real-time streams
+
+\column{0.25\textwidth}
+\centering\small
+\textcolor{mlorange}{\textbf{Processing}}\\
+\footnotesize Clean, tokenize\\
+Feature extraction
+
+\column{0.25\textwidth}
+\centering\small
+\textcolor{mlgreen}{\textbf{Modeling}}\\
+\footnotesize Topic discovery\\
+Update models
+
+\column{0.25\textwidth}
+\centering\small
+\textcolor{mlpurple}{\textbf{Delivery}}\\
+\footnotesize Dashboards\\
+API endpoints
+\end{columns}
+\end{frame}
+
+% Hyperparameter Tuning
+\begin{frame}{Hyperparameter Optimization}
+\begin{columns}[T]
+\column{0.55\textwidth}
+\includegraphics[width=0.85\textwidth]{hyperparameter_grid.pdf}
+
+\vspace{0.3cm}
+\small
+\textcolor{mlblue}{\textbf{Grid Search Results:}}
+\begin{itemize}
+\item Optimal topics: 18
+\item Best alpha: 0.1
+\item Best eta: 0.01
+\item Coherence: 0.62
+\end{itemize}
+
+\column{0.43\textwidth}
+\textcolor{mlorange}{\textbf{Tuning Strategy}}
+
+\normalsize
+\begin{enumerate}
+\item \textbf{Number of topics}\\
+   \small Try: 5, 10, 15, 20, 25, 30
+\item \textbf{Alpha parameter}\\
+   \small Try: auto, 0.01, 0.1, 1.0
+\item \textbf{Beta/Eta parameter}\\
+   \small Try: auto, 0.01, 0.1
+\end{enumerate}
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{Validation:}}
+\begin{itemize}
+\item Coherence score
+\item Human evaluation
+\item Business relevance
+\end{itemize}
+\end{columns}
+\end{frame}
+
+% Handling Different Text Types
+\begin{frame}{Adapting to Different Text Types}
+\begin{columns}[T]
+\column{0.32\textwidth}
+\textcolor{mlblue}{\textbf{Short Text}}\\
+\footnotesize (Tweets, titles)
+
+\small
+\begin{itemize}
+\item Use NMF or BERTopic
+\item Aggressive filtering
+\item Include hashtags
+\item Expand with context
+\end{itemize}
+
+\column{0.32\textwidth}
+\textcolor{mlorange}{\textbf{Long Documents}}\\
+\footnotesize (Reports, articles)
+
+\small
+\begin{itemize}
+\item LDA works well
+\item Paragraph sampling
+\item More topics needed
+\item Section-aware
+\end{itemize}
+
+\column{0.32\textwidth}
+\textcolor{mlgreen}{\textbf{Mixed Format}}\\
+\footnotesize (Reviews + comments)
+
+\small
+\begin{itemize}
+\item Normalize lengths
+\item Weight by importance
+\item Hierarchical topics
+\item Multi-level models
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\begin{center}
+\small\textcolor{mlpurple}{Adapt preprocessing and model choice to your data characteristics}
+\end{center}
+\end{frame}
+
+% Real-time Topic Modeling
+\begin{frame}{Real-time Topic Discovery}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Online Learning}}
+
+\small
+Update models incrementally:
+\begin{itemize}
+\item Online LDA
+\item Mini-batch processing
+\item Sliding window approach
+\item Dynamic topic models
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlorange}{\textbf{Architecture:}}
+\begin{itemize}
+\item Message queues (Kafka)
+\item Stream processing (Spark)
+\item Model serving (MLflow)
+\item Result caching (Redis)
+\end{itemize}
+
+\column{0.48\textwidth}
+\includegraphics[width=0.85\textwidth]{realtime_architecture.pdf}
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{Use Cases:}}
+\small
+\begin{itemize}
+\item Social media monitoring
+\item Live feedback analysis
+\item Trending topic detection
+\item Crisis management
+\end{itemize}
+\end{columns}
+\end{frame}
+
+% Common Pitfalls
+\begin{frame}{Common Implementation Pitfalls}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlred}{\textbf{Mistakes to Avoid}}
+
+\small
+\begin{enumerate}
+\item \textbf{Too few documents}\\
+   \footnotesize Need 100+ per expected topic
+\item \textbf{No preprocessing}\\
+   \footnotesize Garbage in, garbage out
+\item \textbf{Wrong model choice}\\
+   \footnotesize Match model to data type
+\item \textbf{Fixed hyperparameters}\\
+   \footnotesize Always tune and validate
+\item \textbf{Ignoring domain knowledge}\\
+   \footnotesize Involve subject experts
+\end{enumerate}
+
+\column{0.48\textwidth}
+\textcolor{mlgreen}{\textbf{Best Practices}}
+
+\small
+\begin{enumerate}
+\item \textbf{Start simple}\\
+   \footnotesize Basic LDA, then iterate
+\item \textbf{Validate thoroughly}\\
+   \footnotesize Multiple metrics + humans
+\item \textbf{Document everything}\\
+   \footnotesize Preprocessing, parameters
+\item \textbf{Version control models}\\
+   \footnotesize Track changes over time
+\item \textbf{Monitor drift}\\
+   \footnotesize Topics evolve, retrain
+\end{enumerate}
+\end{columns}
+
+\vspace{\fill}
+\begin{center}
+\normalsize\textcolor{mlblue}{Success = Good data + Right model + Careful validation}
+\end{center}
+\end{frame}
+
+% Implementation Summary
+\begin{frame}{Implementation Checklist}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Data Preparation} \checkmark}
+\begin{itemize}
+\item Collect diverse sources
+\item Clean and preprocess
+\item Create document-term matrix
+\item Split train/validation
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlorange}{\textbf{Model Development} \checkmark}
+\begin{itemize}
+\item Choose algorithm
+\item Tune hyperparameters
+\item Validate coherence
+\item Interpret topics
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{mlgreen}{\textbf{Deployment} \checkmark}
+\begin{itemize}
+\item Build pipeline
+\item Create visualizations
+\item Set up monitoring
+\item Document API
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlpurple}{\textbf{Maintenance} \checkmark}
+\begin{itemize}
+\item Track performance
+\item Update regularly
+\item Gather feedback
+\item Iterate and improve
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\begin{center}
+\normalsize\textcolor{mlred}{\textbf{Next:} Applying topics to design}
+\end{center}
+\end{frame}

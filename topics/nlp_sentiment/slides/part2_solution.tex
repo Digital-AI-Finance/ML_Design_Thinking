@@ -1,0 +1,303 @@
+% ==================== PART 2: FIRST SOLUTION & ITS LIMITS ====================
+\section{Part 2: Traditional NLP - Hope Then Despair}
+
+% Slide 6: Key Insight - How Humans Do It
+\begin{frame}[t]{The Intuitive Solution: Count Emotional Words}
+\Large\textbf{How Would YOU Quickly Scan 1000 Reviews?}
+\normalsize
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{Human Strategy:}
+\begin{enumerate}
+\item Look for emotion words: ``love'', ``hate'', ``terrible''
+\item Count positive vs negative
+\item More positive → Happy customer
+\item More negative → Unhappy customer
+\end{enumerate}
+
+\vspace{0.5em}
+\textbf{Computer Implementation:}
+\begin{itemize}
+\item Build word lists
+\item Positive: [great, excellent, love, amazing...]
+\item Negative: [bad, terrible, hate, awful...]
+\item Count occurrences
+\item Calculate: Positive\% - Negative\%
+\end{itemize}
+
+\column{0.48\textwidth}
+\begin{tcolorbox}[colback=mlgreen!10, colframe=mlgreen]
+\textbf{Example Analysis:}\\[0.3em]
+\footnotesize
+``I \textcolor{mlgreen}{love} the design but \textcolor{mlred}{hate} waiting. The quality is \textcolor{mlgreen}{excellent} though shipping was \textcolor{mlred}{terrible}.''\\[0.3em]
+\normalsize
+\textbf{Count:} 2 positive, 2 negative\\
+\textbf{Score:} 50\% - 50\% = Neutral (0)\\[0.3em]
+\textcolor{mlgreen}{✓ Seems reasonable!}
+\end{tcolorbox}
+
+\vspace{0.5em}
+\begin{center}
+\includegraphics[width=0.9\textwidth]{charts/sentiment_word_lists.pdf}
+\end{center}
+\end{columns}
+
+\bottomnote{Simplicity enables initial progress - crude approximations provide baseline performance that reveals limitation patterns}
+\end{frame}
+
+% Slide 7: Bag of Words - Worked Example
+\begin{frame}[t]{Bag of Words: Converting Text to Numbers}
+\Large\textbf{The Classic Approach in Action}
+\normalsize
+
+\begin{columns}[T]
+\column{0.55\textwidth}
+\textbf{Step-by-Step Process:}
+
+\footnotesize
+\textbf{1. Original Review:}\\
+``The product quality is excellent excellent excellent but customer service terrible terrible''
+
+\vspace{0.3em}
+\textbf{2. Tokenize (split into words):}\\
+[The, product, quality, is, excellent, excellent, excellent, but, customer, service, terrible, terrible]
+
+\vspace{0.3em}
+\textbf{3. Count Each Word:}
+\begin{tabular}{lr|lr}
+\textbf{Word} & \textbf{Count} & \textbf{Word} & \textbf{Count} \\
+\hline
+excellent & 3 & terrible & 2 \\
+product & 1 & service & 1 \\
+quality & 1 & customer & 1 \\
+\end{tabular}
+
+\vspace{0.3em}
+\textbf{4. Convert to Vector:}\\
+[0, 1, 1, 1, 3, 0, 0, 0, 1, 1, 2, 0, ...]\\
+\footnotesize (10,000 dimensions, mostly zeros)
+
+\column{0.43\textwidth}
+\begin{center}
+\includegraphics[width=0.95\textwidth]{charts/bow_visualization.pdf}
+\end{center}
+
+\begin{tcolorbox}[colback=mlyellow!20, colframe=mlorange]
+\footnotesize
+\textbf{What We Keep:}
+\begin{itemize}
+\item Word frequencies ✓
+\item Vocabulary presence ✓
+\end{itemize}
+\textbf{What We Lose:}
+\begin{itemize}
+\item Word order ✗
+\item Grammar ✗
+\item Relationships ✗
+\end{itemize}
+\end{tcolorbox}
+\end{columns}
+
+\bottomnote{Discarding structure reduces complexity at cost of precision - positional information carries semantic weight}
+\end{frame}
+
+% Slide 8: TF-IDF Improvement
+\begin{frame}[t]{TF-IDF: Making Words Matter Differently}
+\Large\textbf{Not All Words Are Equal}
+\normalsize
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{The Problem with Raw Counts:}
+\begin{itemize}
+\item ``The'' appears 1000 times → Important?
+\item ``Revolutionary'' appears once → Not important?
+\item Common words dominate
+\item Rare but meaningful words ignored
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{TF-IDF Solution:}
+$$\text{TF-IDF} = \underbrace{\frac{\text{count in doc}}{\text{total words}}}_{\text{Term Frequency}} \times \underbrace{\log\frac{\text{total docs}}{\text{docs with word}}}_{\text{Inverse Document Freq}}$$
+
+\footnotesize
+\begin{itemize}
+\item TF: How often in THIS review
+\item IDF: How rare across ALL reviews
+\item Product: Important AND distinctive
+\end{itemize}
+
+\column{0.48\textwidth}
+\textbf{Example Calculation:}
+
+\footnotesize
+\begin{tabular}{lccc}
+\toprule
+\textbf{Word} & \textbf{TF} & \textbf{IDF} & \textbf{TF-IDF} \\
+\midrule
+``the'' & 0.15 & 0.01 & 0.0015 \\
+``product'' & 0.05 & 0.69 & 0.0345 \\
+``excellent'' & 0.10 & 1.38 & \textcolor{mlgreen}{0.138} \\
+``revolutionary'' & 0.02 & 3.40 & \textcolor{mlgreen}{0.068} \\
+\bottomrule
+\end{tabular}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mlgreen!10, colframe=mlgreen]
+\textbf{Result:} Meaningful words now weighted higher than common words!
+\end{tcolorbox}
+\end{columns}
+
+\bottomnote{Rarity signals importance - terms appearing selectively carry more discriminative power than ubiquitous vocabulary}
+\end{frame}
+
+% Slide 9: THE SUCCESS - Examples That Work
+\begin{frame}[t]{SUCCESS! Traditional NLP Shines}
+\Large\textbf{When Simple Reviews Get Perfect Scores}
+\normalsize
+
+\begin{center}
+\begin{tabular}{p{5cm}ccc}
+\toprule
+\textbf{Review Text} & \textbf{Human} & \textbf{BoW+TFIDF} & \textbf{Match} \\
+\midrule
+``This product is absolutely fantastic! Best purchase ever!'' &
+\textcolor{mlgreen}{Positive} & \textcolor{mlgreen}{Positive (95\%)} & ✓ \\[0.5em]
+
+``Terrible quality. Waste of money. Very disappointed.'' &
+\textcolor{mlred}{Negative} & \textcolor{mlred}{Negative (92\%)} & ✓ \\[0.5em]
+
+``Good product, fair price, happy with purchase'' &
+\textcolor{mlgreen}{Positive} & \textcolor{mlgreen}{Positive (88\%)} & ✓ \\[0.5em]
+
+``Broken on arrival. Customer service unhelpful. Never again.'' &
+\textcolor{mlred}{Negative} & \textcolor{mlred}{Negative (94\%)} & ✓ \\[0.5em]
+
+``Excellent! Exceeded all expectations! Highly recommend!'' &
+\textcolor{mlgreen}{Positive} & \textcolor{mlgreen}{Positive (97\%)} & ✓ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{0.5em}
+
+\begin{center}
+\begin{tcolorbox}[colback=mlgreen!20, colframe=mlgreen, width=0.8\textwidth]
+\centering
+\Large\textbf{Average Accuracy: 93.2\%}\\
+\normalsize
+This is why Bag of Words dominated for 40 years!
+\end{tcolorbox}
+\end{center}
+
+\bottomnote{Explicit signals enable simple methods - literal expression reduces analytical complexity compared to implicit communication}
+\end{frame}
+
+% Slide 10: THE FAILURE PATTERN EMERGES
+\begin{frame}[t]{The Collapse: Where Traditional NLP Fails}
+\Large\textbf{Performance Degradation with Complexity}
+\normalsize
+
+\begin{center}
+\begin{tabular}{p{4.5cm}cccc}
+\toprule
+\textbf{Review Type} & \textbf{Example} & \textbf{Human} & \textbf{BoW} & \textbf{Accuracy} \\
+\midrule
+\textbf{Simple \& Direct} & ``Great product!'' & Pos & Pos & \textcolor{mlgreen}{95\%} \\[0.3em]
+\textbf{Mixed Sentiment} & ``Good but overpriced'' & Neg & Pos & \textcolor{mlorange}{67\%} \\[0.3em]
+\textbf{Sarcasm} & ``Oh great, it broke. Just perfect!'' & Neg & Pos & \textcolor{mlred}{23\%} \\[0.3em]
+\textbf{Context Dependent} & ``Not bad for the price'' & Pos & Neg & \textcolor{mlred}{31\%} \\[0.3em]
+\textbf{Subtle Emotion} & ``It's fine, I guess'' & Neg & Neu & \textcolor{mlorange}{44\%} \\[0.3em]
+\textbf{Negation} & ``Not the worst I've seen'' & Neu & Neg & \textcolor{mlred}{28\%} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\begin{center}
+\includegraphics[width=0.95\textwidth]{charts/performance_degradation.pdf}
+\end{center}
+
+\column{0.48\textwidth}
+\begin{tcolorbox}[colback=mlred!10, colframe=mlred]
+\textbf{The Pattern:}\\[0.3em]
+\footnotesize
+• Simple: 95\% → Works great!\\
+• Real-world: 44\% → Worse than coin flip\\
+• Sarcasm: 23\% → Actively wrong\\[0.3em]
+\normalsize
+\textbf{Average: 51\% (Random guessing: 50\%)}
+\end{tcolorbox}
+\end{columns}
+
+\bottomnote{Majority of natural language exhibits subtle complexity - simple methods handle edge cases well but miss mainstream patterns}
+\end{frame}
+
+% Slide 11: Diagnosis - Why It Fails
+\begin{frame}[t]{Diagnosis: What Information Got Lost}
+\Large\textbf{Tracing the Failure Through Real Examples}
+\normalsize
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{Example: ``Not bad for the price''}
+
+\vspace{0.3em}
+\footnotesize
+\textbf{What BoW Sees:}
+\begin{itemize}
+\item Words: [not, bad, for, the, price]
+\item ``bad'' → Negative word (-1)
+\item ``not'' → Negation word (ignored)
+\item Score: Negative
+\end{itemize}
+
+\textbf{What Got Lost:}
+\begin{itemize}
+\item ``not bad'' = Actually positive
+\item ``for the price'' = Qualified satisfaction
+\item Relationship between words
+\item Overall: Mild positive sentiment
+\end{itemize}
+
+\vspace{0.3em}
+\begin{tcolorbox}[colback=mlred!10, colframe=mlred]
+\textbf{Root Cause:} Word order contains meaning!
+\end{tcolorbox}
+
+\column{0.48\textwidth}
+\textbf{Information Loss Calculation:}
+
+\footnotesize
+\begin{tabular}{lr}
+\toprule
+\textbf{Information Type} & \textbf{Bits Lost} \\
+\midrule
+Word positions & 420 bits \\
+Word relationships & 1,200 bits \\
+Grammar structure & 350 bits \\
+Contextual meaning & 890 bits \\
+\midrule
+\textbf{Total Lost} & \textcolor{mlred}{2,860 bits} \\
+\textbf{Total Kept} & 640 bits \\
+\textbf{Kept Percentage} & \textcolor{mlred}{18\%} \\
+\bottomrule
+\end{tabular}
+
+\vspace{0.5em}
+\begin{center}
+\includegraphics[width=0.9\textwidth]{charts/information_preserved.pdf}
+\end{center}
+\end{columns}
+
+\vspace{0.5em}
+\begin{center}
+\Large\textcolor{mlpurple}{\textbf{We need a fundamentally different approach}}
+\end{center}
+
+\bottomnote{Sequence encodes meaning - word order conveys relationships that frequency-based methods cannot capture}
+\end{frame}

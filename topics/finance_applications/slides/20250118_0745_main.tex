@@ -1,0 +1,107 @@
+\documentclass[8pt,aspectratio=169]{beamer}
+\usetheme{Madrid}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{adjustbox}
+\usepackage{multicol}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{mathtools}
+\usepackage{tcolorbox}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows, positioning, calc}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.17}
+
+% Define colors for finance theme
+\definecolor{finblue}{RGB}{0, 73, 144}
+\definecolor{fingreen}{RGB}{0, 146, 70}
+\definecolor{finred}{RGB}{215, 0, 0}
+\definecolor{fingold}{RGB}{255, 184, 28}
+\definecolor{fingray}{RGB}{89, 89, 89}
+\definecolor{finpurple}{RGB}{128, 100, 162}
+\definecolor{finorange}{RGB}{241, 90, 36}
+\definecolor{fincyan}{RGB}{0, 174, 239}
+
+% Remove navigation symbols and add custom footer
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{footline}{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.25\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
+    \usebeamerfont{author in head/foot}ML Finance Theory
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+    \usebeamerfont{title in head/foot}Mathematical Foundations \& Applications
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.25\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    \usebeamerfont{date in head/foot}\insertframenumber{} / \inserttotalframenumber\hspace*{2ex} 
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+
+% Mathematical operators and symbols
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator{\sign}{sign}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\Cov}{Cov}
+\DeclareMathOperator{\E}{\mathbb{E}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Prob}{\mathbb{P}}
+
+% Reduce margins for more content space
+\setbeamersize{text margin left=5mm,text margin right=5mm}
+
+% Title information
+\title{\Large\textbf{Machine Learning in Finance: Theory \& Applications}}
+\subtitle{\Large A Mathematical Foundation for Financial ML}
+\author{Advanced Course in Quantitative Finance}
+\institute{4-Hour Comprehensive Workshop}
+\date{}
+
+\begin{document}
+
+% Title slide
+\begin{frame}[plain]
+\titlepage
+\end{frame}
+
+% Table of contents
+\begin{frame}{Program Overview: 4-Hour Journey Through ML Finance}
+\tableofcontents
+\vfill
+\begin{center}
+\Large\textcolor{finblue}{\textbf{From Theory to Trading Floor}}
+\end{center}
+\end{frame}
+
+% Include all parts
+\input{part1_ml_foundations}
+\input{part2_statistical_learning}
+\input{part3_supervised_methods}
+\input{part4_unsupervised_methods}
+\input{part5_finance_risk}
+\input{part6_finance_trading}
+\input{part7_finance_credit}
+\input{part8_ethics_regulation}
+\input{appendix_mathematics}
+
+% Closing slide
+\begin{frame}[plain]
+\vfill
+\centering
+\begin{beamercolorbox}[sep=16pt,center]{title}
+\usebeamerfont{title}\Large Thank You\par
+\vspace{1em}
+\normalsize Questions \& Discussion\par
+\vspace{1em}
+\small Contact: finance.ml@university.edu
+\end{beamercolorbox}
+\vfill
+\end{frame}
+
+\end{document}

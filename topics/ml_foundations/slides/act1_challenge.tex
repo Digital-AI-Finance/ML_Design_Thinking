@@ -1,0 +1,347 @@
+% Part 1: The Challenge - Traditional Programming Hits the Wall
+\section{Part 1: The Challenge}
+
+% Section divider
+\begin{frame}[plain]
+\vfill
+\centering
+\begin{beamercolorbox}[sep=16pt,center]{title}
+\usebeamerfont{title}\Large Part 1: The Challenge\par
+\vspace{0.5em}
+\large Traditional Programming Hits the Wall\par
+\end{beamercolorbox}
+\vfill
+\end{frame}
+
+% Slide 1: You Want Programs That Improve
+\begin{frame}{You Want Programs That Improve}
+\twocolslide{
+\Large\textbf{The Spam Email Problem}
+\normalsize
+\vspace{0.5em}
+
+You receive 100 emails per day:
+\begin{itemize}
+\item 30 are spam (scams, ads, phishing)
+\item 70 are legitimate (work, friends, bills)
+\item You spend 15 minutes per day deleting spam
+\item That is 90 hours per year of wasted time
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{What you want:}
+\begin{itemize}
+\item A program that automatically detects spam
+\item Gets better over time as spammers adapt
+\item Learns your personal preferences
+\item Costs you 0 minutes per day
+\end{itemize}
+
+\vspace{0.3em}
+\keypoint{The program needs to LEARN from experience, not follow fixed rules}
+}{
+\Large\textbf{Why Traditional Programming Fails}
+\normalsize
+\vspace{0.5em}
+
+\textbf{Attempt 1:} Write rules manually
+
+\texttt{if email.contains("FREE MONEY") then spam}
+
+\textbf{Problem:} Spammer writes "FR33 M0NEY"
+
+\vspace{0.3em}
+\textbf{Attempt 2:} Add more rules
+
+\texttt{if matches("FR*E* M*NEY") then spam}
+
+\textbf{Problem:} Now legitimate email "We offer free money market accounts" is blocked
+
+\vspace{0.3em}
+\textbf{Attempt 3:} Add exceptions to rules
+
+After 500 rules and 200 exceptions, system is:
+\begin{itemize}
+\item Too complex to maintain
+\item Full of contradictions
+\item Still 40\% error rate
+\item Breaks when spammers adapt
+\end{itemize}
+
+\bottomnote{This is the fundamental limitation: You cannot encode infinite patterns with finite rules}
+}
+\end{frame}
+
+% Slide 2: The Rule Explosion Problem (with chart)
+\begin{frame}{The Rule Explosion Problem}
+\twocolslide{
+\Large\textbf{Measured Failure Pattern}
+\normalsize
+\vspace{0.5em}
+
+\textbf{Microsoft spam filter project (1998):}
+
+\begin{center}
+\begin{tabular}{lcc}
+\hline
+\textbf{Rules Written} & \textbf{Accuracy} & \textbf{Maintenance Hours/Week} \\
+\hline
+50 rules & 70\% & 2 hours \\
+100 rules & 75\% & 5 hours \\
+200 rules & 78\% & 12 hours \\
+500 rules & 80\% & 35 hours \\
+1000 rules & 81\% & 80+ hours \\
+\hline
+\end{tabular}
+\end{center}
+
+\vspace{0.3em}
+\keypoint{Accuracy plateaus while complexity explodes}
+
+\textbf{Root cause diagnosis:}
+\begin{itemize}
+\item Rules interact in unexpected ways
+\item Exceptions need exceptions
+\item New spam types require complete rewrite
+\item Human experts cannot scale
+\end{itemize}
+}{
+\centering
+\includegraphics[width=0.85\textwidth]{charts/rule_complexity_explosion.pdf}
+
+\vspace{0.5em}
+\textbf{The Critical Insight:}
+
+You need a program that:
+\begin{itemize}
+\item Discovers patterns automatically
+\item Updates itself when data changes
+\item Improves with more examples
+\item Handles complexity you cannot encode
+\end{itemize}
+
+\vspace{0.3em}
+This is what learning means.
+}
+\end{frame}
+
+% Slide 3: What Does Learning Mean? Build from Scratch
+\begin{frame}{What Does Learning Mean? Build from Scratch}
+\twocolslide{
+\Large\textbf{Start with Human Experience}
+\normalsize
+\vspace{0.5em}
+
+\textbf{How do YOU learn to recognize spam?}
+
+You read 100 emails and notice patterns:
+\begin{itemize}
+\item Spam uses ALL CAPS frequently
+\item Spam has suspicious links (bit.ly/xxxx)
+\item Spam comes from unknown senders
+\item Spam has bad grammar
+\end{itemize}
+
+After 1000 emails, you get very good at this.
+
+\vspace{0.5em}
+\textbf{Three key elements:}
+\begin{enumerate}
+\item \textbf{Experience:} You saw labeled examples
+\item \textbf{Task:} Classify spam vs not spam
+\item \textbf{Performance:} You improved (60\% -> 95\% accuracy)
+\end{enumerate}
+
+\keypoint{Learning is improvement through experience}
+}{
+\Large\textbf{Tom Mitchell's Formal Definition (1997)}
+\normalsize
+\vspace{0.5em}
+
+A program learns from \textbf{Experience} $E$ at \textbf{Task} $T$ measured by \textbf{Performance} $P$ if its performance at $T$ improves with $E$.
+
+\vspace{0.5em}
+\textbf{Concrete spam filter example:}
+
+\begin{itemize}
+\item[$E$:] 10,000 labeled emails (spam/not spam)
+\item[$T$:] Classify new incoming email
+\item[$P$:] Accuracy percentage
+\end{itemize}
+
+\textbf{Before training:} Random guessing = 50\% accuracy
+
+\textbf{After 1,000 examples:} 80\% accuracy
+
+\textbf{After 10,000 examples:} 95\% accuracy
+
+\vspace{0.3em}
+\keypoint{Performance improved from 50\% to 95\% through experience}
+
+\bottomnote{This definition covers all learning: supervised, unsupervised, reinforcement}
+}
+\end{frame}
+
+% Slide 4: Three Ways to Learn (with worked examples)
+\begin{frame}{Three Ways to Learn: The Complete Taxonomy}
+\begin{columns}[T]
+\begin{column}{0.32\textwidth}
+\centering
+\textcolor{mlblue}{\Large\textbf{Supervised Learning}}
+\normalsize
+\vspace{0.3em}
+
+\textbf{You have labeled examples}
+
+\textbf{Spam filter example:}
+\begin{itemize}
+\item Email 1: "FREE MONEY" -> Spam
+\item Email 2: "Meeting at 3pm" -> Not spam
+\item Email 3: "Click here now!" -> Spam
+\end{itemize}
+
+Given 10,000 labeled emails, learn function:
+\formula{f(\text{email}) \rightarrow \{\text{spam, not spam}\}}
+
+\textbf{Test:} New email "WIN BIG NOW"
+\textbf{Prediction:} Spam (98\% confidence)
+
+\vspace{0.3em}
+\textbf{Applications:}
+\begin{itemize}
+\item Image classification
+\item Speech recognition
+\item Medical diagnosis
+\item Price prediction
+\end{itemize}
+\end{column}
+
+\begin{column}{0.32\textwidth}
+\centering
+\textcolor{mlgreen}{\Large\textbf{Unsupervised Learning}}
+\normalsize
+\vspace{0.3em}
+
+\textbf{You have NO labels}
+
+\textbf{Customer segmentation:}
+\begin{itemize}
+\item Customer A: Buys luxury items, visits weekly
+\item Customer B: Buys basics, visits monthly
+\item Customer C: Buys luxury items, visits weekly
+\end{itemize}
+
+Algorithm discovers patterns:
+\begin{itemize}
+\item Group 1: Premium customers (A, C)
+\item Group 2: Budget customers (B)
+\end{itemize}
+
+\textbf{You did not tell it these groups exist}
+
+\vspace{0.3em}
+\textbf{Applications:}
+\begin{itemize}
+\item Customer segmentation
+\item Anomaly detection
+\item Data compression
+\item Topic discovery
+\end{itemize}
+\end{column}
+
+\begin{column}{0.32\textwidth}
+\centering
+\textcolor{mlorange}{\Large\textbf{Reinforcement Learning}}
+\normalsize
+\vspace{0.3em}
+
+\textbf{You learn through trial and reward}
+
+\textbf{Game playing example:}
+\begin{itemize}
+\item Action: Move chess piece
+\item Result: Win (+1) or Lose (-1)
+\item No one tells you if each move is good
+\item You learn which moves lead to wins
+\end{itemize}
+
+After 1 million games:
+\begin{itemize}
+\item Win rate: 20\% -> 95\%
+\item Discovers winning strategies
+\item Gets superhuman performance
+\end{itemize}
+
+\vspace{0.3em}
+\textbf{Applications:}
+\begin{itemize}
+\item Game AI (AlphaGo)
+\item Robotics
+\item Self-driving cars
+\item Resource optimization
+\end{itemize}
+\end{column}
+\end{columns}
+
+\vspace{0.5em}
+\bottomnote{This course focuses on supervised and unsupervised learning for innovation}
+\end{frame}
+
+% Slide 5: Quantifying the Challenge
+\begin{frame}{Quantifying the Challenge: How Much Learning is Needed?}
+\twocolslide{
+\Large\textbf{The Data Requirements}
+\normalsize
+\vspace{0.5em}
+
+\textbf{Measured learning curves for spam filter:}
+
+\begin{center}
+\begin{tabular}{lcc}
+\hline
+\textbf{Training Examples} & \textbf{Accuracy} & \textbf{Hours to Train} \\
+\hline
+100 emails & 65\% & 1 minute \\
+1,000 emails & 82\% & 5 minutes \\
+10,000 emails & 95\% & 30 minutes \\
+100,000 emails & 98\% & 4 hours \\
+1,000,000 emails & 98.5\% & 2 days \\
+\hline
+\end{tabular}
+\end{center}
+
+\vspace{0.3em}
+\keypoint{Performance improves with data, but shows diminishing returns}
+
+\textbf{Critical questions:}
+\begin{itemize}
+\item How much data is enough?
+\item When do we stop improving?
+\item What limits performance?
+\end{itemize}
+}{
+\centering
+\includegraphics[width=0.85\textwidth]{charts/learning_curve_spam.pdf}
+
+\vspace{0.5em}
+\textbf{The Bias-Variance Tension:}
+
+\textbf{Too simple model:}
+\begin{itemize}
+\item Underfits the data
+\item High training error (high bias)
+\item Cannot capture complex patterns
+\end{itemize}
+
+\textbf{Too complex model:}
+\begin{itemize}
+\item Overfits the data
+\item Low training error, high test error
+\item Memorizes noise (high variance)
+\end{itemize}
+
+\textbf{The Challenge:} Find the right balance
+
+\bottomnote{Part 2 explores this tension through linear models}
+}
+\end{frame}

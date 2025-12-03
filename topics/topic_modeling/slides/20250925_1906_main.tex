@@ -1,0 +1,72 @@
+\documentclass[8pt,aspectratio=169]{beamer}
+\usetheme{Madrid}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{booktabs}
+\usepackage{multicol}
+\usepackage{array}
+\graphicspath{{charts/}}
+
+% ML Color Palette
+\definecolor{mlblue}{RGB}{31, 119, 180}
+\definecolor{mlorange}{RGB}{255, 127, 14}
+\definecolor{mlgreen}{RGB}{44, 160, 44}
+\definecolor{mlred}{RGB}{214, 39, 40}
+\definecolor{mlpurple}{RGB}{148, 103, 189}
+\definecolor{mlbrown}{RGB}{140, 86, 75}
+\definecolor{mlpink}{RGB}{227, 119, 194}
+\definecolor{mlgray}{RGB}{127, 127, 127}
+\definecolor{mlyellow}{RGB}{241, 196, 15}
+\definecolor{mlcyan}{RGB}{23, 190, 207}
+
+% Innovation Stage Colors
+\definecolor{challenge}{RGB}{148, 103, 189}
+\definecolor{explore}{RGB}{52, 152, 219}
+\definecolor{generate}{RGB}{46, 204, 113}
+\definecolor{peak}{RGB}{241, 196, 15}
+\definecolor{filter}{RGB}{230, 126, 34}
+\definecolor{refine}{RGB}{231, 76, 60}
+\definecolor{strategy}{RGB}{192, 57, 43}
+
+% Apply colors to beamer
+\setbeamercolor{structure}{fg=mlblue}
+\setbeamercolor{frametitle}{bg=mlblue!10}
+\setbeamercolor{block title}{bg=mlblue,fg=white}
+\setbeamercolor{block body}{bg=mlblue!10}
+
+% Remove navigation symbols
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{footline}[frame number]
+
+% Title information
+\title{\textcolor{mlblue}{\Large Machine Learning for Smarter Innovation}}
+\subtitle{\textcolor{mlorange}{Week 5: Topic Modeling for Ideation}}
+\author{Design \& AI Program}
+\date{}
+
+\begin{document}
+
+% Title slide
+\begin{frame}[plain]
+\titlepage
+\end{frame}
+
+% Table of Contents
+\begin{frame}{Agenda}
+\tableofcontents
+\end{frame}
+
+% Include modular parts
+\input{part1_foundation}
+\input{part2_algorithms}
+\input{part3_implementation}
+\input{part4_design}
+\input{part5_practice}
+\input{appendix_mathematics}
+
+\end{document}

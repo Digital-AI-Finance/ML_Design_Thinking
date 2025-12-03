@@ -1,0 +1,690 @@
+% ==================== PART 3: THE ALGORITHM ARSENAL ====================
+\section{Part 3: Four Ways to Unmix Topics}
+
+% Slide 13: Algorithm Overview
+\begin{frame}[t]{Four Algorithms, Four Philosophies}
+\Large\textbf{Different Ways to Find Hidden Themes}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\column{0.55\textwidth}
+\begin{center}
+\includegraphics[width=0.95\textwidth]{charts/algorithm_comparison_matrix.pdf}
+\end{center}
+
+\column{0.43\textwidth}
+\textbf{Our Toolkit:}
+\begin{enumerate}
+\item \textbf{LDA}\\
+\footnotesize The probabilistic chef\\
+"What's the recipe probability?"
+
+\item \textbf{NMF}\\
+\footnotesize The LEGO builder\\
+"What parts combine?"
+
+\item \textbf{LSA}\\
+\footnotesize The meaning compressor\\
+"What's the essence?"
+
+\item \textbf{BERTopic}\\
+\footnotesize The context reader\\
+"What's the full meaning?"
+\end{enumerate}
+
+\vspace{0.5em}
+\textbf{Trade-offs:}
+\begin{itemize}
+\footnotesize
+\item Speed vs Quality
+\item Interpretability vs Accuracy
+\item Simple vs Complex
+\end{itemize}
+\end{columns}
+
+\bottomnote{Algorithm characteristics determine applicability - computational complexity, interpretability, and data requirements constrain method selection}
+\end{frame}
+
+% Slide 14: LDA Deep Dive
+\begin{frame}[t]{Algorithm 1: LDA (Latent Dirichlet Allocation)}
+\Large\textbf{The Probabilistic Recipe Finder}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{How LDA Thinks:}
+\begin{itemize}
+\footnotesize
+\item Documents are recipe cards
+\item Topics are ingredient lists
+\item Each word is randomly picked:
+\begin{enumerate}
+\footnotesize
+\item Pick a topic (from document's mix)
+\item Pick a word (from that topic)
+\end{enumerate}
+\item Work backwards from words to topics
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{The Process:}
+\begin{center}
+\begin{tikzpicture}[scale=0.6]
+% Document mixture
+\node[draw,fill=mlyellow!30] (doc) at (0,3) {Doc Mix};
+\node[below] at (0,2.5) {\tiny 30\% T1, 70\% T2};
+
+% Arrow to topic choice
+\draw[->,thick] (doc) -- (0,1.5);
+\node[draw,fill=mlblue!30] (topic) at (0,1) {Pick Topic};
+
+% Arrow to word choice
+\draw[->,thick] (topic) -- (0,-0.5);
+\node[draw,fill=mlgreen!30] (word) at (0,-1) {Pick Word};
+\end{tikzpicture}
+\end{center}
+
+\column{0.48\textwidth}
+\textbf{Real Example:}
+\footnotesize
+\textbf{Input:} 1000 restaurant reviews\\
+\textbf{Output:} 5 topics discovered
+
+\normalsize
+\begin{center}
+\begin{tabular}{lc}
+\toprule
+\textbf{Topic} & \textbf{Top Words} \\
+\midrule
+Food & pizza, pasta, taste \\
+Service & waiter, friendly, quick \\
+Ambiance & cozy, music, romantic \\
+Price & expensive, value, worth \\
+Location & parking, convenient \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{Performance:}
+\begin{itemize}
+\footnotesize
+\item Speed: \textcolor{mlorange}{Medium} (5 min/1000 docs)
+\item Quality: \textcolor{mlgreen}{High}
+\item Interpretability: \textcolor{mlgreen}{Excellent}
+\end{itemize}
+\end{columns}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mllavender4, colframe=mlpurple]
+\centering
+\textbf{Use LDA when:} You need interpretable topics with probability estimates
+\end{tcolorbox}
+
+\bottomnote{Probabilistic generative models dominate production systems - Bayesian framework provides interpretable topic distributions with principled uncertainty quantification}
+\end{frame}
+
+% Slide 15: LDA Mathematics (Simplified)
+\begin{frame}[t]{LDA: The Math (Made Simple)}
+\Large\textbf{Probability All the Way Down}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{The Generative Story:}
+\begin{enumerate}
+\item \textbf{For each document:}\\
+\footnotesize Draw topic proportions\\
+e.g., [0.3, 0.5, 0.2] for 3 topics
+
+\item \textbf{For each word position:}\\
+\footnotesize Pick a topic from proportions\\
+Pick a word from that topic
+\end{enumerate}
+
+\vspace{0.5em}
+\textbf{The Math (Simplified):}
+\begin{align*}
+\text{P(word|doc)} &= \sum \text{P(word|topic)} \\
+&\quad \times \text{P(topic|doc)}
+\end{align*}
+
+\footnotesize
+"Word probability = Sum of (word in topic × topic in document)"
+
+\column{0.48\textwidth}
+\textbf{Visual Process:}
+\begin{center}
+\includegraphics[width=0.9\textwidth]{charts/lda_document_topics.pdf}
+\end{center}
+
+\textbf{Parameters to Set:}
+\begin{itemize}
+\footnotesize
+\item \textbf{K}: Number of topics (try 20)
+\item \textbf{$\alpha$}: Document focus (small = focused)
+\item \textbf{$\beta$}: Topic focus (small = specific)
+\end{itemize}
+\end{columns}
+
+\bottomnote{Hyperparameter automation simplifies deployment - default configurations enable initial application while domain tuning optimizes performance}
+\end{frame}
+
+% Slide 16: NMF Deep Dive
+\begin{frame}[t]{Algorithm 2: NMF (Non-negative Matrix Factorization)}
+\Large\textbf{The LEGO Block Builder}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{How NMF Thinks:}
+\begin{itemize}
+\footnotesize
+\item Topics are LEGO sets
+\item Documents are built from blocks
+\item Only adding, never subtracting
+\item Each part contributes positively
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{The Decomposition:}
+\begin{center}
+V = W × H
+\end{center}
+\begin{itemize}
+\footnotesize
+\item V: Your documents (1000×5000)
+\item W: Document-topics (1000×20)
+\item H: Topic-words (20×5000)
+\item All values $\geq 0$ (non-negative)
+\end{itemize}
+
+\vspace{0.3em}
+\textbf{Why "Parts-Based"?}
+\begin{itemize}
+\footnotesize
+\item Face = eyes + nose + mouth
+\item Review = quality + price + service
+\item Only additive components
+\end{itemize}
+
+\column{0.48\textwidth}
+\textbf{Visual Decomposition:}
+\begin{center}
+\includegraphics[width=0.9\textwidth]{charts/nmf_decomposition.pdf}
+\end{center}
+
+\textbf{Real Example Output:}
+\footnotesize
+\begin{tabular}{lc}
+\toprule
+\textbf{Part/Topic} & \textbf{Components} \\
+\midrule
+Battery & life, hours, charge \\
+Screen & display, bright, clear \\
+Speed & fast, quick, responsive \\
+Build & quality, solid, durable \\
+\bottomrule
+\end{tabular}
+
+\normalsize
+\textbf{Performance:}
+\begin{itemize}
+\footnotesize
+\item Speed: \textcolor{mlgreen}{Fast} (2 min/1000 docs)
+\item Quality: \textcolor{mlorange}{Good}
+\item Interpretability: \textcolor{mlgreen}{Very High}
+\end{itemize}
+\end{columns}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mlgreen!10, colframe=mlgreen]
+\centering
+\textbf{Use NMF when:} You want clear, additive parts (perfect for product features)
+\end{tcolorbox}
+
+\bottomnote{Non-negative factorization produces sparse representations - part-based decomposition naturally aligns with additive feature structures}
+\end{frame}
+
+% Slide 17: LSA Deep Dive
+\begin{frame}[t]{Algorithm 3: LSA (Latent Semantic Analysis)}
+\Large\textbf{The Meaning Compressor}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{How LSA Thinks:}
+\begin{itemize}
+\footnotesize
+\item Words have hidden meanings
+\item "Car" $\approx$ "Automobile" $\approx$ "Vehicle"
+\item Compress to essential concepts
+\item Like MP3 for text
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{The Math Tool: SVD}
+\begin{center}
+A = U $\times$ $\Sigma$ $\times$ V$^T$
+\end{center}
+\begin{itemize}
+\footnotesize
+\item A: Document-term matrix
+\item U: Document concepts
+\item $\Sigma$: Concept importance
+\item V: Term concepts
+\end{itemize}
+
+\vspace{0.3em}
+\textbf{Dimension Reduction:}
+\begin{itemize}
+\footnotesize
+\item 5000 words $\rightarrow$ 100 concepts
+\item Keep most important patterns
+\item Lose noise, keep signal
+\end{itemize}
+
+\column{0.48\textwidth}
+\textbf{Semantic Space:}
+\begin{center}
+\begin{tikzpicture}[scale=0.7]
+% 3D axes
+\draw[->] (0,0) -- (3,0) node[right] {\footnotesize Concept 1};
+\draw[->] (0,0) -- (0,3) node[above] {\footnotesize Concept 2};
+\draw[->] (0,0) -- (-1.5,-1.5) node[below] {\footnotesize Concept 3};
+
+% Similar words cluster
+\node[circle,fill=mlred!50] at (1,2) {};
+\node[right] at (1.2,2) {\tiny car};
+\node[circle,fill=mlred!50] at (1.2,1.8) {};
+\node[right] at (1.4,1.8) {\tiny auto};
+\node[circle,fill=mlred!50] at (0.8,2.1) {};
+
+% Different concept
+\node[circle,fill=mlblue!50] at (2,0.5) {};
+\node[right] at (2.2,0.5) {\tiny food};
+\node[circle,fill=mlblue!50] at (2.2,0.7) {};
+\node[right] at (2.4,0.7) {\tiny meal};
+\end{tikzpicture}
+\end{center}
+
+\textbf{What It Finds:}
+\begin{itemize}
+\footnotesize
+\item Synonyms automatically grouped
+\item Related concepts connected
+\item Hidden relationships revealed
+\end{itemize}
+
+\textbf{Performance:}
+\begin{itemize}
+\footnotesize
+\item Speed: \textcolor{mlgreen}{Very Fast} (30 sec/1000)
+\item Quality: \textcolor{mlorange}{Medium}
+\item Interpretability: \textcolor{mlred}{Lower}
+\end{itemize}
+\end{columns}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mllavender4, colframe=mlpurple]
+\centering
+\textbf{Use LSA when:} You need to find similar documents or reduce dimensions
+\end{tcolorbox}
+
+\bottomnote{Singular value decomposition enables dimensionality reduction - low-rank approximations capture semantic structure through co-occurrence patterns}
+\end{frame}
+
+% Slide 18: BERTopic Deep Dive
+\begin{frame}[t]{Algorithm 4: BERTopic}
+\Large\textbf{The Modern Context Master}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{How BERTopic Thinks:}
+\begin{itemize}
+\footnotesize
+\item Uses BERT's language understanding
+\item "Bank" (money) ≠ "Bank" (river)
+\item Context determines meaning
+\item Clusters similar meanings
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{The Process:}
+\begin{enumerate}
+\footnotesize
+\item Embed documents with BERT
+\item Reduce dimensions (UMAP)
+\item Cluster embeddings (HDBSCAN)
+\item Extract topics with TF-IDF
+\end{enumerate}
+
+\vspace{0.3em}
+\textbf{Why It's Better:}
+\begin{itemize}
+\footnotesize
+\item Understands context
+\item Handles short texts well
+\item Finds nuanced topics
+\item Dynamic number of topics
+\end{itemize}
+
+\column{0.48\textwidth}
+\textbf{Visual Clustering:}
+\begin{center}
+\begin{tikzpicture}[scale=0.6]
+% Clusters
+\draw[fill=mlred!30] (0,0) circle (1);
+\node at (0,0) {\tiny Topic 1};
+\draw[fill=mlblue!30] (2.5,1) circle (0.8);
+\node at (2.5,1) {\tiny Topic 2};
+\draw[fill=mlgreen!30] (1,-2) circle (1.2);
+\node at (1,-2) {\tiny Topic 3};
+\draw[fill=mlyellow!30] (-1.5,-1.5) circle (0.7);
+\node at (-1.5,-1.5) {\tiny Topic 4};
+
+% Points
+\foreach \i in {1,...,10} {
+  \pgfmathsetmacro{\angle}{random(0,360)}
+  \pgfmathsetmacro{\radius}{random(0,60)/100}
+  \node[circle,fill=black,inner sep=1pt] at ($(0,0)+(\angle:\radius)$) {};
+}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Example Topics (More Nuanced):}
+\footnotesize
+\begin{tabular}{lc}
+\toprule
+\textbf{Topic} & \textbf{Description} \\
+\midrule
+1 & Frustrated with slow shipping \\
+2 & Delighted by surprise quality \\
+3 & Confused about setup process \\
+\bottomrule
+\end{tabular}
+
+\normalsize
+\textbf{Performance:}
+\begin{itemize}
+\footnotesize
+\item Speed: \textcolor{mlred}{Slow} (10 min/1000)
+\item Quality: \textcolor{mlgreen}{Excellent}
+\item Interpretability: \textcolor{mlgreen}{High}
+\end{itemize}
+\end{columns}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mlgreen!10, colframe=mlgreen]
+\centering
+\textbf{Use BERTopic when:} Quality matters more than speed, especially for short texts
+\end{tcolorbox}
+
+\bottomnote{Transformer-based embeddings capture contextual semantics - neural representations enable nuanced topic discovery beyond bag-of-words assumptions}
+\end{frame}
+
+% Slide 19: Algorithm Comparison
+\begin{frame}[t]{Choosing Your Algorithm}
+\Large\textbf{Which Tool for Which Job?}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\column{0.55\textwidth}
+\begin{center}
+\includegraphics[width=0.95\textwidth]{charts/algorithm_speed_quality_tradeoff.pdf}
+\end{center}
+
+\column{0.43\textwidth}
+\textbf{Decision Guide:}
+
+\textbf{Use LDA when:}
+\begin{itemize}
+\footnotesize
+\item Need probability estimates
+\item Want interpretable topics
+\item Have medium-length texts
+\end{itemize}
+
+\textbf{Use NMF when:}
+\begin{itemize}
+\footnotesize
+\item Finding product features
+\item Need fast results
+\item Want additive parts
+\end{itemize}
+
+\textbf{Use LSA when:}
+\begin{itemize}
+\footnotesize
+\item Finding similar documents
+\item Need very fast processing
+\item Dimension reduction
+\end{itemize}
+
+\textbf{Use BERTopic when:}
+\begin{itemize}
+\footnotesize
+\item Quality is critical
+\item Have short texts (tweets)
+\item Need nuanced topics
+\end{itemize}
+\end{columns}
+
+\vspace{0.5em}
+\begin{center}
+\textcolor{mlpurple}{\textbf{Pro tip: Start with LDA, it's rarely wrong}}
+\end{center}
+
+\bottomnote{Empirical comparison guides selection - algorithm performance varies by corpus characteristics, requiring domain-specific evaluation}
+\end{frame}
+
+% Slide 20: Real Performance Numbers
+\begin{frame}[t]{Real-World Performance}
+\Large\textbf{What to Expect in Practice}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{On 10,000 Reviews:}
+\begin{center}
+\begin{tabular}{lccc}
+\toprule
+\textbf{Algorithm} & \textbf{Time} & \textbf{Topics} & \textbf{Quality} \\
+\midrule
+LDA & 5 min & 20 & \textcolor{mlgreen}{85\%} \\
+NMF & 2 min & 20 & \textcolor{mlorange}{78\%} \\
+LSA & 30 sec & 20 & \textcolor{mlorange}{72\%} \\
+BERTopic & 15 min & 23 & \textcolor{mlgreen}{92\%} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{0.5em}
+\textbf{Quality Metrics:}
+\begin{itemize}
+\footnotesize
+\item Coherence score (0-100)
+\item Human evaluation
+\item Actionability of insights
+\end{itemize}
+
+\column{0.48\textwidth}
+\textbf{Scalability:}
+\begin{center}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Dataset Size} & \textbf{Best Choice} & \textbf{Time} \\
+\midrule
+<1K docs & BERTopic & 5 min \\
+1K-10K & LDA & 10 min \\
+10K-100K & NMF & 30 min \\
+>100K & LSA$\rightarrow$LDA & 1 hour \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{0.5em}
+\textbf{Industry Usage:}
+\begin{itemize}
+\footnotesize
+\item Netflix: LDA (content)
+\item Amazon: NMF (reviews)
+\item Google: LSA + modern variants
+\item Startups: BERTopic
+\end{itemize}
+\end{columns}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mllavender4, colframe=mlpurple]
+\centering
+\textbf{Reality check:} All algorithms find useful patterns - perfect is enemy of good
+\end{tcolorbox}
+
+\bottomnote{Benchmark comparisons quantify trade-offs - controlled evaluation reveals relative strengths across speed, quality, and scalability dimensions}
+\end{frame}
+
+% Slide 21: Topic Evolution
+\begin{frame}[t]{Advanced: Tracking Topic Evolution}
+\Large\textbf{How Themes Change Over Time}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{Dynamic Topic Modeling:}
+\begin{itemize}
+\item Topics aren't static
+\item Language evolves
+\item New themes emerge
+\item Old themes fade
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Example: Smartphone Reviews}
+\begin{itemize}
+\footnotesize
+\item 2010: "Battery life, small screen"
+\item 2015: "Camera quality, apps"
+\item 2020: "5G, privacy, ecosystem"
+\item 2024: "AI features, sustainability"
+\end{itemize}
+
+\vspace{0.3em}
+\textbf{How to Track:}
+\begin{itemize}
+\footnotesize
+\item Run topic modeling by time period
+\item Align topics across periods
+\item Track word probability changes
+\item Identify emerging themes early
+\end{itemize}
+
+\column{0.48\textwidth}
+\begin{center}
+\includegraphics[width=0.9\textwidth]{charts/trend_evolution.pdf}
+\end{center}
+
+\textbf{Business Value:}
+\begin{itemize}
+\footnotesize
+\item Spot trends before competitors
+\item Adapt products proactively
+\item Predict future needs
+\item Time market entry
+\end{itemize}
+\end{columns}
+
+\vspace{0.5em}
+\begin{center}
+\textcolor{mlpurple}{\textbf{Next: How to turn topics into innovation opportunities}}
+\end{center}
+
+\bottomnote{Temporal topic tracking reveals trend dynamics - longitudinal analysis exposes emerging themes and declining concerns within user populations}
+\end{frame}
+
+% Slide 22: Implementation Tips
+\begin{frame}[t]{Implementation Best Practices}
+\Large\textbf{Making Topic Modeling Work}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{Data Preparation:}
+\begin{itemize}
+\footnotesize
+\item Remove stop words ("the", "a")
+\item Keep domain-specific terms
+\item Minimum 50 words per document
+\item At least 1000 documents total
+\end{itemize}
+
+\vspace{0.3em}
+\textbf{Parameter Tuning:}
+\begin{itemize}
+\footnotesize
+\item Start with 20 topics
+\item Try 10, 30, 50
+\item Check coherence scores
+\item Get human feedback
+\end{itemize}
+
+\vspace{0.3em}
+\textbf{Quality Checks:}
+\begin{itemize}
+\footnotesize
+\item Do topics make sense?
+\item Are they actionable?
+\item Do they reveal insights?
+\item Can you name them?
+\end{itemize}
+
+\column{0.48\textwidth}
+\textbf{Common Mistakes:}
+\begin{itemize}
+\footnotesize
+\item ✗ Too few documents (<100)
+\item ✗ Too many topics (>100)
+\item ✗ Not removing boilerplate
+\item ✗ Ignoring domain knowledge
+\item ✗ One-size-fits-all approach
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Success Factors:}
+\begin{itemize}
+\footnotesize
+\item ✓ Clean, relevant data
+\item ✓ Iterative refinement
+\item ✓ Human validation
+\item ✓ Clear use case
+\item ✓ Action plan for results
+\end{itemize}
+
+\vspace{0.3em}
+\begin{tcolorbox}[colback=mlgreen!10, colframe=mlgreen]
+\footnotesize
+\textbf{Remember:} Topic modeling is exploratory - embrace unexpected discoveries
+\end{tcolorbox}
+\end{columns}
+
+\bottomnote{Domain expertise guides interpretation - algorithmic output requires contextual knowledge to transform statistical patterns into actionable insights}
+\end{frame}

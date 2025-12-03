@@ -1,0 +1,204 @@
+% Act 4: Synthesis (4 slides)
+
+\section{\color{synthesispurple}Act 4: Synthesis}
+
+\begin{frame}{Slide 21: Implementation: sklearn.cluster}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{\color{synthesispurple}Scikit-learn Implementation}
+
+\textbf{K-means Implementation:}
+\begin{itemize}
+\item \texttt{from sklearn.cluster import KMeans}
+\item \texttt{kmeans = KMeans(n\_clusters=3)}
+\item \texttt{labels = kmeans.fit\_predict(X)}
+\item \texttt{centroids = kmeans.cluster\_centers\_}
+\end{itemize}
+
+\textbf{DBSCAN Implementation:}
+\begin{itemize}
+\item \texttt{from sklearn.cluster import DBSCAN}
+\item \texttt{dbscan = DBSCAN(eps=0.5, min\_samples=5)}
+\item \texttt{labels = dbscan.fit\_predict(X)}
+\end{itemize}
+
+\textbf{Hierarchical Implementation:}
+\begin{itemize}
+\item \texttt{from sklearn.cluster import}
+\item \texttt{AgglomerativeClustering}
+\item \texttt{labels = hierarchical.fit\_predict(X)}
+\end{itemize}
+
+\column{0.48\textwidth}
+\textbf{Production Pipeline:}
+\begin{center}
+\includegraphics[width=\textwidth]{charts/sklearn_pipeline.pdf}
+\end{center}
+
+\textbf{Evaluation Tools:}
+\begin{itemize}
+\item \texttt{from sklearn.metrics import}
+\item \texttt{silhouette\_score, adjusted\_rand\_score}
+\item \texttt{sil\_score = silhouette\_score(X, labels)}
+\item \texttt{ari\_score = adjusted\_rand\_score(}
+\item \texttt{true\_labels, predicted\_labels)}
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+{\footnotesize \color{textgray}Implementation: Production-ready clustering with scikit-learn}
+\end{frame}
+
+\begin{frame}{Slide 22: Clustering Method Taxonomy}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{\color{synthesispurple}Clustering Algorithm Families}
+
+\textbf{Centroid-Based:}
+\begin{itemize}
+\item K-means, K-medoids
+\item Assumes spherical clusters
+\item Fast, scalable
+\item Requires k specification
+\end{itemize}
+
+\textbf{Density-Based:}
+\begin{itemize}
+\item DBSCAN, OPTICS, Mean-shift
+\item Handles arbitrary shapes
+\item Automatic noise detection
+\item Parameter sensitive
+\end{itemize}
+
+\textbf{Hierarchical:}
+\begin{itemize}
+\item Agglomerative, Divisive
+\item Creates cluster tree
+\item No k pre-specification
+\item Computationally expensive
+\end{itemize}
+
+\column{0.48\textwidth}
+\textbf{Algorithm Taxonomy Tree:}
+\begin{center}
+\includegraphics[width=\textwidth]{charts/clustering_taxonomy.pdf}
+\end{center}
+
+\textbf{Modern Extensions:}
+\begin{itemize}
+\item Spectral clustering (graph-based)
+\item Gaussian mixture models (probabilistic)
+\item Deep clustering (neural networks)
+\item Fuzzy clustering (soft assignments)
+\end{itemize}
+
+\textbf{Selection Criteria:} Data shape, size, interpretability needs.
+\end{columns}
+
+\vspace{\fill}
+{\footnotesize \color{textgray}Taxonomy: Understanding the clustering algorithm landscape}
+\end{frame}
+
+\begin{frame}{Slide 23: Algorithm Selection Guide}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{\color{synthesispurple}Decision Framework}
+
+\textbf{Ask These Questions:}
+
+\textbf{1. What shapes do you expect?}
+\begin{itemize}
+\item Spherical \textrightarrow K-means
+\item Arbitrary \textrightarrow DBSCAN
+\item Unknown \textrightarrow Hierarchical
+\end{itemize}
+
+\textbf{2. Do you know k?}
+\begin{itemize}
+\item Yes \textrightarrow K-means/Hierarchical
+\item No \textrightarrow DBSCAN
+\end{itemize}
+
+\textbf{3. How much noise?}
+\begin{itemize}
+\item Clean data \textrightarrow K-means
+\item Noisy data \textrightarrow DBSCAN
+\end{itemize}
+
+\textbf{4. What's your dataset size?}
+\begin{itemize}
+\item Large (>10K) \textrightarrow K-means
+\item Medium \textrightarrow Any method
+\item Small (<1K) \textrightarrow Hierarchical
+\end{itemize}
+
+\column{0.48\textwidth}
+\textbf{Selection Decision Tree:}
+\begin{center}
+\includegraphics[width=\textwidth]{charts/algorithm_selection.pdf}
+\end{center}
+
+\textbf{Business Considerations:}
+\begin{itemize}
+\item Interpretability: Hierarchical wins
+\item Speed: K-means fastest
+\item Robustness: DBSCAN handles outliers
+\item Exploration: Try multiple methods
+\end{itemize}
+
+\textbf{Hybrid Approach:} Start with K-means, validate with DBSCAN.
+\end{columns}
+
+\vspace{\fill}
+{\footnotesize \color{textgray}Practical guide: Choosing the right clustering algorithm for your problem}
+\end{frame}
+
+\begin{frame}{Slide 24: Modern Applications \& Neural Network Preview}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{\color{synthesispurple}Real-World Applications}
+
+\textbf{Anomaly Detection:}
+\begin{itemize}
+\item Fraud detection in banking
+\item Network intrusion detection
+\item Quality control in manufacturing
+\item Medical diagnosis outliers
+\end{itemize}
+
+\textbf{Recommendation Systems:}
+\begin{itemize}
+\item User behavior clustering
+\item Product category discovery
+\item Content similarity grouping
+\item Market basket analysis
+\end{itemize}
+
+\textbf{Business Intelligence:}
+\begin{itemize}
+\item Customer segmentation
+\item Market research
+\item Operational optimization
+\item Risk assessment
+\end{itemize}
+
+\column{0.48\textwidth}
+\textbf{Modern Clustering Evolution:}
+\begin{center}
+\includegraphics[width=\textwidth]{charts/modern_applications.pdf}
+\end{center}
+
+\textbf{Neural Network Preview:}
+\begin{itemize}
+\item Autoencoders for dimensionality reduction
+\item Self-organizing maps (SOMs)
+\item Deep embedded clustering
+\item Variational autoencoders
+\end{itemize}
+
+\textbf{Next Steps:} Deep learning approaches that learn representations and cluster simultaneously.
+\end{columns}
+
+\vspace{\fill}
+{\footnotesize \color{textgray}Future directions: From classical clustering to neural network approaches}
+\end{frame}

@@ -1,0 +1,533 @@
+% Part 3: Implementation - Building Validation Systems
+\section{Implementation: Production Validation}
+
+% Slide 1: Sklearn Metrics API Tour
+\begin{frame}[fragile]{Sklearn Metrics: Complete API Tour}
+\begin{columns}[T]
+\column{0.55\textwidth}
+\small
+\texttt{from sklearn.metrics import *\\
+\\
+\# Classification metrics\\
+accuracy\_score(y\_true, y\_pred)\\
+precision\_score(y\_true, y\_pred)\\
+recall\_score(y\_true, y\_pred)\\
+f1\_score(y\_true, y\_pred)\\
+\\
+\# Confusion matrix\\
+confusion\_matrix(y\_true, y\_pred)\\
+classification\_report(y\_true, y\_pred)\\
+\\
+\# Probability-based\\
+roc\_auc\_score(y\_true, y\_proba)\\
+average\_precision\_score(y\_true, y\_proba)\\
+\\
+\# Multi-class\\
+f1\_score(y\_true, y\_pred, average='macro')\\
+\# 'macro', 'micro', 'weighted'}
+
+\column{0.43\textwidth}
+\textcolor{mlblue}{\textbf{Key Functions}}
+
+\small
+\textbf{Binary:}
+\begin{itemize}
+\item accuracy\_score
+\item precision/recall/f1\_score
+\item roc\_auc\_score
+\item confusion\_matrix
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Probability-based:}
+\begin{itemize}
+\item roc\_curve
+\item precision\_recall\_curve
+\item average\_precision\_score
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Reporting:}
+\begin{itemize}
+\item classification\_report
+\item ConfusionMatrixDisplay
+\item RocCurveDisplay
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Standardized metric libraries enable consistent validation - uniform implementations prevent calculation errors and ensure comparable results}
+\end{frame}
+
+% Slide 2: Cross-Validation Strategies
+\begin{frame}[fragile]{Cross-Validation: Beyond Train-Test Split}
+\begin{columns}[T]
+\column{0.55\textwidth}
+\includegraphics[width=0.85\textwidth]{charts/cross_validation_strategies.pdf}
+
+\column{0.43\textwidth}
+\textcolor{mlblue}{\textbf{K-Fold CV}}
+
+\small
+\texttt{from sklearn.model\_selection\\
+import cross\_val\_score\\
+\\
+scores = cross\_val\_score(\\
+\hspace{0.5cm}model, X, y,\\
+\hspace{0.5cm}cv=5,\\
+\hspace{0.5cm}scoring='f1'\\
+)\\
+print(scores.mean())}
+
+\vspace{0.2cm}
+\textbf{Stratified K-Fold:}\\
+Preserves class distribution
+
+\vspace{0.2cm}
+\textbf{Time Series Split:}\\
+Respects temporal order
+
+\vspace{0.2cm}
+\textbf{Leave-One-Out:}\\
+N folds for N samples
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{CV provides robust performance estimates with confidence intervals}
+\end{frame}
+
+% Slide 3: Confusion Matrix Visualization
+\begin{frame}[fragile]{Confusion Matrix Visualization with Seaborn}
+\begin{columns}[T]
+\column{0.55\textwidth}
+\small
+\texttt{import seaborn as sns\\
+from sklearn.metrics import \\
+\hspace{1cm}confusion\_matrix\\
+\\
+\# Calculate matrix\\
+cm = confusion\_matrix(y\_true, y\_pred)\\
+\\
+\# Visualize\\
+sns.heatmap(cm, annot=True,\\
+\hspace{2cm}fmt='d', cmap='Blues')\\
+plt.ylabel('Actual')\\
+plt.xlabel('Predicted')\\
+plt.title('Confusion Matrix')\\
+plt.show()\\
+\\
+\# With labels\\
+labels = ['Negative', 'Positive']\\
+sns.heatmap(cm, annot=True, fmt='d',\\
+\hspace{2cm}xticklabels=labels,\\
+\hspace{2cm}yticklabels=labels)}
+
+\column{0.43\textwidth}
+\textcolor{mlblue}{\textbf{Interpretation}}
+
+\small
+\begin{itemize}
+\item Diagonal = correct predictions
+\item Off-diagonal = errors
+\item Color intensity shows magnitude
+\item Annotations show counts
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{Analysis Tips}}
+
+\small
+\begin{itemize}
+\item Normalize rows (recall per class)
+\item Normalize columns (precision per class)
+\item Look for systematic patterns
+\item Which classes confused most?
+\item Asymmetric errors?
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Visualization reveals patterns raw numbers hide}
+\end{frame}
+
+% Slide 4: ROC Curve Plotting
+\begin{frame}[fragile]{ROC Curves: Multi-Model Comparison}
+\begin{columns}[T]
+\column{0.55\textwidth}
+\small
+\texttt{from sklearn.metrics import \\
+\hspace{1cm}roc\_curve, auc\\
+import matplotlib.pyplot as plt\\
+\\
+\# For each model\\
+for name, model in models.items():\\
+\hspace{0.5cm}y\_proba = model.predict\_proba(\\
+\hspace{1.5cm}X\_test)[:, 1]\\
+\hspace{0.5cm}fpr, tpr, \_ = roc\_curve(\\
+\hspace{1.5cm}y\_test, y\_proba)\\
+\hspace{0.5cm}roc\_auc = auc(fpr, tpr)\\
+\hspace{0.5cm}\\
+\hspace{0.5cm}plt.plot(fpr, tpr,\\
+\hspace{1.5cm}label=f'\\{name\\} \\
+\hspace{1.5cm}(AUC=\\{roc\_auc:.2f\\})')\\
+\\
+plt.plot([0,1], [0,1], 'k--')\\
+plt.legend()}
+
+\column{0.43\textwidth}
+\textcolor{mlblue}{\textbf{Multi-Class ROC}}
+
+\small
+\textbf{One-vs-Rest:}
+\begin{itemize}
+\item Separate curve per class
+\item Class A vs (B+C+D)
+\item N curves for N classes
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Macro-average:}
+\begin{itemize}
+\item Average all class curves
+\item Equal weight per class
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Micro-average:}
+\begin{itemize}
+\item Aggregate all pairs
+\item Weighted by frequency
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Visual comparison reveals performance differences - overlaid curves enable direct model assessment across threshold ranges}
+\end{frame}
+
+% Slide 5: Statistical Significance Testing
+\begin{frame}[fragile]{Statistical Significance: McNemar Test}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{The Question}}
+
+\small
+Is Model A \textbf{significantly} better than Model B, or just lucky on this test set?
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{McNemar Test}}
+
+\small
+Compares two models on same test set:
+\begin{itemize}
+\item Both correct: ignore
+\item Both wrong: ignore
+\item A correct, B wrong: count
+\item A wrong, B correct: count
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Null hypothesis:}\\
+Models equally good
+
+\vspace{0.2cm}
+\textbf{Result:}\\
+p-value $<$ 0.05 $\rightarrow$ significant difference
+
+\column{0.48\textwidth}
+\small
+\texttt{from statsmodels.stats.\\
+\hspace{1cm}contingency\_tables \\
+\hspace{1cm}import mcnemar\\
+\\
+\# Predictions\\
+pred\_a = model\_a.predict(X\_test)\\
+pred\_b = model\_b.predict(X\_test)\\
+\\
+\# Contingency table\\
+n\_01 = sum((pred\_a != y\_test) \& \\
+\hspace{2cm}(pred\_b == y\_test))\\
+n\_10 = sum((pred\_a == y\_test) \& \\
+\hspace{2cm}(pred\_b != y\_test))\\
+\\
+\# Test\\
+table = [[0, n\_01], [n\_10, 0]]\\
+result = mcnemar(table)\\
+\\
+if result.pvalue $<$ 0.05:\\
+\hspace{0.5cm}print("Significant!")}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Statistical tests prevent false confidence in model selection}
+\end{frame}
+
+% Slide 6: Model Comparison Framework
+\begin{frame}[fragile]{Systematic Model Comparison with Pandas}
+\begin{columns}[T]
+\column{0.55\textwidth}
+\small
+\texttt{import pandas as pd\\
+from sklearn.metrics import *\\
+\\
+results = []\\
+\\
+for name, model in models.items():\\
+\hspace{0.5cm}model.fit(X\_train, y\_train)\\
+\hspace{0.5cm}y\_pred = model.predict(X\_test)\\
+\hspace{0.5cm}y\_proba = model.predict\_proba(\\
+\hspace{1.5cm}X\_test)[:, 1]\\
+\hspace{0.5cm}\\
+\hspace{0.5cm}results.append(\\{\\
+\hspace{1cm}'Model': name,\\
+\hspace{1cm}'Accuracy': accuracy\_score(\\
+\hspace{2cm}y\_test, y\_pred),\\
+\hspace{1cm}'Precision': precision\_score(\\
+\hspace{2cm}y\_test, y\_pred),\\
+\hspace{1cm}'Recall': recall\_score(\\
+\hspace{2cm}y\_test, y\_pred),\\
+\hspace{1cm}'F1': f1\_score(y\_test, y\_pred),\\
+\hspace{1cm}'AUC': roc\_auc\_score(\\
+\hspace{2cm}y\_test, y\_proba)\\
+\hspace{0.5cm}\\})\\
+\\
+df = pd.DataFrame(results)\\
+print(df.sort\_values('F1'))}
+
+\column{0.43\textwidth}
+\textcolor{mlblue}{\textbf{Output Example}}
+
+\small
+\begin{tabular}{lrrrrr}
+\toprule
+Model & Acc & Prec & Rec & F1 & AUC \\
+\midrule
+LogReg & 0.89 & 0.85 & 0.82 & 0.83 & 0.91 \\
+RF & 0.92 & 0.90 & 0.88 & 0.89 & 0.95 \\
+XGB & 0.93 & 0.91 & 0.90 & 0.90 & 0.96 \\
+SVM & 0.90 & 0.87 & 0.85 & 0.86 & 0.93 \\
+\bottomrule
+\end{tabular}
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{Benefits}}
+
+\small
+\begin{itemize}
+\item All metrics in one table
+\item Easy sorting and filtering
+\item Export to CSV/Excel
+\item Share with stakeholders
+\item Track over time
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Tabular organization enables systematic model comparison - structured data formats support sorting, filtering, and stakeholder communication}
+\end{frame}
+
+% Slide 7: Hyperparameter Impact on Metrics
+\begin{frame}{Hyperparameter Impact: Trade-Offs Visualized}
+\begin{columns}[T]
+\column{0.55\textwidth}
+\includegraphics[width=0.85\textwidth]{charts/threshold_optimization.pdf}
+
+\column{0.43\textwidth}
+\textcolor{mlblue}{\textbf{Threshold Tuning}}
+
+\small
+\textbf{Default 0.5 often wrong:}
+\begin{itemize}
+\item Assumes equal costs
+\item Ignores class imbalance
+\item Not business-aligned
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{Optimization Process}}
+
+\small
+\begin{enumerate}
+\item Define cost function
+\item Try thresholds 0.1 to 0.9
+\item Calculate business metric
+\item Select optimal threshold
+\item Validate on holdout set
+\end{enumerate}
+
+\vspace{0.3cm}
+\textbf{Example:}\\
+Fraud detection optimal at 0.3\\
+(not 0.5) due to 10:1 cost ratio
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Hyperparameter optimization aligns with evaluation objectives - threshold tuning maximizes target metric rather than arbitrary defaults}
+\end{frame}
+
+% Slide 8: Validation Pipeline Architecture
+\begin{frame}{Production Validation Pipeline}
+\begin{columns}[T]
+\column{0.55\textwidth}
+\includegraphics[width=0.85\textwidth]{charts/validation_pipeline.pdf}
+
+\column{0.43\textwidth}
+\textcolor{mlblue}{\textbf{Pipeline Stages}}
+
+\small
+\textbf{1. Data Split:}
+\begin{itemize}
+\item Train (70\%)
+\item Validation (15\%)
+\item Test (15\%)
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{2. Training:}
+\begin{itemize}
+\item Fit on train set
+\item Tune on validation
+\item Never touch test
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{3. Validation:}
+\begin{itemize}
+\item Cross-validation
+\item Multiple metrics
+\item Statistical tests
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{4. Final Test:}
+\begin{itemize}
+\item One-time evaluation
+\item Report all metrics
+\item Deploy if passing
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Isolated test sets prevent optimization bias - held-out data provides unbiased performance estimates when validation guides development}
+\end{frame}
+
+% Slide 9: Common Pitfalls
+\begin{frame}{Common Validation Pitfalls}
+\begin{columns}[T]
+\column{0.32\textwidth}
+\textcolor{mlred}{\textbf{Data Leakage}}
+
+\small
+\textbf{Problem:}\\
+Test data influences training
+
+\textbf{Examples:}
+\begin{itemize}
+\item Scaling before split
+\item Feature engineering on full dataset
+\item Time series future in training
+\end{itemize}
+
+\textbf{Fix:}
+\begin{itemize}
+\item Split first
+\item Fit transformers on train only
+\item Use sklearn Pipeline
+\end{itemize}
+
+\column{0.32\textwidth}
+\textcolor{mlorange}{\textbf{Test Set Overfitting}}
+
+\small
+\textbf{Problem:}\\
+Tuning on test set
+
+\textbf{Examples:}
+\begin{itemize}
+\item Multiple test evaluations
+\item Selecting model by test performance
+\item Threshold tuning on test
+\end{itemize}
+
+\textbf{Fix:}
+\begin{itemize}
+\item Use validation set
+\item Test only once
+\item Separate holdout
+\end{itemize}
+
+\column{0.32\textwidth}
+\textcolor{mlpurple}{\textbf{Wrong Metric}}
+
+\small
+\textbf{Problem:}\\
+Optimizing inappropriate metric
+
+\textbf{Examples:}
+\begin{itemize}
+\item Accuracy on imbalanced
+\item AUC for fixed threshold
+\item Ignoring business costs
+\end{itemize}
+
+\textbf{Fix:}
+\begin{itemize}
+\item Match problem context
+\item Use multiple metrics
+\item Create custom metric
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Validation errors systematically inflate performance estimates - data leakage, test contamination, and metric mismatch produce unreliable assessments}
+\end{frame}
+
+% Slide 10: Implementation Checklist
+\begin{frame}{Production-Ready Validation Checklist}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Before Training}}
+
+\small
+$\Box$ Data properly split (train/val/test)\\
+$\Box$ Stratification for imbalanced classes\\
+$\Box$ Time-based split for temporal data\\
+$\Box$ No data leakage (scaling, encoding)\\
+$\Box$ Baseline model established\\
+$\Box$ Metrics selected and justified\\
+$\Box$ Business cost function defined\\
+$\Box$ Success criteria documented
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{During Training}}
+
+\small
+$\Box$ Cross-validation performed\\
+$\Box$ Multiple metrics tracked\\
+$\Box$ Hyperparameter grid searched\\
+$\Box$ Validation set never used for training\\
+$\Box$ Model artifacts saved
+
+\column{0.48\textwidth}
+\textcolor{mlorange}{\textbf{Before Deployment}}
+
+\small
+$\Box$ Final test set evaluation (once)\\
+$\Box$ All metrics above thresholds\\
+$\Box$ Statistical significance tested\\
+$\Box$ Confusion matrix analyzed\\
+$\Box$ Error patterns understood\\
+$\Box$ Threshold optimized for business\\
+$\Box$ Confidence intervals calculated\\
+$\Box$ Documentation complete\\
+$\Box$ Monitoring plan ready\\
+$\Box$ Rollback strategy defined
+
+\vspace{0.3cm}
+\begin{center}
+\textcolor{mlpurple}{\small No shortcuts in validation}
+\end{center}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Stakeholder communication translates technical metrics into business value - effective presentation drives informed deployment decisions}
+\end{frame}

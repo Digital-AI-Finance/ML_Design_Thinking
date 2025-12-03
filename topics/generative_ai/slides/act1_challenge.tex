@@ -1,0 +1,220 @@
+% Slide 1: Want to CREATE, not just classify
+\begin{frame}
+\frametitle{The Creation Challenge}
+\framesubtitle{Moving Beyond Classification}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{Traditional ML:} ``What is this?''
+
+\small
+\begin{itemize}
+\item Email spam detector: Classify existing emails
+\item Medical diagnosis: Analyze X-ray images
+\item Sentiment analysis: Judge customer reviews
+\end{itemize}
+
+\textcolor{mlred}{\textbf{Limitation:}} Only analyzes, never creates
+
+\column{0.48\textwidth}
+\textbf{Generative AI:} ``Create something new''
+
+\small
+\begin{itemize}
+\item Generate phishing emails for security training
+\item Synthesize medical images for rare diseases
+\item Write product descriptions automatically
+\item Compose music for video backgrounds
+\end{itemize}
+
+\textcolor{mlgreen}{\textbf{Power:}} Creation enables innovation
+\end{columns}
+
+\vspace{\fill}
+\footnotesize \textcolor{gray}{
+Generative models learn full data distributions enabling sampling - classification learns boundaries, generation learns manifolds
+}
+\end{frame}
+
+% Slide 2: Generative vs discriminative models distinction
+\begin{frame}
+\frametitle{Mathematical Foundation}
+\framesubtitle{Two Approaches to Learning}
+
+\small
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{Discriminative Models}
+
+Learn: $P(y|x)$ - Conditional probability
+
+(Ng \& Jordan 2002: Defined distinction)
+
+\textbf{What it does:}
+\begin{itemize}
+\item Given $x$, predict label $y$
+\item Learns decision boundaries
+\item Divides input space
+\end{itemize}
+
+\textbf{Examples:} Logistic, RF, SVM
+
+\textbf{Can sample new $x$?} NO - only classifies existing data
+
+\column{0.48\textwidth}
+\textbf{Generative Models}
+
+Learn: $P(x)$ - Joint or marginal distribution
+
+\textbf{What it does:}
+\begin{itemize}
+\item Models entire data distribution
+\item Sample via ancestral sampling or MCMC
+\item Samples new $x \sim P(x)$
+\item Creates novel instances
+\end{itemize}
+
+\textbf{Examples:} VAEs, GANs, Diffusion
+
+\textbf{Can sample new $x$?} YES - generates from distribution
+\end{columns}
+
+\vspace{\fill}
+\footnotesize \textcolor{gray}{
+Discriminative models $P(y|x)$ learn boundaries while generative models $P(x)$ or $P(x,y)$ learn distributions - fundamental distinction enables creation
+}
+\end{frame}
+
+% Slide 3: Capturing full data distribution (hard problem)
+\begin{frame}
+\frametitle{The Hard Problem}
+\framesubtitle{Why Generation is Fundamentally Difficult}
+
+\begin{center}
+\includegraphics[width=0.55\textwidth]{charts/distribution_complexity.pdf}
+\end{center}
+
+\footnotesize
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{Challenges:}
+\begin{itemize}
+\item High-dimensional spaces
+\item Multimodal distributions
+\item Curse of dimensionality (data lies on low-dimensional manifolds)
+\item Sample complexity grows exponentially
+\end{itemize}
+
+\column{0.48\textwidth}
+\textbf{Requirements:}
+\begin{itemize}
+\item Capture all patterns
+\item Maintain realism
+\item Computational tractability (exact inference intractable)
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize \textcolor{gray}{
+Manifold hypothesis: real data concentrates on low-dimensional manifolds in high-dimensional space - learning distribution requires exponential samples without structure
+}
+\end{frame}
+
+% Slide 4: Realistic vs diverse tradeoff
+\begin{frame}
+\frametitle{The Fundamental Tradeoff}
+\framesubtitle{Quality vs Diversity Dilemma}
+
+\begin{center}
+\includegraphics[width=0.45\textwidth]{charts/quality_diversity_tradeoff.pdf}
+\end{center}
+
+\footnotesize
+\textcolor{mlred}{\textbf{High Quality:}} Mode collapse, repetitive
+
+\textcolor{mlorange}{\textbf{Balanced:}} Realistic variety
+
+\textcolor{mlblue}{\textbf{High Diversity:}} Unrealistic
+
+\textbf{Explanations:}
+\begin{itemize}
+\item Mode Collapse: Generator produces limited variety (high quality, low diversity)
+\item Coverage Issue: Generator spreads thin (high diversity, low quality)
+\end{itemize}
+
+\vspace{\fill}
+\footnotesize \textcolor{gray}{
+Quality-diversity trade-off is fundamental - mode collapse sacrifices coverage for fidelity, while mode coverage sacrifices fidelity for variety
+}
+\end{frame}
+
+% Slide 5: Quantify: Inception Score, FID, perplexity
+\begin{frame}
+\frametitle{Measuring Generation Quality}
+\framesubtitle{Metrics for Evaluating Generative Models}
+
+\begin{center}
+\includegraphics[width=0.65\textwidth]{charts/generation_metrics.pdf}
+\end{center}
+
+\footnotesize
+\begin{columns}[T]
+\column{0.32\textwidth}
+\textbf{Inception Score (IS)}
+
+(Salimans et al. 2016)
+
+\begin{itemize}
+\item Range: 1-1000
+\item Higher = better
+\item Quality \& diversity
+\end{itemize}
+
+\textbf{Interpretation:}
+\begin{itemize}
+\item $>$300: Excellent
+\item 100-300: Good
+\item $<$100: Poor
+\end{itemize}
+
+\column{0.32\textwidth}
+\textbf{FID Score}
+
+(Heusel et al. 2017: Fréchet Inception Distance)
+
+\begin{itemize}
+\item Range: 0-500
+\item Lower = better
+\item Feature distance
+\end{itemize}
+
+\textbf{Interpretation:}
+\begin{itemize}
+\item $<$10: Photorealistic
+\item 10-50: Good quality
+\item $>$50: Noticeable artifacts
+\end{itemize}
+
+\column{0.32\textwidth}
+\textbf{Perplexity (Text)}
+\begin{itemize}
+\item Range: 1-10,000
+\item Lower = better
+\item Predictability
+\end{itemize}
+
+\textbf{Interpretation:}
+\begin{itemize}
+\item $<$20: Human-like
+\item 20-100: Coherent
+\item $>$100: Gibberish
+\end{itemize}
+\end{columns}
+
+\textbf{Note:} Human evaluation remains gold standard
+
+\vspace{\fill}
+\footnotesize \textcolor{gray}{
+Quantitative metrics approximate perceptual quality - IS measures label confidence and diversity, FID measures feature distribution distance, perplexity measures predictability
+}
+\end{frame}

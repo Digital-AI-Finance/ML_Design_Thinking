@@ -1,0 +1,445 @@
+% Act 3: Density & Hierarchy (10 slides)
+
+\section{\color{densitygreen}Act 3: Density \& Hierarchy}
+
+\begin{frame}{Slide 11: Human Introspection: How YOU Group by Proximity AND Density}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{\color{densitygreen}Human Clustering Intuition}
+
+\textbf{How Do You See Groups?}
+\begin{itemize}
+\item Points close together \textrightarrow same group
+\item Dense regions \textrightarrow natural clusters
+\item Sparse areas \textrightarrow boundaries or noise
+\item Connected components \textrightarrow single cluster
+\end{itemize}
+
+\textbf{Visual Example:}\\
+Looking at stars in night sky:
+\begin{itemize}
+\item Constellation = dense group
+\item Dark space = natural separator
+\item Isolated stars = outliers
+\end{itemize}
+
+\textbf{Key Insight:} Humans use density, not just distance to centroids.
+
+\column{0.48\textwidth}
+\textbf{Human vs K-means Grouping:}
+\begin{center}
+\includegraphics[width=\textwidth]{charts/human_vs_kmeans.pdf}
+\end{center}
+
+\textbf{Human Advantages:}
+\begin{itemize}
+\item Recognizes arbitrary shapes
+\item Identifies noise naturally
+\item Uses local density information
+\item Handles varying cluster sizes
+\end{itemize}
+
+\textbf{Challenge:} Teach machines this intuition.
+\end{columns}
+
+\vspace{\fill}
+{\footnotesize \color{textgray}Human intuition: Density-based grouping comes naturally to us}
+\end{frame}
+
+\begin{frame}{Slide 12: Hypothesis: DBSCAN (Density), Hierarchical (Agglomerative)}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{\color{densitygreen}Alternative Approaches}
+
+\textbf{DBSCAN Hypothesis:}\\
+``Clusters are dense regions separated by sparse areas.''
+
+\textbf{Core Principles:}
+\begin{itemize}
+\item High-density areas = clusters
+\item Low-density areas = boundaries
+\item Isolated points = noise/outliers
+\item No need to specify k
+\end{itemize}
+
+\textbf{Hierarchical Hypothesis:}\\
+``Build clusters by merging similar groups.''
+
+\textbf{Core Principles:}
+\begin{itemize}
+\item Start with individual points
+\item Merge closest pairs iteratively
+\item Create tree of relationships
+\item Cut tree at desired level
+\end{itemize}
+
+\column{0.48\textwidth}
+\textbf{Method Comparison:}
+\begin{center}
+\includegraphics[width=\textwidth]{charts/method_comparison.pdf}
+\end{center}
+
+\textbf{Advantages Over K-means:}
+\begin{itemize}
+\item Handle arbitrary shapes
+\item Automatic outlier detection
+\item No k pre-specification (DBSCAN)
+\item Hierarchical relationships
+\end{itemize}
+
+\textbf{Trade-offs:} More complex, potentially slower.
+\end{columns}
+
+\vspace{\fill}
+{\footnotesize \color{textgray}Alternative hypotheses: Density and hierarchy-based clustering}
+\end{frame}
+
+\begin{frame}{Slide 13: Zero-Jargon: ``Find Crowded Neighborhoods''}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{\color{densitygreen}DBSCAN in Plain English}
+
+\textbf{The Neighborhood Analogy:}
+\begin{itemize}
+\item Draw circle around each point
+\item Count neighbors inside circle
+\item ``Crowded'' = many neighbors
+\item ``Sparse'' = few neighbors
+\end{itemize}
+
+\textbf{Simple Rules:}
+\begin{itemize}
+\item Core point: Has enough neighbors
+\item Border point: Near a core point
+\item Noise point: Not core, not border
+\end{itemize}
+
+\textbf{Clustering Process:}\\
+Connect all core points within neighborhood distance. Add border points to nearest core cluster.
+
+\column{0.48\textwidth}
+\textbf{Neighborhood Visualization:}
+\begin{center}
+\includegraphics[width=\textwidth]{charts/neighborhood_concept.pdf}
+\end{center}
+
+\textbf{Real-World Example:}
+\begin{itemize}
+\item Cities = core points (many neighbors)
+\item Suburbs = border points (near cities)
+\item Rural areas = noise (isolated)
+\end{itemize}
+
+\textbf{No Jargon:} Just finding where data is ``crowded'' together.
+\end{columns}
+
+\vspace{\fill}
+{\footnotesize \color{textgray}Intuitive explanation: DBSCAN finds crowded neighborhoods in data}
+\end{frame}
+
+\begin{frame}{Slide 14: Geometric Intuition: Epsilon-Neighborhoods}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{\color{densitygreen}DBSCAN Parameters}
+
+\textbf{Epsilon ($\varepsilon$):} Neighborhood radius
+\begin{itemize}
+\item Too small \textrightarrow all points are noise
+\item Too large \textrightarrow everything is one cluster
+\item Sweet spot \textrightarrow meaningful neighborhoods
+\end{itemize}
+
+\textbf{MinPts:} Minimum neighbors for core point
+\begin{itemize}
+\item Common choice: 2 * dimensions
+\item Higher MinPts \textrightarrow denser clusters
+\item Lower MinPts \textrightarrow more clusters
+\end{itemize}
+
+\textbf{Geometric Interpretation:}\\
+$\varepsilon$-neighborhood = circle of radius $\varepsilon$ around each point.
+
+\column{0.48\textwidth}
+\textbf{Parameter Effect Visualization:}
+\begin{center}
+\includegraphics[width=\textwidth]{charts/epsilon_effect.pdf}
+\end{center}
+
+\textbf{Parameter Selection:}
+\begin{itemize}
+\item k-distance plot for $\varepsilon$
+\item Domain knowledge for MinPts
+\item Visual inspection of results
+\end{itemize}
+
+\textbf{Mathematical Definition:}
+$$N_\varepsilon(p) = \{q \in D | dist(p,q) \leq \varepsilon\}$$
+\end{columns}
+
+\vspace{\fill}
+{\footnotesize \color{textgray}Geometric foundation: Epsilon-neighborhoods define local density}
+\end{frame}
+
+\begin{frame}{Slide 15: DBSCAN Algorithm Details}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{\color{densitygreen}DBSCAN Algorithm Steps}
+
+\textbf{1. Label Points:}
+\begin{itemize}
+\item Core: $|N_\varepsilon(p)| \geq MinPts$
+\item Border: In neighborhood of core point
+\item Noise: Neither core nor border
+\end{itemize}
+
+\textbf{2. Build Clusters:}
+\begin{itemize}
+\item Start with unvisited core point
+\item Add all density-reachable points
+\item Repeat for remaining core points
+\end{itemize}
+
+\textbf{Density-Reachable:}\\
+Point q is density-reachable from p if there's a chain of core points connecting them.
+
+\column{0.48\textwidth}
+\textbf{Algorithm Flowchart:}
+\begin{center}
+\includegraphics[width=\textwidth]{charts/dbscan_algorithm.pdf}
+\end{center}
+
+\textbf{Complexity:} O(n log n) with spatial indexing
+
+\textbf{Key Properties:}
+\begin{itemize}
+\item Deterministic (same result each run)
+\item Handles noise automatically
+\item No need to specify number of clusters
+\item Finds arbitrarily shaped clusters
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+{\footnotesize \color{textgray}Algorithm details: Systematic approach to density-based clustering}
+\end{frame}
+
+\begin{frame}{Slide 16: Full Walkthrough: Build Dendrogram with Actual Distances}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{\color{hierarchyorange}Hierarchical Clustering Example}
+
+\textbf{Data Points:}
+\begin{itemize}
+\item A: (1,1), B: (2,1), C: (4,3), D: (5,4)
+\end{itemize}
+
+\textbf{Distance Matrix:}
+\begin{center}
+\begin{tabular}{c|cccc}
+  & A & B & C & D \\
+\hline
+A & 0 & 1.0 & 3.6 & 5.0 \\
+B & 1.0 & 0 & 2.8 & 4.2 \\
+C & 3.6 & 2.8 & 0 & 1.4 \\
+D & 5.0 & 4.2 & 1.4 & 0 \\
+\end{tabular}
+\end{center}
+
+\textbf{Step 1:} Merge A-B (distance = 1.0)\\
+\textbf{Step 2:} Merge C-D (distance = 1.4)\\
+\textbf{Step 3:} Merge (AB)-(CD) (distance = 2.8)
+
+\column{0.48\textwidth}
+\textbf{Dendrogram Construction:}
+\begin{center}
+\includegraphics[width=\textwidth]{charts/dendrogram_example.pdf}
+\end{center}
+
+\textbf{Linkage Methods:}
+\begin{itemize}
+\item Single: Minimum distance between clusters
+\item Complete: Maximum distance between clusters
+\item Average: Mean distance between all pairs
+\item Ward: Minimize within-cluster variance
+\end{itemize}
+
+\textbf{Result:} Tree showing all possible clusterings.
+\end{columns}
+
+\vspace{\fill}
+{\footnotesize \color{textgray}Hierarchical example: Building dendrogram step-by-step with real distances}
+\end{frame}
+
+\begin{frame}{Slide 17: Visualization: Density Clusters}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{\color{densitygreen}DBSCAN Results}
+
+\textbf{Crescent Dataset (DBSCAN):}
+\begin{itemize}
+\item Parameters: $\varepsilon = 0.3$, MinPts = 5
+\item Result: 2 crescent-shaped clusters
+\item Noise points: 15 outliers identified
+\item Silhouette Score: 0.82
+\end{itemize}
+
+\textbf{Success Factors:}
+\begin{itemize}
+\item Handles non-convex shapes perfectly
+\item Automatic noise detection
+\item No assumption about cluster count
+\item Robust to outliers
+\end{itemize}
+
+\textbf{Comparison:} Same data that broke K-means now correctly clustered.
+
+\column{0.48\textwidth}
+\textbf{DBSCAN Cluster Visualization:}
+\begin{center}
+\includegraphics[width=\textwidth]{charts/dbscan_clusters.pdf}
+\end{center}
+
+\textbf{Color Coding:}
+\begin{itemize}
+\item Blue points: Cluster 1 (left crescent)
+\item Red points: Cluster 2 (right crescent)
+\item Black points: Noise/outliers
+\item Circles: Core points
+\item Triangles: Border points
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+{\footnotesize \color{textgray}Success visualization: DBSCAN correctly identifies crescent-shaped clusters}
+\end{frame}
+
+\begin{frame}{Slide 18: Visualization: Dendrograms}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{\color{hierarchyorange}Hierarchical Clustering Results}
+
+\textbf{Customer Segmentation Dendrogram:}
+\begin{itemize}
+\item 100 customers, 5 features
+\item Ward linkage minimizes variance
+\item Height = dissimilarity measure
+\item Cut at different levels for k clusters
+\end{itemize}
+
+\textbf{Reading the Tree:}
+\begin{itemize}
+\item Leaves = individual customers
+\item Height = merge distance
+\item Branches = cluster relationships
+\item Cut horizontal line \textrightarrow k clusters
+\end{itemize}
+
+\textbf{Business Value:} Shows natural customer groupings and relationships.
+
+\column{0.48\textwidth}
+\textbf{Customer Dendrogram:}
+\begin{center}
+\includegraphics[width=\textwidth]{charts/customer_dendrogram.pdf}
+\end{center}
+
+\textbf{Interpretation:}
+\begin{itemize}
+\item Major split: High vs low spenders
+\item Sub-groups: Age demographics
+\item Fine structure: Behavioral patterns
+\end{itemize}
+
+\textbf{Optimal Cut:} Gap in heights suggests 4-5 natural clusters.
+\end{columns}
+
+\vspace{\fill}
+{\footnotesize \color{textgray}Hierarchical visualization: Dendrogram reveals customer relationship structure}
+\end{frame}
+
+\begin{frame}{Slide 19: Why It Works: Handles Arbitrary Shapes}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{\color{densitygreen}Why Density-Based Methods Excel}
+
+\textbf{Flexibility Advantages:}
+\begin{itemize}
+\item No geometric assumptions
+\item Follows data distribution
+\item Adapts to local density variations
+\item Separates signal from noise
+\end{itemize}
+
+\textbf{Real-World Shapes:}
+\begin{itemize}
+\item Geographic regions (coastlines)
+\item Social networks (communities)
+\item Gene expression patterns
+\item Anomaly detection boundaries
+\end{itemize}
+
+\textbf{Mathematical Insight:}\\
+Density = local data concentration, not global geometric properties.
+
+\column{0.48\textwidth}
+\textbf{Shape Flexibility Demo:}
+\begin{center}
+\includegraphics[width=\textwidth]{charts/arbitrary_shapes.pdf}
+\end{center}
+
+\textbf{Examples Handled:}
+\begin{itemize}
+\item Spirals and crescents
+\item Nested clusters
+\item Elongated groups
+\item Irregular boundaries
+\end{itemize}
+
+\textbf{Limitation:} Struggles with varying densities within same cluster.
+\end{columns}
+
+\vspace{\fill}
+{\footnotesize \color{textgray}Fundamental advantage: Density methods adapt to arbitrary cluster shapes}
+\end{frame}
+
+\begin{frame}{Slide 20: Experimental Validation: Different Cluster Types Table}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{\color{densitygreen}Comparative Performance Study}
+
+\textbf{Test Datasets:}
+\begin{itemize}
+\item Spherical: Gaussian blobs
+\item Elongated: Stretched ellipses
+\item Crescent: Interlocking moons
+\item Nested: Circles within circles
+\item Noisy: 20\% outliers added
+\end{itemize}
+
+\textbf{Evaluation Metrics:}
+\begin{itemize}
+\item Adjusted Rand Index (ARI)
+\item Silhouette Score
+\item Computational Time
+\item Parameter Sensitivity
+\end{itemize}
+
+\column{0.48\textwidth}
+\textbf{Performance Comparison Table:}
+\begin{center}
+\includegraphics[width=\textwidth]{charts/performance_table.pdf}
+\end{center}
+
+\textbf{Key Findings:}
+\begin{itemize}
+\item K-means: Best on spherical data
+\item DBSCAN: Superior on complex shapes
+\item Hierarchical: Good for exploration
+\item No universal winner
+\end{itemize}
+
+\textbf{Conclusion:} Choose algorithm based on expected data structure.
+\end{columns}
+
+\vspace{\fill}
+{\footnotesize \color{textgray}Experimental evidence: Performance varies significantly by cluster type}
+\end{frame}

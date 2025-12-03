@@ -1,0 +1,488 @@
+\documentclass[8pt,aspectratio=169]{beamer}
+\usetheme{Madrid}
+
+% Color definitions from template
+\definecolor{mlblue}{RGB}{31, 119, 180}
+\definecolor{mlorange}{RGB}{255, 127, 14}
+\definecolor{mlgreen}{RGB}{44, 160, 44}
+\definecolor{mlred}{RGB}{214, 39, 40}
+\definecolor{mlpurple}{RGB}{148, 103, 189}
+\definecolor{mlbrown}{RGB}{140, 86, 75}
+\definecolor{mlpink}{RGB}{227, 119, 194}
+\definecolor{mlgray}{RGB}{127, 127, 127}
+\definecolor{mlyellow}{RGB}{188, 189, 34}
+\definecolor{mlcyan}{RGB}{23, 190, 207}
+\definecolor{mllavender}{RGB}{173, 173, 224}
+\definecolor{mllavender2}{RGB}{193, 193, 232}
+
+% Required packages
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{listings}
+
+% Custom commands
+\newcommand{\bottomnote}[1]{%
+\vspace{\fill}
+\small\textcolor{mllavender}{#1}
+}
+
+% Presentation information
+\title{Supervised Learning}
+\subtitle{Essential Guide to Prediction \& Classification}
+\author{Machine Learning for Smarter Innovation}
+\date{Machine Learning for Smarter Innovation}
+
+\begin{document}
+
+% Title slide
+\begin{frame}
+\titlepage
+\end{frame}
+
+% Slide 1: What is Supervised Learning?
+\begin{frame}{What is Supervised Learning?}
+\begin{columns}
+\begin{column}{0.48\textwidth}
+\textbf{Definition}
+\begin{itemize}
+\item Learning from \textbf{labeled examples}
+\item Input features $X$ $\rightarrow$ Output labels $y$
+\item Algorithm learns mapping: $f(X) \approx y$
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Two Main Tasks}
+\begin{enumerate}
+\item \textcolor{mlblue}{\textbf{Regression:}} Predict continuous values
+   \begin{itemize}
+   \item House prices, sales forecasts
+   \end{itemize}
+\item \textcolor{mlorange}{\textbf{Classification:}} Predict categories
+   \begin{itemize}
+   \item Spam detection, medical diagnosis
+   \end{itemize}
+\end{enumerate}
+\end{column}
+\begin{column}{0.48\textwidth}
+\centering
+\includegraphics[width=\textwidth]{charts/regression_vs_classification.pdf}
+
+\vspace{0.3cm}
+\textbf{Real-World Examples}
+\small
+\begin{itemize}
+\item Real estate pricing
+\item Email spam filtering
+\item Customer churn prediction
+\item Sales forecasting
+\end{itemize}
+\end{column}
+\end{columns}
+
+\bottomnote{Supervised learning transforms labeled historical data into predictive models - algorithms discover patterns from examples}
+\end{frame}
+
+% Slide 2: The Supervised Learning Pipeline
+\begin{frame}{The Supervised Learning Pipeline}
+\begin{columns}
+\begin{column}{0.48\textwidth}
+\textbf{1. Training Phase}
+\begin{itemize}
+\item Collect labeled data: $(X_1, y_1), ..., (X_n, y_n)$
+\item Split: 70-80\% training, 20-30\% testing
+\item Algorithm learns pattern: $\hat{f}(X)$
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{2. Prediction Phase}
+\begin{itemize}
+\item New input: $X_{new}$
+\item Apply model: $\hat{y} = \hat{f}(X_{new})$
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{3. Evaluation Phase}
+\begin{itemize}
+\item Test on held-out data
+\item Measure: Accuracy, RMSE, F1
+\end{itemize}
+\end{column}
+\begin{column}{0.48\textwidth}
+\centering
+\includegraphics[width=\textwidth]{charts/production_ml_pipeline.pdf}
+
+\vspace{0.3cm}
+\textbf{Critical Rule}
+\\
+\large
+\textcolor{mlred}{\textbf{NEVER test on training data!}}
+
+\vspace{0.2cm}
+\normalsize
+\textbf{Why?}
+\begin{itemize}
+\item Cannot measure generalization
+\item Overestimates performance
+\end{itemize}
+\end{column}
+\end{columns}
+
+\bottomnote{Train-test split prevents overfitting evaluation - testing on unseen data reveals true generalization}
+\end{frame}
+
+% Slide 3: Linear Methods - SIMPLIFIED (OLS only)
+\begin{frame}{Linear Methods: The Foundation}
+\begin{columns}
+\begin{column}{0.48\textwidth}
+\small
+\textbf{Ordinary Least Squares (OLS)}
+
+Model: $y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + ... + \epsilon$
+
+\textbf{Goal:} Minimize squared errors
+\[
+\min_{\beta} \sum_{i=1}^n (y_i - \hat{y}_i)^2
+\]
+
+\textbf{Solution:} $\hat{\beta} = (X^TX)^{-1}X^Ty$
+
+\normalsize
+\textbf{Key Properties}
+\begin{itemize}
+\item Fast to compute
+\item Interpretable coefficients
+\item Works for linear relationships
+\end{itemize}
+\end{column}
+\begin{column}{0.48\textwidth}
+\centering
+\includegraphics[width=\textwidth]{charts/linear_regression_fit.pdf}
+
+\vspace{0.2cm}
+\small
+\textbf{For Classification: Logistic Regression}
+
+Maps linear to probability:
+\[
+p(y=1|x) = \frac{1}{1 + e^{-(\beta_0 + \beta^T x)}}
+\]
+
+Decision boundary: $\beta_0 + \beta^T x = 0$
+\end{column}
+\end{columns}
+
+\bottomnote{Linear methods form foundation - OLS for regression, logistic for classification}
+\end{frame}
+
+% Slide 4: When OLS Works vs Fails - SIMPLIFIED
+\begin{frame}{When Linear Methods Work (and When They Don't)}
+\begin{columns}
+\begin{column}{0.48\textwidth}
+\small
+\textbf{Success Cases}
+\begin{itemize}
+\item \textcolor{mlgreen}{Simple patterns:} One feature predicts well
+\item \textcolor{mlgreen}{Monotonic:} More X $\rightarrow$ more Y
+\item \textcolor{mlgreen}{Need interpretability}
+\item \textcolor{mlgreen}{Small datasets}
+\end{itemize}
+
+\vspace{0.1cm}
+\centering
+\includegraphics[width=0.95\textwidth]{charts/linear_success_cases.pdf}
+
+\vspace{0.05cm}
+\footnotesize
+House size $\rightarrow$ price, experience $\rightarrow$ salary
+\end{column}
+\begin{column}{0.48\textwidth}
+\small
+\textbf{Failure Cases}
+\begin{itemize}
+\item \textcolor{mlred}{Curved patterns}
+\item \textcolor{mlred}{Feature interactions}
+\item \textcolor{mlred}{Multiple regions}
+\end{itemize}
+
+\vspace{0.1cm}
+\centering
+\includegraphics[width=0.95\textwidth]{charts/linear_failure_cases.pdf}
+
+\vspace{0.05cm}
+\footnotesize
+Image recognition, XOR, complex boundaries
+\end{column}
+\end{columns}
+
+\bottomnote{Linear methods excel for simple monotonic patterns - complex nonlinear relationships require nonlinear methods}
+\end{frame}
+
+% Slide 5: Decision Trees - EXPANDED with walkthrough
+\begin{frame}{Decision Trees: Human-Like Reasoning}
+\begin{columns}
+\begin{column}{0.48\textwidth}
+\textbf{Intuition: 20 Questions Game}
+
+\small
+\textbf{Example: House Pricing}
+
+If sqft $>$ 2000?
+\begin{itemize}
+\item YES: If bedrooms $>$ 3? YES $\rightarrow$ \$520k, NO $\rightarrow$ \$450k
+\item NO: Predict \$280k
+\end{itemize}
+
+\normalsize
+\textbf{How It Works}
+\begin{enumerate}
+\item Find best split (minimize error)
+\item Recursively split each group
+\item Stop at leaves (predictions)
+\end{enumerate}
+
+\textbf{Advantages}
+\begin{itemize}
+\item Interpretable (IF-THEN rules)
+\item Handles nonlinear patterns
+\item No scaling needed
+\end{itemize}
+
+\textbf{Disadvantages}
+\begin{itemize}
+\item \textcolor{mlred}{Unstable, overfits easily}
+\end{itemize}
+\end{column}
+\begin{column}{0.48\textwidth}
+\centering
+\includegraphics[width=\textwidth]{charts/tree_building_example.pdf}
+
+\vspace{0.3cm}
+\textbf{Solution: Use Ensembles}
+\\Combine many trees to stabilize predictions
+\end{column}
+\end{columns}
+
+\bottomnote{Decision trees mimic human step-by-step reasoning - interpretable but unstable alone, requiring ensemble methods for robustness}
+\end{frame}
+
+% Slide 6: Ensemble Methods - IMPROVED with new charts
+\begin{frame}{Ensemble Methods: Many Trees Better Than One}
+\begin{columns}
+\begin{column}{0.56\textwidth}
+\centering
+\includegraphics[width=0.95\textwidth]{charts/ensemble_trees_graphviz.pdf}
+
+\vspace{0.1cm}
+\includegraphics[width=0.95\textwidth]{charts/ensemble_function_approximation.pdf}
+\end{column}
+\begin{column}{0.42\textwidth}
+\footnotesize
+\textbf{Random Forest}
+\begin{itemize}
+\item Build 100-500 trees
+\item Random data + features
+\item Average predictions
+\end{itemize}
+
+\textbf{Gradient Boosting}
+\begin{itemize}
+\item Sequential trees
+\item Correct previous errors
+\item Weighted sum
+\end{itemize}
+
+\textbf{Insight:} Single tree is jagged, many trees smooth
+
+\textbf{Tools:} XGBoost, LightGBM
+\end{column}
+\end{columns}
+
+\bottomnote{Ensemble methods combine multiple weak learners - averaging reduces variance, boosting reduces bias}
+\end{frame}
+
+% Slide 7: Common Pitfalls - CONDENSED
+\begin{frame}{Common Pitfalls to Avoid}
+\begin{columns}
+\begin{column}{0.48\textwidth}
+\small
+\textbf{1. Overfitting}
+\begin{itemize}
+\item Memorizes training data
+\item \textcolor{mlgreen}{Fix:} More data, cross-validation
+\end{itemize}
+
+\textbf{2. Data Leakage}
+\begin{itemize}
+\item Test info in training
+\item \textcolor{mlgreen}{Fix:} Strict separation
+\end{itemize}
+
+\textbf{3. Wrong Metrics}
+\begin{itemize}
+\item Accuracy for imbalanced data
+\item \textcolor{mlgreen}{Fix:} Use F1, AUC
+\end{itemize}
+
+\centering
+\includegraphics[width=0.95\textwidth]{charts/curse_dimensionality.pdf}
+\end{column}
+\begin{column}{0.48\textwidth}
+\small
+\textbf{4. Too Many Features}
+\begin{itemize}
+\item Curse of dimensionality
+\item \textcolor{mlgreen}{Fix:} Feature selection
+\end{itemize}
+
+\textbf{5. Ignoring Domain}
+\begin{itemize}
+\item Blind algorithm application
+\item \textcolor{mlgreen}{Fix:} Feature engineering
+\end{itemize}
+
+\textbf{Best Practices}
+\begin{itemize}
+\item Split train/test first
+\item Cross-validate
+\item Sanity check predictions
+\end{itemize}
+\end{column}
+\end{columns}
+
+\bottomnote{Common pitfalls arise from flawed evaluation or inappropriate complexity - strict methodology prevents issues}
+\end{frame}
+
+% Slide 8: Best Practices - CONDENSED
+\begin{frame}{Best Practices \& Summary}
+\begin{columns}
+\begin{column}{0.48\textwidth}
+\textbf{Essential Workflow}
+
+\textbf{1. Start Simple}
+\begin{itemize}
+\item Begin with OLS baseline
+\item Add complexity only if needed
+\end{itemize}
+
+\textbf{2. Proper Validation}
+\begin{itemize}
+\item 70-80\% train, 20-30\% test
+\item Never touch test set until final
+\item Use cross-validation for tuning
+\end{itemize}
+
+\textbf{3. Feature Engineering}
+\begin{itemize}
+\item Handle missing values
+\item Encode categorical variables
+\item Scale features if needed
+\end{itemize}
+
+\textbf{4. Choose Algorithm}
+\begin{itemize}
+\item Need interpretability? $\rightarrow$ Linear or tree
+\item Need accuracy? $\rightarrow$ Random Forest or boosting
+\item Small data? $\rightarrow$ Keep it simple
+\end{itemize}
+\end{column}
+\begin{column}{0.48\textwidth}
+\textbf{Algorithm Comparison}
+
+\footnotesize
+\begin{tabular}{|p{2.2cm}|p{1.8cm}|p{1.8cm}|}
+\hline
+\textbf{Method} & \textbf{Pros} & \textbf{Cons} \\
+\hline
+Linear & Fast, interpretable & Assumes linearity \\
+\hline
+Decision Tree & Interpretable, nonlinear & Unstable \\
+\hline
+Random Forest & Accurate, robust & Less interpretable \\
+\hline
+Boosting & Highest accuracy & Slow, complex \\
+\hline
+\end{tabular}
+
+\vspace{0.3cm}
+\normalsize
+\textbf{Key Takeaways}
+
+\begin{enumerate}
+\item Supervised learning needs \textcolor{mlblue}{\textbf{labeled data}}
+\item Two tasks: \textcolor{mlblue}{\textbf{regression}} vs \textcolor{mlorange}{\textbf{classification}}
+\item Always \textcolor{mlred}{\textbf{train-test split}}
+\item Start \textcolor{mlgreen}{\textbf{simple}}, add complexity if needed
+\item \textcolor{mlpurple}{\textbf{Ensembles}} achieve best accuracy
+\end{enumerate}
+\end{column}
+\end{columns}
+
+\bottomnote{Supervised learning success requires proper methodology - split data, start simple, validate rigorously}
+\end{frame}
+
+% APPENDIX: Python Code Examples
+
+\appendix
+
+% Appendix Slide 1: Basic Python Code
+\begin{frame}[fragile]{Appendix A: Python Implementation - Trees \& Random Forest}
+\small
+
+\textbf{Decision Tree}
+\begin{lstlisting}[language=Python, basicstyle=\footnotesize\ttfamily]
+from sklearn.tree import DecisionTreeRegressor
+
+model = DecisionTreeRegressor(max_depth=5)
+model.fit(X_train, y_train)
+predictions = model.predict(X_test)
+\end{lstlisting}
+
+\vspace{0.3cm}
+\textbf{Random Forest}
+\begin{lstlisting}[language=Python, basicstyle=\footnotesize\ttfamily]
+from sklearn.ensemble import RandomForestRegressor
+
+model = RandomForestRegressor(n_estimators=100, max_depth=10)
+model.fit(X_train, y_train)
+predictions = model.predict(X_test)
+\end{lstlisting}
+
+\vspace{0.3cm}
+\textbf{For Classification}
+\\Just replace \texttt{Regressor} with \texttt{Classifier}
+
+\bottomnote{Scikit-learn provides simple, consistent API - fit, predict pattern works for all models}
+\end{frame}
+
+% Appendix Slide 2: Boosting and Evaluation
+\begin{frame}[fragile]{Appendix B: Gradient Boosting \& Evaluation}
+\small
+
+\textbf{Gradient Boosting}
+\begin{lstlisting}[language=Python, basicstyle=\footnotesize\ttfamily]
+from sklearn.ensemble import GradientBoostingRegressor
+
+model = GradientBoostingRegressor(n_estimators=100, learning_rate=0.1)
+model.fit(X_train, y_train)
+predictions = model.predict(X_test)
+\end{lstlisting}
+
+\vspace{0.3cm}
+\textbf{Evaluation}
+\begin{lstlisting}[language=Python, basicstyle=\footnotesize\ttfamily]
+from sklearn.metrics import mean_squared_error, r2_score
+
+mse = mean_squared_error(y_test, predictions)
+rmse = mse ** 0.5
+r2 = r2_score(y_test, predictions)
+
+print(f"RMSE: {rmse:.2f}")
+print(f"R-squared: {r2:.3f}")
+\end{lstlisting}
+
+\bottomnote{Always evaluate on held-out test set - RMSE measures prediction error, R-squared measures explained variance}
+\end{frame}
+
+\end{document}

@@ -1,0 +1,376 @@
+% Part 2: Algorithms - The Mathematics of Discovery
+\section{Algorithms: Topic Modeling Techniques}
+
+% LDA Overview
+\begin{frame}{Latent Dirichlet Allocation (LDA)}
+\begin{columns}[T]
+\column{0.55\textwidth}
+\includegraphics[width=0.85\textwidth]{lda_plate_notation.pdf}
+
+\vspace{0.3cm}
+\small
+\textcolor{mlblue}{\textbf{Generative Process:}}
+\begin{enumerate}
+\item Choose topic distribution for document
+\item For each word position:
+   \begin{itemize}
+   \item Choose a topic
+   \item Choose a word from that topic
+   \end{itemize}
+\end{enumerate}
+
+\column{0.43\textwidth}
+\textcolor{mlorange}{\textbf{Key Parameters}}
+
+\normalsize
+\begin{itemize}
+\item \textbf{K}: Number of topics
+\item \textbf{$\alpha$}: Document-topic density
+\item \textbf{$\beta$}: Topic-word density
+\end{itemize}
+
+\vspace{0.5cm}
+\textcolor{mlgreen}{\textbf{Strengths:}}
+\small
+\begin{itemize}
+\item Probabilistic interpretation
+\item Handles uncertainty
+\item Industry standard
+\end{itemize}
+
+\textcolor{mlred}{\textbf{Limitations:}}
+\small
+\begin{itemize}
+\item Fixed number of topics
+\item Assumes bag-of-words
+\end{itemize}
+\end{columns}
+\end{frame}
+
+% LDA Intuition
+\begin{frame}{LDA Intuition: Restaurant Reviews Example}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Input Reviews:}}
+
+\footnotesize
+``The pasta was delicious and service excellent''\\
+``Great atmosphere, loved the wine selection''\\
+``Fast delivery, food arrived hot''\\
+``Cozy ambiance, romantic lighting''
+
+\vspace{0.3cm}
+\textcolor{mlorange}{\textbf{LDA Discovers:}}
+
+\small
+\textbf{Topic 1: Food Quality}\\
+\footnotesize pasta, delicious, hot, fresh, taste
+
+\small
+\textbf{Topic 2: Service}\\
+\footnotesize service, delivery, fast, staff, friendly
+
+\small
+\textbf{Topic 3: Atmosphere}\\
+\footnotesize atmosphere, ambiance, cozy, romantic
+
+\column{0.48\textwidth}
+\includegraphics[width=0.85\textwidth]{lda_document_topics.pdf}
+
+\vspace{0.3cm}
+\small\textcolor{mlgray}{Each review contains multiple topics in different proportions}
+\end{columns}
+\end{frame}
+
+% NMF Overview
+\begin{frame}{Non-negative Matrix Factorization (NMF)}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Core Concept}}
+
+\normalsize
+Decompose document-term matrix:\\
+\textbf{V = W × H}
+
+\small
+\begin{itemize}
+\item \textbf{V}: Original documents
+\item \textbf{W}: Document-topic weights
+\item \textbf{H}: Topic-term weights
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlorange}{\textbf{Key Difference from LDA:}}
+\begin{itemize}
+\item Deterministic
+\item Parts-based representation
+\item No probabilistic assumptions
+\end{itemize}
+
+\column{0.48\textwidth}
+\includegraphics[width=0.85\textwidth]{nmf_decomposition.pdf}
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{When to Use:}}
+\small
+\begin{itemize}
+\item Short texts (tweets, titles)
+\item Need interpretable parts
+\item Speed is critical
+\item Sparse data
+\end{itemize}
+\end{columns}
+\end{frame}
+
+% LSA Overview
+\begin{frame}{Latent Semantic Analysis (LSA)}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Singular Value Decomposition}}
+
+\normalsize
+\textbf{A = U$\Sigma$V$^T$}
+
+\small
+\begin{itemize}
+\item Reduces dimensionality
+\item Captures semantic relationships
+\item Handles synonyms naturally
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlorange}{\textbf{Process:}}
+\begin{enumerate}
+\item Build term-document matrix
+\item Apply TF-IDF weighting
+\item Perform SVD
+\item Keep top k dimensions
+\end{enumerate}
+
+\column{0.48\textwidth}
+\includegraphics[width=0.85\textwidth]{lsa_semantic_space.pdf}
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{Applications:}}
+\small
+\begin{itemize}
+\item Document similarity
+\item Information retrieval
+\item Concept extraction
+\item Dimensionality reduction
+\end{itemize}
+\end{columns}
+\end{frame}
+
+% Algorithm Comparison
+\begin{frame}{Algorithm Comparison}
+\begin{center}
+\includegraphics[width=0.85\textwidth]{algorithm_comparison_matrix.pdf}
+\end{center}
+
+\vspace{-0.2cm}
+\begin{columns}[T]
+\column{0.32\textwidth}
+\centering\small
+\textcolor{mlblue}{\textbf{LDA}}\\
+\footnotesize Best for interpretability
+
+\column{0.32\textwidth}
+\centering\small
+\textcolor{mlorange}{\textbf{NMF}}\\
+\footnotesize Best for speed
+
+\column{0.32\textwidth}
+\centering\small
+\textcolor{mlgreen}{\textbf{BERTopic}}\\
+\footnotesize Best for accuracy
+\end{columns}
+\end{frame}
+
+% Choosing Number of Topics
+\begin{frame}{Choosing the Number of Topics}
+\begin{columns}[T]
+\column{0.55\textwidth}
+\includegraphics[width=0.85\textwidth]{topic_coherence_plot.pdf}
+
+\vspace{0.3cm}
+\small
+\textcolor{mlblue}{\textbf{Metrics to Consider:}}
+\begin{itemize}
+\item \textbf{Coherence}: Semantic similarity
+\item \textbf{Perplexity}: Model fit
+\item \textbf{Distinctiveness}: Topic separation
+\end{itemize}
+
+\column{0.43\textwidth}
+\textcolor{mlorange}{\textbf{Practical Guidelines}}
+
+\normalsize
+\textbf{Rule of Thumb:}\\
+\small $K = \sqrt{N/2}$ for N documents
+
+\vspace{0.3cm}
+\textbf{Domain-Specific:}
+\begin{itemize}
+\item News: 20-50 topics
+\item Reviews: 5-15 topics
+\item Research: 30-100 topics
+\item Social media: 10-30 topics
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{Best Practice:}}\\
+\small Test multiple values, validate with domain experts
+\end{columns}
+\end{frame}
+
+% Topic Quality Metrics
+\begin{frame}{Evaluating Topic Quality}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Coherence Measures}}
+
+\small
+\textbf{UMass Coherence:}\\
+\footnotesize Based on document co-occurrence
+
+\small
+\textbf{C\_V Coherence:}\\
+\footnotesize Sliding window + word embeddings
+
+\small
+\textbf{C\_NPMI:}\\
+\footnotesize Normalized pointwise mutual information
+
+\vspace{0.5cm}
+\textcolor{mlorange}{\textbf{Human Evaluation}}
+\begin{itemize}
+\item Topic interpretability
+\item Word intrusion test
+\item Topic intrusion test
+\end{itemize}
+
+\column{0.48\textwidth}
+\includegraphics[width=0.85\textwidth]{topic_quality_dashboard.pdf}
+
+\vspace{0.3cm}
+\small\textcolor{mlgreen}{\textbf{Quality Thresholds:}}
+\begin{itemize}
+\item Coherence $>$ 0.5: Good
+\item Distinctiveness $>$ 0.7: Good
+\item Coverage $>$ 80\%: Good
+\end{itemize}
+\end{columns}
+\end{frame}
+
+% Modern Approaches - BERTopic
+\begin{frame}{Modern Approach: BERTopic}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Pipeline:}}
+\begin{enumerate}
+\item Embed documents (BERT)
+\item Cluster embeddings (HDBSCAN)
+\item Create topics (c-TF-IDF)
+\item Fine-tune representations
+\end{enumerate}
+
+\vspace{0.3cm}
+\textcolor{mlorange}{\textbf{Advantages:}}
+\begin{itemize}
+\item Contextual understanding
+\item Dynamic number of topics
+\item Outlier detection
+\item Hierarchical topics
+\end{itemize}
+
+\column{0.48\textwidth}
+\includegraphics[width=0.85\textwidth]{bertopic_pipeline.pdf}
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{Use Cases:}}
+\small
+\begin{itemize}
+\item Dynamic content streams
+\item Multi-lingual datasets
+\item Short text (tweets)
+\item Evolving topics over time
+\end{itemize}
+\end{columns}
+\end{frame}
+
+% Preprocessing for Topics
+\begin{frame}{Preprocessing for Topic Models}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Essential Steps:}}
+\begin{enumerate}
+\item \textbf{Tokenization}\\
+   \footnotesize Split into meaningful units
+\item \textbf{Lowercasing}\\
+   \footnotesize Normalize text
+\item \textbf{Remove stopwords}\\
+   \footnotesize Filter common words
+\item \textbf{Lemmatization}\\
+   \footnotesize Reduce to base forms
+\item \textbf{Filter extremes}\\
+   \footnotesize Remove rare/common terms
+\end{enumerate}
+
+\column{0.48\textwidth}
+\textcolor{mlorange}{\textbf{Advanced Techniques:}}
+\begin{itemize}
+\item \textbf{Bigrams/Trigrams}\\
+   \footnotesize ``machine learning'' as one token
+\item \textbf{Named Entity Recognition}\\
+   \footnotesize Preserve ``New York''
+\item \textbf{Part-of-speech filtering}\\
+   \footnotesize Keep nouns and verbs
+\item \textbf{Domain stopwords}\\
+   \footnotesize Remove domain-specific noise
+\end{itemize}
+
+\vspace{0.3cm}
+\small\textcolor{mlgreen}{Quality preprocessing = Better topics}
+\end{columns}
+\end{frame}
+
+% Algorithm Summary
+\begin{frame}{Algorithm Summary}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Classical Methods}}
+\begin{itemize}
+\item \textbf{LDA}: Probabilistic gold standard
+\item \textbf{NMF}: Fast and interpretable
+\item \textbf{LSA}: Semantic relationships
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlorange}{\textbf{Modern Methods}}
+\begin{itemize}
+\item \textbf{BERTopic}: Contextual understanding
+\item \textbf{Top2Vec}: Document embeddings
+\item \textbf{CTM}: Correlated topics
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{mlgreen}{\textbf{Selection Criteria}}
+\begin{itemize}
+\item Data size and type
+\item Interpretability needs
+\item Computational resources
+\item Real-time requirements
+\item Language complexity
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlred}{\textbf{Remember:}}\\
+\small No single best algorithm - choose based on your specific use case
+\end{columns}
+
+\vspace{\fill}
+\begin{center}
+\normalsize\textcolor{mlpurple}{\textbf{Next:} Implementation in practice}
+\end{center}
+\end{frame}

@@ -1,0 +1,533 @@
+\documentclass[8pt,aspectratio=169]{beamer}
+\usetheme{Madrid}
+\usecolortheme{default}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{adjustbox}
+\usepackage{multicol}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usepackage{listings}
+\usepackage{xcolor}
+
+% Define colors
+\definecolor{mlblue}{RGB}{31, 119, 180}
+\definecolor{mlorange}{RGB}{255, 127, 14}
+\definecolor{mlgreen}{RGB}{44, 160, 44}
+\definecolor{mlred}{RGB}{214, 39, 40}
+\definecolor{mlpurple}{RGB}{148, 103, 189}
+
+% Beamer settings
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{footline}[frame number]
+
+% Code listing settings
+\lstset{
+    language=Python,
+    basicstyle=\tiny\ttfamily,
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    stepnumber=1,
+    backgroundcolor=\color{gray!5},
+    keywordstyle=\color{mlblue},
+    commentstyle=\color{mlgreen},
+    stringstyle=\color{mlorange}
+}
+
+% Title information
+\title{\Large\textbf{Clustering FinTech Users: From Data to Empathy}}
+\subtitle{Advanced Clustering Techniques on Real Financial Data\\
+\small 10,000 Users, 12 Features, 7 Natural Segments}
+\author{Week 2: Machine Learning for Smarter Innovation}
+\institute{BSc Course - MSc-Level Dataset}
+\date{2025}
+
+\begin{document}
+
+% Title slide
+\begin{frame}[plain]
+\titlepage
+\end{frame}
+
+% Slide 2: Opening Power Visual
+\begin{frame}[plain]
+\centering
+\includegraphics[width=0.95\textwidth]{fintech_dataset_overview_slides.pdf}
+\end{frame}
+
+% Slide 3: The Challenge
+\begin{frame}{The Challenge: Understanding 10,000 Digital Banking Users}
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\Large\textbf{The Problem}
+\normalsize
+\begin{itemize}
+\item 10,000 FinTech app users
+\item Diverse behavioral patterns
+\item Need personalization at scale
+\item Fraud detection requirements
+\item Customer lifecycle understanding
+\end{itemize}
+
+\vspace{0.5em}
+\Large\textbf{The Stakes}
+\normalsize
+\begin{itemize}
+\item \$12M annual transaction volume
+\item 3\% fraud risk = \$360K exposure
+\item 25\% churn rate costs \$2M/year
+\end{itemize}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\Large\textbf{Our Approach}
+\normalsize
+
+Use advanced clustering to discover:
+\begin{enumerate}
+\item Natural user segments
+\item Fraudulent behavior patterns
+\item Customer evolution paths
+\item Personalization opportunities
+\item Risk indicators
+\end{enumerate}
+
+\vspace{0.5em}
+\begin{center}
+\colorbox{mlgreen!20}{\textbf{ML transforms raw data into actionable insights}}
+\end{center}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Slide 4: Dataset Introduction
+\begin{frame}{FinTech Dataset: 12 Behavioral Dimensions}
+\begin{columns}[T]
+\begin{column}{0.3\textwidth}
+\textbf{Transaction Patterns}
+\small
+\begin{itemize}
+\item Transaction frequency
+\item Transaction volume
+\item Peak hour usage
+\item Merchant categories
+\end{itemize}
+\end{column}
+
+\begin{column}{0.3\textwidth}
+\textbf{Financial Behavior}
+\small
+\begin{itemize}
+\item Savings behavior
+\item Credit utilization
+\item International activity
+\item Payment diversity
+\end{itemize}
+\end{column}
+
+\begin{column}{0.3\textwidth}
+\textbf{User Engagement}
+\small
+\begin{itemize}
+\item Session duration
+\item Support contacts
+\item Device switches
+\item Account age
+\end{itemize}
+\end{column}
+\end{columns}
+
+\vspace{1em}
+\begin{center}
+\begin{tabular}{lrrrr}
+\toprule
+\textbf{Segment} & \textbf{Count} & \textbf{\%} & \textbf{Key Trait} \\
+\midrule
+Digital Natives & 2,500 & 25\% & Tech-savvy, high usage \\
+Traditional Savers & 2,000 & 20\% & High deposits, low transactions \\
+Business Users & 1,500 & 15\% & High volume, peak hours \\
+International & 1,000 & 10\% & Cross-border focus \\
+Cautious Beginners & 2,500 & 25\% & Learning, high support \\
+Fraudulent & 300 & 3\% & Anomalous patterns \\
+Noise & 200 & 2\% & Random behavior \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{frame}
+
+% Slide 5: Real-World Relevance
+\begin{frame}{Why This Matters for MSc Students}
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\Large\textbf{Industry Relevance}
+\normalsize
+\begin{itemize}
+\item FinTech employs 300K+ data scientists globally
+\item Average salary: \$120K-\$180K
+\item Similar datasets at:
+\begin{itemize}
+\item PayPal (420M users)
+\item Revolut (35M users)
+\item Square (50M users)
+\end{itemize}
+\end{itemize}
+
+\vspace{0.5em}
+\Large\textbf{Regulatory Requirements}
+\normalsize
+\begin{itemize}
+\item KYC (Know Your Customer)
+\item AML (Anti-Money Laundering)
+\item GDPR compliance
+\item Fair lending practices
+\end{itemize}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\Large\textbf{Technical Skills Demonstrated}
+\normalsize
+\begin{itemize}
+\item Handling skewed distributions
+\item Missing data imputation (0.46\%)
+\item Feature scaling decisions
+\item Distance metric selection
+\item Outlier detection
+\item Temporal pattern analysis
+\end{itemize}
+
+\vspace{0.5em}
+\Large\textbf{Business Impact}
+\normalsize
+\begin{itemize}
+\item Reduce fraud by 85\%
+\item Increase retention by 30\%
+\item Improve cross-sell by 40\%
+\item Cut support costs by 25\%
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Section Divider
+\begin{frame}[plain]
+\vfill
+\centering
+\Huge\textbf{Part 2: Advanced Clustering Techniques}\\
+\vspace{0.5em}
+\Large Comparing Algorithms on Real FinTech Data
+\vfill
+\end{frame}
+
+% Slide 6: Algorithm Comparison
+\begin{frame}[plain]
+\centering
+\includegraphics[width=0.95\textwidth]{fintech_algorithm_comparison.pdf}
+\end{frame}
+
+% Slide 7: K-Means Results
+\begin{frame}{K-Means: 5 Clear Behavioral Segments}
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\Large\textbf{Algorithm Performance}
+\normalsize
+\begin{itemize}
+\item Optimal k = 5 (validated)
+\item Silhouette score: 0.412
+\item Convergence: 18 iterations
+\item Runtime: 0.3 seconds
+\end{itemize}
+
+\vspace{0.5em}
+\Large\textbf{Segments Discovered}
+\normalsize
+\begin{enumerate}
+\item \textbf{Cluster 0}: High-value business (15\%)
+\item \textbf{Cluster 1}: Digital natives (25\%)
+\item \textbf{Cluster 2}: Traditional savers (20\%)
+\item \textbf{Cluster 3}: International users (10\%)
+\item \textbf{Cluster 4}: Beginners (30\%)
+\end{enumerate}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\Large\textbf{Key Insights}
+\normalsize
+
+Each cluster shows distinct patterns:
+\begin{itemize}
+\item Transaction frequency: 1.2 - 12.5/day
+\item Volume range: \$500 - \$15,000/month
+\item International activity: 5\% - 80\%
+\item Support needs: 0.5 - 4.2 contacts/month
+\end{itemize}
+
+\vspace{0.5em}
+\begin{center}
+\colorbox{mlblue!20}{\textbf{Clear separation enables targeted strategies}}
+\end{center}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Slide 8: Elbow Method
+\begin{frame}[plain]
+\centering
+\includegraphics[width=0.95\textwidth]{fintech_cluster_quality.pdf}
+\end{frame}
+
+% Slide 9: DBSCAN Fraud Detection
+\begin{frame}[plain]
+\centering
+\includegraphics[width=0.95\textwidth]{fintech_fraud_detection.pdf}
+\end{frame}
+
+% Slide 10: Fraud Pattern Analysis
+\begin{frame}{What Makes Fraudulent Users Different?}
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\Large\textbf{Behavioral Anomalies}
+\normalsize
+
+\begin{tabular}{lrr}
+\toprule
+\textbf{Feature} & \textbf{Normal} & \textbf{Fraud} \\
+\midrule
+International activity & 28\% & 80\% \\
+Transaction frequency & 6.0 & 7.9 \\
+Device switches & 2.8 & 8.1 \\
+Support contacts & 1.3 & 0.0 \\
+Account age & 467 days & 15 days \\
+\bottomrule
+\end{tabular}
+
+\vspace{0.5em}
+\textbf{Detection Performance}
+\begin{itemize}
+\item Precision: 72\%
+\item Recall: 65\%
+\item F1-Score: 68\%
+\end{itemize}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\Large\textbf{Fraud Patterns}
+\normalsize
+
+\textbf{1. Account Takeover}
+\begin{itemize}
+\item Sudden transaction spike
+\item New device/location
+\item Zero support contact
+\end{itemize}
+
+\textbf{2. Money Laundering}
+\begin{itemize}
+\item High international transfers
+\item Round amounts
+\item Rapid in/out pattern
+\end{itemize}
+
+\textbf{3. Synthetic Identity}
+\begin{itemize}
+\item New account
+\item Perfect credit behavior initially
+\item Then sudden max-out
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Section Divider
+\begin{frame}[plain]
+\vfill
+\centering
+\Huge\textbf{Part 3: From Clusters to Personas}\\
+\vspace{0.5em}
+\Large Transforming Data into Human Understanding
+\vfill
+\end{frame}
+
+% Slide 11: Persona Mapping
+\begin{frame}{Data-Driven Personas: Who Are Our Users?}
+\begin{columns}[T]
+\begin{column}{0.2\textwidth}
+\centering
+\textbf{Patricia}\\
+\small Power Professional\\
+\vspace{0.3em}
+28-45 years\\
+Business Owner\\
+\vspace{0.3em}
+\$12K/month\\
+15\% of users
+\end{column}
+
+\begin{column}{0.2\textwidth}
+\centering
+\textbf{Samuel}\\
+\small Traditional Saver\\
+\vspace{0.3em}
+35-60 years\\
+Professional\\
+\vspace{0.3em}
+\$3K/month\\
+20\% of users
+\end{column}
+
+\begin{column}{0.2\textwidth}
+\centering
+\textbf{Gina}\\
+\small Global Nomad\\
+\vspace{0.3em}
+25-40 years\\
+Consultant\\
+\vspace{0.3em}
+\$5K/month\\
+10\% of users
+\end{column}
+
+\begin{column}{0.2\textwidth}
+\centering
+\textbf{Nancy}\\
+\small Newcomer\\
+\vspace{0.3em}
+18-30 years\\
+Student\\
+\vspace{0.3em}
+\$800/month\\
+25\% of users
+\end{column}
+
+\begin{column}{0.2\textwidth}
+\centering
+\textbf{Chris}\\
+\small Casual User\\
+\vspace{0.3em}
+25-50 years\\
+Various\\
+\vspace{0.3em}
+\$2K/month\\
+25\% of users
+\end{column}
+\end{columns}
+
+\vspace{1em}
+\begin{center}
+\begin{tabular}{lccccc}
+\toprule
+\textbf{Need} & Patricia & Samuel & Gina & Nancy & Chris \\
+\midrule
+Efficiency & HIGH & Low & High & Low & Med \\
+Security & Med & HIGH & Med & Med & High \\
+Guidance & Low & Low & Med & HIGH & Med \\
+International & Low & Low & HIGH & Low & Low \\
+Simplicity & Low & Med & Low & High & HIGH \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{frame}
+
+% Slide 12: Implementation Code
+\begin{frame}[fragile]{Python Implementation: From Theory to Practice}
+\begin{lstlisting}
+import numpy as np
+from sklearn.cluster import KMeans, DBSCAN
+from sklearn.preprocessing import StandardScaler
+from sklearn.metrics import silhouette_score
+
+# Load FinTech dataset
+X = np.load('fintech_X.npy')  # Shape: (10000, 12)
+segments = np.load('fintech_segments.npy')
+
+# Handle missing values and scale
+X_clean = np.nan_to_num(X, nan=np.nanmedian(X, axis=0))
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X_clean)
+
+# Find optimal k using elbow method
+inertias = []
+for k in range(2, 11):
+    kmeans = KMeans(n_clusters=k, random_state=42)
+    kmeans.fit(X_scaled)
+    inertias.append(kmeans.inertia_)
+
+# Apply optimal clustering (k=5)
+kmeans = KMeans(n_clusters=5, random_state=42)
+user_segments = kmeans.fit_predict(X_scaled)
+
+# Detect fraud with DBSCAN
+dbscan = DBSCAN(eps=0.8, min_samples=10)
+anomalies = dbscan.fit_predict(X_scaled)
+fraud_mask = anomalies == -1  # Outliers
+
+print(f"Found {fraud_mask.sum()} potential fraudulent users")
+print(f"Silhouette score: {silhouette_score(X_scaled, user_segments):.3f}")
+\end{lstlisting}
+\end{frame}
+
+% Slide 13: Key Takeaways
+\begin{frame}{Key Takeaways: Business Value from Clustering}
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\Large\textbf{Technical Achievements}
+\normalsize
+\begin{itemize}
+\item Successfully segmented 10K users
+\item Identified 5 business personas
+\item Detected 65\% of fraud cases
+\item Achieved 0.412 silhouette score
+\item Processing time: < 1 second
+\end{itemize}
+
+\vspace{0.5em}
+\Large\textbf{Algorithm Insights}
+\normalsize
+\begin{itemize}
+\item K-Means: Best for clear segments
+\item DBSCAN: Excellent for fraud detection
+\item Hierarchical: Shows user evolution
+\item GMM: Captures overlapping behaviors
+\end{itemize}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\Large\textbf{Business Impact}
+\normalsize
+\begin{itemize}
+\item \textbf{Personalization}: Tailored experiences for 5 personas
+\item \textbf{Fraud Prevention}: Save \$234K annually
+\item \textbf{Retention}: Target at-risk segments
+\item \textbf{Cross-sell}: Match products to needs
+\item \textbf{Support}: Proactive help for beginners
+\end{itemize}
+
+\vspace{0.5em}
+\Large\textbf{Next Steps}
+\normalsize
+\begin{enumerate}
+\item Deploy real-time clustering
+\item A/B test persona strategies
+\item Refine fraud detection rules
+\item Build recommendation engine
+\item Track segment evolution
+\end{enumerate}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Final slide
+\begin{frame}[plain]
+\vfill
+\centering
+\Huge\textbf{Questions?}\\
+\vspace{1em}
+\Large Dataset and code available at:\\
+\texttt{github.com/course/week2-fintech}\\
+\vspace{1em}
+\normalsize
+Next Week: Classification \& Customer Prediction
+\vfill
+\end{frame}
+
+\end{document}

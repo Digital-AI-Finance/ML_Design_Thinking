@@ -1,0 +1,267 @@
+% Part 4: Synthesis (4 slides)
+
+\begin{frame}{23. Deep Learning Evolution Timeline}
+\begin{columns}[c]
+\column{0.48\textwidth}
+\textbf{Key Milestones:}
+
+\textbf{2012 - AlexNet:}
+\begin{itemize}
+\item CNNs + ImageNet breakthrough
+\item 8-layer network, ReLU activation
+\item GPU acceleration
+\end{itemize}
+
+\textbf{2014 - Sequence-to-Sequence:}
+\begin{itemize}
+\item RNNs for machine translation
+\item Encoder-decoder architecture
+\end{itemize}
+
+\textbf{2015 - ResNet:}
+\begin{itemize}
+\item 152 layers with skip connections
+\item First to surpass human performance on ImageNet
+\item Solved vanishing gradient problem
+\end{itemize}
+
+\textbf{2017 - Transformers:}
+\begin{itemize}
+\item ``Attention Is All You Need''
+\item Self-attention mechanism
+\item Foundation for GPT, BERT
+\end{itemize}
+
+\textbf{2020 - GPT-3:}
+\begin{itemize}
+\item 175 billion parameters
+\item Few-shot learning capability
+\end{itemize}
+
+\textbf{2023 - GPT-4:}
+\begin{itemize}
+\item $>$1 trillion parameters (rumored)
+\item Multimodal capabilities
+\item Human-level performance on many tasks
+\end{itemize}
+
+\column{0.48\textwidth}
+\begin{center}
+\includegraphics[width=\textwidth]{charts/deep_learning_timeline.pdf}
+\end{center}
+\end{columns}
+
+\vspace{\fill}
+\small\textcolor{gray}{From 8 layers to 1000+ layers in just one decade}
+\end{frame}
+
+\begin{frame}{24. Architecture Design Principles}
+\begin{columns}[c]
+\column{0.48\textwidth}
+\textbf{Universal Design Principles:}
+
+\textbf{1. Locality:}
+\begin{itemize}
+\item Nearby elements are related
+\item CNNs: Spatial locality
+\item RNNs: Temporal locality
+\end{itemize}
+
+\textbf{2. Hierarchy:}
+\begin{itemize}
+\item Build complexity gradually
+\item Low-level -> High-level features
+\item Mirrors human cognition
+\end{itemize}
+
+\textbf{3. Invariance:}
+\begin{itemize}
+\item Robust to irrelevant changes
+\item Translation, rotation, scale
+\item Attention: Permutation invariance
+\end{itemize}
+
+\textbf{4. Efficiency:}
+\begin{itemize}
+\item Parameter sharing
+\item Computational optimization
+\item Memory constraints
+\end{itemize}
+
+\column{0.48\textwidth}
+\begin{center}
+\includegraphics[width=\textwidth]{charts/design_principles.pdf}
+\end{center}
+\end{columns}
+
+\vspace{\fill}
+\small\textcolor{gray}{Good architectures encode the right inductive biases for the domain}
+\end{frame}
+
+\begin{frame}{24.5 When to Use Each Architecture}
+\begin{columns}[c]
+\column{0.48\textwidth}
+\textbf{Decision Criteria:}
+
+\textbf{Use CNNs when:}
+\begin{itemize}
+\item Data has spatial structure (images, video)
+\item Translation invariance needed
+\item Local patterns matter
+\item Examples: Vision, medical imaging
+\end{itemize}
+
+\textbf{Use RNNs when:}
+\begin{itemize}
+\item Sequential dependencies
+\item Variable-length sequences
+\item Real-time processing needed
+\item Examples: Speech, time series
+\end{itemize}
+
+\column{0.48\textwidth}
+\textbf{Use Transformers when:}
+\begin{itemize}
+\item Long-range dependencies critical
+\item Parallel processing available
+\item Sufficient compute budget
+\item Examples: NLP, multimodal AI
+\end{itemize}
+
+\textbf{Use Generic MLPs when:}
+\begin{itemize}
+\item Tabular data (no structure)
+\item Small datasets ($<$10k examples)
+\item Interpretability required
+\item Examples: Finance, healthcare
+\end{itemize}
+
+\textbf{Key Rule:}
+\begin{itemize}
+\item Match architecture to data structure
+\item Start simple, add complexity if needed
+\item More parameters $\neq$ better performance
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\small\textcolor{gray}{Architecture choice depends on data structure, computational budget, and domain requirements}
+\end{frame}
+
+\begin{frame}{25. Modern Applications: Computer Vision, NLP, Multimodal}
+\begin{columns}[c]
+\column{0.48\textwidth}
+\textbf{Computer Vision:}
+\begin{itemize}
+\item Object detection (YOLO, R-CNN)
+\item Image segmentation
+\item Medical imaging diagnosis
+\item Autonomous driving
+\end{itemize}
+
+\textbf{Natural Language Processing:}
+\begin{itemize}
+\item Machine translation approaching human quality
+\item Text generation (GPT family)
+\item Question answering
+\item Code generation (GitHub Copilot)
+\end{itemize}
+
+\textbf{Multimodal AI:}
+\begin{itemize}
+\item Image captioning
+\item Visual question answering
+\item Video understanding
+\item Robotics integration
+\end{itemize}
+
+\column{0.48\textwidth}
+\begin{center}
+\includegraphics[width=\textwidth]{charts/modern_applications.pdf}
+\end{center}
+\end{columns}
+
+\vspace{\fill}
+\small\textcolor{gray}{Neural networks now match or exceed human performance in many domains}
+\end{frame}
+
+\begin{frame}{25.5 Common Pitfalls in Neural Network Design}
+\begin{columns}[c]
+\column{0.48\textwidth}
+\textbf{Pitfall 1: Wrong Architecture}
+\begin{itemize}
+\item Using MLP for images (ignores structure)
+\item Solution: Match architecture to data
+\end{itemize}
+
+\textbf{Pitfall 2: Too Deep Too Soon}
+\begin{itemize}
+\item 100 layers without skip connections
+\item Solution: Start shallow, add depth incrementally
+\end{itemize}
+
+\textbf{Pitfall 3: Poor Initialization}
+\begin{itemize}
+\item All weights = 0 (symmetry breaking fails)
+\item Solution: Xavier/He initialization
+\end{itemize}
+
+\column{0.48\textwidth}
+\textbf{Pitfall 4: Ignoring Overfitting}
+\begin{itemize}
+\item Training accuracy 99\%, test 60\%
+\item Solution: Dropout, regularization, augmentation
+\end{itemize}
+
+\textbf{Pitfall 5: Wrong Learning Rate}
+\begin{itemize}
+\item Too high: Divergence, too low: No learning
+\item Solution: LR schedules, adaptive optimizers
+\end{itemize}
+
+\textbf{Pitfall 6: Insufficient Data}
+\begin{itemize}
+\item Deep networks need 1000s of examples
+\item Solution: Transfer learning, data augmentation
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\small\textcolor{gray}{Most neural network failures stem from architecture mismatch, poor initialization, or insufficient data}
+\end{frame}
+
+\begin{frame}{26. Summary \& Preview: Generative AI}
+\begin{columns}[c]
+\column{0.48\textwidth}
+\textbf{What We Learned:}
+\begin{itemize}
+\item Perceptrons: Linear limitations
+\item MLPs: Non-linear but shallow
+\item Deep networks: Vanishing gradients
+\item Modern architectures: Structured solutions
+\end{itemize}
+
+\textbf{Key Insights:}
+\begin{itemize}
+\item \textcolor{mlblue}{Architecture matters more than size}
+\item Three breakthroughs: ReLU activation, specialized architectures, skip connections
+\item Depth provides exponential expressivity advantage
+\end{itemize}
+
+\textbf{Next: Generative AI}
+\begin{itemize}
+\item From classification (is this a cat?) to generation (draw me a cat)
+\item VAEs, GANs, Diffusion models
+\item Large language models
+\item Applications in innovation
+\end{itemize}
+
+\column{0.48\textwidth}
+\begin{center}
+\includegraphics[width=\textwidth]{charts/summary_preview.pdf}
+\end{center}
+\end{columns}
+
+\vspace{\fill}
+\small\textcolor{gray}{Neural networks: From solving XOR to generating Shakespeare}
+\end{frame}

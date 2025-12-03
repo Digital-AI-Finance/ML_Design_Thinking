@@ -1,0 +1,195 @@
+% Part 2: Linear + Regularization (6 slides)
+
+\begin{frame}{6. OLS with Worked Example}
+\begin{columns}
+\begin{column}{0.48\textwidth}
+\textbf{Ordinary Least Squares}
+\begin{itemize}
+\item Minimize: $\sum_{i=1}^n (y_i - \hat{y}_i)^2$
+\item Solution: $\beta = (X^T X)^{-1} X^T y$
+\item Assumptions: $X^T X$ is invertible
+\item Unbiased estimator under Gauss-Markov
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Worked Example}
+\small
+Data: $(1,2,3)$ predicts $(2,4,6)$
+\begin{align}
+X &= \begin{pmatrix} 1 & 1 \\ 1 & 2 \\ 1 & 3 \end{pmatrix}, y = \begin{pmatrix} 2 \\ 4 \\ 6 \end{pmatrix} \\
+\beta &= \begin{pmatrix} 0 \\ 2 \end{pmatrix}
+\end{align}
+\end{column}
+\begin{column}{0.48\textwidth}
+\includegraphics[width=\textwidth]{charts/ols_example.pdf}
+\end{column}
+\end{columns}
+
+\vspace{\fill}
+\small\textcolor{gray}{OLS provides minimum variance unbiased estimators under Gauss-Markov assumptions - closed-form solution enables fast computation for linear models}
+\end{frame}
+
+\begin{frame}{7. Ridge and LASSO Regularization}
+\begin{columns}
+\begin{column}{0.48\textwidth}
+\textbf{Ridge Regression (L2)}
+\begin{itemize}
+\item Minimize: $||y - X\beta||^2 + \lambda ||\beta||^2$
+\item Shrinks coefficients toward zero
+\item Keeps all features
+\item Solution: $\beta = (X^T X + \lambda I)^{-1} X^T y$
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{LASSO Regression (L1)}
+\begin{itemize}
+\item Minimize: $||y - X\beta||^2 + \lambda ||\beta||_1$
+\item Sets some coefficients to exactly zero
+\item Automatic feature selection
+\item No closed-form solution
+\end{itemize}
+
+\textbf{Elastic Net}
+\begin{itemize}
+\item Combines L1 + L2: $\alpha||\beta||_1 + (1-\alpha)||\beta||^2$
+\item Balances selection and shrinkage
+\end{itemize}
+\end{column}
+\begin{column}{0.48\textwidth}
+\includegraphics[width=\textwidth]{charts/ridge_lasso_comparison.pdf}
+\end{column}
+\end{columns}
+
+\vspace{\fill}
+\small\textcolor{gray}{Regularization adds penalty terms to loss function - L2 shrinks coefficients, L1 enforces sparsity, Elastic Net combines both strategies}
+\end{frame}
+
+\begin{frame}{8. {\color{mlgreen} SUCCESS: Perfect on Linearly Separable Data}}
+\begin{columns}
+\begin{column}{0.48\textwidth}
+\textbf{Linear Model Triumphs}
+\begin{itemize}
+\item {\color{mlgreen} Iris setosa classification: 100\% accuracy}
+\item {\color{mlgreen} House price in suburbs: R² = 0.94}
+\item {\color{mlgreen} Linear trend prediction: MSE = 0.01}
+\item {\color{mlgreen} Feature importance: Interpretable}
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Why It Works}
+\begin{itemize}
+\item Underlying relationship is linear
+\item Features are independent
+\item Low noise in measurements
+\item Sufficient training data
+\end{itemize}
+\end{column}
+\begin{column}{0.48\textwidth}
+\includegraphics[width=\textwidth]{charts/linear_success_cases.pdf}
+
+\vspace{0.2cm}
+\small
+{\color{mlgreen} When assumptions hold, linear models are optimal and interpretable}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{9. {\color{mlred} FAILURE: Terrible on XOR, Nonlinear Boundaries}}
+\begin{columns}
+\begin{column}{0.48\textwidth}
+\textbf{{\color{mlred} Linear Model Failures}}
+
+\small
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Dataset} & \textbf{Linear Acc} & \textbf{Tree Acc} & \textbf{Gap} \\
+\hline
+XOR & 50\% & 100\% & 50\% \\
+Circles & 52\% & 98\% & 46\% \\
+Moons & 58\% & 94\% & 36\% \\
+Spirals & 48\% & 89\% & 41\% \\
+\hline
+\end{tabular}
+
+\vspace{0.3cm}
+\textbf{XOR Truth Table}
+\begin{tabular}{|c|c|c|}
+\hline
+$x_1$ & $x_2$ & $y$ \\
+\hline
+0 & 0 & 0 \\
+0 & 1 & 1 \\
+1 & 0 & 1 \\
+1 & 1 & 0 \\
+\hline
+\end{tabular}
+\end{column}
+\begin{column}{0.48\textwidth}
+\includegraphics[width=\textwidth]{charts/linear_failure_cases.pdf}
+
+\vspace{0.2cm}
+\small
+{\color{mlred} Linear boundaries cannot separate XOR or curved patterns}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{10. Root Cause: Linear Assumption Too Restrictive}
+\begin{columns}
+\begin{column}{0.48\textwidth}
+\textbf{Mathematical Limitation}
+\begin{itemize}
+\item Linear model: $y = w^T x + b$
+\item Decision boundary: hyperplane
+\item Cannot curve or bend
+\item Cannot create islands or holes
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Real-World Examples}
+\begin{itemize}
+\item Customer behavior (nonlinear)
+\item Stock market patterns (chaotic)
+\item Medical diagnosis (complex interactions)
+\item Image recognition (hierarchical)
+\end{itemize}
+\end{column}
+\begin{column}{0.48\textwidth}
+\includegraphics[width=\textwidth]{charts/linear_vs_nonlinear_boundaries.pdf}
+
+\vspace{0.2cm}
+\small
+Most real-world phenomena require nonlinear decision boundaries
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{11. Regularization Tradeoff}
+\begin{columns}
+\begin{column}{0.48\textwidth}
+\textbf{Bias-Variance Tradeoff}
+\begin{itemize}
+\item $\lambda = 0$: High variance, low bias
+\item $\lambda \to \infty$: Low variance, high bias
+\item Optimal $\lambda$: Minimizes test error
+\item Cross-validation finds optimum
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Practical Guidelines}
+\begin{itemize}
+\item Start with Ridge for stability
+\item Use LASSO for feature selection
+\item Elastic Net combines both
+\item Grid search for $\lambda$
+\end{itemize}
+\end{column}
+\begin{column}{0.48\textwidth}
+\includegraphics[width=\textwidth]{charts/regularization_tradeoff.pdf}
+
+\vspace{0.2cm}
+\small
+Regularization strength controls the complexity-accuracy tradeoff
+\end{column}
+\end{columns}
+\end{frame}

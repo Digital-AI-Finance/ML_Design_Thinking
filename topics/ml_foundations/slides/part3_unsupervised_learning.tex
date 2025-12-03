@@ -1,0 +1,450 @@
+% Part 3: Unsupervised Learning Methods
+\section{Unsupervised Learning Methods}
+
+% Section divider
+\begin{frame}[plain]
+\vfill
+\centering
+\begin{beamercolorbox}[sep=16pt,center]{title}
+\usebeamerfont{title}\Large Part 3: Unsupervised Learning Methods\par
+\vspace{0.5em}
+\large Discovering Hidden Structure in Data\par
+\end{beamercolorbox}
+\vfill
+\end{frame}
+
+% K-means Clustering
+\begin{frame}{K-means: You Want to Group Similar Data Points}
+\twocolslide{
+\Large\textbf{The Idea}
+\normalsize
+\vspace{0.5em}
+
+You have customer data and want to find 3 natural groups:
+
+\textbf{Step-by-step:}
+\begin{enumerate}
+\item \textbf{Start:} Place 3 center points randomly
+\item \textbf{Assign:} Each customer joins nearest center
+\item \textbf{Update:} Move centers to average of their group
+\item \textbf{Repeat:} Until centers stop moving
+\end{enumerate}
+
+\vspace{0.3em}
+\textbf{Worked Example (2D):}
+\begin{itemize}
+\item Point $x_1 = [2, 3]$, Centers: $\mu_1 = [1, 2]$, $\mu_2 = [5, 5]$
+\item Distance to $\mu_1$: $\sqrt{(2-1)^2 + (3-2)^2} = 1.4$
+\item Distance to $\mu_2$: $\sqrt{(2-5)^2 + (3-5)^2} = 3.6$
+\item Assign $x_1$ to cluster 1 (closer!)
+\end{itemize}
+
+\keypoint{The algorithm minimizes total distance from points to their cluster centers}
+}{
+\centering
+\includegraphics[width=0.85\textwidth]{charts/kmeans_clustering.pdf}
+
+\vspace{0.5em}
+\textbf{The optimization:}
+\formula{J = \sum_{i=1}^n \sum_{k=1}^K w_{ik} ||x_i - \mu_k||^2}
+
+\textbf{How many clusters (K)?}
+\begin{itemize}
+\item \highlight{Elbow Method:} Look for ``bend'' in error curve
+\item \highlight{Silhouette:} Measure how well-separated
+\item \highlight{Domain knowledge:} Often you know K
+\end{itemize}
+}
+
+\bottomnote{Iterative centroid refinement minimizes within-cluster variance - algorithm converges to local optimum dependent on initialization}
+\end{frame}
+
+% Hierarchical Clustering
+\begin{frame}{Hierarchical Clustering: Building Cluster Trees}
+\twocolslide{
+\Large\textbf{Agglomerative Approach}
+\normalsize
+\vspace{0.5em}
+
+\textbf{Algorithm:}
+\begin{enumerate}
+\item Start with each point as its own cluster
+\item Merge closest pair of clusters
+\item Repeat until single cluster remains
+\item Cut dendrogram at desired level
+\end{enumerate}
+
+\textbf{Linkage Criteria:}
+\begin{itemize}
+\item \textbf{Single:} $\min(d(a,b))$ where $a \in A, b \in B$
+\item \textbf{Complete:} $\max(d(a,b))$ where $a \in A, b \in B$
+\item \textbf{Average:} $\frac{1}{|A||B|}\sum_{a \in A}\sum_{b \in B} d(a,b)$
+\item \textbf{Ward:} Minimize within-cluster variance
+\end{itemize}
+
+\textbf{Time Complexity:} $O(n^3)$ for naive implementation
+}{
+\centering
+\includegraphics[width=0.85\textwidth]{charts/hierarchical_clustering.pdf}
+
+\vspace{0.5em}
+\textbf{Advantages:}
+\begin{itemize}
+\item No need to specify number of clusters
+\item Produces hierarchy of clusters
+\item Deterministic results
+\item Works with any distance metric
+\end{itemize}
+
+\textbf{Disadvantages:}
+\begin{itemize}
+\item Computationally expensive
+\item Sensitive to outliers
+\item Difficult to handle large datasets
+\end{itemize}
+}
+
+\bottomnote{Hierarchical methods build complete cluster dendrograms - agglomerative merging reveals nested structure across all granularity levels}
+\end{frame}
+
+% DBSCAN
+\begin{frame}{DBSCAN: Density-Based Clustering}
+\twocolslide{
+\Large\textbf{Density-Based Approach}
+\normalsize
+\vspace{0.5em}
+
+\textbf{Key Concepts:}
+\begin{itemize}
+\item \textbf{Core Point:} $\geq$ minPts neighbors within $\epsilon$
+\item \textbf{Border Point:} In neighborhood of core point
+\item \textbf{Noise Point:} Neither core nor border
+\end{itemize}
+
+\textbf{Algorithm:}
+\begin{enumerate}
+\item For each unvisited point
+\item If core point, start new cluster
+\item Add all density-reachable points
+\item Mark non-core points as noise
+\end{enumerate}
+
+\textbf{Parameters:}
+\begin{itemize}
+\item $\epsilon$: Neighborhood radius
+\item minPts: Minimum points for core
+\end{itemize}
+
+\formula{\text{Density} = \frac{\text{Points in }\epsilon\text{-neighborhood}}{|\epsilon\text{-neighborhood}|}}
+}{
+\centering
+\includegraphics[width=0.85\textwidth]{charts/dbscan_clustering.pdf}
+
+\vspace{0.5em}
+\textbf{Advantages:}
+\begin{itemize}
+\item Finds arbitrary-shaped clusters
+\item Automatically determines cluster count
+\item Robust to outliers
+\item Identifies noise points
+\end{itemize}
+
+\textbf{Applications:}
+\begin{itemize}
+\item Anomaly detection
+\item Image segmentation
+\item Fraud detection
+\item Social network analysis
+\end{itemize}
+}
+
+\bottomnote{Density-based clustering identifies arbitrary-shaped groups - core point connectivity enables nonconvex cluster discovery with automatic noise detection}
+\end{frame}
+
+% Principal Component Analysis
+\begin{frame}{Principal Component Analysis: Dimensionality Reduction}
+\twocolslide{
+\Large\textbf{Mathematical Framework}
+\normalsize
+\vspace{0.5em}
+
+\textbf{Objective:} Find directions of maximum variance
+
+\textbf{Covariance Matrix:}
+\formula{C = \frac{1}{n-1}X^TX}
+
+\textbf{Eigendecomposition:}
+\formula{C = V\Lambda V^T}
+
+where $V$ contains eigenvectors (principal components) and $\Lambda$ contains eigenvalues.
+
+\textbf{Dimensionality Reduction:}
+\formula{Z = XW}
+
+where $W$ contains the first $k$ principal components.
+
+\textbf{Variance Explained:}
+\formula{\text{Explained Variance} = \frac{\sum_{i=1}^k \lambda_i}{\sum_{i=1}^p \lambda_i}}
+}{
+\centering
+\includegraphics[width=0.85\textwidth]{charts/pca_analysis.pdf}
+
+\vspace{0.5em}
+\textbf{Steps:}
+\begin{enumerate}
+\item Standardize the data
+\item Compute covariance matrix
+\item Find eigenvalues and eigenvectors
+\item Sort by eigenvalue magnitude
+\item Select top k components
+\item Transform data
+\end{enumerate}
+
+\textbf{Applications:}
+\begin{itemize}
+\item Data visualization
+\item Noise reduction
+\item Feature extraction
+\item Compression
+\end{itemize}
+}
+
+\bottomnote{Principal component analysis projects data onto maximum variance directions - eigendecomposition provides optimal linear dimensionality reduction}
+\end{frame}
+
+% Autoencoders
+\begin{frame}{Autoencoders: Neural Network Dimensionality Reduction}
+\twocolslide{
+\Large\textbf{Architecture}
+\normalsize
+\vspace{0.5em}
+
+\textbf{Encoder:}
+\formula{z = f(Wx + b)}
+
+\textbf{Decoder:}
+\formula{\hat{x} = g(W'z + b')}
+
+\textbf{Objective:}
+\formula{\min_{W,W'} ||x - \hat{x}||^2}
+
+\textbf{Types of Autoencoders:}
+\begin{itemize}
+\item \textbf{Vanilla:} Basic encoder-decoder
+\item \textbf{Denoising:} Add noise to input
+\item \textbf{Sparse:} Encourage sparse representations
+\item \textbf{Variational:} Probabilistic latent space
+\end{itemize}
+
+\textbf{Bottleneck Layer:} Forces compression and learning of important features
+}{
+\centering
+\includegraphics[width=0.85\textwidth]{charts/autoencoder_architecture.pdf}
+
+\vspace{0.5em}
+\textbf{Advantages over PCA:}
+\begin{itemize}
+\item Nonlinear transformations
+\item Better reconstruction for complex data
+\item Can learn hierarchical features
+\item Flexible architecture
+\end{itemize}
+
+\textbf{Applications:}
+\begin{itemize}
+\item Image denoising
+\item Anomaly detection
+\item Data compression
+\item Feature learning
+\end{itemize}
+}
+
+\bottomnote{Neural autoencoders learn nonlinear compressions - encoder-decoder architecture discovers hierarchical representations beyond linear PCA}
+\end{frame}
+
+% t-SNE and UMAP
+\begin{frame}{t-SNE and UMAP: Nonlinear Visualization}
+\twocolslide{
+\Large\textbf{t-SNE}
+\normalsize
+\vspace{0.5em}
+
+\textbf{t-Distributed Stochastic Neighbor Embedding}
+
+\textbf{High-dimensional similarities:}
+\formula{p_{j|i} = \frac{\exp(-||x_i - x_j||^2 / 2\sigma_i^2)}{\sum_{k \neq i} \exp(-||x_i - x_k||^2 / 2\sigma_i^2)}}
+
+\textbf{Low-dimensional similarities:}
+\formula{q_{ij} = \frac{(1 + ||y_i - y_j||^2)^{-1}}{\sum_{k \neq l}(1 + ||y_k - y_l||^2)^{-1}}}
+
+\textbf{Objective:} Minimize KL divergence
+\formula{C = \sum_i KL(P_i||Q_i)}
+
+\textbf{Key Features:}
+\begin{itemize}
+\item Preserves local structure
+\item Heavy-tailed distribution in low-dim
+\item Stochastic optimization
+\end{itemize}
+}{
+\centering
+\includegraphics[width=0.85\textwidth]{charts/tsne_umap_comparison.pdf}
+
+\vspace{0.5em}
+\textbf{UMAP (Uniform Manifold Approximation)}
+\begin{itemize}
+\item Faster than t-SNE
+\item Preserves global structure better
+\item Consistent results across runs
+\item Can embed to higher dimensions
+\end{itemize}
+
+\textbf{When to Use:}
+\begin{itemize}
+\item \textbf{t-SNE:} Detailed local clustering
+\item \textbf{UMAP:} Balance of local and global
+\item \textbf{PCA:} Linear structure, fast
+\end{itemize}
+}
+
+\bottomnote{Nonlinear dimensionality reduction preserves local structure - t-SNE and UMAP optimize neighborhood preservation for visualization}
+\end{frame}
+
+% Clustering Evaluation
+\begin{frame}{Evaluating Unsupervised Learning}
+\twocolslide{
+\Large\textbf{Internal Metrics}
+\normalsize
+\vspace{0.5em}
+
+\textbf{Silhouette Score:}
+\formula{s(i) = \frac{b(i) - a(i)}{\max(a(i), b(i))}}
+
+where $a(i)$ = avg distance within cluster, $b(i)$ = avg distance to nearest cluster
+
+\textbf{Calinski-Harabasz Index:}
+\formula{CH = \frac{SS_B / (k-1)}{SS_W / (n-k)}}
+
+\textbf{Davies-Bouldin Index:}
+\formula{DB = \frac{1}{k}\sum_{i=1}^k \max_{j \neq i} \frac{\sigma_i + \sigma_j}{d(c_i, c_j)}}
+
+\textbf{Inertia (Within-cluster sum of squares):}
+\formula{WCSS = \sum_{i=1}^k \sum_{x \in C_i} ||x - \mu_i||^2}
+}{
+\Large\textbf{External Metrics}
+\normalsize
+\vspace{0.5em}
+
+\textbf{Adjusted Rand Index:}
+\formula{ARI = \frac{RI - E[RI]}{\max(RI) - E[RI]}}
+
+\textbf{Normalized Mutual Information:}
+\formula{NMI = \frac{MI(U,V)}{\sqrt{H(U)H(V)}}}
+
+\textbf{Homogeneity and Completeness:}
+\begin{itemize}
+\item Homogeneity: Each cluster contains only one class
+\item Completeness: All members of class in same cluster
+\end{itemize}
+
+\textbf{V-measure:} Harmonic mean of homogeneity and completeness
+
+\keypoint{Note:} External metrics require ground truth labels
+}
+
+\bottomnote{Unsupervised evaluation lacks ground truth - internal metrics assess cluster cohesion and separation without external validation}
+\end{frame}
+
+% Applications Summary
+\begin{frame}{Unsupervised Learning Applications}
+\begin{columns}[T]
+\begin{column}{0.32\textwidth}
+\centering
+\textcolor{chartblue}{\Large\textbf{Clustering}}
+\normalsize
+\vspace{0.3em}
+
+\textbf{Customer Segmentation:}
+\begin{itemize}
+\item Group customers by behavior
+\item Targeted marketing campaigns
+\item Product recommendations
+\end{itemize}
+
+\textbf{Market Basket Analysis:}
+\begin{itemize}
+\item Find product associations
+\item Store layout optimization
+\item Cross-selling opportunities
+\end{itemize}
+
+\textbf{Image Segmentation:}
+\begin{itemize}
+\item Medical image analysis
+\item Computer vision
+\item Object recognition
+\end{itemize}
+\end{column}
+
+\begin{column}{0.32\textwidth}
+\centering
+\textcolor{chartteal}{\Large\textbf{Dimensionality Reduction}}
+\normalsize
+\vspace{0.3em}
+
+\textbf{Data Visualization:}
+\begin{itemize}
+\item Explore high-dimensional data
+\item Identify patterns and outliers
+\item Present insights to stakeholders
+\end{itemize}
+
+\textbf{Feature Engineering:}
+\begin{itemize}
+\item Reduce computational cost
+\item Remove noise and redundancy
+\item Improve model performance
+\end{itemize}
+
+\textbf{Compression:}
+\begin{itemize}
+\item Image and audio compression
+\item Efficient data storage
+\item Fast data transmission
+\end{itemize}
+\end{column}
+
+\begin{column}{0.32\textwidth}
+\centering
+\textcolor{chartorange}{\Large\textbf{Anomaly Detection}}
+\normalsize
+\vspace{0.3em}
+
+\textbf{Fraud Detection:}
+\begin{itemize}
+\item Credit card transactions
+\item Insurance claims
+\item Online account activity
+\end{itemize}
+
+\textbf{Network Security:}
+\begin{itemize}
+\item Intrusion detection
+\item Malware identification
+\item Unusual traffic patterns
+\end{itemize}
+
+\textbf{Quality Control:}
+\begin{itemize}
+\item Manufacturing defects
+\item System monitoring
+\item Predictive maintenance
+\end{itemize}
+\end{column}
+\end{columns}
+
+\vspace{1em}
+\textcolor{darkgray}{\small Unsupervised learning reveals hidden patterns and structures in data without labeled examples}
+
+\bottomnote{Unsupervised methods discover latent structure - clustering, dimensionality reduction, and anomaly detection operate without supervisory signal}
+\end{frame}

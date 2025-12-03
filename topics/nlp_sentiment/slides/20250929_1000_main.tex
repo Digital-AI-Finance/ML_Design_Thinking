@@ -1,0 +1,172 @@
+\documentclass[8pt,aspectratio=169]{beamer}
+\usetheme{Madrid}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{adjustbox}
+\usepackage{multicol}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{tcolorbox}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows, positioning}
+\usepackage{listings}
+
+% Color definitions - Template Beamer style
+\definecolor{mlblue}{RGB}{0,102,204}
+\definecolor{mlpurple}{RGB}{51,51,178}
+\definecolor{mllavender}{RGB}{173,173,224}
+\definecolor{mllavender2}{RGB}{193,193,232}
+\definecolor{mllavender3}{RGB}{204,204,235}
+\definecolor{mllavender4}{RGB}{214,214,239}
+\definecolor{mlorange}{RGB}{255, 127, 14}
+\definecolor{mlgreen}{RGB}{44, 160, 44}
+\definecolor{mlred}{RGB}{214, 39, 40}
+\definecolor{mlgray}{RGB}{127, 127, 127}
+\definecolor{mlyellow}{RGB}{255, 206, 84}
+\definecolor{mlcyan}{RGB}{23, 190, 207}
+
+% Additional colors for clarity
+\definecolor{lightgray}{RGB}{240, 240, 240}
+\definecolor{midgray}{RGB}{180, 180, 180}
+
+% Apply custom colors to Madrid theme
+\setbeamercolor{palette primary}{bg=mllavender3,fg=mlpurple}
+\setbeamercolor{palette secondary}{bg=mllavender2,fg=mlpurple}
+\setbeamercolor{palette tertiary}{bg=mllavender,fg=white}
+\setbeamercolor{palette quaternary}{bg=mlpurple,fg=white}
+
+\setbeamercolor{structure}{fg=mlpurple}
+\setbeamercolor{section in toc}{fg=mlpurple}
+\setbeamercolor{subsection in toc}{fg=mlblue}
+\setbeamercolor{title}{fg=mlpurple}
+\setbeamercolor{frametitle}{fg=mlpurple,bg=mllavender3}
+\setbeamercolor{block title}{bg=mllavender2,fg=mlpurple}
+\setbeamercolor{block body}{bg=mllavender4,fg=black}
+
+% Remove navigation symbols
+\setbeamertemplate{navigation symbols}{}
+
+% Clean itemize/enumerate
+\setbeamertemplate{itemize items}[circle]
+\setbeamertemplate{enumerate items}[default]
+
+% Reduce margins for more content space
+\setbeamersize{text margin left=5mm,text margin right=5mm}
+
+% Custom footer
+\setbeamertemplate{footline}{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.25\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
+    \usebeamerfont{author in head/foot}Week 3
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+    \usebeamerfont{title in head/foot}NLP for Emotional Context
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.25\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    \usebeamerfont{date in head/foot}\insertframenumber{} / \inserttotalframenumber\hspace*{2ex}
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+
+% Command for bottom annotation (Madrid-style)
+\newcommand{\bottomnote}[1]{%
+\vfill
+\vspace{-2mm}
+\textcolor{mllavender2}{\rule{\textwidth}{0.4pt}}
+\vspace{1mm}
+\footnotesize
+\textbf{#1}
+}
+
+% Code listing settings for syntax highlighting
+\lstset{
+    language=Python,
+    basicstyle=\small\ttfamily,
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    stepnumber=1,
+    numbersep=5pt,
+    backgroundcolor=\color{white},
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    frame=single,
+    rulecolor=\color{gray},
+    tabsize=2,
+    captionpos=b,
+    breaklines=true,
+    breakatwhitespace=false,
+    keywordstyle=\color{mlblue},
+    commentstyle=\color{mlgreen},
+    stringstyle=\color{mlorange}
+}
+
+% Title information
+\title{\Large Machine Learning for Smarter Innovation}
+\subtitle{Week 3: NLP for Emotional Context\\
+Understanding What Users Really Feel Through Language}
+\author{ML \& Design Thinking Course}
+\date{BSc Level - 2025}
+
+\begin{document}
+
+% Title slide with plain style
+\begin{frame}[plain]
+\vspace{2cm}
+\begin{center}
+{\Huge \textcolor{mlpurple}{\textbf{NLP for Emotional Context}}}\\[0.5cm]
+{\Large From Words to Understanding What Users Really Feel}\\[1.5cm]
+{\large Week 3: Machine Learning for Smarter Innovation}\\[0.5cm]
+{\normalsize Transform 50,000 Reviews into Actionable Design Insights}
+\end{center}
+\end{frame}
+
+% Table of contents with overview
+\begin{frame}[t]{Today's Journey: From Confusion to Clarity}
+\Large\textbf{Four Stages of Understanding}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{enumerate}
+\item \textbf{The Challenge} - Why understanding emotion in text is impossibly hard
+\item \textbf{First Solution \& Its Limits} - Traditional NLP works... until it doesn't
+\item \textbf{The Breakthrough} - How Transformers changed everything
+\item \textbf{Design Synthesis} - From ML insights to user empathy
+\end{enumerate}
+
+\vspace{1em}
+
+\begin{center}
+\begin{tcolorbox}[colback=mllavender4, colframe=mlpurple, width=0.8\textwidth]
+\centering
+\textbf{Core Question:} How can we understand the emotions of 50,000 users without reading 5 million words?
+\end{tcolorbox}
+\end{center}
+
+\bottomnote{Large-scale emotional analysis enables mass personalization - automated sentiment understanding processes millions of user expressions beyond manual capacity}
+\end{frame}
+
+% Include modular parts with new structure
+\input{part1_challenge}      % Act 1: The Challenge
+\input{part2_solution}        % Act 2: First Solution & Failure
+\input{part3_breakthrough}    % Act 3: The Transformer Breakthrough
+\input{part4_synthesis}       % Act 4: Design Synthesis
+\input{part5_exercises}       % Hands-on Exercises
+
+% Closing slide
+\begin{frame}[plain]
+\vspace{2cm}
+\begin{center}
+{\Huge \textcolor{mlpurple}{\textbf{Key Takeaway}}}\\[1cm]
+{\Large Understanding emotion at scale is not about}\\
+{\Large reading faster—it's about attending smarter}\\[1.5cm]
+\normalsize
+\textbf{Next Week:} Classification \& Problem Definition\\
+From emotions to actionable categories
+\end{center}
+\end{frame}
+
+\end{document}

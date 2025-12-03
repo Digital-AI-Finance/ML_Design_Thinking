@@ -1,0 +1,264 @@
+% ==================== PART 1: THE PROBLEM ====================
+\section{Part 1: The Definition Dilemma}
+
+% Slide 1: The Opening Hook
+\begin{frame}[t]{Your Challenge: 10,000 Ideas, 10 Slots}
+\Large\textbf{The \$100 Million Decision}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{The Scenario:}
+\begin{itemize}
+\item You run an innovation fund
+\item 10,000 proposals submitted
+\item Budget for exactly 10 projects
+\item Each costs \$1M to develop
+\item Winners return \$10-15M
+\item Losers return \$0
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{The Stakes:}
+\begin{itemize}
+\item Choose right: \$100M+ return
+\item Choose wrong: \$10M loss
+\item Your job depends on this
+\end{itemize}
+
+\column{0.48\textwidth}
+\begin{center}
+\includegraphics[width=0.9\textwidth]{charts/innovation_success_dashboard.pdf}
+\end{center}
+
+\begin{tcolorbox}[colback=mlred!10, colframe=mlred]
+\centering
+\textbf{Problem:} Reading 10,000 proposals takes 2,500 hours (15 months)
+\end{tcolorbox}
+\end{columns}
+
+\bottomnote{High-stakes decisions under time pressure amplify human biases - volume constraints force systematic evaluation frameworks}
+\end{frame}
+
+% Slide 2: Human Judgment Failures
+\begin{frame}[t]{Why Human Judgment Fails at Scale}
+\Large\textbf{The Four Horsemen of Decision Failure}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{1. Cognitive Overload}
+\begin{itemize}
+\item After 20 decisions: 95\% accuracy
+\item After 100 decisions: 75\% accuracy
+\item After 500 decisions: 55\% accuracy
+\item After 1000 decisions: Random guessing
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{2. Inconsistency}
+\begin{itemize}
+\item Same proposal, different days
+\item Morning: ``Brilliant!'' (Accept)
+\item Afternoon: ``Too risky'' (Reject)
+\item 30\% decision flip rate
+\end{itemize}
+
+\column{0.48\textwidth}
+\textbf{3. Bias Creep}
+\begin{itemize}
+\item Prefer familiar industries (42\%)
+\item Favor confident presenters (38\%)
+\item Overweight recent successes (31\%)
+\item Undervalue quiet innovation (45\%)
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{4. Pattern Blindness}
+\begin{itemize}
+\item Can't see patterns across 10,000 items
+\item Miss subtle success indicators
+\item Overlook correlation combinations
+\item Focus on obvious, miss important
+\end{itemize}
+\end{columns}
+
+\vspace{0.5em}
+\begin{center}
+\textcolor{mlpurple}{\textbf{Result: Human experts achieve 62\% accuracy on innovation prediction}}
+\end{center}
+
+\bottomnote{Expert judgment remains probabilistic - domain knowledge improves accuracy but cannot eliminate uncertainty}
+\end{frame}
+
+% Slide 3: The Cost of Wrong Decisions
+\begin{frame}[t]{The Real Cost of Decision Errors}
+\Large\textbf{When Judgment Fails, Everyone Loses}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\column{0.55\textwidth}
+\begin{center}
+\includegraphics[width=0.95\textwidth]{charts/decision_cost_matrix.pdf}
+\end{center}
+
+\column{0.43\textwidth}
+\textbf{Type I Error: False Rejection}
+\begin{itemize}
+\item Rejected Airbnb (now \$75B)
+\item Passed on WhatsApp (\$19B exit)
+\item Declined Uber seed round
+\item Cost: Infinite (missed unicorns)
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Type II Error: False Acceptance}
+\begin{itemize}
+\item Theranos: \$945M lost
+\item Quibi: \$1.75B lost
+\item Juicero: \$120M lost
+\item Cost: Entire investment
+\end{itemize}
+\end{columns}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mllavender4, colframe=mlpurple]
+\centering
+\textbf{The Pattern:} Humans are good at avoiding obvious failures but terrible at spotting hidden gems
+\end{tcolorbox}
+
+\bottomnote{False negatives incur opportunity costs - missing exceptional cases often proves more costly than accepting marginal failures}
+\end{frame}
+
+% Slide 4: The Scale Problem
+\begin{frame}[t]{The Exponential Scale Challenge}
+\Large\textbf{Why ``Just Hire More Experts'' Doesn't Work}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{Linear Scaling Myth:}
+\begin{itemize}
+\item 1 expert: 100 decisions/day
+\item 10 experts: 1,000 decisions/day?
+\item Reality: 600 decisions/day
+\item Why? Coordination overhead
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Quality Degradation:}
+\begin{center}
+\begin{tikzpicture}[scale=0.7]
+\begin{axis}[
+    xlabel={Number of Reviewers},
+    ylabel={Decision Quality (\%)},
+    grid=major,
+    width=6cm,
+    height=4cm,
+    xmin=0, xmax=20,
+    ymin=50, ymax=100
+]
+\addplot[mlred,ultra thick,mark=*] coordinates {
+    (1,95) (2,93) (5,85) (10,72) (20,58)
+};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\column{0.48\textwidth}
+\textbf{The Consistency Problem:}
+\begin{itemize}
+\item 2 reviewers: 85\% agreement
+\item 5 reviewers: 61\% agreement
+\item 10 reviewers: 42\% agreement
+\item 20 reviewers: 28\% agreement
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Cost Explosion:}
+\begin{itemize}
+\item 1 expert: \$150K/year
+\item Team of 10: \$2M/year (with overhead)
+\item Still only handle 1\% of volume
+\item 3-week decision lag
+\end{itemize}
+\end{columns}
+
+\vspace{0.5em}
+\begin{center}
+\textcolor{mlpurple}{\textbf{We need a fundamentally different approach: Machine Classification}}
+\end{center}
+
+\bottomnote{Classification enables scale - systematic categorization transforms overwhelming volume into manageable decision inputs}
+\end{frame}
+
+% Slide 5: The Promise of Classification
+\begin{frame}[t]{Enter Machine Learning Classification}
+\Large\textbf{From Human Limits to Algorithmic Scale}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{What Classification Offers:}
+
+\vspace{0.3em}
+\textbf{1. Infinite Scale}
+\begin{itemize}
+\item Process 10,000 in minutes
+\item Or 10 million in hours
+\item No fatigue, no degradation
+\end{itemize}
+
+\vspace{0.3em}
+\textbf{2. Perfect Consistency}
+\begin{itemize}
+\item Same input = Same output
+\item No mood swings
+\item No time-of-day effects
+\end{itemize}
+
+\vspace{0.3em}
+\textbf{3. Pattern Detection}
+\begin{itemize}
+\item Finds subtle correlations
+\item Combines 100+ factors
+\item Learns from history
+\end{itemize}
+
+\column{0.48\textwidth}
+\textbf{Real Performance:}
+\begin{center}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Metric} & \textbf{Human} & \textbf{ML} \\
+\midrule
+Accuracy & 62\% & \textcolor{mlgreen}{89\%} \\
+Speed & 15/hour & \textcolor{mlgreen}{10,000/min} \\
+Cost & \$50/decision & \textcolor{mlgreen}{\$0.001} \\
+Consistency & 70\% & \textcolor{mlgreen}{100\%} \\
+Scale limit & 1,000 & \textcolor{mlgreen}{Unlimited} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mlgreen!10, colframe=mlgreen]
+\centering
+\textbf{The Promise:}\\
+Turn subjective judgment into\\
+objective, scalable intelligence
+\end{tcolorbox}
+\end{columns}
+
+\bottomnote{Supervised learning formalizes decision patterns - explicit examples enable algorithmic generalization of human judgment}
+\end{frame}

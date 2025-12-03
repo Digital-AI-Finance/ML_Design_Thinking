@@ -1,0 +1,726 @@
+% Part 1: Foundation - The Science of Iteration
+\section{Foundation: The Iteration Advantage}
+
+% Slide 1: The Iteration Advantage
+\begin{frame}{The Iteration Advantage: Why Speed Wins}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{The Winners Iterate Fast}}
+
+\small
+\textbf{Spotify:}
+\begin{itemize}
+\item Tens of thousands of experiments annually
+\item Test every feature before launch
+\item 30\% faster iteration than competitors
+\item Result: 500M+ users
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Netflix:}
+\begin{itemize}
+\item AI recommendation system saves \$1B annually
+\item A/B testing validates all improvements
+\item 80\% engagement from personalization
+\item Tests 250+ variations simultaneously
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Amazon:}
+\begin{itemize}
+\item Tests every UI change
+\item 35\% revenue from recommendations (McKinsey)
+\item ``Our success is a function of experiments''
+\item Iterates daily, not quarterly
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{mlgreen}{\textbf{The Losers Deploy and Hope}}
+
+\small
+\textbf{Traditional Approach:}
+\begin{itemize}
+\item Build for 6 months
+\item Launch to 100\% users
+\item Hope it works
+\item No measurement
+\item No iteration
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlorange}{\textbf{The Iteration Gap}}
+
+\small
+\textbf{Industry Reality:}
+\begin{itemize}
+\item 87-90\% of ML projects never reach production
+\item Most that deploy: No iteration, no measurement
+\item Majority lack A/B testing infrastructure
+\item Average: 2-3 experiments per year vs 50+
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlpurple}{\textbf{Week 10 Mission}}
+
+\small
+Transform you from ``deploy and hope'' to ``test and learn'' practitioners who ship 50+ experiments annually.
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Experimental velocity correlates with innovation output - systematic testing infrastructure accelerates discovery rates}
+\end{frame}
+
+% Slide 2: Why Models Decay
+\begin{frame}{Why Deployed Models Decay Without Iteration}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{The Decay Curve}}
+
+\small
+\textbf{Typical Model Degradation:}
+\begin{itemize}
+\item Month 0: 90\% accuracy (deployment)
+\item Month 3: 87\% accuracy (3\% drop)
+\item Month 6: 82\% accuracy (9\% drop)
+\item Month 12: 75\% accuracy (17\% drop)
+\item Month 18: 68\% accuracy (24\% drop)
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlred}{\textbf{Performance drops 15-30\% per year without updates}}
+
+\vspace{0.3cm}
+\textbf{Why This Happens:}
+\begin{itemize}
+\item User behavior changes
+\item Competitor adaptations
+\item Market dynamics shift
+\item Seasonal patterns evolve
+\item New product features launched
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{mlgreen}{\textbf{Root Causes}}
+
+\small
+\textbf{1. Concept Drift}
+\begin{itemize}
+\item User preferences change
+\item P(Y$|$X) relationship shifts
+\item Training data becomes stale
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{2. Data Distribution Shift}
+\begin{itemize}
+\item New user demographics
+\item P(X) changes over time
+\item Features no longer predictive
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{3. Competitive Response}
+\begin{itemize}
+\item Rivals launch better features
+\item Users have higher expectations
+\item Bar constantly rising
+\end{itemize}
+
+\vspace{0.2cm}
+\textcolor{mlorange}{\textbf{The Solution}}
+
+\small
+\textbf{Continuous iteration through A/B testing:}
+\begin{itemize}
+\item Weekly model updates
+\item Feature experiments
+\item Algorithm improvements
+\item User feedback integration
+\end{itemize}
+
+\textbf{Result:} Maintain or improve performance over time
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Models are not static artifacts - they're dynamic systems requiring continuous maintenance}
+\end{frame}
+
+% Slide 3: The Experimentation Mindset
+\begin{frame}{From ``Deploy and Hope'' to ``Test and Learn''}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlred}{\textbf{Old Mindset: Waterfall}}
+
+\small
+\textbf{Process:}
+\begin{enumerate}
+\item Spend 6 months building
+\item Launch to all users
+\item Cross fingers
+\item Wait for complaints
+\item Emergency fix if broken
+\item Repeat in 12 months
+\end{enumerate}
+
+\vspace{0.3cm}
+\textbf{Problems:}
+\begin{itemize}
+\item High risk (all eggs in one basket)
+\item Slow learning (feedback after 6 months)
+\item No data (guessing what works)
+\item Expensive failures
+\item Competitor advantage grows
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlgray}{\textbf{Success rate: 10-20\%}}
+
+\column{0.48\textwidth}
+\textcolor{mlgreen}{\textbf{New Mindset: Scientific Method}}
+
+\small
+\textbf{Process:}
+\begin{enumerate}
+\item Form hypothesis (``X will improve Y'')
+\item Design experiment (A/B test)
+\item Calculate sample size (power analysis)
+\item Deploy to 5\% users (low risk)
+\item Measure results (data-driven)
+\item Ship winners, kill losers
+\item Repeat weekly
+\end{enumerate}
+
+\vspace{0.3cm}
+\textbf{Benefits:}
+\begin{itemize}
+\item Low risk (gradual rollout)
+\item Fast learning (results in days)
+\item Data-driven (know what works)
+\item Compound gains (many small wins)
+\item Competitive edge (10$	imes$ iteration speed)
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{Success rate: 30-40\%}}
+
+\vspace{0.2cm}
+\textbf{Key insight:} Most experiments ``fail'' (don't beat control), but you learn fast and iterate
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Experimental value lies in learning speed rather than validation - rapid iteration reveals insights faster than perfect execution}
+\end{frame}
+
+% Slide 4: A/B Testing Fundamentals
+\begin{frame}{A/B Testing Fundamentals: The Gold Standard}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{What is A/B Testing?}}
+
+\small
+\textbf{Definition:} Randomized controlled trial comparing two versions to determine which performs better.
+
+\vspace{0.3cm}
+\textbf{Core Components:}
+\begin{enumerate}
+\item \textbf{Control Group (A):} Current system (baseline)
+\item \textbf{Treatment Group (B):} New variant (challenger)
+\item \textbf{Random Assignment:} Users split 50/50
+\item \textbf{Metric:} What you're measuring (CTR, revenue)
+\item \textbf{Statistical Test:} Determine if difference is real
+\end{enumerate}
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{Example: Recommendation Algorithm}}
+
+\small
+\begin{itemize}
+\item Control: Popularity-based (5\% CTR)
+\item Treatment: ML collaborative filtering
+\item Metric: Click-through rate
+\item Users: 50,000 per group
+\item Duration: 2 weeks
+\item Result: Treatment wins (6.2\% CTR)
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{mlorange}{\textbf{Why Randomization Matters}}
+
+\small
+\textbf{Without randomization:}
+\begin{itemize}
+\item Selection bias (power users in treatment)
+\item Confounding variables (time of day, device)
+\item Can't isolate causal effect
+\item Results are unreliable
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{With randomization:}
+\begin{itemize}
+\item Groups are statistically equivalent
+\item Only difference is the treatment
+\item Causal interpretation valid
+\item Results are trustworthy
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlpurple}{\textbf{Key Requirements}}
+
+\small
+\begin{itemize}
+\item \textbf{Sample size:} Large enough for statistical power
+\item \textbf{Duration:} Long enough to capture true behavior
+\item \textbf{Randomization:} Truly random assignment
+\item \textbf{Isolation:} No spillover between groups
+\item \textbf{Pre-registration:} Hypothesis before experiment
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{A/B testing applies scientific method to product development - controlled experiments enable evidence-based decision-making}
+\end{frame}
+
+% Slide 5: Real Success Stories
+\begin{frame}{Real Success Stories: Data-Driven Wins}
+\begin{columns}[T]
+\column{0.32\textwidth}
+\textcolor{mlblue}{\textbf{Booking.com}}
+
+\small
+\textbf{Experiment:} Scarcity messaging
+
+\vspace{0.2cm}
+\textbf{Hypothesis:}\\
+``Only 2 rooms left!'' increases urgency and conversions
+
+\vspace{0.2cm}
+\textbf{Test:}
+\begin{itemize}
+\item Control: No scarcity message
+\item Treatment: Real-time room count
+\item Metric: Conversion rate
+\item Users: 100K per group
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Result:}
+\begin{itemize}
+\item 25\% conversion lift
+\item \$50M annual revenue impact
+\item Rolled out globally
+\end{itemize}
+
+\vspace{0.2cm}
+\textcolor{mlgreen}{\textbf{Lesson:}} Small UX changes, massive impact when tested rigorously
+
+\column{0.32\textwidth}
+\textcolor{mlorange}{\textbf{Obama 2012 Campaign}}
+
+\small
+\textbf{Experiment:} Email subject lines
+
+\vspace{0.2cm}
+\textbf{Challenge:}\\
+Raise \$500M through email donations
+
+\vspace{0.2cm}
+\textbf{Test:}
+\begin{itemize}
+\item 20 subject line variants
+\item A/B/C/D.../T testing
+\item Metric: Donation rate
+\item Recipients: 13M per variant
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Result:}
+\begin{itemize}
+\item Winner: ``Hey'' (simplest)
+\item 70\% higher open rate
+\item \$500K extra per email
+\item 500+ experiments total
+\end{itemize}
+
+\vspace{0.2cm}
+\textcolor{mlpurple}{\textbf{Lesson:}} Intuition fails. Data wins. Test everything.
+
+\column{0.32\textwidth}
+\textcolor{mlred}{\textbf{Google Search Ads}}
+
+\small
+\textbf{Experiment:} 41 shades of blue
+
+\vspace{0.2cm}
+\textbf{Question:}\\
+Which blue color for ad links maximizes clicks?
+
+\vspace{0.2cm}
+\textbf{Test:}
+\begin{itemize}
+\item 41 blue color variants
+\item Metric: Click-through rate
+\item Traffic: Billions of searches
+\item Duration: 3 weeks
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Result:}
+\begin{itemize}
+\item Optimal blue found
+\item 1\% CTR improvement
+\item \$200M annual revenue
+\item Criticized but data-driven
+\end{itemize}
+
+\vspace{0.2cm}
+\textcolor{mlgreen}{\textbf{Lesson:}} At scale, tiny improvements = huge value. Test obsessively.
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Empirical evidence supersedes expert intuition - measured outcomes reveal truths hidden from qualitative assessment}
+\end{frame}
+
+% Slide 6: Real Failure Examples
+\begin{frame}{Real Failure Examples: The Cost of Not Testing}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlred}{\textbf{Knight Capital: \$440M Loss}}
+
+\small
+\textbf{What Happened:}
+\begin{itemize}
+\item August 1, 2012: Deploy new trading algorithm
+\item No A/B test, no gradual rollout
+\item Bug: Bought high, sold low repeatedly
+\item Duration: 45 minutes
+\item Loss: \$440 million
+\item Outcome: Company bankrupt
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlblue}{\textbf{What Should Have Been Done:}}
+\begin{itemize}
+\item Shadow mode testing (parallel run)
+\item Canary deployment (1\% traffic first)
+\item Kill switch (automatic rollback)
+\item Guardrail metrics (loss limits)
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Lesson:} High-stakes deployments demand rigorous testing
+
+\column{0.48\textwidth}
+\textcolor{mlorange}{\textbf{Microsoft Tay Chatbot}}
+
+\small
+\textbf{What Happened:}
+\begin{itemize}
+\item March 2016: Launch AI chatbot on Twitter
+\item No gradual rollout, no guardrails
+\item Users exploited vulnerabilities
+\item Within 16 hours: Racist, offensive tweets
+\item Outcome: Shut down, PR disaster
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlpurple}{\textbf{What Should Have Been Done:}}
+\begin{itemize}
+\item Beta test with controlled users
+\item Content moderation safeguards
+\item Incremental rollout (100 $\rightarrow$ 1K $\rightarrow$ 10K users)
+\item Real-time monitoring and kill switch
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Lesson:} AI in the wild requires safety testing
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{Common Thread}}
+
+\small
+Both failures share: (1) No gradual rollout, (2) No guardrails, (3) No monitoring, (4) No rollback plan
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Experimentation prevents catastrophic failures - systematic testing identifies risks before they manifest at scale}
+\end{frame}
+
+% Slide 7: The Experimentation Pyramid
+\begin{frame}{The Experimentation Pyramid: Three Levels}
+\begin{columns}[T]
+\column{0.55\textwidth}
+\includegraphics[width=0.85\textwidth]{charts/ab_testing_fundamentals.pdf}
+
+\column{0.43\textwidth}
+\textcolor{mlblue}{\textbf{Level 1: Speed}}
+
+\small
+\textbf{Ship fast, iterate faster}
+\begin{itemize}
+\item 50+ experiments per year
+\item 1-2 week experiment duration
+\item Automated analysis pipelines
+\item Low friction deployment
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{Level 2: Safety}}
+
+\small
+\textbf{Guardrails prevent disasters}
+\begin{itemize}
+\item Revenue floor (don't lose money)
+\item Latency ceiling (stay fast)
+\item Error rate limits (don't break)
+\item Automatic kill switches
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlorange}{\textbf{Level 3: Learning}}
+
+\small
+\textbf{Extract insights, compound gains}
+\begin{itemize}
+\item Why did it win/lose?
+\item What worked for which users?
+\item How to generalize learnings?
+\item Build institutional knowledge
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Balance:} Fast iteration + safety nets + deep learning
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Multi-level optimization requires coordinated interventions - isolated improvements at single layers leave systemic gains unrealized}
+\end{frame}
+
+% Slide 8: When to A/B Test ML Models
+\begin{frame}{When to A/B Test ML Models}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Always A/B Test}}
+
+\small
+\textbf{1. New Model Deployment}
+\begin{itemize}
+\item Replacing existing model
+\item High risk of regression
+\item Need causal validation
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{2. Algorithm Changes}
+\begin{itemize}
+\item Random Forest $
+
+\rightarrow$ XGBoost
+\item Content-based $
+
+\rightarrow$ collaborative filtering
+\item Offline metrics don't predict online
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{3. Feature Updates}
+\begin{itemize}
+\item Add new features
+\item Remove stale features
+\item Feature engineering changes
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{4. Hyperparameter Tuning}
+\begin{itemize}
+\item Learning rate changes
+\item Regularization adjustments
+\item May help or hurt in production
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{5. Retraining Cadence}
+\begin{itemize}
+\item Daily vs weekly vs monthly
+\item Balance freshness and stability
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{mlorange}{\textbf{Sometimes A/B Test}}
+
+\small
+\textbf{6. UI/UX Changes}
+\begin{itemize}
+\item Model recommendations display
+\item Explanation text
+\item Confidence thresholds shown to users
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{7. Business Logic}
+\begin{itemize}
+\item Ranking vs filtering
+\item Diversity vs relevance
+\item Personalization intensity
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{Don't Bother A/B Testing}}
+
+\small
+\textbf{8. Bug Fixes}
+\begin{itemize}
+\item Obvious correctness issues
+\item Fix immediately, no test needed
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{9. Infrastructure Changes}
+\begin{itemize}
+\item Same model, faster serving
+\item No user-facing behavior change
+\end{itemize}
+
+\vspace{0.2cm}
+\textcolor{mlpurple}{\textbf{Rule of Thumb}}
+
+\small
+If change affects user experience or business metrics $\rightarrow$ A/B test it
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Experimental cost justifies when deployment risk exceeds testing investment - pre-deployment validation prevents expensive post-launch failures}
+\end{frame}
+
+% Slide 9: Learning Objectives
+\begin{frame}{Week 10 Learning Objectives}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Technical Skills}}
+
+\small
+By end of week, you will:
+
+\begin{enumerate}
+\item \textbf{Design} statistically rigorous A/B tests for ML models
+\item \textbf{Calculate} sample sizes and experiment duration (power analysis)
+\item \textbf{Implement} experiments in Python (scipy, PyMC3, bandits)
+\item \textbf{Interpret} p-values, confidence intervals, effect sizes correctly
+\item \textbf{Apply} Bayesian A/B testing for faster decisions
+\item \textbf{Use} multi-armed bandits for real-time optimization
+\item \textbf{Identify} and avoid common pitfalls (peeking, multiple testing)
+\item \textbf{Build} experiment monitoring dashboards
+\end{enumerate}
+
+\column{0.48\textwidth}
+\textcolor{mlgreen}{\textbf{Strategic Skills}}
+
+\small
+You will master:
+
+\begin{itemize}
+\item Formulating testable hypotheses
+\item Choosing primary and guardrail metrics
+\item Balancing speed and statistical rigor
+\item Communicating results to stakeholders
+\item Making confident deployment decisions
+\item Building experimentation culture
+\item Measuring long-term impact
+\item Iterating systematically
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlorange}{\textbf{Professional Outcomes}}
+
+\small
+\begin{itemize}
+\item Design and run 50+ experiments annually
+\item Avoid catastrophic deployment failures
+\item Iterate 10$	imes$ faster than competitors
+\item Build data-driven product culture
+\item Become trusted voice in product decisions
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Validation establishes baseline quality while experimentation drives continuous improvement - measurement enables optimization}
+\end{frame}
+
+% Slide 10: Foundation Summary
+\begin{frame}{Foundation Summary: Why Iteration Wins}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Key Concepts}}
+
+\small
+\textbf{1. Iteration Advantage}
+\begin{itemize}
+\item Winners (Spotify, Netflix) ship 1000+ experiments/year
+\item Losers deploy once and hope
+\item Speed of learning = competitive edge
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{2. Model Decay}
+\begin{itemize}
+\item Performance drops 15-30\% annually without updates
+\item Concept drift, distribution shift, competition
+\item Solution: Continuous iteration
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{3. Experimentation Mindset}
+\begin{itemize}
+\item From ``deploy and hope'' to ``test and learn''
+\item Scientific method: Hypothesis $
+
+\rightarrow$ Test $
+
+\rightarrow$ Learn
+\item Most experiments ``fail'' but learning compounds
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{4. A/B Testing Fundamentals}
+\begin{itemize}
+\item Randomized controlled trials
+\item Control vs treatment
+\item Causal inference through randomization
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{mlgreen}{\textbf{Real-World Lessons}}
+
+\small
+\textbf{Success Stories:}
+\begin{itemize}
+\item Booking.com: 25\% conversion lift from scarcity
+\item Obama 2012: \$500K per optimized email
+\item Google: \$200M from testing blue shades
+\end{itemize}
+
+\vspace{0.2cm}
+\textbf{Failure Examples:}
+\begin{itemize}
+\item Knight Capital: \$440M loss (no testing)
+\item Microsoft Tay: Shut down in 16 hours
+\item Lesson: Gradual rollout + guardrails essential
+\end{itemize}
+
+\vspace{0.2cm}
+\textcolor{mlorange}{\textbf{The Experimentation Pyramid}}
+
+\small
+\begin{itemize}
+\item \textbf{Speed:} Ship fast, iterate faster
+\item \textbf{Safety:} Guardrails prevent disasters
+\item \textbf{Learning:} Extract insights, compound gains
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlpurple}{\textbf{Next:}} Learn statistical techniques for rigorous A/B testing
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Rigorous experimental design precedes execution - statistical planning determines whether results will yield actionable insights}
+\end{frame}

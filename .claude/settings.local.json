@@ -15,7 +15,9 @@
       "Bash(pdflatex:*)",
       "WebSearch",
       "Bash(pdfinfo:*)",
-      "Bash(start \"D:\\Joerg\\Research\\slides\\ML_Design_Thinking_16\\Week_00e_Generative_AI\\20250928_2200_main.pdf\")"
+      "Bash(start \"D:\\Joerg\\Research\\slides\\ML_Design_Thinking_16\\Week_00e_Generative_AI\\20250928_2200_main.pdf\")",
+      "Bash(powershell -Command \"Get-ChildItem -Force | Select-Object Name, PSIsContainer, Length | Format-Table -AutoSize\")",
+      "Bash(do echo \"=== $week ===\" ls -1 \"$week\")"
     ],
     "deny": [],
     "ask": []

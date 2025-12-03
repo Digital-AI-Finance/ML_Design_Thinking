@@ -1,0 +1,139 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{multicol}
+\usepackage{tcolorbox}
+\usepackage{xcolor}
+\usepackage{geometry}
+\geometry{margin=1in}
+
+% Define colors
+\definecolor{mlblue}{RGB}{31, 119, 180}
+\definecolor{mlorange}{RGB}{255, 127, 14}
+\definecolor{mlgreen}{RGB}{44, 160, 44}
+\definecolor{mlred}{RGB}{214, 39, 40}
+\definecolor{mlpurple}{RGB}{148, 103, 189}
+
+\title{\Large\textbf{Discovery Learning: When K-Means Fails}\\
+\vspace{0.5em}
+\large Hands-on Exploration of Clustering Limitations}
+\author{Machine Learning for Smarter Innovation - Week 1}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section*{Learning Objectives}
+By completing this discovery exercise, you will:
+\begin{itemize}
+    \item Identify scenarios where K-means clustering fails
+    \item Understand why these failures occur
+    \item Discover which alternative algorithms to use
+    \item Develop intuition for algorithm selection
+\end{itemize}
+
+\section*{Part 1: Observation Exercise}
+Look at the chart showing 6 different data patterns. For each pattern, answer:
+
+\begin{tcolorbox}[colback=mlblue!10, colframe=mlblue!50, title=Pattern Analysis]
+\begin{enumerate}
+    \item \textbf{Crescent Shapes (Technology Evolution Chains)}
+    \begin{itemize}
+        \item What shape do you see? \underline{\hspace{3cm}}
+        \item Why might circles fail here? \underline{\hspace{5cm}}
+        \item Real-world example: \underline{\hspace{6cm}}
+    \end{itemize}
+    
+    \item \textbf{Nested Circles (Core vs Peripheral Innovation)}
+    \begin{itemize}
+        \item Describe the structure: \underline{\hspace{5cm}}
+        \item What's the K-means assumption violated? \underline{\hspace{4cm}}
+        \item Business analogy: \underline{\hspace{6cm}}
+    \end{itemize}
+    
+    \item \textbf{Chain Patterns (Innovation Pipelines)}
+    \begin{itemize}
+        \item What's the data distribution? \underline{\hspace{5cm}}
+        \item K-means draws what shape? \underline{\hspace{5cm}}
+        \item Industry example: \underline{\hspace{6cm}}
+    \end{itemize}
+\end{enumerate}
+\end{tcolorbox}
+
+\section*{Part 2: Prediction Challenge}
+Before looking at the solutions, predict how K-means would cluster these patterns:
+
+\begin{multicols}{2}
+\begin{tcolorbox}[colback=mlorange!10, colframe=mlorange!50, title=Your Predictions]
+\textbf{Pattern 4: Different Densities}\\
+Draw where you think K-means would split:\\
+\vspace{3cm}
+
+\textbf{Pattern 5: With Outliers}\\
+Circle the outliers K-means would misassign:\\
+\vspace{3cm}
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=mlgreen!10, colframe=mlgreen!50, title=Think About]
+\begin{itemize}
+    \item Does K-means handle density differences?
+    \item Can K-means ignore outliers?
+    \item What assumptions does K-means make?
+    \item When should you NOT use K-means?
+\end{itemize}
+\end{tcolorbox}
+\end{multicols}
+
+\section*{Part 3: Algorithm Matching}
+Match each problematic pattern with its best alternative algorithm:
+
+\begin{center}
+\begin{tabular}{|l|c|l|}
+\hline
+\textbf{Pattern Type} & \textbf{Match} & \textbf{Algorithm Options} \\
+\hline
+Non-spherical shapes & \_\_\_ & A. Hierarchical Clustering \\
+Different densities & \_\_\_ & B. DBSCAN \\
+Connected components & \_\_\_ & C. Gaussian Mixture Model \\
+With outliers & \_\_\_ & D. DBSCAN \\
+Nested structures & \_\_\_ & E. Spectral Clustering \\
+Elongated clusters & \_\_\_ & F. GMM with full covariance \\
+\hline
+\end{tabular}
+\end{center}
+
+\section*{Part 4: Real-World Application}
+Consider your own innovation data or business problem:
+
+\begin{tcolorbox}[colback=mlpurple!10, colframe=mlpurple!50, title=Your Scenario]
+\begin{enumerate}
+    \item Describe your data: \underline{\hspace{8cm}}
+    \item Expected cluster shapes: \underline{\hspace{7cm}}
+    \item Potential outliers?: \underline{\hspace{8cm}}
+    \item Density variations?: \underline{\hspace{7cm}}
+    \item Your algorithm choice: \underline{\hspace{7cm}}
+    \item Why this choice?: \underline{\hspace{8cm}}
+\end{enumerate}
+\end{tcolorbox}
+
+\section*{Key Takeaways}
+\begin{itemize}
+    \item K-means assumes \textbf{spherical} clusters of \textbf{similar size}
+    \item K-means is sensitive to \textbf{outliers} and \textbf{initialization}
+    \item DBSCAN finds \textbf{arbitrary shapes} and handles \textbf{noise}
+    \item Hierarchical clustering shows \textbf{relationships} at multiple scales
+    \item GMM allows \textbf{overlapping} clusters with \textbf{soft assignments}
+\end{itemize}
+
+\section*{Challenge Question}
+If you had customer behavior data with clear weekday vs. weekend patterns, seasonal variations, and some unusual one-time events, which clustering approach would you use and why?
+
+\vspace{1cm}
+\noindent\rule{\textwidth}{0.5pt}
+\vspace{0.5cm}
+\noindent\rule{\textwidth}{0.5pt}
+\vspace{0.5cm}
+\noindent\rule{\textwidth}{0.5pt}
+
+\end{document}

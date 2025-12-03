@@ -1,0 +1,176 @@
+% Appendix: Mathematical Foundations
+\section*{Appendix: Mathematical Foundations}
+
+% LDA Mathematical Framework
+\begin{frame}{Mathematical Framework: LDA}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Generative Model}}
+
+\small
+For each document $d$:
+\begin{align*}
+\theta_d &\sim \text{Dir}(\alpha) \\
+\end{align*}
+
+For each word $w_{d,n}$ in document $d$:
+\begin{align*}
+z_{d,n} &\sim \text{Multinomial}(\theta_d) \\
+w_{d,n} &\sim \text{Multinomial}(\beta_{z_{d,n}})
+\end{align*}
+
+Where:
+\begin{itemize}
+\item $\theta_d$: topic distribution for doc $d$
+\item $z_{d,n}$: topic for $n$-th word in doc $d$
+\item $\beta_k$: word distribution for topic $k$
+\item $\alpha$: Dirichlet prior for documents
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{mlorange}{\textbf{Posterior Inference}}
+
+\small
+Goal: Estimate posterior
+$$p(\theta, z | w, \alpha, \beta)$$
+
+\textbf{Approaches:}
+\begin{itemize}
+\item Variational Inference (faster)
+\item Gibbs Sampling (more accurate)
+\item Online Learning (scalable)
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{Perplexity:}}
+$$\text{Perplexity} = \exp\left(-\frac{\sum_d \log p(w_d)}{N}\right)$$
+
+Lower is better
+\end{columns}
+\end{frame}
+
+% NMF Mathematics
+\begin{frame}{Mathematical Framework: NMF}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Matrix Factorization}}
+
+\normalsize
+$$\mathbf{V} \approx \mathbf{W} \mathbf{H}$$
+
+\small
+Where:
+\begin{itemize}
+\item $\mathbf{V} \in \mathbb{R}^{m \times n}_+$: document-term matrix
+\item $\mathbf{W} \in \mathbb{R}^{m \times k}_+$: document-topic matrix
+\item $\mathbf{H} \in \mathbb{R}^{k \times n}_+$: topic-term matrix
+\item All entries non-negative
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlorange}{\textbf{Optimization:}}
+$$\min_{W,H \geq 0} ||\mathbf{V} - \mathbf{WH}||_F^2$$
+
+\column{0.48\textwidth}
+\textcolor{mlgreen}{\textbf{Update Rules}}
+
+\small
+Multiplicative updates:
+\begin{align*}
+H_{ij} &\leftarrow H_{ij} \frac{(W^T V)_{ij}}{(W^T W H)_{ij}} \\
+W_{ij} &\leftarrow W_{ij} \frac{(V H^T)_{ij}}{(W H H^T)_{ij}}
+\end{align*}
+
+\vspace{0.3cm}
+\textcolor{mlpurple}{\textbf{Convergence:}}
+\begin{itemize}
+\item Guaranteed to non-increase objective
+\item Local minimum (not global)
+\item Initialize multiple times
+\end{itemize}
+\end{columns}
+\end{frame}
+
+% Topic Coherence Metrics
+\begin{frame}{Topic Coherence Metrics}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{UMass Coherence}}
+
+\small
+For top $N$ words in topic:
+$$C_{UMass} = \sum_{i=2}^{N} \sum_{j=1}^{i-1} \log \frac{D(w_i, w_j) + \epsilon}{D(w_j)}$$
+
+Where:
+\begin{itemize}
+\item $D(w_i, w_j)$: co-occurrence count
+\item $D(w_j)$: document frequency
+\item $\epsilon$: smoothing parameter
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlorange}{\textbf{C\_V Coherence}}
+
+Normalized PMI with sliding window
+
+\column{0.48\textwidth}
+\textcolor{mlgreen}{\textbf{NPMI Coherence}}
+
+\small
+$$NPMI(w_i, w_j) = \frac{\log \frac{P(w_i, w_j)}{P(w_i)P(w_j)}}{-\log P(w_i, w_j)}$$
+
+Range: [-1, 1], higher is better
+
+\vspace{0.3cm}
+\textcolor{mlpurple}{\textbf{Topic Diversity}}
+
+$$TD = \frac{|\text{unique words}|}{k \times N}$$
+
+Where $k$ = number of topics, $N$ = words per topic
+\end{columns}
+\end{frame}
+
+% Information Theory for Topics
+\begin{frame}{Information Theory for Topic Models}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Kullback-Leibler Divergence}}
+
+\small
+Between topic distributions:
+$$D_{KL}(P||Q) = \sum_w P(w) \log \frac{P(w)}{Q(w)}$$
+
+Used for:
+\begin{itemize}
+\item Topic distinctiveness
+\item Model comparison
+\item Variational inference
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlorange}{\textbf{Mutual Information}}
+
+$$I(X;Y) = \sum_{x,y} p(x,y) \log \frac{p(x,y)}{p(x)p(y)}$$
+
+\column{0.48\textwidth}
+\textcolor{mlgreen}{\textbf{Jensen-Shannon Divergence}}
+
+\small
+Symmetric version of KL:
+$$JSD(P||Q) = \frac{1}{2}D_{KL}(P||M) + \frac{1}{2}D_{KL}(Q||M)$$
+
+Where $M = \frac{1}{2}(P + Q)$
+
+\vspace{0.3cm}
+\textcolor{mlpurple}{\textbf{Topic Entropy}}
+
+$$H(T) = -\sum_w P(w|T) \log P(w|T)$$
+
+Lower entropy = more focused topic
+\end{columns}
+
+\vspace{\fill}
+\begin{center}
+\footnotesize\textcolor{mlgray}{Mathematical rigor ensures reliable innovation insights}
+\end{center}
+\end{frame}

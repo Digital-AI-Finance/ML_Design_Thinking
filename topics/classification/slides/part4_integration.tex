@@ -1,0 +1,462 @@
+% ==================== PART 4: DESIGN INTEGRATION ====================
+\section{Part 4: From Algorithm to User Experience}
+
+% Slide 23: Real-Time Recommendations
+\begin{frame}[t]{Real-Time Recommendation Systems}
+\Large\textbf{Classification Powers Personalization}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{Netflix's Challenge:}
+\begin{itemize}
+\item 200M users
+\item 15,000 titles
+\item Which 10 to show?
+\item 90 seconds to capture interest
+\item Wrong picks = lost subscriber
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Classification in Action:}
+\begin{enumerate}
+\footnotesize
+\item \textbf{Binary:} Will watch? Yes/No
+\item \textbf{Multi-class:} Genre preference
+\item \textbf{Probability:} Engagement score
+\item \textbf{Rank:} Top 10 by probability
+\item \textbf{Display:} Personalized row
+\end{enumerate}
+
+\vspace{0.5em}
+\textbf{Update Cycle:}
+\begin{itemize}
+\footnotesize
+\item Real-time: After each viewing
+\item Batch: Nightly full retraining
+\item A/B test: Continuous improvement
+\end{itemize}
+
+\column{0.48\textwidth}
+\textbf{The Pipeline:}
+\begin{center}
+\begin{tikzpicture}[scale=0.7,
+    box/.style={draw,rounded corners,fill=mllavender3,minimum width=2.5cm,minimum height=0.6cm,font=\footnotesize}]
+
+\node[box] (user) at (0,3) {User Action};
+\node[box] (feat) at (0,2) {Extract Features};
+\node[box] (class) at (0,1) {Classify};
+\node[box] (rank) at (0,0) {Rank Results};
+\node[box] (show) at (0,-1) {Show to User};
+
+\draw[->] (user) -- (feat);
+\draw[->] (feat) -- (class);
+\draw[->] (class) -- (rank);
+\draw[->] (rank) -- (show);
+\draw[->] (show.east) .. controls (2,-1) and (2,3) .. (user.east);
+
+\node at (2.5,1) {\footnotesize 50ms total};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Impact:}
+\begin{itemize}
+\item 80\% of views from recommendations
+\item \$1B saved in customer acquisition
+\item 75\% reduction in churn
+\end{itemize}
+\end{columns}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mlgreen!10, colframe=mlgreen]
+\centering
+\textbf{Design Principle:} Classification invisible to user, value visible immediately
+\end{tcolorbox}
+
+\bottomnote{Ensemble deployment scales complexity - parallel model execution delivers diverse predictions within strict latency constraints}
+\end{frame}
+
+% Slide 24: A/B Testing Automation
+\begin{frame}[t]{Automated A/B Test Evaluation}
+\Large\textbf{Let Classification Judge Your Experiments}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{Traditional A/B Testing:}
+\begin{itemize}
+\item Run experiment for 2 weeks
+\item Collect metrics
+\item Statistical significance test
+\item Human interprets results
+\item Decision after meeting
+\item 3-week cycle time
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{ML-Powered Testing:}
+\begin{itemize}
+\item Classification monitors in real-time
+\item Predicts winner early (3 days)
+\item Auto-stops losing variants
+\item Allocates traffic to winners
+\item Learns from pattern history
+\item 3-day cycle time
+\end{itemize}
+
+\column{0.48\textwidth}
+\textbf{Multi-Armed Bandit:}
+\begin{center}
+\begin{tikzpicture}[scale=0.6]
+% Variants
+\node[draw,fill=mllavender2] (a) at (0,2) {Variant A};
+\node[draw,fill=mllavender2] (b) at (0,0.5) {Variant B};
+\node[draw,fill=mllavender2] (c) at (0,-1) {Variant C};
+
+% Traffic allocation
+\draw[->] (1,2) -- (2,2) node[right] {\footnotesize 60\% traffic};
+\draw[->] (1,0.5) -- (2,0.5) node[right] {\footnotesize 30\% traffic};
+\draw[->] (1,-1) -- (2,-1) node[right] {\footnotesize 10\% traffic};
+
+% Performance bars
+\draw[fill=mlgreen] (3,1.8) rectangle (5,2.2);
+\draw[fill=mlorange] (3,0.3) rectangle (4.2,0.7);
+\draw[fill=mlred] (3,-1.2) rectangle (3.5,-0.8);
+
+\node at (4,-2) {\footnotesize Adaptive allocation};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Classification Decides:}
+\begin{itemize}
+\footnotesize
+\item Is difference real or random?
+\item Will trend continue?
+\item Should we stop early?
+\item How to split traffic?
+\end{itemize}
+\end{columns}
+
+\vspace{0.5em}
+\begin{center}
+\textcolor{mlpurple}{\textbf{Result: 10x faster iteration, 3x more experiments, continuous improvement}}
+\end{center}
+
+\bottomnote{Automated experimentation enables continuous optimization - classification directs traffic allocation based on predicted outcomes}
+\end{frame}
+
+% Slide 25: Risk Assessment Dashboards
+\begin{frame}[t]{Risk Assessment Dashboards}
+\Large\textbf{Making ML Predictions Actionable}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\column{0.55\textwidth}
+\begin{center}
+\includegraphics[width=0.95\textwidth]{charts/risk_dashboard_mockup.pdf}
+\end{center}
+
+\column{0.43\textwidth}
+\textbf{Dashboard Components:}
+
+\textbf{1. Risk Score (0-100)}
+\begin{itemize}
+\footnotesize
+\item ML probability converted
+\item Color coded (green/yellow/red)
+\item Historical trend line
+\end{itemize}
+
+\textbf{2. Key Factors}
+\begin{itemize}
+\footnotesize
+\item Top 5 risk drivers
+\item Feature importance
+\item What-if simulator
+\end{itemize}
+
+\textbf{3. Recommendations}
+\begin{itemize}
+\footnotesize
+\item Auto-generated actions
+\item Priority ranked
+\item Expected impact
+\end{itemize}
+
+\textbf{4. Confidence Level}
+\begin{itemize}
+\footnotesize
+\item Model certainty
+\item Similar cases reference
+\item Override option
+\end{itemize}
+\end{columns}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mllavender4, colframe=mlpurple]
+\centering
+\textbf{Design Rule:} Never show raw ML output - translate to business language
+\end{tcolorbox}
+
+\bottomnote{Interface design determines adoption - presenting predictions requires balancing simplicity with sufficient context for informed decisions}
+\end{frame}
+
+% Slide 26: Personalization Engines
+\begin{frame}[t]{Personalization at Scale}
+\Large\textbf{Every User Gets Their Own Experience}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{Amazon's Approach:}
+\begin{itemize}
+\item 300M customers
+\item Each sees different homepage
+\item 35\% of revenue from recommendations
+\item Real-time classification
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Classification Layers:}
+\begin{enumerate}
+\footnotesize
+\item \textbf{User Type:} New/Regular/Prime
+\item \textbf{Intent:} Browse/Buy/Research
+\item \textbf{Category:} Electronics/Books/etc
+\item \textbf{Price Sensitivity:} Low/Med/High
+\item \textbf{Time:} Rush/Leisure
+\end{enumerate}
+
+\vspace{0.5em}
+\textbf{Combines Into:}
+\begin{itemize}
+\footnotesize
+\item Product recommendations
+\item Price points shown
+\item Deals highlighted
+\item Layout selected
+\item Shipping options
+\end{itemize}
+
+\column{0.48\textwidth}
+\textbf{The Magic:}
+\begin{center}
+\begin{tikzpicture}[scale=0.6]
+% User
+\node[draw,circle,fill=mllavender2] (user) at (0,0) {User};
+
+% Classifications
+\node[draw,fill=mllavender3,font=\tiny] (c1) at (2,2) {Browser};
+\node[draw,fill=mllavender3,font=\tiny] (c2) at (2,0.5) {Tech-savvy};
+\node[draw,fill=mllavender3,font=\tiny] (c3) at (2,-1) {Price-conscious};
+\node[draw,fill=mllavender3,font=\tiny] (c4) at (2,-2.5) {Weekend};
+
+% Personalization
+\node[draw,fill=mlpurple,text=white] (result) at (5,0) {Personalized Page};
+
+% Arrows
+\draw[->] (user) -- (c1);
+\draw[->] (user) -- (c2);
+\draw[->] (user) -- (c3);
+\draw[->] (user) -- (c4);
+\draw[->] (c1) -- (result);
+\draw[->] (c2) -- (result);
+\draw[->] (c3) -- (result);
+\draw[->] (c4) -- (result);
+\end{tikzpicture}
+\end{center}
+
+\textbf{Results:}
+\begin{itemize}
+\item 29\% increase in sales
+\item 37\% higher engagement
+\item 23\% better retention
+\item 31\% larger cart size
+\end{itemize}
+\end{columns}
+
+\vspace{0.5em}
+\begin{center}
+\textcolor{mlpurple}{\textbf{Classification enables 1-to-1 marketing at billion-user scale}}
+\end{center}
+
+\bottomnote{Real-time model updating incorporates feedback immediately - continuous learning reduces prediction lag from user behavior changes}
+\end{frame}
+
+% Slide 27: Case Study - Airbnb
+\begin{frame}[t]{Case Study: Airbnb's Smart Pricing}
+\Large\textbf{Classification Optimizes Billions in Revenue}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{The Problem:}
+\begin{itemize}
+\item 7M+ listings worldwide
+\item Hosts don't know optimal price
+\item Too high = no bookings
+\item Too low = lost revenue
+\item Market changes daily
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Classification Solution:}
+\begin{enumerate}
+\footnotesize
+\item Classify listing type (luxury/budget/unique)
+\item Classify demand level (high/med/low)
+\item Classify booking probability at each price
+\item Classify competitor positioning
+\item Recommend optimal price
+\end{enumerate}
+
+\vspace{0.5em}
+\textbf{Features Used:}
+\begin{itemize}
+\footnotesize
+\item Location, amenities, photos
+\item Season, events, day of week
+\item Historical bookings
+\item Similar listings' performance
+\end{itemize}
+
+\column{0.48\textwidth}
+\textbf{Impact Metrics:}
+\begin{center}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Metric} & \textbf{Before} & \textbf{After} \\
+\midrule
+Booking rate & 42\% & \textcolor{mlgreen}{58\%} \\
+Avg price & \$89 & \textcolor{mlgreen}{\$97} \\
+Revenue/list & \$4,200 & \textcolor{mlgreen}{\$5,900} \\
+Host adoption & - & \textcolor{mlgreen}{41\%} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{0.5em}
+\textbf{The Algorithm:}
+\begin{center}
+\begin{tcolorbox}[colback=mllavender4, colframe=mlpurple, width=0.9\textwidth]
+\footnotesize
+\centering
+Random Forest (500 trees)\\
+67 features\\
+Retrained daily\\
+89\% pricing accuracy
+\end{tcolorbox}
+\end{center}
+
+\textbf{Design Touch:}
+\begin{itemize}
+\footnotesize
+\item Simple on/off toggle
+\item Shows confidence level
+\item Explains factors
+\item Allows overrides
+\end{itemize}
+\end{columns}
+
+\bottomnote{Dynamic classification drives pricing optimization - predicting booking probability enables revenue maximization through rate adjustment}
+\end{frame}
+
+% Slide 28: Implementation Checklist
+\begin{frame}[t]{Your Implementation Roadmap}
+\Large\textbf{From Prototype to Production}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{Phase 1: Prototype (Week 1)}
+\begin{itemize}
+\footnotesize
+\item Define success metrics
+\item Gather historical data
+\item Clean and prepare features
+\item Try 3-5 algorithms
+\item Validate on test set
+\item Pick best performer
+\end{itemize}
+
+\textbf{Phase 2: Pilot (Week 2-4)}
+\begin{itemize}
+\footnotesize
+\item Build simple API
+\item Create basic dashboard
+\item Run with 1\% traffic
+\item Monitor performance
+\item Gather user feedback
+\item Iterate on model
+\end{itemize}
+
+\textbf{Phase 3: Scale (Week 5-8)}
+\begin{itemize}
+\footnotesize
+\item Optimize for speed
+\item Add monitoring
+\item Build fallback system
+\item Gradual rollout (1→10→50→100\%)
+\item A/B test impact
+\item Document everything
+\end{itemize}
+
+\column{0.48\textwidth}
+\textbf{Common Pitfalls:}
+\begin{itemize}
+\item ✗ Starting too complex
+\item ✗ Ignoring data quality
+\item ✗ No baseline comparison
+\item ✗ Overfitting to test set
+\item ✗ No monitoring in production
+\item ✗ Assuming model won't degrade
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Success Factors:}
+\begin{itemize}
+\item ✓ Start simple (logistic regression)
+\item ✓ Focus on data quality
+\item ✓ Always have human fallback
+\item ✓ Monitor everything
+\item ✓ Retrain regularly
+\item ✓ Keep improving
+\end{itemize}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mlgreen!10, colframe=mlgreen]
+\centering
+\textbf{Remember:}\\
+Perfect is the enemy of good\\
+Ship at 80\%, improve to 95\%
+\end{tcolorbox}
+\end{columns}
+
+\bottomnote{Incremental deployment reduces risk - simple baseline models enable production learning before investing in complex approaches}
+\end{frame}
+% Slide: When to Use Which Classification Algorithm - Judgment Criteria
+\begin{frame}[t]{When to Use Which Classification Algorithm: Judgment Criteria}
+\vspace{-0.5cm}
+\begin{center}
+\includegraphics[width=0.75\textwidth]{charts/classification_algorithm_decision.pdf}
+\end{center}
+
+\begin{center}
+\textcolor{mlpurple}{\textbf{The Principle:}} Start interpretable (logistic), add complexity (trees/SVM) only when accuracy demands it
+\end{center}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Judgment criteria enable systematic algorithm selection - balance explainability, accuracy, and computational constraints}
+\end{frame}

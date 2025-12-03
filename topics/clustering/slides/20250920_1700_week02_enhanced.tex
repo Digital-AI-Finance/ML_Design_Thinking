@@ -1,0 +1,1669 @@
+\documentclass[8pt,aspectratio=169]{beamer}
+\usetheme{Madrid}
+\usecolortheme{default}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{adjustbox}
+\usepackage{multicol}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{tcolorbox}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows, positioning}
+\usepackage{listings}
+
+% Define colors matching the ML Design course theme
+\definecolor{mlblue}{RGB}{31, 119, 180}
+\definecolor{mlorange}{RGB}{255, 127, 14}
+\definecolor{mlgreen}{RGB}{44, 160, 44}
+\definecolor{mlred}{RGB}{214, 39, 40}
+\definecolor{mlpurple}{RGB}{148, 103, 189}
+\definecolor{mlbrown}{RGB}{140, 86, 75}
+\definecolor{mlpink}{RGB}{227, 119, 194}
+\definecolor{mlgray}{RGB}{127, 127, 127}
+\definecolor{mlyellow}{RGB}{255, 187, 120}
+\definecolor{mlcyan}{RGB}{23, 190, 207}
+
+% Beamer template customization
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{footline}{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
+    \usebeamerfont{author in head/foot}Part \insertpartnumber/4
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+    \usebeamerfont{title in head/foot}Week 2: Deep Empathy
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    \usebeamerfont{date in head/foot}Slide \insertframenumber{} of \inserttotalframenumber\hspace*{2ex} 
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+
+% Code listing settings
+\lstset{
+    language=Python,
+    basicstyle=\small\ttfamily,
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    stepnumber=1,
+    numbersep=5pt,
+    backgroundcolor=\color{gray!5},
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    frame=single,
+    rulecolor=\color{gray!30},
+    tabsize=2,
+    captionpos=b,
+    breaklines=true,
+    breakatwhitespace=false,
+    keywordstyle=\color{mlblue},
+    commentstyle=\color{mlgreen},
+    stringstyle=\color{mlorange}
+}
+
+% Enhanced title information
+\title{\Large\textbf{Machine Learning for Smarter Innovation}\\
+\vspace{0.5em}
+\Large Week 2: Clustering for Deep Empathy}
+\subtitle{Understanding Users Through Data-Driven Segmentation\\
+\small Discovering Hidden Patterns in Human Behavior}
+\author{BSc Course in AI-Enhanced Innovation}
+\institute{Department of Computer Science \& Design}
+\date{2025}
+
+\begin{document}
+
+% Enhanced title slide
+\begin{frame}[plain]
+\titlepage
+\vspace{-1em}
+\begin{center}
+\small\textit{This week: Transform behavioral data into deep user understanding through advanced clustering}
+\end{center}
+\end{frame}
+
+% NEW: Table of Contents with Journey
+\begin{frame}
+\frametitle{Today's Journey: From Data Points to Human Insights}
+\framesubtitle{Your Roadmap to Understanding Users Through Clustering}
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\begin{tcolorbox}[colback=mlblue!10, colframe=mlblue!50, title=Morning Session]
+\small
+\textbf{Part 1: Foundation (25 min)}
+\begin{itemize}
+\item Why clustering for empathy?
+\item Traditional vs data-driven personas
+\item Setting objectives
+\end{itemize}
+
+\vspace{0.3em}
+\textbf{Part 2: Technical Deep Dive (35 min)}
+\begin{itemize}
+\item Advanced K-means techniques
+\item Finding optimal clusters
+\item DBSCAN, Hierarchical, GMM
+\item Algorithm selection guide
+\end{itemize}
+\end{tcolorbox}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\begin{tcolorbox}[colback=mlgreen!10, colframe=mlgreen!50, title=Afternoon Session]
+\small
+\textbf{Part 3: Design Integration (30 min)}
+\begin{itemize}
+\item From clusters to personas
+\item Building empathy maps
+\item Journey mapping per segment
+\item Innovation opportunities
+\end{itemize}
+
+\vspace{0.3em}
+\textbf{Part 4: Practice (20 min)}
+\begin{itemize}
+\item Spotify case study
+\item 5 music personas discovered
+\item Implementation pipeline
+\item Your turn: exercise
+\end{itemize}
+\end{tcolorbox}
+\end{column}
+\end{columns}
+
+\vspace{0.5em}
+\begin{center}
+\begin{tcolorbox}[colback=mlpurple!20, colframe=mlpurple!60, width=0.9\textwidth]
+\centering
+\textbf{Goal:} Master data-driven empathy to understand users you've never met
+\end{tcolorbox}
+\end{center}
+\end{frame}
+
+% NEW: Prerequisites & Setup
+\begin{frame}
+\frametitle{Prerequisites \& What You'll Build}
+\framesubtitle{Setting You Up for Success in User Understanding}
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\begin{tcolorbox}[colback=mlgreen!10, colframe=mlgreen!50, title=Building on Week 1]
+\normalsize
+\textbf{You already know:}
+\begin{itemize}
+\item Basic K-means clustering
+\item Elbow method for K
+\item Silhouette scores
+\item Distance metrics
+\end{itemize}
+
+\vspace{0.3em}
+\textbf{New this week:}
+\begin{itemize}
+\item User behavior features
+\item Persona creation methods
+\item Empathy map construction
+\item Journey differentiation
+\end{itemize}
+\end{tcolorbox}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\begin{tcolorbox}[colback=mlorange!10, colframe=mlorange!50, title=What You'll Create]
+\normalsize
+\textbf{By end of today:}
+\begin{itemize}
+\item Data-driven user personas
+\item Behavioral segment profiles
+\item Empathy maps per segment
+\item Differentiated journey maps
+\item Innovation opportunity matrix
+\end{itemize}
+
+\vspace{0.3em}
+\textbf{Tools we'll use:}
+\begin{itemize}
+\item Python + scikit-learn
+\item Pandas for data processing
+\item Matplotlib/Seaborn for viz
+\item Jupyter notebooks
+\end{itemize}
+\end{tcolorbox}
+\end{column}
+\end{columns}
+
+\vspace{0.5em}
+\begin{center}
+\begin{tcolorbox}[colback=mlyellow!20, colframe=mlorange!60, width=0.9\textwidth]
+\centering
+\textbf{Remember:} Every data point represents a real person with real needs
+\end{tcolorbox}
+\end{center}
+\end{frame}
+
+% PART 1: ENHANCED FOUNDATION
+\begin{frame}[plain]
+\begin{center}
+\vspace{2em}
+{\Huge\textcolor{mlblue}{\textbf{PART 1}}}\\
+\vspace{0.5em}
+{\Large\textbf{Foundation: Why Clustering for Empathy?}}\\
+\vspace{1em}
+\textit{Moving beyond assumptions to data-driven understanding}\\
+\vspace{2em}
+\Large
+\textbf{Key Questions We'll Answer:}\\
+\vspace{0.5em}
+\normalsize
+\begin{itemize}
+\item How do we truly understand millions of users?
+\item What patterns exist in user behavior?
+\item How can data reveal emotional needs?
+\item Where do traditional personas fail?
+\end{itemize}
+\vspace{1em}
+\Large\textcolor{mlpurple}{\textbf{Let's discover hidden user segments}}
+\end{center}
+\end{frame}
+
+% NEW: Learning Objectives for Part 1
+\begin{frame}
+\frametitle{Part 1: Learning Objectives}
+\framesubtitle{Foundation Skills You'll Develop}
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\begin{tcolorbox}[colback=mlblue!10, colframe=mlblue!50, title={By the end of Part 1, you will:}]
+\normalsize
+\begin{itemize}
+\item \textbf{Understand} why clustering enables deep empathy
+\item \textbf{Recognize} limitations of assumption-based personas
+\item \textbf{Identify} behavioral patterns in user data
+\item \textbf{Explain} the value of data-driven segmentation
+\item \textbf{Connect} clustering to design thinking
+\end{itemize}
+\end{tcolorbox}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\begin{tcolorbox}[colback=mlgreen!10, colframe=mlgreen!50, title=Success Criteria]
+\normalsize
+\begin{itemize}
+\item Can articulate clustering's role in empathy
+\item Understand behavioral vs demographic segmentation
+\item Know when to use data-driven personas
+\item Can identify suitable user features
+\item Ready for technical deep dive
+\end{itemize}
+\end{tcolorbox}
+\end{column}
+\end{columns}
+
+\vspace{0.5em}
+\begin{center}
+\textcolor{mlpurple}{\textbf{Foundation first, then we'll dive into the algorithms}}
+\end{center}
+\end{frame}
+
+% Opening Power Chart
+\begin{frame}
+\frametitle{From Chaos to Clarity: The Power of User Clustering}
+\framesubtitle{Watch 10,000 Users Self-Organize into Natural Groups}
+
+\begin{center}
+\includegraphics[width=0.85\textwidth]{charts/clustering_evolution.pdf}
+\end{center}
+
+\vspace{0.3em}
+\begin{center}
+\begin{tcolorbox}[colback=mlpurple!20, colframe=mlpurple!60, width=0.9\textwidth]
+\centering
+\Large\textcolor{mlpurple}{\textbf{Each dot = a real user, each cluster = shared needs}}
+\end{tcolorbox}
+\end{center}
+\end{frame}
+
+% Enhanced Problem Statement
+\begin{frame}
+\frametitle{The User Understanding Challenge: A Deep Dive}
+\framesubtitle{Why Traditional Methods Fall Short at Scale}
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\begin{tcolorbox}[colback=mlred!10, colframe=mlred!50, title=Traditional Challenges]
+\normalsize
+\textbf{Assumption-Based:}
+\begin{itemize}
+\item "Millennials want X"
+\item "Power users need Y"
+\item Based on 5-10 interviews
+\end{itemize}
+
+\textbf{Problems:}
+\begin{itemize}
+\item Generic personas
+\item Missing hidden segments
+\item Biased by loud voices
+\item Static profiles
+\item Limited samples
+\end{itemize}
+
+\textbf{Result:}\\
+\textcolor{mlred}{70\% of features unused}
+\end{tcolorbox}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\begin{tcolorbox}[colback=mlgreen!10, colframe=mlgreen!50, title=ML-Enhanced Solutions]
+\normalsize
+\textbf{Data-Driven:}
+\begin{itemize}
+\item Behavioral patterns
+\item Usage analytics
+\item 1000s of data points
+\end{itemize}
+
+\textbf{Benefits:}
+\begin{itemize}
+\item Natural segments
+\item Unexpected patterns
+\item Balanced representation
+\item Dynamic insights
+\item Scale to millions
+\end{itemize}
+
+\textbf{Result:}\\
+\textcolor{mlgreen}{2x feature adoption}
+\end{tcolorbox}
+\end{column}
+\end{columns}
+
+\vspace{0.5em}
+\begin{center}
+\begin{tcolorbox}[colback=mlyellow!20, colframe=mlorange!60, width=0.9\textwidth]
+\centering
+\textbf{Think about it:} How many user types are you missing with traditional personas?
+\end{tcolorbox}
+\end{center}
+\end{frame}
+
+% Why Clustering for Empathy
+\begin{frame}
+\frametitle{Why Clustering Creates Deeper Empathy}
+\framesubtitle{Understanding the "Why" Behind User Behavior}
+
+\begin{columns}[T]
+\begin{column}{0.55\textwidth}
+\begin{center}
+\includegraphics[width=\textwidth]{charts/user_segmentation_main.pdf}
+\end{center}
+\end{column}
+
+\begin{column}{0.43\textwidth}
+\begin{tcolorbox}[colback=mlpurple!10, colframe=mlpurple!50, title=Clustering Reveals]
+\small
+\textbf{1. Natural Groupings}
+\begin{itemize}
+\item Users cluster by behavior
+\item Not by demographics
+\end{itemize}
+
+\textbf{2. Hidden Patterns}
+\begin{itemize}
+\item Unexpected user types
+\item Cross-demographic needs
+\end{itemize}
+
+\textbf{3. Emotional Context}
+\begin{itemize}
+\item Usage = emotional state
+\item Patterns = needs
+\end{itemize}
+
+\textbf{4. Evolution}
+\begin{itemize}
+\item Users change over time
+\item Clusters evolve
+\end{itemize}
+\end{tcolorbox}
+\end{column}
+\end{columns}
+
+\begin{center}
+\begin{tcolorbox}[colback=mlgreen!20, colframe=mlgreen!60, width=0.9\textwidth]
+\centering
+\textbf{Key Insight:} Behavior reveals needs better than demographics ever could
+\end{tcolorbox}
+\end{center}
+\end{frame}
+
+% Evolution Comparison
+\begin{frame}
+\frametitle{Evolution: From Assumptions to Data-Driven Insights}
+\framesubtitle{The Journey of User Understanding Methods}
+
+\begin{center}
+\includegraphics[width=0.85\textwidth]{charts/empathy_evolution.pdf}
+\end{center}
+
+\begin{columns}[T]
+\begin{column}{0.24\textwidth}
+\centering
+\textcolor{mlgray}{\textbf{1990s}}\\
+\small Demographics\\
+Age, Gender, Income\\
+\textcolor{mlred}{0 behavioral data}
+\end{column}
+
+\begin{column}{0.24\textwidth}
+\centering
+\textcolor{mlgray}{\textbf{2000s}}\\
+\small Personas\\
+5-10 interviews\\
+\textcolor{mlorange}{Limited scale}
+\end{column}
+
+\begin{column}{0.24\textwidth}
+\centering
+\textcolor{mlblue}{\textbf{2010s}}\\
+\small Analytics\\
+Usage tracking\\
+\textcolor{mlblue}{Some patterns}
+\end{column}
+
+\begin{column}{0.24\textwidth}
+\centering
+\textcolor{mlgreen}{\textbf{2020s}}\\
+\small ML Clustering\\
+Behavioral segmentation\\
+\textcolor{mlgreen}{Deep understanding}
+\end{column}
+\end{columns}
+
+\vspace{0.5em}
+\begin{center}
+\textcolor{mlpurple}{\textbf{We're here: Using ML to understand users at scale with empathy}}
+\end{center}
+\end{frame}
+
+% Checkpoint 1
+\begin{frame}
+\frametitle{Checkpoint: Foundation Understanding}
+\framesubtitle{Quick Knowledge Check \hfill \textcolor{mlblue}{\textbf{Progress: Part 1/4}}}
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\begin{tcolorbox}[colback=mlblue!10, colframe=mlblue!50, title=True or False?]
+\normalsize
+\begin{enumerate}
+\item Clustering finds natural user groups \textcolor{mlgreen}{(T)}
+\item Demographics > behavior for segmentation \textcolor{mlred}{(F)}
+\item Traditional personas scale well \textcolor{mlred}{(F)}
+\item Clustering reveals hidden patterns \textcolor{mlgreen}{(T)}
+\item Users stay in same segment forever \textcolor{mlred}{(F)}
+\end{enumerate}
+\end{tcolorbox}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\begin{tcolorbox}[colback=mlgreen!10, colframe=mlgreen!50, title=Can You Explain?]
+\normalsize
+\begin{itemize}
+\item Why does behavior matter more than demographics?
+\item How does clustering create empathy?
+\item What patterns might we discover?
+\item When should we re-cluster users?
+\end{itemize}
+\end{tcolorbox}
+\end{column}
+\end{columns}
+
+\vspace{0.5em}
+\begin{center}
+\Large\textcolor{mlpurple}{\textbf{Ready for the technical deep dive?}}\\
+\normalsize\textit{Next: Advanced clustering algorithms for user understanding}
+\end{center}
+\end{frame}
+
+% PART 2: ENHANCED TECHNICAL
+\begin{frame}[plain]
+\begin{center}
+\vspace{2em}
+{\Huge\textcolor{mlgreen}{\textbf{PART 2}}}\\
+\vspace{0.5em}
+{\Large\textbf{Technical Deep Dive}}\\
+\vspace{1em}
+\textit{Advanced clustering for nuanced user understanding}\\
+\vspace{2em}
+\Large
+\textbf{What You'll Master:}\\
+\vspace{0.5em}
+\normalsize
+\begin{itemize}
+\item Advanced K-means techniques
+\item Optimal cluster validation
+\item DBSCAN for outlier users
+\item Hierarchical for user taxonomies
+\item GMM for overlapping segments
+\end{itemize}
+\vspace{1em}
+\Large\textcolor{mlpurple}{\textbf{From algorithms to insights}}
+\end{center}
+\end{frame}
+
+% Learning Objectives Part 2
+\begin{frame}
+\frametitle{Part 2: Technical Learning Objectives}
+\framesubtitle{Algorithm Mastery for User Understanding}
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\begin{tcolorbox}[colback=mlgreen!10, colframe=mlgreen!50, title={Technical Skills}]
+\normalsize
+\begin{itemize}
+\item \textbf{Implement} K-means variations
+\item \textbf{Validate} cluster quality
+\item \textbf{Choose} optimal K systematically
+\item \textbf{Apply} DBSCAN for outliers
+\item \textbf{Build} hierarchical taxonomies
+\item \textbf{Use} GMM for soft clustering
+\end{itemize}
+\end{tcolorbox}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\begin{tcolorbox}[colback=mlorange!10, colframe=mlorange!50, title={Application Skills}]
+\normalsize
+\begin{itemize}
+\item Select right algorithm for user data
+\item Handle outlier users properly
+\item Validate segment stability
+\item Interpret cluster characteristics
+\item Scale to millions of users
+\item Update clusters dynamically
+\end{itemize}
+\end{tcolorbox}
+\end{column}
+\end{columns}
+
+\vspace{0.5em}
+\begin{center}
+\textcolor{mlpurple}{\textbf{Each algorithm reveals different aspects of user behavior}}
+\end{center}
+\end{frame}
+
+% Enhanced K-means for Users
+\begin{frame}
+\frametitle{K-Means for User Segmentation: Advanced Techniques}
+\framesubtitle{Beyond Basic Clustering - Understanding User Nuances}
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\begin{tcolorbox}[colback=mlblue!10, colframe=mlblue!50, title=K-Means++ Initialization]
+\small
+\textbf{Problem:} Random init = poor segments
+
+\textbf{Solution:} Smart initialization
+\begin{enumerate}
+\item Choose first center randomly
+\item Next center: farthest from existing
+\item Repeat until K centers
+\end{enumerate}
+
+\textbf{Result:} 
+\begin{itemize}
+\item Better convergence
+\item More stable segments
+\item Reproducible personas
+\end{itemize}
+\end{tcolorbox}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\begin{tcolorbox}[colback=mlgreen!10, colframe=mlgreen!50, title=Mini-Batch K-Means]
+\small
+\textbf{Problem:} Millions of users = slow
+
+\textbf{Solution:} Batch processing
+\begin{itemize}
+\item Sample random batches
+\item Update centroids incrementally
+\item Converge faster
+\end{itemize}
+
+\textbf{Performance:}
+\begin{itemize}
+\item 3-10x faster
+\item Less than 5\% quality loss
+\item Scales to billions
+\end{itemize}
+\end{tcolorbox}
+\end{column}
+\end{columns}
+
+\vspace{0.5em}
+\begin{center}
+\begin{tcolorbox}[colback=mlyellow!20, colframe=mlorange!60, width=0.9\textwidth]
+\centering
+\textbf{Pro Tip:} Use K-means++ for quality, Mini-batch for scale, combine for production!
+\end{tcolorbox}
+\end{center}
+\end{frame}
+
+% Finding Optimal Clusters
+\begin{frame}
+\frametitle{Finding the Right Number of User Segments}
+\framesubtitle{Data-Driven Approach to Persona Count}
+
+\begin{center}
+\includegraphics[width=0.85\textwidth]{charts/elbow_silhouette_analysis.pdf}
+\end{center}
+
+\begin{columns}[T]
+\begin{column}{0.32\textwidth}
+\begin{tcolorbox}[colback=mlblue!10, colframe=mlblue!50, title=Elbow Method]
+\small
+\textbf{Look for:}
+\begin{itemize}
+\item Sharp bend
+\item Diminishing returns
+\item Here: K=5
+\end{itemize}
+
+\textbf{Means:}\\
+5 distinct user types
+\end{tcolorbox}
+\end{column}
+
+\begin{column}{0.32\textwidth}
+\begin{tcolorbox}[colback=mlgreen!10, colframe=mlgreen!50, title=Silhouette]
+\small
+\textbf{Measures:}
+\begin{itemize}
+\item Cohesion within
+\item Separation between
+\item Max at K=5
+\end{itemize}
+
+\textbf{Score 0.73:}\\
+Strong segments!
+\end{tcolorbox}
+\end{column}
+
+\begin{column}{0.32\textwidth}
+\begin{tcolorbox}[colback=mlorange!10, colframe=mlorange!50, title=Business Logic]
+\small
+\textbf{Consider:}
+\begin{itemize}
+\item Team capacity
+\item Product variants
+\item Market reality
+\end{itemize}
+
+\textbf{Balance:}\\
+Statistics + practicality
+\end{tcolorbox}
+\end{column}
+\end{columns}
+\end{frame}
+
+% DBSCAN for Outlier Users
+\begin{frame}
+\frametitle{DBSCAN: Finding Unique Users and Edge Cases}
+\framesubtitle{Not Everyone Fits in a Box - And That's Valuable!}
+
+\begin{columns}[T]
+\begin{column}{0.55\textwidth}
+\begin{center}
+\includegraphics[width=\textwidth]{charts/dbscan_detailed.pdf}
+\end{center}
+\end{column}
+
+\begin{column}{0.43\textwidth}
+\begin{tcolorbox}[colback=mlpurple!10, colframe=mlpurple!50, title=DBSCAN Benefits]
+\small
+\textbf{Finds:}
+\begin{itemize}
+\item Core user groups
+\item Edge users
+\item True outliers
+\item Irregular shapes
+\end{itemize}
+
+\textbf{Perfect for:}
+\begin{itemize}
+\item Power users
+\item Early adopters
+\item Special needs
+\item Fraud detection
+\end{itemize}
+
+\textbf{No K needed!}\\
+Algorithm finds natural groups
+\end{tcolorbox}
+\end{column}
+\end{columns}
+
+\begin{center}
+\begin{tcolorbox}[colback=mlgreen!20, colframe=mlgreen!60, width=0.9\textwidth]
+\centering
+\textbf{Insight:} Your most valuable users might be outliers - DBSCAN finds them!
+\end{tcolorbox}
+\end{center}
+\end{frame}
+
+% Hierarchical for User Taxonomy
+\begin{frame}
+\frametitle{Hierarchical Clustering: Building User Taxonomies}
+\framesubtitle{Understanding User Relationships at Multiple Levels}
+
+\begin{columns}[T]
+\begin{column}{0.55\textwidth}
+\begin{center}
+\includegraphics[width=\textwidth]{charts/hierarchical_detailed.pdf}
+\end{center}
+\end{column}
+
+\begin{column}{0.43\textwidth}
+\begin{tcolorbox}[colback=mlblue!10, colframe=mlblue!50, title=Multi-Level Understanding]
+\small
+\textbf{Level 1: Broad}
+\begin{itemize}
+\item Active vs Passive users
+\end{itemize}
+
+\textbf{Level 2: Categories}
+\begin{itemize}
+\item Creators, Consumers, Curators
+\end{itemize}
+
+\textbf{Level 3: Specific}
+\begin{itemize}
+\item 8-10 detailed personas
+\end{itemize}
+
+\textbf{Benefits:}
+\begin{itemize}
+\item Flexible granularity
+\item Natural hierarchy
+\item Evolution tracking
+\end{itemize}
+\end{tcolorbox}
+\end{column}
+\end{columns}
+
+\begin{center}
+\begin{tcolorbox}[colback=mlyellow!20, colframe=mlorange!60, width=0.9\textwidth]
+\centering
+\textbf{Use Case:} Perfect for creating user documentation at different detail levels
+\end{tcolorbox}
+\end{center}
+\end{frame}
+
+% GMM for Overlapping Segments
+\begin{frame}
+\frametitle{Gaussian Mixture Models: When Users Don't Fit One Box}
+\framesubtitle{Soft Clustering for Complex User Behaviors}
+
+\begin{columns}[T]
+\begin{column}{0.55\textwidth}
+\begin{center}
+\includegraphics[width=\textwidth]{charts/gmm_detailed.pdf}
+\end{center}
+\end{column}
+
+\begin{column}{0.43\textwidth}
+\begin{tcolorbox}[colback=mlgreen!10, colframe=mlgreen!50, title=Soft Assignments]
+\small
+\textbf{User A:}
+\begin{itemize}
+\item 70\% Power User
+\item 20\% Creator
+\item 10\% Casual
+\end{itemize}
+
+\textbf{User B:}
+\begin{itemize}
+\item 60\% Consumer
+\item 40\% Curator
+\end{itemize}
+
+\textbf{Benefits:}
+\begin{itemize}
+\item Realistic modeling
+\item Probability scores
+\item Transition detection
+\item Nuanced personas
+\end{itemize}
+\end{tcolorbox}
+\end{column}
+\end{columns}
+
+\begin{center}
+\begin{tcolorbox}[colback=mlpurple!20, colframe=mlpurple!60, width=0.9\textwidth]
+\centering
+\textbf{Reality:} Most users are combinations - GMM captures this complexity!
+\end{tcolorbox}
+\end{center}
+\end{frame}
+
+% Algorithm Selection Guide
+\begin{frame}
+\frametitle{Choosing the Right Algorithm: Decision Guide}
+\framesubtitle{Match Your User Data to the Right Method}
+
+\begin{center}
+\includegraphics[width=0.85\textwidth]{charts/clustering_selection_guide.pdf}
+\end{center}
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\begin{tcolorbox}[colback=mlblue!10, colframe=mlblue!50, title=Quick Decision Tree]
+\small
+\textbf{Start here:}
+\begin{itemize}
+\item Know K? → K-means
+\item Need outliers? → DBSCAN
+\item Need hierarchy? → Hierarchical
+\item Users overlap? → GMM
+\item Huge scale? → Mini-batch
+\end{itemize}
+\end{tcolorbox}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\begin{tcolorbox}[colback=mlgreen!10, colframe=mlgreen!50, title=Pro Combination]
+\small
+\textbf{Best practice:}
+\begin{enumerate}
+\item DBSCAN for outliers
+\item K-means for main segments
+\item GMM for refinement
+\item Hierarchical for taxonomy
+\end{enumerate}
+\textbf{Result:} Complete user understanding
+\end{tcolorbox}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Python Implementation
+\begin{frame}[fragile]
+\frametitle{Implementation: User Clustering Pipeline}
+\framesubtitle{Production-Ready Code for User Segmentation}
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\begin{tcolorbox}[colback=gray!5, colframe=mlblue!50, title={\small Data Preparation}]
+\begin{lstlisting}[language=Python, basicstyle=\tiny\ttfamily]
+import pandas as pd
+from sklearn.preprocessing import StandardScaler
+from sklearn.cluster import KMeans
+
+# Load user behavior data
+users = pd.read_csv('user_behavior.csv')
+
+# Select features
+features = ['sessions', 'duration',
+           'actions', 'shares', 
+           'likes', 'comments']
+
+# Scale features
+scaler = StandardScaler()
+X = scaler.fit_transform(users[features])
+
+# Find optimal K
+from sklearn.metrics import silhouette_score
+
+scores = []
+for k in range(2, 10):
+    kmeans = KMeans(n_clusters=k)
+    labels = kmeans.fit_predict(X)
+    score = silhouette_score(X, labels)
+    scores.append(score)
+
+optimal_k = scores.index(max(scores)) + 2
+\end{lstlisting}
+\end{tcolorbox}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\begin{tcolorbox}[colback=gray!5, colframe=mlgreen!50, title={\small Clustering \& Analysis}]
+\begin{lstlisting}[language=Python, basicstyle=\tiny\ttfamily]
+# Cluster with optimal K
+kmeans = KMeans(
+    n_clusters=optimal_k,
+    init='k-means++',
+    n_init=10,
+    random_state=42
+)
+users['segment'] = kmeans.fit_predict(X)
+
+# Analyze segments
+for i in range(optimal_k):
+    segment = users[users['segment'] == i]
+    print(f"\nSegment {i} ({len(segment)} users):")
+    print(segment[features].mean())
+
+# Create persona profiles
+personas = users.groupby('segment').agg({
+    'sessions': ['mean', 'std'],
+    'duration': ['mean', 'std'],
+    'actions': ['mean', 'std']
+})
+
+# Export for design team
+personas.to_csv('user_personas.csv')
+users.to_csv('users_segmented.csv')
+\end{lstlisting}
+\end{tcolorbox}
+\end{column}
+\end{columns}
+
+\begin{center}
+\begin{tcolorbox}[colback=mlyellow!20, colframe=mlorange!60, width=0.9\textwidth]
+\centering
+\textbf{Note:} This code scales to millions of users with mini-batch modifications
+\end{tcolorbox}
+\end{center}
+\end{frame}
+
+% Checkpoint 2
+\begin{frame}
+\frametitle{Checkpoint: Technical Mastery}
+\framesubtitle{Algorithm Understanding Check \hfill \textcolor{mlgreen}{\textbf{Progress: Part 2/4}}}
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\begin{tcolorbox}[colback=mlblue!10, colframe=mlblue!50, title=Match the Algorithm]
+\normalsize
+Match use case to algorithm:
+\begin{enumerate}
+\item Finding power users\\
+   → \textcolor{mlgreen}{DBSCAN}
+\item Quick segmentation\\
+   → \textcolor{mlblue}{K-means}
+\item User taxonomy\\
+   → \textcolor{mlorange}{Hierarchical}
+\item Mixed behaviors\\
+   → \textcolor{mlpurple}{GMM}
+\end{enumerate}
+\end{tcolorbox}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\begin{tcolorbox}[colback=mlgreen!10, colframe=mlgreen!50, title=Can You Code?]
+\normalsize
+Write the code to:
+\begin{itemize}
+\item Load user data (Y)
+\item Scale features (Y)
+\item Find optimal K (Y)
+\item Cluster users (Y)
+\item Analyze segments (Y)
+\end{itemize}
+\end{tcolorbox}
+\end{column}
+\end{columns}
+
+\vspace{0.5em}
+\begin{center}
+\Large\textcolor{mlpurple}{\textbf{Excellent! Now let's turn clusters into personas}}\\
+\normalsize\textit{Next: Design integration - from data to human stories}
+\end{center}
+\end{frame}
+
+% PART 3: ENHANCED DESIGN INTEGRATION
+\begin{frame}[plain]
+\begin{center}
+\vspace{2em}
+{\Huge\textcolor{mlorange}{\textbf{PART 3}}}\\
+\vspace{0.5em}
+{\Large\textbf{Design Integration}}\\
+\vspace{1em}
+\textit{Transforming clusters into empathetic understanding}\\
+\vspace{2em}
+\Large
+\textbf{What You'll Create:}\\
+\vspace{0.5em}
+\normalsize
+\begin{itemize}
+\item Data-driven personas with narratives
+\item Empathy maps per segment
+\item Differentiated journey maps
+\item Pain point matrices
+\item Innovation opportunities
+\end{itemize}
+\vspace{1em}
+\Large\textcolor{mlpurple}{\textbf{From numbers to human stories}}
+\end{center}
+\end{frame}
+
+% From Clusters to Personas
+\begin{frame}
+\frametitle{From Clusters to Living Personas}
+\framesubtitle{Breathing Life into Data Points}
+
+\begin{columns}[T]
+\begin{column}{0.55\textwidth}
+\begin{center}
+\includegraphics[width=\textwidth]{charts/cluster_to_empathy.pdf}
+\end{center}
+\end{column}
+
+\begin{column}{0.43\textwidth}
+\begin{tcolorbox}[colback=mlorange!10, colframe=mlorange!50, title=Persona Building]
+\small
+\textbf{Cluster 3 → "Creative Curator"}
+
+\textbf{Data says:}
+\begin{itemize}
+\item High sharing rate
+\item Medium session length
+\item Peak usage evenings
+\end{itemize}
+
+\textbf{Persona becomes:}
+\begin{itemize}
+\item Sarah, 28, Designer
+\item Discovers \& shares inspiration
+\item Values quality over quantity
+\item Needs: curation tools
+\end{itemize}
+
+\textbf{Key:} Data informs, empathy guides
+\end{tcolorbox}
+\end{column}
+\end{columns}
+
+\begin{center}
+\begin{tcolorbox}[colback=mlpurple!20, colframe=mlpurple!60, width=0.9\textwidth]
+\centering
+\textbf{Remember:} Clusters are statistical, personas are human - bridge both worlds!
+\end{tcolorbox}
+\end{center}
+\end{frame}
+
+% Building Empathy Maps
+\begin{frame}
+\frametitle{Building Data-Driven Empathy Maps}
+\framesubtitle{Understanding What Users Think, Feel, Say, and Do}
+
+\begin{columns}[T]
+\begin{column}{0.55\textwidth}
+\begin{center}
+\includegraphics[width=\textwidth]{charts/empathy_map_detailed.pdf}
+\end{center}
+\end{column}
+
+\begin{column}{0.43\textwidth}
+\begin{tcolorbox}[colback=mlgreen!10, colframe=mlgreen!50, title=From Data to Empathy]
+\small
+\textbf{Think (from search data):}
+\begin{itemize}
+\item "Is there a better way?"
+\item "How do others do this?"
+\end{itemize}
+
+\textbf{Feel (from behavior):}
+\begin{itemize}
+\item Frustrated (rage clicks)
+\item Delighted (shares)
+\end{itemize}
+
+\textbf{Say (from reviews):}
+\begin{itemize}
+\item "Love this feature!"
+\item "Too complicated"
+\end{itemize}
+
+\textbf{Do (from analytics):}
+\begin{itemize}
+\item Abandons after 3 clicks
+\item Returns daily
+\end{itemize}
+\end{tcolorbox}
+\end{column}
+\end{columns}
+
+\begin{center}
+\begin{tcolorbox}[colback=mlyellow!20, colframe=mlorange!60, width=0.9\textwidth]
+\centering
+\textbf{Pro Tip:} Combine quantitative cluster data with qualitative user research
+\end{tcolorbox}
+\end{center}
+\end{frame}
+
+% Journey Mapping per Segment
+\begin{frame}
+\frametitle{Differentiated Journey Maps: One Product, Many Paths}
+\framesubtitle{How Different User Segments Experience Your Product}
+
+\begin{center}
+\includegraphics[width=0.85\textwidth]{charts/journey_comparison.pdf}
+\end{center}
+
+\begin{columns}[T]
+\begin{column}{0.32\textwidth}
+\begin{tcolorbox}[colback=mlblue!10, colframe=mlblue!50, title=Power Users]
+\small
+\textbf{Journey:}
+\begin{itemize}
+\item Skip onboarding
+\item Deep dive features
+\item Create workflows
+\item Become advocates
+\end{itemize}
+\textbf{Need:} Advanced tools
+\end{tcolorbox}
+\end{column}
+
+\begin{column}{0.32\textwidth}
+\begin{tcolorbox}[colback=mlgreen!10, colframe=mlgreen!50, title=Casual Users]
+\small
+\textbf{Journey:}
+\begin{itemize}
+\item Need guidance
+\item Use basics only
+\item Periodic engagement
+\item Quick tasks
+\end{itemize}
+\textbf{Need:} Simplicity
+\end{tcolorbox}
+\end{column}
+
+\begin{column}{0.32\textwidth}
+\begin{tcolorbox}[colback=mlorange!10, colframe=mlorange!50, title=Explorers]
+\small
+\textbf{Journey:}
+\begin{itemize}
+\item Try everything
+\item Test limits
+\item Share discoveries
+\item Suggest features
+\end{itemize}
+\textbf{Need:} Playground
+\end{tcolorbox}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Innovation Opportunities
+\begin{frame}
+\frametitle{Innovation Opportunity Matrix}
+\framesubtitle{Where Each Segment Needs Innovation}
+
+\begin{center}
+% \includegraphics[width=0.85\textwidth]{charts/innovation_opportunities.pdf}
+\textit{[Innovation Opportunity Matrix Chart]}
+\end{center}
+
+\begin{center}
+\begin{tcolorbox}[colback=mlpurple!20, colframe=mlpurple!60, width=0.9\textwidth]
+\centering
+\textbf{Insight:} Different segments = different innovation priorities
+\end{tcolorbox}
+\end{center}
+\end{frame}
+
+% PART 4: PRACTICE & CASE STUDY
+\begin{frame}[plain]
+\begin{center}
+\vspace{2em}
+{\Huge\textcolor{mlred}{\textbf{PART 4}}}\\
+\vspace{0.5em}
+{\Large\textbf{Practice \& Case Study}}\\
+\vspace{1em}
+\textit{Real-world application: Spotify's data-driven personas}\\
+\vspace{2em}
+\Large
+\textbf{What We'll Explore:}\\
+\vspace{0.5em}
+\normalsize
+\begin{itemize}
+\item How Spotify segments 400M users
+\item 5 core music personas discovered
+\item Features designed per segment
+\item Measurable impact
+\item Your practice exercise
+\end{itemize}
+\vspace{1em}
+\Large\textcolor{mlpurple}{\textbf{From theory to practice}}
+\end{center}
+\end{frame}
+
+% Spotify Case Study
+\begin{frame}
+\frametitle{Case Study: Spotify's Data-Driven Personas}
+\framesubtitle{How 400 Million Users Became 5 Core Personas}
+
+\begin{columns}[T]
+\begin{column}{0.55\textwidth}
+\begin{center}
+\includegraphics[width=\textwidth]{charts/persona_profiles.pdf}
+\end{center}
+\end{column}
+
+\begin{column}{0.43\textwidth}
+\begin{tcolorbox}[colback=mlgreen!10, colframe=mlgreen!50, title=The Challenge]
+\small
+\textbf{Problem:}
+\begin{itemize}
+\item 400M users
+\item 180 countries
+\item Diverse tastes
+\item One app?
+\end{itemize}
+
+\textbf{Solution:}
+\begin{itemize}
+\item Behavioral clustering
+\item 5 core personas found
+\item Personalized features
+\item Dynamic adaptation
+\end{itemize}
+
+\textbf{Impact:}
+\begin{itemize}
+\item 2x engagement
+\item 40\% less churn
+\item Higher satisfaction
+\end{itemize}
+\end{tcolorbox}
+\end{column}
+\end{columns}
+
+\begin{center}
+\begin{tcolorbox}[colback=mlyellow!20, colframe=mlorange!60, width=0.9\textwidth]
+\centering
+\textbf{Key Learning:} Same data, different algorithms = deeper understanding
+\end{tcolorbox}
+\end{center}
+\end{frame}
+
+% The 5 Spotify Personas
+\begin{frame}
+\frametitle{Spotify's 5 Music Personas: Data-Driven Discovery}
+\framesubtitle{Each Persona Gets Different Features}
+
+\begin{columns}[T]
+\begin{column}{0.19\textwidth}
+\begin{tcolorbox}[colback=mlblue!10, colframe=mlblue!50, title=Explorer]
+\tiny
+\textbf{Behavior:}
+\begin{itemize}
+\item New music daily
+\item Diverse genres
+\item Short sessions
+\end{itemize}
+
+\textbf{Feature:}\\
+Discover Weekly
+\end{tcolorbox}
+\end{column}
+
+\begin{column}{0.19\textwidth}
+\begin{tcolorbox}[colback=mlgreen!10, colframe=mlgreen!50, title=Loyalist]
+\tiny
+\textbf{Behavior:}
+\begin{itemize}
+\item Same artists
+\item Full albums
+\item Long sessions
+\end{itemize}
+
+\textbf{Feature:}\\
+Artist Radio
+\end{tcolorbox}
+\end{column}
+
+\begin{column}{0.19\textwidth}
+\begin{tcolorbox}[colback=mlorange!10, colframe=mlorange!50, title=Social]
+\tiny
+\textbf{Behavior:}
+\begin{itemize}
+\item Share playlists
+\item Follow friends
+\item Group sessions
+\end{itemize}
+
+\textbf{Feature:}\\
+Blend Playlists
+\end{tcolorbox}
+\end{column}
+
+\begin{column}{0.19\textwidth}
+\begin{tcolorbox}[colback=mlred!10, colframe=mlred!50, title=Focused]
+\tiny
+\textbf{Behavior:}
+\begin{itemize}
+\item Background music
+\item Mood playlists
+\item Repeat mode
+\end{itemize}
+
+\textbf{Feature:}\\
+Focus Playlists
+\end{tcolorbox}
+\end{column}
+
+\begin{column}{0.19\textwidth}
+\begin{tcolorbox}[colback=mlpurple!10, colframe=mlpurple!50, title=Curator]
+\tiny
+\textbf{Behavior:}
+\begin{itemize}
+\item Create playlists
+\item Organize library
+\item Edit metadata
+\end{itemize}
+
+\textbf{Feature:}\\
+Enhanced Library
+\end{tcolorbox}
+\end{column}
+\end{columns}
+
+\vspace{0.5em}
+\begin{center}
+\Large\textcolor{mlpurple}{\textbf{Result: Each user feels Spotify was made for them}}
+\end{center}
+\end{frame}
+
+% Practice Exercise
+\begin{frame}
+\frametitle{Practice Exercise: Segment Your Users}
+\framesubtitle{Hands-On: From Raw Data to Personas}
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\begin{tcolorbox}[colback=mlblue!10, colframe=mlblue!50, title=Your Task]
+\normalsize
+\textbf{Dataset:} E-commerce users\\
+\textbf{Size:} 10,000 users\\
+\textbf{Features:} 15 behavioral metrics
+
+\vspace{0.3em}
+\textbf{Steps:}
+\begin{enumerate}
+\item Load and explore data
+\item Preprocess features
+\item Find optimal K
+\item Cluster users
+\item Analyze segments
+\item Create 3 personas
+\item Build empathy maps
+\item Design features
+\end{enumerate}
+
+\textbf{Time:} 45 minutes\\
+\textbf{Deliverable:} Persona cards
+\end{tcolorbox}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\begin{tcolorbox}[colback=mlgreen!10, colframe=mlgreen!50, title=Starter Code]
+\begin{lstlisting}[language=Python, basicstyle=\tiny\ttfamily]
+import pandas as pd
+from sklearn.cluster import KMeans
+from sklearn.preprocessing import StandardScaler
+
+# Load your data
+users = pd.read_csv('ecommerce_users.csv')
+
+# Explore
+print(users.info())
+print(users.describe())
+
+# Select behavioral features
+features = ['visits', 'duration', 
+           'pages_viewed', 'items_bought',
+           'cart_abandons', 'reviews']
+
+# Your code here...
+# 1. Scale features
+# 2. Find optimal K
+# 3. Cluster users
+# 4. Analyze segments
+
+# Template for persona
+persona_template = {
+    'name': '',
+    'characteristics': [],
+    'needs': [],
+    'pain_points': [],
+    'opportunities': []
+}
+\end{lstlisting}
+\end{tcolorbox}
+\end{column}
+\end{columns}
+\end{frame}
+
+% Implementation Checklist
+\begin{frame}
+\frametitle{Implementation Checklist}
+\framesubtitle{Your Step-by-Step Guide to User Segmentation Success}
+
+\begin{columns}[T]
+\begin{column}{0.32\textwidth}
+\begin{tcolorbox}[colback=mlblue!10, colframe=mlblue!50, title=1. Data Prep]
+\small
+\textbf{Collect:}
+\begin{itemize}
+\item[$\square$] User behavior data
+\item[$\square$] Engagement metrics
+\item[$\square$] Feature usage
+\item[$\square$] Feedback data
+\end{itemize}
+
+\textbf{Process:}
+\begin{itemize}
+\item[$\square$] Clean data
+\item[$\square$] Handle missing
+\item[$\square$] Feature engineering
+\item[$\square$] Scale features
+\end{itemize}
+\end{tcolorbox}
+\end{column}
+
+\begin{column}{0.32\textwidth}
+\begin{tcolorbox}[colback=mlgreen!10, colframe=mlgreen!50, title=2. Cluster]
+\small
+\textbf{Algorithm:}
+\begin{itemize}
+\item[$\square$] Choose method
+\item[$\square$] Find optimal K
+\item[$\square$] Validate quality
+\item[$\square$] Check stability
+\end{itemize}
+
+\textbf{Analysis:}
+\begin{itemize}
+\item[$\square$] Segment profiles
+\item[$\square$] Size distribution
+\item[$\square$] Key differences
+\item[$\square$] Edge cases
+\end{itemize}
+\end{tcolorbox}
+\end{column}
+
+\begin{column}{0.32\textwidth}
+\begin{tcolorbox}[colback=mlorange!10, colframe=mlorange!50, title=3. Design]
+\small
+\textbf{Personas:}
+\begin{itemize}
+\item[$\square$] Create narratives
+\item[$\square$] Build empathy maps
+\item[$\square$] Map journeys
+\item[$\square$] Identify needs
+\end{itemize}
+
+\textbf{Apply:}
+\begin{itemize}
+\item[$\square$] Design features
+\item[$\square$] Prioritize roadmap
+\item[$\square$] Test with users
+\item[$\square$] Measure impact
+\end{itemize}
+\end{tcolorbox}
+\end{column}
+\end{columns}
+
+\vspace{0.5em}
+\begin{center}
+\begin{tcolorbox}[colback=mlpurple!20, colframe=mlpurple!60, width=0.9\textwidth]
+\centering
+\textbf{Success Metric:} Users say "This feels made just for me!"
+\end{tcolorbox}
+\end{center}
+\end{frame}
+
+% Key Takeaways
+\begin{frame}
+\frametitle{Key Takeaways: Clustering for Deep Empathy}
+\framesubtitle{What You've Mastered Today}
+
+\begin{columns}[T]
+\begin{column}{0.32\textwidth}
+\begin{tcolorbox}[colback=mlblue!10, colframe=mlblue!50, title=Technical]
+\small
+\textbf{You can now:}
+\begin{itemize}
+\item Implement K-means++
+\item Validate clusters
+\item Use DBSCAN
+\item Build hierarchies
+\item Apply GMM
+\item Scale to millions
+\end{itemize}
+\end{tcolorbox}
+\end{column}
+
+\begin{column}{0.32\textwidth}
+\begin{tcolorbox}[colback=mlgreen!10, colframe=mlgreen!50, title=Design]
+\small
+\textbf{You create:}
+\begin{itemize}
+\item Data personas
+\item Empathy maps
+\item Journey maps
+\item Pain matrices
+\item Opportunity maps
+\item Feature priorities
+\end{itemize}
+\end{tcolorbox}
+\end{column}
+
+\begin{column}{0.32\textwidth}
+\begin{tcolorbox}[colback=mlorange!10, colframe=mlorange!50, title=Impact]
+\small
+\textbf{Results in:}
+\begin{itemize}
+\item Better products
+\item Happy users
+\item Less churn
+\item More engagement
+\item Innovation focus
+\item Scalable empathy
+\end{itemize}
+\end{tcolorbox}
+\end{column}
+\end{columns}
+
+\vspace{0.5em}
+\begin{center}
+\begin{tcolorbox}[colback=mlpurple!20, colframe=mlpurple!60, width=0.9\textwidth]
+\centering\Large
+\textbf{Remember: Every cluster represents real people with real needs}
+\end{tcolorbox}
+\end{center}
+
+\begin{center}
+\Large\textcolor{mlgreen}{\textbf{You now have the tools to understand millions of users with empathy!}}
+\end{center}
+\end{frame}
+
+% Resources & Next Steps
+\begin{frame}
+\frametitle{Resources \& Next Week Preview}
+\framesubtitle{Continue Your Journey in Data-Driven Empathy}
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\begin{tcolorbox}[colback=mlblue!10, colframe=mlblue!50, title=This Week's Resources]
+\small
+\textbf{Readings:}
+\begin{itemize}
+\item "Persona Lifecycle" - Pruitt \& Adlin
+\item "K-means++: The Advantages" - Arthur
+\item Spotify Engineering Blog
+\end{itemize}
+
+\textbf{Tools:}
+\begin{itemize}
+\item Scikit-learn clustering guide
+\item Persona template toolkit
+\item Journey mapping tools
+\end{itemize}
+
+\textbf{Practice:}
+\begin{itemize}
+\item Kaggle customer segmentation
+\item UCI ML Repository datasets
+\end{itemize}
+\end{tcolorbox}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\begin{tcolorbox}[colback=mlgreen!10, colframe=mlgreen!50, title=Next Week: NLP for Emotion]
+\small
+\textbf{Week 3 Preview:}
+\begin{itemize}
+\item Sentiment analysis with BERT
+\item Understanding user emotions
+\item Context-aware NLP
+\item Voice of customer analysis
+\end{itemize}
+
+\textbf{You'll learn:}
+\begin{itemize}
+\item Extract emotions from text
+\item Detect sarcasm and nuance
+\item Analyze reviews at scale
+\item Build emotional journeys
+\end{itemize}
+
+\textbf{Homework:}\\
+Segment a dataset of your choice!
+\end{tcolorbox}
+\end{column}
+\end{columns}
+
+\vspace{0.5em}
+\begin{center}
+\begin{tcolorbox}[colback=mlyellow!20, colframe=mlorange!60, width=0.9\textwidth]
+\centering
+\textbf{Office Hours:} Tuesday 2-4pm | Slack: \#ml-empathy | Questions welcome!
+\end{tcolorbox}
+\end{center}
+\end{frame}
+
+% Final Slide
+\begin{frame}
+\frametitle{Your Data-Driven Empathy Journey Continues!}
+\framesubtitle{From Understanding Groups to Understanding Emotions}
+
+\begin{center}
+{\Large\textbf{This Week's Achievement:}}\\
+\vspace{0.5em}
+{\large You can now understand user segments at scale with deep empathy}\\
+\vspace{1em}
+{\Large\textbf{Next Week's Challenge:}}\\
+\vspace{0.5em}
+{\large Understanding what users feel through their words}
+\end{center}
+
+\vspace{1em}
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\begin{tcolorbox}[colback=mlgreen!10, colframe=mlgreen!50, title=Your Homework]
+\normalsize
+\begin{enumerate}
+\item Choose a dataset
+\item Apply clustering pipeline
+\item Create 3-5 personas
+\item Build empathy maps
+\item Share in Slack!
+\end{enumerate}
+\end{tcolorbox}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\begin{tcolorbox}[colback=mlblue!10, colframe=mlblue!50, title=Success Tips]
+\normalsize
+\begin{itemize}
+\item Start with K-means++
+\item Always validate clusters
+\item Combine with qualitative data
+\item Focus on actionable insights
+\item Remember: data serves empathy
+\end{itemize}
+\end{tcolorbox}
+\end{column}
+\end{columns}
+
+\vspace{1em}
+\begin{center}
+\begin{tcolorbox}[colback=mlpurple!20, colframe=mlpurple!60, width=0.9\textwidth]
+\centering\Large
+\textbf{Questions? Let's discuss!}
+\end{tcolorbox}
+\end{center}
+\end{frame}
+
+\end{document}

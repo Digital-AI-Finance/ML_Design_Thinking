@@ -1,0 +1,686 @@
+% ==================== PART 3: THE ALGORITHMS ====================
+\section{Part 3: Five Ways to Draw Decision Lines}
+
+% Slide 13: Algorithm Overview
+\begin{frame}[t]{Five Algorithms, Five Philosophies}
+\Large\textbf{Different Ways to Solve the Same Problem}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\column{0.55\textwidth}
+\begin{center}
+\includegraphics[width=0.95\textwidth]{charts/innovation_algorithm_comparison.pdf}
+\end{center}
+
+\column{0.43\textwidth}
+\textbf{Our Arsenal:}
+\begin{enumerate}
+\item \textbf{Logistic Regression}\\
+\footnotesize The straight line
+
+\item \textbf{Decision Trees}\\
+\footnotesize 20 questions game
+
+\item \textbf{Random Forest}\\
+\footnotesize Ask 100 experts
+
+\item \textbf{SVM}\\
+\footnotesize Maximum margin
+
+\item \textbf{Neural Networks}\\
+\footnotesize Stacked patterns
+\end{enumerate}
+
+\vspace{0.5em}
+\textbf{Performance Preview:}
+\begin{itemize}
+\footnotesize
+\item Speed vs Accuracy
+\item Interpretability vs Power
+\item Simple vs Complex
+\end{itemize}
+\end{columns}
+
+\bottomnote{Context determines optimal method - algorithm selection requires matching approach characteristics to problem structure and constraints}
+\end{frame}
+
+% Slide 14: Logistic Regression
+\begin{frame}[t]{Algorithm 1: Logistic Regression}
+\Large\textbf{The Straight Line Approach}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{How It Works:}
+\begin{itemize}
+\item Draw a straight line (or plane)
+\item Measure distance to line
+\item Convert to probability
+\item Simple, fast, interpretable
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{The Math (Simplified):}
+$$P(\text{success}) = \frac{1}{1 + e^{-(w_1x_1 + w_2x_2 + ... + b)}}$$
+
+\footnotesize
+``Squashes any number between 0 and 1''
+
+\vspace{0.5em}
+\normalsize
+\textbf{Real Example:}
+\footnotesize
+$$P = \frac{1}{1 + e^{-(0.5 \cdot \text{novelty} + 0.3 \cdot \text{market} - 2)}}$$
+
+\column{0.48\textwidth}
+\textbf{Visual Intuition:}
+\begin{center}
+\begin{tikzpicture}[scale=0.7]
+\begin{axis}[
+    xlabel={Feature Combination},
+    ylabel={Probability},
+    grid=major,
+    width=6cm,
+    height=4cm,
+    ymin=0, ymax=1
+]
+\addplot[mlpurple,ultra thick,domain=-6:6,samples=100] {1/(1+exp(-x))};
+\node at (axis cs:-3,0.1) [mlred] {\footnotesize Fail};
+\node at (axis cs:3,0.9) [mlgreen] {\footnotesize Success};
+\addplot[dashed,mlgray] coordinates {(-6,0.5) (6,0.5)};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Performance:}
+\begin{itemize}
+\item Accuracy: \textcolor{mlorange}{76\%}
+\item Training: \textcolor{mlgreen}{0.1 seconds}
+\item Prediction: \textcolor{mlgreen}{0.001 seconds}
+\item Interpretability: \textcolor{mlgreen}{High}
+\end{itemize}
+\end{columns}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mllavender4, colframe=mlpurple]
+\centering
+\textbf{Use when:} You need fast, interpretable results and relationships are roughly linear
+\end{tcolorbox}
+
+\bottomnote{Linear simplicity enables interpretability - coefficient-based models provide transparent feature importance attribution}
+\end{frame}
+
+% Slide 15: Decision Trees
+\begin{frame}[t]{Algorithm 2: Decision Trees}
+\Large\textbf{The 20 Questions Game}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\column{0.55\textwidth}
+\textbf{How It Works:}
+\begin{center}
+\begin{tikzpicture}[scale=0.7,
+    every node/.style={draw,rounded corners,font=\footnotesize},
+    level 1/.style={sibling distance=3.5cm},
+    level 2/.style={sibling distance=1.8cm}]
+\node[fill=mllavender2] {Novelty > 70\%?}
+    child {node[fill=mllavender3] {Team > 5yr?}
+        child {node[fill=mlred!30,draw=mlred] {\textbf{Fail} 85\%}}
+        child {node[fill=mlorange!30] {Market > \$1B?}
+            child {node[fill=mlyellow!30] {Maybe 55\%}}
+            child {node[fill=mlgreen!30,draw=mlgreen] {\textbf{Success} 78\%}}
+        }
+    }
+    child {node[fill=mllavender3] {Funded before?}
+        child {node[fill=mlgreen!30,draw=mlgreen] {\textbf{Success} 92\%}}
+        child {node[fill=mlyellow!30] {Maybe 61\%}}
+    };
+\end{tikzpicture}
+\end{center}
+
+\footnotesize
+Each question splits the data into purer groups
+
+\column{0.43\textwidth}
+\textbf{The Process:}
+\begin{enumerate}
+\footnotesize
+\item Find best question to ask
+\item Split data based on answer
+\item Repeat for each branch
+\item Stop when pure (or max depth)
+\end{enumerate}
+
+\vspace{0.5em}
+\normalsize
+\textbf{Why ``Best'' Question?}
+\begin{itemize}
+\footnotesize
+\item Maximum information gain
+\item Biggest reduction in uncertainty
+\item Most separation between classes
+\end{itemize}
+
+\vspace{0.5em}
+\normalsize
+\textbf{Performance:}
+\begin{itemize}
+\item Accuracy: \textcolor{mlorange}{78\%}
+\item Training: \textcolor{mlorange}{0.5 seconds}
+\item Prediction: \textcolor{mlgreen}{0.001 seconds}
+\item Interpretability: \textcolor{mlgreen}{Very High}
+\end{itemize}
+\end{columns}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mlgreen!10, colframe=mlgreen]
+\centering
+\textbf{Use when:} You need to explain decisions to non-technical stakeholders
+\end{tcolorbox}
+
+\bottomnote{Hierarchical partitioning mirrors human reasoning - sequential decision rules create interpretable classification paths}
+\end{frame}
+
+% Slide 16: Random Forest
+\begin{frame}[t]{Algorithm 3: Random Forest}
+\Large\textbf{Ask 100 Experts, Take a Vote}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{The Wisdom of Crowds:}
+\begin{itemize}
+\item Build 100 different trees
+\item Each sees different data subset
+\item Each uses different features
+\item All vote on final decision
+\item Democracy beats dictatorship
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Why It Works:}
+\begin{itemize}
+\footnotesize
+\item Single tree: Might overfit
+\item 100 trees: Cancel out errors
+\item Different perspectives
+\item Robust predictions
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Voting Example:}
+\begin{itemize}
+\footnotesize
+\item 73 trees say: Success
+\item 27 trees say: Fail
+\item Result: 73\% confidence Success
+\end{itemize}
+
+\column{0.48\textwidth}
+\textbf{Visual Concept:}
+\begin{center}
+\begin{tikzpicture}[scale=0.6]
+% Forest of trees
+\foreach \x in {0,1.5,3} {
+    \foreach \y in {0,1.5} {
+        \draw[mlgreen!70,thick] (\x,\y) -- (\x,\y+0.3) -- (\x-0.2,\y+0.5) (\x,\y+0.3) -- (\x+0.2,\y+0.5);
+        \draw[mlgreen!70,fill=mlgreen!30] (\x,\y+0.5) circle (0.3);
+    }
+}
+% Arrows pointing to result
+\draw[->,thick] (3.5,0.75) -- (4.5,0.75);
+% Result box
+\draw[thick,fill=mllavender2] (4.5,0.25) rectangle (6,1.25);
+\node at (5.25,0.75) {\footnotesize \textbf{Vote: 73\%}};
+\end{tikzpicture}
+\end{center}
+
+\vspace{0.5em}
+\textbf{Performance:}
+\begin{itemize}
+\item Accuracy: \textcolor{mlgreen}{89\%}
+\item Training: \textcolor{mlorange}{2 seconds}
+\item Prediction: \textcolor{mlorange}{0.01 seconds}
+\item Interpretability: \textcolor{mlred}{Low}
+\end{itemize}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mllavender4, colframe=mlpurple]
+\textbf{Trade-off:} Lost interpretability,\\
+gained 11\% accuracy
+\end{tcolorbox}
+\end{columns}
+
+\bottomnote{Ensemble averaging reduces variance - aggregating diverse models improves robustness over single estimator predictions}
+\end{frame}
+
+% Slide 17: Support Vector Machines
+\begin{frame}[t]{Algorithm 4: Support Vector Machines (SVM)}
+\Large\textbf{Maximum Margin Philosophy}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{The Core Idea:}
+\begin{itemize}
+\item Find the line with maximum margin
+\item Stay as far from both classes as possible
+\item Like drawing a road between cities
+\item Maximize distance to nearest houses
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{The Kernel Trick:}
+\begin{itemize}
+\footnotesize
+\item Can't separate with straight line?
+\item Transform to higher dimension
+\item Now linearly separable!
+\item Project back down
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{2D → 3D Example:}
+\begin{itemize}
+\footnotesize
+\item 2D: Circles inside circles (impossible)
+\item 3D: Lift inner circle up
+\item Now: Plane can separate
+\item Magic: Works in 1000D too
+\end{itemize}
+
+\column{0.48\textwidth}
+\textbf{Visual Intuition:}
+\begin{center}
+\begin{tikzpicture}[scale=0.7]
+% Draw axes
+\draw[->] (-0.5,0) -- (4,0) node[right] {\footnotesize Feature 1};
+\draw[->] (0,-0.5) -- (0,3.5) node[above] {\footnotesize Feature 2};
+
+% Draw points
+\foreach \x/\y in {0.5/0.5, 0.8/0.8, 0.3/1.0} {
+    \node[circle,fill=mlred,inner sep=2pt] at (\x,\y) {};
+}
+\foreach \x/\y in {2.5/2.5, 3.0/2.8, 2.8/2.3} {
+    \node[circle,fill=mlgreen,inner sep=2pt] at (\x,\y) {};
+}
+
+% Draw decision boundary
+\draw[thick,mlpurple] (0,2) -- (3,1);
+% Draw margins
+\draw[dashed,mlgray] (0,1.3) -- (2.3,0.3);
+\draw[dashed,mlgray] (0.7,2.7) -- (3.7,1.7);
+% Support vectors
+\node[circle,draw=mlpurple,fill=mlred,inner sep=2pt] at (0.8,0.8) {};
+\node[circle,draw=mlpurple,fill=mlgreen,inner sep=2pt] at (2.5,2.5) {};
+% Margin annotation
+\draw[<->,mlpurple] (1.2,1.2) -- (1.8,1.8);
+\node[mlpurple] at (2.2,1.3) {\tiny margin};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Performance:}
+\begin{itemize}
+\item Accuracy: \textcolor{mlgreen}{85\%}
+\item Training: \textcolor{mlred}{5 seconds}
+\item Prediction: \textcolor{mlorange}{0.005 seconds}
+\item Interpretability: \textcolor{mlred}{Very Low}
+\end{itemize}
+\end{columns}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mllavender4, colframe=mlpurple]
+\centering
+\textbf{Use when:} You have complex, non-linear patterns and don't need to explain why
+\end{tcolorbox}
+
+\bottomnote{Maximum margin optimization seeks robust boundaries - maximizing separation distance reduces sensitivity to small perturbations}
+\end{frame}
+
+% Slide 18: Neural Networks
+\begin{frame}[t]{Algorithm 5: Neural Networks}
+\Large\textbf{Stacking Patterns to Find Patterns}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{Inspired by the Brain:}
+\begin{itemize}
+\item Neurons = Simple units
+\item Layers = Pattern detectors
+\item Stack layers = Complex patterns
+\item Learn by adjusting connections
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Layer by Layer:}
+\begin{enumerate}
+\footnotesize
+\item \textbf{Input:} 27 features
+\item \textbf{Hidden 1:} Find simple patterns\\
+(e.g., ``high novelty + low budget'')
+\item \textbf{Hidden 2:} Combine patterns\\
+(e.g., ``risky but innovative'')
+\item \textbf{Output:} Final decision\\
+(73\% success probability)
+\end{enumerate}
+
+\vspace{0.5em}
+\textbf{The Power:}
+Can learn ANY pattern given enough data and layers
+
+\column{0.48\textwidth}
+\textbf{Network Architecture:}
+\begin{center}
+\begin{tikzpicture}[scale=0.5]
+% Input layer
+\foreach \y in {0,1,2,3} {
+    \node[circle,draw,fill=mllavender3,inner sep=2pt] (i\y) at (0,\y) {};
+}
+\node at (0,-0.7) {\tiny Input};
+
+% Hidden layer 1
+\foreach \y in {0.5,1.5,2.5} {
+    \node[circle,draw,fill=mllavender2,inner sep=2pt] (h1\y) at (2,\y) {};
+}
+\node at (2,-0.7) {\tiny Hidden 1};
+
+% Hidden layer 2
+\foreach \y in {1,2} {
+    \node[circle,draw,fill=mllavender,inner sep=2pt] (h2\y) at (4,\y) {};
+}
+\node at (4,-0.7) {\tiny Hidden 2};
+
+% Output layer
+\node[circle,draw,fill=mlpurple,inner sep=2pt] (o) at (6,1.5) {};
+\node at (6,-0.7) {\tiny Output};
+
+% Connections (sample)
+\foreach \i in {0,1,2,3} {
+    \foreach \h in {0.5,1.5,2.5} {
+        \draw[gray,opacity=0.3] (i\i) -- (h1\h);
+    }
+}
+\end{tikzpicture}
+\end{center}
+
+\textbf{Performance:}
+\begin{itemize}
+\item Accuracy: \textcolor{mlgreen}{\textbf{92\%}}
+\item Training: \textcolor{mlred}{10 seconds}
+\item Prediction: \textcolor{mlorange}{0.01 seconds}
+\item Interpretability: \textcolor{mlred}{None}
+\end{itemize}
+\end{columns}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mlgreen!10, colframe=mlgreen]
+\centering
+\textbf{Use when:} Accuracy is everything and you have lots of data
+\end{tcolorbox}
+
+\bottomnote{Universal approximation enables flexibility - layered nonlinearity learns arbitrary decision boundaries given sufficient capacity and examples}
+\end{frame}
+
+% Slide 19: Algorithm Comparison
+\begin{frame}[t]{Choosing Your Weapon}
+\Large\textbf{No Free Lunch - Every Algorithm Has Trade-offs}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\column{0.55\textwidth}
+\begin{center}
+\includegraphics[width=0.95\textwidth]{charts/algorithm_complexity_tradeoff.pdf}
+\end{center}
+
+\column{0.43\textwidth}
+\textbf{Performance Summary:}
+\begin{center}
+\footnotesize
+\begin{tabular}{lccc}
+\toprule
+\textbf{Algorithm} & \textbf{Acc} & \textbf{Speed} & \textbf{Explain} \\
+\midrule
+Logistic & 76\% & \textcolor{mlgreen}{+++} & \textcolor{mlgreen}{+++} \\
+Tree & 78\% & \textcolor{mlgreen}{+++} & \textcolor{mlgreen}{+++} \\
+Forest & 89\% & \textcolor{mlorange}{++} & \textcolor{mlred}{+} \\
+SVM & 85\% & \textcolor{mlorange}{++} & \textcolor{mlred}{-} \\
+Neural & \textcolor{mlgreen}{92\%} & \textcolor{mlred}{+} & \textcolor{mlred}{-} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{0.5em}
+\textbf{Decision Framework:}
+\begin{itemize}
+\footnotesize
+\item Need to explain? → Tree
+\item Need speed? → Logistic
+\item Need accuracy? → Neural
+\item Good all-around? → Forest
+\item Complex patterns? → SVM
+\end{itemize}
+\end{columns}
+
+\vspace{0.5em}
+\begin{center}
+\textcolor{mlpurple}{\textbf{Pro tip: Always try Random Forest first - it's rarely wrong}}
+\end{center}
+
+\bottomnote{Empirical validation trumps theoretical preference - actual performance on validation data determines deployment choice}
+\end{frame}
+
+% Slide 20: Real Performance Numbers
+\begin{frame}[t]{Real-World Performance}
+\Large\textbf{What to Expect in Production}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{On Innovation Dataset:}
+\begin{itemize}
+\item 9,500 proposals
+\item 27 features
+\item 70/15/15 split
+\item 5-fold cross-validation
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Actual Results:}
+\begin{center}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Metric} & \textbf{Train} & \textbf{Test} \\
+\midrule
+Logistic & 78\% & 76\% \\
+Tree & 95\% & 78\% \\
+Forest & 91\% & \textcolor{mlgreen}{\textbf{89\%}} \\
+SVM & 88\% & 85\% \\
+Neural & 94\% & 92\% \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Note: Tree overfits badly!
+
+\column{0.48\textwidth}
+\textbf{Processing Speed:}
+\begin{center}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Algorithm} & \textbf{Train} & \textbf{Predict} \\
+\midrule
+Logistic & 0.1s & 0.001s \\
+Tree & 0.5s & 0.001s \\
+Forest & 2s & 0.01s \\
+SVM & 5s & 0.005s \\
+Neural & 10s & 0.01s \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{0.5em}
+\textbf{At Scale (1M items):}
+\begin{itemize}
+\footnotesize
+\item Logistic: 1 second total
+\item Forest: 10 seconds total
+\item Neural: 10 seconds total
+\item All handle millions easily
+\end{itemize}
+\end{columns}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mllavender4, colframe=mlpurple]
+\centering
+\textbf{Reality check:} 89\% accuracy means 11 wrong out of 100 - still need human oversight
+\end{tcolorbox}
+
+\bottomnote{Performance varies by problem - algorithm rankings change across datasets based on data structure and class separability}
+\end{frame}
+
+% Slide 21: Beyond Accuracy
+\begin{frame}[t]{Beyond Accuracy: What Really Matters}
+\Large\textbf{Accuracy Isn't Everything}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{The Accuracy Trap:}
+
+Imagine: 95\% innovations fail
+\begin{itemize}
+\item Algorithm: ``Always predict fail''
+\item Accuracy: 95\% ✓
+\item Usefulness: Zero ✗
+\item Never finds successes!
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Better Metrics:}
+\begin{itemize}
+\item \textbf{Precision:} When I say success, am I right?
+\item \textbf{Recall:} Do I find all successes?
+\item \textbf{F1:} Balance of both
+\item \textbf{ROC-AUC:} Overall quality
+\end{itemize}
+
+\column{0.48\textwidth}
+\begin{center}
+\includegraphics[width=0.9\textwidth]{charts/precision_recall_curves.pdf}
+\end{center}
+
+\textbf{For Innovation:}
+\begin{itemize}
+\footnotesize
+\item High Precision: Don't waste money
+\item High Recall: Don't miss unicorns
+\item Can't have both perfectly
+\item Choose based on your goal
+\end{itemize}
+\end{columns}
+
+\vspace{0.5em}
+\begin{center}
+\textcolor{mlpurple}{\textbf{Key insight: Choose metrics that align with business goals, not just accuracy}}
+\end{center}
+
+\bottomnote{Metric selection reflects business priorities - precision minimizes false positives, recall minimizes false negatives based on error cost asymmetry}
+\end{frame}
+
+% Slide 22: Ensemble Methods
+\begin{frame}[t]{Advanced: Ensemble Methods}
+\Large\textbf{Combining Algorithms for Super Performance}
+\normalsize
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{The Ensemble Idea:}
+\begin{itemize}
+\item Use multiple algorithms
+\item Each has different strengths
+\item Combine their predictions
+\item Better than any single one
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Combination Methods:}
+\begin{enumerate}
+\footnotesize
+\item \textbf{Voting:} Each gets one vote
+\item \textbf{Weighted:} Better ones count more
+\item \textbf{Stacking:} ML to combine MLs
+\item \textbf{Blending:} Optimize the mix
+\end{enumerate}
+
+\vspace{0.5em}
+\textbf{Example Ensemble:}
+\begin{itemize}
+\footnotesize
+\item 40\% Random Forest
+\item 30\% Neural Network
+\item 20\% SVM
+\item 10\% Logistic (for speed)
+\end{itemize}
+
+\column{0.48\textwidth}
+\textbf{Performance Boost:}
+\begin{center}
+\begin{tikzpicture}[scale=0.7]
+\begin{axis}[
+    ybar,
+    bar width=0.5cm,
+    xlabel={Algorithm},
+    ylabel={Accuracy (\%)},
+    ymin=70, ymax=100,
+    xtick=data,
+    xticklabels={Log,Tree,RF,SVM,NN,Ens},
+    xticklabel style={font=\footnotesize},
+    nodes near coords,
+    nodes near coords style={font=\footnotesize},
+]
+\addplot[fill=mllavender2] coordinates {
+    (0,76) (1,78) (2,89) (3,85) (4,92) (5,94)
+};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\begin{tcolorbox}[colback=mlgreen!10, colframe=mlgreen]
+\footnotesize
+\textbf{Result:} 94\% accuracy\\
+2\% better than best single algorithm
+\end{tcolorbox}
+
+\textbf{The Cost:}
+\begin{itemize}
+\footnotesize
+\item More complex
+\item Slower predictions
+\item Harder to maintain
+\item No interpretability
+\end{itemize}
+\end{columns}
+
+\bottomnote{Model combination reduces individual weaknesses - ensembles capture complementary strengths across diverse approaches}
+\end{frame}

@@ -1,0 +1,254 @@
+% Part 4: Unsupervised Learning Methods
+\section{Unsupervised Learning Methods}
+
+\begin{frame}[plain]
+\vfill
+\centering
+\begin{beamercolorbox}[sep=16pt,center]{title}
+\usebeamerfont{title}\Large Part 4: Unsupervised Learning\par
+\vspace{0.5em}
+\large Discovering Structure in Financial Data\par
+\end{beamercolorbox}
+\vfill
+\end{frame}
+
+\begin{frame}{PCA for Factor Analysis}
+\begin{columns}[T]
+\begin{column}{0.55\textwidth}
+\Large\textbf{Eigenportfolios and Risk Factors}
+\normalsize
+\vspace{0.5em}
+
+\textbf{Covariance Matrix Decomposition:}
+$$\Sigma = V\Lambda V^T$$
+
+where $V$ contains eigenvectors (factor loadings), $\Lambda$ contains eigenvalues (factor variances).
+
+\textbf{Principal Components as Factors:}
+$$R_{i,t} = \sum_{j=1}^k \beta_{i,j} F_{j,t} + \epsilon_{i,t}$$
+
+\textbf{Variance Explained:}
+$$\text{Explained} = \frac{\sum_{i=1}^k \lambda_i}{\sum_{i=1}^p \lambda_i}$$
+
+\textbf{Typical Results:}
+\begin{itemize}
+\item First 3 PCs explain 60-80\% of equity return variance
+\item PC1: Market factor (beta)
+\item PC2: Size factor
+\item PC3: Value factor
+\end{itemize}
+\end{column}
+
+\begin{column}{0.43\textwidth}
+\textbf{Finance Applications:}
+
+\textcolor{finblue}{\textbf{Factor Models:}}
+\begin{itemize}
+\item Fama-French 3-factor model
+\item Statistical arbitrage
+\item Risk attribution
+\item Portfolio hedging
+\end{itemize}
+
+\textcolor{fingreen}{\textbf{Advantages:}}
+\begin{itemize}
+\item Dimensionality reduction (1000 stocks -> 10 factors)
+\item Interpretable risk sources
+\item Computational efficiency
+\item Noise filtering
+\end{itemize}
+
+\textcolor{finred}{\textbf{Limitations:}}
+\begin{itemize}
+\item Linear assumptions
+\item Unstable in crisis periods
+\item Ignores tail dependencies
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Hierarchical Risk Parity (HRP)}
+\begin{columns}[T]
+\begin{column}{0.55\textwidth}
+\Large\textbf{Clustering-Based Portfolio Construction}
+\normalsize
+\vspace{0.5em}
+
+\textbf{Algorithm Steps:}
+\begin{enumerate}
+\item Compute correlation matrix from returns
+\item Hierarchical clustering of assets
+\item Recursive bisection of dendrogram
+\item Inverse-variance weighting within clusters
+\end{enumerate}
+
+\textbf{Weight Formula:}
+$$w_i = \frac{1/\sigma_i^2}{\sum_{j \in \text{cluster}} 1/\sigma_j^2}$$
+
+\textbf{Cluster Allocation:}
+$$w_{\text{cluster}} \propto \frac{1}{\sigma_{\text{cluster}}^2}$$
+
+\textbf{Key Properties:}
+\begin{itemize}
+\item Stable to estimation error
+\item No matrix inversion required
+\item Accounts for hierarchical structure
+\item Robust to outliers
+\end{itemize}
+\end{column}
+
+\begin{column}{0.43\textwidth}
+\textbf{vs Traditional Markowitz:}
+
+\begin{center}
+\small
+\begin{tabular}{lcc}
+\toprule
+\textbf{Metric} & \textbf{MVO} & \textbf{HRP} \\
+\midrule
+Stability & Low & High \\
+Turnover & High & Low \\
+Out-sample Sharpe & 0.4 & 0.6 \\
+Max Drawdown & -35\% & -22\% \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{0.3em}
+\textbf{Why HRP Works:}
+\begin{itemize}
+\item Clustering identifies natural asset groups
+\item Hierarchical structure captures market organization
+\item Diversification across and within clusters
+\item Reduces estimation error impact
+\end{itemize}
+
+\textbf{Applications:}
+\begin{itemize}
+\item Multi-asset allocation
+\item Pension fund management
+\item Risk parity strategies
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{K-means for Market Regime Detection}
+\begin{columns}[T]
+\begin{column}{0.55\textwidth}
+\Large\textbf{Identifying Market States}
+\normalsize
+\vspace{0.5em}
+
+\textbf{Feature Engineering:}
+\begin{itemize}
+\item Volatility: Rolling 20-day std
+\item Momentum: 60-day return
+\item Volume: Relative to 90-day average
+\item Correlation: Cross-asset correlation
+\end{itemize}
+
+\textbf{Clustering Process:}
+$$\min_{\mu_1, \ldots, \mu_K} \sum_{k=1}^K \sum_{t \in C_k} ||x_t - \mu_k||^2$$
+
+\textbf{Typical Regimes Discovered:}
+\begin{enumerate}
+\item \textbf{Bull Market:} Low vol, positive momentum, low correlation
+\item \textbf{Bear Market:} High vol, negative momentum, high correlation
+\item \textbf{Consolidation:} Medium vol, low momentum, medium correlation
+\item \textbf{Crisis:} Extreme vol, negative momentum, correlation -> 1
+\end{enumerate}
+\end{column}
+
+\begin{column}{0.43\textwidth}
+\textbf{Trading Applications:}
+
+\textcolor{finblue}{\textbf{Regime-Dependent Strategies:}}
+\begin{itemize}
+\item Bull: Long-only momentum
+\item Bear: Defensive hedging
+\item Consolidation: Mean reversion
+\item Crisis: Risk-off positioning
+\end{itemize}
+
+\textbf{Performance Metrics:}
+\begin{center}
+\footnotesize
+\begin{tabular}{lc}
+\toprule
+\textbf{Approach} & \textbf{Sharpe} \\
+\midrule
+Static strategy & 0.5 \\
+Regime-aware & 0.9 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{Implementation:}
+\begin{itemize}
+\item sklearn.cluster.KMeans
+\item Weekly regime updates
+\item 3-5 regimes typical
+\item Combine with HMMs for transitions
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Anomaly Detection in Trading}
+\begin{columns}[T]
+\begin{column}{0.55\textwidth}
+\Large\textbf{Identifying Unusual Market Behavior}
+\normalsize
+\vspace{0.5em}
+
+\textbf{One-Class SVM Approach:}
+$$\min_{w,\rho} \frac{1}{2}||w||^2 - \rho + \frac{1}{\nu n}\sum_i \xi_i$$
+$$\text{s.t. } w^T\phi(x_i) \geq \rho - \xi_i$$
+
+\textbf{Isolation Forest:}
+\begin{itemize}
+\item Random feature selection
+\item Random split values
+\item Anomaly score: Average path length
+\item Faster than distance-based methods
+\end{itemize}
+
+\textbf{Applications:}
+\begin{enumerate}
+\item \textbf{Flash crashes:} Detect abnormal price movements
+\item \textbf{Fat finger errors:} Identify erroneous orders
+\item \textbf{Market manipulation:} Spot pump-and-dump schemes
+\item \textbf{System failures:} Data feed anomalies
+\end{enumerate}
+\end{column}
+
+\begin{column}{0.43\textwidth}
+\textbf{Real-World Example:}
+
+\textbf{2010 Flash Crash Detection:}
+\begin{itemize}
+\item Normal: SPY volatility 15-25\%
+\item May 6, 2010: Volatility spike to 150\%
+\item Anomaly score: 12 std deviations
+\item Duration: 5 minutes
+\end{itemize}
+
+\textbf{Detection Metrics:}
+\begin{itemize}
+\item Precision: 95\% (few false alarms)
+\item Recall: 88\% (catches most anomalies)
+\item Latency: < 100ms detection time
+\end{itemize}
+
+\textbf{ML Techniques:}
+\begin{itemize}
+\item Autoencoders for reconstruction error
+\item LSTM for temporal anomalies
+\item Isolation Forest for multivariate
+\item Ensemble methods for robustness
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}

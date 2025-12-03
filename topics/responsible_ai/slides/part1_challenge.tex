@@ -1,0 +1,1103 @@
+% Part 1: The Hidden Challenge (11 slides)
+% Theme: Invisible discrimination requires measurement frameworks
+% Colors: mllavender/mlpurple (template_beamer_final)
+
+\section{The Hidden Challenge}
+
+% Slide 1: The Invisible Discrimination Scenario
+\begin{frame}[t]{The Invisible Discrimination: You Can't Fix What You Can't See}
+\textbf{A real scenario that reveals the hidden harm:}
+
+\vspace{0.3em}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlpurple}{\textbf{The Hidden Pattern}}
+
+\small
+\textbf{Bank loan system, 2024:}\\
+10,000 applications processed
+
+\vspace{0.3cm}
+\textbf{Observable outcomes:}
+\begin{itemize}
+\item Group A: 7,500 approved (75\%)
+\item Group B: 4,500 approved (45\%)
+\item Overall: 60\% approval rate
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlorange}{\textbf{The Question:}}\\
+Is this discrimination?\\
+How would you even know?
+
+\vspace{0.3cm}
+\textbf{Hidden factors:}
+\begin{itemize}
+\item Can't see: Intent, causation, counterfactuals
+\item Can only see: Outcomes, rates, patterns
+\item Qualification differences?
+\item Historical bias?
+\item Proxy variables?
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{The Invisibility Problem}}
+
+\small
+\textbf{Why discrimination stays hidden:}
+
+\vspace{0.3cm}
+\textbf{1. No Ground Truth}
+\begin{itemize}
+\item Can't observe ``fair'' counterfactual
+\item What WOULD have happened?
+\item Intent is unobservable
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{2. Aggregate Masks Disparities}
+\begin{itemize}
+\item 60\% overall looks reasonable
+\item 30\% gap hidden in average
+\item Simpson's paradox
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{3. Proxy Variables Conceal}
+\begin{itemize}
+\item Zip code $	o$ Race (95\% correlation)
+\item Name $	o$ Gender (98\% correlation)
+\item School $	o$ Socioeconomic status
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlred}{\textbf{Real harm:}}\\
+4,500 people denied opportunities\\
+System appears ``objective''\\
+Discrimination is \textbf{invisible}
+\end{columns}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mllavender!30, colframe=mlpurple]
+\textbf{Key Insight:} Invisible discrimination is unmeasurable discrimination - you can't fix what you can't see or quantify
+\end{tcolorbox}
+
+\vspace{0.5em}
+\textbf{Key Question:} How do we make invisible bias visible enough to measure and fix?
+
+\bottomnote{Undetected bias accumulates until critical threshold - early measurement prevents expensive corrective interventions later}
+\end{frame}
+
+% Slide 2: What IS Bias? (Built from zero with information theory)
+\begin{frame}[t]{What IS Bias? Building the Concept from Information Theory}
+\textbf{Defining bias mathematically (from zero knowledge):}
+
+\vspace{0.3em}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlpurple}{\textbf{Human Analogy: Blind Auditions}}
+
+\small
+\textbf{Symphony orchestras, 1970s-1990s:}
+
+\vspace{0.3cm}
+Before blind auditions:
+\begin{itemize}
+\item 5\% women in orchestras
+\item Judges could see candidates
+\item Implicit bias affected decisions
+\end{itemize}
+
+\vspace{0.3cm}
+After blind auditions:
+\begin{itemize}
+\item 40\% women in orchestras
+\item Screen hides gender
+\item Decisions based on skill only
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlorange}{\textbf{Key observation:}}\\
+Removing visibility of protected\\
+attribute changed outcomes
+
+\vspace{0.3cm}
+\textcolor{mlblue}{\textbf{This means:}}\\
+Decision correlated with\\
+irrelevant attribute = BIAS
+
+\column{0.48\textwidth}
+\textcolor{mlpurple}{\textbf{Computer/Math Equivalent}}
+
+\small
+\textbf{Protected attribute} $A$: Race, gender, age, etc.\\
+\textbf{Decision} $D$: Hire, approve loan, admit, etc.\\
+\textbf{True qualification} $Y$: Actual merit/ability
+
+\vspace{0.3cm}
+\textcolor{mlorange}{\textbf{Information Theory Definition:}}
+
+Bias exists when decision carries\\
+information about protected attribute:
+
+$$\textcolor{mlblue}{I(D; A) > 0}$$
+
+Where $I$ = mutual information
+
+\vspace{0.3cm}
+\textbf{Expanded form:}
+$$I(D; A) = H(D) - H(D|A)$$
+$$= H(A) - H(A|D)$$
+
+\vspace{0.3cm}
+\textcolor{mlpurple}{\textbf{Intuition:}}
+\begin{itemize}
+\item $H(D)$: Uncertainty in decisions
+\item $H(D|A)$: Uncertainty after seeing group
+\item Difference = information leaked
+\item $I(D; A) = 0$ means independence
+\item $I(D; A) > 0$ means bias
+\end{itemize}
+\end{columns}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mllavender!30, colframe=mlpurple]
+\textbf{Key Insight:} Bias is statistical dependence between decisions and protected attributes - measurable via mutual information
+\end{tcolorbox}
+
+\vspace{0.5em}
+\textbf{Key Question:} If we can define bias with I(D; A), can we measure it in real systems?
+
+\bottomnote{Information-theoretic metrics formalize dependence - quantifying predictive relationships enables systematic bias detection beyond intuition}
+\end{frame}
+
+% Slide 3: Why Bias is Hidden (Observability problem with Simpson's paradox)
+\begin{frame}[t]{Why Bias Stays Hidden: The Observability Problem}
+\textbf{Three reasons discrimination remains invisible:}
+
+\vspace{0.3em}
+
+\begin{columns}[T]
+\column{0.31\textwidth}
+\textcolor{mlpurple}{\textbf{1. Counterfactuals}}
+
+\small
+\textbf{Can't directly observe:}
+\begin{itemize}
+\item What WOULD have happened
+\item Alternative universe
+\item Fair outcome for comparison
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Example:}\\
+Person denied loan
+
+Question: ``Would they have\\
+been approved if different race?''
+
+\textcolor{mlred}{Impossible to know!}
+
+\vspace{0.3cm}
+\textbf{Mathematics:}\\
+Need $P(D|A=a, X)$ and\\
+$P(D|A=a', X)$ for same $X$
+
+But can only observe one\\
+$A$ value per person
+
+\vspace{0.3cm}
+\textcolor{mlorange}{\textbf{Result:}}\\
+Causal discrimination\\
+stays hidden
+
+\column{0.31\textwidth}
+\textcolor{mlblue}{\textbf{2. Aggregation}}
+
+\small
+\textbf{Simpson's Paradox:}
+
+\vspace{0.3cm}
+\textbf{Department A:}
+\begin{itemize}
+\item Men: 80\% admit
+\item Women: 85\% admit
+\item No bias!
+\end{itemize}
+
+\textbf{Department B:}
+\begin{itemize}
+\item Men: 60\% admit
+\item Women: 65\% admit
+\item No bias!
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlred}{\textbf{Combined:}}
+\begin{itemize}
+\item Men: 70\% admit
+\item Women: 65\% admit
+\item BIAS APPEARS!
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Why:}\\
+Men apply to easier dept
+
+\vspace{0.3cm}
+\textcolor{mlorange}{\textbf{Result:}}\\
+Aggregation hides or\\
+creates false patterns
+
+\column{0.31\textwidth}
+\textcolor{mlpurple}{\textbf{3. Proxy Variables}}
+
+\small
+\textbf{Indirect discrimination:}
+
+\vspace{0.3cm}
+\textbf{High correlation:}
+\begin{itemize}
+\item Zip code $	o$ Race (95\%)
+\item Name $	o$ Gender (98\%)
+\item School $	o$ Class (92\%)
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Model never sees $A$}\\
+but uses proxy $P$
+
+\vspace{0.3cm}
+\textbf{Mathematics:}
+$$I(D; A|P) < I(D; A)$$
+
+But still $I(D; A) > 0$\\
+through indirect path
+
+\vspace{0.3cm}
+\textcolor{mlred}{\textbf{Example:}}\\
+Remove ``gender'' from\\
+hiring algorithm
+
+Still biased via:
+\begin{itemize}
+\item Sports: football vs volleyball
+\item Hobbies: different patterns
+\item Language: subtle cues
+\end{itemize}
+
+\textcolor{mlorange}{\textbf{Result:}}\\
+Hidden in 1000+ features
+\end{columns}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mllavender!30, colframe=mlpurple]
+\textbf{Key Insight:} Bias stays hidden through unobservable counterfactuals, aggregation paradoxes, and proxy variables
+\end{tcolorbox}
+
+\vspace{0.5em}
+\textbf{Key Question:} If bias is so well-hidden, how can we possibly measure it at scale?
+
+\bottomnote{Aggregation choices determine visible patterns - statistical conclusions reverse under different grouping strategies revealing measurement fragility}
+\end{frame}
+
+% Slide 4: The Measurement Challenge (Quantified with Shannon entropy)
+\begin{frame}[t]{The Measurement Challenge: Capacity Overflow}
+\textbf{Information-theoretic analysis of the measurement problem:}
+
+\vspace{0.3em}
+
+\begin{columns}[T]
+\column{0.55\textwidth}
+\textcolor{mlpurple}{\textbf{The Combinatorial Explosion}}
+
+\small
+\textbf{Step 1: Count protected attributes}
+
+Legally protected in US/EU:
+\begin{itemize}
+\item Race: 6 categories
+\item Gender: 3+ categories
+\item Age: 7 bins (decades)
+\item Disability: 2 (yes/no)
+\item Religion: 10+ categories
+\item National origin: 195 countries
+\end{itemize}
+
+Just these 6: $6 \times 3 \times 7 \times 2 \times 10 \times 195$\\
+= \textcolor{mlred}{\textbf{490,140 subgroups}}
+
+\vspace{0.3cm}
+\textbf{Step 2: Calculate entropy}
+
+Shannon entropy of subgroups:\\
+$H(\text{Subgroups}) = \log_2(490{,}140)$\\
+$= 18.9$ bits of discrimination information
+
+\vspace{0.3cm}
+\textbf{Step 3: Intersectionality}
+
+Add socioeconomic (5 levels):\\
+$490{,}140 \times 5 = 2{,}450{,}700$ subgroups\\
+$H = \log_2(2{,}450{,}700) = 21.2$ bits
+
+\column{0.43\textwidth}
+\textcolor{mlblue}{\textbf{The Capacity Problem}}
+
+\small
+\textbf{Measurement bandwidth:}
+
+\vspace{0.3cm}
+Typical fairness audit:
+\begin{itemize}
+\item Sample size: 10,000
+\item Disaggregate by: Race $	imes$ Gender
+\item Subgroups measured: 18
+\item Capacity: $\log_2(18) = 4.2$ bits
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlred}{\textbf{Information loss:}}
+
+$$\text{Loss} = H - B$$
+$$= 21.2 - 4.2$$
+$$= 17.0 \text{ bits UNMEASURED}$$
+
+\vspace{0.3cm}
+\textbf{Opportunity cost:}\\
+$2^{17} = 131{,}072$ subgroups\\
+with invisible discrimination
+
+\vspace{0.3cm}
+\textcolor{mlorange}{\textbf{Result:}}
+\begin{itemize}
+\item 99.999\% of discrimination unmeasured
+\item Subgroup harm stays hidden
+\item Most vulnerable: smallest groups
+\end{itemize}
+\end{columns}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mllavender!30, colframe=mlpurple]
+\textbf{Key Insight:} Measurement capacity (4.2 bits) vastly insufficient for discrimination space (21.2 bits) - 17 bits lost
+\end{tcolorbox}
+
+\vspace{0.5em}
+\textbf{Key Question:} Given this measurement bottleneck, can we still make bias visible?
+
+\bottomnote{Information-theoretic limits bound observability - measurement capacity constrains bias detection regardless of analytical sophistication}
+\end{frame}
+
+% Slide 5: NEW DEEP AI - Bias Amplification Theory
+\begin{frame}[t]{Deep AI: Bias Amplification Through Feedback Loops}
+\textbf{How ML systems amplify initial bias over time through feedback:}
+
+\vspace{0.3em}
+
+\begin{columns}[T]
+\column{0.55\textwidth}
+\textcolor{mlpurple}{\textbf{Mathematical Framework}}
+
+\small
+\textbf{Temporal dynamics of bias:}
+
+\vspace{0.3cm}
+\textcolor{mlorange}{\textbf{Initial state (t=0):}}
+$$B_0 = I(D_0; A) = \epsilon > 0$$
+Small initial bias $\epsilon$
+
+\vspace{0.3cm}
+\textcolor{mlblue}{\textbf{Feedback mechanism:}}
+
+System uses past decisions to train:
+$$D_{t+1} = f(\theta_t, X_{t+1})$$
+$$\theta_{t+1} = \text{train}(D_1, \ldots, D_t)$$
+
+\vspace{0.3cm}
+\textbf{Bias evolution:}
+$$B_{t+1} = B_t + \alpha \cdot D_t$$
+
+where $\alpha > 0$ is amplification factor
+
+\vspace{0.3cm}
+\textcolor{mlred}{\textbf{Exponential growth:}}
+$$B_t = B_0 \cdot (1 + \alpha)^t$$
+
+After 10 iterations with $\alpha = 0.15$:\\
+$B_{10} = \epsilon \cdot (1.15)^{10} = 4.05\epsilon$\\
+\textbf{4x amplification!}
+
+\column{0.43\textwidth}
+\textcolor{mlpurple}{\textbf{Real-World Examples}}
+
+\small
+\textbf{1. Predictive Policing}
+\begin{itemize}
+\item t=0: Historical arrest bias (1.2x)
+\item Algorithm sends more patrols
+\item More arrests in over-policed areas
+\item Reinforces initial bias
+\item t=5: Bias grows to 3.1x
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{2. Recommendation Systems}
+\begin{itemize}
+\item t=0: Slight gender preference (5\%)
+\item Users click biased recommendations
+\item System learns from clicks
+\item Recommends more extreme content
+\item t=10: 47\% gender segregation
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{3. Resume Screening}
+\begin{itemize}
+\item t=0: Small hiring bias (8\%)
+\item System trained on past hires
+\item Biased training data
+\item Amplifies historical patterns
+\item t=3: 32\% bias (4x growth)
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlorange}{\textbf{Breaking the loop:}}
+\begin{itemize}
+\item Requires external intervention
+\item Counterfactual data injection
+\item Periodic re-calibration
+\end{itemize}
+\end{columns}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mllavender!30, colframe=mlpurple]
+\textbf{Key Insight:} ML feedback loops amplify bias exponentially: $B_t = B_0(1+\alpha)^t$ - small initial bias becomes systemic harm
+\end{tcolorbox}
+
+\vspace{0.5em}
+\textbf{Key Question:} How does intersectionality further complicate measurement?
+
+\bottomnote{Prediction-action-outcome loops create self-fulfilling prophecies - model outputs influence data generation invalidating independence assumptions}
+\end{frame}
+
+% Slide 6: NEW DEEP AI - Intersectionality Explosion
+\begin{frame}[t]{Deep AI: The Intersectionality Explosion Problem}
+\textbf{How combining attributes creates exponential measurement challenges:}
+
+\vspace{0.3em}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlpurple}{\textbf{Combinatorial Explosion}}
+
+\small
+\textbf{Subgroup growth:}
+
+\vspace{0.3cm}
+\textbf{1 attribute (Race, 6 levels):}
+$$N_1 = 6 \text{ subgroups}$$
+
+\textbf{2 attributes (Race $	imes$ Gender):}
+$$N_2 = 6 \times 3 = 18$$
+
+\textbf{3 attributes (+ Age):}
+$$N_3 = 6 \times 3 \times 7 = 126$$
+
+\textbf{n attributes:}
+$$N_n = \prod_{i=1}^n |A_i| = 2^{O(n)}$$
+
+\vspace{0.3cm}
+\textcolor{mlred}{\textbf{With 6 attributes:}}
+$$N_6 = 490{,}140 \text{ subgroups}$$
+
+\vspace{0.3cm}
+\textcolor{mlorange}{\textbf{Sample size requirement:}}
+
+For each subgroup, need sufficient power:
+$$n_{\text{sub}} = \frac{z^2 \cdot p(1-p)}{e^2}$$
+
+For 95\% confidence, 5\% margin:
+$$n_{\text{sub}} = \frac{1.96^2 \cdot 0.5 \cdot 0.5}{0.05^2} = 384$$
+
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Statistical Power Collapse}}
+
+\small
+\textbf{Total sample needed:}
+
+\vspace{0.3cm}
+For 490,140 subgroups:
+$$N_{\text{total}} = 490{,}140 \times 384$$
+$$= 188{,}213{,}760 \text{ samples}$$
+
+\vspace{0.3cm}
+\textcolor{mlred}{\textbf{Reality:}}
+\begin{itemize}
+\item Typical dataset: 10,000 samples
+\item Measured subgroups: 18 (Race $	imes$ Gender)
+\item \textbf{Coverage: 0.004\%}
+\item 99.996\% of intersections unmeasured
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Consequence:}\\
+Smallest, most vulnerable groups\\
+have \textbf{zero statistical power}
+
+\vspace{0.3cm}
+\textcolor{mlorange}{\textbf{Example: Black transgender woman}}
+\begin{itemize}
+\item Subgroup size: n = 3 in dataset
+\item Required: n = 384
+\item Power: 0.8\% (vs 80\% needed)
+\item \textbf{Bias undetectable}
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Mathematical barrier:}\\
+Exponential growth vs\\
+linear data collection
+\end{columns}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mllavender!30, colframe=mlpurple]
+\textbf{Key Insight:} Intersectionality creates $2^{O(n)}$ subgroups requiring 188M+ samples - most vulnerable groups unmeasurable
+\end{tcolorbox}
+
+\vspace{0.5em}
+\textbf{Key Question:} What is the real-world cost of this unmeasured harm?
+
+\bottomnote{Combinatorial explosion defeats exhaustive analysis - intersecting attributes grow exponentially while sample sizes remain fixed}
+\end{frame}
+
+% Slide 7: The Stakes (Real-world harm with quantification)
+\begin{frame}[t]{The Stakes: Real Harm from Invisible Discrimination}
+\textbf{Quantifying the human and economic cost of hidden bias:}
+
+\vspace{0.3em}
+
+\begin{columns}[T]
+\column{0.55\textwidth}
+\textcolor{mlpurple}{\textbf{2024 AI Discrimination Incidents}}
+
+\small
+\begin{center}
+\begin{tabular}{lccc}
+\toprule
+\textbf{Sector} & \textbf{Incidents} & \textbf{People} & \textbf{Cost} \\
+\midrule
+Healthcare & 79 & 2.3M & \$3.2B \\
+Finance & 65 & 1.8M & \$4.1B \\
+Criminal Justice & 51 & 890K & \$1.7B \\
+Employment & 38 & 1.2M & \$1.4B \\
+\midrule
+\textbf{Total} & \textbf{233} & \textbf{6.2M} & \textbf{\$10.4B} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{0.3cm}
+\textcolor{mlorange}{\textbf{Trend Analysis:}}
+\begin{itemize}
+\item 2022: 148 incidents (+27\% from 2021)
+\item 2023: 184 incidents (+24\% from 2022)
+\item 2024: 233 incidents (+27\% from 2023)
+\item Exponential growth: $1.26^t$
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Geographic distribution:}
+\begin{itemize}
+\item North America: 112 (48\%)
+\item Europe: 78 (33\%)
+\item Asia: 31 (13\%)
+\item Other: 12 (5\%)
+\item \textbf{47 countries} affected
+\end{itemize}
+
+\column{0.43\textwidth}
+\textcolor{mlblue}{\textbf{Individual Harm}}
+
+\small
+\textbf{Case: Detroit facial recognition (2024)}
+\begin{itemize}
+\item Black man wrongfully arrested
+\item 30 hours in custody
+\item False FR match (12\% confidence)
+\item Now: FR banned for sole arrest basis
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Case: UK Facewatch (May 2024)}
+\begin{itemize}
+\item Woman misidentified as shoplifter
+\item Banned from all stores in network
+\item \$1,200 settlement
+\item Systemic bias on darker skin (32\% error rate vs 1.2\%)
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlpurple}{\textbf{Systemic Patterns:}}
+\begin{itemize}
+\item Facial recognition: 34x higher error rate for Black women
+\item Resume screening: 1.8x lower callback for non-white names
+\item Healthcare algorithms: \$2,500 less spent per Black patient
+\item Recidivism tools: 2.1x false positive rate for Black defendants
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlred}{\textbf{The Common Thread:}}\\
+All started invisible, became\\
+visible only after harm occurred
+\end{columns}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mllavender!30, colframe=mlpurple]
+\textbf{Key Insight:} 233 incidents, 6.2M people, \$10.4B cost in 2024 alone - hidden bias causes measurable, preventable harm
+\end{tcolorbox}
+
+\vspace{0.5em}
+\textbf{Key Question:} Can we develop measurement frameworks to make bias visible BEFORE harm occurs?
+
+\bottomnote{Harm acceleration outpaces detection capability - systematic measurement infrastructure becomes critical as deployment scales}
+\end{frame}
+
+% Slide 8: Real-World Failures (condensed from part1_OLD)
+\begin{frame}[t]{When AI Goes Wrong: Documented 2024 Cases}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlpurple}{\textbf{Facial Recognition Bias}}
+
+\textcolor{mlorange}{Detroit Settlement (2024)}
+\begin{itemize}
+\item Black man wrongfully arrested
+\item False facial recognition match
+\item Police now banned from arrests based solely on FR
+\end{itemize}
+
+\textcolor{mlblue}{UK Facewatch Case (May 2024)}
+\begin{itemize}
+\item Woman wrongly ID'd as shoplifter
+\item Banned from all stores in network
+\item System failed on non-white individual
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlpurple}{\textbf{Common Pattern:}}
+\begin{itemize}
+\item Higher error rates on darker skin (34x)
+\item No human oversight
+\item Irreversible consequences
+\item Systemic discrimination
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{mlpurple}{\textbf{Employment Discrimination}}
+
+\textcolor{mlblue}{Uber Eats (2024)}
+\begin{itemize}
+\item Driver dismissed by FR system
+\item Technology failed on darker skin
+\item No human review process
+\end{itemize}
+
+\textcolor{mlorange}{Resume Screening}
+\begin{itemize}
+\item AI tools used for hiring decisions
+\item Women and minorities disadvantaged
+\item Most managers untrained in fair use
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlpurple}{\textbf{Healthcare Algorithms}}
+\begin{itemize}
+\item \$2,500 less spent per Black patient
+\item Predict cost, not need
+\item Systematic undertreatment
+\item Affects millions of patients
+\end{itemize}
+\end{columns}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mllavender!30, colframe=mlpurple]
+\textbf{Key Insight:} These aren't edge cases -- they're systemic failures requiring measurement frameworks to prevent
+\end{tcolorbox}
+
+\vspace{0.5em}
+\textbf{Key Question:} Where in the ML pipeline does bias enter and amplify?
+
+\bottomnote{Pattern emergence across domains reveals systematic failures - diverse incident types share common root cause of inadequate initial measurement}
+\end{frame}
+
+% Slide 9: Bias Entry Points + Ethical Frameworks (merged from part1_OLD)
+\begin{frame}[t]{Where Bias Enters: The ML Pipeline and Ethical Lenses}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlpurple}{\textbf{The ML Pipeline}}
+
+\small
+\textcolor{mlorange}{\textbf{1. Data Collection}}
+\begin{itemize}
+\item Historical discrimination embedded
+\item Sampling bias (underrepresented groups)
+\item Missing populations
+\item Label bias from human annotators
+\end{itemize}
+
+\textcolor{mlblue}{\textbf{2. Feature Engineering}}
+\begin{itemize}
+\item Proxy variables (zip code $	o$ race)
+\item Correlation artifacts
+\item Human assumptions codified
+\item Redundant encodings
+\end{itemize}
+
+\textcolor{mlpurple}{\textbf{3. Model Training}}
+\begin{itemize}
+\item Optimization bias (accuracy $\neq$ fairness)
+\item Spurious correlations learned
+\item Overfitting to majority group
+\item Minority group neglect
+\end{itemize}
+
+\textcolor{mlorange}{\textbf{4. Deployment}}
+\begin{itemize}
+\item Context mismatch
+\item Feedback loops
+\item Drift over time
+\item Lack of monitoring
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{mlpurple}{\textbf{Ethical Frameworks}}
+
+\small
+\textcolor{mlorange}{\textbf{Consequentialist}}
+\begin{itemize}
+\item Focus on outcomes
+\item Maximize benefit, minimize harm
+\item Risk-benefit analysis
+\item \textbf{Question:} Does system increase total welfare?
+\end{itemize}
+
+\textcolor{mlblue}{\textbf{Deontological}}
+\begin{itemize}
+\item Focus on duties and rights
+\item Respect autonomy
+\item Follow moral rules
+\item \textbf{Question:} Does system respect human dignity?
+\end{itemize}
+
+\textcolor{mlpurple}{\textbf{Virtue Ethics}}
+\begin{itemize}
+\item Focus on character
+\item Cultivate wisdom, fairness
+\item Demonstrate integrity
+\item \textbf{Question:} What would a fair person do?
+\end{itemize}
+
+\textcolor{mlorange}{\textbf{Care Ethics}}
+\begin{itemize}
+\item Focus on relationships
+\item Understand context
+\item Address vulnerability
+\item \textbf{Question:} Who is most vulnerable?
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{No single framework sufficient}\\
+Combine perspectives for robust ethics
+\end{columns}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mllavender!30, colframe=mlpurple]
+\textbf{Key Insight:} Bias enters at all pipeline stages; ethical frameworks provide multiple lenses for evaluation
+\end{tcolorbox}
+
+\vspace{0.5em}
+\textbf{Key Question:} Who are the stakeholders affected by biased systems?
+
+\bottomnote{Multi-stage bias entry necessitates comprehensive auditing - pipeline vulnerabilities compound without continuous monitoring at each transformation point}
+\end{frame}
+
+% Slide 10: Stakeholders and Power (merged from part1_OLD)
+\begin{frame}[t]{Stakeholders and Power Asymmetries in AI Systems}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlpurple}{\textbf{Who Has Power?}}
+
+\small
+\textcolor{mlorange}{Tech Companies}
+\begin{itemize}
+\item Control system design
+\item Set defaults and constraints
+\item Influence policy
+\item Access to resources
+\end{itemize}
+
+\textcolor{mlblue}{Governments}
+\begin{itemize}
+\item Regulatory authority
+\item Procurement decisions
+\item Surveillance capabilities
+\item Enforcement power
+\end{itemize}
+
+\textcolor{mlpurple}{Privileged Groups}
+\begin{itemize}
+\item Represented in training data
+\item Cultural norms embedded
+\item Economic resources
+\item Political influence
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlorange}{\textbf{Stakeholders:}}
+\begin{itemize}
+\item Users (direct interaction)
+\item Developers (technical choices)
+\item Deployers (operational control)
+\item Affected communities (indirect impact)
+\item Society (broad implications)
+\item Environment (carbon footprint)
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{mlpurple}{\textbf{Who Lacks Power?}}
+
+\small
+\textcolor{mlorange}{End Users}
+\begin{itemize}
+\item Limited choice
+\item Information asymmetry
+\item No opt-out options
+\item Captive audiences
+\end{itemize}
+
+\textcolor{mlblue}{Marginalized Groups}
+\begin{itemize}
+\item Underrepresented in data
+\item Higher error rates
+\item Less recourse
+\item Compounded discrimination
+\item Intersectionality amplifies harm
+\end{itemize}
+
+\textcolor{mlpurple}{Future Generations}
+\begin{itemize}
+\item No voice in current decisions
+\item Inherit consequences
+\item Path dependencies lock in bias
+\item Environmental debt
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlorange}{\textbf{Impact of Power Imbalance:}}
+\begin{itemize}
+\item Design reflects powerful interests
+\item Marginalized voices ignored
+\item Harm concentrated on powerless
+\item Requires active intervention
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Responsible AI: Actively empower the powerless}
+\end{columns}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mllavender!30, colframe=mlpurple]
+\textbf{Key Insight:} Power asymmetries shape AI systems - fairness requires centering marginalized stakeholders
+\end{tcolorbox}
+
+\vspace{0.5em}
+\textbf{Key Question:} How do we move from recognizing the challenge to solving it?
+
+\bottomnote{Stakeholder identification precedes harm prevention - invisible constituencies remain unprotected without deliberate representation analysis}
+\end{frame}
+
+% Slide 11: NEW DEEP AI - Statistical vs Causal Parity
+\begin{frame}[t]{Deep AI: Statistical vs Causal Parity - Two Fairness Paradigms}
+\textbf{Understanding the fundamental difference between statistical and causal fairness:}
+
+\vspace{0.3em}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlpurple}{\textbf{Statistical Parity}}
+
+\small
+\textbf{Definition:} Independence in observed distribution
+
+$$P(D|A) = P(D)$$
+
+\vspace{0.3cm}
+\textcolor{mlorange}{What it measures:}
+\begin{itemize}
+\item Observed outcome rates
+\item Aggregate group differences
+\item Population-level patterns
+\item No causal assumptions needed
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Example (Loans):}
+
+Group A: 75\% approved\\
+Group B: 45\% approved
+
+Statistical parity violated: $|0.75 - 0.45| = 30\%$
+
+\vspace{0.3cm}
+\textcolor{mlblue}{\textbf{When to use:}}
+\begin{itemize}
+\item Legal compliance (disparate impact)
+\item No causal graph available
+\item Descriptive fairness assessment
+\item Regulatory reporting
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Limitation:} Cannot distinguish discrimination from legitimate differences
+
+\column{0.48\textwidth}
+\textcolor{mlpurple}{\textbf{Causal Parity}}
+
+\small
+\textbf{Definition:} Counterfactual independence
+
+$$P(D_{A \leftarrow a}|X, A=a) = P(D_{A \leftarrow a'}|X, A=a)$$
+
+\vspace{0.3cm}
+\textcolor{mlorange}{What it measures:}
+\begin{itemize}
+\item Effect of changing protected attribute
+\item Individual-level counterfactuals
+\item Causal pathways
+\item Requires causal DAG
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Example (Loans):}
+
+Same person, change only race:\\
+$P(\text{Approved}_{Race \leftarrow White}|X) = 0.80$\\
+$P(\text{Approved}_{Race \leftarrow Black}|X) = 0.55$
+
+Causal disparity: $|0.80 - 0.55| = 25\%$
+
+\vspace{0.3cm}
+\textcolor{mlblue}{\textbf{When to use:}}
+\begin{itemize}
+\item Root cause analysis
+\item Intervention design
+\item Policy evaluation
+\item Understanding mechanisms
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Advantage:} Separates direct discrimination from confounding
+\end{columns}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mllavender!30, colframe=mlpurple]
+\textbf{Key Insight:} Statistical: $P(D|A) = P(D)$ (observed), Causal: $P(D_{A \leftarrow a}|X) = P(D_{A \leftarrow a'}|X)$ (counterfactual) - different tools for different questions
+\end{tcolorbox}
+
+\vspace{0.5em}
+\textbf{Key Question:} How do we actually measure these fairness violations in practice?
+
+\bottomnote{Statistical correlation detects symptoms while causal analysis diagnoses mechanisms - compliance requires both measurement paradigms}
+\end{frame}
+
+% Slide 12: Summary - The Challenge
+\begin{frame}[t]{Summary: The Hidden Challenge We Must Solve}
+\textbf{What we now understand about the invisible discrimination problem:}
+
+\vspace{0.3em}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlpurple}{\textbf{The Problem}}
+
+\small
+\textbf{1. Invisibility:}
+\begin{itemize}
+\item Discrimination hidden in outcomes
+\item No ground truth counterfactuals
+\item Proxy variables conceal bias
+\item I(D; A) > 0 but unobserved
+\end{itemize}
+
+\textbf{2. Measurement bottleneck:}
+\begin{itemize}
+\item 490,140 subgroups (6 attributes)
+\item 21.2 bits discrimination space
+\item Only 4.2 bits measurable
+\item 99.996\% unmeasured
+\end{itemize}
+
+\textbf{3. Amplification:}
+\begin{itemize}
+\item Feedback loops: $B_t = B_0(1+\alpha)^t$
+\item Small bias becomes systemic
+\item Exponential growth over time
+\item Reinforces historical patterns
+\end{itemize}
+
+\textbf{4. Intersectionality:}
+\begin{itemize}
+\item Exponential subgroup growth
+\item 188M+ samples needed
+\item Most vulnerable unmeasurable
+\item Statistical power collapse
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{mlpurple}{\textbf{The Stakes}}
+
+\small
+\textbf{2024 Impact:}
+\begin{itemize}
+\item 233 documented incidents
+\item 6.2M people affected
+\item \$10.4B in costs
+\item 47 countries
+\item 56\% YoY growth rate
+\end{itemize}
+
+\textbf{Systemic patterns:}
+\begin{itemize}
+\item 34x error rate (facial recognition)
+\item 1.8x callback gap (hiring)
+\item \$2,500 healthcare disparity
+\item 2.1x false positive (recidivism)
+\end{itemize}
+
+\textbf{Power imbalances:}
+\begin{itemize}
+\item Tech companies control design
+\item Marginalized lack voice
+\item Powerless bear harm
+\item Future generations inherit debt
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlorange}{\Large\textbf{The Challenge:}}\\
+\vspace{0.2cm}
+Make invisible bias visible\\
+through measurement frameworks\\
+before harm occurs
+\end{columns}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mllavender!30, colframe=mlpurple]
+\textbf{Core Takeaway:} Hidden discrimination (I(D; A) > 0, 21.2 bits) + Measurement gap (17 bits lost) + Amplification ($1.26^t$) = Urgent need for fairness metrics
+\end{tcolorbox}
+
+\vspace{0.5em}
+\textbf{Next:} Part 2 explores measurement frameworks that make bias visible - demographic parity, equal opportunity, and more
+
+\bottomnote{Problem quantification enables solution design - measurement frameworks emerge from understanding why detection fails}
+\end{frame}

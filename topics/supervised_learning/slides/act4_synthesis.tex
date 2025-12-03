@@ -1,0 +1,147 @@
+% Part 4: Synthesis (4 slides)
+
+\begin{frame}{22. Algorithm Landscape: Linear -> Tree -> Ensemble -> SVM}
+\begin{columns}
+\begin{column}{0.48\textwidth}
+\textbf{Complexity Progression}
+\begin{itemize}
+\item \textbf{Linear}: $y = w^T x + b$
+\item \textbf{Tree}: Recursive partitioning
+\item \textbf{Ensemble}: Multiple tree combination
+\item \textbf{SVM}: Kernel-based mapping
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Computational Complexity}
+\begin{itemize}
+\item Linear: $O(nd)$ training
+\item Single tree: $O(nd \log n)$
+\item Random forest: $O(tnd \log n)$
+\item SVM: $O(n^2d)$ to $O(n^3d)$
+\end{itemize}
+\end{column}
+\begin{column}{0.48\textwidth}
+\includegraphics[width=\textwidth]{charts/algorithm_landscape.pdf}
+
+\vspace{0.2cm}
+\small
+Algorithms form a spectrum from simple linear to complex nonlinear methods
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{23. When to Use Each: Interpretability vs Accuracy}
+\small
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\textbf{Linear Models}
+\begin{itemize}
+\item High interpretability, fast
+\item Use: Regulatory needs, simple patterns
+\end{itemize}
+
+\textbf{Decision Trees}
+\begin{itemize}
+\item Moderate interpretability
+\item Use: Rule extraction, mixed data
+\end{itemize}
+\end{column}
+\begin{column}{0.48\textwidth}
+\textbf{Ensemble Methods}
+\begin{itemize}
+\item Highest accuracy, robust
+\item Use: Performance critical
+\end{itemize}
+
+\textbf{SVM}
+\begin{itemize}
+\item Kernel flexibility
+\item Use: High dimensions, small data
+\end{itemize}
+
+\vspace{0.3cm}
+\includegraphics[width=\textwidth]{charts/interpretability_accuracy_tradeoff.pdf}
+\end{column}
+\end{columns}
+
+\vspace{\fill}
+\small\textcolor{gray}{Algorithm selection requires balancing interpretability, accuracy, and computational cost - no universally optimal choice exists}
+\end{frame}
+
+\begin{frame}{23.5 Common Pitfalls in Supervised Learning}
+\begin{columns}[c]
+\column{0.48\textwidth}
+\textbf{Pitfall 1: Data Leakage}
+\begin{itemize}
+\item Using test data during training
+\item Solution: Strict train/test separation
+\end{itemize}
+
+\textbf{Pitfall 2: Wrong Metric}
+\begin{itemize}
+\item Optimizing accuracy on imbalanced data
+\item Solution: Use F1, AUC-ROC for imbalanced cases
+\end{itemize}
+
+\textbf{Pitfall 3: Feature Scaling}
+\begin{itemize}
+\item Forgetting to normalize features
+\item Solution: StandardScaler before distance-based methods
+\end{itemize}
+
+\column{0.48\textwidth}
+\textbf{Pitfall 4: Overfitting}
+\begin{itemize}
+\item Too complex model for small data
+\item Solution: Regularization, cross-validation
+\end{itemize}
+
+\textbf{Pitfall 5: Ignoring Assumptions}
+\begin{itemize}
+\item Linear model on nonlinear data
+\item Solution: Validate assumptions, use nonlinear methods
+\end{itemize}
+
+\textbf{Pitfall 6: No Baseline}
+\begin{itemize}
+\item Not comparing to simple baseline
+\item Solution: Always start with logistic/linear regression
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\small\textcolor{gray}{Most supervised learning failures stem from data leakage, inappropriate metrics, or model mismatch - systematic validation prevents these errors}
+\end{frame}
+
+\begin{frame}{24. Modern Applications: Production ML Pipelines}
+\begin{columns}
+\begin{column}{0.48\textwidth}
+\textbf{Real-World Pipeline}
+\begin{enumerate}
+\item Data ingestion \& cleaning
+\item Feature engineering
+\item Model training \& validation
+\item Hyperparameter tuning
+\item Production deployment
+\item Monitoring \& retraining
+\end{enumerate}
+
+\vspace{0.3cm}
+\textbf{Industry Applications}
+\begin{itemize}
+\item Credit scoring: Gradient boosting
+\item Recommendation: Ensemble methods
+\item Fraud detection: Anomaly detection
+\item Medical diagnosis: Interpretable models
+\end{itemize}
+\end{column}
+\begin{column}{0.48\textwidth}
+\includegraphics[width=\textwidth]{charts/production_ml_pipeline.pdf}
+
+\vspace{0.2cm}
+\small
+Modern ML systems integrate multiple algorithms in end-to-end pipelines
+\end{column}
+\end{columns}
+\end{frame}
+

@@ -1,0 +1,217 @@
+% Act 2: K-means Algorithm (5 slides)
+
+\section{\color{discoverblue}Act 2: K-means Algorithm}
+
+\begin{frame}{Slide 6: Assign to Nearest Center Algorithm}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{\color{discoverblue}K-means Algorithm Steps}
+
+\textbf{1. Initialize:} Place k random centroids
+\textbf{2. Assign:} Each point \textrightarrow nearest centroid
+\textbf{3. Update:} Move centroids to cluster centers
+\textbf{4. Repeat:} Until convergence
+
+\textbf{Mathematical Foundation:}
+\begin{align}
+\text{Assign: } &c_i = \arg\min_j ||x_i - \mu_j||^2\\
+\text{Update: } &\mu_j = \frac{1}{|S_j|} \sum_{x_i \in S_j} x_i
+\end{align}
+
+Where $\mu_j$ is centroid j, $S_j$ is cluster j.
+
+\column{0.48\textwidth}
+\textbf{Algorithm Visualization:}
+\begin{center}
+\includegraphics[width=\textwidth]{charts/kmeans_steps.pdf}
+\end{center}
+
+\textbf{Convergence Criteria:}
+\begin{itemize}
+\item Centroids stop moving
+\item Maximum iterations reached
+\item Improvement below threshold
+\end{itemize}
+
+\textbf{Complexity:} O(nkdi) where n=points, k=clusters, d=dimensions, i=iterations
+\end{columns}
+
+\vspace{\fill}
+{\footnotesize \color{textgray}Iterative algorithm: Assign points, update centers, repeat}
+\end{frame}
+
+\begin{frame}{Slide 7: Worked Example with Actual Coordinates}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{\color{discoverblue}Step-by-Step Example}
+
+\textbf{Data Points:}
+\begin{itemize}
+\item A: (2, 3), B: (3, 4), C: (8, 7), D: (9, 8)
+\end{itemize}
+
+\textbf{Initial Centroids (k=2):}
+\begin{itemize}
+\item $\mu_1$: (1, 1), $\mu_2$: (6, 6)
+\end{itemize}
+
+\textbf{Iteration 1 - Assignments:}
+\begin{itemize}
+\item A to $\mu_1$: $d = \sqrt{(2-1)^2 + (3-1)^2} = 2.24$
+\item A to $\mu_2$: $d = \sqrt{(2-6)^2 + (3-6)^2} = 5.0$
+\item A \textrightarrow Cluster 1
+\end{itemize}
+
+\column{0.48\textwidth}
+\textbf{Complete Assignment Table:}
+\begin{center}
+\includegraphics[width=\textwidth]{charts/kmeans_example.pdf}
+\end{center}
+
+\textbf{Update Centroids:}
+\begin{itemize}
+\item Cluster 1: {A, B} \textrightarrow $\mu_1 = (2.5, 3.5)$
+\item Cluster 2: {C, D} \textrightarrow $\mu_2 = (8.5, 7.5)$
+\end{itemize}
+
+\textbf{Iteration 2:} Repeat until no changes
+\end{columns}
+
+\vspace{\fill}
+{\footnotesize \color{textgray}Concrete example: From random initialization to final clusters}
+\end{frame}
+
+\begin{frame}{Slide 8: [+] SUCCESS: Beautiful on Spherical Clusters}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{\color{discoverblue}[+] K-means Excels Here}
+
+\textbf{Ideal Conditions:}
+\begin{itemize}
+\item Spherical (circular) clusters
+\item Similar cluster sizes
+\item Well-separated groups
+\item Gaussian-distributed data
+\end{itemize}
+
+\textbf{Why It Works:}
+\begin{itemize}
+\item Minimizes within-cluster variance
+\item Natural for spherical boundaries
+\item Fast convergence
+\item Stable results
+\end{itemize}
+
+\textbf{Real Applications:}
+\begin{itemize}
+\item Customer segments by spending
+\item Geographic market regions
+\item Image color quantization
+\end{itemize}
+
+\column{0.48\textwidth}
+\textbf{Perfect K-means Scenario:}
+\begin{center}
+\includegraphics[width=\textwidth]{charts/kmeans_success.pdf}
+\end{center}
+
+\textbf{Performance Metrics:}
+\begin{itemize}
+\item Silhouette Score: 0.75+
+\item Low within-cluster variance
+\item Clear separation between clusters
+\item Intuitive business interpretation
+\end{itemize}
+
+\textbf{Result:} Clean, actionable customer segments.
+\end{columns}
+
+\vspace{\fill}
+{\footnotesize \color{textgray}Success case: K-means performs excellently on spherical, well-separated data}
+\end{frame}
+
+\begin{frame}{Slide 9: [-] FAILURE PATTERN: Breaks on Non-Convex Shapes}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{\color{challengered}[-] K-means Fails Here}
+
+\textbf{Problematic Shapes:}
+\begin{itemize}
+\item Crescent/moon shapes
+\item Elongated clusters
+\item Nested circles
+\item Irregular boundaries
+\end{itemize}
+
+\textbf{Why It Breaks:}
+\begin{itemize}
+\item Assumes spherical clusters
+\item Uses linear decision boundaries
+\item Centroids pull toward geometric center
+\item Ignores data density
+\end{itemize}
+
+\textbf{Crescent Data Example:}\\
+Two interlocking crescents \textrightarrow K-means creates artificial vertical split.
+
+\column{0.48\textwidth}
+\textbf{Failure Visualization:}
+\begin{center}
+\includegraphics[width=\textwidth]{charts/kmeans_failure.pdf}
+\end{center}
+
+\textbf{Crescent Data Table:}
+\begin{center}
+\includegraphics[width=\textwidth]{charts/crescent_data_table.pdf}
+\end{center}
+
+\textbf{Wrong Assignment:} Points clearly in same crescent assigned to different clusters.
+\end{columns}
+
+\vspace{\fill}
+{\footnotesize \color{textgray}Failure case: Non-convex shapes break K-means assumptions}
+\end{frame}
+
+\begin{frame}{Slide 10: Diagnosis: Assumes Convex, Spherical Clusters}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{\color{discoverblue}K-means Assumptions}
+
+\textbf{Mathematical Constraints:}
+\begin{itemize}
+\item Minimizes Euclidean distance to centroids
+\item Creates Voronoi cell boundaries
+\item Results in convex cluster shapes
+\item Equal weight to all dimensions
+\end{itemize}
+
+\textbf{Geometric Intuition:}\\
+K-means draws straight lines halfway between cluster centers \textrightarrow Always convex regions.
+
+\textbf{When to Use K-means:}
+\begin{itemize}
+\item Spherical data distributions
+\item Similar cluster variances
+\item Fast, scalable solution needed
+\end{itemize}
+
+\column{0.48\textwidth}
+\textbf{Voronoi Boundaries:}
+\begin{center}
+\includegraphics[width=\textwidth]{charts/voronoi_boundaries.pdf}
+\end{center}
+
+\textbf{Alternative Needed When:}
+\begin{itemize}
+\item Arbitrary cluster shapes
+\item Varying cluster densities
+\item Nested or overlapping groups
+\item Noise and outliers present
+\end{itemize}
+
+\textbf{Next:} Density-based approaches that handle complex shapes.
+\end{columns}
+
+\vspace{\fill}
+{\footnotesize \color{textgray}Diagnosis: Understanding K-means limitations guides algorithm choice}
+\end{frame}

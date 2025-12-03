@@ -1,0 +1,268 @@
+% Part 2: Techniques - Making AI Reliable
+\section{Techniques: Structured Generation Methods}
+
+% Slide 1: JSON Schema Fundamentals
+\begin{frame}{JSON Schema: The Contract for AI Outputs}
+\includegraphics[width=0.9\textwidth]{charts/json_schema_example.pdf}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Schemas enforce structural contracts - type specifications and constraint declarations enable validation and error detection}
+\end{frame}
+
+% Slide 2: Prompt Engineering Patterns
+\begin{frame}{Prompt Engineering for Reliability}
+\includegraphics[width=0.85\textwidth]{charts/prompt_patterns_comparison.pdf}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Prompt structure influences output consistency - explicit instructions reduce variance across generations}
+\end{frame}
+
+% Slide 3: Prompt Pattern Examples
+\begin{frame}[fragile]{Five Prompt Patterns Explained}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{1. Basic Prompt}}\\
+\small\texttt{"Extract data from this review"}\\
+\textcolor{mlgray}{Success: 72\%}
+
+\vspace{0.3cm}
+\textcolor{mlorange}{\textbf{2. Role-Based}}\\
+\small\texttt{"You are a data extraction expert. Extract..."}\\
+\textcolor{mlgray}{Success: 81\%}
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{3. Step-by-Step}}\\
+\small\texttt{"1. Read review 2. Identify rating 3. Extract..."}\\
+\textcolor{mlgray}{Success: 88\%}
+
+\column{0.48\textwidth}
+\textcolor{mlpurple}{\textbf{4. Few-Shot}}\\
+\small Provide 2-3 examples\\
+\textcolor{mlgray}{Success: 92\%}
+
+\vspace{0.3cm}
+\textcolor{mlred}{\textbf{5. Chain-of-Thought}}\\
+\small\texttt{"Think through each field. Explain your reasoning..."}\\
+\textcolor{mlgray}{Success: 95\%}
+\end{columns}
+
+\vspace{0.5cm}
+\begin{center}
+\textcolor{mlblue}{\normalsize Combine patterns for best results: Role + Few-Shot + CoT = 97\%}
+\end{center}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Pattern complexity matches task difficulty - sophisticated prompting techniques address proportionate challenges}
+\end{frame}
+
+% Slide 4: Temperature Impact
+\begin{frame}{Temperature: The Creativity-Reliability Tradeoff}
+\includegraphics[width=0.85\textwidth]{charts/temperature_reliability.pdf}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Temperature controls stochastic variation - lower values increase determinism at the cost of creative diversity}
+\end{frame}
+
+% Slide 5: Function Calling Mechanics
+\begin{frame}{Function Calling: How It Works}
+\includegraphics[width=0.85\textwidth]{charts/function_calling_flow.pdf}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Function calling enables autonomous tool selection - models determine appropriate actions and generate conformant parameters}
+\end{frame}
+
+% Slide 6: Function Calling vs Tool Use
+\begin{frame}{Function Calling vs Tool Use: What's the Difference?}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlblue}{\textbf{Function Calling}}\\
+\textcolor{mlgray}{OpenAI, Google}
+
+\small
+\begin{itemize}
+\item Model generates function call
+\item You execute the function
+\item Return results to model
+\item Model processes response
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{Best for:}}
+\begin{itemize}
+\item Structured data extraction
+\item API integrations
+\item Multi-step workflows
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{mlorange}{\textbf{Tool Use}}\\
+\textcolor{mlgray}{Anthropic Claude}
+
+\small
+\begin{itemize}
+\item Model requests tool
+\item Same pattern, different API
+\item More explicit tool definitions
+\item Designed for agents
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlpurple}{\textbf{Best for:}}
+\begin{itemize}
+\item Agent systems
+\item Complex tool chains
+\item Interactive workflows
+\end{itemize}
+\end{columns}
+
+\vspace{0.5cm}
+\begin{center}
+\textcolor{mlred}{\small Both achieve structured outputs - choose based on your LLM provider}
+\end{center}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Provider terminology varies despite conceptual equivalence - implementation details differ while core mechanisms align}
+\end{frame}
+
+% Slide 7: Chain-of-Thought for Structured Output
+\begin{frame}{Chain-of-Thought: Improving Reasoning}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlred}{\textbf{Without CoT}}
+
+\small
+\texttt{Extract: \{rating: 3, price: "moderate"\}}
+
+\vspace{0.3cm}
+Problems:
+\begin{itemize}
+\item No reasoning visible
+\item Hard to debug errors
+\item Inconsistent logic
+\item Cannot verify
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{mlgreen}{\textbf{With CoT}}
+
+\small
+\texttt{Reasoning: "Customer mentions 'okay food' suggesting 3/5 stars. They say '\$25 per person' which is moderate range."}
+
+\texttt{Extract: \{rating: 3, price: "moderate"\}}
+
+\vspace{0.3cm}
+Benefits:
+\begin{itemize}
+\item Reasoning traceable
+\item Easier debugging
+\item More consistent
+\item Verifiable logic
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Intermediate reasoning improves complex task performance - explicit thought chains enhance output quality for multi-step problems}
+\end{frame}
+
+% Slide 8: Validation Strategies
+\begin{frame}{Multi-Stage Validation Pipeline}
+\includegraphics[width=0.85\textwidth]{charts/validation_pipeline.pdf}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Layered validation catches diverse error modes - multiple verification stages detect different failure types}
+\end{frame}
+
+% Slide 9: Validation Layers Explained
+\begin{frame}{Three Layers of Validation}
+\begin{columns}[T]
+\column{0.32\textwidth}
+\textcolor{mlblue}{\textbf{1. Schema Validation}}
+
+\small
+\begin{itemize}
+\item Valid JSON?
+\item All fields present?
+\item Correct types?
+\item Within ranges?
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlgray}{\small Tools:}\\
+JSON Schema\\
+Pydantic\\
+TypeScript types
+
+\column{0.32\textwidth}
+\textcolor{mlgreen}{\textbf{2. Business Rules}}
+
+\small
+\begin{itemize}
+\item Logical consistency?
+\item Cross-field validation?
+\item Domain constraints?
+\item Edge cases?
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlgray}{\small Example:}\\
+If rating = 5\\
+then sentiment cannot be negative
+
+\column{0.32\textwidth}
+\textcolor{mlorange}{\textbf{3. Confidence Checks}}
+
+\small
+\begin{itemize}
+\item Model confidence score?
+\item Ambiguous input?
+\item Unusual values?
+\item Human review needed?
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlgray}{\small Action:}\\
+$<$ 70\% confidence\\
+→ Flag for review
+\end{columns}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Validation layers target distinct failure categories - syntactic, semantic, and business constraints require separate verification}
+\end{frame}
+
+% Slide 10: Retry Logic with Exponential Backoff
+\begin{frame}{Error Handling: Retry Strategies}
+\includegraphics[width=0.85\textwidth]{charts/error_handling_strategies.pdf}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Graceful degradation preserves system function - fallback hierarchies maintain service quality through progressive simplification}
+\end{frame}
+
+% Slide 11: Technique Comparison Summary
+\begin{frame}{Technique Selection Guide}
+\begin{center}
+\begin{tabular}{p{3cm}p{2.5cm}p{2.5cm}p{2.5cm}}
+\toprule
+\textbf{Technique} & \textbf{Reliability} & \textbf{Speed} & \textbf{Best For} \\
+\midrule
+Basic Prompt & 70-80\% & Fast & Simple extraction \\
+\midrule
+Role + Steps & 85-90\% & Fast & Medium complexity \\
+\midrule
+Few-Shot & 90-95\% & Medium & Consistent format \\
+\midrule
+Chain-of-Thought & 95-97\% & Slow & Complex reasoning \\
+\midrule
+Function Calling & 95-99\% & Fast & Structured APIs \\
+\midrule
+Multi-Validation & 98-99\% & Medium & Critical data \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{0.5cm}
+\textcolor{mlblue}{\textbf{Recommended:}} Function calling + Few-shot + Validation\\
+\textcolor{mlgreen}{\textbf{Result:}} 98\%+ reliability at reasonable speed
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Technique composition achieves production reliability - combining complementary methods addresses multiple failure modes simultaneously}
+\end{frame}

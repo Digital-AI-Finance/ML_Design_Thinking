@@ -1,0 +1,344 @@
+% Part 1: Machine Learning Foundations
+\section{Machine Learning Foundations}
+
+% Section divider
+\begin{frame}[plain]
+\vfill
+\centering
+\begin{beamercolorbox}[sep=16pt,center]{title}
+\usebeamerfont{title}\Large Part 1: Machine Learning Foundations\par
+\vspace{0.5em}
+\large Theory, Definitions, and Core Concepts\par
+\end{beamercolorbox}
+\vfill
+\end{frame}
+
+% What is Machine Learning
+\begin{frame}{What is Machine Learning? Building from Scratch}
+\twocolslide{
+\Large\textbf{You Want a Program That Gets Better}
+\normalsize
+\vspace{0.5em}
+
+Think about email spam detection:
+\begin{itemize}
+\item You \textbf{show it} 10,000 examples (spam and not spam)
+\item It learns patterns in the data
+\item It gets better at recognizing new spam
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Tom Mitchell (1997) formalized this:}
+
+A program learns from \textbf{Experience} $E$ at \textbf{Task} $T$ measured by \textbf{Performance} $P$ if its performance improves with experience.
+
+\vspace{0.5em}
+\textbf{Concrete Example:}
+\begin{itemize}
+\item[$E$:] 10,000 labeled emails
+\item[$T$:] Classify spam vs non-spam
+\item[$P$:] 85\% -> 95\% accuracy after training
+\end{itemize}
+}{
+\Large\textbf{The Mathematical Pattern}
+\normalsize
+\vspace{0.5em}
+
+What the algorithm actually does:
+
+\textbf{Step 1:} Given labeled examples
+\formula{\mathcal{D} = \{(x_i, y_i)\}_{i=1}^n}
+
+\textbf{Step 2:} Find function that maps inputs to outputs
+\formula{f: \mathcal{X} \rightarrow \mathcal{Y}}
+
+\textbf{Step 3:} Minimize errors on training data
+\formula{\hat{f} = \argmin_{f \in \mathcal{F}} \sum_{i=1}^n L(y_i, f(x_i)) + \lambda R(f)}
+
+where $L$ measures mistakes, $R$ prevents overfitting
+
+\vspace{0.3em}
+\keypoint{This optimization is what ``learning'' means mathematically}
+}
+
+\bottomnote{Learning formalizes improvement through optimization - mathematical frameworks transform intuitive experience into tractable computational problems}
+\end{frame}
+
+% Types of Learning
+\begin{frame}{Three Paradigms of Machine Learning}
+\begin{columns}[T]
+\begin{column}{0.32\textwidth}
+\centering
+\textcolor{chartblue}{\Large\textbf{Supervised}}
+\normalsize
+\vspace{0.3em}
+
+% Chart placeholder
+\includegraphics[width=0.85\textwidth]{charts/supervised_paradigm.pdf}
+
+\formula{\{(x_i, y_i)\}_{i=1}^n \rightarrow \hat{f}}
+
+\textbf{Applications:}
+\begin{itemize}
+\item Email spam detection
+\item Medical diagnosis
+\item Stock price prediction
+\item Image recognition
+\end{itemize}
+
+\textbf{Key Algorithms:}
+\begin{itemize}
+\item Linear Regression
+\item Random Forest
+\item Neural Networks
+\end{itemize}
+\end{column}
+
+\begin{column}{0.32\textwidth}
+\centering
+\textcolor{chartteal}{\Large\textbf{Unsupervised}}
+\normalsize
+\vspace{0.3em}
+
+% Chart placeholder
+\includegraphics[width=0.85\textwidth]{charts/unsupervised_paradigm.pdf}
+
+\formula{\{x_i\}_{i=1}^n \rightarrow \text{Structure}}
+
+\textbf{Applications:}
+\begin{itemize}
+\item Customer segmentation
+\item Anomaly detection
+\item Data compression
+\item Market basket analysis
+\end{itemize}
+
+\textbf{Key Algorithms:}
+\begin{itemize}
+\item K-means clustering
+\item PCA
+\item Autoencoders
+\end{itemize}
+\end{column}
+
+\begin{column}{0.32\textwidth}
+\centering
+\textcolor{chartorange}{\Large\textbf{Reinforcement}}
+\normalsize
+\vspace{0.3em}
+
+% Chart placeholder
+\includegraphics[width=0.85\textwidth]{charts/reinforcement_paradigm.pdf}
+
+\formula{(s_t, a_t, r_t, s_{t+1}) \rightarrow \pi^*}
+
+\textbf{Applications:}
+\begin{itemize}
+\item Game playing (Chess, Go)
+\item Autonomous vehicles
+\item Robotics control
+\item Resource allocation
+\end{itemize}
+
+\textbf{Key Algorithms:}
+\begin{itemize}
+\item Q-Learning
+\item Policy Gradients
+\item Actor-Critic
+\end{itemize}
+\end{column}
+\end{columns}
+
+\bottomnote{Three paradigms partition problem space - supervised uses labels, unsupervised discovers structure, reinforcement optimizes through interaction}
+\end{frame}
+
+% The Learning Process
+\begin{frame}{The Machine Learning Pipeline}
+\centering
+\includegraphics[width=0.85\textwidth]{charts/ml_pipeline.pdf}
+
+\vspace{0.5em}
+\textcolor{darkgray}{\small Data Collection $\rightarrow$ Preprocessing $\rightarrow$ Feature Engineering $\rightarrow$ Model Training $\rightarrow$ Validation $\rightarrow$ Deployment}
+
+\bottomnote{Pipeline thinking prevents isolated optimization - holistic workflow design addresses data quality, model selection, and deployment constraints simultaneously}
+\end{frame}
+
+% Bias-Variance Tradeoff
+\begin{frame}{The Fundamental Tradeoff: Bias vs Variance}
+\twocolslide{
+\Large\textbf{Mathematical Framework}
+\normalsize
+\vspace{0.5em}
+
+For any learning algorithm, the expected error can be decomposed as:
+
+\formula{\text{Error} = \text{Bias}^2 + \text{Variance} + \text{Noise}}
+
+\textbf{Bias:} Error from oversimplifying assumptions
+\formula{\text{Bias}[\hat{f}(x)] = E[\hat{f}(x)] - f(x)}
+
+\textbf{Variance:} Error from sensitivity to training data
+\formula{\text{Var}[\hat{f}(x)] = E[(\hat{f}(x) - E[\hat{f}(x)])^2]}
+
+\keypoint{Key Insight:} There's a fundamental tradeoff between bias and variance
+}{
+\centering
+\includegraphics[width=0.95\textwidth]{charts/bias_variance_tradeoff.pdf}
+
+\vspace{0.5em}
+\textbf{Model Complexity Examples:}
+\begin{itemize}
+\item \textcolor{darkred}{High Bias:} Linear models on nonlinear data
+\item \textcolor{chartorange}{Balanced:} Regularized models
+\item \textcolor{darkred}{High Variance:} Deep trees, k-NN with small k
+\end{itemize}
+}
+
+\bottomnote{Bias-variance decomposition reveals structural tension - no algorithm minimizes both error sources simultaneously requiring principled complexity management}
+\end{frame}
+
+% ML vs Traditional Programming
+\begin{frame}{Machine Learning vs Traditional Programming}
+\twocolslide{
+\centering
+\textcolor{darkgray}{\Large\textbf{Traditional Programming}}
+\normalsize
+\vspace{0.5em}
+
+\textbf{Process:}
+\begin{itemize}
+\item Write explicit rules
+\item Code logic step by step
+\item Handle edge cases manually
+\item Deterministic outputs
+\end{itemize}
+
+\textbf{Example: Email Classification}
+\begin{itemize}
+\item IF contains ``FREE'' AND ``LIMITED TIME''
+\item THEN classify as spam
+\item Requires manual rule updates
+\end{itemize}
+
+\textcolor{darkred}{\textbf{Limitations:}}
+\begin{itemize}
+\item Rules become complex
+\item Hard to handle exceptions
+\item Doesn't adapt to new patterns
+\end{itemize}
+}{
+\centering
+\textcolor{chartblue}{\Large\textbf{Machine Learning}}
+\normalsize
+\vspace{0.5em}
+
+\textbf{Process:}
+\begin{itemize}
+\item Provide example data
+\item Algorithm learns patterns
+\item Generalizes to new cases
+\item Probabilistic outputs
+\end{itemize}
+
+\textbf{Example: Email Classification}
+\begin{itemize}
+\item Train on 10,000 labeled emails
+\item Learn complex word patterns
+\item Automatically adapts to new spam
+\end{itemize}
+
+\textcolor{darkgreen}{\textbf{Advantages:}}
+\begin{itemize}
+\item Handles complex patterns
+\item Adapts to new data
+\item Discovers hidden relationships
+\end{itemize}
+}
+
+\bottomnote{Machine learning excels where explicit programming fails - pattern complexity and adaptation requirements favor data-driven approaches over rule-based systems}
+\end{frame}
+
+% Training, Validation, Test
+\begin{frame}{Data Splitting: Training, Validation, and Test Sets}
+\twocolslide{
+\Large\textbf{Why Split Data?}
+\normalsize
+\vspace{0.5em}
+
+\highlight{Training Set (60\%):}
+\begin{itemize}
+\item Used to fit model parameters
+\item Algorithm learns from this data
+\item Larger is generally better
+\end{itemize}
+
+\highlight{Validation Set (20\%):}
+\begin{itemize}
+\item Used for hyperparameter tuning
+\item Model selection and comparison
+\item Prevents overfitting to training data
+\end{itemize}
+
+\highlight{Test Set (20\%):}
+\begin{itemize}
+\item Final unbiased evaluation
+\item Never seen during development
+\item Estimates real-world performance
+\end{itemize}
+}{
+\centering
+\includegraphics[width=0.95\textwidth]{charts/data_splitting.pdf}
+
+\vspace{0.5em}
+\textbf{Cross-Validation:}
+\formula{CV = \frac{1}{k}\sum_{i=1}^k \text{Error}_i}
+
+\begin{itemize}
+\item k-fold CV: Split data into k parts
+\item Train on k-1, validate on 1
+\item Repeat k times, average results
+\item More robust than single split
+\end{itemize}
+}
+
+\bottomnote{Data partitioning prevents optimistic bias - holdout validation estimates generalization performance on unseen examples}
+\end{frame}
+
+% Performance Metrics Overview
+\begin{frame}{Evaluating Machine Learning Models}
+\twocolslide{
+\Large\textbf{Classification Metrics}
+\normalsize
+\vspace{0.5em}
+
+\textbf{Accuracy:}
+\formula{\text{Accuracy} = \frac{\text{Correct Predictions}}{\text{Total Predictions}}}
+
+\textbf{Precision:}
+\formula{\text{Precision} = \frac{\text{True Positives}}{\text{True Positives + False Positives}}}
+
+\textbf{Recall (Sensitivity):}
+\formula{\text{Recall} = \frac{\text{True Positives}}{\text{True Positives + False Negatives}}}
+
+\textbf{F1-Score:}
+\formula{F1 = 2 \cdot \frac{\text{Precision} \times \text{Recall}}{\text{Precision} + \text{Recall}}}
+}{
+\Large\textbf{Regression Metrics}
+\normalsize
+\vspace{0.5em}
+
+\textbf{Mean Squared Error:}
+\formula{MSE = \frac{1}{n}\sum_{i=1}^n (y_i - \hat{y}_i)^2}
+
+\textbf{Root Mean Squared Error:}
+\formula{RMSE = \sqrt{MSE}}
+
+\textbf{Mean Absolute Error:}
+\formula{MAE = \frac{1}{n}\sum_{i=1}^n |y_i - \hat{y}_i|}
+
+\textbf{R-squared:}
+\formula{R^2 = 1 - \frac{SS_{res}}{SS_{tot}}}
+}
+
+\bottomnote{Evaluation metrics quantify model quality - metric selection aligns algorithmic optimization with domain-specific success criteria}
+\end{frame}

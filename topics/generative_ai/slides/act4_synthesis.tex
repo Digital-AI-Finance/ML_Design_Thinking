@@ -1,0 +1,394 @@
+% Slide 24: Generative model landscape (VAE, GAN, Diffusion, Transformer)
+\begin{frame}
+\frametitle{The Generative AI Landscape}
+\framesubtitle{Four Fundamental Approaches}
+
+\begin{center}
+\includegraphics[width=0.65\textwidth]{charts/generative_landscape.pdf}
+\end{center}
+
+\footnotesize
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{VAEs (2013):} Probabilistic, smooth latent, blurry - First scalable
+
+\textbf{GANs (2014):} Adversarial, sharp outputs, unstable - Realism breakthrough
+
+\column{0.48\textwidth}
+\textbf{Diffusion (2020):} Iterative denoising, high quality, slow - SOTA quality
+
+\textbf{Transformers (2017):} Sequential, excellent text, scalable - Attention mechanism
+\end{columns}
+
+\vspace{\fill}
+\footnotesize \textcolor{gray}{
+Generative AI landscape spans four fundamental paradigms - each optimizes different objectives (VAE: likelihood, GAN: adversarial, Diffusion: denoising, Transformer: autoregressive) yielding distinct trade-offs
+}
+\end{frame}
+
+% Slide 25: When to Use Each Approach (Meta-Knowledge)
+\begin{frame}
+\frametitle{Choosing Your Generative Model}
+\framesubtitle{Decision Framework for Practitioners}
+
+\small
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{Decision Criteria:}
+
+\textbf{1. What are you generating?}
+\begin{itemize}
+\item Images: Diffusion or GAN
+\item Text: Transformer (GPT family)
+\item Structured data: VAE
+\item Multimodal: Diffusion + Transformer
+\end{itemize}
+
+\textbf{2. Data size?}
+\begin{itemize}
+\item $<$ 10k samples: VAE (stable)
+\item 10k-100k: GAN or VAE
+\item $>$ 100k: Diffusion or Transformer
+\end{itemize}
+
+\textbf{3. Priority?}
+\begin{itemize}
+\item Quality: Diffusion (FID < 5)
+\item Speed: GAN (single pass)
+\item Stability: VAE (always converges)
+\item Control: Diffusion (guidance)
+\end{itemize}
+
+\column{0.48\textwidth}
+\textbf{Recommendation Table:}
+
+\footnotesize
+\begin{tabular}{lll}
+\toprule
+\textbf{Use Case} & \textbf{Best} & \textbf{Why} \\
+\midrule
+Photorealistic & Diffusion & Quality \\
+Fast prototype & GAN & Speed \\
+Data augment & VAE & Stable \\
+Text gen & Transformer & Sequential \\
+Style transfer & VAE & Interpolate \\
+Research & VAE & Interpret \\
+\bottomrule
+\end{tabular}
+
+\vspace{0.2cm}
+\textbf{When NOT to Use:}
+\begin{itemize}
+\item VAE: Need sharp images
+\item GAN: Limited data, need stability
+\item Diffusion: Real-time inference required
+\item All: Insufficient compute resources
+\item All: Need deterministic outputs (use retrieval instead)
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize \textcolor{gray}{
+Model selection requires systematic decision framework - prioritize constraints (data size, latency, quality requirements) then match to architectural strengths balancing engineering and scientific considerations
+}
+\end{frame}
+
+% Slide 26: Common Pitfalls (Meta-Knowledge)
+\begin{frame}
+\frametitle{Common Pitfalls: What Can Go Wrong}
+\framesubtitle{Failure Modes and Solutions}
+
+\footnotesize
+\begin{columns}[T]
+\column{0.32\textwidth}
+\textcolor{mlred}{\textbf{VAE Pitfalls}}
+
+\textbf{1. Posterior Collapse}
+\begin{itemize}
+\item KL -> 0
+\item Fix: $\beta$-VAE, warm-up
+\end{itemize}
+
+\textbf{2. Blurry}
+\begin{itemize}
+\item MSE averages
+\item Fix: Perceptual loss
+\end{itemize}
+
+\textbf{3. KL Annealing}
+\begin{itemize}
+\item Warm-up schedule prevents collapse
+\end{itemize}
+
+\column{0.32\textwidth}
+\textcolor{mlred}{\textbf{GAN Pitfalls}}
+
+\textbf{1. Mode Collapse}
+\begin{itemize}
+\item Limited variety
+\item Fix: Minibatch disc
+\end{itemize}
+
+\textbf{2. Unstable}
+\begin{itemize}
+\item Oscillates
+\item Fix: Wasserstein, spectral norm
+\end{itemize}
+
+\textbf{3. Label Smoothing}
+\begin{itemize}
+\item Prevents D overconfidence
+\end{itemize}
+
+\column{0.32\textwidth}
+\textcolor{mlred}{\textbf{Diffusion Pitfalls}}
+
+\textbf{1. Slow (1000 steps)}
+\begin{itemize}
+\item Latency issue
+\item Fix: DDIM (50 steps)
+\end{itemize}
+
+\textbf{2. Memory}
+\begin{itemize}
+\item High-res costly
+\item Fix: Latent diffusion
+\end{itemize}
+
+\textbf{3. Classifier-Free Guidance}
+\begin{itemize}
+\item Better control
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize \textcolor{gray}{
+Understanding failure modes enables proactive mitigation - posterior collapse, mode collapse, and inference speed have well-established solutions requiring architecture-specific debugging strategies
+}
+\end{frame}
+
+% Slide 27: Best Practices (Meta-Knowledge)
+\begin{frame}
+\frametitle{Generative AI Best Practices}
+\framesubtitle{From Research to Production}
+
+\footnotesize
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{Training:}
+
+\textbf{1. Start Simple}
+\begin{itemize}
+\item Low res first (64x64 before 1024x1024)
+\item Validate on toy datasets
+\end{itemize}
+
+\textbf{2. Monitor Obsessively}
+\begin{itemize}
+\item Log every 100 steps
+\item Visual sample inspection
+\item Track FID/IS
+\end{itemize}
+
+\textbf{3. Use Pretrained}
+\begin{itemize}
+\item Transfer learning saves weeks
+\item Fine-tune Stable Diffusion
+\end{itemize}
+
+\textbf{4. Ablation Studies}
+\begin{itemize}
+\item Test components independently
+\end{itemize}
+
+\textbf{5. Reproducibility}
+\begin{itemize}
+\item Fix seeds, log hyperparameters, version data
+\end{itemize}
+
+\column{0.48\textwidth}
+\textbf{Deployment:}
+
+\textbf{1. Quality Control}
+\begin{itemize}
+\item Human-in-the-loop review
+\item Content filtering
+\item Watermarking
+\end{itemize}
+
+\textbf{2. Performance}
+\begin{itemize}
+\item Quantization (FP16, INT8)
+\item Distillation for speed
+\item Caching
+\end{itemize}
+
+\textbf{3. Safety}
+\begin{itemize}
+\item Rate limiting
+\item Content moderation
+\item Prompt injection defenses
+\end{itemize}
+
+\textbf{4. Continuous Improvement}
+\begin{itemize}
+\item User feedback
+\item A/B testing
+\end{itemize}
+
+\textbf{5. Versioning}
+\begin{itemize}
+\item Model registry, A/B testing, rollback capability
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize \textcolor{gray}{
+Production deployment requires systematic engineering - start simple for validation, monitor obsessively for failure detection, use transfer learning for efficiency, implement safety guardrails for responsible deployment
+}
+\end{frame}
+
+% Slide 28: Comprehensive Trade-offs
+\begin{frame}
+\frametitle{Comprehensive Trade-offs}
+\framesubtitle{No Free Lunch in Generative Modeling}
+
+\begin{center}
+\includegraphics[width=0.5\textwidth]{charts/generative_tradeoffs.pdf}
+\end{center}
+
+\footnotesize
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{Stability:}
+\begin{itemize}
+\item VAEs, Diffusion: Stable
+\item GANs: Unstable
+\end{itemize}
+
+\textbf{Speed:}
+\begin{itemize}
+\item VAEs, GANs: Fast
+\item Diffusion: Slow
+\end{itemize}
+
+\textbf{Data Efficiency:}
+\begin{itemize}
+\item VAE $>$ Diffusion $>$ GAN (sample requirements)
+\end{itemize}
+
+\column{0.48\textwidth}
+\textbf{Quality:}
+\begin{itemize}
+\item Diffusion, GANs: Excellent
+\item VAEs: Blurry
+\end{itemize}
+
+\textbf{Control:}
+\begin{itemize}
+\item Diffusion, Transformers: High
+\item GANs: Limited
+\end{itemize}
+
+\textbf{Interpretability:}
+\begin{itemize}
+\item VAE $>$ Diffusion $>$ GAN (latent structure)
+\end{itemize}
+
+\textbf{Training Stability:}
+\begin{itemize}
+\item Diffusion $>$ VAE $>$ GAN (convergence reliability)
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize \textcolor{gray}{
+No free lunch theorem applies - stability vs quality vs speed form fundamental trade-off triangle, optimal choice depends on problem constraints and deployment requirements
+}
+\end{frame}
+
+% Slide 29: Production Systems
+\begin{frame}
+\frametitle{State-of-the-Art Applications}
+\framesubtitle{Production Generative AI Systems}
+
+\begin{center}
+\includegraphics[width=0.5\textwidth]{charts/modern_applications.pdf}
+\end{center}
+
+\footnotesize
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textbf{Image:}
+\begin{itemize}
+\item DALL-E 3, Midjourney
+\item Stable Diffusion, Firefly
+\item FID $<$ 5 (photorealistic), 1024x1024, \$0.002-0.05/image
+\item 1024x1024, 10-30 sec
+\end{itemize}
+
+\column{0.48\textwidth}
+\textbf{Text:}
+\begin{itemize}
+\item GPT-4, Claude, Gemini
+\item Llama 2 (open)
+\item Perplexity $<$ 10, 32k-2M tokens, \$0.0001-0.01/1k tokens
+\item 32k-200k tokens, 100+ languages
+\end{itemize}
+\end{columns}
+
+\vspace{\fill}
+\footnotesize \textcolor{gray}{
+State-of-the-art systems achieve superhuman performance in constrained domains - image generation reaches FID<5 (human-indistinguishable), text generation achieves perplexity<10 (human-level coherence)
+}
+\end{frame}
+
+% Slide 30: Summary & Future Directions
+\begin{frame}
+\frametitle{Summary \& Future of Generative AI}
+\framesubtitle{What We Learned and What's Next}
+
+\begin{center}
+\includegraphics[width=0.4\textwidth]{charts/ethics_summary.pdf}
+\end{center}
+
+\footnotesize
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlgreen}{\textbf{Learned:}}
+\begin{itemize}
+\item VAEs: Probabilistic, blurry
+\item GANs: Adversarial, realistic
+\item Diffusion: Best quality
+\item Decision framework, pitfalls
+\end{itemize}
+
+\textcolor{mlpurple}{\textbf{Future:}}
+\begin{itemize}
+\item Faster, multimodal, edge
+\item Video (Sora, Gen-2), 3D (Point-E), Audio (MusicLM)
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{mlred}{\textbf{Ethics:}}
+\begin{itemize}
+\item Deepfakes, copyright
+\item Bias, displacement
+\item Attribution: Training data transparency
+\end{itemize}
+
+\textcolor{mlorange}{\textbf{Solutions:}}
+\begin{itemize}
+\item Watermarking, auditing
+\item Detection: Adversarial classifiers for synthetic content
+\item Governance
+\end{itemize}
+
+\textbf{Next:} Apply to innovation
+\end{columns}
+
+\vspace{\fill}
+\footnotesize \textcolor{gray}{
+Generative AI requires balancing capability with responsibility - technical excellence must accompany ethical frameworks addressing deepfakes, copyright, bias, and societal impact through watermarking, governance, and transparency
+}
+\end{frame}

@@ -1,0 +1,332 @@
+% Part 3: Nonlinear Methods (10 slides)
+
+\begin{frame}{12. Human Introspection: How YOU Divide Decision Space}
+\begin{columns}
+\begin{column}{0.48\textwidth}
+\textbf{Your Natural Decision Process}
+\begin{itemize}
+\item ``Is income > 50k?'' -> Split population
+\item ``If yes, is age > 40?'' -> Further split
+\item ``If no, is education > 12 years?'' -> Alternative path
+\item Continue until clear decision
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Hierarchical Thinking}
+\begin{itemize}
+\item Start with most important feature
+\item Recursively subdivide space
+\item Each split reduces uncertainty
+\item Stop when confident
+\end{itemize}
+\end{column}
+\begin{column}{0.48\textwidth}
+\includegraphics[width=\textwidth]{charts/human_decision_process.pdf}
+
+\vspace{0.2cm}
+\small
+Humans naturally create decision trees through sequential yes/no questions
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{13. Hypothesis: Trees, Kernels, Ensembles}
+\begin{columns}
+\begin{column}{0.48\textwidth}
+\textbf{Decision Trees}
+\begin{itemize}
+\item Recursive binary splits
+\item Non-parametric method
+\item Handles interactions naturally
+\item Interpretable rules
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Kernel Methods}
+\begin{itemize}
+\item Map to higher dimensions
+\item ``Kernel trick'' for efficiency
+\item SVM with RBF, polynomial kernels
+\item Implicit feature expansion
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Ensemble Methods}
+\begin{itemize}
+\item Combine multiple weak learners
+\item Random Forest, Gradient Boosting
+\item Reduce overfitting through averaging
+\end{itemize}
+\end{column}
+\begin{column}{0.48\textwidth}
+\includegraphics[width=\textwidth]{charts/nonlinear_methods_overview.pdf}
+
+\vspace{0.2cm}
+\small
+Three main approaches to capture nonlinear patterns in data
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{14. Zero-Jargon: ``20 Questions Game'' for Trees}
+\begin{columns}
+\begin{column}{0.48\textwidth}
+\textbf{The Game Analogy}
+\begin{itemize}
+\item You think of an animal
+\item I ask yes/no questions
+\item ``Is it bigger than a cat?''
+\item ``Does it live in water?''
+\item ``Is it a mammal?''
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Decision Tree Mapping}
+\begin{itemize}
+\item Animal = Data point
+\item Questions = Feature splits
+\item Final guess = Prediction
+\item Good questions = Informative features
+\end{itemize}
+\end{column}
+\begin{column}{0.48\textwidth}
+\includegraphics[width=\textwidth]{charts/twenty_questions_tree.pdf}
+
+\vspace{0.2cm}
+\small
+Decision trees ask the most informative questions to reach predictions quickly
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{15. Geometric Intuition: Decision Boundaries}
+\begin{columns}
+\begin{column}{0.48\textwidth}
+\textbf{Linear vs Nonlinear Boundaries}
+\begin{itemize}
+\item Linear: Straight lines/planes
+\item Trees: Axis-aligned rectangles
+\item SVM RBF: Curved boundaries
+\item Neural nets: Arbitrary shapes
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Complexity Hierarchy}
+\begin{itemize}
+\item Most restrictive: Linear
+\item Moderate: Decision trees
+\item Flexible: Kernel methods
+\item Most flexible: Deep networks
+\end{itemize}
+\end{column}
+\begin{column}{0.48\textwidth}
+\includegraphics[width=\textwidth]{charts/decision_boundaries_comparison.pdf}
+
+\vspace{0.2cm}
+\small
+Different algorithms create different types of decision boundaries
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{16. CART Algorithm with Actual Splits}
+\begin{columns}
+\begin{column}{0.48\textwidth}
+\textbf{CART Algorithm Steps}
+\begin{enumerate}
+\item Calculate impurity for current node
+\item Try all possible splits
+\item Choose split with highest information gain
+\item Recurse on child nodes
+\item Stop when stopping criterion met
+\end{enumerate}
+
+\vspace{0.3cm}
+\textbf{Gini Impurity Formula}
+$$G = 1 - \sum_{i=1}^C p_i^2$$
+where $p_i$ is probability of class $i$
+
+\vspace{0.3cm}
+\textbf{Information Gain}
+$$IG = G_{parent} - \sum \frac{n_{child}}{n_{parent}} G_{child}$$
+\end{column}
+\begin{column}{0.48\textwidth}
+\includegraphics[width=\textwidth]{charts/cart_algorithm_steps.pdf}
+
+\vspace{0.2cm}
+\small
+CART systematically finds the best splits by maximizing information gain
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{17. Full Walkthrough: Build Tree with Numbers}
+\begin{columns}
+\begin{column}{0.48\textwidth}
+\textbf{Dataset: Loan Approval}
+\small
+\begin{tabular}{|c|c|c|}
+\hline
+Income & Age & Approved \\
+\hline
+30k & 25 & No \\
+60k & 35 & Yes \\
+40k & 45 & No \\
+80k & 30 & Yes \\
+50k & 50 & Yes \\
+70k & 25 & Yes \\
+\hline
+\end{tabular}
+
+\small
+\textbf{Root Gini:} 4 Yes, 2 No $\to G = 0.444$
+\end{column}
+\begin{column}{0.48\textwidth}
+\textbf{Best Split: Income $\geq$ 55k}
+
+\small
+Left (<55k): 1Y, 2N $\to G_L = 0.444$
+
+Right ($\geq$55k): 3Y, 0N $\to G_R = 0$
+
+\textbf{Info Gain:} $IG = 0.222$
+
+\vspace{0.2cm}
+\includegraphics[width=\textwidth]{charts/tree_building_example.pdf}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{18. Visualization: Decision Boundaries on 2D Data}
+\begin{columns}
+\begin{column}{0.48\textwidth}
+\textbf{Tree Partitioning Process}
+\begin{itemize}
+\item Split 1: $x_1 \leq 0.5$ (vertical line)
+\item Split 2: $x_2 \leq 0.3$ (horizontal line)
+\item Split 3: $x_1 \leq 0.8$ (vertical line)
+\item Result: Rectangular regions
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Boundary Characteristics}
+\begin{itemize}
+\item Always axis-aligned
+\item Creates rectangular partitions
+\item Can approximate any boundary
+\item With enough splits
+\end{itemize}
+\end{column}
+\begin{column}{0.48\textwidth}
+\includegraphics[width=\textwidth]{charts/tree_2d_boundaries.pdf}
+
+\vspace{0.2cm}
+\small
+Decision tree boundaries are piecewise constant and axis-aligned
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{19. Why It Works: Piecewise Approximation}
+\begin{columns}
+\begin{column}{0.48\textwidth}
+\textbf{Universal Approximation}
+\begin{itemize}
+\item Any function can be approximated
+\item By piecewise constant functions
+\item With sufficient partitions
+\item Trees implement this naturally
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Mathematical Foundation}
+\begin{itemize}
+\item Step functions are dense in $L^2$
+\item Trees create step functions
+\item More splits = better approximation
+\item Regularization prevents overfitting
+\end{itemize}
+\end{column}
+\begin{column}{0.48\textwidth}
+\includegraphics[width=\textwidth]{charts/piecewise_approximation.pdf}
+
+\vspace{0.2cm}
+\small
+Trees approximate complex functions through recursive partitioning
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{20. Experimental Validation: Algorithm Comparison}
+\begin{columns}
+\begin{column}{0.48\textwidth}
+\textbf{Benchmark Results}
+\small
+\begin{tabular}{|l|c|c|c|}
+\hline
+\textbf{Dataset} & \textbf{Linear} & \textbf{Tree} & \textbf{SVM} \\
+\hline
+Iris & 96\% & 96\% & 98\% \\
+Wine & 94\% & 90\% & 96\% \\
+Digits & 92\% & 85\% & 98\% \\
+Breast Cancer & 95\% & 93\% & 97\% \\
+XOR & 50\% & 100\% & 100\% \\
+Circles & 52\% & 98\% & 100\% \\
+\hline
+\end{tabular}
+
+\vspace{0.3cm}
+\textbf{Key Insights}
+\begin{itemize}
+\item Linear: Good on linear data
+\item Trees: Excel on discrete features
+\item SVM: Best overall performance
+\item No universal winner
+\end{itemize}
+\end{column}
+\begin{column}{0.48\textwidth}
+\includegraphics[width=\textwidth]{charts/algorithm_comparison_table.pdf}
+
+\vspace{0.2cm}
+\small
+Performance varies by dataset characteristics and problem complexity
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{21. Implementation: sklearn Ensemble Methods}
+\begin{columns}
+\begin{column}{0.48\textwidth}
+\textbf{Random Forest}
+\begin{itemize}
+\item Bootstrap sampling of data
+\item Random subset of features
+\item Average predictions
+\item Reduces overfitting
+\end{itemize}
+
+\small
+\texttt{from sklearn.ensemble import RandomForestClassifier}
+
+\texttt{rf = RandomForestClassifier(n\_estimators=100)}
+
+\texttt{rf.fit(X\_train, y\_train)}
+
+\vspace{0.3cm}
+\textbf{Gradient Boosting}
+\begin{itemize}
+\item Sequential weak learners
+\item Each corrects previous errors
+\item Weighted combination
+\item Often best performance
+\end{itemize}
+\end{column}
+\begin{column}{0.48\textwidth}
+\includegraphics[width=\textwidth]{charts/ensemble_methods_performance.pdf}
+
+\vspace{0.2cm}
+\small
+Ensemble methods combine multiple models for superior performance
+\end{column}
+\end{columns}
+\end{frame}

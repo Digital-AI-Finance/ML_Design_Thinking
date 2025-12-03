@@ -10,72 +10,79 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## High-Level Architecture
 
-### Course Structure Evolution
+### Topic-Based Structure (December 2025)
 
-**Week 0 Options** (Choose based on course needs):
-- **Week_00_Introduction_ML_AI**: Comprehensive ML survey (45 slides, 90-min session) - broad overview
-  - **Status (Oct 2025):** ✅ Complete with 41 bottom notes, mathematically verified, production-ready
-- **Week 0a-0e Series**: 5 standalone narrative presentations (127 slides total, 5 × 90 min) - deep pedagogical approach
-  - Week_00a_ML_Foundations (32 slides) - "Learning Journey" metaphor - ✅ Math errors fixed
-  - Week_00b_Supervised_Learning (27 slides) - "Prediction Challenge" - ✅ Zero overflows
-  - Week_00c_Unsupervised_Learning (26 slides) - "Discovery Challenge" - ✅ Unicode compliant
-  - Week_00d_Neural_Networks (27 slides) - "Depth Challenge" - ✅ Unicode compliant
-  - Week_00e_Generative_AI (29 slides) - "Creation Challenge" - ✅ Major overflow reduction
-- **Week_00_Finance_Theory**: Advanced finance theory (45+ slides, 10 parts, quant track)
-  - **Status (Oct 2025):** ✅ Expanded from 124 to 1181 lines (9.5x growth), 15 new comprehensive slides added
-  - **Note:** Renamed from Week_00b_ML_Finance_Applications to avoid confusion with Week_00b_Supervised_Learning
+Content is organized by ML topic rather than by week:
 
-**Main Course** (Weeks 1-10):
-- **Week 1-10**: Complete weekly modules (47-59 slides each) covering full innovation cycle
-- **Weeks 11-12**: Reserved for future expansion
-
-**Build System**: compile.py available in Weeks 1-10 and Week_00_Finance_Theory
-
-### Standard Week Structure
-
-**Traditional 5-Part Structure** (Weeks 1-7, 9-10):
 ```
-Week_##/
-├── YYYYMMDD_HHMM_main.tex              # Master controller with \input{} commands
-├── YYYYMMDD_HHMM_main_beginner.tex     # Beginner version (Week 4+)
-├── part1_foundation.tex                # Part 1: Foundation
-├── part2_technical.tex                 # Part 2: Technical/Algorithms
-├── part3_implementation.tex            # Part 3: Implementation
-├── part4_design.tex                    # Part 4: Design/UX
-├── part5_practice.tex                  # Part 5: Workshop/Practice
-├── appendix_*.tex (optional)
-├── compile.py                          # Automated compilation with cleanup
-├── charts/                             # PDF (300dpi) + PNG (150dpi) visualizations
-├── scripts/                            # Chart generation Python scripts
-├── handouts/                           # 3-level skill-targeted guides (.md)
-└── archive/                            # Version control & cleanup
-    ├── aux/                            # Auxiliary files auto-moved here
-    ├── builds/                         # Timestamped PDF archives
-    └── previous/                       # Version history
+ML_Design_Thinking_16/
+├── topics/                    # Main course content by topic
+│   ├── ml_foundations/        # ML/AI overview and learning paradigms
+│   ├── supervised_learning/   # Regression, classification
+│   ├── unsupervised_learning/ # Clustering theory
+│   ├── clustering/            # Applied clustering, personas
+│   ├── nlp_sentiment/         # Text analysis, sentiment
+│   ├── classification/        # Decision trees, forests
+│   ├── topic_modeling/        # LDA, document topics
+│   ├── generative_ai/         # LLMs, prompt engineering
+│   ├── neural_networks/       # Deep learning
+│   ├── responsible_ai/        # Ethics, fairness, SHAP
+│   ├── structured_output/     # JSON output, reliability
+│   ├── validation_metrics/    # Model evaluation
+│   ├── ab_testing/            # Experiments, statistics
+│   └── finance_applications/  # Quantitative finance
+├── archive/weeks_original/    # Original week-based folders
+├── docs/                      # Status reports and documentation
+├── tools/                     # Python utilities
+└── moodle/                    # Course export (pending analysis)
 ```
 
-**4-Act Dramatic Structure** (Week 0a-0e):
+### Topic Folder Structure
+
+Each topic folder follows consistent structure:
+
 ```
-Week_##/
-├── YYYYMMDD_HHMM_main.tex              # Master controller with 4 act inputs
-├── act1_*_challenge.tex                # Act 1: The Challenge (5 slides)
-├── act2_*_solution.tex                 # Act 2: First Solution (5-6 slides)
-├── act3_*_breakthrough.tex             # Act 3: The Breakthrough (9-10 slides)
-├── act4_*_synthesis.tex                # Act 4: Synthesis (4 slides)
-├── charts/                             # Visualizations
-├── scripts/                            # Chart generation
-└── archive/                            # Version control
+topics/{topic_name}/
+├── README.md                  # Topic overview and objectives
+├── slides/                    # Presentation files (.tex, .pdf)
+│   ├── main.tex               # Main presentation
+│   ├── part1_*.tex            # Modular sections
+│   └── *.pdf                  # Compiled slides
+├── charts/                    # Visualizations (PDF + PNG)
+├── scripts/                   # Chart generation Python scripts
+├── handouts/                  # Student materials
+│   ├── basic.md               # Beginner level
+│   ├── intermediate.md        # Implementation guide
+│   └── advanced.md            # Theory and proofs
+└── compile.py                 # Compilation script
 ```
 
-**Note**: Week 0 series presentations compile directly with pdflatex (simpler structure). Week 8 uses the 5-part structure above despite having 4-act narrative content.
+### Topic Index
+
+| Topic | Content | Original Sources |
+|-------|---------|------------------|
+| ml_foundations | ML/AI overview, learning paradigms | Week_00_Introduction, Week_00a |
+| supervised_learning | Regression, OLS, trees | Week_00b |
+| unsupervised_learning | Clustering theory | Week_00c |
+| clustering | Applied clustering, personas | Week_01, Week_02 |
+| nlp_sentiment | Text analysis, BERT | Week_03 |
+| classification | Decision trees, forests | Week_04 |
+| topic_modeling | LDA, document topics | Week_05 |
+| generative_ai | LLMs, prompting | Week_06, Week_00e |
+| neural_networks | Deep learning | Week_00d |
+| responsible_ai | Ethics, fairness, SHAP | Week_07 |
+| structured_output | JSON output, reliability | Week_08 |
+| validation_metrics | Model evaluation | Week_09 |
+| ab_testing | Experiments, statistics | Week_10 |
+| finance_applications | Quant finance, risk | Week_00_Finance_Theory |
 
 ## Quick Start Cheat Sheet
 
 ```powershell
 # COMPILE SLIDES
-cd Week_01                  # Navigate to any week
+cd topics/clustering        # Navigate to any topic
 python compile.py           # Auto-detects and compiles latest .tex
-start *.pdf                 # View generated PDF (Windows)
+start slides/*.pdf          # View generated PDF (Windows)
 
 # GENERATE CHARTS
 cd scripts
@@ -83,6 +90,23 @@ python create_*.py          # Generates both PDF (300dpi) and PNG (150dpi)
 
 # CHECK STATUS
 git status                  # See modified files
+```
+
+## Batch Operations
+
+```powershell
+# Compile multiple topics sequentially
+foreach ($topic in @("ml_foundations","supervised_learning","clustering","nlp_sentiment","classification")) {
+    cd "D:\Joerg\Research\slides\ML_Design_Thinking_16\topics\$topic"
+    python compile.py
+}
+
+# Generate all charts for a specific topic
+cd topics/clustering/scripts
+Get-ChildItem -Filter "create_*.py" | ForEach-Object { python $_.Name }
+
+# List all topics
+Get-ChildItem -Path "D:\Joerg\Research\slides\ML_Design_Thinking_16\topics" -Directory | Select-Object Name
 ```
 
 ## Quick Troubleshooting Guide
@@ -225,7 +249,7 @@ Move-Item *.aux,*.log,*.nav,*.snm,*.toc,*.vrb,*.out -Destination archive\aux -Fo
   - ❌ WRONG: `main.tex` (no timestamp), `slides_v2.tex` (version in name)
   - Exception: Beginner versions use `_beginner` suffix: `20250928_1539_main_beginner.tex`
 - **Charts**: Python-generated only, NO TikZ
-- **Week 0b Finance**: NO Python code on slides (pure theory)
+- **Week_00_Finance_Theory**: NO Python code on slides (pure theory)
 - **Code blocks in Beamer**: Frames with `\begin{lstlisting}` MUST use `[fragile,t]` option
   - ✅ CORRECT: `\begin{frame}[fragile,t]{Title}`
   - ❌ WRONG: `\begin{frame}[t]{Title}` when lstlisting is inside
@@ -324,6 +348,9 @@ From Section E (Meta-Knowledge) and Quality Checks:
 Complete 4-act narrative structure presentations (see WEEK_0_SERIES_README.md):
 - **Week_00a_ML_Foundations**: Learning journey metaphor (4 acts, 26 slides, 17 charts)
 - **Week_00b_Supervised_Learning**: Prediction challenge (4 acts, 25 slides, 25 charts)
+  - **Summary Version**: 11-slide compact presentation (20251008_1600_summary_revised.tex)
+  - Visual-focused ensemble methods with graphviz trees + function approximation
+  - Python code appendix for practical reference
 - **Week_00c_Unsupervised_Learning**: Discovery without labels (4 acts, 26 slides, 25 charts)
 - **Week_00d_Neural_Networks**: Depth challenge (4 acts, 25 slides, 25 charts)
 - **Week_00e_Generative_AI**: Creation challenge (4 acts, 29 slides, 20 charts)
@@ -447,6 +474,7 @@ Week_##/archive/
 pip install scikit-learn numpy pandas scipy matplotlib seaborn
 
 # Week-specific requirements
+pip install graphviz                                 # Week 0b Summary (tree visualization)
 pip install textblob transformers nltk wordcloud      # Week 3+ (NLP)
 pip install gensim pyLDAvis                          # Week 5 (Topic Modeling)
 pip install imblearn                                 # Week 4 (Imbalanced Data)
@@ -459,6 +487,7 @@ pip install black flake8                             # Code formatting and linti
 
 ### Package Usage by Week
 ```python
+# Week 0b Summary: graphviz (for ensemble tree visualization)
 # Week 1-2: sklearn.cluster (KMeans, DBSCAN, Hierarchical)
 # Week 3: textblob, transformers (BERT), nltk, wordcloud
 # Week 4: sklearn.ensemble, imblearn.over_sampling
@@ -555,8 +584,8 @@ Choose based on course constraints and pedagogical goals:
   - Framework designed for concept-introduction presentations (Week 0a-0e series)
   - Applied workshop weeks (1-10) follow core principles selectively
 - `WEEK_0_SERIES_README.md`: Overview of Week 0a-0e expansion (5 presentations, 127 slides)
-- `GAP_ANALYSIS_REPORT.md`: Course completion tracking (~85% complete, last updated 2025-09-27)
-  - **Update (Oct 6, 2025):** Week 0 variants now 100% content-complete
+- `GAP_ANALYSIS_REPORT.md`: Course completion tracking (~90% complete, last updated 2025-10-08)
+  - Week 0 variants: 100% content-complete
   - All 10 main weeks (1-10) framework-compliant for pedagogical requirements
   - All 7 Week 0 variants verified, mathematically correct, production-ready
 - `template_beamer_final.tex`: Standard Beamer template (22 layouts, Madrid theme)
@@ -602,17 +631,59 @@ Standard template with 22 professional layouts:
 - Don't commit auxiliary files (*.aux, *.log, etc.)
 - Large binary files (PDFs) should be committed selectively
 
+## New Folder Organization (December 2025)
+
+### /docs/ - Documentation and Reports
+Status reports and historical documentation moved from root:
+- `FALL_2025_ACTION_PLAN.md` - Deployment checklist
+- `GAP_ANALYSIS_REPORT.md` - Course completion tracking
+- `COMPLETION_SUMMARY_OCT_2025.md` - October 2025 summary
+- `WEEK_0_COMPLETION_REPORT.md` - Week 0 completion details
+- `REPOSITORY_STATUS_REPORT.md` - Repository health
+- `CLEANUP_REPORT.md` - Cleanup operations log
+- `CLAUDE_OLD.md` - Superseded instructions (archive)
+
+### /tools/ - Python Utilities
+Development and maintenance scripts:
+- `create_metainfo.py` - Quantlet metadata generation
+- `create_remaining_meta_charts.py` - Chart metadata
+- `fix_chart_sizes.py` - Chart dimension standardization
+
+### /ML_Design_Course/ - Planning Materials (Restructured)
+Course planning materials organized into:
+- `course_overview/` - Overview slides and LaTeX files
+- `visuals/` - Chart generation scripts (course_visuals/, week01_visuals/)
+- `archive/` - Historical versions (old/, previous/, temp/)
+- `README.md` - Folder purpose documentation
+- `NEEDS_REVIEW.md` - Pending analysis tasks
+
+### /moodle/ - Course Export (Pending Analysis)
+Moodle course backup (~31MB) containing deployed course materials.
+- Status: **PENDING ANALYSIS** - Core content needing improvement
+- See `moodle/README.md` for analysis tasks
+
+## Archive Structure
+
+### archive/weeks_original/
+All original week-based folders preserved here for reference:
+- Week_00 through Week_10 (main course)
+- Week_00a through Week_00e (narrative series)
+- Week_00_Introduction_ML_AI, Week_00_Finance_Theory
+
+These are **read-only archives**. All active development happens in `topics/`.
+
 ---
 
-**Last Updated**: October 8, 2025
+**Last Updated**: December 3, 2025
 **Recent Changes**:
-- **RENAMED**: Week_00b_ML_Finance_Applications → Week_00_Finance_Theory (eliminates confusion)
-- **CLEANED**: Moved 696 auxiliary files to archive/aux directories (zero deletions)
-- **ENHANCED**: .gitignore now includes LaTeX, Python, Jupyter, OS, and IDE patterns
-- Added Quick Troubleshooting Guide section for common issues
-- Documented Archive System structure and workflow
-- Added Discovery-Based Handout system documentation (Week_00_Introduction_ML_AI)
-- Documented 6 discovery chart generators with true overfitting demonstration
-- Updated handout system section with chart generation workflow
-- Corrected compile.py availability statement (present in Weeks 1-10 and Week_00_Finance_Theory)
-- Updated Week_00e slide count (29 slides, not 25)
+- **MAJOR REORGANIZATION**: Converted from week-based to topic-based structure
+  - Created `topics/` folder with 14 topic subfolders
+  - Moved all Week_* folders to `archive/weeks_original/`
+  - Each topic has: slides/, charts/, scripts/, handouts/, README.md
+  - Topic names: ml_foundations, supervised_learning, clustering, nlp_sentiment, etc.
+- Created README.md for each of the 14 topics with learning objectives
+- Updated Quick Start and Batch Operations for topic-based workflow
+- Created /docs/ folder (7 documentation files moved from root)
+- Created /tools/ folder (3 Python utilities moved from root)
+- Restructured ML_Design_Course/ with course_overview/, visuals/, archive/
+- Added README.md to moodle/ folder for pending analysis

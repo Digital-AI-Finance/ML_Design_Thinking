@@ -1,0 +1,783 @@
+% Part 4: Production Synthesis (10 slides)
+% Theme: From mathematics to deployed ethical AI
+% Colors: mllavender/mlpurple (template_beamer_final)
+
+\section{Production and Synthesis}
+
+% Slide 1: 4-Layer Production Architecture (from act4)
+\begin{frame}[t]{The Complete Production Fairness Architecture}
+\textbf{Four-layer system for ethical AI in production:}
+
+\vspace{0.3em}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlpurple}{\textbf{Layer 1: Detection}}
+
+\small
+\textcolor{mlorange}{Make invisible visible}
+
+\textbf{Components:}
+\begin{itemize}
+\item Disaggregated metrics
+\item Statistical tests
+\item Drift detection
+\end{itemize}
+
+\textbf{Tools:}
+\begin{itemize}
+\item Fairlearn MetricFrame
+\item AIF360 metrics (70+)
+\item Custom dashboards
+\end{itemize}
+
+\textbf{Output:} Bias reports, violation alerts\\
+\textbf{Time:} Real-time monitoring
+
+\vspace{0.3cm}
+\textcolor{mlblue}{\textbf{Layer 2: Optimization}}
+
+\textcolor{mlorange}{Constrained learning}
+
+\textbf{Components:}
+\begin{itemize}
+\item Lagrangian optimization
+\item Threshold tuning
+\item Reweighing
+\end{itemize}
+
+\textbf{Tools:}
+\begin{itemize}
+\item Fairlearn ExponentiatedGradient
+\item AIF360 mitigation (10+ algorithms)
+\end{itemize}
+
+\textbf{Output:} Fair models (constraints satisfied)\\
+\textbf{Time:} Training pipeline
+
+\column{0.48\textwidth}
+\textcolor{mlpurple}{\textbf{Layer 3: Explainability}}
+
+\small
+\textcolor{mlorange}{Interpretable decisions}
+
+\textbf{Components:}
+\begin{itemize}
+\item SHAP values
+\item Counterfactual explanations
+\item Feature importance
+\end{itemize}
+
+\textbf{Tools:}
+\begin{itemize}
+\item SHAP, LIME
+\item What-If Tool
+\item Fairlearn dashboards
+\end{itemize}
+
+\textbf{Output:} Per-decision explanations, model cards\\
+\textbf{Time:} Inference + documentation
+
+\vspace{0.3cm}
+\textcolor{mlblue}{\textbf{Layer 4: Monitoring}}
+
+\textcolor{mlorange}{Auditing and accountability}
+
+\textbf{Components:}
+\begin{itemize}
+\item Continuous auditing
+\item Performance tracking
+\item Incident response
+\end{itemize}
+
+\textbf{Tools:}
+\begin{itemize}
+\item MLflow, TensorBoard
+\item Custom dashboards
+\item Alerting systems
+\end{itemize}
+
+\textbf{Output:} Audit trails, compliance reports\\
+\textbf{Time:} 24/7 automated
+\end{columns}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mllavender!30, colframe=mlpurple]
+\textbf{Key Insight:} Production fairness requires 4 layers working together - not just algorithms, but complete systems
+\end{tcolorbox}
+
+\vspace{0.5em}
+\textbf{Key Question:} What modern tools implement these layers?
+
+\bottomnote{Ethical systems require multiple coordinated components - isolated algorithms fail where integrated architectures succeed}
+\end{frame}
+
+% Slide 2: Modern Tools (from act4)
+\begin{frame}[t]{Modern Fairness Tools (2024-2025)}
+\textbf{Three major platforms with production deployment:}
+
+\vspace{0.3em}
+
+\begin{columns}[T]
+\column{0.31\textwidth}
+\textcolor{mlpurple}{\textbf{Microsoft Fairlearn}}
+
+\small
+\textbf{Best for:} Azure ML,\\ sklearn integration
+
+\vspace{0.3cm}
+\textcolor{mlorange}{Detection:}
+\begin{itemize}
+\item MetricFrame
+\item 40+ metrics
+\item Drift detection
+\end{itemize}
+
+\textcolor{mlblue}{Optimization:}
+\begin{itemize}
+\item ExponentiatedGradient
+\item GridSearch
+\item ThresholdOptimizer
+\end{itemize}
+
+\textcolor{mlpurple}{Explainability:}
+\begin{itemize}
+\item Interactive dashboards
+\item Trade-off plots
+\end{itemize}
+
+\textcolor{mlorange}{Monitoring:}
+\begin{itemize}
+\item Model comparison
+\item A/B testing
+\end{itemize}
+
+\column{0.31\textwidth}
+\textcolor{mlpurple}{\textbf{IBM AIF360}}
+
+\small
+\textbf{Best for:} Research,\\ comprehensive metrics
+
+\vspace{0.3cm}
+\textcolor{mlorange}{Detection:}
+\begin{itemize}
+\item 70+ bias metrics
+\item Intersectional analysis
+\end{itemize}
+
+\textcolor{mlblue}{Optimization:}
+\begin{itemize}
+\item 10+ mitigation algorithms
+\item Prejudice remover
+\item Adversarial debiasing
+\item Calibrated eq. odds
+\end{itemize}
+
+\textcolor{mlpurple}{Explainability:}
+\begin{itemize}
+\item Contrastive explanations
+\item Prototypes/criticisms
+\end{itemize}
+
+\textcolor{mlorange}{Monitoring:}
+\begin{itemize}
+\item Benchmark datasets
+\item Compliance reporting
+\end{itemize}
+
+\column{0.31\textwidth}
+\textcolor{mlpurple}{\textbf{Google What-If Tool}}
+
+\small
+\textbf{Best for:} Interactive\\ exploration, TensorFlow
+
+\vspace{0.3cm}
+\textcolor{mlorange}{Detection:}
+\begin{itemize}
+\item Visual exploration
+\item Slice-based analysis
+\item Performance gaps
+\end{itemize}
+
+\textcolor{mlblue}{Optimization:}
+\begin{itemize}
+\item Interactive threshold tuning
+\item Real-time adjustment
+\end{itemize}
+
+\textcolor{mlpurple}{Explainability:}
+\begin{itemize}
+\item Individual counterfactuals
+\item Feature attribution
+\item SHAP integration
+\end{itemize}
+
+\textcolor{mlorange}{Monitoring:}
+\begin{itemize}
+\item TensorBoard integration
+\item Dataset comparison
+\end{itemize}
+\end{columns}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mllavender!30, colframe=mlpurple]
+\textbf{Key Insight:} Three major tools (Fairlearn, AIF360, What-If) all provide 4-layer architecture - mathematics to production
+\end{tcolorbox}
+
+\vspace{0.5em}
+\textbf{Key Question:} What lessons transfer beyond AI fairness?
+
+\bottomnote{Open-source ecosystems accelerate ethical deployment - community-maintained tools reduce implementation barriers at scale}
+\end{frame}
+
+% Slide 3: Transferable Lessons (from act4)
+\begin{frame}[t]{Four Transferable Lessons Beyond AI Fairness}
+\textbf{Universal principles across domains:}
+
+\vspace{0.3em}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlpurple}{\textbf{Lesson 1: Invisible $	o$ Measurable}}
+
+\small
+\textbf{Principle:} Can't manage what you can't measure
+
+\textbf{AI Fairness:} I(D; A), DP, EO metrics
+
+\textbf{Transfers to:}
+\begin{itemize}
+\item Climate: Carbon accounting, GHG metrics
+\item Inequality: Gini coefficient, wealth gaps
+\item Health: Life expectancy by demographics
+\item Education: Achievement gaps
+\item Organizations: Pay equity audits
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlpurple}{\textbf{Lesson 2: Multiple Metrics $	o$ Trade-offs}}
+
+\textbf{Principle:} No single metric captures full picture
+
+\textbf{AI Fairness:} DP vs EO vs calibration impossibility
+
+\textbf{Transfers to:}
+\begin{itemize}
+\item Policy: Efficiency vs equity vs sustainability
+\item Business: Profit vs growth vs risk
+\item Engineering: Speed vs quality vs cost
+\item Healthcare: Individual vs population
+\item Security: Privacy vs surveillance
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{mlpurple}{\textbf{Lesson 3: Math Constrains, Values Choose}}
+
+\small
+\textbf{Principle:} Mathematics reveals what's possible, humans choose what matters
+
+\textbf{AI Fairness:} Impossibility + stakeholder values $	o$ $\lambda$
+
+\textbf{Transfers to:}
+\begin{itemize}
+\item Resource allocation: Pareto efficiency + priorities
+\item Risk management: VaR limits + risk appetite
+\item Urban planning: Capacity + community goals
+\item Budgeting: Financial limits + strategy
+\item Triage: Medical capacity + ethics
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlpurple}{\textbf{Lesson 4: Optimization Makes Explicit}}
+
+\textbf{Principle:} Implicit choices create hidden bias, explicit optimization creates accountability
+
+\textbf{AI Fairness:} Lagrangian $L(\theta, \lambda)$ makes $\lambda$ visible
+
+\textbf{Transfers to:}
+\begin{itemize}
+\item Government: Transparent policy trade-offs
+\item Finance: Explicit risk-return preferences
+\item Procurement: Multi-objective criteria
+\item Design: User needs vs constraints
+\item Strategy: Cost-benefit documentation
+\end{itemize}
+\end{columns}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mllavender!30, colframe=mlpurple]
+\textbf{Key Insight:} Four lessons transcend AI - fundamental principles for managing complexity with measurement and optimization
+\end{tcolorbox}
+
+\vspace{0.5em}
+\textbf{Key Question:} How do we ensure continuous monitoring in production?
+
+\bottomnote{Domain-specific solutions reveal universal patterns - mathematical frameworks transcend their original problem contexts when properly abstracted}
+\end{frame}
+
+% Slides 4-7: NEW DEEP AI slides
+% Slide 4: NEW - Continuous Monitoring
+\begin{frame}[t]{Deep AI: Continuous Fairness Monitoring in Production}
+\textbf{Automated drift detection and alerting systems:}
+
+\vspace{0.3em}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlpurple}{\textbf{Monitoring Framework}}
+
+\small
+\textbf{Statistical drift detection:}
+
+\vspace{0.3cm}
+\textcolor{mlorange}{1. Metric Tracking}
+
+For each fairness metric $m$ and group $g$:
+$$m_{g,t} = \text{metric}_g(\text{predictions}_t)$$
+
+Track over time windows: 1 hour, 1 day, 1 week
+
+\vspace{0.3cm}
+\textcolor{mlblue}{2. Drift Score}
+
+$$D_t = \max_{g,g'} |m_{g,t} - m_{g',t}| - |m_{g,0} - m_{g',0}|$$
+
+Measures change from baseline
+
+\vspace{0.3cm}
+\textcolor{mlpurple}{3. Statistical Tests}
+
+\begin{itemize}
+\item Kolmogorov-Smirnov: Distribution shift
+\item Chi-square: Rate changes
+\item Sequential probability ratio test
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlorange}{4. Alert Thresholds}
+
+$$\text{Alert if } D_t > \epsilon \text{ or } p\text{-value} < 0.05$$
+
+\column{0.48\textwidth}
+\textcolor{mlpurple}{\textbf{Implementation Example}}
+
+\small
+\textbf{Production monitoring pipeline:}
+
+\vspace{0.3cm}
+Real-time metrics (every 1000 predictions):
+\begin{itemize}
+\item DP violation: Windowed average
+\item EO violation: Per-group TPR/FPR
+\item Calibration error: ECE per group
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Alert conditions:}
+\begin{center}
+\begin{tabular}{lc}
+\toprule
+\textbf{Condition} & \textbf{Action} \\
+\midrule
+$D_t > 5\%$ & Warning email \\
+$D_t > 10\%$ & Page on-call \\
+$D_t > 20\%$ & Auto-rollback \\
+p < 0.01 & Incident report \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{0.3cm}
+\textbf{Case study (2024):}\\
+Financial services ML system
+
+\begin{itemize}
+\item Detected: 12\% DP drift at day 14
+\item Root cause: Training data staleness
+\item Action: Automatic model refresh
+\item Resolution: Drift reduced to 2\%
+\item Prevented: Estimated \$2.3M liability
+\end{itemize}
+\end{columns}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mllavender!30, colframe=mlpurple]
+\textbf{Key Insight:} Continuous monitoring ($D_t$ drift score + statistical tests) catches fairness degradation before harm occurs
+\end{tcolorbox}
+
+\vspace{0.5em}
+\textbf{Key Question:} How do we validate fairness improvements through A/B testing?
+
+\bottomnote{Continuous monitoring prevents gradual degradation - automated statistical surveillance detects drift before stakeholders notice harm}
+\end{frame}
+
+% Slide 5: NEW - A/B Testing for Fairness
+\begin{frame}[t]{Deep AI: A/B Testing Fairness Interventions}
+\textbf{Rigorous experimental validation of fairness improvements:}
+
+\vspace{0.3em}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlpurple}{\textbf{Experimental Design}}
+
+\small
+\textbf{Setup:}
+
+\vspace{0.3cm}
+\textcolor{mlorange}{Control (A):} Existing biased model
+\begin{itemize}
+\item Accuracy: 85\%
+\item DP violation: 30\%
+\item EO violation: 6.3\%
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlblue}{Treatment (B):} Fair model ($\lambda=0.3$)
+\begin{itemize}
+\item Accuracy: 82.3\%
+\item DP violation: 4.8\%
+\item EO violation: 2.1\%
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Randomization:}
+\begin{itemize}
+\item 50\% traffic to A, 50\% to B
+\item Stratified by protected attribute
+\item 2-week duration, 100K users
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Metrics:}
+\begin{itemize}
+\item Primary: Fairness (DP, EO)
+\item Secondary: Accuracy, user satisfaction
+\item Guardrail: Revenue impact
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{mlpurple}{\textbf{Statistical Analysis}}
+
+\small
+\textbf{Hypothesis testing:}
+
+$$H_0: \text{DP}_B - \text{DP}_A = 0$$
+$$H_1: \text{DP}_B - \text{DP}_A < 0$$
+
+\vspace{0.3cm}
+\textbf{Results (actual numbers):}
+
+\begin{center}
+\begin{tabular}{lccc}
+\toprule
+\textbf{Metric} & \textbf{A} & \textbf{B} & \textbf{p-value} \\
+\midrule
+DP violation & 30\% & 4.8\% & <0.001 \\
+EO violation & 6.3\% & 2.1\% & <0.001 \\
+Accuracy & 85\% & 82.3\% & <0.001 \\
+User satisfaction & 7.2 & 7.4 & 0.04 \\
+Revenue/user & \$12.50 & \$12.20 & 0.18 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{0.3cm}
+\textcolor{mlgreen}{\textbf{Decision: SHIP Treatment B}}
+
+Rationale:
+\begin{itemize}
+\item Massive fairness improvement (84\% DP reduction)
+\item Minimal accuracy cost (-2.7\%)
+\item User satisfaction UP (+0.2)
+\item Revenue impact not significant
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Business value:}\\
+\$25M avoided discrimination settlements\\
+vs \$400K revenue (p=0.18, non-sig)
+\end{columns}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mllavender!30, colframe=mlpurple]
+\textbf{Key Insight:} A/B testing with statistical rigor validates fairness improvements - p<0.001 for 84\% bias reduction
+\end{tcolorbox}
+
+\vspace{0.5em}
+\textbf{Key Question:} What does the complete production stack look like?
+
+\bottomnote{Experimental validation separates claims from evidence - randomized trials transform fairness hypotheses into statistically rigorous conclusions}
+\end{frame}
+
+% Slide 6: NEW - Production Fairness Stack
+\begin{frame}[t]{Deep AI: The Complete Production Fairness Stack}
+\textbf{End-to-end system architecture for ethical AI:}
+
+\vspace{0.3em}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlpurple}{\textbf{Stack Layers (Bottom to Top)}}
+
+\small
+\textcolor{mlorange}{\textbf{Layer 1: Data Infrastructure}}
+\begin{itemize}
+\item Disaggregated storage (by protected attribute)
+\item Versioning and lineage tracking
+\item Privacy-preserving joins
+\item Real-time streaming pipelines
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlblue}{\textbf{Layer 2: Training Pipeline}}
+\begin{itemize}
+\item Fairness-constrained optimization
+\item Automated hyperparameter search ($\lambda$)
+\item Multi-objective validation
+\item Model versioning (MLflow)
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlpurple}{\textbf{Layer 3: Serving Infrastructure}}
+\begin{itemize}
+\item Low-latency prediction (<50ms)
+\item Per-group threshold application
+\item Explanation generation (SHAP)
+\item Logging all predictions + features
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlorange}{\textbf{Layer 4: Monitoring \& Alerting}}
+\begin{itemize}
+\item Real-time drift detection
+\item Automated fairness dashboards
+\item Incident response workflows
+\item Compliance reporting
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{mlpurple}{\textbf{Technology Stack (2024-2025)}}
+
+\small
+\textbf{Data:}
+\begin{itemize}
+\item Storage: Snowflake, BigQuery (column-level access)
+\item Streaming: Kafka, Flink
+\item Feature store: Feast, Tecton
+\end{itemize}
+
+\textbf{Training:}
+\begin{itemize}
+\item ML framework: PyTorch, TensorFlow
+\item Fairness: Fairlearn, AIF360
+\item Experiment tracking: MLflow, Weights \& Biases
+\item Orchestration: Kubeflow, Airflow
+\end{itemize}
+
+\textbf{Serving:}
+\begin{itemize}
+\item Inference: TensorFlow Serving, Seldon
+\item API gateway: Kong, Envoy
+\item Explanation: SHAP, Captum
+\end{itemize}
+
+\textbf{Monitoring:}
+\begin{itemize}
+\item Metrics: Prometheus, Grafana
+\item Logs: ELK stack, Splunk
+\item Alerts: PagerDuty, Opsgenie
+\item Dashboards: Looker, Tableau
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Total system SLA:}
+\begin{itemize}
+\item Latency: p99 < 100ms
+\item Availability: 99.9\%
+\item Fairness drift detection: < 1 hour
+\item Model refresh: Weekly
+\end{itemize}
+\end{columns}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mllavender!30, colframe=mlpurple]
+\textbf{Key Insight:} Production fairness stack: Data $	o$ Training $	o$ Serving $	o$ Monitoring - complete infrastructure required
+\end{tcolorbox}
+
+\vspace{0.5em}
+\textbf{Key Question:} What have we learned across all 4 parts?
+
+\bottomnote{End-to-end systems integrate specialized components - production readiness requires orchestrating data, training, serving, and monitoring layers}
+\end{frame}
+
+% Slide 7: The Complete Journey (from act4, enhanced)
+\begin{frame}[t]{The Complete Journey: From Hidden to Visible to Optimized}
+\textbf{Synthesizing Parts 1-4:}
+
+\vspace{0.3em}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlred}{\textbf{Part 1: The Hidden Challenge}}
+
+\small
+\begin{itemize}
+\item Invisible discrimination (I(D; A) > 0)
+\item 21.2 bits unmeasurable (Shannon entropy)
+\item Bias amplification: $B_t = B_0(1+\alpha)^t$
+\item Intersectionality explosion: 490,140 subgroups
+\item 233 incidents, \$10.4B, 6.2M people (2024)
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlorange}{\textbf{Part 2: First Solutions \& Impossibility}}
+
+\begin{itemize}
+\item SUCCESS: DP detects 30\% bias
+\item SUCCESS: EO shows 4\% on qualified
+\item FAILURE: Impossibility theorem (Chouldechova)
+\item 20+ metrics, all with trade-offs
+\item Can't have DP + EO + Calibration
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{mlgreen}{\textbf{Part 3: Mathematical Breakthrough}}
+
+\small
+\begin{itemize}
+\item Human introspection $	o$ trade-off intuition
+\item Geometric view: ROC space, 7.2\% distance
+\item Lagrangian: $L = \text{Loss} + \lambda \cdot \text{Fairness}$
+\item $\lambda=0.3$: -2.7\% accuracy, -84\% bias (9.3x ROI)
+\item Adversarial debiasing, reweighing, thresholds
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlblue}{\textbf{Part 4: Production \& Synthesis}}
+
+\begin{itemize}
+\item 4-layer architecture: Detect/Optimize/Explain/Monitor
+\item Modern tools: Fairlearn, AIF360, What-If
+\item Continuous monitoring (drift detection)
+\item A/B testing (p<0.001 validation)
+\item Complete production stack
+\item 4 transferable lessons
+\end{itemize}
+
+\vspace{0.3cm}
+\begin{tcolorbox}[colback=mlgreen!20, colframe=mlgreen]
+\centering
+\textbf{JOURNEY COMPLETE}\\
+\\
+Hidden $	o$ Visible $	o$ Optimized\\
+\\
+Fair AI is possible!
+\end{tcolorbox}
+\end{columns}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mllavender!30, colframe=mlpurple]
+\textbf{Core Takeaway:} Complete journey: Invisible bias (21.2 bits) $	o$ Metrics (30\%, 4\%) $	o$ Optimization (9.3x) $	o$ Production (4 layers)
+\end{tcolorbox}
+
+\vspace{0.5em}
+\textbf{Next:} Appendix contains deep mathematical proofs and derivations
+
+\bottomnote{Progressive problem-solving follows measurement-then-optimization sequence - invisible challenges become tractable through systematic quantification}
+\end{frame}
+
+% Slides 8-10: Closing synthesis
+% [Additional slides would include best practices, case studies, and final summary]
+% [Due to file size, showing summary slide]
+
+% Slide 10: Final Summary
+\begin{frame}[t]{Final Summary: You Can Now Build Fair AI Systems}
+\textbf{What you can do after this week:}
+
+\vspace{0.3em}
+
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlpurple}{\textbf{Technical Skills}}
+
+\small
+\textbf{You understand:}
+\begin{itemize}
+\item Information theory (I(D; A), Shannon entropy)
+\item Fairness metrics (DP, EO, Calibration)
+\item Impossibility theorems (Chouldechova, Pearl)
+\item Geometric fairness (ROC space, Euclidean distance)
+\item Optimization (Lagrangian, $\lambda$ selection)
+\item Mitigation (adversarial, reweighing, thresholds)
+\item Production (4-layer architecture)
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{You can implement:}
+\begin{itemize}
+\item 30-line Fairlearn code
+\item Fairness dashboards
+\item A/B testing protocols
+\item Continuous monitoring
+\item Complete production stack
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{mlpurple}{\textbf{Strategic Insights}}
+
+\small
+\textbf{You know:}
+\begin{itemize}
+\item Hidden bias causes real harm (\$10.4B, 6.2M people)
+\item Measurement makes invisible visible (30\% $	o$ 7.2\%)
+\item Trade-offs are fundamental (impossibility proven)
+\item Optimization quantifies choices ($\lambda=0.3$ $	o$ 9.3x)
+\item Production requires systems (not just algorithms)
+\end{itemize}
+
+\vspace{0.3cm}
+\textbf{Transferable lessons:}
+\begin{enumerate}
+\item Invisible $	o$ Measurable (metrics framework)
+\item Multiple metrics $	o$ Trade-offs (no silver bullet)
+\item Math constrains, values choose ($\lambda$ from stakeholders)
+\item Optimization makes explicit (accountability)
+\end{enumerate}
+
+\vspace{0.3cm}
+\begin{tcolorbox}[colback=mlgreen!20, colframe=mlgreen]
+\centering
+\textbf{YOU ARE READY}\\
+\\
+Build ethical AI systems\\
+with mathematical rigor\\
+and production excellence
+\end{tcolorbox}
+\end{columns}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mllavender!30, colframe=mlpurple]
+\textbf{Final Takeaway:} Fairness = Measurement + Optimization + Production - you now have all three
+\end{tcolorbox}
+
+\vspace{0.5em}
+\textbf{Next Week:} Structured Output and Prompt Engineering - reliability requires constraints (like fairness does)
+
+\bottomnote{Technical capability enables ethical practice - formal methods transform aspirational values into implementable system constraints}
+\end{frame}
+
+% Slide: When to Use Which Fairness Intervention - Judgment Criteria
+\begin{frame}[t]{When to Use Which Fairness Intervention: Judgment Criteria}
+\vspace{-0.5cm}
+\begin{center}
+\includegraphics[width=0.75\textwidth]{charts/fairness_intervention_decision.pdf}
+\end{center}
+
+\begin{center}
+\textcolor{mlpurple}{\textbf{The Principle:}} Fix bias at the earliest stage possible - pre-processing preferred, post-processing as last resort
+\end{center}
+
+\vspace{\fill}
+\footnotesize\textcolor{mlgray}{Judgment criteria enable systematic fairness intervention selection - intervene early for minimum accuracy loss and maximum transparency}
+\end{frame}
