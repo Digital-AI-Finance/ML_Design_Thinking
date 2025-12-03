@@ -1,0 +1,17 @@
+{{ define "main" }}
+<article>
+    {{ .Content }}
+
+    {{ if .Pages }}
+    <div class="topics-grid">
+        {{ range .Pages }}
+        <div class="topic-card">
+            <h3>{{ .Title }}</h3>
+            <p>{{ .Summary | truncate 120 }}</p>
+            <a href="{{ .Permalink }}">Learn more &rarr;</a>
+        </div>
+        {{ end }}
+    </div>
+    {{ end }}
+</article>
+{{ end }}

@@ -1,0 +1,31 @@
+baseURL: https://digital-ai-finance.github.io/ML_Design_Thinking_16/
+languageCode: en-us
+title: Machine Learning for Smarter Innovation
+theme: course-theme
+
+params:
+  description: "BSc-level course bridging ML/AI with design thinking"
+  author: "Digital AI Finance"
+  subtitle: "Bridging Machine Learning with Design Thinking"
+
+menu:
+  main:
+    - name: Home
+      url: /
+      weight: 1
+    - name: Topics
+      url: /topics/
+      weight: 2
+    - name: Resources
+      url: /resources/
+      weight: 3
+    - name: About
+      url: /about/
+      weight: 4
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+  highlight:
+    style: monokai

@@ -1,0 +1,9 @@
+<div class="topics-grid">
+    {{ range (where .Site.RegularPages "Section" "topics") }}
+    <div class="topic-card">
+        <h3>{{ .Title }}</h3>
+        <p>{{ .Summary | truncate 100 }}</p>
+        <a href="{{ .Permalink }}">Explore &rarr;</a>
+    </div>
+    {{ end }}
+</div>

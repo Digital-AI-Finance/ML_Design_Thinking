@@ -1,0 +1,10 @@
+# Theme metadata
+name = "Course Theme"
+license = "MIT"
+licenselink = "https://github.com/Digital-AI-Finance/ML_Design_Thinking_16"
+description = "A clean theme for educational course websites"
+homepage = "https://github.com/Digital-AI-Finance/ML_Design_Thinking_16"
+min_version = "0.100.0"
+
+[author]
+name = "Digital AI Finance"
