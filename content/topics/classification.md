@@ -4,7 +4,7 @@ weight: 7
 description: "Categorizing data into predefined classes with decision trees"
 difficulty: "Intermediate"
 duration: "90 minutes"
-pdf_url: "/downloads/classification.pdf"
+pdf_url: "downloads/classification.pdf"
 ---
 
 # Classification

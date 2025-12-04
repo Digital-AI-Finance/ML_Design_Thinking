@@ -4,7 +4,7 @@ weight: 4
 description: "Deep learning architectures for complex pattern recognition"
 difficulty: "Intermediate"
 duration: "75 minutes"
-pdf_url: "/downloads/neural-networks.pdf"
+pdf_url: "downloads/neural-networks.pdf"
 ---
 
 # Neural Networks

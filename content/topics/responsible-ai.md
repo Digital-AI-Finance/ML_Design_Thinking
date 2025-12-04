@@ -4,7 +4,7 @@ weight: 10
 description: "Ethics, fairness, and explainability in machine learning"
 difficulty: "Intermediate"
 duration: "75 minutes"
-pdf_url: "/downloads/responsible-ai.pdf"
+pdf_url: "downloads/responsible-ai.pdf"
 ---
 
 # Responsible AI

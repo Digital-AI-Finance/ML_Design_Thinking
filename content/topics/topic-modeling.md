@@ -4,7 +4,7 @@ weight: 9
 description: "Discovering abstract topics in document collections"
 difficulty: "Intermediate"
 duration: "75 minutes"
-pdf_url: "/downloads/topic-modeling.pdf"
+pdf_url: "downloads/topic-modeling.pdf"
 ---
 
 # Topic Modeling

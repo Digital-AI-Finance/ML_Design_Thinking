@@ -4,7 +4,7 @@ weight: 13
 description: "Statistical experimentation for data-driven decisions"
 difficulty: "Intermediate"
 duration: "75 minutes"
-pdf_url: "/downloads/ab-testing.pdf"
+pdf_url: "downloads/ab-testing.pdf"
 ---
 
 # A/B Testing

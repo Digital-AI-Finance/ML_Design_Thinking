@@ -4,7 +4,7 @@ weight: 3
 description: "Discovering patterns in data without predefined labels"
 difficulty: "Beginner"
 duration: "45 minutes"
-pdf_url: "/downloads/unsupervised-learning.pdf"
+pdf_url: "downloads/unsupervised-learning.pdf"
 ---
 
 # Unsupervised Learning

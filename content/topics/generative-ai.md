@@ -4,7 +4,7 @@ weight: 8
 description: "Creating content with large language models and AI systems"
 difficulty: "Intermediate"
 duration: "90 minutes"
-pdf_url: "/downloads/generative-ai.pdf"
+pdf_url: "downloads/generative-ai.pdf"
 ---
 
 # Generative AI

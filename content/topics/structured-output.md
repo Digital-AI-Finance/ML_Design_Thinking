@@ -4,7 +4,7 @@ weight: 11
 description: "Generating reliable, formatted AI responses"
 difficulty: "Intermediate"
 duration: "60 minutes"
-pdf_url: "/downloads/structured-output.pdf"
+pdf_url: "downloads/structured-output.pdf"
 ---
 
 # Structured Output

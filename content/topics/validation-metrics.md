@@ -4,7 +4,7 @@ weight: 12
 description: "Evaluating and measuring model performance"
 difficulty: "Intermediate"
 duration: "75 minutes"
-pdf_url: "/downloads/validation-metrics.pdf"
+pdf_url: "downloads/validation-metrics.pdf"
 ---
 
 # Validation & Metrics

@@ -4,7 +4,7 @@ weight: 1
 description: "Introduction to machine learning concepts and the learning journey"
 difficulty: "Beginner"
 duration: "60 minutes"
-pdf_url: "/downloads/ml-foundations.pdf"
+pdf_url: "downloads/ml-foundations.pdf"
 ---
 
 # Machine Learning Foundations

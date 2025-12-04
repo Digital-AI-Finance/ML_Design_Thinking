@@ -4,7 +4,7 @@ weight: 2
 description: "Learning from labeled examples to make predictions"
 difficulty: "Beginner"
 duration: "60 minutes"
-pdf_url: "/downloads/supervised-learning.pdf"
+pdf_url: "downloads/supervised-learning.pdf"
 ---
 
 # Supervised Learning

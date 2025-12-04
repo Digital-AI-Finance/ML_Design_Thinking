@@ -4,7 +4,7 @@ weight: 6
 description: "Extracting meaning and emotion from text data"
 difficulty: "Intermediate"
 duration: "90 minutes"
-pdf_url: "/downloads/nlp-sentiment.pdf"
+pdf_url: "downloads/nlp-sentiment.pdf"
 ---
 
 # NLP & Sentiment Analysis

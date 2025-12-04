@@ -4,7 +4,7 @@ weight: 5
 description: "Discovering natural groupings in data for customer segmentation"
 difficulty: "Intermediate"
 duration: "90 minutes"
-pdf_url: "/downloads/clustering.pdf"
+pdf_url: "downloads/clustering.pdf"
 ---
 
 # Clustering

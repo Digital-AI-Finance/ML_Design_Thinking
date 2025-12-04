@@ -4,7 +4,7 @@ weight: 14
 description: "ML applications in financial services and risk management"
 difficulty: "Advanced"
 duration: "90 minutes"
-pdf_url: "/downloads/finance-applications.pdf"
+pdf_url: "downloads/finance-applications.pdf"
 ---
 
 # Finance Applications
