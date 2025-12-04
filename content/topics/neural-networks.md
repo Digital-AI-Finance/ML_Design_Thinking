@@ -1,32 +1,65 @@
 ---
 title: "Neural Networks"
 weight: 4
+description: "Deep learning architectures for complex pattern recognition"
+difficulty: "Intermediate"
+duration: "75 minutes"
+pdf_url: "/downloads/neural-networks.pdf"
 ---
 
 # Neural Networks
 
 Deep learning architectures for complex pattern recognition.
 
-## Overview
+## Learning Outcomes
 
-Neural networks learn hierarchical representations of data through layers of interconnected nodes.
+By completing this topic, you will:
+- Explain how neurons and layers process information
+- Describe forward and backward propagation
+- Choose appropriate activation functions
+- Understand when depth helps (and when it doesn't)
 
-## Topics Covered
+## Prerequisites
+
+- Supervised Learning concepts
+- Basic calculus (derivatives, chain rule)
+- Matrix operations
+
+## Key Concepts
 
 ### Network Architecture
-- Perceptrons and activation functions
-- Hidden layers and depth
-- Forward propagation
+- **Input layer**: Receives features
+- **Hidden layers**: Learn representations
+- **Output layer**: Produces predictions
 
-### Training
-- Backpropagation algorithm
-- Gradient descent optimization
-- Loss functions
+### Activation Functions
+- **ReLU**: Default for hidden layers (fast, avoids vanishing gradients)
+- **Sigmoid**: Binary classification output
+- **Softmax**: Multi-class classification output
 
-### Architectures
-- Feedforward networks
-- Convolutional networks (CNN)
-- Recurrent networks (RNN)
+### Training Process
+1. Forward pass: Compute predictions
+2. Loss calculation: Measure error
+3. Backward pass: Compute gradients
+4. Update weights: Gradient descent
 
-## Source Weeks
-Originally from: Week_00d_Neural_Networks
+### Common Architectures
+- **Feedforward**: Basic fully-connected networks
+- **CNN**: Image and spatial data
+- **RNN/LSTM**: Sequential and time series data
+
+## When to Use
+
+Neural networks excel when:
+- You have large amounts of data
+- Features require complex transformations
+- Interpretability is less critical
+- Computational resources are available
+
+## Common Pitfalls
+
+- Too few training examples for network size
+- Not normalizing inputs
+- Learning rate too high or too low
+- Vanishing/exploding gradients in deep networks
+- Overfitting without regularization (dropout, weight decay)

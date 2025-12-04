@@ -1,37 +1,63 @@
 ---
 title: "Classification"
 weight: 7
+description: "Categorizing data into predefined classes with decision trees"
+difficulty: "Intermediate"
+duration: "90 minutes"
+pdf_url: "/downloads/classification.pdf"
 ---
 
 # Classification
 
-Categorizing data into predefined classes.
+Categorizing data into predefined classes using tree-based methods.
 
-## Overview
+## Learning Outcomes
 
-Classification algorithms learn decision boundaries to categorize new observations based on learned patterns.
+By completing this topic, you will:
+- Build and interpret decision trees
+- Apply random forests for robust predictions
+- Handle imbalanced classification problems
+- Evaluate classifiers with appropriate metrics
 
-## Algorithms
+## Prerequisites
+
+- Supervised Learning concepts
+- Understanding of entropy and information gain
+- Basic probability concepts
+
+## Key Concepts
 
 ### Decision Trees
-- Interpretable rule-based decisions
-- Feature importance
-- Handling mixed data types
+Interpretable rule-based classifiers:
+- Split data based on feature thresholds
+- Information gain guides split selection
+- Pruning prevents overfitting
 
 ### Random Forests
-- Ensemble of decision trees
-- Reduced overfitting
-- Feature selection
+Ensemble of decision trees:
+- Bootstrap aggregating (bagging)
+- Random feature selection
+- Reduced variance, improved accuracy
 
-### Support Vector Machines
-- Maximum margin classifiers
-- Kernel methods
+### Evaluation Metrics
+- **Accuracy**: Overall correctness
+- **Precision**: True positives / predicted positives
+- **Recall**: True positives / actual positives
+- **F1-score**: Harmonic mean of precision and recall
+- **ROC-AUC**: Discrimination ability
 
-## Evaluation
+## When to Use
 
-- Confusion matrix
-- Precision, recall, F1-score
-- ROC curves and AUC
+| Method | Best For |
+|--------|----------|
+| Decision Tree | Interpretability, simple rules |
+| Random Forest | Accuracy, feature importance |
+| Gradient Boosting | Maximum performance |
 
-## Source Weeks
-Originally from: Week_04
+## Common Pitfalls
+
+- Overfitting with deep trees
+- Ignoring class imbalance
+- Using accuracy on skewed datasets
+- Not tuning hyperparameters
+- Forgetting to scale features for some algorithms

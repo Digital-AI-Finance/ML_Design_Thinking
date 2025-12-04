@@ -1,45 +1,65 @@
 ---
 title: "Clustering"
 weight: 5
+description: "Discovering natural groupings in data for customer segmentation"
+difficulty: "Intermediate"
+duration: "90 minutes"
+pdf_url: "/downloads/clustering.pdf"
 ---
 
 # Clustering
 
 Discovering natural groupings in data without predefined labels.
 
-## Overview
+## Learning Outcomes
 
-Clustering algorithms find structure in unlabeled data by grouping similar observations together.
+By completing this topic, you will:
+- Apply K-means, DBSCAN, and hierarchical clustering
+- Choose the optimal number of clusters
+- Interpret and validate cluster results
+- Create customer personas from segments
 
-## Algorithms Covered
+## Prerequisites
+
+- Unsupervised Learning concepts
+- Distance metrics (Euclidean, Manhattan)
+- Feature scaling techniques
+
+## Key Concepts
 
 ### K-Means Clustering
-- Iterative centroid-based algorithm
-- Choosing optimal k with elbow method
-- Strengths and limitations
+Partition data into K spherical clusters:
+1. Initialize K centroids
+2. Assign points to nearest centroid
+3. Update centroids as cluster means
+4. Repeat until convergence
+
+**Choosing K**: Elbow method, silhouette score
 
 ### DBSCAN
-- Density-based clustering
-- Handling arbitrary shapes
-- Noise detection
+Density-based clustering for arbitrary shapes:
+- **Epsilon**: Neighborhood radius
+- **MinPts**: Minimum points to form a cluster
+- Automatically detects noise points
 
 ### Hierarchical Clustering
-- Agglomerative approach
+Build nested cluster hierarchy:
+- Agglomerative (bottom-up)
+- Divisive (top-down)
 - Dendrograms for visualization
-- Cutting strategies
 
-## Applications in Design Thinking
+## When to Use
 
-- Customer persona development
-- Market segmentation
-- Behavior pattern discovery
-- Survey response grouping
+| Algorithm | Best For |
+|-----------|----------|
+| K-means | Spherical clusters, known K |
+| DBSCAN | Arbitrary shapes, noise detection |
+| Hierarchical | Exploring cluster structure |
 
-## Materials
+## Common Pitfalls
 
-- Lecture slides (PDF)
-- Python notebooks
-- Case studies
-
-## Source Weeks
-Originally from: Week_01, Week_02
+- Not scaling features before clustering
+- Choosing K based on convenience, not data
+- Ignoring cluster interpretability
+- Using K-means on non-spherical data
+- Forgetting to validate cluster stability

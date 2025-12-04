@@ -1,0 +1,13 @@
+{{ define "main" }}
+<div style="text-align: center; padding: 3rem 1rem;">
+    <h1 style="font-size: 4rem; margin-bottom: 0.5rem; color: var(--lavender);">404</h1>
+    <h2 style="margin-bottom: 1rem;">Page Not Found</h2>
+    <p style="margin-bottom: 1.5rem; color: var(--text-light);">
+        The page you're looking for doesn't exist or has been moved.
+    </p>
+    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+        <a href="{{ .Site.BaseURL }}" class="download-btn">Go to Home</a>
+        <a href="{{ .Site.BaseURL }}topics/" class="download-btn" style="background: var(--secondary);">Browse Topics</a>
+    </div>
+</div>
+{{ end }}

@@ -1,46 +1,57 @@
 ---
 title: "Supervised Learning"
 weight: 2
+description: "Learning from labeled examples to make predictions"
+difficulty: "Beginner"
+duration: "60 minutes"
+pdf_url: "/downloads/supervised-learning.pdf"
 ---
 
 # Supervised Learning
 
 Learning from labeled examples to make predictions on new data.
 
-## Overview
+## Learning Outcomes
 
-Supervised learning is the most common machine learning paradigm, where models learn from input-output pairs to predict outcomes for unseen data.
+By completing this topic, you will:
+- Distinguish between regression and classification tasks
+- Implement linear regression using OLS
+- Evaluate model performance with appropriate metrics
+- Understand the prediction workflow
+
+## Prerequisites
+
+- ML Foundations concepts
+- Basic linear algebra (vectors, matrices)
+- Understanding of mean squared error
 
 ## Key Concepts
 
-### Regression
-- Predicting continuous values
-- Ordinary Least Squares (OLS)
-- Model evaluation metrics (MSE, R-squared)
+### Regression vs Classification
+- **Regression**: Predict continuous values (price, temperature)
+- **Classification**: Predict discrete categories (spam/not spam, species)
 
-### Classification
-- Predicting discrete categories
-- Logistic regression basics
-- Evaluation metrics (accuracy, precision, recall)
+### Linear Regression
+The foundation of predictive modeling:
+- Ordinary Least Squares (OLS) minimizes squared errors
+- Coefficients show feature importance
+- R-squared measures explained variance
 
-### The Learning Process
-1. Training on labeled data
-2. Model parameter optimization
-3. Validation and testing
-4. Generalization to new data
+### Model Evaluation
+- **Regression**: MSE, RMSE, MAE, R-squared
+- **Classification**: Accuracy, Precision, Recall, F1-score
 
-## Applications
+## When to Use
 
-- Price prediction
-- Customer churn forecasting
-- Risk assessment
-- Quality control
+Supervised learning works when:
+- You have labeled historical data
+- The relationship between inputs and outputs is learnable
+- Future data resembles training data
+- Predictions drive decisions
 
-## Materials
+## Common Pitfalls
 
-- Lecture slides (PDF)
-- Summary presentation (11 slides)
-- Python examples
-
-## Source Weeks
-Originally from: Week_00b_Supervised_Learning
+- Confusing correlation with causation
+- Using accuracy on imbalanced datasets
+- Ignoring feature scaling for distance-based methods
+- Not validating on held-out data

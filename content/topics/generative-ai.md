@@ -1,45 +1,67 @@
 ---
 title: "Generative AI"
 weight: 8
+description: "Creating content with large language models and AI systems"
+difficulty: "Intermediate"
+duration: "90 minutes"
+pdf_url: "/downloads/generative-ai.pdf"
 ---
 
 # Generative AI
 
 Creating new content with large language models and AI systems.
 
-## Overview
+## Learning Outcomes
 
-Generative AI represents a paradigm shift in how we interact with and leverage AI systems for creative and analytical tasks.
+By completing this topic, you will:
+- Understand transformer architecture fundamentals
+- Apply effective prompt engineering techniques
+- Integrate LLMs into applications
+- Evaluate and improve generated outputs
 
-## Topics Covered
+## Prerequisites
+
+- Neural Networks concepts
+- Basic understanding of attention mechanisms
+- API usage experience
+
+## Key Concepts
 
 ### Large Language Models
-- Transformer architecture fundamentals
-- GPT and instruction-following models
-- Tokenization and context windows
+- **Transformers**: Attention-based architecture
+- **Pre-training**: Learning from massive text corpora
+- **Fine-tuning**: Adapting to specific tasks
 
 ### Prompt Engineering
-- Zero-shot and few-shot prompting
-- Chain-of-thought reasoning
-- Prompt patterns and templates
+Techniques for better outputs:
+- **Zero-shot**: Direct instructions
+- **Few-shot**: Include examples
+- **Chain-of-thought**: Step-by-step reasoning
+- **System prompts**: Set behavior and constraints
 
 ### Practical Applications
-- Content generation
-- Code assistance
-- Document summarization
+- Content generation and summarization
+- Code assistance and debugging
+- Document analysis and extraction
 - Creative ideation support
 
-## Integration with Design Thinking
+## When to Use
 
-- Rapid prototyping of concepts
-- Generating diverse solution alternatives
-- Evaluating and refining ideas at scale
+Generative AI excels for:
+- Tasks requiring language understanding
+- Creative content generation
+- Rapid prototyping of ideas
+- Augmenting human capabilities
 
-## Materials
+Avoid when:
+- Exact numerical precision required
+- Full verifiability needed
+- Domain expertise is critical
 
-- Lecture slides (PDF)
-- Prompt engineering exercises
-- API integration examples
+## Common Pitfalls
 
-## Source Weeks
-Originally from: Week_06, Week_00e_Generative_AI
+- Hallucinations (confident but wrong outputs)
+- Prompt injection vulnerabilities
+- Over-reliance without verification
+- Ignoring token limits and costs
+- Not testing edge cases

@@ -1,39 +1,60 @@
 ---
 title: "NLP & Sentiment Analysis"
 weight: 6
+description: "Extracting meaning and emotion from text data"
+difficulty: "Intermediate"
+duration: "90 minutes"
+pdf_url: "/downloads/nlp-sentiment.pdf"
 ---
 
 # NLP & Sentiment Analysis
 
 Extracting meaning and emotion from text data.
 
-## Overview
+## Learning Outcomes
 
-Natural Language Processing enables machines to understand, interpret, and generate human language.
+By completing this topic, you will:
+- Preprocess text data (tokenization, normalization)
+- Build sentiment classifiers
+- Use pre-trained embeddings and transformers
+- Evaluate NLP model performance
 
-## Topics Covered
+## Prerequisites
+
+- Supervised Learning concepts
+- Basic text processing concepts
+- Understanding of classification metrics
+
+## Key Concepts
 
 ### Text Preprocessing
-- Tokenization and normalization
-- Stop word removal
-- Stemming and lemmatization
+1. **Tokenization**: Split text into words/subwords
+2. **Normalization**: Lowercase, remove punctuation
+3. **Stop word removal**: Filter common words
+4. **Stemming/Lemmatization**: Reduce to root form
 
-### Sentiment Analysis
-- Polarity detection
-- Emotion classification
-- Opinion mining
+### Sentiment Analysis Approaches
+- **Rule-based**: Lexicons with sentiment scores
+- **Machine Learning**: Train on labeled examples
+- **Deep Learning**: Transformers (BERT, RoBERTa)
 
-### Embeddings
-- Word vectors
-- Contextual embeddings
-- BERT and transformers
+### Word Embeddings
+Dense vector representations:
+- Word2Vec, GloVe (static embeddings)
+- BERT (contextual embeddings)
 
-## Applications
+## When to Use
 
+Sentiment analysis is valuable for:
 - Customer feedback analysis
 - Social media monitoring
 - Brand perception tracking
-- Voice of customer insights
+- Product review summarization
 
-## Source Weeks
-Originally from: Week_03
+## Common Pitfalls
+
+- Ignoring domain-specific vocabulary
+- Not handling negation ("not good")
+- Overlooking sarcasm and irony
+- Using general models on specialized text
+- Ignoring class imbalance in training data

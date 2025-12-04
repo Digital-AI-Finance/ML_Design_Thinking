@@ -29,3 +29,13 @@ markup:
       unsafe: true
   highlight:
     style: monokai
+
+minify:
+  minifyOutput: true
+  tdewolff:
+    html:
+      keepWhitespace: false
+    css:
+      keepCSS2: true
+    js:
+      keepVarNames: false

@@ -1,37 +1,60 @@
 ---
 title: "ML Foundations"
 weight: 1
+description: "Introduction to machine learning concepts and the learning journey"
+difficulty: "Beginner"
+duration: "60 minutes"
+pdf_url: "/downloads/ml-foundations.pdf"
 ---
 
 # Machine Learning Foundations
 
 The starting point for understanding how machines learn from data.
 
-## Overview
+## Learning Outcomes
 
-This topic introduces the fundamental concepts of machine learning, including:
+By completing this topic, you will:
+- Understand the three main types of machine learning (supervised, unsupervised, reinforcement)
+- Explain the difference between training and inference
+- Identify overfitting and underfitting in model performance
+- Apply the train-test split methodology
 
-- Types of learning (supervised, unsupervised, reinforcement)
-- The learning journey from data to predictions
-- Model training and evaluation basics
-- Overfitting vs underfitting
+## Prerequisites
+
+No prior ML knowledge required. Basic familiarity with:
+- Data concepts (rows, columns, features)
+- Basic statistics (mean, variance)
 
 ## Key Concepts
 
-### The Learning Paradigm
-Machine learning enables computers to learn patterns from data without being explicitly programmed for each task.
+### Types of Learning
+- **Supervised Learning**: Learn from labeled examples (input-output pairs)
+- **Unsupervised Learning**: Discover patterns without labels
+- **Reinforcement Learning**: Learn through trial and reward
+
+### The Learning Process
+1. Collect and prepare data
+2. Choose a model architecture
+3. Train on training data
+4. Evaluate on test data
+5. Deploy and monitor
 
 ### Bias-Variance Tradeoff
-Understanding the balance between model complexity and generalization ability.
+Balance between:
+- **High bias** (underfitting): Model too simple, misses patterns
+- **High variance** (overfitting): Model too complex, memorizes noise
 
-### Cross-Validation
-Techniques for robust model evaluation and selection.
+## When to Use
 
-## Materials
+Machine learning is appropriate when:
+- You have sufficient historical data
+- Patterns exist but are hard to code manually
+- Predictions or classifications add value
+- The problem is well-defined
 
-- Lecture slides (PDF)
-- Hands-on exercises
-- Discovery worksheets
+## Common Pitfalls
 
-## Source Weeks
-Originally from: Week_00_Introduction_ML_AI, Week_00a_ML_Foundations
+- Training and testing on the same data (data leakage)
+- Ignoring class imbalance in classification
+- Not normalizing features with different scales
+- Overfitting to small datasets
