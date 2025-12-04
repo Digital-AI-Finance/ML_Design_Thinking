@@ -1,0 +1,47 @@
+<aside class="sidebar">
+    <nav class="sidebar-nav">
+        <!-- Foundations (weight 1-4) -->
+        <div class="nav-section">
+            <span class="nav-header">Foundations</span>
+            <ul>
+                {{ range where (where .Site.RegularPages "Section" "topics") "Weight" "le" 4 }}
+                <li><a href="{{ .Permalink }}"{{ if eq $.RelPermalink .RelPermalink }} class="active"{{ end }}>{{ .Title }}</a></li>
+                {{ end }}
+            </ul>
+        </div>
+
+        <!-- Core Techniques (weight 5-9) -->
+        <div class="nav-section">
+            <span class="nav-header">Core Techniques</span>
+            <ul>
+                {{ range where (where .Site.RegularPages "Section" "topics") "Weight" "ge" 5 }}
+                {{ if le .Weight 9 }}
+                <li><a href="{{ .Permalink }}"{{ if eq $.RelPermalink .RelPermalink }} class="active"{{ end }}>{{ .Title }}</a></li>
+                {{ end }}
+                {{ end }}
+            </ul>
+        </div>
+
+        <!-- Advanced Applications (weight 10-13) -->
+        <div class="nav-section">
+            <span class="nav-header">Advanced</span>
+            <ul>
+                {{ range where (where .Site.RegularPages "Section" "topics") "Weight" "ge" 10 }}
+                {{ if le .Weight 13 }}
+                <li><a href="{{ .Permalink }}"{{ if eq $.RelPermalink .RelPermalink }} class="active"{{ end }}>{{ .Title }}</a></li>
+                {{ end }}
+                {{ end }}
+            </ul>
+        </div>
+
+        <!-- Specialized (weight 14) -->
+        <div class="nav-section">
+            <span class="nav-header">Specialized</span>
+            <ul>
+                {{ range where (where .Site.RegularPages "Section" "topics") "Weight" "ge" 14 }}
+                <li><a href="{{ .Permalink }}"{{ if eq $.RelPermalink .RelPermalink }} class="active"{{ end }}>{{ .Title }}</a></li>
+                {{ end }}
+            </ul>
+        </div>
+    </nav>
+</aside>

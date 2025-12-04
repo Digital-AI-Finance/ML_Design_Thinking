@@ -4,6 +4,21 @@
     <p>{{ .Site.Params.subtitle }}</p>
 </div>
 
+<div class="chart-grid">
+    <figure class="chart-item">
+        <img src="{{ "images/innovation_diamond.png" | relURL }}" alt="Innovation Diamond" loading="lazy">
+        <figcaption>Innovation Diamond</figcaption>
+    </figure>
+    <figure class="chart-item">
+        <img src="{{ "images/journey_roadmap.png" | relURL }}" alt="Learning Journey" loading="lazy">
+        <figcaption>Learning Journey</figcaption>
+    </figure>
+    <figure class="chart-item">
+        <img src="{{ "images/unified_pipeline.png" | relURL }}" alt="ML Pipeline" loading="lazy">
+        <figcaption>ML Pipeline</figcaption>
+    </figure>
+</div>
+
 <article>
     {{ .Content }}
 </article>
