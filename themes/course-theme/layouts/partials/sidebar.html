@@ -1,47 +1,83 @@
 <aside class="sidebar">
     <nav class="sidebar-nav">
+        {{ $topics := where .Site.RegularPages "Section" "topics" }}
+
         <!-- Foundations (weight 1-4) -->
-        <div class="nav-section">
-            <span class="nav-header">Foundations</span>
+        {{ $foundations := where $topics "Weight" "le" 4 }}
+        <div class="nav-section" data-section="foundations">
+            <span class="nav-header" onclick="toggleSection(this)">
+                <span><span class="icon">*</span> Foundations <span class="count">({{ len $foundations }})</span></span>
+                <span class="chevron">v</span>
+            </span>
             <ul>
-                {{ range where (where .Site.RegularPages "Section" "topics") "Weight" "le" 4 }}
+                {{ range $foundations }}
                 <li><a href="{{ .Permalink }}"{{ if eq $.RelPermalink .RelPermalink }} class="active"{{ end }}>{{ .Title }}</a></li>
                 {{ end }}
             </ul>
         </div>
 
         <!-- Core Techniques (weight 5-9) -->
-        <div class="nav-section">
-            <span class="nav-header">Core Techniques</span>
+        {{ $core := where (where $topics "Weight" "ge" 5) "Weight" "le" 9 }}
+        <div class="nav-section" data-section="core">
+            <span class="nav-header" onclick="toggleSection(this)">
+                <span><span class="icon">#</span> Core <span class="count">({{ len $core }})</span></span>
+                <span class="chevron">v</span>
+            </span>
             <ul>
-                {{ range where (where .Site.RegularPages "Section" "topics") "Weight" "ge" 5 }}
-                {{ if le .Weight 9 }}
+                {{ range $core }}
                 <li><a href="{{ .Permalink }}"{{ if eq $.RelPermalink .RelPermalink }} class="active"{{ end }}>{{ .Title }}</a></li>
-                {{ end }}
                 {{ end }}
             </ul>
         </div>
 
         <!-- Advanced Applications (weight 10-13) -->
-        <div class="nav-section">
-            <span class="nav-header">Advanced</span>
+        {{ $advanced := where (where $topics "Weight" "ge" 10) "Weight" "le" 13 }}
+        <div class="nav-section" data-section="advanced">
+            <span class="nav-header" onclick="toggleSection(this)">
+                <span><span class="icon">^</span> Advanced <span class="count">({{ len $advanced }})</span></span>
+                <span class="chevron">v</span>
+            </span>
             <ul>
-                {{ range where (where .Site.RegularPages "Section" "topics") "Weight" "ge" 10 }}
-                {{ if le .Weight 13 }}
+                {{ range $advanced }}
                 <li><a href="{{ .Permalink }}"{{ if eq $.RelPermalink .RelPermalink }} class="active"{{ end }}>{{ .Title }}</a></li>
-                {{ end }}
                 {{ end }}
             </ul>
         </div>
 
-        <!-- Specialized (weight 14) -->
-        <div class="nav-section">
-            <span class="nav-header">Specialized</span>
+        <!-- Specialized (weight 14+) -->
+        {{ $specialized := where $topics "Weight" "ge" 14 }}
+        <div class="nav-section" data-section="specialized">
+            <span class="nav-header" onclick="toggleSection(this)">
+                <span><span class="icon">$</span> Specialized <span class="count">({{ len $specialized }})</span></span>
+                <span class="chevron">v</span>
+            </span>
             <ul>
-                {{ range where (where .Site.RegularPages "Section" "topics") "Weight" "ge" 14 }}
+                {{ range $specialized }}
                 <li><a href="{{ .Permalink }}"{{ if eq $.RelPermalink .RelPermalink }} class="active"{{ end }}>{{ .Title }}</a></li>
                 {{ end }}
             </ul>
         </div>
     </nav>
+
+    <script>
+    function toggleSection(header) {
+        const section = header.parentElement;
+        section.classList.toggle('collapsed');
+        const sectionName = section.dataset.section;
+        const collapsed = JSON.parse(localStorage.getItem('sidebarCollapsed') || '{}');
+        collapsed[sectionName] = section.classList.contains('collapsed');
+        localStorage.setItem('sidebarCollapsed', JSON.stringify(collapsed));
+    }
+
+    // Restore collapsed state on page load
+    document.addEventListener('DOMContentLoaded', function() {
+        const collapsed = JSON.parse(localStorage.getItem('sidebarCollapsed') || '{}');
+        Object.keys(collapsed).forEach(function(section) {
+            if (collapsed[section]) {
+                const el = document.querySelector('[data-section="' + section + '"]');
+                if (el) el.classList.add('collapsed');
+            }
+        });
+    });
+    </script>
 </aside>

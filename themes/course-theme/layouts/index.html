@@ -5,19 +5,44 @@
 </div>
 
 <div class="chart-grid">
-    <figure class="chart-item">
+    <figure class="chart-item" onclick="openLightbox(this)">
         <img src="{{ "images/innovation_diamond.png" | relURL }}" alt="Innovation Diamond" loading="lazy">
         <figcaption>Innovation Diamond</figcaption>
     </figure>
-    <figure class="chart-item">
+    <figure class="chart-item" onclick="openLightbox(this)">
         <img src="{{ "images/journey_roadmap.png" | relURL }}" alt="Learning Journey" loading="lazy">
         <figcaption>Learning Journey</figcaption>
     </figure>
-    <figure class="chart-item">
+    <figure class="chart-item" onclick="openLightbox(this)">
         <img src="{{ "images/unified_pipeline.png" | relURL }}" alt="ML Pipeline" loading="lazy">
         <figcaption>ML Pipeline</figcaption>
     </figure>
 </div>
+
+<!-- Lightbox Modal -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <button class="lightbox-close" aria-label="Close">&times;</button>
+    <img id="lightbox-img" src="" alt="">
+</div>
+
+<script>
+function openLightbox(el) {
+    const img = el.querySelector('img');
+    document.getElementById('lightbox-img').src = img.src;
+    document.getElementById('lightbox-img').alt = img.alt;
+    document.getElementById('lightbox').classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeLightbox();
+});
+</script>
 
 <article>
     {{ .Content }}

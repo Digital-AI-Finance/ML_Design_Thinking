@@ -1,9 +1,17 @@
 <div class="topics-grid">
     {{ range (where .Site.RegularPages "Section" "topics") }}
     <div class="topic-card">
-        <h3>{{ .Title }}</h3>
-        <p>{{ .Summary | truncate 100 }}</p>
-        <a href="{{ .Permalink }}">Explore &rarr;</a>
+        <h3><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
+        <p>{{ .Params.description | default (.Summary | truncate 80) }}</p>
+        <div class="card-meta">
+            {{ with .Params.difficulty }}
+            {{ $class := "badge-intermediate" }}
+            {{ if eq . "Beginner" }}{{ $class = "badge-beginner" }}{{ end }}
+            {{ if eq . "Advanced" }}{{ $class = "badge-advanced" }}{{ end }}
+            <span class="badge {{ $class }}">{{ . }}</span>
+            {{ end }}
+            {{ with .Params.duration }}<span class="duration">{{ . }}</span>{{ end }}
+        </div>
     </div>
     {{ end }}
 </div>
