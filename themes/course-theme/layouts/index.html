@@ -4,6 +4,12 @@
     <p>{{ .Site.Params.subtitle }}</p>
 </div>
 
+<nav class="home-nav">
+    {{ range .Site.Menus.main }}
+    <a href="{{ .URL }}">{{ .Name }}</a>
+    {{ end }}
+</nav>
+
 <div class="chart-grid">
     <figure class="chart-item" onclick="openLightbox(this)">
         <img src="{{ "images/innovation_diamond.png" | relURL }}" alt="Innovation Diamond" loading="lazy">
