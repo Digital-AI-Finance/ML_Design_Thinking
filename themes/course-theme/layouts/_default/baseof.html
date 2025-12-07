@@ -11,33 +11,22 @@
     <header class="site-header">
         <div class="container">
             <a href="{{ .Site.BaseURL }}" class="site-title">{{ .Site.Title }}</a>
-            <nav class="main-nav">
-                {{ range .Site.Menus.main }}
-                <a href="{{ .URL }}" class="{{ if $.IsMenuCurrent "main" . }}active{{ end }}">{{ .Name }}</a>
-                {{ end }}
-            </nav>
         </div>
     </header>
 
     <main class="site-main">
-        {{ if eq .Section "topics" }}
         <div class="site-layout">
             {{ partial "sidebar.html" . }}
             <div class="main-content">
                 {{ block "main" . }}{{ end }}
             </div>
         </div>
-        {{ else }}
-        <div class="container">
-            {{ block "main" . }}{{ end }}
-        </div>
-        {{ end }}
     </main>
 
     <footer class="site-footer">
         <div class="container">
             <p>{{ .Site.Title }} - {{ .Site.Params.subtitle }}</p>
-            <p>{{ .Site.Params.author }} | <a href="https://github.com/Digital-AI-Finance/ML_Design_Thinking_16">GitHub Repository</a></p>
+            <p>{{ .Site.Params.author }} | <a href="https://github.com/Digital-AI-Finance/ML_Design_Thinking_16">GitHub</a></p>
         </div>
     </footer>
 </body>

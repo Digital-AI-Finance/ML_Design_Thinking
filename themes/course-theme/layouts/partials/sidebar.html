@@ -1,5 +1,14 @@
 <aside class="sidebar">
     <nav class="sidebar-nav">
+        <!-- Main Navigation -->
+        <div class="nav-section nav-main">
+            <ul>
+                {{ range .Site.Menus.main }}
+                <li><a href="{{ .URL }}"{{ if $.IsMenuCurrent "main" . }} class="active"{{ end }}>{{ .Name }}</a></li>
+                {{ end }}
+            </ul>
+        </div>
+
         {{ $topics := where .Site.RegularPages "Section" "topics" }}
 
         <!-- Foundations (weight 1-4) -->
@@ -69,7 +78,6 @@
         localStorage.setItem('sidebarCollapsed', JSON.stringify(collapsed));
     }
 
-    // Restore collapsed state on page load
     document.addEventListener('DOMContentLoaded', function() {
         const collapsed = JSON.parse(localStorage.getItem('sidebarCollapsed') || '{}');
         Object.keys(collapsed).forEach(function(section) {
