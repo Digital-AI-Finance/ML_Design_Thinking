@@ -19,6 +19,26 @@ By completing this topic, you will:
 - Use pre-trained embeddings and transformers
 - Evaluate NLP model performance
 
+## Visual Guides
+
+### Sentiment Distribution
+
+[![Sentiment Distribution](/ML_Design_Thinking_16/images/topics/nlp-sentiment/sentiment_distribution.png)](https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py)
+
+*Distribution of positive, neutral, and negative sentiments in customer reviews*
+
+### Word Embeddings
+
+[![Word Embeddings](/ML_Design_Thinking_16/images/topics/nlp-sentiment/word_embeddings.png)](https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py)
+
+*Similar words cluster together in vector space*
+
+### Text Preprocessing
+
+[![Text Preprocessing](/ML_Design_Thinking_16/images/topics/nlp-sentiment/preprocessing_pipeline.png)](https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py)
+
+*Steps from raw text to numerical vectors*
+
 ## Prerequisites
 
 - Supervised Learning concepts

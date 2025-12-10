@@ -19,6 +19,26 @@ By completing this topic, you will:
 - Interpret and validate cluster results
 - Create customer personas from segments
 
+## Visual Guides
+
+### K-Means Algorithm
+
+[![K-Means Algorithm](/ML_Design_Thinking_16/images/topics/clustering/kmeans_steps.png)](https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py)
+
+*Initialize centroids, assign points, update centroids, repeat*
+
+### Elbow Method
+
+[![Elbow Method](/ML_Design_Thinking_16/images/topics/clustering/elbow_method.png)](https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py)
+
+*Find optimal k where inertia reduction slows*
+
+### Silhouette Scores
+
+[![Silhouette Scores](/ML_Design_Thinking_16/images/topics/clustering/silhouette_scores.png)](https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py)
+
+*Measure cluster quality (higher is better)*
+
 ## Prerequisites
 
 - Unsupervised Learning concepts

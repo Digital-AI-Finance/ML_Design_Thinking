@@ -19,6 +19,26 @@ By completing this topic, you will:
 - Evaluate model performance with appropriate metrics
 - Understand the prediction workflow
 
+## Visual Guides
+
+### Regression vs Classification
+
+[![Regression vs Classification](/ML_Design_Thinking_16/images/topics/supervised-learning/regression_vs_classification.png)](https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py)
+
+*Regression predicts continuous values; classification predicts categories*
+
+### Bias-Variance Tradeoff
+
+[![Bias-Variance Tradeoff](/ML_Design_Thinking_16/images/topics/supervised-learning/bias_variance.png)](https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py)
+
+*Finding the optimal model complexity to minimize total error*
+
+### Train/Test Split
+
+[![Train/Test Split](/ML_Design_Thinking_16/images/topics/supervised-learning/train_test_split.png)](https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py)
+
+*Standard 80/20 split for model evaluation*
+
 ## Prerequisites
 
 - ML Foundations concepts

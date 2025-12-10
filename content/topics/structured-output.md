@@ -19,6 +19,26 @@ By completing this topic, you will:
 - Design robust prompt patterns
 - Build reliable AI-powered pipelines
 
+## Visual Guides
+
+### JSON Generation Success
+
+[![JSON Generation Success](/ML_Design_Thinking_16/images/topics/structured-output/json_success_rate.png)](https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py)
+
+*Structured output methods dramatically improve reliability*
+
+### Validation Pipeline
+
+[![Validation Pipeline](/ML_Design_Thinking_16/images/topics/structured-output/validation_pipeline.png)](https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py)
+
+*Steps to ensure clean, valid data*
+
+### Common Errors
+
+[![Common Errors](/ML_Design_Thinking_16/images/topics/structured-output/error_types.png)](https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py)
+
+*Types of structured output failures*
+
 ## Prerequisites
 
 - Generative AI concepts

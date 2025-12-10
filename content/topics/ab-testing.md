@@ -19,6 +19,26 @@ By completing this topic, you will:
 - Analyze results with statistical rigor
 - Avoid common experimentation pitfalls
 
+## Visual Guides
+
+### Conversion Rates
+
+[![Conversion Rates](/ML_Design_Thinking_16/images/topics/ab-testing/conversion_rates.png)](https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py)
+
+*Comparing control and variant performance*
+
+### Statistical Significance
+
+[![Statistical Significance](/ML_Design_Thinking_16/images/topics/ab-testing/statistical_significance.png)](https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py)
+
+*P-value drops below 0.05 when result is significant*
+
+### Sample Size Planning
+
+[![Sample Size Planning](/ML_Design_Thinking_16/images/topics/ab-testing/sample_size.png)](https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py)
+
+*Smaller effects require larger samples to detect*
+
 ## Prerequisites
 
 - Basic statistics (mean, variance)

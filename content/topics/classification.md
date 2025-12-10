@@ -19,6 +19,26 @@ By completing this topic, you will:
 - Handle imbalanced classification problems
 - Evaluate classifiers with appropriate metrics
 
+## Visual Guides
+
+### Decision Boundary
+
+[![Decision Boundary](/ML_Design_Thinking_16/images/topics/classification/decision_boundary.png)](https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py)
+
+*The line (or surface) that separates classes*
+
+### Confusion Matrix
+
+[![Confusion Matrix](/ML_Design_Thinking_16/images/topics/classification/confusion_matrix.png)](https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py)
+
+*True vs predicted labels showing model performance*
+
+### Decision Tree
+
+[![Decision Tree](/ML_Design_Thinking_16/images/topics/classification/decision_tree.png)](https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py)
+
+*Rule-based classification through sequential questions*
+
 ## Prerequisites
 
 - Supervised Learning concepts

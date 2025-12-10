@@ -19,6 +19,26 @@ By completing this topic, you will:
 - Choose appropriate activation functions
 - Understand when depth helps (and when it doesn't)
 
+## Visual Guides
+
+### Network Architecture
+
+[![Network Architecture](/ML_Design_Thinking_16/images/topics/neural-networks/network_architecture.png)](https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py)
+
+*Layers of interconnected neurons processing information*
+
+### Activation Functions
+
+[![Activation Functions](/ML_Design_Thinking_16/images/topics/neural-networks/activation_functions.png)](https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py)
+
+*Sigmoid, ReLU, and Tanh introduce non-linearity*
+
+### Training Progress
+
+[![Training Progress](/ML_Design_Thinking_16/images/topics/neural-networks/training_loss.png)](https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py)
+
+*Loss decreases over epochs with early stopping to prevent overfitting*
+
 ## Prerequisites
 
 - Supervised Learning concepts

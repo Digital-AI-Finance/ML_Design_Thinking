@@ -19,6 +19,26 @@ By completing this topic, you will:
 - Implement credit risk and fraud detection models
 - Navigate regulatory requirements
 
+## Visual Guides
+
+### Risk Metrics
+
+[![Risk Metrics](/ML_Design_Thinking_16/images/topics/finance-applications/risk_metrics.png)](https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py)
+
+*Portfolio performance with Value at Risk (VaR)*
+
+### Portfolio Allocation
+
+[![Portfolio Allocation](/ML_Design_Thinking_16/images/topics/finance-applications/portfolio_allocation.png)](https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py)
+
+*ML-optimized asset distribution*
+
+### Prediction Models
+
+[![Prediction Models](/ML_Design_Thinking_16/images/topics/finance-applications/prediction_accuracy.png)](https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py)
+
+*Comparing forecasting approaches*
+
 ## Prerequisites
 
 - Supervised and Unsupervised Learning

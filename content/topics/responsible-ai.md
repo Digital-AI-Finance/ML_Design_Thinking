@@ -19,6 +19,26 @@ By completing this topic, you will:
 - Use SHAP for model explanations
 - Design for accountability and transparency
 
+## Visual Guides
+
+### Fairness Metrics
+
+[![Fairness Metrics](/ML_Design_Thinking_16/images/topics/responsible-ai/fairness_metrics.png)](https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py)
+
+*Checking for disparate impact across groups*
+
+### SHAP Feature Importance
+
+[![SHAP Feature Importance](/ML_Design_Thinking_16/images/topics/responsible-ai/shap_importance.png)](https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py)
+
+*Understanding which features drive predictions*
+
+### Ethics Assessment
+
+[![Ethics Assessment](/ML_Design_Thinking_16/images/topics/responsible-ai/ethics_radar.png)](https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py)
+
+*Evaluating AI systems across ethical dimensions*
+
 ## Prerequisites
 
 - Classification and Supervised Learning

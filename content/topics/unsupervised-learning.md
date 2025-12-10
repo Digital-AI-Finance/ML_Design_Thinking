@@ -19,6 +19,26 @@ By completing this topic, you will:
 - Evaluate cluster quality without ground truth
 - Apply PCA for visualization
 
+## Visual Guides
+
+### Clustering Example
+
+[![Clustering Example](/ML_Design_Thinking_16/images/topics/unsupervised-learning/clustering_example.png)](https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py)
+
+*K-means finds natural groups in unlabeled data*
+
+### Dimensionality Reduction
+
+[![Dimensionality Reduction](/ML_Design_Thinking_16/images/topics/unsupervised-learning/dimensionality_reduction.png)](https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py)
+
+*PCA reduces high-dimensional data to 2D for visualization*
+
+### Supervised vs Unsupervised
+
+[![Supervised vs Unsupervised](/ML_Design_Thinking_16/images/topics/unsupervised-learning/supervised_vs_unsupervised.png)](https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py)
+
+*Key difference: labeled data requirement*
+
 ## Prerequisites
 
 - ML Foundations concepts

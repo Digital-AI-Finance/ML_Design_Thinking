@@ -19,6 +19,26 @@ By completing this topic, you will:
 - Integrate LLMs into applications
 - Evaluate and improve generated outputs
 
+## Visual Guides
+
+### LLM Capabilities
+
+[![LLM Capabilities](/ML_Design_Thinking_16/images/topics/generative-ai/llm_capabilities.png)](https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py)
+
+*Modern language models excel at diverse tasks*
+
+### Prompt Engineering
+
+[![Prompt Engineering](/ML_Design_Thinking_16/images/topics/generative-ai/prompt_flow.png)](https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py)
+
+*From user input to model output*
+
+### Scaling Laws
+
+[![Scaling Laws](/ML_Design_Thinking_16/images/topics/generative-ai/scaling_laws.png)](https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py)
+
+*Larger models achieve better performance*
+
 ## Prerequisites
 
 - Neural Networks concepts

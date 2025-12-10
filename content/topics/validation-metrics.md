@@ -19,6 +19,26 @@ By completing this topic, you will:
 - Avoid common evaluation mistakes
 - Design validation for production systems
 
+## Visual Guides
+
+### ROC Curve
+
+[![ROC Curve](/ML_Design_Thinking_16/images/topics/validation-metrics/roc_curve.png)](https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py)
+
+*Comparing classifier performance at all thresholds*
+
+### Precision-Recall Tradeoff
+
+[![Precision-Recall Tradeoff](/ML_Design_Thinking_16/images/topics/validation-metrics/precision_recall.png)](https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py)
+
+*Adjusting threshold affects both metrics*
+
+### Cross-Validation
+
+[![Cross-Validation](/ML_Design_Thinking_16/images/topics/validation-metrics/cross_validation.png)](https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py)
+
+*K-fold validation reduces overfitting to test set*
+
 ## Prerequisites
 
 - Supervised Learning concepts

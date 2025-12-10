@@ -19,6 +19,26 @@ By completing this topic, you will:
 - Identify overfitting and underfitting in model performance
 - Apply the train-test split methodology
 
+## Visual Guides
+
+### Learning Paradigms
+
+[![Learning Paradigms](/ML_Design_Thinking_16/images/topics/ml-foundations/learning_paradigms.png)](https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py)
+
+*Supervised, unsupervised, and reinforcement learning with industry adoption rates*
+
+### ML vs Traditional Programming
+
+[![ML vs Traditional Programming](/ML_Design_Thinking_16/images/topics/ml-foundations/ml_vs_traditional.png)](https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py)
+
+*Traditional programming uses rules to produce output; ML learns rules from data*
+
+### Performance Scaling
+
+[![Performance Scaling](/ML_Design_Thinking_16/images/topics/ml-foundations/performance_scaling.png)](https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py)
+
+*How different approaches scale with more data*
+
 ## Prerequisites
 
 No prior ML knowledge required. Basic familiarity with:
