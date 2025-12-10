@@ -37,19 +37,20 @@ ML_Design_Thinking_16/
 
 ```
 topics/{topic_name}/
+├── compile.py        # LaTeX compilation script (run from topic root)
 ├── slides/           # .tex and .pdf files
 ├── charts/           # Visualizations (.pdf, .png) + generation scripts
-├── scripts/          # Chart generation scripts (create_*.py)
+├── scripts/          # Additional chart generation scripts (create_*.py)
 ├── handouts/         # basic.md, intermediate.md, advanced.md
-└── compile.py        # LaTeX compilation script
+└── README.md         # Topic-specific documentation
 ```
 
 ## Quick Start
 
 ```powershell
-# COMPILE SLIDES
-cd topics/clustering/slides
-python ../compile.py                    # Auto-detects latest .tex file
+# COMPILE SLIDES (run from topic root, compile.py auto-finds .tex in slides/)
+cd topics/clustering
+python compile.py                       # Auto-detects latest .tex file in slides/
 
 # GENERATE CHARTS
 cd topics/clustering/charts
@@ -57,8 +58,8 @@ python create_kmeans_animation.py       # Creates .pdf and .png
 
 # BATCH COMPILE
 foreach ($t in @("clustering","nlp_sentiment","classification")) {
-    cd "D:\Joerg\Research\slides\ML_Design_Thinking_16\topics\$t\slides"
-    python ../compile.py
+    cd "D:\Joerg\Research\slides\ML_Design_Thinking_16\topics\$t"
+    python compile.py
 }
 ```
 
@@ -84,9 +85,13 @@ foreach ($t in @("clustering","nlp_sentiment","classification")) {
 \definecolor{mlblue}{RGB}{0,102,204}
 \definecolor{mlpurple}{RGB}{51,51,178}
 \definecolor{mllavender}{RGB}{173,173,224}
+\definecolor{mllavender2}{RGB}{193,193,232}   % Lighter variant
+\definecolor{mllavender3}{RGB}{204,204,235}   % Frame title bg
+\definecolor{mllavender4}{RGB}{214,214,239}   % Block body bg
 \definecolor{mlorange}{RGB}{255,127,14}
 \definecolor{mlgreen}{RGB}{44,160,44}
 \definecolor{mlred}{RGB}{214,39,40}
+\definecolor{mlgray}{RGB}{127,127,127}
 
 % Innovation stages (clustering topic)
 \definecolor{challenge}{RGB}{148,103,189}
@@ -101,10 +106,8 @@ foreach ($t in @("clustering","nlp_sentiment","classification")) {
 ### Template Commands
 ```latex
 \bottomnote{text}              % Lavender annotation at slide bottom
-\twocolslide{left}{right}      % Two-column layout (0.48/0.48)
-\formula{equation}             % Highlighted equation box
-\highlight{text}               % Blue bold emphasis
-\keypoint{text}                % Green bold key insight
+\compactlist                   % Use inside itemize for tight spacing
+\chartplaceholder[height]{desc}% Placeholder box for charts (default 5cm)
 ```
 
 ### Critical Rules
@@ -226,7 +229,7 @@ Required elements: success-before-failure, root cause diagnosis, zero-jargon exp
 - `EDUCATIONAL_PRESENTATION_FRAMEWORK.md` - Complete pedagogical methodology
 - `WEEK_0_SERIES_README.md` - Week 0a-0e narrative structure overview
 - `docs/GAP_ANALYSIS_REPORT.md` - Course completion tracking
-- `template_beamer_final.tex` - 22 professional slide layouts
+- `template_beamer_final.tex` - 28 professional slide layouts
 
 ## Topic-to-Week Mapping
 
