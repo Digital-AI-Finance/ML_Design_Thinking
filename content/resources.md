@@ -27,14 +27,37 @@ All lecture slides are available as PDF files in the course repository.
 
 ## Jupyter Notebooks
 
-Interactive notebooks for hands-on learning:
+Interactive notebooks for hands-on learning. Click "Open in Colab" to run directly in your browser.
+
+### Machine Learning Fundamentals
 
 | Notebook | Description | Link |
 |----------|-------------|------|
-| One Agent Minimal | Single LLM agent API call example | [Open in Colab](https://colab.research.google.com/drive/1CG-qHzcJmV3SpluZnIg7CS2yYpt6sJec#scrollTo=GwfMSsGOyecn) |
-| Multi-Agent System | Three agents (Writer, Critic, Editor) collaboration | [Open in Colab](https://colab.research.google.com/drive/1rW0FAIZOCURMeJjEMT1GsCQHfaASeH_P#scrollTo=BkpC-wg2z0j5) |
-| Neural Network | Simple classification with Neural Network | [Open in Colab](https://colab.research.google.com/drive/1Yc6nMX177t4zRqOa2PQmQ5usmhlOwDww) |
-| Random Forest | Simple classification with Random Forest | [Open in Colab](https://colab.research.google.com/drive/1EohECW9LllL90G45LCJBKdFxWF7w5-K1) |
+| Random Forest | Classification with Random Forest | [Open in Colab](https://colab.research.google.com/github/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/notebooks/01_random_forest_simple.ipynb) |
+| Neural Network | Classification with Neural Network | [Open in Colab](https://colab.research.google.com/github/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/notebooks/02_neural_network_simple.ipynb) |
+| Text Embeddings | HuggingFace embeddings, PCA, similarity | [Open in Colab](https://colab.research.google.com/github/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/notebooks/03_embeddings_similarity.ipynb) |
+
+### Clustering
+
+| Notebook | Description | Link |
+|----------|-------------|------|
+| K-Means Clustering | Customer segmentation with K-Means | [Open in Colab](https://colab.research.google.com/github/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/notebooks/04_kmeans_clustering.ipynb) |
+| DBSCAN Clustering | Density-based clustering for outlier detection | [Open in Colab](https://colab.research.google.com/github/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/notebooks/05_dbscan_clustering.ipynb) |
+
+### Data Analysis
+
+| Notebook | Description | Link |
+|----------|-------------|------|
+| Data Exploration | Descriptive analytics and visualization | [Open in Colab](https://colab.research.google.com/github/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/notebooks/06_data_exploration.ipynb) |
+| Supervised Learning | Complete supervised learning workflow | [Open in Colab](https://colab.research.google.com/github/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/notebooks/07_supervised_learning.ipynb) |
+
+### Generative AI Agents
+
+| Notebook | Description | Link |
+|----------|-------------|------|
+| Single Agent API | One LLM agent making API calls | [Open in Colab](https://colab.research.google.com/github/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/notebooks/08_single_agent_api.ipynb) |
+| Multi-Agent System | Writer, Critic, Editor collaboration | [Open in Colab](https://colab.research.google.com/github/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/notebooks/09_multi_agent_system.ipynb) |
+| Agent CSV Analysis | Agent reads and analyzes CSV data | [Open in Colab](https://colab.research.google.com/github/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/notebooks/10_agent_csv_analysis.ipynb) |
 
 ## Handouts
 
