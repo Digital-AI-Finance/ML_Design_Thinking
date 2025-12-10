@@ -32,6 +32,7 @@ Interactive notebooks for hands-on learning:
 | Notebook | Description | Link |
 |----------|-------------|------|
 | One Agent Minimal | Single LLM agent API call example | [Open in Colab](https://colab.research.google.com/drive/1CG-qHzcJmV3SpluZnIg7CS2yYpt6sJec#scrollTo=GwfMSsGOyecn) |
+| Multi-Agent System | Three agents (Writer, Critic, Editor) collaboration | [Open in Colab](https://colab.research.google.com/drive/1rW0FAIZOCURMeJjEMT1GsCQHfaASeH_P#scrollTo=BkpC-wg2z0j5) |
 | Random Forest | Simple classification with Random Forest | [Repository](https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/tree/main/topics/classification/notebooks) |
 | Neural Network | Simple classification with Neural Network | [Repository](https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/tree/main/topics/classification/notebooks) |
 
