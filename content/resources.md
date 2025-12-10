@@ -25,6 +25,16 @@ All lecture slides are available as PDF files in the course repository.
 | A/B Testing | PDF Slides | [Repository](https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/tree/main/topics/ab_testing) |
 | Finance Applications | PDF Slides | [Repository](https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/tree/main/topics/finance_applications) |
 
+## Jupyter Notebooks
+
+Interactive notebooks for hands-on learning:
+
+| Notebook | Description | Link |
+|----------|-------------|------|
+| One Agent Minimal | Single LLM agent API call example | [Open in Colab](https://colab.research.google.com/drive/1CG-qHzcJmV3SpluZnIg7CS2yYpt6sJec#scrollTo=GwfMSsGOyecn) |
+| Random Forest | Simple classification with Random Forest | [Repository](https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/tree/main/topics/classification/notebooks) |
+| Neural Network | Simple classification with Neural Network | [Repository](https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/tree/main/topics/classification/notebooks) |
+
 ## Handouts
 
 Each topic includes skill-level targeted handouts:
