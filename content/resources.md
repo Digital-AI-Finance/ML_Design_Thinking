@@ -19,20 +19,20 @@ All lecture slides are available as PDF files in the course repository.
 
 | Topic | Format | Access |
 |-------|--------|--------|
-| ML Foundations | PDF Slides | [Repository](https://github.com/Digital-AI-Finance/ML_Design_Thinking/tree/main/topics/ml_foundations) |
-| Supervised Learning | PDF Slides | [Repository](https://github.com/Digital-AI-Finance/ML_Design_Thinking/tree/main/topics/supervised_learning) |
-| Unsupervised Learning | PDF Slides | [Repository](https://github.com/Digital-AI-Finance/ML_Design_Thinking/tree/main/topics/unsupervised_learning) |
-| Clustering | PDF Slides | [Repository](https://github.com/Digital-AI-Finance/ML_Design_Thinking/tree/main/topics/clustering) |
-| NLP & Sentiment | PDF Slides | [Repository](https://github.com/Digital-AI-Finance/ML_Design_Thinking/tree/main/topics/nlp_sentiment) |
-| Classification | PDF Slides | [Repository](https://github.com/Digital-AI-Finance/ML_Design_Thinking/tree/main/topics/classification) |
-| Topic Modeling | PDF Slides | [Repository](https://github.com/Digital-AI-Finance/ML_Design_Thinking/tree/main/topics/topic_modeling) |
-| Generative AI | PDF Slides | [Repository](https://github.com/Digital-AI-Finance/ML_Design_Thinking/tree/main/topics/generative_ai) |
-| Neural Networks | PDF Slides | [Repository](https://github.com/Digital-AI-Finance/ML_Design_Thinking/tree/main/topics/neural_networks) |
-| Responsible AI | PDF Slides | [Repository](https://github.com/Digital-AI-Finance/ML_Design_Thinking/tree/main/topics/responsible_ai) |
-| Structured Output | PDF Slides | [Repository](https://github.com/Digital-AI-Finance/ML_Design_Thinking/tree/main/topics/structured_output) |
-| Validation & Metrics | PDF Slides | [Repository](https://github.com/Digital-AI-Finance/ML_Design_Thinking/tree/main/topics/validation_metrics) |
-| A/B Testing | PDF Slides | [Repository](https://github.com/Digital-AI-Finance/ML_Design_Thinking/tree/main/topics/ab_testing) |
-| Finance Applications | PDF Slides | [Repository](https://github.com/Digital-AI-Finance/ML_Design_Thinking/tree/main/topics/finance_applications) |
+| ML Foundations | [PDF Slides](downloads/ml-foundations.pdf) | [Repository](https://github.com/Digital-AI-Finance/ML_Design_Thinking/tree/main/topics/ml_foundations) |
+| Supervised Learning | [PDF Slides](downloads/supervised-learning.pdf) | [Repository](https://github.com/Digital-AI-Finance/ML_Design_Thinking/tree/main/topics/supervised_learning) |
+| Unsupervised Learning | [PDF Slides](downloads/unsupervised-learning.pdf) | [Repository](https://github.com/Digital-AI-Finance/ML_Design_Thinking/tree/main/topics/unsupervised_learning) |
+| Clustering | [PDF Slides](downloads/clustering.pdf) | [Repository](https://github.com/Digital-AI-Finance/ML_Design_Thinking/tree/main/topics/clustering) |
+| NLP & Sentiment | [PDF Slides](downloads/nlp-sentiment.pdf) | [Repository](https://github.com/Digital-AI-Finance/ML_Design_Thinking/tree/main/topics/nlp_sentiment) |
+| Classification | [PDF Slides](downloads/classification.pdf) | [Repository](https://github.com/Digital-AI-Finance/ML_Design_Thinking/tree/main/topics/classification) |
+| Topic Modeling | [PDF Slides](downloads/topic-modeling.pdf) | [Repository](https://github.com/Digital-AI-Finance/ML_Design_Thinking/tree/main/topics/topic_modeling) |
+| Generative AI | [PDF Slides](downloads/generative-ai.pdf) | [Repository](https://github.com/Digital-AI-Finance/ML_Design_Thinking/tree/main/topics/generative_ai) |
+| Neural Networks | [PDF Slides](downloads/neural-networks.pdf) | [Repository](https://github.com/Digital-AI-Finance/ML_Design_Thinking/tree/main/topics/neural_networks) |
+| Responsible AI | [PDF Slides](downloads/responsible-ai.pdf) | [Repository](https://github.com/Digital-AI-Finance/ML_Design_Thinking/tree/main/topics/responsible_ai) |
+| Structured Output | [PDF Slides](downloads/structured-output.pdf) | [Repository](https://github.com/Digital-AI-Finance/ML_Design_Thinking/tree/main/topics/structured_output) |
+| Validation & Metrics | [PDF Slides](downloads/validation-metrics.pdf) | [Repository](https://github.com/Digital-AI-Finance/ML_Design_Thinking/tree/main/topics/validation_metrics) |
+| A/B Testing | [PDF Slides](downloads/ab-testing.pdf) | [Repository](https://github.com/Digital-AI-Finance/ML_Design_Thinking/tree/main/topics/ab_testing) |
+| Finance Applications | [PDF Slides](downloads/finance-applications.pdf) | [Repository](https://github.com/Digital-AI-Finance/ML_Design_Thinking/tree/main/topics/finance_applications) |
 
 ## Jupyter Notebooks
 
