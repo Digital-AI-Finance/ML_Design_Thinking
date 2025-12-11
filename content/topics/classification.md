@@ -21,23 +21,20 @@ By completing this topic, you will:
 
 ## Visual Guides
 
-### Decision Boundary
-
-[![Decision Boundary](/ML_Design_Thinking_16/images/topics/classification/decision_boundary.png)](https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py)
-
-*The line (or surface) that separates classes*
-
-### Confusion Matrix
-
-[![Confusion Matrix](/ML_Design_Thinking_16/images/topics/classification/confusion_matrix.png)](https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py)
-
-*True vs predicted labels showing model performance*
-
-### Decision Tree
-
-[![Decision Tree](/ML_Design_Thinking_16/images/topics/classification/decision_tree.png)](https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py)
-
-*Rule-based classification through sequential questions*
+<div class="chart-grid">
+<div class="chart-item">
+<a href="https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py"><img src="/ML_Design_Thinking_16/images/topics/classification/decision_boundary.png" alt="Decision Boundary"></a>
+<div class="chart-caption">Decision Boundary</div>
+</div>
+<div class="chart-item">
+<a href="https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py"><img src="/ML_Design_Thinking_16/images/topics/classification/confusion_matrix.png" alt="Confusion Matrix"></a>
+<div class="chart-caption">Confusion Matrix</div>
+</div>
+<div class="chart-item">
+<a href="https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py"><img src="/ML_Design_Thinking_16/images/topics/classification/decision_tree.png" alt="Decision Tree"></a>
+<div class="chart-caption">Decision Tree</div>
+</div>
+</div>
 
 ## Prerequisites
 

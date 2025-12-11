@@ -21,23 +21,20 @@ By completing this topic, you will:
 
 ## Visual Guides
 
-### Topic Word Distribution
-
-[![Topic Word Distribution](/ML_Design_Thinking_16/images/topics/topic-modeling/topic_words.png)](https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py)
-
-*Each topic is a distribution over words*
-
-### Document-Topic Mix
-
-[![Document-Topic Mix](/ML_Design_Thinking_16/images/topics/topic-modeling/document_topics.png)](https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py)
-
-*Each document contains multiple topics*
-
-### Finding Optimal Topics
-
-[![Finding Optimal Topics](/ML_Design_Thinking_16/images/topics/topic-modeling/coherence_score.png)](https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py)
-
-*Coherence score peaks at the best number of topics*
+<div class="chart-grid">
+<div class="chart-item">
+<a href="https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py"><img src="/ML_Design_Thinking_16/images/topics/topic-modeling/topic_words.png" alt="Topic Word Distribution"></a>
+<div class="chart-caption">Topic Word Distribution</div>
+</div>
+<div class="chart-item">
+<a href="https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py"><img src="/ML_Design_Thinking_16/images/topics/topic-modeling/document_topics.png" alt="Document-Topic Mix"></a>
+<div class="chart-caption">Document-Topic Mix</div>
+</div>
+<div class="chart-item">
+<a href="https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py"><img src="/ML_Design_Thinking_16/images/topics/topic-modeling/coherence_score.png" alt="Finding Optimal Topics"></a>
+<div class="chart-caption">Finding Optimal Topics</div>
+</div>
+</div>
 
 ## Prerequisites
 

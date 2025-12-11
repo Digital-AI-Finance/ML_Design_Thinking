@@ -21,23 +21,20 @@ By completing this topic, you will:
 
 ## Visual Guides
 
-### Fairness Metrics
-
-[![Fairness Metrics](/ML_Design_Thinking_16/images/topics/responsible-ai/fairness_metrics.png)](https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py)
-
-*Checking for disparate impact across groups*
-
-### SHAP Feature Importance
-
-[![SHAP Feature Importance](/ML_Design_Thinking_16/images/topics/responsible-ai/shap_importance.png)](https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py)
-
-*Understanding which features drive predictions*
-
-### Ethics Assessment
-
-[![Ethics Assessment](/ML_Design_Thinking_16/images/topics/responsible-ai/ethics_radar.png)](https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py)
-
-*Evaluating AI systems across ethical dimensions*
+<div class="chart-grid">
+<div class="chart-item">
+<a href="https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py"><img src="/ML_Design_Thinking_16/images/topics/responsible-ai/fairness_metrics.png" alt="Fairness Metrics"></a>
+<div class="chart-caption">Fairness Metrics</div>
+</div>
+<div class="chart-item">
+<a href="https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py"><img src="/ML_Design_Thinking_16/images/topics/responsible-ai/shap_importance.png" alt="SHAP Feature Importance"></a>
+<div class="chart-caption">SHAP Feature Importance</div>
+</div>
+<div class="chart-item">
+<a href="https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py"><img src="/ML_Design_Thinking_16/images/topics/responsible-ai/ethics_radar.png" alt="Ethics Assessment"></a>
+<div class="chart-caption">Ethics Assessment</div>
+</div>
+</div>
 
 ## Prerequisites
 

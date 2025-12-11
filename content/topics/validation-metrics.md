@@ -21,23 +21,20 @@ By completing this topic, you will:
 
 ## Visual Guides
 
-### ROC Curve
-
-[![ROC Curve](/ML_Design_Thinking_16/images/topics/validation-metrics/roc_curve.png)](https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py)
-
-*Comparing classifier performance at all thresholds*
-
-### Precision-Recall Tradeoff
-
-[![Precision-Recall Tradeoff](/ML_Design_Thinking_16/images/topics/validation-metrics/precision_recall.png)](https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py)
-
-*Adjusting threshold affects both metrics*
-
-### Cross-Validation
-
-[![Cross-Validation](/ML_Design_Thinking_16/images/topics/validation-metrics/cross_validation.png)](https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py)
-
-*K-fold validation reduces overfitting to test set*
+<div class="chart-grid">
+<div class="chart-item">
+<a href="https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py"><img src="/ML_Design_Thinking_16/images/topics/validation-metrics/roc_curve.png" alt="ROC Curve"></a>
+<div class="chart-caption">ROC Curve</div>
+</div>
+<div class="chart-item">
+<a href="https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py"><img src="/ML_Design_Thinking_16/images/topics/validation-metrics/precision_recall.png" alt="Precision-Recall Tradeoff"></a>
+<div class="chart-caption">Precision-Recall Tradeoff</div>
+</div>
+<div class="chart-item">
+<a href="https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py"><img src="/ML_Design_Thinking_16/images/topics/validation-metrics/cross_validation.png" alt="Cross-Validation"></a>
+<div class="chart-caption">Cross-Validation</div>
+</div>
+</div>
 
 ## Prerequisites
 

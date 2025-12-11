@@ -21,23 +21,20 @@ By completing this topic, you will:
 
 ## Visual Guides
 
-### JSON Generation Success
-
-[![JSON Generation Success](/ML_Design_Thinking_16/images/topics/structured-output/json_success_rate.png)](https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py)
-
-*Structured output methods dramatically improve reliability*
-
-### Validation Pipeline
-
-[![Validation Pipeline](/ML_Design_Thinking_16/images/topics/structured-output/validation_pipeline.png)](https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py)
-
-*Steps to ensure clean, valid data*
-
-### Common Errors
-
-[![Common Errors](/ML_Design_Thinking_16/images/topics/structured-output/error_types.png)](https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py)
-
-*Types of structured output failures*
+<div class="chart-grid">
+<div class="chart-item">
+<a href="https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py"><img src="/ML_Design_Thinking_16/images/topics/structured-output/json_success_rate.png" alt="JSON Generation Success"></a>
+<div class="chart-caption">JSON Generation Success</div>
+</div>
+<div class="chart-item">
+<a href="https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py"><img src="/ML_Design_Thinking_16/images/topics/structured-output/validation_pipeline.png" alt="Validation Pipeline"></a>
+<div class="chart-caption">Validation Pipeline</div>
+</div>
+<div class="chart-item">
+<a href="https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py"><img src="/ML_Design_Thinking_16/images/topics/structured-output/error_types.png" alt="Common Errors"></a>
+<div class="chart-caption">Common Errors</div>
+</div>
+</div>
 
 ## Prerequisites
 

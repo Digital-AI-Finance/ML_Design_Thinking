@@ -21,23 +21,20 @@ By completing this topic, you will:
 
 ## Visual Guides
 
-### Clustering Example
-
-[![Clustering Example](/ML_Design_Thinking_16/images/topics/unsupervised-learning/clustering_example.png)](https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py)
-
-*K-means finds natural groups in unlabeled data*
-
-### Dimensionality Reduction
-
-[![Dimensionality Reduction](/ML_Design_Thinking_16/images/topics/unsupervised-learning/dimensionality_reduction.png)](https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py)
-
-*PCA reduces high-dimensional data to 2D for visualization*
-
-### Supervised vs Unsupervised
-
-[![Supervised vs Unsupervised](/ML_Design_Thinking_16/images/topics/unsupervised-learning/supervised_vs_unsupervised.png)](https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py)
-
-*Key difference: labeled data requirement*
+<div class="chart-grid">
+<div class="chart-item">
+<a href="https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py"><img src="/ML_Design_Thinking_16/images/topics/unsupervised-learning/clustering_example.png" alt="Clustering Example"></a>
+<div class="chart-caption">Clustering Example</div>
+</div>
+<div class="chart-item">
+<a href="https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py"><img src="/ML_Design_Thinking_16/images/topics/unsupervised-learning/dimensionality_reduction.png" alt="Dimensionality Reduction"></a>
+<div class="chart-caption">Dimensionality Reduction</div>
+</div>
+<div class="chart-item">
+<a href="https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py"><img src="/ML_Design_Thinking_16/images/topics/unsupervised-learning/supervised_vs_unsupervised.png" alt="Supervised vs Unsupervised"></a>
+<div class="chart-caption">Supervised vs Unsupervised</div>
+</div>
+</div>
 
 ## Prerequisites
 

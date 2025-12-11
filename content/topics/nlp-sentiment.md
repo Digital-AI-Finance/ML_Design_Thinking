@@ -21,23 +21,20 @@ By completing this topic, you will:
 
 ## Visual Guides
 
-### Sentiment Distribution
-
-[![Sentiment Distribution](/ML_Design_Thinking_16/images/topics/nlp-sentiment/sentiment_distribution.png)](https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py)
-
-*Distribution of positive, neutral, and negative sentiments in customer reviews*
-
-### Word Embeddings
-
-[![Word Embeddings](/ML_Design_Thinking_16/images/topics/nlp-sentiment/word_embeddings.png)](https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py)
-
-*Similar words cluster together in vector space*
-
-### Text Preprocessing
-
-[![Text Preprocessing](/ML_Design_Thinking_16/images/topics/nlp-sentiment/preprocessing_pipeline.png)](https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py)
-
-*Steps from raw text to numerical vectors*
+<div class="chart-grid">
+<div class="chart-item">
+<a href="https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py"><img src="/ML_Design_Thinking_16/images/topics/nlp-sentiment/sentiment_distribution.png" alt="Sentiment Distribution"></a>
+<div class="chart-caption">Sentiment Distribution</div>
+</div>
+<div class="chart-item">
+<a href="https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py"><img src="/ML_Design_Thinking_16/images/topics/nlp-sentiment/word_embeddings.png" alt="Word Embeddings"></a>
+<div class="chart-caption">Word Embeddings</div>
+</div>
+<div class="chart-item">
+<a href="https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py"><img src="/ML_Design_Thinking_16/images/topics/nlp-sentiment/preprocessing_pipeline.png" alt="Text Preprocessing"></a>
+<div class="chart-caption">Text Preprocessing</div>
+</div>
+</div>
 
 ## Prerequisites
 

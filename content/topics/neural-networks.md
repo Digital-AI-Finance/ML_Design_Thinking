@@ -21,23 +21,20 @@ By completing this topic, you will:
 
 ## Visual Guides
 
-### Network Architecture
-
-[![Network Architecture](/ML_Design_Thinking_16/images/topics/neural-networks/network_architecture.png)](https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py)
-
-*Layers of interconnected neurons processing information*
-
-### Activation Functions
-
-[![Activation Functions](/ML_Design_Thinking_16/images/topics/neural-networks/activation_functions.png)](https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py)
-
-*Sigmoid, ReLU, and Tanh introduce non-linearity*
-
-### Training Progress
-
-[![Training Progress](/ML_Design_Thinking_16/images/topics/neural-networks/training_loss.png)](https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py)
-
-*Loss decreases over epochs with early stopping to prevent overfitting*
+<div class="chart-grid">
+<div class="chart-item">
+<a href="https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py"><img src="/ML_Design_Thinking_16/images/topics/neural-networks/network_architecture.png" alt="Network Architecture"></a>
+<div class="chart-caption">Network Architecture</div>
+</div>
+<div class="chart-item">
+<a href="https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py"><img src="/ML_Design_Thinking_16/images/topics/neural-networks/activation_functions.png" alt="Activation Functions"></a>
+<div class="chart-caption">Activation Functions</div>
+</div>
+<div class="chart-item">
+<a href="https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py"><img src="/ML_Design_Thinking_16/images/topics/neural-networks/training_loss.png" alt="Training Progress"></a>
+<div class="chart-caption">Training Progress</div>
+</div>
+</div>
 
 ## Prerequisites
 

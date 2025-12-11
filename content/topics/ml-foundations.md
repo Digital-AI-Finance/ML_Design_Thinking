@@ -21,23 +21,20 @@ By completing this topic, you will:
 
 ## Visual Guides
 
-### Learning Paradigms
-
-[![Learning Paradigms](/ML_Design_Thinking_16/images/topics/ml-foundations/learning_paradigms.png)](https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py)
-
-*Supervised, unsupervised, and reinforcement learning with industry adoption rates*
-
-### ML vs Traditional Programming
-
-[![ML vs Traditional Programming](/ML_Design_Thinking_16/images/topics/ml-foundations/ml_vs_traditional.png)](https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py)
-
-*Traditional programming uses rules to produce output; ML learns rules from data*
-
-### Performance Scaling
-
-[![Performance Scaling](/ML_Design_Thinking_16/images/topics/ml-foundations/performance_scaling.png)](https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py)
-
-*How different approaches scale with more data*
+<div class="chart-grid">
+<div class="chart-item">
+<a href="https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py"><img src="/ML_Design_Thinking_16/images/topics/ml-foundations/learning_paradigms.png" alt="Learning Paradigms"></a>
+<div class="chart-caption">Learning Paradigms</div>
+</div>
+<div class="chart-item">
+<a href="https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py"><img src="/ML_Design_Thinking_16/images/topics/ml-foundations/ml_vs_traditional.png" alt="ML vs Traditional Programming"></a>
+<div class="chart-caption">ML vs Traditional Programming</div>
+</div>
+<div class="chart-item">
+<a href="https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py"><img src="/ML_Design_Thinking_16/images/topics/ml-foundations/performance_scaling.png" alt="Performance Scaling"></a>
+<div class="chart-caption">Performance Scaling</div>
+</div>
+</div>
 
 ## Prerequisites
 

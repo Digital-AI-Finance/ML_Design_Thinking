@@ -82,17 +82,22 @@ CHARTS = {
 
 
 def generate_chart_section(topic):
-    """Generate the chart section markdown for a topic."""
+    """Generate the chart section HTML for a topic (3-column grid)."""
     charts = CHARTS.get(topic, [])
     if not charts:
         return ''
 
     lines = ['\n## Visual Guides\n']
+    lines.append('<div class="chart-grid">')
+
     for filename, title, description in charts:
         img_path = f'/ML_Design_Thinking_16/images/topics/{topic}/{filename}.png'
-        lines.append(f'### {title}\n')
-        lines.append(f'[![{title}]({img_path})]({GITHUB_BASE})\n')
-        lines.append(f'*{description}*\n')
+        lines.append('<div class="chart-item">')
+        lines.append(f'<a href="{GITHUB_BASE}"><img src="{img_path}" alt="{title}"></a>')
+        lines.append(f'<div class="chart-caption">{title}</div>')
+        lines.append('</div>')
+
+    lines.append('</div>\n')
 
     return '\n'.join(lines)
 
