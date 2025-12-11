@@ -185,6 +185,36 @@ Site: https://digital-ai-finance.github.io/ML_Design_Thinking/
 
 Content files: `content/_index.md`, `content/resources.md`, `content/about.md`
 
+Theme: `themes/course-theme/` (custom theme with sidebar, topic cards, download buttons)
+
+## Git Remotes
+
+| Remote | URL | Purpose |
+|--------|-----|---------|
+| origin | github.com/josterri/ML_Design_Thinking | Personal repo |
+| digital-finance | github.com/Digital-AI-Finance/ML_Design_Thinking | Organization repo (public site) |
+
+Push to both: `git push origin main && git push digital-finance main`
+
+## Static Downloads
+
+PDFs stored in `static/downloads/` and copied to `public/downloads/` during Hugo build:
+- Individual topic PDFs (14 files, ~1 MB each)
+- `all-lectures.zip` - ZIP of all 14 PDFs (8 MB)
+- `all-lectures.pdf` - Merged single PDF (12 MB)
+
+Regenerate with: `python tools/create_all_downloads.py`
+
+## Tools
+
+| Script | Purpose |
+|--------|---------|
+| `tools/create_all_downloads.py` | Generate all-lectures.zip and all-lectures.pdf |
+| `tools/check_links.py` | Validate links in content files |
+| `tools/create_topic_readmes.py` | Generate README.md for each topic |
+| `tools/populate_topics.py` | Populate topic content |
+| `tools/update_topic_pages.py` | Update Hugo topic pages |
+
 ## Python Dependencies
 
 ```powershell
