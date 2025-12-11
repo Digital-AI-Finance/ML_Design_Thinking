@@ -293,29 +293,26 @@ pre code { background: none; padding: 0; color: inherit; }
 .topic-meta span { display: flex; align-items: center; gap: 0.2rem; }
 .topic-meta strong { color: var(--heading); }
 
-/* Chart Grid - 2 columns, larger */
+/* Chart Grid - 3 columns */
 .chart-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.4rem;
-    margin: 0.3rem 0;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.6rem;
+    margin: 0.5rem 0;
 }
 .chart-item {
     background: var(--surface);
     border-radius: 4px;
-    padding: 0.3rem;
+    padding: 0.25rem;
     box-shadow: 0 1px 3px rgba(0,0,0,0.1);
     text-align: center;
     cursor: pointer;
     transition: transform 0.2s, box-shadow 0.2s;
 }
-.chart-item:hover { transform: scale(1.02); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+.chart-item:hover { transform: scale(1.03); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+.chart-item a { display: block; }
 .chart-item img { width: 100%; height: auto; border-radius: 3px; }
-.chart-item figcaption { font-size: 10px; color: var(--text-light); margin-top: 0.15rem; font-weight: 500; }
-
-/* Third chart spans full width */
-.chart-grid .chart-item:nth-child(3) { grid-column: span 2; }
-.chart-grid .chart-item:nth-child(3) img { max-height: 200px; width: auto; }
+.chart-caption { font-size: 10px; color: var(--text-light); margin-top: 0.2rem; font-weight: 500; line-height: 1.2; }
 
 /* Visual Sections for Topic Pages */
 .topic-content h2[id*="key"], .topic-content h2:first-of-type { margin-top: 0; }
@@ -376,9 +373,11 @@ article section.pitfalls { background: var(--section-yellow); padding: 0.4rem; b
     .main-nav { flex-wrap: wrap; justify-content: center; gap: 0.5rem; }
     h1 { font-size: 1.1rem; } h2 { font-size: 0.95rem; }
     .topics-grid { grid-template-columns: repeat(2, 1fr); }
-    .chart-grid { grid-template-columns: 1fr; }
-    .chart-grid .chart-item:nth-child(3) { grid-column: span 1; }
+    .chart-grid { grid-template-columns: repeat(2, 1fr); }
     .page-nav { flex-direction: column; gap: 0.25rem; }
+}
+@media (max-width: 500px) {
+    .chart-grid { grid-template-columns: 1fr; }
 }
 @media (max-width: 480px) {
     body { font-size: 12px; }

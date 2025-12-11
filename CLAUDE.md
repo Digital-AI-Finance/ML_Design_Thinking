@@ -58,7 +58,7 @@ python create_kmeans_animation.py       # Creates .pdf and .png
 
 # BATCH COMPILE
 foreach ($t in @("clustering","nlp_sentiment","classification")) {
-    cd "D:\Joerg\Research\slides\ML_Design_Thinking\topics\$t"
+    cd "D:\Joerg\Research\slides\ML_Design_Thinking_16\topics\$t"
     python compile.py
 }
 ```
@@ -172,10 +172,10 @@ Dataset: `Dataset_Machine_Learning.csv` (rating, price, returned columns)
 
 ```powershell
 # Build site
-hugo --source "D:\Joerg\Research\slides\ML_Design_Thinking"
+hugo --source "D:\Joerg\Research\slides\ML_Design_Thinking_16"
 
 # Serve locally
-hugo server --source "D:\Joerg\Research\slides\ML_Design_Thinking"
+hugo server --source "D:\Joerg\Research\slides\ML_Design_Thinking_16"
 
 # Deploy (auto via GitHub Actions on push to main)
 git add . && git commit -m "Update" && git push
