@@ -4,6 +4,15 @@ title: "Resources"
 
 # Course Resources
 
+## Download All Lectures
+
+Get all 14 lecture slide decks in one download:
+
+<div class="download-all-buttons">
+<a href="downloads/all-lectures.zip" class="download-btn" download>ZIP Archive (14 PDFs, 8 MB)</a>
+<a href="downloads/all-lectures.pdf" class="download-btn" download>Merged PDF (12 MB)</a>
+</div>
+
 ## Lecture Materials
 
 All lecture slides are available as PDF files in the course repository.
