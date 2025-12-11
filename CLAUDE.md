@@ -162,9 +162,13 @@ Located in `notebooks/` folder with Colab links on the website:
 | `01_random_forest_simple.ipynb` | RF classification (rating, price -> returned) |
 | `02_neural_network_simple.ipynb` | NN classification with StandardScaler |
 | `03_embeddings_similarity.ipynb` | HuggingFace embeddings + PCA + K-means |
-| `20251114_2224_one_agent_minimal.ipynb` | Single LLM agent API call |
-| `20251114_2224_multi_agent_minimal.ipynb` | Writer/Critic/Editor agents |
-| `20251210_one_agent_csv.ipynb` | Agent reads CSV, ranks 10 topics |
+| `04_kmeans_clustering.ipynb` | Customer segmentation with K-Means |
+| `05_dbscan_clustering.ipynb` | Density-based clustering for outlier detection |
+| `06_data_exploration.ipynb` | Descriptive analytics and visualization |
+| `07_supervised_learning.ipynb` | Complete supervised learning workflow |
+| `08_single_agent_api.ipynb` | Single LLM agent API call |
+| `09_multi_agent_system.ipynb` | Writer/Critic/Editor agents |
+| `10_agent_csv_analysis.ipynb` | Agent reads CSV, ranks 10 topics |
 
 Dataset: `Dataset_Machine_Learning.csv` (rating, price, returned columns)
 
@@ -186,6 +190,23 @@ Site: https://digital-ai-finance.github.io/ML_Design_Thinking/
 Content files: `content/_index.md`, `content/resources.md`, `content/about.md`
 
 Theme: `themes/course-theme/` (custom theme with sidebar, topic cards, download buttons)
+
+### Website Content Structure
+
+```
+content/
+├── _index.md           # Homepage content
+├── resources.md        # Downloads, notebooks, reading list
+├── about.md            # Course information
+└── topics/
+    ├── _index.md       # Topics listing page
+    └── {topic}.md      # 14 topic pages with charts and descriptions
+
+static/
+├── downloads/          # PDF lecture files
+└── images/
+    └── topics/         # Chart PNGs for each topic (3 per topic)
+```
 
 ## Git Remotes
 
@@ -210,9 +231,10 @@ Regenerate with: `python tools/create_all_downloads.py`
 | Script | Purpose |
 |--------|---------|
 | `tools/create_all_downloads.py` | Generate all-lectures.zip and all-lectures.pdf |
+| `tools/generate_web_charts.py` | Generate PNG charts for Hugo website |
+| `tools/copy_pdfs_to_downloads.py` | Copy topic PDFs to static/downloads |
 | `tools/check_links.py` | Validate links in content files |
 | `tools/create_topic_readmes.py` | Generate README.md for each topic |
-| `tools/populate_topics.py` | Populate topic content |
 | `tools/update_topic_pages.py` | Update Hugo topic pages |
 
 ## Python Dependencies
