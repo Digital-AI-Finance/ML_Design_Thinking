@@ -23,15 +23,15 @@ By completing this topic, you will:
 
 <div class="chart-grid">
 <div class="chart-item">
-<a href="https://github.com/Digital-AI-Finance/ML_Design_Thinking/blob/main/tools/generate_web_charts.py"><img src="/ML_Design_Thinking/images/topics/supervised-learning/regression_vs_classification.png" alt="Regression vs Classification"></a>
+<a href="/ML_Design_Thinking/images/topics/supervised-learning/regression_vs_classification.png" target="_blank"><img src="/ML_Design_Thinking/images/topics/supervised-learning/regression_vs_classification.png" alt="Regression vs Classification"></a>
 <div class="chart-caption">Regression vs Classification</div>
 </div>
 <div class="chart-item">
-<a href="https://github.com/Digital-AI-Finance/ML_Design_Thinking/blob/main/tools/generate_web_charts.py"><img src="/ML_Design_Thinking/images/topics/supervised-learning/bias_variance.png" alt="Bias-Variance Tradeoff"></a>
+<a href="/ML_Design_Thinking/images/topics/supervised-learning/bias_variance.png" target="_blank"><img src="/ML_Design_Thinking/images/topics/supervised-learning/bias_variance.png" alt="Bias-Variance Tradeoff"></a>
 <div class="chart-caption">Bias-Variance Tradeoff</div>
 </div>
 <div class="chart-item">
-<a href="https://github.com/Digital-AI-Finance/ML_Design_Thinking/blob/main/tools/generate_web_charts.py"><img src="/ML_Design_Thinking/images/topics/supervised-learning/train_test_split.png" alt="Train/Test Split"></a>
+<a href="/ML_Design_Thinking/images/topics/supervised-learning/train_test_split.png" target="_blank"><img src="/ML_Design_Thinking/images/topics/supervised-learning/train_test_split.png" alt="Train/Test Split"></a>
 <div class="chart-caption">Train/Test Split</div>
 </div>
 </div>

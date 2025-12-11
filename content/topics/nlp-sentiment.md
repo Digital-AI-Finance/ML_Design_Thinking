@@ -23,15 +23,15 @@ By completing this topic, you will:
 
 <div class="chart-grid">
 <div class="chart-item">
-<a href="https://github.com/Digital-AI-Finance/ML_Design_Thinking/blob/main/tools/generate_web_charts.py"><img src="/ML_Design_Thinking/images/topics/nlp-sentiment/sentiment_distribution.png" alt="Sentiment Distribution"></a>
+<a href="/ML_Design_Thinking/images/topics/nlp-sentiment/sentiment_distribution.png" target="_blank"><img src="/ML_Design_Thinking/images/topics/nlp-sentiment/sentiment_distribution.png" alt="Sentiment Distribution"></a>
 <div class="chart-caption">Sentiment Distribution</div>
 </div>
 <div class="chart-item">
-<a href="https://github.com/Digital-AI-Finance/ML_Design_Thinking/blob/main/tools/generate_web_charts.py"><img src="/ML_Design_Thinking/images/topics/nlp-sentiment/word_embeddings.png" alt="Word Embeddings"></a>
+<a href="/ML_Design_Thinking/images/topics/nlp-sentiment/word_embeddings.png" target="_blank"><img src="/ML_Design_Thinking/images/topics/nlp-sentiment/word_embeddings.png" alt="Word Embeddings"></a>
 <div class="chart-caption">Word Embeddings</div>
 </div>
 <div class="chart-item">
-<a href="https://github.com/Digital-AI-Finance/ML_Design_Thinking/blob/main/tools/generate_web_charts.py"><img src="/ML_Design_Thinking/images/topics/nlp-sentiment/preprocessing_pipeline.png" alt="Text Preprocessing"></a>
+<a href="/ML_Design_Thinking/images/topics/nlp-sentiment/preprocessing_pipeline.png" target="_blank"><img src="/ML_Design_Thinking/images/topics/nlp-sentiment/preprocessing_pipeline.png" alt="Text Preprocessing"></a>
 <div class="chart-caption">Text Preprocessing</div>
 </div>
 </div>

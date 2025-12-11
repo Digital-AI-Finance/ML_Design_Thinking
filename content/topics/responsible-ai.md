@@ -23,15 +23,15 @@ By completing this topic, you will:
 
 <div class="chart-grid">
 <div class="chart-item">
-<a href="https://github.com/Digital-AI-Finance/ML_Design_Thinking/blob/main/tools/generate_web_charts.py"><img src="/ML_Design_Thinking/images/topics/responsible-ai/fairness_metrics.png" alt="Fairness Metrics"></a>
+<a href="/ML_Design_Thinking/images/topics/responsible-ai/fairness_metrics.png" target="_blank"><img src="/ML_Design_Thinking/images/topics/responsible-ai/fairness_metrics.png" alt="Fairness Metrics"></a>
 <div class="chart-caption">Fairness Metrics</div>
 </div>
 <div class="chart-item">
-<a href="https://github.com/Digital-AI-Finance/ML_Design_Thinking/blob/main/tools/generate_web_charts.py"><img src="/ML_Design_Thinking/images/topics/responsible-ai/shap_importance.png" alt="SHAP Feature Importance"></a>
+<a href="/ML_Design_Thinking/images/topics/responsible-ai/shap_importance.png" target="_blank"><img src="/ML_Design_Thinking/images/topics/responsible-ai/shap_importance.png" alt="SHAP Feature Importance"></a>
 <div class="chart-caption">SHAP Feature Importance</div>
 </div>
 <div class="chart-item">
-<a href="https://github.com/Digital-AI-Finance/ML_Design_Thinking/blob/main/tools/generate_web_charts.py"><img src="/ML_Design_Thinking/images/topics/responsible-ai/ethics_radar.png" alt="Ethics Assessment"></a>
+<a href="/ML_Design_Thinking/images/topics/responsible-ai/ethics_radar.png" target="_blank"><img src="/ML_Design_Thinking/images/topics/responsible-ai/ethics_radar.png" alt="Ethics Assessment"></a>
 <div class="chart-caption">Ethics Assessment</div>
 </div>
 </div>

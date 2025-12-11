@@ -23,15 +23,15 @@ By completing this topic, you will:
 
 <div class="chart-grid">
 <div class="chart-item">
-<a href="https://github.com/Digital-AI-Finance/ML_Design_Thinking/blob/main/tools/generate_web_charts.py"><img src="/ML_Design_Thinking/images/topics/structured-output/json_success_rate.png" alt="JSON Generation Success"></a>
+<a href="/ML_Design_Thinking/images/topics/structured-output/json_success_rate.png" target="_blank"><img src="/ML_Design_Thinking/images/topics/structured-output/json_success_rate.png" alt="JSON Generation Success"></a>
 <div class="chart-caption">JSON Generation Success</div>
 </div>
 <div class="chart-item">
-<a href="https://github.com/Digital-AI-Finance/ML_Design_Thinking/blob/main/tools/generate_web_charts.py"><img src="/ML_Design_Thinking/images/topics/structured-output/validation_pipeline.png" alt="Validation Pipeline"></a>
+<a href="/ML_Design_Thinking/images/topics/structured-output/validation_pipeline.png" target="_blank"><img src="/ML_Design_Thinking/images/topics/structured-output/validation_pipeline.png" alt="Validation Pipeline"></a>
 <div class="chart-caption">Validation Pipeline</div>
 </div>
 <div class="chart-item">
-<a href="https://github.com/Digital-AI-Finance/ML_Design_Thinking/blob/main/tools/generate_web_charts.py"><img src="/ML_Design_Thinking/images/topics/structured-output/error_types.png" alt="Common Errors"></a>
+<a href="/ML_Design_Thinking/images/topics/structured-output/error_types.png" target="_blank"><img src="/ML_Design_Thinking/images/topics/structured-output/error_types.png" alt="Common Errors"></a>
 <div class="chart-caption">Common Errors</div>
 </div>
 </div>

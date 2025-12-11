@@ -23,15 +23,15 @@ By completing this topic, you will:
 
 <div class="chart-grid">
 <div class="chart-item">
-<a href="https://github.com/Digital-AI-Finance/ML_Design_Thinking/blob/main/tools/generate_web_charts.py"><img src="/ML_Design_Thinking/images/topics/classification/decision_boundary.png" alt="Decision Boundary"></a>
+<a href="/ML_Design_Thinking/images/topics/classification/decision_boundary.png" target="_blank"><img src="/ML_Design_Thinking/images/topics/classification/decision_boundary.png" alt="Decision Boundary"></a>
 <div class="chart-caption">Decision Boundary</div>
 </div>
 <div class="chart-item">
-<a href="https://github.com/Digital-AI-Finance/ML_Design_Thinking/blob/main/tools/generate_web_charts.py"><img src="/ML_Design_Thinking/images/topics/classification/confusion_matrix.png" alt="Confusion Matrix"></a>
+<a href="/ML_Design_Thinking/images/topics/classification/confusion_matrix.png" target="_blank"><img src="/ML_Design_Thinking/images/topics/classification/confusion_matrix.png" alt="Confusion Matrix"></a>
 <div class="chart-caption">Confusion Matrix</div>
 </div>
 <div class="chart-item">
-<a href="https://github.com/Digital-AI-Finance/ML_Design_Thinking/blob/main/tools/generate_web_charts.py"><img src="/ML_Design_Thinking/images/topics/classification/decision_tree.png" alt="Decision Tree"></a>
+<a href="/ML_Design_Thinking/images/topics/classification/decision_tree.png" target="_blank"><img src="/ML_Design_Thinking/images/topics/classification/decision_tree.png" alt="Decision Tree"></a>
 <div class="chart-caption">Decision Tree</div>
 </div>
 </div>

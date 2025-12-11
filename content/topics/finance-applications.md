@@ -23,15 +23,15 @@ By completing this topic, you will:
 
 <div class="chart-grid">
 <div class="chart-item">
-<a href="https://github.com/Digital-AI-Finance/ML_Design_Thinking/blob/main/tools/generate_web_charts.py"><img src="/ML_Design_Thinking/images/topics/finance-applications/risk_metrics.png" alt="Risk Metrics"></a>
+<a href="/ML_Design_Thinking/images/topics/finance-applications/risk_metrics.png" target="_blank"><img src="/ML_Design_Thinking/images/topics/finance-applications/risk_metrics.png" alt="Risk Metrics"></a>
 <div class="chart-caption">Risk Metrics</div>
 </div>
 <div class="chart-item">
-<a href="https://github.com/Digital-AI-Finance/ML_Design_Thinking/blob/main/tools/generate_web_charts.py"><img src="/ML_Design_Thinking/images/topics/finance-applications/portfolio_allocation.png" alt="Portfolio Allocation"></a>
+<a href="/ML_Design_Thinking/images/topics/finance-applications/portfolio_allocation.png" target="_blank"><img src="/ML_Design_Thinking/images/topics/finance-applications/portfolio_allocation.png" alt="Portfolio Allocation"></a>
 <div class="chart-caption">Portfolio Allocation</div>
 </div>
 <div class="chart-item">
-<a href="https://github.com/Digital-AI-Finance/ML_Design_Thinking/blob/main/tools/generate_web_charts.py"><img src="/ML_Design_Thinking/images/topics/finance-applications/prediction_accuracy.png" alt="Prediction Models"></a>
+<a href="/ML_Design_Thinking/images/topics/finance-applications/prediction_accuracy.png" target="_blank"><img src="/ML_Design_Thinking/images/topics/finance-applications/prediction_accuracy.png" alt="Prediction Models"></a>
 <div class="chart-caption">Prediction Models</div>
 </div>
 </div>

@@ -23,15 +23,15 @@ By completing this topic, you will:
 
 <div class="chart-grid">
 <div class="chart-item">
-<a href="https://github.com/Digital-AI-Finance/ML_Design_Thinking/blob/main/tools/generate_web_charts.py"><img src="/ML_Design_Thinking/images/topics/unsupervised-learning/clustering_example.png" alt="Clustering Example"></a>
+<a href="/ML_Design_Thinking/images/topics/unsupervised-learning/clustering_example.png" target="_blank"><img src="/ML_Design_Thinking/images/topics/unsupervised-learning/clustering_example.png" alt="Clustering Example"></a>
 <div class="chart-caption">Clustering Example</div>
 </div>
 <div class="chart-item">
-<a href="https://github.com/Digital-AI-Finance/ML_Design_Thinking/blob/main/tools/generate_web_charts.py"><img src="/ML_Design_Thinking/images/topics/unsupervised-learning/dimensionality_reduction.png" alt="Dimensionality Reduction"></a>
+<a href="/ML_Design_Thinking/images/topics/unsupervised-learning/dimensionality_reduction.png" target="_blank"><img src="/ML_Design_Thinking/images/topics/unsupervised-learning/dimensionality_reduction.png" alt="Dimensionality Reduction"></a>
 <div class="chart-caption">Dimensionality Reduction</div>
 </div>
 <div class="chart-item">
-<a href="https://github.com/Digital-AI-Finance/ML_Design_Thinking/blob/main/tools/generate_web_charts.py"><img src="/ML_Design_Thinking/images/topics/unsupervised-learning/supervised_vs_unsupervised.png" alt="Supervised vs Unsupervised"></a>
+<a href="/ML_Design_Thinking/images/topics/unsupervised-learning/supervised_vs_unsupervised.png" target="_blank"><img src="/ML_Design_Thinking/images/topics/unsupervised-learning/supervised_vs_unsupervised.png" alt="Supervised vs Unsupervised"></a>
 <div class="chart-caption">Supervised vs Unsupervised</div>
 </div>
 </div>

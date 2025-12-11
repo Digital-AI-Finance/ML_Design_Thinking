@@ -23,15 +23,15 @@ By completing this topic, you will:
 
 <div class="chart-grid">
 <div class="chart-item">
-<a href="https://github.com/Digital-AI-Finance/ML_Design_Thinking/blob/main/tools/generate_web_charts.py"><img src="/ML_Design_Thinking/images/topics/topic-modeling/topic_words.png" alt="Topic Word Distribution"></a>
+<a href="/ML_Design_Thinking/images/topics/topic-modeling/topic_words.png" target="_blank"><img src="/ML_Design_Thinking/images/topics/topic-modeling/topic_words.png" alt="Topic Word Distribution"></a>
 <div class="chart-caption">Topic Word Distribution</div>
 </div>
 <div class="chart-item">
-<a href="https://github.com/Digital-AI-Finance/ML_Design_Thinking/blob/main/tools/generate_web_charts.py"><img src="/ML_Design_Thinking/images/topics/topic-modeling/document_topics.png" alt="Document-Topic Mix"></a>
+<a href="/ML_Design_Thinking/images/topics/topic-modeling/document_topics.png" target="_blank"><img src="/ML_Design_Thinking/images/topics/topic-modeling/document_topics.png" alt="Document-Topic Mix"></a>
 <div class="chart-caption">Document-Topic Mix</div>
 </div>
 <div class="chart-item">
-<a href="https://github.com/Digital-AI-Finance/ML_Design_Thinking/blob/main/tools/generate_web_charts.py"><img src="/ML_Design_Thinking/images/topics/topic-modeling/coherence_score.png" alt="Finding Optimal Topics"></a>
+<a href="/ML_Design_Thinking/images/topics/topic-modeling/coherence_score.png" target="_blank"><img src="/ML_Design_Thinking/images/topics/topic-modeling/coherence_score.png" alt="Finding Optimal Topics"></a>
 <div class="chart-caption">Finding Optimal Topics</div>
 </div>
 </div>

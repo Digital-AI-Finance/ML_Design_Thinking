@@ -23,15 +23,15 @@ By completing this topic, you will:
 
 <div class="chart-grid">
 <div class="chart-item">
-<a href="https://github.com/Digital-AI-Finance/ML_Design_Thinking/blob/main/tools/generate_web_charts.py"><img src="/ML_Design_Thinking/images/topics/generative-ai/llm_capabilities.png" alt="LLM Capabilities"></a>
+<a href="/ML_Design_Thinking/images/topics/generative-ai/llm_capabilities.png" target="_blank"><img src="/ML_Design_Thinking/images/topics/generative-ai/llm_capabilities.png" alt="LLM Capabilities"></a>
 <div class="chart-caption">LLM Capabilities</div>
 </div>
 <div class="chart-item">
-<a href="https://github.com/Digital-AI-Finance/ML_Design_Thinking/blob/main/tools/generate_web_charts.py"><img src="/ML_Design_Thinking/images/topics/generative-ai/prompt_flow.png" alt="Prompt Engineering"></a>
+<a href="/ML_Design_Thinking/images/topics/generative-ai/prompt_flow.png" target="_blank"><img src="/ML_Design_Thinking/images/topics/generative-ai/prompt_flow.png" alt="Prompt Engineering"></a>
 <div class="chart-caption">Prompt Engineering</div>
 </div>
 <div class="chart-item">
-<a href="https://github.com/Digital-AI-Finance/ML_Design_Thinking/blob/main/tools/generate_web_charts.py"><img src="/ML_Design_Thinking/images/topics/generative-ai/scaling_laws.png" alt="Scaling Laws"></a>
+<a href="/ML_Design_Thinking/images/topics/generative-ai/scaling_laws.png" target="_blank"><img src="/ML_Design_Thinking/images/topics/generative-ai/scaling_laws.png" alt="Scaling Laws"></a>
 <div class="chart-caption">Scaling Laws</div>
 </div>
 </div>
