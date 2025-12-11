@@ -25,6 +25,6 @@ This course demonstrates how machine learning augments human-centered design pro
 
 ## Quick Links
 
-- [View All Topics](/topics/)
-- [Course Resources](/resources/)
-- [About This Course](/about/)
+- [View All Topics]({{< ref "/topics" >}})
+- [Course Resources]({{< ref "/resources" >}})
+- [About This Course]({{< ref "/about" >}})

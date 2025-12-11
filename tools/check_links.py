@@ -2,6 +2,7 @@
 """
 Link Checker for Hugo Website
 Checks all internal links and download links on the deployed site.
+Also detects links with wrong base path (missing /ML_Design_Thinking/).
 """
 
 import requests
@@ -68,8 +69,24 @@ def check_link(url, session):
         return str(e)[:20]
 
 def is_our_site(url):
-    """Check if URL is on our Hugo site (not GitHub or external)."""
+    """Check if URL is on our Hugo site with correct base path."""
     return url.startswith(HOST + BASE_PATH)
+
+def is_our_org(url):
+    """Check if URL is on our GitHub Pages org (any path)."""
+    return url.startswith(HOST)
+
+def has_wrong_base_path(url):
+    """Check if URL is on our org but missing the correct base path."""
+    if not is_our_org(url):
+        return False
+    if is_our_site(url):
+        return False
+    # It's on our org but doesn't have the correct base path
+    # Exclude GitHub repo links
+    if "github.com" in url:
+        return False
+    return True
 
 def is_download(url):
     """Check if URL is a download link."""
@@ -83,7 +100,8 @@ def main():
     print("=" * 60)
     print("Link Checker for ML Design Thinking Website")
     print("=" * 60)
-    print(f"\nBase URL: {BASE_URL}\n")
+    print(f"\nBase URL: {BASE_URL}")
+    print(f"Host: {HOST}\n")
 
     session = requests.Session()
     session.headers.update({
@@ -92,9 +110,10 @@ def main():
 
     visited = set()
     to_visit = [BASE_URL]
-    all_links = {}
+    all_links = {}  # url -> source page
     download_links = set()
     image_links = set()
+    wrong_path_links = {}  # url -> source page (links with wrong base path)
 
     print("Crawling site...")
 
@@ -105,7 +124,7 @@ def main():
         if url in visited:
             continue
 
-        # Only crawl our Hugo site pages
+        # Only crawl our Hugo site pages (with correct base path)
         if not is_our_site(url):
             continue
         if any(url.lower().endswith(ext) for ext in ['.pdf', '.png', '.jpg', '.css', '.js', '.svg']):
@@ -124,7 +143,13 @@ def main():
         for link in links:
             link = link.rstrip('/')
 
-            # Only process our site links
+            # Check for wrong base path (on our org but missing /ML_Design_Thinking)
+            if has_wrong_base_path(link):
+                if link not in wrong_path_links:
+                    wrong_path_links[link] = url
+                continue
+
+            # Only process our site links for further crawling
             if not is_our_site(link):
                 continue
 
@@ -144,6 +169,22 @@ def main():
 
     print(f"\nCrawled {len(visited)} pages")
     print(f"Found {len(download_links)} downloads, {len(image_links)} images")
+
+    # Check for wrong base path links FIRST (these are errors)
+    wp_fail = 0
+    if wrong_path_links:
+        print("\n" + "-" * 60)
+        print("WRONG BASE PATH (missing /ML_Design_Thinking)")
+        print("-" * 60)
+        for url, source in sorted(wrong_path_links.items()):
+            status = check_link(url, session)
+            short_url = url.replace(HOST, "")
+            short_source = source.replace(HOST + BASE_PATH, "") or "/"
+            print(f"  [WRONG] {short_url}")
+            print(f"          Found on: {short_source}")
+            print(f"          Status: {status}")
+            wp_fail += 1
+            time.sleep(0.05)
 
     # Check downloads
     print("\n" + "-" * 60)
@@ -204,16 +245,19 @@ def main():
     print("SUMMARY")
     print("=" * 60)
     print(f"Pages crawled: {len(visited)}")
+    print(f"Wrong base path: {wp_fail} ERRORS")
     print(f"Downloads: {dl_ok} OK, {dl_fail} FAIL")
     print(f"Images: {img_ok} OK, {img_fail} FAIL")
     print(f"Pages: {pg_ok} OK, {pg_fail} FAIL")
 
-    total_fail = dl_fail + img_fail + pg_fail
+    total_fail = wp_fail + dl_fail + img_fail + pg_fail
     print("\n" + "=" * 60)
     if total_fail == 0:
         print("ALL LINKS OK!")
     else:
-        print(f"FAILED: {total_fail} broken links")
+        print(f"FAILED: {total_fail} broken/wrong links")
+        if wp_fail > 0:
+            print(f"  - {wp_fail} links missing /ML_Design_Thinking base path")
     print("=" * 60)
 
     return 1 if total_fail > 0 else 0
