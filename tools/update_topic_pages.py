@@ -4,7 +4,7 @@
 from pathlib import Path
 
 CONTENT_PATH = Path(__file__).parent.parent / 'content' / 'topics'
-GITHUB_BASE = 'https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py'
+GITHUB_BASE = 'https://github.com/Digital-AI-Finance/ML_Design_Thinking/blob/main/tools/generate_web_charts.py'
 
 # Chart configurations per topic
 CHARTS = {
@@ -91,7 +91,7 @@ def generate_chart_section(topic):
     lines.append('<div class="chart-grid">')
 
     for filename, title, description in charts:
-        img_path = f'/ML_Design_Thinking_16/images/topics/{topic}/{filename}.png'
+        img_path = f'/ML_Design_Thinking/images/topics/{topic}/{filename}.png'
         lines.append('<div class="chart-item">')
         lines.append(f'<a href="{GITHUB_BASE}"><img src="{img_path}" alt="{title}"></a>')
         lines.append(f'<div class="chart-caption">{title}</div>')

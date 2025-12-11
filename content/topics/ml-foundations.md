@@ -23,15 +23,15 @@ By completing this topic, you will:
 
 <div class="chart-grid">
 <div class="chart-item">
-<a href="https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py"><img src="/ML_Design_Thinking_16/images/topics/ml-foundations/learning_paradigms.png" alt="Learning Paradigms"></a>
+<a href="https://github.com/Digital-AI-Finance/ML_Design_Thinking/blob/main/tools/generate_web_charts.py"><img src="/ML_Design_Thinking/images/topics/ml-foundations/learning_paradigms.png" alt="Learning Paradigms"></a>
 <div class="chart-caption">Learning Paradigms</div>
 </div>
 <div class="chart-item">
-<a href="https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py"><img src="/ML_Design_Thinking_16/images/topics/ml-foundations/ml_vs_traditional.png" alt="ML vs Traditional Programming"></a>
+<a href="https://github.com/Digital-AI-Finance/ML_Design_Thinking/blob/main/tools/generate_web_charts.py"><img src="/ML_Design_Thinking/images/topics/ml-foundations/ml_vs_traditional.png" alt="ML vs Traditional Programming"></a>
 <div class="chart-caption">ML vs Traditional Programming</div>
 </div>
 <div class="chart-item">
-<a href="https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py"><img src="/ML_Design_Thinking_16/images/topics/ml-foundations/performance_scaling.png" alt="Performance Scaling"></a>
+<a href="https://github.com/Digital-AI-Finance/ML_Design_Thinking/blob/main/tools/generate_web_charts.py"><img src="/ML_Design_Thinking/images/topics/ml-foundations/performance_scaling.png" alt="Performance Scaling"></a>
 <div class="chart-caption">Performance Scaling</div>
 </div>
 </div>

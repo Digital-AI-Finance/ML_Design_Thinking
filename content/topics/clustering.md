@@ -23,15 +23,15 @@ By completing this topic, you will:
 
 <div class="chart-grid">
 <div class="chart-item">
-<a href="https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py"><img src="/ML_Design_Thinking_16/images/topics/clustering/kmeans_steps.png" alt="K-Means Algorithm"></a>
+<a href="https://github.com/Digital-AI-Finance/ML_Design_Thinking/blob/main/tools/generate_web_charts.py"><img src="/ML_Design_Thinking/images/topics/clustering/kmeans_steps.png" alt="K-Means Algorithm"></a>
 <div class="chart-caption">K-Means Algorithm</div>
 </div>
 <div class="chart-item">
-<a href="https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py"><img src="/ML_Design_Thinking_16/images/topics/clustering/elbow_method.png" alt="Elbow Method"></a>
+<a href="https://github.com/Digital-AI-Finance/ML_Design_Thinking/blob/main/tools/generate_web_charts.py"><img src="/ML_Design_Thinking/images/topics/clustering/elbow_method.png" alt="Elbow Method"></a>
 <div class="chart-caption">Elbow Method</div>
 </div>
 <div class="chart-item">
-<a href="https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py"><img src="/ML_Design_Thinking_16/images/topics/clustering/silhouette_scores.png" alt="Silhouette Scores"></a>
+<a href="https://github.com/Digital-AI-Finance/ML_Design_Thinking/blob/main/tools/generate_web_charts.py"><img src="/ML_Design_Thinking/images/topics/clustering/silhouette_scores.png" alt="Silhouette Scores"></a>
 <div class="chart-caption">Silhouette Scores</div>
 </div>
 </div>

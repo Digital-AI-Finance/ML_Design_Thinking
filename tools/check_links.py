@@ -9,8 +9,8 @@ from urllib.parse import urljoin
 import re
 import time
 
-BASE_URL = "https://digital-ai-finance.github.io/ML_Design_Thinking_16/"
-BASE_PATH = "/ML_Design_Thinking_16"
+BASE_URL = "https://digital-ai-finance.github.io/ML_Design_Thinking/"
+BASE_PATH = "/ML_Design_Thinking"
 HOST = "https://digital-ai-finance.github.io"
 
 def get_all_links(url, session):

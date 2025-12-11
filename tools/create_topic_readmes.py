@@ -4,7 +4,7 @@ Script to create README.md files for each topic folder.
 
 from pathlib import Path
 
-BASE = Path(r"D:\Joerg\Research\slides\ML_Design_Thinking_16")
+BASE = Path(r"D:\Joerg\Research\slides\ML_Design_Thinking")
 TOPICS = BASE / "topics"
 
 TOPIC_INFO = {

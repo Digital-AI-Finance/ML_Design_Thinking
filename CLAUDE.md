@@ -11,7 +11,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Architecture
 
 ```
-ML_Design_Thinking_16/
+ML_Design_Thinking/
 ├── topics/                    # Active course content (14 topics)
 │   ├── ml_foundations/        # ML/AI overview, learning paradigms
 │   ├── supervised_learning/   # Regression, classification, ensembles
@@ -58,7 +58,7 @@ python create_kmeans_animation.py       # Creates .pdf and .png
 
 # BATCH COMPILE
 foreach ($t in @("clustering","nlp_sentiment","classification")) {
-    cd "D:\Joerg\Research\slides\ML_Design_Thinking_16\topics\$t"
+    cd "D:\Joerg\Research\slides\ML_Design_Thinking\topics\$t"
     python compile.py
 }
 ```
@@ -172,16 +172,16 @@ Dataset: `Dataset_Machine_Learning.csv` (rating, price, returned columns)
 
 ```powershell
 # Build site
-hugo --source "D:\Joerg\Research\slides\ML_Design_Thinking_16"
+hugo --source "D:\Joerg\Research\slides\ML_Design_Thinking"
 
 # Serve locally
-hugo server --source "D:\Joerg\Research\slides\ML_Design_Thinking_16"
+hugo server --source "D:\Joerg\Research\slides\ML_Design_Thinking"
 
 # Deploy (auto via GitHub Actions on push to main)
 git add . && git commit -m "Update" && git push
 ```
 
-Site: https://digital-ai-finance.github.io/ML_Design_Thinking_16/
+Site: https://digital-ai-finance.github.io/ML_Design_Thinking/
 
 Content files: `content/_index.md`, `content/resources.md`, `content/about.md`
 

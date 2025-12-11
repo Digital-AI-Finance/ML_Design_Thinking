@@ -23,15 +23,15 @@ By completing this topic, you will:
 
 <div class="chart-grid">
 <div class="chart-item">
-<a href="https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py"><img src="/ML_Design_Thinking_16/images/topics/validation-metrics/roc_curve.png" alt="ROC Curve"></a>
+<a href="https://github.com/Digital-AI-Finance/ML_Design_Thinking/blob/main/tools/generate_web_charts.py"><img src="/ML_Design_Thinking/images/topics/validation-metrics/roc_curve.png" alt="ROC Curve"></a>
 <div class="chart-caption">ROC Curve</div>
 </div>
 <div class="chart-item">
-<a href="https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py"><img src="/ML_Design_Thinking_16/images/topics/validation-metrics/precision_recall.png" alt="Precision-Recall Tradeoff"></a>
+<a href="https://github.com/Digital-AI-Finance/ML_Design_Thinking/blob/main/tools/generate_web_charts.py"><img src="/ML_Design_Thinking/images/topics/validation-metrics/precision_recall.png" alt="Precision-Recall Tradeoff"></a>
 <div class="chart-caption">Precision-Recall Tradeoff</div>
 </div>
 <div class="chart-item">
-<a href="https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/tools/generate_web_charts.py"><img src="/ML_Design_Thinking_16/images/topics/validation-metrics/cross_validation.png" alt="Cross-Validation"></a>
+<a href="https://github.com/Digital-AI-Finance/ML_Design_Thinking/blob/main/tools/generate_web_charts.py"><img src="/ML_Design_Thinking/images/topics/validation-metrics/cross_validation.png" alt="Cross-Validation"></a>
 <div class="chart-caption">Cross-Validation</div>
 </div>
 </div>

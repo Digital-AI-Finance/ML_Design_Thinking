@@ -48,4 +48,4 @@ This course is developed and maintained by the Digital AI Finance group.
 
 ## Repository
 
-All course materials are available on [GitHub](https://github.com/Digital-AI-Finance/ML_Design_Thinking_16).
+All course materials are available on [GitHub](https://github.com/Digital-AI-Finance/ML_Design_Thinking).

@@ -7,7 +7,7 @@ import shutil
 import os
 from pathlib import Path
 
-BASE = Path(r"D:\Joerg\Research\slides\ML_Design_Thinking_16")
+BASE = Path(r"D:\Joerg\Research\slides\ML_Design_Thinking")
 ARCHIVE = BASE / "archive" / "weeks_original"
 TOPICS = BASE / "topics"
 

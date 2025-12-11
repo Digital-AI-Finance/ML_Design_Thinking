@@ -10,20 +10,20 @@ All lecture slides are available as PDF files in the course repository.
 
 | Topic | Format | Access |
 |-------|--------|--------|
-| ML Foundations | PDF Slides | [Repository](https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/tree/main/topics/ml_foundations) |
-| Supervised Learning | PDF Slides | [Repository](https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/tree/main/topics/supervised_learning) |
-| Unsupervised Learning | PDF Slides | [Repository](https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/tree/main/topics/unsupervised_learning) |
-| Clustering | PDF Slides | [Repository](https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/tree/main/topics/clustering) |
-| NLP & Sentiment | PDF Slides | [Repository](https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/tree/main/topics/nlp_sentiment) |
-| Classification | PDF Slides | [Repository](https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/tree/main/topics/classification) |
-| Topic Modeling | PDF Slides | [Repository](https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/tree/main/topics/topic_modeling) |
-| Generative AI | PDF Slides | [Repository](https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/tree/main/topics/generative_ai) |
-| Neural Networks | PDF Slides | [Repository](https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/tree/main/topics/neural_networks) |
-| Responsible AI | PDF Slides | [Repository](https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/tree/main/topics/responsible_ai) |
-| Structured Output | PDF Slides | [Repository](https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/tree/main/topics/structured_output) |
-| Validation & Metrics | PDF Slides | [Repository](https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/tree/main/topics/validation_metrics) |
-| A/B Testing | PDF Slides | [Repository](https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/tree/main/topics/ab_testing) |
-| Finance Applications | PDF Slides | [Repository](https://github.com/Digital-AI-Finance/ML_Design_Thinking_16/tree/main/topics/finance_applications) |
+| ML Foundations | PDF Slides | [Repository](https://github.com/Digital-AI-Finance/ML_Design_Thinking/tree/main/topics/ml_foundations) |
+| Supervised Learning | PDF Slides | [Repository](https://github.com/Digital-AI-Finance/ML_Design_Thinking/tree/main/topics/supervised_learning) |
+| Unsupervised Learning | PDF Slides | [Repository](https://github.com/Digital-AI-Finance/ML_Design_Thinking/tree/main/topics/unsupervised_learning) |
+| Clustering | PDF Slides | [Repository](https://github.com/Digital-AI-Finance/ML_Design_Thinking/tree/main/topics/clustering) |
+| NLP & Sentiment | PDF Slides | [Repository](https://github.com/Digital-AI-Finance/ML_Design_Thinking/tree/main/topics/nlp_sentiment) |
+| Classification | PDF Slides | [Repository](https://github.com/Digital-AI-Finance/ML_Design_Thinking/tree/main/topics/classification) |
+| Topic Modeling | PDF Slides | [Repository](https://github.com/Digital-AI-Finance/ML_Design_Thinking/tree/main/topics/topic_modeling) |
+| Generative AI | PDF Slides | [Repository](https://github.com/Digital-AI-Finance/ML_Design_Thinking/tree/main/topics/generative_ai) |
+| Neural Networks | PDF Slides | [Repository](https://github.com/Digital-AI-Finance/ML_Design_Thinking/tree/main/topics/neural_networks) |
+| Responsible AI | PDF Slides | [Repository](https://github.com/Digital-AI-Finance/ML_Design_Thinking/tree/main/topics/responsible_ai) |
+| Structured Output | PDF Slides | [Repository](https://github.com/Digital-AI-Finance/ML_Design_Thinking/tree/main/topics/structured_output) |
+| Validation & Metrics | PDF Slides | [Repository](https://github.com/Digital-AI-Finance/ML_Design_Thinking/tree/main/topics/validation_metrics) |
+| A/B Testing | PDF Slides | [Repository](https://github.com/Digital-AI-Finance/ML_Design_Thinking/tree/main/topics/ab_testing) |
+| Finance Applications | PDF Slides | [Repository](https://github.com/Digital-AI-Finance/ML_Design_Thinking/tree/main/topics/finance_applications) |
 
 ## Jupyter Notebooks
 
@@ -33,31 +33,31 @@ Interactive notebooks for hands-on learning. Click "Open in Colab" to run direct
 
 | Notebook | Description | Link |
 |----------|-------------|------|
-| Random Forest | Classification with Random Forest | [Open in Colab](https://colab.research.google.com/github/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/notebooks/01_random_forest_simple.ipynb) |
-| Neural Network | Classification with Neural Network | [Open in Colab](https://colab.research.google.com/github/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/notebooks/02_neural_network_simple.ipynb) |
-| Text Embeddings | HuggingFace embeddings, PCA, similarity | [Open in Colab](https://colab.research.google.com/github/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/notebooks/03_embeddings_similarity.ipynb) |
+| Random Forest | Classification with Random Forest | [Open in Colab](https://colab.research.google.com/github/Digital-AI-Finance/ML_Design_Thinking/blob/main/notebooks/01_random_forest_simple.ipynb) |
+| Neural Network | Classification with Neural Network | [Open in Colab](https://colab.research.google.com/github/Digital-AI-Finance/ML_Design_Thinking/blob/main/notebooks/02_neural_network_simple.ipynb) |
+| Text Embeddings | HuggingFace embeddings, PCA, similarity | [Open in Colab](https://colab.research.google.com/github/Digital-AI-Finance/ML_Design_Thinking/blob/main/notebooks/03_embeddings_similarity.ipynb) |
 
 ### Clustering
 
 | Notebook | Description | Link |
 |----------|-------------|------|
-| K-Means Clustering | Customer segmentation with K-Means | [Open in Colab](https://colab.research.google.com/github/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/notebooks/04_kmeans_clustering.ipynb) |
-| DBSCAN Clustering | Density-based clustering for outlier detection | [Open in Colab](https://colab.research.google.com/github/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/notebooks/05_dbscan_clustering.ipynb) |
+| K-Means Clustering | Customer segmentation with K-Means | [Open in Colab](https://colab.research.google.com/github/Digital-AI-Finance/ML_Design_Thinking/blob/main/notebooks/04_kmeans_clustering.ipynb) |
+| DBSCAN Clustering | Density-based clustering for outlier detection | [Open in Colab](https://colab.research.google.com/github/Digital-AI-Finance/ML_Design_Thinking/blob/main/notebooks/05_dbscan_clustering.ipynb) |
 
 ### Data Analysis
 
 | Notebook | Description | Link |
 |----------|-------------|------|
-| Data Exploration | Descriptive analytics and visualization | [Open in Colab](https://colab.research.google.com/github/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/notebooks/06_data_exploration.ipynb) |
-| Supervised Learning | Complete supervised learning workflow | [Open in Colab](https://colab.research.google.com/github/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/notebooks/07_supervised_learning.ipynb) |
+| Data Exploration | Descriptive analytics and visualization | [Open in Colab](https://colab.research.google.com/github/Digital-AI-Finance/ML_Design_Thinking/blob/main/notebooks/06_data_exploration.ipynb) |
+| Supervised Learning | Complete supervised learning workflow | [Open in Colab](https://colab.research.google.com/github/Digital-AI-Finance/ML_Design_Thinking/blob/main/notebooks/07_supervised_learning.ipynb) |
 
 ### Generative AI Agents
 
 | Notebook | Description | Link |
 |----------|-------------|------|
-| Single Agent API | One LLM agent making API calls | [Open in Colab](https://colab.research.google.com/github/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/notebooks/08_single_agent_api.ipynb) |
-| Multi-Agent System | Writer, Critic, Editor collaboration | [Open in Colab](https://colab.research.google.com/github/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/notebooks/09_multi_agent_system.ipynb) |
-| Agent CSV Analysis | Agent reads and analyzes CSV data | [Open in Colab](https://colab.research.google.com/github/Digital-AI-Finance/ML_Design_Thinking_16/blob/main/notebooks/10_agent_csv_analysis.ipynb) |
+| Single Agent API | One LLM agent making API calls | [Open in Colab](https://colab.research.google.com/github/Digital-AI-Finance/ML_Design_Thinking/blob/main/notebooks/08_single_agent_api.ipynb) |
+| Multi-Agent System | Writer, Critic, Editor collaboration | [Open in Colab](https://colab.research.google.com/github/Digital-AI-Finance/ML_Design_Thinking/blob/main/notebooks/09_multi_agent_system.ipynb) |
+| Agent CSV Analysis | Agent reads and analyzes CSV data | [Open in Colab](https://colab.research.google.com/github/Digital-AI-Finance/ML_Design_Thinking/blob/main/notebooks/10_agent_csv_analysis.ipynb) |
 
 ## Handouts
 
@@ -104,4 +104,4 @@ pip install graphviz imblearn statsmodels
 
 ## GitHub Repository
 
-Full source code and materials: [Digital-AI-Finance/ML_Design_Thinking_16](https://github.com/Digital-AI-Finance/ML_Design_Thinking_16)
+Full source code and materials: [Digital-AI-Finance/ML_Design_Thinking](https://github.com/Digital-AI-Finance/ML_Design_Thinking)
