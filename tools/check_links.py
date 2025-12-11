@@ -86,6 +86,9 @@ def has_wrong_base_path(url):
     # Exclude GitHub repo links
     if "github.com" in url:
         return False
+    # Exclude JavaScript code fragments (false positives from minified HTML)
+    if any(js in url for js in ['document.', 'function', 'getElementById', 'classList', '.src', '.alt']):
+        return False
     return True
 
 def is_download(url):
