@@ -2,6 +2,10 @@
 <div class="hero">
     <h1>{{ .Site.Title }}</h1>
     <p>{{ .Site.Params.subtitle }}</p>
+    <div class="download-all-buttons" style="margin-top: 0.5rem;">
+        <a href="{{ "downloads/all-lectures.zip" | relURL }}" class="download-btn" download>ZIP Archive (14 PDFs, 8 MB)</a>
+        <a href="{{ "downloads/all-lectures.pdf" | relURL }}" class="download-btn" download>Merged PDF (12 MB)</a>
+    </div>
 </div>
 
 <nav class="home-nav">

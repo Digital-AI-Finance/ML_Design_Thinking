@@ -23,15 +23,6 @@ This course demonstrates how machine learning augments human-centered design pro
 - **Design Integration**: Connecting ML capabilities with design thinking stages
 - **Ethical Considerations**: Responsible AI and fairness in ML systems
 
-## Download All Lectures
-
-Get all 14 lecture slide decks in one download:
-
-<div class="download-all-buttons">
-<a href="downloads/all-lectures.zip" class="download-btn" download>ZIP Archive (14 PDFs, 8 MB)</a>
-<a href="downloads/all-lectures.pdf" class="download-btn" download>Merged PDF (12 MB)</a>
-</div>
-
 ## Quick Links
 
 - [View All Topics](/topics/)
