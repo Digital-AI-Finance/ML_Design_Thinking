@@ -139,6 +139,16 @@ def main():
             # Open PDF
             open_pdf(pdf_file)
 
+            # Run verification against download PDF
+            try:
+                topic_name = os.path.basename(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+                verify_script = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), 'tools', 'verify_pdf.py')
+                if os.path.exists(verify_script):
+                    print(f"\nVerifying PDF against download...")
+                    subprocess.run([sys.executable, verify_script, topic_name], cwd=os.path.dirname(verify_script))
+            except Exception as e:
+                print(f"Warning: Could not run verification: {e}")
+
             print("\n" + "=" * 50)
             print("Compilation complete!")
             print(f"PDF location: {os.path.abspath(pdf_file)}")

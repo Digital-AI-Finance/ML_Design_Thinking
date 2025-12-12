@@ -79,6 +79,16 @@ if os.path.exists(pdf_name):
         print("Opened PDF in default viewer")
     except:
         print("Could not auto-open PDF")
+
+    # Run verification against download PDF
+    try:
+        topic_name = os.path.basename(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+        verify_script = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), 'tools', 'verify_pdf.py')
+        if os.path.exists(verify_script):
+            print(f"\nVerifying PDF against download...")
+            subprocess.run([sys.executable, verify_script, topic_name], cwd=os.path.dirname(verify_script))
+    except Exception as e:
+        print(f"Warning: Could not run verification: {e}")
 else:
     print("\nWARNING: PDF file not found, compilation may have failed")
     sys.exit(1)
