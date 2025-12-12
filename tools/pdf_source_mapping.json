@@ -128,9 +128,11 @@
       "pdf": "supervised-learning.pdf",
       "topic": "supervised_learning",
       "source_folder": "topics/supervised_learning/slides",
-      "tex_file": "20250928_1900_main.tex",
-      "full_path": "D:\\Joerg\\Research\\slides\\ML_Design_Thinking_16\\topics\\supervised_learning\\slides\\20250928_1900_main.tex",
-      "type": "topic"
+      "tex_file": null,
+      "source_pdf": "20251007_1730_SupervisedLearning.pdf",
+      "full_path": "D:\\Joerg\\Research\\slides\\ML_Design_Thinking_16\\topics\\supervised_learning\\slides\\20251007_1730_SupervisedLearning.pdf",
+      "type": "topic",
+      "note": "Original .tex source deleted; PDF verified against 20251007_1730_SupervisedLearning.pdf"
     },
     {
       "pdf": "topic-modeling.pdf",

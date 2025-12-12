@@ -185,9 +185,8 @@ def verify_topic(topic_name: str) -> bool:
     checks["size"] = 0.20 <= size_ratio <= 5.0  # Wide tolerance for recompilation
     details.append(f"size: {size_ratio:.0%}")
 
-    # 3. Image count (should be similar - IMPORTANT)
-    img_diff = abs(source_info["image_count"] - download_info["image_count"])
-    checks["images"] = img_diff <= max(5, download_info["image_count"] * 0.1)  # 10% or 5 tolerance
+    # 3. Image count (exact match required - CRITICAL)
+    checks["images"] = source_info["image_count"] == download_info["image_count"]
     details.append(f"imgs: {source_info['image_count']}/{download_info['image_count']}")
 
     # 4. Title slide match (first slide title - IMPORTANT)
