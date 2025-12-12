@@ -731,190 +731,196 @@ visible only after harm occurred
 \bottomnote{Pattern emergence across domains reveals systematic failures - diverse incident types share common root cause of inadequate initial measurement}
 \end{frame}
 
-% Slide 9: Bias Entry Points + Ethical Frameworks (merged from part1_OLD)
-\begin{frame}[t]{Where Bias Enters: The ML Pipeline and Ethical Lenses}
+% Slide 9a: Bias Entry Points - ML Pipeline
+\begin{frame}[t]{Where Bias Enters: The ML Pipeline}
 \begin{columns}[T]
 \column{0.48\textwidth}
-\textcolor{mlpurple}{\textbf{The ML Pipeline}}
+\textcolor{mlpurple}{\textbf{Data and Features}}
 
 \small
 \textcolor{mlorange}{\textbf{1. Data Collection}}
 \begin{itemize}
 \item Historical discrimination embedded
 \item Sampling bias (underrepresented groups)
-\item Missing populations
 \item Label bias from human annotators
 \end{itemize}
 
+\vspace{0.3cm}
 \textcolor{mlblue}{\textbf{2. Feature Engineering}}
 \begin{itemize}
-\item Proxy variables (zip code $	o$ race)
-\item Correlation artifacts
+\item Proxy variables (zip code $\to$ race)
 \item Human assumptions codified
 \item Redundant encodings
 \end{itemize}
 
+\column{0.48\textwidth}
+\textcolor{mlpurple}{\textbf{Model and Deployment}}
+
+\small
 \textcolor{mlpurple}{\textbf{3. Model Training}}
 \begin{itemize}
-\item Optimization bias (accuracy $\neq$ fairness)
-\item Spurious correlations learned
+\item Optimization for accuracy $\neq$ fairness
 \item Overfitting to majority group
 \item Minority group neglect
 \end{itemize}
 
+\vspace{0.3cm}
 \textcolor{mlorange}{\textbf{4. Deployment}}
 \begin{itemize}
 \item Context mismatch
-\item Feedback loops
+\item Feedback loops amplify bias
 \item Drift over time
-\item Lack of monitoring
 \end{itemize}
+\end{columns}
 
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mllavender!30, colframe=mlpurple]
+\textbf{Key Insight:} Bias enters at all pipeline stages - requires monitoring at each transformation point
+\end{tcolorbox}
+
+\bottomnote{Multi-stage bias entry necessitates comprehensive auditing at data, features, training, and deployment}
+\end{frame}
+
+% Slide 9b: Ethical Frameworks for AI
+\begin{frame}[t]{Ethical Frameworks for Evaluating AI Systems}
+\begin{columns}[T]
 \column{0.48\textwidth}
-\textcolor{mlpurple}{\textbf{Ethical Frameworks}}
+\textcolor{mlpurple}{\textbf{Outcome-Focused}}
 
 \small
 \textcolor{mlorange}{\textbf{Consequentialist}}
 \begin{itemize}
-\item Focus on outcomes
 \item Maximize benefit, minimize harm
-\item Risk-benefit analysis
-\item \textbf{Question:} Does system increase total welfare?
-\end{itemize}
-
-\textcolor{mlblue}{\textbf{Deontological}}
-\begin{itemize}
-\item Focus on duties and rights
-\item Respect autonomy
-\item Follow moral rules
-\item \textbf{Question:} Does system respect human dignity?
-\end{itemize}
-
-\textcolor{mlpurple}{\textbf{Virtue Ethics}}
-\begin{itemize}
-\item Focus on character
-\item Cultivate wisdom, fairness
-\item Demonstrate integrity
-\item \textbf{Question:} What would a fair person do?
-\end{itemize}
-
-\textcolor{mlorange}{\textbf{Care Ethics}}
-\begin{itemize}
-\item Focus on relationships
-\item Understand context
-\item Address vulnerability
-\item \textbf{Question:} Who is most vulnerable?
+\item \textbf{Ask:} Does system increase welfare?
 \end{itemize}
 
 \vspace{0.3cm}
-\textbf{No single framework sufficient}\\
-Combine perspectives for robust ethics
+\textcolor{mlblue}{\textbf{Deontological}}
+\begin{itemize}
+\item Focus on duties and rights
+\item \textbf{Ask:} Does it respect human dignity?
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{mlpurple}{\textbf{Character-Focused}}
+
+\small
+\textcolor{mlpurple}{\textbf{Virtue Ethics}}
+\begin{itemize}
+\item Cultivate wisdom and fairness
+\item \textbf{Ask:} What would a fair person do?
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlorange}{\textbf{Care Ethics}}
+\begin{itemize}
+\item Address vulnerability in context
+\item \textbf{Ask:} Who is most vulnerable?
+\end{itemize}
 \end{columns}
 
 \vspace{0.5em}
 \begin{tcolorbox}[colback=mllavender!30, colframe=mlpurple]
-\textbf{Key Insight:} Bias enters at all pipeline stages; ethical frameworks provide multiple lenses for evaluation
+\textbf{Key Insight:} No single framework sufficient - combine perspectives for robust ethical evaluation
 \end{tcolorbox}
 
-\vspace{0.5em}
-\textbf{Key Question:} Who are the stakeholders affected by biased systems?
-
-\bottomnote{Multi-stage bias entry necessitates comprehensive auditing - pipeline vulnerabilities compound without continuous monitoring at each transformation point}
+\bottomnote{Ethical frameworks provide complementary lenses for evaluating fairness in AI systems}
 \end{frame}
 
-% Slide 10: Stakeholders and Power (merged from part1_OLD)
-\begin{frame}[t]{Stakeholders and Power Asymmetries in AI Systems}
+% Slide 10a: Who Has Power in AI Systems
+\begin{frame}[t]{Power in AI Systems: Who Controls What}
 \begin{columns}[T]
 \column{0.48\textwidth}
-\textcolor{mlpurple}{\textbf{Who Has Power?}}
+\textcolor{mlpurple}{\textbf{Those With Power}}
 
 \small
-\textcolor{mlorange}{Tech Companies}
+\textcolor{mlorange}{\textbf{Tech Companies}}
 \begin{itemize}
 \item Control system design
 \item Set defaults and constraints
-\item Influence policy
-\item Access to resources
 \end{itemize}
 
-\textcolor{mlblue}{Governments}
+\textcolor{mlblue}{\textbf{Governments}}
 \begin{itemize}
 \item Regulatory authority
-\item Procurement decisions
-\item Surveillance capabilities
 \item Enforcement power
 \end{itemize}
 
-\textcolor{mlpurple}{Privileged Groups}
+\textcolor{mlpurple}{\textbf{Privileged Groups}}
 \begin{itemize}
 \item Represented in training data
 \item Cultural norms embedded
-\item Economic resources
-\item Political influence
-\end{itemize}
-
-\vspace{0.3cm}
-\textcolor{mlorange}{\textbf{Stakeholders:}}
-\begin{itemize}
-\item Users (direct interaction)
-\item Developers (technical choices)
-\item Deployers (operational control)
-\item Affected communities (indirect impact)
-\item Society (broad implications)
-\item Environment (carbon footprint)
 \end{itemize}
 
 \column{0.48\textwidth}
-\textcolor{mlpurple}{\textbf{Who Lacks Power?}}
+\textcolor{mlpurple}{\textbf{Key Stakeholders}}
 
 \small
-\textcolor{mlorange}{End Users}
 \begin{itemize}
-\item Limited choice
+\item \textbf{Users:} Direct interaction
+\item \textbf{Developers:} Technical choices
+\item \textbf{Deployers:} Operational control
+\item \textbf{Communities:} Indirect impact
+\end{itemize}
+\end{columns}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mllavender!30, colframe=mlpurple]
+\textbf{Key Insight:} Power concentration in tech companies shapes system design - stakeholder mapping is essential
+\end{tcolorbox}
+
+\bottomnote{Understanding power distribution enables targeted interventions for fairer AI systems}
+\end{frame}
+
+% Slide 10b: Who Lacks Power in AI Systems
+\begin{frame}[t]{Power Asymmetries: Who Bears the Harm}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlpurple}{\textbf{Those Without Power}}
+
+\small
+\textcolor{mlorange}{\textbf{End Users}}
+\begin{itemize}
+\item Limited choice, no opt-out
 \item Information asymmetry
-\item No opt-out options
-\item Captive audiences
 \end{itemize}
 
-\textcolor{mlblue}{Marginalized Groups}
+\textcolor{mlblue}{\textbf{Marginalized Groups}}
 \begin{itemize}
 \item Underrepresented in data
-\item Higher error rates
-\item Less recourse
-\item Compounded discrimination
-\item Intersectionality amplifies harm
+\item Higher error rates, less recourse
 \end{itemize}
 
-\textcolor{mlpurple}{Future Generations}
+\textcolor{mlpurple}{\textbf{Future Generations}}
 \begin{itemize}
 \item No voice in current decisions
-\item Inherit consequences
-\item Path dependencies lock in bias
-\item Environmental debt
+\item Inherit path dependencies
 \end{itemize}
 
-\vspace{0.3cm}
-\textcolor{mlorange}{\textbf{Impact of Power Imbalance:}}
+\column{0.48\textwidth}
+\textcolor{mlpurple}{\textbf{Consequences}}
+
+\small
+\textcolor{mlorange}{\textbf{Impact of Imbalance:}}
 \begin{itemize}
 \item Design reflects powerful interests
-\item Marginalized voices ignored
 \item Harm concentrated on powerless
 \item Requires active intervention
 \end{itemize}
 
-\vspace{0.3cm}
-\textbf{Responsible AI: Actively empower the powerless}
+\vspace{0.5cm}
+\textcolor{mlred}{\Large\textbf{Responsible AI:}}\\
+\vspace{0.2cm}
+Actively empower the powerless\\
+Center marginalized stakeholders
 \end{columns}
 
 \vspace{0.5em}
 \begin{tcolorbox}[colback=mllavender!30, colframe=mlpurple]
-\textbf{Key Insight:} Power asymmetries shape AI systems - fairness requires centering marginalized stakeholders
+\textbf{Key Insight:} Fairness requires centering those who bear harm, not those who hold power
 \end{tcolorbox}
 
-\vspace{0.5em}
-\textbf{Key Question:} How do we move from recognizing the challenge to solving it?
-
-\bottomnote{Stakeholder identification precedes harm prevention - invisible constituencies remain unprotected without deliberate representation analysis}
+\bottomnote{Stakeholder identification precedes harm prevention - invisible constituencies need deliberate representation}
 \end{frame}
 
 % Slide 11: NEW DEEP AI - Statistical vs Causal Parity
@@ -1011,93 +1017,102 @@ Causal disparity: $|0.80 - 0.55| = 25\%$
 \bottomnote{Statistical correlation detects symptoms while causal analysis diagnoses mechanisms - compliance requires both measurement paradigms}
 \end{frame}
 
-% Slide 12: Summary - The Challenge
-\begin{frame}[t]{Summary: The Hidden Challenge We Must Solve}
-\textbf{What we now understand about the invisible discrimination problem:}
-
-\vspace{0.3em}
-
+% Slide 12a: Summary - The Core Problem
+\begin{frame}[t]{Summary: The Hidden Discrimination Problem}
 \begin{columns}[T]
 \column{0.48\textwidth}
-\textcolor{mlpurple}{\textbf{The Problem}}
+\textcolor{mlpurple}{\textbf{Why Bias Stays Hidden}}
 
 \small
-\textbf{1. Invisibility:}
+\textcolor{mlorange}{\textbf{1. Invisibility}}
 \begin{itemize}
-\item Discrimination hidden in outcomes
+\item Discrimination embedded in outcomes
 \item No ground truth counterfactuals
-\item Proxy variables conceal bias
-\item I(D; A) > 0 but unobserved
+\item Proxy variables conceal true bias
 \end{itemize}
 
-\textbf{2. Measurement bottleneck:}
+\vspace{0.3cm}
+\textcolor{mlblue}{\textbf{2. Measurement Bottleneck}}
 \begin{itemize}
 \item 490,140 subgroups (6 attributes)
-\item 21.2 bits discrimination space
-\item Only 4.2 bits measurable
-\item 99.996\% unmeasured
+\item Only 4.2 of 21.2 bits measurable
+\item 99.996\% of intersections unmeasured
 \end{itemize}
 
-\textbf{3. Amplification:}
+\column{0.48\textwidth}
+\textcolor{mlpurple}{\textbf{How Bias Grows}}
+
+\small
+\textcolor{mlpurple}{\textbf{3. Amplification}}
 \begin{itemize}
 \item Feedback loops: $B_t = B_0(1+\alpha)^t$
 \item Small bias becomes systemic
 \item Exponential growth over time
-\item Reinforces historical patterns
-\end{itemize}
-
-\textbf{4. Intersectionality:}
-\begin{itemize}
-\item Exponential subgroup growth
-\item 188M+ samples needed
-\item Most vulnerable unmeasurable
-\item Statistical power collapse
-\end{itemize}
-
-\column{0.48\textwidth}
-\textcolor{mlpurple}{\textbf{The Stakes}}
-
-\small
-\textbf{2024 Impact:}
-\begin{itemize}
-\item 233 documented incidents
-\item 6.2M people affected
-\item \$10.4B in costs
-\item 47 countries
-\item 56\% YoY growth rate
-\end{itemize}
-
-\textbf{Systemic patterns:}
-\begin{itemize}
-\item 34x error rate (facial recognition)
-\item 1.8x callback gap (hiring)
-\item \$2,500 healthcare disparity
-\item 2.1x false positive (recidivism)
-\end{itemize}
-
-\textbf{Power imbalances:}
-\begin{itemize}
-\item Tech companies control design
-\item Marginalized lack voice
-\item Powerless bear harm
-\item Future generations inherit debt
 \end{itemize}
 
 \vspace{0.3cm}
-\textcolor{mlorange}{\Large\textbf{The Challenge:}}\\
-\vspace{0.2cm}
-Make invisible bias visible\\
-through measurement frameworks\\
-before harm occurs
+\textcolor{mlorange}{\textbf{4. Intersectionality}}
+\begin{itemize}
+\item Exponential subgroup growth
+\item 188M+ samples needed for full coverage
+\item Most vulnerable groups unmeasurable
+\end{itemize}
 \end{columns}
 
 \vspace{0.5em}
 \begin{tcolorbox}[colback=mllavender!30, colframe=mlpurple]
-\textbf{Core Takeaway:} Hidden discrimination (I(D; A) > 0, 21.2 bits) + Measurement gap (17 bits lost) + Amplification ($1.26^t$) = Urgent need for fairness metrics
+\textbf{Core Problem:} I(D; A) > 0 but unobservable - 17 bits of discrimination information lost to measurement limits
 \end{tcolorbox}
 
-\vspace{0.5em}
-\textbf{Next:} Part 2 explores measurement frameworks that make bias visible - demographic parity, equal opportunity, and more
-
 \bottomnote{Problem quantification enables solution design - measurement frameworks emerge from understanding why detection fails}
+\end{frame}
+
+% Slide 12b: Summary - The Stakes and Call to Action
+\begin{frame}[t]{Summary: The Urgent Stakes of Hidden Bias}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlpurple}{\textbf{2024 Documented Impact}}
+
+\small
+\begin{itemize}
+\item 233 AI discrimination incidents
+\item 6.2M people affected
+\item \$10.4B in documented costs
+\item 47 countries impacted
+\end{itemize}
+
+\vspace{0.3cm}
+\textcolor{mlorange}{\textbf{Systemic Disparities}}
+\begin{itemize}
+\item 34x error rate: facial recognition
+\item 1.8x callback gap: hiring
+\item \$2,500 less: healthcare spending
+\item 2.1x false positive: recidivism
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{mlpurple}{\textbf{Power Imbalances}}
+
+\small
+\begin{itemize}
+\item Tech companies control design
+\item Marginalized groups lack voice
+\item Powerless bear the harm
+\item Future generations inherit bias debt
+\end{itemize}
+
+\vspace{0.5cm}
+\textcolor{mlorange}{\Large\textbf{The Challenge:}}\\
+\vspace{0.2cm}
+Make invisible bias visible\\
+through measurement frameworks\\
+\textbf{before} harm occurs
+\end{columns}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mllavender!30, colframe=mlpurple]
+\textbf{Next:} Part 2 explores measurement frameworks - demographic parity, equal opportunity, and more
+\end{tcolorbox}
+
+\bottomnote{Harm acceleration outpaces detection - measurement infrastructure becomes critical as AI deployment scales}
 \end{frame}

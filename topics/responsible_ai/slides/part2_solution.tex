@@ -1031,100 +1031,103 @@ mathematics can't choose for us
 \bottomnote{Statistical measurement detects symptoms without diagnosing causes - correlation-based metrics miss causal mechanisms driving observed disparities}
 \end{frame}
 
-% Slide 11: Five Real Scenarios
-\begin{frame}[t]{The Measurement Dilemma: Five Real Scenarios}
-\textbf{When metrics conflict, values must decide:}
-
-\vspace{0.3em}
-
+% Slide 11a: Real Scenarios - Public Sector
+\begin{frame}[t]{Metrics Conflict: Public Sector Scenarios}
 \begin{columns}[T]
 \column{0.48\textwidth}
-\textcolor{mlpurple}{\textbf{Scenario 1: University Admissions}}
+\textcolor{mlpurple}{\textbf{University Admissions}}
 
 \small
-\textbf{Metrics conflict:}
+\textbf{Metrics in tension:}
 \begin{itemize}
-\item DP: Equal admit rates $	o$ representation
-\item EO: Equal TPR for qualified $	o$ merit
-\item Calibration: Predict success $	o$ outcomes
+\item DP: Equal admit rates (representation)
+\item EO: Equal TPR for qualified (merit)
+\item Calibration: Predict success (outcomes)
 \end{itemize}
 
-\textbf{Stakeholder preferences:}
-\begin{itemize}
-\item Diversity office: Wants DP (representation)
-\item Faculty: Wants EO (merit-based)
-\item Administration: Wants calibration (graduation rates)
-\end{itemize}
-
-\textcolor{mlorange}{\textbf{Can't have all three!}}
-
-\vspace{0.3cm}
-\textcolor{mlpurple}{\textbf{Scenario 2: Criminal Justice}}
-
-\textbf{Recidivism prediction:}
-\begin{itemize}
-\item DP: Equal risk scores $	o$ equal treatment
-\item EO: Equal TPR $	o$ catch actual recidivists
-\item Calibration: Accurate risk $	o$ resource allocation
-\end{itemize}
-
-\textbf{Stakes:}
-\begin{itemize}
-\item Public safety vs individual liberty
-\item False positives harm innocents
-\item False negatives harm victims
-\end{itemize}
-
-\textcolor{mlred}{\textbf{Life-altering decisions!}}
+\textcolor{mlorange}{\textbf{Stakeholder conflict:}}\\
+Diversity office, faculty, and administration\\
+want different fairness definitions
 
 \column{0.48\textwidth}
-\textcolor{mlpurple}{\textbf{Scenario 3: Healthcare Triage}}
+\textcolor{mlpurple}{\textbf{Criminal Justice}}
+
+\small
+\textbf{Recidivism prediction:}
+\begin{itemize}
+\item DP: Equal risk scores (equal treatment)
+\item EO: Equal TPR (catch recidivists)
+\item Calibration: Accurate risk (allocation)
+\end{itemize}
+
+\textcolor{mlred}{\textbf{Stakes:}}\\
+Public safety vs individual liberty\\
+False positives harm innocents
+\end{columns}
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mllavender!30, colframe=mlpurple]
+\textbf{Key Insight:} Public sector decisions require explicit value trade-offs - no metric is universally correct
+\end{tcolorbox}
+
+\bottomnote{Context determines fairness priorities - life-altering decisions require transparent metric selection}
+\end{frame}
+
+% Slide 11b: Real Scenarios - Private Sector
+\begin{frame}[t]{Metrics Conflict: Private Sector Scenarios}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlpurple}{\textbf{Healthcare Triage}}
 
 \small
 \textbf{Resource allocation:}
 \begin{itemize}
 \item DP: Equal treatment rates per group
-\item Individual fairness: Sickest treated first
+\item Individual: Sickest treated first
 \item Utilitarian: Maximize QALYs saved
 \end{itemize}
 
-\textbf{Ethical frameworks disagree!}
+\textcolor{mlorange}{\textbf{Ethical frameworks disagree!}}
 
-\vspace{0.3cm}
-\textcolor{mlpurple}{\textbf{Scenario 4: Employment}}
+\vspace{0.5cm}
+\textcolor{mlpurple}{\textbf{Employment}}
 
 \textbf{Hiring algorithm:}
 \begin{itemize}
-\item DP: Equal hiring rates (diversity goals)
+\item DP: Equal hiring rates (diversity)
 \item EO: Equal callback for qualified (merit)
 \item Business: Maximize productivity
 \end{itemize}
 
-\textcolor{mlorange}{\textbf{Legal requirements vs business goals}}
+\textcolor{mlorange}{\textbf{Legal vs business goals}}
 
-\vspace{0.3cm}
-\textcolor{mlpurple}{\textbf{Scenario 5: Credit/Lending}}
+\column{0.48\textwidth}
+\textcolor{mlpurple}{\textbf{Credit/Lending}}
 
+\small
 \textbf{Loan approvals:}
 \begin{itemize}
-\item DP: Equal approval rates (anti-discrimination)
-\item Calibration: Accurate default prediction (profit)
-\item EO: Equal approval for creditworthy (fairness)
+\item DP: Equal approval rates
+\item Calibration: Accurate default prediction
+\item EO: Equal approval for creditworthy
 \end{itemize}
 
 \textbf{Regulatory conflict:}\\
 Fair Housing Act vs profitability
+
+\vspace{0.5cm}
+\textcolor{mlred}{\Large\textbf{Common Thread:}}\\
+\vspace{0.2cm}
+Mathematics constrains choices\\
+Values must decide priorities
 \end{columns}
 
 \vspace{0.5em}
 \begin{tcolorbox}[colback=mllavender!30, colframe=mlpurple]
-\textbf{Key Insight:} Five scenarios show metrics conflict systematically - mathematics constrains, values must choose
+\textbf{Key Question:} How can we make these value-laden choices explicit and auditable?
 \end{tcolorbox}
 
-\vspace{0.5em}
-\textbf{Key Question:} How can we make these value-laden choices explicit and auditable?
-
-\bottomnote{Context determines fairness priorities - stakeholder value conflicts require domain-specific resolution beyond universal mathematical solutions}
+\bottomnote{Stakeholder value conflicts require domain-specific resolution beyond universal mathematical solutions}
 \end{frame}
 
 % Slide 12: Mitigation Approaches (Condensed from part2_OLD)
@@ -1237,86 +1240,81 @@ Where $F$ = fairness constraint
 \bottomnote{Pipeline intervention points offer complementary strategies - addressing bias across multiple stages provides robustness single-point fixes cannot achieve}
 \end{frame}
 
-% Slide 13: Summary - Measurement Reveals Trade-offs
-\begin{frame}[t]{Summary: Measurement Makes Visible, But Reveals Fundamental Trade-offs}
-\textbf{What we now understand about fairness metrics:}
-
-\vspace{0.3em}
-
+% Slide 13a: Summary - What Metrics Achieve
+\begin{frame}[t]{Summary: What Fairness Metrics Achieve}
 \begin{columns}[T]
 \column{0.48\textwidth}
-\textcolor{mlgreen}{\textbf{The Success}}
+\textcolor{mlgreen}{\textbf{Detection Success}}
 
 \small
-\textbf{Metrics work:}
 \begin{itemize}
 \item DP detected 30\% hidden bias
-\item EO revealed 4\% on qualified
-\item Calibration showed 1\% accuracy
+\item EO revealed 4\% disparity on qualified
+\item Calibration showed 1\% accuracy gap
 \item All statistically significant
-\item Computable in <1 second
+\item Computable in real-time
 \end{itemize}
 
-\textbf{20+ metrics available:}
+\column{0.48\textwidth}
+\textcolor{mlpurple}{\textbf{Available Tools}}
+
+\small
+\textbf{20+ metrics in 5 families:}
 \begin{itemize}
-\item Group fairness (DP, EO, EqOdds, Calibration)
-\item Individual fairness (Lipschitz, counterfactual)
-\item Causal fairness (path-specific, NUD)
+\item Group fairness (DP, EO, Calibration)
+\item Individual fairness (Lipschitz)
+\item Causal fairness (path-specific)
 \item Intersectional (multicalibration)
 \item Dynamic (long-term, ranking)
 \end{itemize}
-
-\textbf{Three mitigation stages:}
-\begin{itemize}
-\item Pre-processing: Data transformation
-\item In-processing: Constrained optimization
-\item Post-processing: Threshold tuning
-\end{itemize}
-
-\column{0.48\textwidth}
-\textcolor{mlred}{\textbf{The Impossibility}}
-
-\small
-\textbf{Fundamental limits:}
-\begin{itemize}
-\item Cannot satisfy DP + EO + Calibration
-\item Chouldechova: Calibration + base rates $	o$ no DP/EO
-\item Pearl: 3 causal independences overconstrain
-\item Geometric: Different ROC curves per group
-\item No universal fairness metric
-\end{itemize}
-
-\textbf{What metrics miss:}
-\begin{itemize}
-\item Causation (why base rates differ?)
-\item Normative values (which metric is ``right''?)
-\item Stakeholder preferences (who decides?)
-\item Context (domain-specific trade-offs)
-\end{itemize}
-
-\textbf{Real dilemmas:}
-\begin{itemize}
-\item University admissions: Merit vs diversity
-\item Criminal justice: Safety vs liberty
-\item Healthcare: Equality vs efficiency
-\item Employment: Legal vs business
-\item Lending: Regulation vs profit
-\end{itemize}
+\end{columns}
 
 \vspace{0.3cm}
-\textcolor{mlorange}{\Large\textbf{The Path Forward:}}\\
-\vspace{0.2cm}
-Make trade-offs explicit through\\
-mathematical optimization
-\end{columns}
+\textcolor{mlblue}{\textbf{Three Mitigation Stages:}} Pre-processing (data) | In-processing (model) | Post-processing (threshold)
 
 \vspace{0.5em}
 \begin{tcolorbox}[colback=mllavender!30, colframe=mlpurple]
-\textbf{Core Takeaway:} Metrics make bias visible (success!) but reveal mathematical impossibility - optimization required
+\textbf{Success:} Metrics make invisible bias visible and quantifiable
 \end{tcolorbox}
 
-\vspace{0.5em}
-\textbf{Next:} Part 3 explores mathematical optimization that makes trade-offs auditable and explicit
+\bottomnote{Formalization transforms intuition into measurable criteria - mathematical definitions enable systematic auditing}
+\end{frame}
 
-\bottomnote{Quantification enables optimization despite impossibility - explicit metric selection transforms philosophical debate into tractable engineering problem}
+% Slide 13b: Summary - Fundamental Limits
+\begin{frame}[t]{Summary: Fundamental Limits of Fairness Metrics}
+\begin{columns}[T]
+\column{0.48\textwidth}
+\textcolor{mlred}{\textbf{Impossibility Results}}
+
+\small
+\begin{itemize}
+\item Cannot satisfy DP + EO + Calibration
+\item Chouldechova: Base rates break compatibility
+\item Pearl: 3 independences overconstrain DAG
+\item No universal fairness metric exists
+\end{itemize}
+
+\column{0.48\textwidth}
+\textcolor{mlpurple}{\textbf{What Metrics Miss}}
+
+\small
+\begin{itemize}
+\item Causation: Why do base rates differ?
+\item Values: Which metric is ``right''?
+\item Stakeholders: Who decides trade-offs?
+\item Context: Domain-specific priorities
+\end{itemize}
+\end{columns}
+
+\vspace{0.5cm}
+\textcolor{mlorange}{\Large\textbf{The Path Forward:}}\\
+\vspace{0.2cm}
+Make trade-offs explicit through mathematical optimization
+
+\vspace{0.5em}
+\begin{tcolorbox}[colback=mllavender!30, colframe=mlpurple]
+\textbf{Next:} Part 3 explores optimization that makes trade-offs auditable and explicit
+\end{tcolorbox}
+
+\bottomnote{Quantification enables optimization despite impossibility - explicit metric selection transforms philosophical debate into engineering}
 \end{frame}
