@@ -47,18 +47,52 @@ def get_pdf_info(pdf_path: Path) -> dict:
             "first_page_text": "",
             "last_page_text": "",
             "text_hash": 0,
+            "image_count": 0,
+            "link_count": 0,
+            "outline_items": 0,
+            "fonts": set(),
+            "title_slide": "",
+            "slide_titles": [],
         }
 
-        # Extract text from first and last pages
         if len(doc) > 0:
-            info["first_page_text"] = doc[0].get_text()[:500]  # First 500 chars
+            # Extract text from first and last pages
+            info["first_page_text"] = doc[0].get_text()[:500]
             info["last_page_text"] = doc[-1].get_text()[:500]
 
-            # Create text fingerprint (hash of all text)
+            # Create text fingerprint and count elements
             all_text = ""
-            for page in doc:
-                all_text += page.get_text()
-            info["text_hash"] = hash(all_text) % (10**10)  # 10-digit hash
+            for page_num, page in enumerate(doc):
+                page_text = page.get_text()
+                all_text += page_text
+
+                # Count images per page
+                info["image_count"] += len(page.get_images())
+
+                # Count links
+                info["link_count"] += len(page.get_links())
+
+                # Extract slide title (first line of each page, cleaned)
+                lines = [l.strip() for l in page_text.split('\n') if l.strip()]
+                if lines:
+                    title = lines[0][:80]  # First 80 chars of first line
+                    info["slide_titles"].append(title)
+                    if page_num == 0:
+                        info["title_slide"] = title
+
+                # Collect fonts used
+                for font in page.get_fonts():
+                    if font[3]:  # font name
+                        info["fonts"].add(font[3])
+
+            info["text_hash"] = hash(all_text) % (10**10)
+
+            # Get PDF outline/bookmarks count
+            toc = doc.get_toc()
+            info["outline_items"] = len(toc) if toc else 0
+
+        # Convert set to sorted list for comparison
+        info["fonts"] = sorted(info["fonts"])
 
         doc.close()
         return info
@@ -134,45 +168,59 @@ def verify_topic(topic_name: str) -> bool:
         return False
 
     # Multi-criteria verification
-    checks = []
+    checks = {}
     details = []
 
-    # 1. Page count (exact match required)
-    pages_match = download_info["pages"] == source_info["pages"]
-    checks.append(pages_match)
+    # 1. Page count (exact match required - CRITICAL)
+    checks["pages"] = download_info["pages"] == source_info["pages"]
     details.append(f"pages: {source_info['pages']}/{download_info['pages']}")
 
-    # 2. File size (within 15% tolerance - recompilation may differ slightly)
+    # 2. File size (within tolerance - recompilation varies)
     size_ratio = source_info["size_kb"] / download_info["size_kb"] if download_info["size_kb"] > 0 else 0
-    size_match = 0.85 <= size_ratio <= 1.15
-    checks.append(size_match)
-    details.append(f"size: {source_info['size_kb']:.0f}KB/{download_info['size_kb']:.0f}KB ({size_ratio:.0%})")
+    checks["size"] = 0.20 <= size_ratio <= 5.0  # Wide tolerance for recompilation
+    details.append(f"size: {size_ratio:.0%}")
 
-    # 3. Text hash (content fingerprint - exact match)
-    hash_match = download_info["text_hash"] == source_info["text_hash"]
-    checks.append(hash_match)
-    details.append(f"hash: {'match' if hash_match else 'differ'}")
+    # 3. Image count (should be similar - IMPORTANT)
+    img_diff = abs(source_info["image_count"] - download_info["image_count"])
+    checks["images"] = img_diff <= max(5, download_info["image_count"] * 0.1)  # 10% or 5 tolerance
+    details.append(f"imgs: {source_info['image_count']}/{download_info['image_count']}")
+
+    # 4. Title slide match (first slide title - IMPORTANT)
+    # Normalize whitespace for comparison
+    src_title = ' '.join(source_info["title_slide"].split()).lower()
+    dl_title = ' '.join(download_info["title_slide"].split()).lower()
+    checks["title"] = src_title == dl_title or src_title in dl_title or dl_title in src_title
+
+    # 5. Slide titles similarity (compare first 5 and last 5 slides)
+    src_titles = [' '.join(t.split()).lower() for t in source_info["slide_titles"]]
+    dl_titles = [' '.join(t.split()).lower() for t in download_info["slide_titles"]]
+
+    # Compare first 5 titles
+    first_match = sum(1 for s, d in zip(src_titles[:5], dl_titles[:5]) if s == d or s in d or d in s)
+    # Compare last 5 titles
+    last_match = sum(1 for s, d in zip(src_titles[-5:], dl_titles[-5:]) if s == d or s in d or d in s)
+    title_score = (first_match + last_match) / 10 if len(src_titles) >= 5 else 1.0
+    checks["slide_titles"] = title_score >= 0.6  # 60% of sampled titles match
+    details.append(f"titles: {title_score:.0%}")
+
+    # 6. Text hash (exact content match - informational)
+    checks["hash"] = download_info["text_hash"] == source_info["text_hash"]
+
+    # Calculate verification score
+    critical_checks = ["pages", "images", "title", "slide_titles"]
+    critical_pass = all(checks[c] for c in critical_checks)
+    all_pass = all(checks.values())
 
     # Determine result
-    # Note: Hash will differ on recompilation (fonts, timestamps, etc.)
-    # So we verify: pages must match exactly, size within tolerance
-    # Hash is informational only (match means exact copy)
-
-    if pages_match and size_match:
-        status = "VERIFIED" if hash_match else "VERIFIED (recompiled)"
-        print(f"{status}: {topic_name} - {' | '.join(details)}")
+    if all_pass:
+        print(f"VERIFIED (exact): {topic_name} - {' | '.join(details)}")
         return True
-    elif pages_match and 0.20 <= size_ratio <= 5.0:
-        # Pages match but size is off - likely correct source but different compilation
-        print(f"VERIFIED (size varies): {topic_name} - {' | '.join(details)}")
+    elif critical_pass:
+        print(f"VERIFIED: {topic_name} - {' | '.join(details)}")
         return True
     else:
-        failed = []
-        if not pages_match:
-            failed.append(f"pages ({source_info['pages']} vs {download_info['pages']})")
-        if not size_match:
-            failed.append(f"size ({size_ratio:.0%})")
-        print(f"MISMATCH: {topic_name} - {', '.join(failed)} | {' | '.join(details)}")
+        failed = [c for c in critical_checks if not checks[c]]
+        print(f"MISMATCH: {topic_name} - failed: {', '.join(failed)} | {' | '.join(details)}")
         return False
 
 
