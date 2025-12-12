@@ -5,11 +5,19 @@ description: "Capstone presentation: From 1 ESG challenge to 5 ML-driven strateg
 difficulty: "Capstone"
 duration: "51 slides"
 pdf_url: "downloads/innovation-diamond.pdf"
+summary_url: "downloads/innovation-diamond-summary.pdf"
 ---
 
 # Innovation Diamond
 
 Capstone presentation integrating all course concepts into a complete ML-powered innovation pipeline.
+
+## Downloads
+
+<div class="download-all-buttons">
+<a href="/ML_Design_Thinking/downloads/innovation-diamond.pdf" class="download-btn" download>Full Presentation (51 slides)</a>
+<a href="/ML_Design_Thinking/downloads/innovation-diamond-summary.pdf" class="download-btn" download>10-Slide Summary</a>
+</div>
 
 ## Learning Outcomes
 
