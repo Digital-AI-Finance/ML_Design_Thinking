@@ -306,6 +306,19 @@ Checks performed:
 - Chart sizing (50-70% of page width)
 - Python code detection (should be avoided on slides)
 
+## Innovation Diamond Materials
+
+The capstone `innovation_diamond/` folder contains:
+- Full presentation (51 slides)
+- 10-slide summaries: Technical (with formulas) and Practical (plain English)
+- Student worksheet (5 pages with LLM prompts for applying framework to own challenge)
+
+Downloads in `static/downloads/`:
+- `innovation-diamond.pdf` - Full presentation
+- `innovation-diamond-summary.pdf` - Technical summary
+- `innovation-diamond-practical.pdf` - Practical summary
+- `innovation-diamond-worksheet.pdf` - Student worksheet
+
 ## Key Documentation
 
 - `EDUCATIONAL_PRESENTATION_FRAMEWORK.md` - Complete pedagogical methodology
