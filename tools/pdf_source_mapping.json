@@ -1,0 +1,166 @@
+{
+  "generated": "2025-12-12T21:15:06.721564",
+  "total_pdfs": 19,
+  "mappings": [
+    {
+      "pdf": "ab-testing.pdf",
+      "topic": "ab_testing",
+      "source_folder": "topics/ab_testing/slides",
+      "tex_file": "20250927_1218_main.tex",
+      "full_path": "D:\\Joerg\\Research\\slides\\ML_Design_Thinking_16\\topics\\ab_testing\\slides\\20250927_1218_main.tex",
+      "type": "topic"
+    },
+    {
+      "pdf": "all-lectures.pdf",
+      "topic": null,
+      "source_folder": "GENERATED",
+      "tex_file": null,
+      "full_path": null,
+      "type": "generated"
+    },
+    {
+      "pdf": "classification.pdf",
+      "topic": "classification",
+      "source_folder": "topics/classification/slides",
+      "tex_file": "20250929_1530_main.tex",
+      "full_path": "D:\\Joerg\\Research\\slides\\ML_Design_Thinking_16\\topics\\classification\\slides\\20250929_1530_main.tex",
+      "type": "topic"
+    },
+    {
+      "pdf": "clustering.pdf",
+      "topic": "clustering",
+      "source_folder": "topics/clustering/slides",
+      "tex_file": "20250928_1211_main.tex",
+      "full_path": "D:\\Joerg\\Research\\slides\\ML_Design_Thinking_16\\topics\\clustering\\slides\\20250928_1211_main.tex",
+      "type": "topic"
+    },
+    {
+      "pdf": "finance-applications.pdf",
+      "topic": "finance_applications",
+      "source_folder": "topics/finance_applications/slides",
+      "tex_file": "20250118_0745_main.tex",
+      "full_path": "D:\\Joerg\\Research\\slides\\ML_Design_Thinking_16\\topics\\finance_applications\\slides\\20250118_0745_main.tex",
+      "type": "topic"
+    },
+    {
+      "pdf": "generative-ai.pdf",
+      "topic": "generative_ai",
+      "source_folder": "topics/generative_ai/slides",
+      "tex_file": "20251001_0000_main.tex",
+      "full_path": "D:\\Joerg\\Research\\slides\\ML_Design_Thinking_16\\topics\\generative_ai\\slides\\20251001_0000_main.tex",
+      "type": "topic"
+    },
+    {
+      "pdf": "innovation-diamond-practical.pdf",
+      "topic": "innovation_diamond",
+      "source_folder": "innovation_diamond/slides/summary",
+      "tex_file": "20251212_1700_summary_practical.tex",
+      "full_path": "D:\\Joerg\\Research\\slides\\ML_Design_Thinking_16\\innovation_diamond\\slides\\summary\\20251212_1700_summary_practical.tex",
+      "type": "innovation_diamond"
+    },
+    {
+      "pdf": "innovation-diamond-summary.pdf",
+      "topic": "innovation_diamond",
+      "source_folder": "innovation_diamond/slides/summary",
+      "tex_file": "20251212_1500_summary.tex",
+      "full_path": "D:\\Joerg\\Research\\slides\\ML_Design_Thinking_16\\innovation_diamond\\slides\\summary\\20251212_1500_summary.tex",
+      "type": "innovation_diamond"
+    },
+    {
+      "pdf": "innovation-diamond-worksheet.pdf",
+      "topic": "innovation_diamond",
+      "source_folder": "innovation_diamond/handouts",
+      "tex_file": "innovation_diamond_worksheet.tex",
+      "full_path": "D:\\Joerg\\Research\\slides\\ML_Design_Thinking_16\\innovation_diamond\\handouts\\innovation_diamond_worksheet.tex",
+      "type": "innovation_diamond"
+    },
+    {
+      "pdf": "innovation-diamond.pdf",
+      "topic": "innovation_diamond",
+      "source_folder": "innovation_diamond/slides",
+      "tex_file": "20251212_1430_main.tex",
+      "full_path": "D:\\Joerg\\Research\\slides\\ML_Design_Thinking_16\\innovation_diamond\\slides\\20251212_1430_main.tex",
+      "type": "innovation_diamond"
+    },
+    {
+      "pdf": "ml-foundations.pdf",
+      "topic": "ml_foundations",
+      "source_folder": "topics/ml_foundations/slides",
+      "tex_file": "20251007_1630_ml_foundations.tex",
+      "full_path": "D:\\Joerg\\Research\\slides\\ML_Design_Thinking_16\\topics\\ml_foundations\\slides\\20251007_1630_ml_foundations.tex",
+      "type": "topic"
+    },
+    {
+      "pdf": "neural-networks.pdf",
+      "topic": "neural_networks",
+      "source_folder": "topics/neural_networks/slides",
+      "tex_file": "20251007_1700_neural_networks.tex",
+      "full_path": "D:\\Joerg\\Research\\slides\\ML_Design_Thinking_16\\topics\\neural_networks\\slides\\20251007_1700_neural_networks.tex",
+      "type": "topic"
+    },
+    {
+      "pdf": "nlp-sentiment.pdf",
+      "topic": "nlp_sentiment",
+      "source_folder": "topics/nlp_sentiment/slides",
+      "tex_file": "20250929_1000_main.tex",
+      "full_path": "D:\\Joerg\\Research\\slides\\ML_Design_Thinking_16\\topics\\nlp_sentiment\\slides\\20250929_1000_main.tex",
+      "type": "topic"
+    },
+    {
+      "pdf": "responsible-ai.pdf",
+      "topic": "responsible_ai",
+      "source_folder": "topics/responsible_ai/slides",
+      "tex_file": "20251001_1800_main.tex",
+      "full_path": "D:\\Joerg\\Research\\slides\\ML_Design_Thinking_16\\topics\\responsible_ai\\slides\\20251001_1800_main.tex",
+      "type": "topic"
+    },
+    {
+      "pdf": "structured-output.pdf",
+      "topic": "structured_output",
+      "source_folder": "topics/structured_output/slides",
+      "tex_file": "20251003_0728_main.tex",
+      "full_path": "D:\\Joerg\\Research\\slides\\ML_Design_Thinking_16\\topics\\structured_output\\slides\\20251003_0728_main.tex",
+      "type": "topic"
+    },
+    {
+      "pdf": "supervised-learning.pdf",
+      "topic": "supervised_learning",
+      "source_folder": "topics/supervised_learning/slides",
+      "tex_file": "20251008_1600_summary_revised.tex",
+      "full_path": "D:\\Joerg\\Research\\slides\\ML_Design_Thinking_16\\topics\\supervised_learning\\slides\\20251008_1600_summary_revised.tex",
+      "type": "topic"
+    },
+    {
+      "pdf": "topic-modeling.pdf",
+      "topic": "topic_modeling",
+      "source_folder": "topics/topic_modeling/slides",
+      "tex_file": "20250929_1630_main.tex",
+      "full_path": "D:\\Joerg\\Research\\slides\\ML_Design_Thinking_16\\topics\\topic_modeling\\slides\\20250929_1630_main.tex",
+      "type": "topic"
+    },
+    {
+      "pdf": "unsupervised-learning.pdf",
+      "topic": "unsupervised_learning",
+      "source_folder": "topics/unsupervised_learning/slides",
+      "tex_file": "20251007_1640_unsupervised_learning.tex",
+      "full_path": "D:\\Joerg\\Research\\slides\\ML_Design_Thinking_16\\topics\\unsupervised_learning\\slides\\20251007_1640_unsupervised_learning.tex",
+      "type": "topic"
+    },
+    {
+      "pdf": "validation-metrics.pdf",
+      "topic": "validation_metrics",
+      "source_folder": "topics/validation_metrics/slides",
+      "tex_file": "20250927_1021_main.tex",
+      "full_path": "D:\\Joerg\\Research\\slides\\ML_Design_Thinking_16\\topics\\validation_metrics\\slides\\20250927_1021_main.tex",
+      "type": "topic"
+    },
+    {
+      "pdf": "all-lectures.zip",
+      "topic": null,
+      "source_folder": "GENERATED",
+      "tex_file": null,
+      "full_path": null,
+      "type": "generated"
+    }
+  ]
+}
