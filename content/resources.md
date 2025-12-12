@@ -30,14 +30,14 @@ All lecture slides are available as PDF files in the course repository.
 
 | Topic | Format | Source | Verified | Access |
 |-------|--------|--------|----------|--------|
-| ML Foundations | [PDF Slides](downloads/ml-foundations.pdf) | [LaTeX](https://github.com/Digital-AI-Finance/ML_Design_Thinking/tree/main/topics/ml_foundations/slides) | - | [Repository](https://github.com/Digital-AI-Finance/ML_Design_Thinking/tree/main/topics/ml_foundations) |
-| Supervised Learning | [PDF Slides](downloads/supervised-learning.pdf) | [LaTeX](https://github.com/Digital-AI-Finance/ML_Design_Thinking/tree/main/topics/supervised_learning/slides) | - | [Repository](https://github.com/Digital-AI-Finance/ML_Design_Thinking/tree/main/topics/supervised_learning) |
+| ML Foundations | [PDF Slides](downloads/ml-foundations.pdf) | [LaTeX](https://github.com/Digital-AI-Finance/ML_Design_Thinking/tree/main/topics/ml_foundations/slides) | Y 2025-12-12 | [Repository](https://github.com/Digital-AI-Finance/ML_Design_Thinking/tree/main/topics/ml_foundations) |
+| Supervised Learning | [PDF Slides](downloads/supervised-learning.pdf) | [LaTeX](https://github.com/Digital-AI-Finance/ML_Design_Thinking/tree/main/topics/supervised_learning/slides) | Y 2025-12-12 | [Repository](https://github.com/Digital-AI-Finance/ML_Design_Thinking/tree/main/topics/supervised_learning) |
 | Unsupervised Learning | [PDF Slides](downloads/unsupervised-learning.pdf) | [LaTeX](https://github.com/Digital-AI-Finance/ML_Design_Thinking/tree/main/topics/unsupervised_learning/slides) | Y 2025-12-12 | [Repository](https://github.com/Digital-AI-Finance/ML_Design_Thinking/tree/main/topics/unsupervised_learning) |
 | Clustering | [PDF Slides](downloads/clustering.pdf) | [LaTeX](https://github.com/Digital-AI-Finance/ML_Design_Thinking/tree/main/topics/clustering/slides) | Y 2025-12-12 | [Repository](https://github.com/Digital-AI-Finance/ML_Design_Thinking/tree/main/topics/clustering) |
 | NLP & Sentiment | [PDF Slides](downloads/nlp-sentiment.pdf) | [LaTeX](https://github.com/Digital-AI-Finance/ML_Design_Thinking/tree/main/topics/nlp_sentiment/slides) | Y 2025-12-12 | [Repository](https://github.com/Digital-AI-Finance/ML_Design_Thinking/tree/main/topics/nlp_sentiment) |
 | Classification | [PDF Slides](downloads/classification.pdf) | [LaTeX](https://github.com/Digital-AI-Finance/ML_Design_Thinking/tree/main/topics/classification/slides) | Y 2025-12-12 | [Repository](https://github.com/Digital-AI-Finance/ML_Design_Thinking/tree/main/topics/classification) |
 | Topic Modeling | [PDF Slides](downloads/topic-modeling.pdf) | [LaTeX](https://github.com/Digital-AI-Finance/ML_Design_Thinking/tree/main/topics/topic_modeling/slides) | Y 2025-12-12 | [Repository](https://github.com/Digital-AI-Finance/ML_Design_Thinking/tree/main/topics/topic_modeling) |
-| Generative AI | [PDF Slides](downloads/generative-ai.pdf) | [LaTeX](https://github.com/Digital-AI-Finance/ML_Design_Thinking/tree/main/topics/generative_ai/slides) | - | [Repository](https://github.com/Digital-AI-Finance/ML_Design_Thinking/tree/main/topics/generative_ai) |
+| Generative AI | [PDF Slides](downloads/generative-ai.pdf) | [LaTeX](https://github.com/Digital-AI-Finance/ML_Design_Thinking/tree/main/topics/generative_ai/slides) | Y 2025-12-12 | [Repository](https://github.com/Digital-AI-Finance/ML_Design_Thinking/tree/main/topics/generative_ai) |
 | Neural Networks | [PDF Slides](downloads/neural-networks.pdf) | [LaTeX](https://github.com/Digital-AI-Finance/ML_Design_Thinking/tree/main/topics/neural_networks/slides) | Y 2025-12-12 | [Repository](https://github.com/Digital-AI-Finance/ML_Design_Thinking/tree/main/topics/neural_networks) |
 | Responsible AI | [PDF Slides](downloads/responsible-ai.pdf) | [LaTeX](https://github.com/Digital-AI-Finance/ML_Design_Thinking/tree/main/topics/responsible_ai/slides) | Y 2025-12-12 | [Repository](https://github.com/Digital-AI-Finance/ML_Design_Thinking/tree/main/topics/responsible_ai) |
 | Structured Output | [PDF Slides](downloads/structured-output.pdf) | [LaTeX](https://github.com/Digital-AI-Finance/ML_Design_Thinking/tree/main/topics/structured_output/slides) | Y 2025-12-12 | [Repository](https://github.com/Digital-AI-Finance/ML_Design_Thinking/tree/main/topics/structured_output) |
@@ -69,11 +69,7 @@ Interactive notebooks for hands-on learning. Click "Open in Colab" to run direct
 | Notebook | Description | Link |
 |----------|-------------|------|
 | Data Exploration | Descriptive analytics and visualization | [Open in Colab](https://colab.research.google.com/github/Digital-AI-Finance/ML_Design_Thinking/blob/main/notebooks/06_data_exploration.ipynb) |
-| Supervised Learning | Complete supervised learning workflow | [Open in Colab](https://colab.research.google.com/github/Digital-AI-Finance/ML_Design_Thinking/blob/main/notebooks/07_supervised_learning.ipynb) |
-
-### Generative AI Agents
-
-| Notebook | Description | Link |
+| Supervised Learning | Complete supervised learning workflow | [Open in Colab](https://colab.research.google.com/github/Digital-AI-Finance/ML_Design_Thinking/blob/main/notebooks/07_supervised_learning.ipynb) | Y 2025-12-12 | Notebook | Description | Link |
 |----------|-------------|------|
 | Single Agent API | One LLM agent making API calls | [Open in Colab](https://colab.research.google.com/github/Digital-AI-Finance/ML_Design_Thinking/blob/main/notebooks/08_single_agent_api.ipynb) |
 | Multi-Agent System | Writer, Critic, Editor collaboration | [Open in Colab](https://colab.research.google.com/github/Digital-AI-Finance/ML_Design_Thinking/blob/main/notebooks/09_multi_agent_system.ipynb) |

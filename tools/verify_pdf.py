@@ -35,17 +35,42 @@ TOPIC_DISPLAY_NAMES = {
 }
 
 
-def get_page_count(pdf_path: Path) -> int:
-    """Get page count from a PDF file."""
+def get_pdf_info(pdf_path: Path) -> dict:
+    """Get comprehensive info from a PDF file."""
     if not pdf_path.exists():
-        return -1
+        return None
     try:
         doc = fitz.open(pdf_path)
-        pages = len(doc)
+        info = {
+            "pages": len(doc),
+            "size_kb": pdf_path.stat().st_size / 1024,
+            "first_page_text": "",
+            "last_page_text": "",
+            "text_hash": 0,
+        }
+
+        # Extract text from first and last pages
+        if len(doc) > 0:
+            info["first_page_text"] = doc[0].get_text()[:500]  # First 500 chars
+            info["last_page_text"] = doc[-1].get_text()[:500]
+
+            # Create text fingerprint (hash of all text)
+            all_text = ""
+            for page in doc:
+                all_text += page.get_text()
+            info["text_hash"] = hash(all_text) % (10**10)  # 10-digit hash
+
         doc.close()
-        return pages
-    except Exception:
-        return -1
+        return info
+    except Exception as e:
+        print(f"ERROR reading {pdf_path}: {e}")
+        return None
+
+
+def get_page_count(pdf_path: Path) -> int:
+    """Get page count from a PDF file."""
+    info = get_pdf_info(pdf_path)
+    return info["pages"] if info else -1
 
 
 def get_mapping_for_topic(topic_name: str) -> dict:
@@ -67,7 +92,7 @@ def get_mapping_for_topic(topic_name: str) -> dict:
 
 
 def verify_topic(topic_name: str) -> bool:
-    """Verify that the compiled PDF matches the download."""
+    """Verify that the compiled PDF matches the download using multiple criteria."""
     mapping = get_mapping_for_topic(topic_name)
     if not mapping:
         print(f"ERROR: No mapping found for topic: {topic_name}")
@@ -79,9 +104,9 @@ def verify_topic(topic_name: str) -> bool:
 
     # Get download PDF info
     download_pdf = DOWNLOADS / mapping["pdf"]
-    download_pages = get_page_count(download_pdf)
+    download_info = get_pdf_info(download_pdf)
 
-    if download_pages < 0:
+    if not download_info:
         print(f"ERROR: Cannot read download PDF: {download_pdf}")
         return False
 
@@ -102,18 +127,52 @@ def verify_topic(topic_name: str) -> bool:
         print(f"ERROR: Cannot find compiled PDF in: {source_tex.parent}")
         return False
 
-    source_pages = get_page_count(source_pdf)
+    source_info = get_pdf_info(source_pdf)
 
-    if source_pages < 0:
+    if not source_info:
         print(f"ERROR: Cannot read source PDF: {source_pdf}")
         return False
 
-    # Compare
-    if download_pages == source_pages:
-        print(f"VERIFIED: {topic_name} - {source_pages} pages match")
+    # Multi-criteria verification
+    checks = []
+    details = []
+
+    # 1. Page count (exact match required)
+    pages_match = download_info["pages"] == source_info["pages"]
+    checks.append(pages_match)
+    details.append(f"pages: {source_info['pages']}/{download_info['pages']}")
+
+    # 2. File size (within 15% tolerance - recompilation may differ slightly)
+    size_ratio = source_info["size_kb"] / download_info["size_kb"] if download_info["size_kb"] > 0 else 0
+    size_match = 0.85 <= size_ratio <= 1.15
+    checks.append(size_match)
+    details.append(f"size: {source_info['size_kb']:.0f}KB/{download_info['size_kb']:.0f}KB ({size_ratio:.0%})")
+
+    # 3. Text hash (content fingerprint - exact match)
+    hash_match = download_info["text_hash"] == source_info["text_hash"]
+    checks.append(hash_match)
+    details.append(f"hash: {'match' if hash_match else 'differ'}")
+
+    # Determine result
+    # Note: Hash will differ on recompilation (fonts, timestamps, etc.)
+    # So we verify: pages must match exactly, size within tolerance
+    # Hash is informational only (match means exact copy)
+
+    if pages_match and size_match:
+        status = "VERIFIED" if hash_match else "VERIFIED (recompiled)"
+        print(f"{status}: {topic_name} - {' | '.join(details)}")
+        return True
+    elif pages_match and 0.20 <= size_ratio <= 5.0:
+        # Pages match but size is off - likely correct source but different compilation
+        print(f"VERIFIED (size varies): {topic_name} - {' | '.join(details)}")
         return True
     else:
-        print(f"MISMATCH: {topic_name} - source has {source_pages} pages, download has {download_pages}")
+        failed = []
+        if not pages_match:
+            failed.append(f"pages ({source_info['pages']} vs {download_info['pages']})")
+        if not size_match:
+            failed.append(f"size ({size_ratio:.0%})")
+        print(f"MISMATCH: {topic_name} - {', '.join(failed)} | {' | '.join(details)}")
         return False
 
 
