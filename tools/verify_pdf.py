@@ -145,20 +145,25 @@ def verify_topic(topic_name: str) -> bool:
         return False
 
     # Get source PDF info (the one in slides/ folder)
-    source_tex = Path(mapping["full_path"])
-    source_pdf = source_tex.with_suffix(".pdf")
+    # Handle case where tex_file is null but source_pdf is specified
+    if mapping.get("tex_file"):
+        source_tex = Path(mapping["full_path"])
+        source_pdf = source_tex.with_suffix(".pdf")
+    else:
+        # Direct PDF reference (no .tex source available)
+        source_pdf = Path(mapping["full_path"])
 
     # Also check for PDF with same name as .tex file
     if not source_pdf.exists():
         # Try finding any PDF in the slides folder
-        slides_folder = source_tex.parent
+        slides_folder = Path(mapping["full_path"]).parent
         pdfs = list(slides_folder.glob("*.pdf"))
         if pdfs:
             # Get the most recently modified one
             source_pdf = max(pdfs, key=lambda p: p.stat().st_mtime)
 
     if not source_pdf.exists():
-        print(f"ERROR: Cannot find compiled PDF in: {source_tex.parent}")
+        print(f"ERROR: Cannot find source PDF: {source_pdf}")
         return False
 
     source_info = get_pdf_info(source_pdf)

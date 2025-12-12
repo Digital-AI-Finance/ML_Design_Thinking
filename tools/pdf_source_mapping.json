@@ -46,9 +46,11 @@
       "pdf": "generative-ai.pdf",
       "topic": "generative_ai",
       "source_folder": "topics/generative_ai/slides",
-      "tex_file": "20250928_2200_main.tex",
-      "full_path": "D:\\Joerg\\Research\\slides\\ML_Design_Thinking_16\\topics\\generative_ai\\slides\\20250928_2200_main.tex",
-      "type": "topic"
+      "tex_file": null,
+      "source_pdf": "20251006_2312_main.pdf",
+      "full_path": "D:\\Joerg\\Research\\slides\\ML_Design_Thinking_16\\topics\\generative_ai\\slides\\20251006_2312_main.pdf",
+      "type": "topic",
+      "note": "Original .tex source deleted; PDF verified against 20251006_2312_main.pdf"
     },
     {
       "pdf": "innovation-diamond-practical.pdf",
