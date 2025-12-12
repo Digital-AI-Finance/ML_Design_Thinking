@@ -1,0 +1,449 @@
+\documentclass[8pt,aspectratio=169]{beamer}
+\usetheme{Madrid}
+
+% ============================================================
+% PACKAGES
+% ============================================================
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{adjustbox}
+\usepackage{multicol}
+\usepackage{amsmath}
+
+% ============================================================
+% DIAMOND COLOR SCHEME
+% ============================================================
+\definecolor{challenge}{RGB}{148,103,189}
+\definecolor{explore}{RGB}{52,152,219}
+\definecolor{generate}{RGB}{46,204,113}
+\definecolor{peak}{RGB}{241,196,15}
+\definecolor{filter}{RGB}{230,126,34}
+\definecolor{refine}{RGB}{231,76,60}
+\definecolor{strategy}{RGB}{192,57,43}
+\definecolor{mlpurple}{RGB}{51,51,178}
+\definecolor{mllavender}{RGB}{173,173,224}
+\definecolor{mllavender2}{RGB}{193,193,232}
+\definecolor{mllavender3}{RGB}{204,204,235}
+\definecolor{darkgray}{RGB}{64,64,64}
+
+% ============================================================
+% THEME CONFIGURATION
+% ============================================================
+\setbeamercolor{structure}{fg=mlpurple}
+\setbeamercolor{frametitle}{fg=mlpurple,bg=mllavender3}
+\setbeamercolor{block title}{fg=mlpurple,bg=mllavender2}
+\setbeamercolor{block body}{bg=mllavender3!30}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{itemize item}{\textbullet}
+\setbeamertemplate{itemize subitem}{--}
+\setbeamersize{text margin left=5mm,text margin right=5mm}
+
+% ============================================================
+% CUSTOM COMMANDS
+% ============================================================
+\newcommand{\bottomnote}[1]{%
+    \vfill
+    \textcolor{mllavender2}{\rule{\textwidth}{0.4pt}}
+    \par\vspace{2pt}
+    {\footnotesize\textcolor{mllavender2}{#1}}
+}
+
+\newcommand{\sigeq}[1]{\vspace{0.2em}\colorbox{mllavender3!50}{$\displaystyle #1$}}
+\newcommand{\stagecolor}[2]{\textcolor{#1}{\textbf{#2}}}
+
+% ============================================================
+% DOCUMENT INFO
+% ============================================================
+\title{Innovation Diamond}
+\subtitle{10-Slide Technical Summary}
+\author{Machine Learning for Smarter Innovation}
+\date{BSc Course -- Student Reference}
+
+\begin{document}
+
+% ============================================================
+% SLIDE 1: TITLE
+% ============================================================
+\begin{frame}[plain]
+\titlepage
+\end{frame}
+
+% ============================================================
+% SLIDE 2: THE INNOVATION DIAMOND
+% ============================================================
+\begin{frame}{The Innovation Diamond: Framework Overview}
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\textbf{Core Concept:}
+\begin{itemize}
+\item \stagecolor{generate}{Divergent}: Expand possibilities
+\item \stagecolor{peak}{Peak}: Maximum exploration
+\item \stagecolor{strategy}{Convergent}: Focus on best
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{The Journey:}
+
+\centering
+\Large
+\textcolor{challenge}{1} $\rightarrow$ \textcolor{peak}{5,000} $\rightarrow$ \textcolor{strategy}{5}
+
+\normalsize
+\vspace{0.5em}
+\textit{Challenge $\rightarrow$ Ideas $\rightarrow$ Strategies}
+\end{column}
+
+\begin{column}{0.50\textwidth}
+\centering
+\includegraphics[width=0.95\textwidth]{../../charts/01_diamond_overview/chart.pdf}
+\end{column}
+\end{columns}
+
+\bottomnote{ML enables both creative expansion (generative) and strategic focus (discriminative)}
+\end{frame}
+
+% ============================================================
+% SLIDE 3: DIVERGENT PHASE
+% ============================================================
+\begin{frame}{Divergent Phase: Expansion Techniques}
+\begin{columns}[T]
+\begin{column}{0.55\textwidth}
+\small
+\textbf{\stagecolor{challenge}{ML Foundations} -- Problem Framing}
+
+\sigeq{L(\theta) = \frac{1}{n}\sum_{i=1}^{n}\ell(y_i, f(x_i;\theta))}
+
+\vspace{0.3em}
+\textbf{\stagecolor{explore}{Unsupervised Learning} -- Pattern Discovery}
+
+\sigeq{\underset{C}{\text{argmin}} \sum_{k}\sum_{x \in C_k}\|x - \mu_k\|^2}
+
+\vspace{0.3em}
+\textbf{\stagecolor{explore}{Supervised Learning} -- Feature Engineering}
+
+\sigeq{\hat{y} = \sum_{j=1}^{p}\beta_j x_j + \epsilon}
+\end{column}
+
+\begin{column}{0.43\textwidth}
+\centering
+\includegraphics[width=0.95\textwidth]{../../charts/02_divergent_process/chart.pdf}
+
+\vspace{0.3em}
+\footnotesize
+\begin{tabular}{lc}
+\toprule
+\textbf{Stage} & \textbf{Count} \\
+\midrule
+Challenge & 1 \\
+Exploration & 10 \\
+Discovery & 100 \\
+\bottomrule
+\end{tabular}
+\end{column}
+\end{columns}
+
+\bottomnote{Divergent techniques expand from one challenge to hundreds of features and dimensions}
+\end{frame}
+
+% ============================================================
+% SLIDE 4: GENERATIVE AI & NLP
+% ============================================================
+\begin{frame}{Generative AI \& NLP: Creative Expansion}
+\begin{columns}[T]
+\begin{column}{0.55\textwidth}
+\small
+\textbf{\stagecolor{generate}{Generative AI} -- Idea Generation (1,000)}
+
+\sigeq{P(x) = \int P(x|z)P(z)dz}
+
+LLMs generate diverse solution variants
+
+\vspace{0.3em}
+\textbf{\stagecolor{generate}{Topic Modeling} -- Theme Discovery}
+
+\sigeq{P(w|d) = \sum_{t}P(w|t)P(t|d)}
+
+LDA extracts latent topics from documents
+
+\vspace{0.3em}
+\textbf{\stagecolor{peak}{NLP \& Sentiment} -- Text Processing}
+
+\sigeq{P(w_t|w_{t-k},...,w_{t-1}) = \text{softmax}(W \cdot h_t)}
+
+Language models process massive text data
+\end{column}
+
+\begin{column}{0.43\textwidth}
+\centering
+\includegraphics[width=0.95\textwidth]{../../charts/06_idea_generation/chart.pdf}
+
+\vspace{0.3em}
+\footnotesize
+\begin{tabular}{lc}
+\toprule
+\textbf{Stage} & \textbf{Count} \\
+\midrule
+Generation & 1,000 \\
+Peak & 5,000 \\
+\bottomrule
+\end{tabular}
+\end{column}
+\end{columns}
+
+\bottomnote{Generative techniques expand to thousands of possibilities beyond human capacity}
+\end{frame}
+
+% ============================================================
+% SLIDE 5: PEAK
+% ============================================================
+\begin{frame}{Peak: Maximum Exploration (5,000 Possibilities)}
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\textbf{How 5,000 Emerges:}
+\begin{itemize}
+\item Companies: 500+ targets
+\item Weighting schemes: 100+
+\item Sectors: 50+
+\item Risk parameters: 20+
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Expansion Techniques Used:}
+\begin{itemize}
+\item Unsupervised Learning
+\item Generative AI (LLMs)
+\item NLP \& Sentiment Analysis
+\item Topic Modeling
+\end{itemize}
+
+\vspace{0.5em}
+\textcolor{refine}{\textbf{Pitfall:}} Analysis paralysis
+\end{column}
+
+\begin{column}{0.50\textwidth}
+\centering
+\includegraphics[width=0.95\textwidth]{../../charts/07_peak_pool/chart.pdf}
+\end{column}
+\end{columns}
+
+\bottomnote{The peak represents maximum divergence -- now convergent ML techniques must focus}
+\end{frame}
+
+% ============================================================
+% SLIDE 6: CONVERGENT PHASE
+% ============================================================
+\begin{frame}{Convergent Phase: Focus Techniques}
+\begin{columns}[T]
+\begin{column}{0.55\textwidth}
+\small
+\textbf{\stagecolor{filter}{Clustering} -- Grouping (5,000 $\rightarrow$ 2,000)}
+
+\sigeq{\text{Silhouette}(i) = \frac{b(i) - a(i)}{\max(a(i), b(i))}}
+
+Group similar ideas, remove duplicates
+
+\vspace{0.5em}
+\textbf{\stagecolor{refine}{Classification} -- Ranking (2,000 $\rightarrow$ 500)}
+
+\sigeq{\text{Gini}(D) = 1 - \sum_{k=1}^{K}p_k^2}
+
+Classify by feasibility and impact tiers
+
+\vspace{0.5em}
+\textbf{Neural Networks} -- Cross-cutting
+
+\sigeq{a^{(l)} = \sigma(W^{(l)}a^{(l-1)} + b^{(l)})}
+
+Deep patterns across both phases
+\end{column}
+
+\begin{column}{0.43\textwidth}
+\centering
+\includegraphics[width=0.95\textwidth]{../../charts/03_convergent_process/chart.pdf}
+
+\vspace{0.3em}
+\footnotesize
+\begin{tabular}{lc}
+\toprule
+\textbf{Stage} & \textbf{Count} \\
+\midrule
+Extraction & 2,000 \\
+Patterns & 500 \\
+\bottomrule
+\end{tabular}
+\end{column}
+\end{columns}
+
+\bottomnote{Convergent techniques systematically reduce possibilities to actionable strategies}
+\end{frame}
+
+% ============================================================
+% SLIDE 7: VALIDATION & SELECTION
+% ============================================================
+\begin{frame}{Validation \& Final Selection}
+\begin{columns}[T]
+\begin{column}{0.55\textwidth}
+\small
+\textbf{\stagecolor{refine}{Validation} -- Testing (500 $\rightarrow$ 50)}
+
+\sigeq{\text{CV} = \frac{1}{k}\sum_{i=1}^{k}\text{Score}(f_{-i}, D_i)}
+
+Cross-validation ensures generalization
+
+\vspace{0.3em}
+\textbf{\stagecolor{refine}{A/B Testing} -- Comparison}
+
+\sigeq{t = \frac{\bar{x}_A - \bar{x}_B}{\sqrt{\frac{s_A^2}{n_A} + \frac{s_B^2}{n_B}}}}
+
+Statistical significance for decisions
+
+\vspace{0.3em}
+\textbf{\stagecolor{strategy}{Responsible AI} -- Selection (50 $\rightarrow$ 5)}
+
+\sigeq{\phi_j = \sum_{S}\frac{|S|!(n-|S|-1)!}{n!}[v(S \cup j) - v(S)]}
+
+SHAP values for explainability
+\end{column}
+
+\begin{column}{0.43\textwidth}
+\centering
+\includegraphics[width=0.95\textwidth]{../../charts/10_validation_metrics/chart.pdf}
+
+\vspace{0.3em}
+\footnotesize
+\begin{tabular}{lc}
+\toprule
+\textbf{Stage} & \textbf{Count} \\
+\midrule
+Insights & 50 \\
+Strategy & 5 \\
+\bottomrule
+\end{tabular}
+\end{column}
+\end{columns}
+
+\bottomnote{Validation and explainability ensure final strategies are trustworthy and actionable}
+\end{frame}
+
+% ============================================================
+% SLIDE 8: ESG CASE STUDY
+% ============================================================
+\begin{frame}{ESG Case Study: Complete Journey}
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\textbf{The Challenge:}
+
+\textit{``Create a portfolio maximizing returns with genuine ESG impact''}
+
+\vspace{0.5em}
+\textbf{Journey Numbers:}
+\begin{itemize}
+\item \textbf{1} ESG portfolio challenge
+\item \textbf{10} sustainability dimensions
+\item \textbf{100} engineered features
+\item \textbf{1,000} LLM-generated theses
+\item \textbf{5,000} raw investment criteria
+\item \textbf{2,000} clustered approaches
+\item \textbf{500} classified patterns
+\item \textbf{50} validated insights
+\item \textbf{5} final strategies
+\end{itemize}
+\end{column}
+
+\begin{column}{0.50\textwidth}
+\centering
+\includegraphics[width=0.95\textwidth]{../../charts/11_final_strategies/chart.pdf}
+
+\vspace{0.3em}
+\small
+\textbf{Final 5 Strategies:}
+\begin{enumerate}
+\item Climate Leaders Fund
+\item Social Impact Blend
+\item Governance Excellence
+\item ESG Momentum Strategy
+\item Sustainable Dividend Growth
+\end{enumerate}
+\end{column}
+\end{columns}
+
+\bottomnote{All 14 ML techniques applied systematically through the Innovation Diamond}
+\end{frame}
+
+% ============================================================
+% SLIDE 9: ML TOOLKIT REFERENCE
+% ============================================================
+\begin{frame}{ML Toolkit Reference: All 14 Techniques}
+\begin{center}
+\footnotesize
+\begin{tabular}{llll}
+\toprule
+\textbf{Topic} & \textbf{Phase} & \textbf{Signature Equation} & \textbf{Purpose} \\
+\midrule
+ML Foundations & Divergent & $L(\theta) = \frac{1}{n}\sum\ell(y_i, f(x_i;\theta))$ & Problem framing \\
+Supervised & Divergent & $\hat{y} = X\beta + \epsilon$ & Feature engineering \\
+Unsupervised & Divergent & $\text{argmin}\sum\|x - \mu_k\|^2$ & Pattern discovery \\
+Neural Networks & Both & $a^{(l)} = \sigma(W^{(l)}a^{(l-1)} + b^{(l)})$ & Complex patterns \\
+Generative AI & Divergent & $P(x) = \int P(x|z)P(z)dz$ & Idea generation \\
+NLP \& Sentiment & Divergent & $P(w_t|w_{<t}) = \text{softmax}(Wh_t)$ & Text processing \\
+Topic Modeling & Divergent & $P(w|d) = \sum_t P(w|t)P(t|d)$ & Theme extraction \\
+\midrule
+Clustering & Convergent & $\frac{b(i)-a(i)}{\max(a(i),b(i))}$ & Grouping \\
+Classification & Convergent & $\text{Gini} = 1 - \sum p_k^2$ & Categorization \\
+Validation & Convergent & $\text{CV} = \frac{1}{k}\sum\text{Score}$ & Testing \\
+A/B Testing & Convergent & $t = \frac{\bar{x}_A - \bar{x}_B}{s}$ & Comparison \\
+Responsible AI & Convergent & SHAP $\phi_j$ & Explainability \\
+Structured Output & Convergent & JSON schema & Reliability \\
+Finance & Convergent & $\text{VaR}_\alpha$ & Risk modeling \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\bottomnote{14 ML tools for the complete innovation journey from challenge to strategy}
+\end{frame}
+
+% ============================================================
+% SLIDE 10: KEY TAKEAWAYS
+% ============================================================
+\begin{frame}{Key Takeaways \& Decision Framework}
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\textbf{5 Key Insights:}
+\begin{enumerate}
+\item ML \textbf{amplifies} human innovation
+\item \textbf{Both phases} are essential
+\item \textbf{Match technique} to phase
+\item \textbf{Watch for pitfalls} at each stage
+\item \textbf{Trust but verify} with validation
+\end{enumerate}
+
+\vspace{0.5em}
+\textbf{Common Pitfalls:}
+\begin{itemize}
+\item \textcolor{generate}{Divergent}: Analysis paralysis, noise over signal
+\item \textcolor{strategy}{Convergent}: Premature closure, overfitting
+\end{itemize}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\textbf{Decision Framework:}
+\begin{itemize}
+\item Need to explore? $\rightarrow$ Unsupervised
+\item Need to predict? $\rightarrow$ Supervised
+\item Need to generate? $\rightarrow$ Generative AI
+\item Need to group? $\rightarrow$ Clustering
+\item Need to rank? $\rightarrow$ Classification
+\item Need to test? $\rightarrow$ A/B Testing
+\end{itemize}
+
+\vspace{0.5em}
+\centering
+\Large
+\textcolor{mlpurple}{\textbf{1 $\rightarrow$ 5,000 $\rightarrow$ 5}}
+\end{column}
+\end{columns}
+
+\bottomnote{The Innovation Diamond: ML-powered systematic innovation from challenge to strategy}
+\end{frame}
+
+\end{document}
