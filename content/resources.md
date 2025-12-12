@@ -4,6 +4,14 @@ title: "Resources"
 
 # Course Resources
 
+## Capstone Presentation
+
+The Innovation Diamond synthesizes all 14 ML topics into one comprehensive framework:
+
+<div class="download-all-buttons">
+<a href="downloads/innovation-diamond.pdf" class="download-btn" download>Innovation Diamond (40 slides, PDF)</a>
+</div>
+
 ## Download All Lectures
 
 Get all 14 lecture slide decks in one download:
