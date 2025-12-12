@@ -27,6 +27,7 @@ ML_Design_Thinking/
 │   ├── validation_metrics/    # Model evaluation
 │   ├── ab_testing/            # Experiments, statistics
 │   └── finance_applications/  # Quantitative finance, risk
+├── innovation_diamond/        # Innovation Diamond standalone topic
 ├── archive/weeks_original/    # Read-only: original Week_00-10 folders
 ├── docs/                      # Status reports, planning documents
 ├── tools/                     # Python utilities
@@ -69,6 +70,13 @@ foreach ($t in @("clustering","nlp_sentiment","classification")) {
 - Runs pdflatex twice for references
 - Archives PDF to `archive/builds/` with timestamp
 - Moves aux files (.aux, .log, .nav, .snm, .toc) to `archive/aux/`
+
+**Note:** compile.py exists in 10 of 14 topics (clustering, nlp_sentiment, classification, topic_modeling, generative_ai, responsible_ai, structured_output, validation_metrics, ab_testing, finance_applications). For topics without compile.py, compile manually:
+
+```powershell
+cd topics/{topic_name}/slides
+pdflatex main.tex && pdflatex main.tex
+```
 
 ## LaTeX/Beamer Requirements
 
@@ -236,6 +244,7 @@ Regenerate with: `python tools/create_all_downloads.py`
 | `tools/check_links.py` | Validate links in content files |
 | `tools/create_topic_readmes.py` | Generate README.md for each topic |
 | `tools/update_topic_pages.py` | Update Hugo topic pages |
+| `tools/check_beamer_compliance.py` | Check PDF slides against template rules (requires PyMuPDF) |
 
 ## Python Dependencies
 
@@ -275,6 +284,27 @@ Required elements: success-before-failure, root cause diagnosis, zero-jargon exp
 | lstlisting error | Add `[fragile,t]` to frame |
 | Missing chart | Run `python create_*.py` in charts/ folder |
 | Aux file clutter | `compile.py` auto-archives them |
+
+## Beamer Compliance Checking
+
+```powershell
+# Check all PDFs in static/downloads/
+python tools/check_beamer_compliance.py
+
+# Check specific topic
+python tools/check_beamer_compliance.py --pdf clustering
+
+# Save report to file
+python tools/check_beamer_compliance.py --output docs/compliance_report.txt
+```
+
+Checks performed:
+- Aspect ratio (16:9)
+- Margins (5mm minimum)
+- Bullet count (max 5 single-column, max 10 two-column)
+- Bottomnote presence on content slides
+- Chart sizing (50-70% of page width)
+- Python code detection (should be avoided on slides)
 
 ## Key Documentation
 
