@@ -18,6 +18,7 @@ Capstone presentation integrating all course concepts into a complete ML-powered
 <a href="/ML_Design_Thinking/downloads/innovation-diamond.pdf" class="download-btn" download>Full Presentation (51 slides)</a>
 <a href="/ML_Design_Thinking/downloads/innovation-diamond-summary.pdf" class="download-btn" download>10-Slide Summary (Technical)</a>
 <a href="/ML_Design_Thinking/downloads/innovation-diamond-practical.pdf" class="download-btn" download>10-Slide Summary (Practical)</a>
+<a href="/ML_Design_Thinking/downloads/innovation-diamond-worksheet.pdf" class="download-btn" download>Student Worksheet (5 pages)</a>
 </div>
 
 ## Learning Outcomes

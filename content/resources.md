@@ -12,6 +12,7 @@ The Innovation Diamond synthesizes all 14 ML topics into one comprehensive frame
 <a href="downloads/innovation-diamond.pdf" class="download-btn" download>Full Presentation (51 slides)</a>
 <a href="downloads/innovation-diamond-summary.pdf" class="download-btn" download>10-Slide Summary (Technical)</a>
 <a href="downloads/innovation-diamond-practical.pdf" class="download-btn" download>10-Slide Summary (Practical)</a>
+<a href="downloads/innovation-diamond-worksheet.pdf" class="download-btn" download>Student Worksheet (5 pages)</a>
 </div>
 
 ## Download All Lectures
