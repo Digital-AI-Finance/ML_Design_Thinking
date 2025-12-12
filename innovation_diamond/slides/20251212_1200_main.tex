@@ -1,0 +1,1235 @@
+\documentclass[8pt,aspectratio=169]{beamer}
+\usetheme{Madrid}
+
+% ============================================================
+% PACKAGES
+% ============================================================
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{adjustbox}
+\usepackage{multicol}
+\usepackage{amsmath}
+
+% ============================================================
+% DIAMOND COLOR SCHEME
+% ============================================================
+\definecolor{challenge}{RGB}{148,103,189}
+\definecolor{explore}{RGB}{52,152,219}
+\definecolor{generate}{RGB}{46,204,113}
+\definecolor{peak}{RGB}{241,196,15}
+\definecolor{filter}{RGB}{230,126,34}
+\definecolor{refine}{RGB}{231,76,60}
+\definecolor{strategy}{RGB}{192,57,43}
+\definecolor{mlpurple}{RGB}{51,51,178}
+\definecolor{mllavender}{RGB}{173,173,224}
+\definecolor{mllavender2}{RGB}{193,193,232}
+\definecolor{mllavender3}{RGB}{204,204,235}
+\definecolor{darkgray}{RGB}{64,64,64}
+
+% ============================================================
+% THEME CONFIGURATION
+% ============================================================
+\setbeamercolor{structure}{fg=mlpurple}
+\setbeamercolor{frametitle}{fg=mlpurple,bg=mllavender3}
+\setbeamercolor{block title}{fg=mlpurple,bg=mllavender2}
+\setbeamercolor{block body}{bg=mllavender3!30}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{itemize item}{\textbullet}
+\setbeamertemplate{itemize subitem}{--}
+\setbeamersize{text margin left=5mm,text margin right=5mm}
+
+% ============================================================
+% CUSTOM COMMANDS
+% ============================================================
+\newcommand{\bottomnote}[1]{%
+    \vfill
+    \textcolor{mllavender2}{\rule{\textwidth}{0.4pt}}
+    \par\vspace{2pt}
+    {\footnotesize\textcolor{mllavender2}{#1}}
+}
+
+\newcommand{\stagecolor}[2]{\textcolor{#1}{\textbf{#2}}}
+\newcommand{\pitfall}[1]{\vspace{0.3em}\textcolor{refine}{\textbf{Pitfall:}} \textit{#1}}
+\newcommand{\sigeq}[1]{\vspace{0.3em}\colorbox{mllavender3!50}{$\displaystyle #1$}}
+
+% ============================================================
+% DOCUMENT INFO
+% ============================================================
+\title{ML-Powered Innovation}
+\subtitle{From Challenge to Strategy: The Innovation Diamond}
+\author{Machine Learning for Smarter Innovation}
+\date{BSc Course Capstone}
+
+\begin{document}
+
+% ============================================================
+% PART 1: OPENING (4 slides)
+% ============================================================
+
+% Slide 1: Title
+\begin{frame}[plain]
+\titlepage
+\end{frame}
+
+% Slide 2: Course Roadmap
+\begin{frame}{Course Roadmap: 14 Topics, One Framework}
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\textbf{Foundations}
+\begin{itemize}
+\item ML Foundations
+\item Supervised Learning
+\item Unsupervised Learning
+\item Neural Networks
+\end{itemize}
+
+\textbf{Core Techniques}
+\begin{itemize}
+\item Clustering
+\item Classification
+\item NLP \& Sentiment
+\item Topic Modeling
+\end{itemize}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\textbf{Advanced Applications}
+\begin{itemize}
+\item Generative AI
+\item Structured Output
+\item Validation \& Metrics
+\item A/B Testing
+\end{itemize}
+
+\textbf{Specialized}
+\begin{itemize}
+\item Responsible AI
+\item Finance Applications
+\end{itemize}
+\end{column}
+\end{columns}
+
+\vspace{0.5em}
+\centering
+\textcolor{mlpurple}{\textbf{All 14 topics connect through the Innovation Diamond}}
+
+\bottomnote{Each ML technique serves a specific purpose in the innovation journey from challenge to strategy}
+\end{frame}
+
+% Slide 3: Innovation Diamond Overview
+\begin{frame}{The Innovation Diamond: From Challenge to Strategy}
+\begin{center}
+\includegraphics[width=0.55\textwidth]{../charts/01_diamond_overview/chart.pdf}
+\end{center}
+\bottomnote{ML enables both creative expansion and strategic focus in innovation}
+\end{frame}
+
+% Slide 4: ESG Challenge Introduction
+\begin{frame}{The ESG Challenge: Our Running Example}
+\begin{columns}[T]
+\begin{column}{0.55\textwidth}
+\textbf{The Innovation Challenge:}
+
+\vspace{0.5em}
+\textit{``How can we create an investment portfolio that maximizes returns while ensuring genuine environmental and social impact?''}
+
+\vspace{1em}
+\textbf{Why This Matters:}
+\begin{itemize}
+\item \$35 trillion in ESG assets globally
+\item Greenwashing concerns abound
+\item Need rigorous, data-driven approach
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Our Journey:} 1 challenge $\rightarrow$ 5,000 possibilities $\rightarrow$ 5 strategies
+\end{column}
+
+\begin{column}{0.43\textwidth}
+\centering
+\includegraphics[width=0.9\textwidth]{../charts/04_esg_dimensions/chart.pdf}
+\end{column}
+\end{columns}
+
+\bottomnote{This challenge will guide us through all 14 ML topics in the Innovation Diamond}
+\end{frame}
+
+% ============================================================
+% PART 2: DIVERGENT PHASE (12 slides)
+% ============================================================
+
+% Slide 5: ML Foundations
+\begin{frame}{Stage 1: \stagecolor{challenge}{Challenge} -- ML Foundations}
+\begin{columns}[T]
+\begin{column}{0.55\textwidth}
+\textbf{The Starting Point (1)}
+\begin{itemize}
+\item Define the problem clearly
+\item Understand stakeholder needs
+\item Set measurable success criteria
+\end{itemize}
+
+\textbf{Signature Equation -- Loss Function:}
+
+\sigeq{L(\theta) = \frac{1}{n}\sum_{i=1}^{n}\ell(y_i, f(x_i;\theta))}
+
+\vspace{0.5em}
+\textbf{ESG Application:}
+
+Minimize prediction error for ESG impact vs. returns tradeoff
+
+\pitfall{Starting too broad or too narrow}
+\end{column}
+
+\begin{column}{0.43\textwidth}
+\centering
+\includegraphics[width=0.9\textwidth]{../charts/01_diamond_overview/chart.pdf}
+\end{column}
+\end{columns}
+
+\bottomnote{ML Foundations provides the vocabulary and framework for framing innovation challenges}
+\end{frame}
+
+% Slide 6: Unsupervised Learning
+\begin{frame}{Stage 2: \stagecolor{explore}{Exploration} -- Unsupervised Learning}
+\begin{columns}[T]
+\begin{column}{0.55\textwidth}
+\textbf{Exploring the Space (10 dimensions)}
+\begin{itemize}
+\item Identify relevant dimensions
+\item Find hidden structure in data
+\item No predefined labels needed
+\end{itemize}
+
+\textbf{Signature Equation -- K-Means:}
+
+\sigeq{\underset{C}{\text{argmin}} \sum_{k}\sum_{x \in C_k}\|x - \mu_k\|^2}
+
+\vspace{0.5em}
+\textbf{ESG Application:}
+
+10 dimensions discovered: Carbon, Water, Labor, Board diversity, Supply chain, Community, Waste, Energy, Privacy, Anti-corruption
+
+\pitfall{Ignoring non-obvious dimensions}
+\end{column}
+
+\begin{column}{0.43\textwidth}
+\centering
+\includegraphics[width=0.9\textwidth]{../charts/04_esg_dimensions/chart.pdf}
+\end{column}
+\end{columns}
+
+\bottomnote{Unsupervised Learning reveals hidden structure without requiring labeled examples}
+\end{frame}
+
+% Slide 7: Supervised Learning
+\begin{frame}{Stage 3: \stagecolor{explore}{Discovery} -- Supervised Learning}
+\begin{columns}[T]
+\begin{column}{0.55\textwidth}
+\textbf{Feature Engineering (100 features)}
+\begin{itemize}
+\item Transform raw data into features
+\item Engineer domain-specific metrics
+\item Validate feature relevance
+\end{itemize}
+
+\textbf{Signature Equation -- Linear Prediction:}
+
+\sigeq{\hat{y} = \sum_{j=1}^{p}\beta_j x_j + \epsilon}
+
+\vspace{0.5em}
+\textbf{ESG Application:}
+
+100 features from sustainability reports, news sentiment, social media, regulatory filings
+
+\pitfall{Creating features without domain knowledge}
+\end{column}
+
+\begin{column}{0.43\textwidth}
+\centering
+\includegraphics[width=0.9\textwidth]{../charts/05_feature_extraction/chart.pdf}
+\end{column}
+\end{columns}
+
+\bottomnote{Supervised Learning teaches which features actually predict outcomes}
+\end{frame}
+
+% Slide 8: Neural Networks
+\begin{frame}{Cross-Cutting: Neural Networks}
+\begin{columns}[T]
+\begin{column}{0.55\textwidth}
+\textbf{Deep Learning Power}
+\begin{itemize}
+\item Learn complex patterns
+\item Automatic feature extraction
+\item Transfer learning capability
+\end{itemize}
+
+\textbf{Signature Equation -- Forward Propagation:}
+
+\sigeq{a^{(l)} = \sigma(W^{(l)}a^{(l-1)} + b^{(l)})}
+
+\vspace{0.5em}
+\textbf{ESG Application:}
+
+Deep networks process unstructured ESG reports, extract sentiment from news, identify patterns in complex datasets
+
+\pitfall{Black-box models reduce interpretability}
+\end{column}
+
+\begin{column}{0.43\textwidth}
+\centering
+\includegraphics[width=0.95\textwidth]{../charts/16_neural_network_arch/chart.pdf}
+\end{column}
+\end{columns}
+
+\bottomnote{Neural Networks provide powerful pattern recognition across the entire innovation journey}
+\end{frame}
+
+% Slide 9: Generative AI
+\begin{frame}{Stage 4: \stagecolor{generate}{Generation} -- Generative AI}
+\begin{columns}[T]
+\begin{column}{0.55\textwidth}
+\textbf{Creative Expansion (1,000 ideas)}
+\begin{itemize}
+\item Generate diverse possibilities
+\item Explore unconventional combinations
+\item Push beyond obvious solutions
+\end{itemize}
+
+\textbf{Signature Equation -- Generative Model:}
+
+\sigeq{P(x) = \int P(x|z)P(z)dz}
+
+\vspace{0.5em}
+\textbf{ESG Application:}
+
+LLMs generate 1,000 investment thesis variations like ``Invest in circular economy leaders''
+
+\pitfall{Generating ideas without quality filters}
+\end{column}
+
+\begin{column}{0.43\textwidth}
+\centering
+\includegraphics[width=0.9\textwidth]{../charts/06_idea_generation/chart.pdf}
+\end{column}
+\end{columns}
+
+\bottomnote{Generative AI expands the solution space beyond human capacity}
+\end{frame}
+
+% Slide 10: Topic Modeling
+\begin{frame}{Stage 4b: \stagecolor{generate}{Generation} -- Topic Modeling}
+\begin{columns}[T]
+\begin{column}{0.55\textwidth}
+\textbf{Discovering Themes}
+\begin{itemize}
+\item Extract topics from documents
+\item Identify latent themes
+\item Organize unstructured content
+\end{itemize}
+
+\textbf{Signature Equation -- LDA:}
+
+\sigeq{P(w|d) = \sum_{t}P(w|t)P(t|d)}
+
+\vspace{0.5em}
+\textbf{ESG Application:}
+
+LDA discovers themes in sustainability reports: ``climate action'', ``diversity initiatives'', ``governance reforms''
+
+\pitfall{Over-interpreting topic labels}
+\end{column}
+
+\begin{column}{0.43\textwidth}
+\centering
+\textbf{Topic Distribution Example}
+
+\vspace{0.5em}
+\begin{tabular}{lc}
+\toprule
+\textbf{Topic} & \textbf{Weight} \\
+\midrule
+Climate Action & 0.35 \\
+Supply Chain & 0.25 \\
+Governance & 0.20 \\
+Social Impact & 0.15 \\
+Other & 0.05 \\
+\bottomrule
+\end{tabular}
+\end{column}
+\end{columns}
+
+\bottomnote{Topic Modeling reveals hidden themes in document collections}
+\end{frame}
+
+% Slide 11: NLP & Sentiment
+\begin{frame}{Stage 5: \stagecolor{peak}{Peak} -- NLP \& Sentiment Analysis}
+\begin{columns}[T]
+\begin{column}{0.55\textwidth}
+\textbf{Maximum Expansion (5,000 ideas)}
+\begin{itemize}
+\item Process massive text data
+\item Extract sentiment signals
+\item Combine all generated content
+\end{itemize}
+
+\textbf{Signature Equation -- Language Model:}
+
+\sigeq{P(w_t|w_{t-k},...,w_{t-1}) = \text{softmax}(W \cdot h_t)}
+
+\vspace{0.5em}
+\textbf{ESG Application:}
+
+5,000 potential criteria combining company targets (500+), weighting schemes (100+), sectors (50+), risk parameters (20+)
+
+\pitfall{Analysis paralysis at peak}
+\end{column}
+
+\begin{column}{0.43\textwidth}
+\centering
+\includegraphics[width=0.9\textwidth]{../charts/07_peak_pool/chart.pdf}
+\end{column}
+\end{columns}
+
+\bottomnote{NLP and Sentiment Analysis help process and understand massive text-based idea pools}
+\end{frame}
+
+% Slide 12: Divergent Summary
+\begin{frame}{Divergent Phase Summary: Techniques That Expand}
+\begin{center}
+\begin{tabular}{lccc}
+\toprule
+\textbf{Stage} & \textbf{Count} & \textbf{ML Technique} & \textbf{Course Topic} \\
+\midrule
+\textcolor{challenge}{Challenge} & 1 & Problem Framing & ML Foundations \\
+\textcolor{explore}{Exploration} & 10 & Data Mining & Unsupervised Learning \\
+\textcolor{explore}{Discovery} & 100 & Feature Engineering & Supervised Learning \\
+\textcolor{generate}{Generation} & 1,000 & Generative Algorithms & Generative AI, Topic Modeling \\
+\textcolor{peak}{Peak} & 5,000 & NLP Analysis & NLP \& Sentiment \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{0.5em}
+\textbf{Key Insight:} Each technique serves a specific expansion purpose
+
+\begin{itemize}
+\item \textbf{Unsupervised} learning finds structure without labels
+\item \textbf{Generative AI} creates new possibilities
+\item \textbf{NLP} processes human-generated content at scale
+\end{itemize}
+
+\bottomnote{Divergent thinking requires ML techniques that expand rather than constrain}
+\end{frame}
+
+% Slide 13: Visualizing Expansion
+\begin{frame}{Visualizing Expansion: 1 to 5,000}
+\begin{center}
+\includegraphics[width=0.7\textwidth]{../charts/02_divergent_process/chart.pdf}
+\end{center}
+\bottomnote{The divergent phase systematically expands from a single challenge to thousands of possibilities}
+\end{frame}
+
+% ============================================================
+% PART 3: TRANSITION (2 slides)
+% ============================================================
+
+% Slide 14: Transition
+\begin{frame}{Transition: Now We Must Focus}
+\begin{center}
+\Large
+\textcolor{peak}{\textbf{5,000 ideas}}
+
+\vspace{1em}
+$\downarrow$
+
+\vspace{1em}
+\textit{``Having many options is valuable only if you can choose wisely.''}
+
+\vspace{1em}
+$\downarrow$
+
+\vspace{1em}
+\textcolor{strategy}{\textbf{5 strategies}}
+\end{center}
+
+\vspace{1em}
+The convergent phase applies ML to systematically filter, pattern-match, validate, and select.
+
+\bottomnote{Innovation requires both expansion and focus -- now we apply convergent ML techniques}
+\end{frame}
+
+% ============================================================
+% PART 4: CONVERGENT PHASE (12 slides)
+% ============================================================
+
+% Slide 15: Clustering
+\begin{frame}{Stage 6: \stagecolor{filter}{Extraction} -- Clustering}
+\begin{columns}[T]
+\begin{column}{0.55\textwidth}
+\textbf{Initial Filtering (2,000)}
+\begin{itemize}
+\item Group similar ideas
+\item Remove duplicates and noise
+\item Identify natural clusters
+\end{itemize}
+
+\textbf{Signature Equation -- Silhouette Score:}
+
+\sigeq{\text{Silhouette}(i) = \frac{b(i) - a(i)}{\max(a(i), b(i))}}
+
+\vspace{0.5em}
+\textbf{ESG Application:}
+
+8 distinct clusters: Best-in-class, Exclusionary, Impact-first, ESG momentum, etc.
+
+\pitfall{Forcing clusters that don't exist}
+\end{column}
+
+\begin{column}{0.43\textwidth}
+\centering
+\includegraphics[width=0.9\textwidth]{../charts/08_clustering_esg/chart.pdf}
+\end{column}
+\end{columns}
+
+\bottomnote{Clustering groups similar ideas, reducing 5000 to meaningful categories}
+\end{frame}
+
+% Slide 16: Classification
+\begin{frame}{Stage 7: \stagecolor{refine}{Patterns} -- Classification}
+\begin{columns}[T]
+\begin{column}{0.55\textwidth}
+\textbf{Ranking and Categorizing (500)}
+\begin{itemize}
+\item Identify high-potential patterns
+\item Classify by feasibility/impact
+\item Rank by multiple criteria
+\end{itemize}
+
+\textbf{Signature Equation -- Gini Impurity:}
+
+\sigeq{\text{Gini}(D) = 1 - \sum_{k=1}^{K}p_k^2}
+
+\vspace{0.5em}
+\textbf{ESG Application:}
+
+Tier 1: Leaders (verified impact), Tier 2: Improvers, Tier 3: Laggards
+
+\pitfall{Over-relying on historical patterns}
+\end{column}
+
+\begin{column}{0.43\textwidth}
+\centering
+\includegraphics[width=0.9\textwidth]{../charts/09_classification_tiers/chart.pdf}
+\end{column}
+\end{columns}
+
+\bottomnote{Classification assigns categories based on learned patterns from data}
+\end{frame}
+
+% Slide 17: Validation & Metrics
+\begin{frame}{Stage 8: \stagecolor{refine}{Insights} -- Validation \& Metrics}
+\begin{columns}[T]
+\begin{column}{0.55\textwidth}
+\textbf{Testing Hypotheses (50)}
+\begin{itemize}
+\item Rigorous hypothesis testing
+\item Compare approaches quantitatively
+\item Validate with holdout data
+\end{itemize}
+
+\textbf{Signature Equation -- Cross-Validation:}
+
+\sigeq{\text{CV} = \frac{1}{k}\sum_{i=1}^{k}\text{Score}(f_{-i}, D_i)}
+
+\vspace{0.5em}
+\textbf{ESG Application:}
+
+5-fold CV on portfolio strategies, compare risk-adjusted returns
+
+\pitfall{Overfitting to historical data}
+\end{column}
+
+\begin{column}{0.43\textwidth}
+\centering
+\includegraphics[width=0.9\textwidth]{../charts/10_validation_metrics/chart.pdf}
+\end{column}
+\end{columns}
+
+\bottomnote{Validation ensures our insights are genuine, not artifacts of noise}
+\end{frame}
+
+% Slide 18: A/B Testing
+\begin{frame}{Stage 8b: \stagecolor{refine}{Insights} -- A/B Testing}
+\begin{columns}[T]
+\begin{column}{0.55\textwidth}
+\textbf{Statistical Experimentation}
+\begin{itemize}
+\item Compare strategies rigorously
+\item Control for confounding factors
+\item Measure statistical significance
+\end{itemize}
+
+\textbf{Signature Equation -- t-statistic:}
+
+\sigeq{t = \frac{\bar{x}_A - \bar{x}_B}{\sqrt{\frac{s_A^2}{n_A} + \frac{s_B^2}{n_B}}}}
+
+\vspace{0.5em}
+\textbf{ESG Application:}
+
+A/B test: ESG strategy vs. benchmark on returns, Sharpe ratio, ESG scores
+
+\pitfall{Insufficient sample size}
+\end{column}
+
+\begin{column}{0.43\textwidth}
+\centering
+\textbf{A/B Test Results}
+
+\vspace{0.5em}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Metric} & \textbf{ESG} & \textbf{Bench} \\
+\midrule
+Returns & 12\% & 9\% \\
+Sharpe & 1.2 & 0.9 \\
+ESG Score & 78 & 65 \\
+Volatility & 15\% & 18\% \\
+\bottomrule
+\end{tabular}
+
+\vspace{0.5em}
+\textit{p-value < 0.05 for returns}
+\end{column}
+\end{columns}
+
+\bottomnote{A/B Testing provides statistical confidence in strategy comparisons}
+\end{frame}
+
+% Slide 19: Responsible AI
+\begin{frame}{Stage 9: \stagecolor{strategy}{Strategy} -- Responsible AI}
+\begin{columns}[T]
+\begin{column}{0.55\textwidth}
+\textbf{Final Selection (5)}
+\begin{itemize}
+\item Apply fairness principles
+\item Consider bias and ethics
+\item Ensure explainability
+\end{itemize}
+
+\textbf{Signature Equation -- SHAP Value:}
+
+\sigeq{\phi_j = \sum_{S}\frac{|S|!(n-|S|-1)!}{n!}[v(S \cup j) - v(S)]}
+
+\vspace{0.5em}
+\textbf{ESG Application:}
+
+SHAP explains why each company was selected, ensuring transparency
+
+\pitfall{Black-box decisions without transparency}
+\end{column}
+
+\begin{column}{0.43\textwidth}
+\centering
+\textbf{SHAP Feature Importance}
+
+\vspace{0.5em}
+\begin{tabular}{lc}
+\toprule
+\textbf{Feature} & \textbf{Impact} \\
+\midrule
+Carbon Score & +0.35 \\
+Board Diversity & +0.22 \\
+Revenue Growth & +0.18 \\
+Controversy Score & -0.15 \\
+Sector & +0.10 \\
+\bottomrule
+\end{tabular}
+\end{column}
+\end{columns}
+
+\bottomnote{Responsible AI ensures final strategies are fair, explainable, and trustworthy}
+\end{frame}
+
+% Slide 20: Structured Output
+\begin{frame}[fragile]{Supporting: Structured Output}
+\begin{columns}[T]
+\begin{column}{0.55\textwidth}
+\textbf{Reliable AI Responses}
+\begin{itemize}
+\item JSON schema validation
+\item Consistent output format
+\item Production-ready reliability
+\end{itemize}
+
+\textbf{Key Concept -- Schema Validation:}
+
+\begin{verbatim}
+{
+  "strategy": "Climate Leaders",
+  "confidence": 0.92,
+  "companies": ["MSFT", "AAPL"],
+  "risk_level": "medium"
+}
+\end{verbatim}
+
+\textbf{ESG Application:}
+
+Structured portfolio recommendations with validated JSON output
+
+\pitfall{Unstructured outputs break downstream systems}
+\end{column}
+
+\begin{column}{0.43\textwidth}
+\centering
+\includegraphics[width=0.95\textwidth]{../charts/17_structured_output_reliability/chart.pdf}
+\end{column}
+\end{columns}
+
+\bottomnote{Structured Output ensures AI responses integrate reliably into production systems}
+\end{frame}
+
+% Slide 21: Finance Applications
+\begin{frame}{Supporting: Finance Applications}
+\begin{columns}[T]
+\begin{column}{0.55\textwidth}
+\textbf{Quantitative Finance ML}
+\begin{itemize}
+\item Risk modeling and VaR
+\item Portfolio optimization
+\item Market prediction
+\end{itemize}
+
+\textbf{Signature Equation -- Value at Risk:}
+
+\sigeq{\text{VaR}_\alpha = -\inf\{x : P(X \leq x) \geq \alpha\}}
+
+\vspace{0.5em}
+\textbf{ESG Application:}
+
+Efficient frontier with ESG constraints, downside risk modeling
+
+\pitfall{Ignoring tail risks in ESG portfolios}
+\end{column}
+
+\begin{column}{0.43\textwidth}
+\centering
+\includegraphics[width=0.95\textwidth]{../charts/18_efficient_frontier/chart.pdf}
+\end{column}
+\end{columns}
+
+\bottomnote{Finance Applications bring rigorous quantitative methods to ESG portfolio construction}
+\end{frame}
+
+% Slide 22: Convergent Summary
+\begin{frame}{Convergent Phase Summary: Techniques That Focus}
+\begin{center}
+\begin{tabular}{lccc}
+\toprule
+\textbf{Stage} & \textbf{Count} & \textbf{ML Technique} & \textbf{Course Topic} \\
+\midrule
+\textcolor{filter}{Extraction} & 2,000 & Clustering & Clustering \\
+\textcolor{refine}{Patterns} & 500 & Classification & Classification \\
+\textcolor{refine}{Insights} & 50 & Optimization & Validation, A/B Testing \\
+\textcolor{strategy}{Strategy} & 5 & Decision Support & Responsible AI, Finance \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{0.5em}
+\textbf{Key Insight:} Each technique serves a specific focusing purpose
+
+\begin{itemize}
+\item \textbf{Clustering} groups and reduces
+\item \textbf{Classification} ranks and categorizes
+\item \textbf{Validation} tests and confirms
+\item \textbf{Responsible AI} ensures quality
+\end{itemize}
+
+\bottomnote{Convergent thinking requires ML techniques that filter and focus rather than expand}
+\end{frame}
+
+% Slide 23: Visualizing Convergence
+\begin{frame}{Visualizing Convergence: 5,000 to 5}
+\begin{center}
+\includegraphics[width=0.7\textwidth]{../charts/03_convergent_process/chart.pdf}
+\end{center}
+\bottomnote{The convergent phase systematically reduces possibilities to actionable strategies}
+\end{frame}
+
+% ============================================================
+% PART 5: SYNTHESIS (8 slides)
+% ============================================================
+
+% Slide 24: Final 5 Strategies
+\begin{frame}{The Final 5 ESG Strategies}
+\begin{center}
+\includegraphics[width=0.65\textwidth]{../charts/11_final_strategies/chart.pdf}
+\end{center}
+\bottomnote{From one challenge to five actionable strategies -- ML enables the full journey}
+\end{frame}
+
+% Slide 25: Balance Visual
+\begin{frame}{The Key: Balance Is Everything}
+\begin{center}
+\includegraphics[width=0.55\textwidth]{../charts/13_balance_visual/chart.pdf}
+\end{center}
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\textcolor{generate}{\textbf{Too Much Divergence:}}
+\begin{itemize}
+\item Analysis paralysis
+\item No actionable outcomes
+\end{itemize}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\textcolor{strategy}{\textbf{Too Much Convergence:}}
+\begin{itemize}
+\item Missed opportunities
+\item Local maxima trap
+\end{itemize}
+\end{column}
+\end{columns}
+
+\bottomnote{Successful innovation requires knowing when to expand and when to focus}
+\end{frame}
+
+% Slide 26: Complete Journey
+\begin{frame}{The Complete ESG Journey}
+\begin{center}
+\includegraphics[width=0.65\textwidth]{../charts/15_journey_complete/chart.pdf}
+\end{center}
+\bottomnote{From one challenge to five strategies -- ML enables the full innovation journey}
+\end{frame}
+
+% Slide 27: Topic Mapping
+\begin{frame}{All 14 Topics on the Diamond}
+\begin{center}
+\includegraphics[width=0.65\textwidth]{../charts/12_topic_mapping/chart.pdf}
+\end{center}
+\bottomnote{Every course topic has its place in the innovation journey}
+\end{frame}
+
+% Slide 28: When to Use
+\begin{frame}{When to Use Each Phase}
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\textcolor{generate}{\textbf{Use Divergent When:}}
+\begin{itemize}
+\item Problem is new or unclear
+\item Need fresh perspectives
+\item Current solutions inadequate
+\item Early in project lifecycle
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{ML Tools:}
+\begin{itemize}
+\item Unsupervised Learning
+\item Generative AI
+\item NLP \& Topic Modeling
+\end{itemize}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\textcolor{strategy}{\textbf{Use Convergent When:}}
+\begin{itemize}
+\item Many options available
+\item Resources are limited
+\item Decision deadline approaching
+\item Ready for implementation
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{ML Tools:}
+\begin{itemize}
+\item Clustering \& Classification
+\item Validation \& A/B Testing
+\item Responsible AI
+\end{itemize}
+\end{column}
+\end{columns}
+
+\bottomnote{Recognize which phase you're in and apply the appropriate ML techniques}
+\end{frame}
+
+% Slide 29: Key Message
+\begin{frame}{Key Message: Balance Expansion and Focus}
+\begin{center}
+\Large
+\textbf{Innovation = Divergent + Convergent}
+
+\vspace{1.5em}
+
+\begin{tabular}{cc}
+\textcolor{generate}{\textbf{DIVERGENT}} & \textcolor{strategy}{\textbf{CONVERGENT}} \\
+\hline
+Explore possibilities & Filter options \\
+Generate ideas & Validate hypotheses \\
+Expand the space & Focus on best \\
+Creative thinking & Critical thinking \\
+\end{tabular}
+
+\vspace{1.5em}
+
+\textit{``The best innovations come from exploring widely, then selecting wisely.''}
+\end{center}
+
+\bottomnote{Machine Learning amplifies both sides -- expanding human creativity and sharpening human judgment}
+\end{frame}
+
+% Slide 30: ML Toolkit Summary
+\begin{frame}{Complete ML Toolkit Summary}
+\begin{center}
+\small
+\begin{tabular}{llll}
+\toprule
+\textbf{Topic} & \textbf{Phase} & \textbf{Key Equation} & \textbf{Purpose} \\
+\midrule
+ML Foundations & Divergent & Loss Function & Problem framing \\
+Supervised & Divergent & Linear $\hat{y} = X\beta$ & Feature engineering \\
+Unsupervised & Divergent & K-Means objective & Pattern discovery \\
+Neural Networks & Both & Forward prop & Complex patterns \\
+Generative AI & Divergent & $P(x) = \int P(x|z)P(z)dz$ & Idea generation \\
+NLP \& Sentiment & Divergent & Language model & Text processing \\
+Topic Modeling & Divergent & LDA $P(w|d)$ & Theme extraction \\
+Clustering & Convergent & Silhouette score & Grouping \\
+Classification & Convergent & Gini impurity & Categorization \\
+Validation & Convergent & Cross-validation & Testing \\
+A/B Testing & Convergent & t-statistic & Comparison \\
+Responsible AI & Convergent & SHAP values & Explainability \\
+Structured Output & Convergent & JSON schema & Reliability \\
+Finance & Convergent & VaR & Risk modeling \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\bottomnote{14 tools for the complete innovation journey from challenge to strategy}
+\end{frame}
+
+% ============================================================
+% PART 6: META-LEARNING & PITFALLS (6 slides)
+% ============================================================
+
+% Slide 31: Pitfalls Chart
+\begin{frame}{Common Pitfalls by Stage}
+\begin{center}
+\includegraphics[width=0.7\textwidth]{../charts/14_pitfalls_summary/chart.pdf}
+\end{center}
+\bottomnote{Awareness of pitfalls at each stage helps navigate the innovation journey successfully}
+\end{frame}
+
+% Slide 32: Divergent Pitfalls
+\begin{frame}{Pitfalls: Divergent Phase}
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\textbf{\textcolor{challenge}{Challenge Stage}}
+\begin{itemize}
+\item Too broad: ``Solve climate change''
+\item Too narrow: ``Improve this one metric''
+\item \textbf{Fix:} Define measurable success
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{\textcolor{explore}{Exploration Stage}}
+\begin{itemize}
+\item Ignoring non-obvious dimensions
+\item Confirmation bias in data selection
+\item \textbf{Fix:} Use unsupervised methods
+\end{itemize}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\textbf{\textcolor{generate}{Generation Stage}}
+\begin{itemize}
+\item Quantity without quality filters
+\item Hallucinated or infeasible ideas
+\item \textbf{Fix:} Structured prompting
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{\textcolor{peak}{Peak Stage}}
+\begin{itemize}
+\item Analysis paralysis
+\item Lost in the abundance
+\item \textbf{Fix:} Set convergence deadline
+\end{itemize}
+\end{column}
+\end{columns}
+
+\bottomnote{Divergent pitfalls often involve losing focus or generating noise instead of signal}
+\end{frame}
+
+% Slide 33: Convergent Pitfalls
+\begin{frame}{Pitfalls: Convergent Phase}
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\textbf{\textcolor{filter}{Extraction Stage}}
+\begin{itemize}
+\item Forcing non-existent clusters
+\item Wrong number of clusters (k)
+\item \textbf{Fix:} Use elbow/silhouette methods
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{\textcolor{refine}{Pattern Stage}}
+\begin{itemize}
+\item Over-relying on historical data
+\item Overfitting to past patterns
+\item \textbf{Fix:} Out-of-sample validation
+\end{itemize}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\textbf{\textcolor{refine}{Insights Stage}}
+\begin{itemize}
+\item Lookahead bias in backtesting
+\item p-hacking and data snooping
+\item \textbf{Fix:} Proper train/test splits
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{\textcolor{strategy}{Strategy Stage}}
+\begin{itemize}
+\item Black-box decisions
+\item Ignoring ethical implications
+\item \textbf{Fix:} SHAP + fairness checks
+\end{itemize}
+\end{column}
+\end{columns}
+
+\bottomnote{Convergent pitfalls often involve premature closure or false confidence}
+\end{frame}
+
+% Slide 34: What We Learned
+\begin{frame}{What We Learned: Key Insights}
+\begin{enumerate}
+\item \textbf{ML amplifies human innovation} -- it doesn't replace creativity
+
+\item \textbf{Both phases are essential} -- expansion without focus is chaos; focus without expansion is local maxima
+
+\item \textbf{Match technique to phase} -- use generative tools for divergence, analytical tools for convergence
+
+\item \textbf{Watch for pitfalls} -- each stage has characteristic failure modes
+
+\item \textbf{Trust but verify} -- use validation to confirm ML insights
+\end{enumerate}
+
+\vspace{1em}
+\begin{center}
+\textcolor{mlpurple}{\Large \textbf{1 Challenge $\rightarrow$ 5,000 Ideas $\rightarrow$ 5 Strategies}}
+\end{center}
+
+\bottomnote{The Innovation Diamond provides a framework for ML-powered innovation}
+\end{frame}
+
+% Slide 35: Decision Framework
+\begin{frame}{How to Choose: Decision Framework}
+\begin{center}
+\textbf{Which ML Technique Should I Use?}
+\end{center}
+
+\vspace{0.5em}
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\textbf{If you need to...}
+\begin{itemize}
+\item Explore unknown structure $\rightarrow$ \textcolor{explore}{Unsupervised}
+\item Predict outcomes $\rightarrow$ \textcolor{generate}{Supervised}
+\item Generate new content $\rightarrow$ \textcolor{generate}{Generative AI}
+\item Process text $\rightarrow$ \textcolor{peak}{NLP}
+\item Group similar items $\rightarrow$ \textcolor{filter}{Clustering}
+\item Categorize items $\rightarrow$ \textcolor{refine}{Classification}
+\item Test hypotheses $\rightarrow$ \textcolor{refine}{A/B Testing}
+\end{itemize}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\textbf{Key Questions:}
+\begin{enumerate}
+\item Do you have labels? (Yes $\rightarrow$ Supervised)
+\item Are you expanding or focusing?
+\item What's your success metric?
+\item How much data do you have?
+\item Do you need explainability?
+\end{enumerate}
+
+\vspace{0.5em}
+\textbf{Remember:} No single technique solves everything -- combine approaches!
+\end{column}
+\end{columns}
+
+\bottomnote{The right ML technique depends on your phase, data, and objectives}
+\end{frame}
+
+% Slide 36: Reflection
+\begin{frame}{Reflection: Your Innovation Journey}
+\begin{center}
+\textbf{Think About Your Own Projects:}
+\end{center}
+
+\vspace{0.5em}
+
+\begin{enumerate}
+\item \textbf{What challenge} are you trying to solve?
+
+\item \textbf{Which phase} are you currently in -- divergent or convergent?
+
+\item \textbf{Which ML techniques} could help you at this stage?
+
+\item \textbf{What pitfalls} should you watch for?
+
+\item \textbf{How will you know} when it's time to switch phases?
+\end{enumerate}
+
+\vspace{1em}
+\begin{center}
+\textit{``The Innovation Diamond is not just a framework -- it's a way of thinking about how ML can augment human creativity and judgment.''}
+\end{center}
+
+\bottomnote{Apply these principles to your own innovation challenges}
+\end{frame}
+
+% ============================================================
+% PART 7: CLOSING (4 slides)
+% ============================================================
+
+% Slide 37: Final Takeaways
+\begin{frame}{Final Takeaways}
+\begin{enumerate}
+\item \textbf{ML amplifies human innovation} -- it doesn't replace creativity
+
+\item \textbf{Both phases are essential} -- expansion without focus is chaos; focus without expansion is local maxima
+
+\item \textbf{Match technique to phase} -- use generative tools for divergence, analytical tools for convergence
+
+\item \textbf{Watch for pitfalls} -- each stage has characteristic failure modes
+
+\item \textbf{Trust but verify} -- use validation to confirm ML insights
+\end{enumerate}
+
+\vspace{1em}
+\begin{center}
+\textcolor{mlpurple}{\Large \textbf{1 Challenge $\rightarrow$ 5,000 Ideas $\rightarrow$ 5 Strategies}}
+
+\vspace{0.5em}
+\textit{Machine Learning enables both creative expansion and strategic focus}
+\end{center}
+
+\bottomnote{The Innovation Diamond provides a framework for ML-powered innovation from challenge to strategy}
+\end{frame}
+
+% Slide 38: ESG Summary
+\begin{frame}{ESG Case Study: Complete Summary}
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\textbf{The Journey:}
+\begin{itemize}
+\item \textbf{1} ESG portfolio challenge
+\item \textbf{10} sustainability dimensions
+\item \textbf{100} engineered features
+\item \textbf{1,000} LLM-generated theses
+\item \textbf{5,000} raw investment criteria
+\item \textbf{2,000} clustered approaches
+\item \textbf{500} classified patterns
+\item \textbf{50} validated insights
+\item \textbf{5} final portfolio strategies
+\end{itemize}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\textbf{The Strategies:}
+\begin{enumerate}
+\item Climate Leaders Fund
+\item Social Impact Blend
+\item Governance Excellence
+\item ESG Momentum Strategy
+\item Sustainable Dividend Growth
+\end{enumerate}
+
+\vspace{0.5em}
+\textbf{ML Techniques Used:}
+
+All 14 course topics applied in sequence through the Innovation Diamond
+\end{column}
+\end{columns}
+
+\bottomnote{A complete demonstration of ML-powered innovation in sustainable finance}
+\end{frame}
+
+% Slide 39: Resources
+\begin{frame}{Resources \& Next Steps}
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\textbf{Course Materials:}
+\begin{itemize}
+\item 14 topic slide decks
+\item Jupyter notebooks
+\item Handouts (basic/intermediate/advanced)
+\item Dataset for practice
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Key Libraries:}
+\begin{itemize}
+\item scikit-learn (ML algorithms)
+\item transformers (NLP/LLMs)
+\item matplotlib/seaborn (visualization)
+\end{itemize}
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\textbf{Practice Projects:}
+\begin{enumerate}
+\item Apply the Diamond to your own challenge
+\item Build an ESG analysis pipeline
+\item Create a clustering-based recommender
+\item Develop an A/B testing framework
+\end{enumerate}
+
+\vspace{0.5em}
+\textbf{Remember:}
+
+The best way to learn ML is to \textit{apply it to real problems}!
+\end{column}
+\end{columns}
+
+\bottomnote{Continue your journey -- apply ML to innovation challenges in your own domain}
+\end{frame}
+
+% Slide 40: Thank You
+\begin{frame}[plain]
+\begin{center}
+\vspace{2em}
+{\Huge \textcolor{mlpurple}{\textbf{Thank You!}}}
+
+\vspace{2em}
+{\Large Machine Learning for Smarter Innovation}
+
+\vspace{1em}
+{\large BSc Course Capstone}
+
+\vspace{2em}
+\textbf{The Innovation Diamond:}
+
+\vspace{0.5em}
+\textcolor{challenge}{1 Challenge} $\rightarrow$
+\textcolor{explore}{10} $\rightarrow$
+\textcolor{generate}{100} $\rightarrow$
+\textcolor{generate}{1,000} $\rightarrow$
+\textcolor{peak}{5,000} $\rightarrow$
+\textcolor{filter}{2,000} $\rightarrow$
+\textcolor{refine}{500} $\rightarrow$
+\textcolor{refine}{50} $\rightarrow$
+\textcolor{strategy}{5 Strategies}
+
+\vspace{2em}
+{\large Questions?}
+\end{center}
+\end{frame}
+
+\end{document}
