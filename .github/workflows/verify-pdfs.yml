@@ -1,0 +1,76 @@
+name: Verify PDFs on TeX Changes
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'topics/**/*.tex'
+      - 'innovation_diamond/**/*.tex'
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install pymupdf
+
+      - name: Get changed .tex files
+        id: changed
+        run: |
+          CHANGED=$(git diff --name-only HEAD~1 HEAD -- '*.tex' | grep -E '^topics/|^innovation_diamond/' || true)
+          echo "files=$CHANGED" >> $GITHUB_OUTPUT
+          echo "Changed .tex files:"
+          echo "$CHANGED"
+
+      - name: Extract topics from changed files
+        id: topics
+        run: |
+          TOPICS=""
+          for file in ${{ steps.changed.outputs.files }}; do
+            if [[ $file == topics/* ]]; then
+              topic=$(echo $file | cut -d'/' -f2)
+              if [[ ! $TOPICS =~ $topic ]]; then
+                TOPICS="$TOPICS $topic"
+              fi
+            fi
+          done
+          echo "topics=$TOPICS" >> $GITHUB_OUTPUT
+          echo "Topics to verify: $TOPICS"
+
+      - name: Run verification
+        if: steps.topics.outputs.topics != ''
+        run: |
+          for topic in ${{ steps.topics.outputs.topics }}; do
+            echo "Verifying $topic..."
+            python tools/verify_pdf.py $topic || echo "WARN: $topic verification failed"
+          done
+
+      - name: Check for resources.md changes
+        id: check_changes
+        run: |
+          if git diff --quiet content/resources.md; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+          else
+            echo "changed=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Commit updated verification status
+        if: steps.check_changes.outputs.changed == 'true'
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add content/resources.md
+          git commit -m "Auto-verify PDFs after .tex changes"
+          git push
