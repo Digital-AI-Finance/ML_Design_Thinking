@@ -1,0 +1,362 @@
+% Pandoc LaTeX template for course handouts
+% Usage: pandoc input.md -o output.tex --template=handout_template.tex --listings
+\documentclass[10pt,a4paper]{article}
+
+% Geometry
+\usepackage[margin=2.5cm]{geometry}
+
+% Fonts and encoding
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+
+% Math
+\usepackage{amsmath,amssymb,amsfonts}
+
+% Tables
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+
+% Graphics
+\usepackage{graphicx}
+
+% Colors
+\usepackage{xcolor}
+\definecolor{mlpurple}{RGB}{51,51,178}
+\definecolor{mlblue}{RGB}{0,102,204}
+\definecolor{codebg}{RGB}{248,248,248}
+\definecolor{codeframe}{RGB}{200,200,200}
+
+% Code listings
+\usepackage{listings}
+\lstset{
+  backgroundcolor=\color{codebg},
+  basicstyle=\ttfamily\small,
+  breakatwhitespace=false,
+  breaklines=true,
+  captionpos=b,
+  commentstyle=\color{gray},
+  frame=single,
+  framerule=0.5pt,
+  rulecolor=\color{codeframe},
+  keepspaces=true,
+  keywordstyle=\color{mlblue}\bfseries,
+  language=Python,
+  numbers=none,
+  showspaces=false,
+  showstringspaces=false,
+  showtabs=false,
+  stringstyle=\color{mlpurple},
+  tabsize=4,
+  xleftmargin=0.5em,
+  xrightmargin=0.5em,
+  aboveskip=1em,
+  belowskip=1em
+}
+
+% Hyperlinks
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=mlblue,
+  urlcolor=mlblue,
+  citecolor=mlblue
+}
+
+% Headers and footers
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\textcolor{mlpurple}{\textbf{Topic Modeling}}}
+\rhead{\textcolor{gray}{Basic}}
+\cfoot{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Paragraph spacing
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.5em}
+
+% Section formatting
+\usepackage{titlesec}
+\titleformat{\section}
+  {\Large\bfseries\color{mlpurple}}
+  {\thesection}{1em}{}
+\titleformat{\subsection}
+  {\large\bfseries\color{mlblue}}
+  {\thesubsection}{1em}{}
+\titleformat{\subsubsection}
+  {\normalsize\bfseries}
+  {\thesubsubsection}{1em}{}
+
+% Lists
+\usepackage{enumitem}
+\setlist[itemize]{topsep=0.5em, itemsep=0.25em}
+\setlist[enumerate]{topsep=0.5em, itemsep=0.25em}
+
+% Tight list support for pandoc
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+% Title
+\title{\Huge\bfseries\color{mlpurple} Handout 1: Introduction to Topic Modeling (Basic Level)}
+\author{Machine Learning for Smarter Innovation}
+\date{}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{fancy}
+
+\section{Handout 1: Introduction to Topic Modeling (Basic
+Level)}\label{handout-1-introduction-to-topic-modeling-basic-level}
+
+\subsection{What is Topic Modeling?}\label{what-is-topic-modeling}
+
+Topic modeling is like having a smart assistant that reads thousands of
+documents and tells you: ``These documents are mainly about these
+themes.'' It automatically discovers hidden patterns in text
+collections.
+
+\subsubsection{Real-World Analogy}\label{real-world-analogy}
+
+Imagine sorting a huge pile of letters into groups without reading each
+one completely. Topic modeling does this digitally - it finds common
+themes across documents automatically.
+
+\subsection{Key Concepts}\label{key-concepts}
+
+\subsubsection{1. Topics}\label{topics}
+
+\begin{itemize}
+\tightlist
+\item
+  A topic is a collection of words that frequently appear together
+\item
+  Example: \{battery, charging, power, drain\} = ``Power Issues'' topic
+\item
+  Documents can contain multiple topics
+\end{itemize}
+
+\subsubsection{2. Documents}\label{documents}
+
+\begin{itemize}
+\tightlist
+\item
+  Any text: reviews, emails, reports, social media posts
+\item
+  Each document is a mixture of topics
+\item
+  Example: A product review might be 60\% about quality, 30\% about
+  price, 10\% about delivery
+\end{itemize}
+
+\subsubsection{3. Words}\label{words}
+
+\begin{itemize}
+\tightlist
+\item
+  Building blocks of topics
+\item
+  Same word can belong to different topics
+\item
+  Context determines meaning
+\end{itemize}
+
+\subsection{Why Use Topic Modeling?}\label{why-use-topic-modeling}
+
+\subsubsection{Business Benefits}\label{business-benefits}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Scale}: Analyze thousands of documents in minutes
+\item
+  \textbf{Objectivity}: Remove human bias from categorization
+\item
+  \textbf{Discovery}: Find patterns humans might miss
+\item
+  \textbf{Speed}: 70\% faster than manual analysis
+\end{itemize}
+
+\subsubsection{Common Applications}\label{common-applications}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Customer Feedback Analysis}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    What are customers talking about?
+  \item
+    Which issues are most common?
+  \end{itemize}
+\item
+  \textbf{Innovation Mining}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    What ideas keep appearing?
+  \item
+    Where are the opportunity gaps?
+  \end{itemize}
+\item
+  \textbf{Content Organization}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Auto-categorize articles
+  \item
+    Create navigation structures
+  \end{itemize}
+\end{enumerate}
+
+\subsection{Simple Example with
+TextBlob}\label{simple-example-with-textblob}
+
+\begin{lstlisting}[language=Python]
+from textblob import TextBlob
+import pandas as pd
+
+# Sample reviews
+reviews = [
+    "The battery life is amazing and charges quickly",
+    "Great battery, lasts all day long",
+    "Beautiful design, looks premium",
+    "Sleek design and comfortable to hold"
+]
+
+# Simple word frequency approach
+word_counts = {}
+for review in reviews:
+    blob = TextBlob(review.lower())
+    for word in blob.words:
+        if word not in ['the', 'is', 'and', 'to']:
+            word_counts[word] = word_counts.get(word, 0) + 1
+
+# Find top words (simple topics)
+top_words = sorted(word_counts.items(), key=lambda x: x[1], reverse=True)[:5]
+print("Top theme words:", [word for word, count in top_words])
+\end{lstlisting}
+
+\subsection{Practice Exercise}\label{practice-exercise}
+
+\subsubsection{Task: Manual Topic
+Discovery}\label{task-manual-topic-discovery}
+
+Given these 5 product reviews, identify 2-3 main topics:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  ``Easy to set up, installation was quick, great instructions''
+\item
+  ``Simple installation process, anyone can do it''
+\item
+  ``Expensive but worth it, high quality materials''
+\item
+  ``Price is high but the quality justifies it''
+\item
+  ``Customer service was helpful and responsive''
+\end{enumerate}
+
+\textbf{Your answers:} - Topic 1: \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+(Words: \_\_\_\_\_\_\_\_\_\_\_\_\_) - Topic 2:
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ (Words: \_\_\_\_\_\_\_\_\_\_\_\_\_) -
+Topic 3: \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ (Words:
+\_\_\_\_\_\_\_\_\_\_\_\_\_)
+
+\subsubsection{Solution Guide}\label{solution-guide}
+
+\begin{itemize}
+\tightlist
+\item
+  Topic 1: \textbf{Installation} (setup, installation, easy, simple,
+  quick)
+\item
+  Topic 2: \textbf{Value} (expensive, price, worth, quality, high)
+\item
+  Topic 3: \textbf{Service} (customer, service, helpful, responsive)
+\end{itemize}
+
+\subsection{Key Takeaways}\label{key-takeaways}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Topics are word patterns} - Groups of words that appear
+  together
+\item
+  \textbf{Documents mix topics} - Real text contains multiple themes
+\item
+  \textbf{Scale matters} - Manual works for 10 documents, not 10,000
+\item
+  \textbf{Objectivity helps} - Removes personal interpretation bias
+\item
+  \textbf{Speed is valuable} - Get insights in minutes, not days
+\end{enumerate}
+
+\subsection{Tools to Explore}\label{tools-to-explore}
+
+\subsubsection{Beginner-Friendly}\label{beginner-friendly}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Orange3}: Visual programming for text mining
+\item
+  \textbf{MonkeyLearn}: No-code topic modeling
+\item
+  \textbf{Google Cloud Natural Language}: Pre-built API
+\end{itemize}
+
+\subsubsection{Next Level}\label{next-level}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Gensim}: Python library with tutorials
+\item
+  \textbf{scikit-learn}: Integrated with data science tools
+\end{itemize}
+
+\subsection{Questions for Reflection}\label{questions-for-reflection}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  What text data does your organization have that could benefit from
+  topic modeling?
+\item
+  What patterns might you discover in customer feedback?
+\item
+  How could topic modeling speed up your current processes?
+\end{enumerate}
+
+\subsection{Further Reading}\label{further-reading}
+
+\begin{itemize}
+\tightlist
+\item
+  ``Topic Modeling for Humans'' - Gensim Tutorial
+\item
+  ``A Friendly Introduction to Topic Modeling'' - Medium article
+\item
+  ``LDA Explained Simply'' - Towards Data Science
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\emph{Remember: Start simple, focus on understanding the concepts before
+diving into complex algorithms.}
+
+\end{document}

@@ -1,0 +1,360 @@
+% Pandoc LaTeX template for course handouts
+% Usage: pandoc input.md -o output.tex --template=handout_template.tex --listings
+\documentclass[10pt,a4paper]{article}
+
+% Geometry
+\usepackage[margin=2.5cm]{geometry}
+
+% Fonts and encoding
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+
+% Math
+\usepackage{amsmath,amssymb,amsfonts}
+
+% Tables
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+
+% Graphics
+\usepackage{graphicx}
+
+% Colors
+\usepackage{xcolor}
+\definecolor{mlpurple}{RGB}{51,51,178}
+\definecolor{mlblue}{RGB}{0,102,204}
+\definecolor{codebg}{RGB}{248,248,248}
+\definecolor{codeframe}{RGB}{200,200,200}
+
+% Code listings
+\usepackage{listings}
+\lstset{
+  backgroundcolor=\color{codebg},
+  basicstyle=\ttfamily\small,
+  breakatwhitespace=false,
+  breaklines=true,
+  captionpos=b,
+  commentstyle=\color{gray},
+  frame=single,
+  framerule=0.5pt,
+  rulecolor=\color{codeframe},
+  keepspaces=true,
+  keywordstyle=\color{mlblue}\bfseries,
+  language=Python,
+  numbers=none,
+  showspaces=false,
+  showstringspaces=false,
+  showtabs=false,
+  stringstyle=\color{mlpurple},
+  tabsize=4,
+  xleftmargin=0.5em,
+  xrightmargin=0.5em,
+  aboveskip=1em,
+  belowskip=1em
+}
+
+% Hyperlinks
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=mlblue,
+  urlcolor=mlblue,
+  citecolor=mlblue
+}
+
+% Headers and footers
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\textcolor{mlpurple}{\textbf{Generative AI}}}
+\rhead{\textcolor{gray}{Basic}}
+\cfoot{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Paragraph spacing
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.5em}
+
+% Section formatting
+\usepackage{titlesec}
+\titleformat{\section}
+  {\Large\bfseries\color{mlpurple}}
+  {\thesection}{1em}{}
+\titleformat{\subsection}
+  {\large\bfseries\color{mlblue}}
+  {\thesubsection}{1em}{}
+\titleformat{\subsubsection}
+  {\normalsize\bfseries}
+  {\thesubsubsection}{1em}{}
+
+% Lists
+\usepackage{enumitem}
+\setlist[itemize]{topsep=0.5em, itemsep=0.25em}
+\setlist[enumerate]{topsep=0.5em, itemsep=0.25em}
+
+% Tight list support for pandoc
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+% Title
+\title{\Huge\bfseries\color{mlpurple} Handout 1: Getting Started with AI Prototyping (Basic Level)}
+\author{Machine Learning for Smarter Innovation}
+\date{}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{fancy}
+
+\section{Handout 1: Getting Started with AI Prototyping (Basic
+Level)}\label{handout-1-getting-started-with-ai-prototyping-basic-level}
+
+\subsection{What is Generative AI?}\label{what-is-generative-ai}
+
+Generative AI creates new content - text, images, code, audio - based on
+patterns learned from existing data. Think of it as a creative assistant
+that can help you prototype ideas faster.
+
+\subsubsection{Common Generative AI
+Tools}\label{common-generative-ai-tools}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{ChatGPT/Claude} - Text generation, brainstorming, writing
+\item
+  \textbf{DALL-E/Midjourney} - Image creation from text descriptions
+\item
+  \textbf{GitHub Copilot} - Code writing assistant
+\item
+  \textbf{Canva AI} - Design automation
+\end{enumerate}
+
+\subsection{Your First AI Prototype:
+Step-by-Step}\label{your-first-ai-prototype-step-by-step}
+
+\subsubsection{Step 1: Define Your Goal}\label{step-1-define-your-goal}
+
+\begin{itemize}
+\tightlist
+\item
+  What problem are you solving?
+\item
+  Who is your target user?
+\item
+  What would success look like?
+\end{itemize}
+
+\subsubsection{Step 2: Choose Your Tool}\label{step-2-choose-your-tool}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{For text/ideas}: ChatGPT (free tier available)
+\item
+  \textbf{For images}: Bing Image Creator (free with Microsoft account)
+\item
+  \textbf{For design}: Canva (free tier with AI features)
+\end{itemize}
+
+\subsubsection{Step 3: Write Your First
+Prompt}\label{step-3-write-your-first-prompt}
+
+\begin{lstlisting}
+Bad Prompt: "Make a logo"
+
+Good Prompt: "Create a minimalist logo for a sustainable
+coffee shop called 'Green Bean' using earth tones and a
+coffee plant leaf icon"
+\end{lstlisting}
+
+\subsubsection{Step 4: Iterate and
+Refine}\label{step-4-iterate-and-refine}
+
+\begin{itemize}
+\tightlist
+\item
+  Generate 5-10 variations
+\item
+  Combine the best elements
+\item
+  Refine with more specific prompts
+\end{itemize}
+
+\subsection{Practical Exercise: 30-Minute Product
+Concept}\label{practical-exercise-30-minute-product-concept}
+
+\subsubsection{Materials Needed}\label{materials-needed}
+
+\begin{itemize}
+\tightlist
+\item
+  Computer with internet
+\item
+  Free ChatGPT account
+\item
+  Free Canva account
+\end{itemize}
+
+\subsubsection{Task}\label{task}
+
+Create a mobile app concept for helping students manage study time.
+
+\subsubsection{Process}\label{process}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Brainstorm (5 min)}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Ask ChatGPT: ``Generate 5 innovative features for a student time
+    management app''
+  \end{itemize}
+\item
+  \textbf{Develop Concept (10 min)}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Pick the best 3 features
+  \item
+    Ask for detailed descriptions
+  \end{itemize}
+\item
+  \textbf{Create Visuals (10 min)}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Use Canva AI to generate app mockup
+  \item
+    Create simple logo
+  \end{itemize}
+\item
+  \textbf{Write Description (5 min)}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Generate app store description with ChatGPT
+  \end{itemize}
+\end{enumerate}
+
+\subsection{Tips for Success}\label{tips-for-success}
+
+\subsubsection{DO:}\label{do}
+
+\begin{itemize}
+\tightlist
+\item
+  Start simple
+\item
+  Try multiple variations
+\item
+  Combine AI output with your ideas
+\item
+  Always review and edit AI content
+\item
+  Save your prompts for reuse
+\end{itemize}
+
+\subsubsection{DON'T:}\label{dont}
+
+\begin{itemize}
+\tightlist
+\item
+  Accept first output as final
+\item
+  Use AI content without review
+\item
+  Ignore ethical considerations
+\item
+  Share sensitive data
+\end{itemize}
+
+\subsection{Common Beginner Mistakes}\label{common-beginner-mistakes}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Vague Prompts} → Be specific!
+\item
+  \textbf{No Iteration} → Always generate multiple versions
+\item
+  \textbf{Blind Trust} → Always fact-check AI outputs
+\item
+  \textbf{Over-complexity} → Start with simple tasks
+\end{enumerate}
+
+\subsection{Free Resources to Explore}\label{free-resources-to-explore}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{OpenAI Playground}: experiments.openai.com
+\item
+  \textbf{Hugging Face}: Free AI models to try
+\item
+  \textbf{Google Colab}: Free computing for AI experiments
+\item
+  \textbf{YouTube}: ``AI for beginners'' tutorials
+\end{itemize}
+
+\subsection{Ethics Reminder}\label{ethics-reminder}
+
+\begin{itemize}
+\tightlist
+\item
+  Always disclose when content is AI-generated
+\item
+  Don't use AI to create misleading content
+\item
+  Respect copyright and intellectual property
+\item
+  Consider bias in AI outputs
+\end{itemize}
+
+\subsection{Your Homework}\label{your-homework}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Create 3 different product concepts using AI
+\item
+  Generate 5 variations of each
+\item
+  Document which prompts worked best
+\item
+  Share your favorite with the class
+\end{enumerate}
+
+\subsection{Questions to Consider}\label{questions-to-consider}
+
+\begin{itemize}
+\tightlist
+\item
+  How did AI speed up your creative process?
+\item
+  What limitations did you encounter?
+\item
+  How would you combine AI with traditional methods?
+\item
+  What ethical concerns arose?
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\emph{Remember: AI is a tool to enhance your creativity, not replace it.
+The best results come from human creativity guided by AI assistance.}
+
+\end{document}

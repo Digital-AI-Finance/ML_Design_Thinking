@@ -1,0 +1,497 @@
+% Pandoc LaTeX template for course handouts
+% Usage: pandoc input.md -o output.tex --template=handout_template.tex --listings
+\documentclass[10pt,a4paper]{article}
+
+% Geometry
+\usepackage[margin=2.5cm]{geometry}
+
+% Fonts and encoding
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+
+% Math
+\usepackage{amsmath,amssymb,amsfonts}
+
+% Tables
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+
+% Graphics
+\usepackage{graphicx}
+
+% Colors
+\usepackage{xcolor}
+\definecolor{mlpurple}{RGB}{51,51,178}
+\definecolor{mlblue}{RGB}{0,102,204}
+\definecolor{codebg}{RGB}{248,248,248}
+\definecolor{codeframe}{RGB}{200,200,200}
+
+% Code listings
+\usepackage{listings}
+\lstset{
+  backgroundcolor=\color{codebg},
+  basicstyle=\ttfamily\small,
+  breakatwhitespace=false,
+  breaklines=true,
+  captionpos=b,
+  commentstyle=\color{gray},
+  frame=single,
+  framerule=0.5pt,
+  rulecolor=\color{codeframe},
+  keepspaces=true,
+  keywordstyle=\color{mlblue}\bfseries,
+  language=Python,
+  numbers=none,
+  showspaces=false,
+  showstringspaces=false,
+  showtabs=false,
+  stringstyle=\color{mlpurple},
+  tabsize=4,
+  xleftmargin=0.5em,
+  xrightmargin=0.5em,
+  aboveskip=1em,
+  belowskip=1em
+}
+
+% Hyperlinks
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=mlblue,
+  urlcolor=mlblue,
+  citecolor=mlblue
+}
+
+% Headers and footers
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\textcolor{mlpurple}{\textbf{Finance Applications}}}
+\rhead{\textcolor{gray}{Basic}}
+\cfoot{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Paragraph spacing
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.5em}
+
+% Section formatting
+\usepackage{titlesec}
+\titleformat{\section}
+  {\Large\bfseries\color{mlpurple}}
+  {\thesection}{1em}{}
+\titleformat{\subsection}
+  {\large\bfseries\color{mlblue}}
+  {\thesubsection}{1em}{}
+\titleformat{\subsubsection}
+  {\normalsize\bfseries}
+  {\thesubsubsection}{1em}{}
+
+% Lists
+\usepackage{enumitem}
+\setlist[itemize]{topsep=0.5em, itemsep=0.25em}
+\setlist[enumerate]{topsep=0.5em, itemsep=0.25em}
+
+% Tight list support for pandoc
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+% Title
+\title{\Huge\bfseries\color{mlpurple} Finance Applications of ML - Basic Handout}
+\author{Machine Learning for Smarter Innovation}
+\date{}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{fancy}
+
+\section{Finance Applications of ML - Basic
+Handout}\label{finance-applications-of-ml---basic-handout}
+
+\textbf{Target Audience}: Finance professionals with no ML background
+\textbf{Duration}: 30 minutes reading \textbf{Level}: Basic (no math,
+practical focus)
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{ML in Finance: Overview}\label{ml-in-finance-overview}
+
+Machine learning transforms finance by: - Automating decisions that
+humans make slowly - Finding patterns in massive datasets - Making
+predictions based on historical data - Managing risk more precisely
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Key Applications}\label{key-applications}
+
+\subsubsection{1. Credit Scoring}\label{credit-scoring}
+
+\textbf{Problem}: Decide who gets a loan \textbf{ML Solution}: Predict
+default probability from application data
+
+\textbf{Benefits}: - Faster decisions (seconds vs days) - More
+consistent than human judgment - Can process more data points - Reduces
+discrimination when done right
+
+\textbf{Example Features}: Income, employment history, existing debts,
+payment history
+
+\subsubsection{2. Fraud Detection}\label{fraud-detection}
+
+\textbf{Problem}: Find suspicious transactions \textbf{ML Solution}:
+Flag anomalies that deviate from normal patterns
+
+\textbf{Benefits}: - Real-time detection - Adapts to new fraud patterns
+- Reduces false positives over time - Scales to millions of transactions
+
+\textbf{Example}: Credit card company blocks transaction in foreign
+country you've never visited
+
+\subsubsection{3. Algorithmic Trading}\label{algorithmic-trading}
+
+\textbf{Problem}: Execute trades optimally \textbf{ML Solution}: Predict
+price movements, optimize execution
+
+\textbf{Applications}: - High-frequency trading (milliseconds) -
+Portfolio rebalancing - Market making - Sentiment-based trading
+
+\textbf{Note}: Most retail investors shouldn't compete here -
+institutions have advantages
+
+\subsubsection{4. Portfolio Management}\label{portfolio-management}
+
+\textbf{Problem}: Allocate assets to maximize returns for given risk
+\textbf{ML Solution}: Optimize portfolios using predicted returns and
+correlations
+
+\textbf{Robo-Advisors}: Automated portfolio management (Betterment,
+Wealthfront) - Low fees - Tax-loss harvesting - Automatic rebalancing
+
+\subsubsection{5. Risk Management}\label{risk-management}
+
+\textbf{Problem}: Quantify potential losses \textbf{ML Solution}: Better
+estimate of Value at Risk (VaR) and stress scenarios
+
+\textbf{Applications}: - Market risk (price changes) - Credit risk
+(defaults) - Operational risk (fraud, errors) - Liquidity risk (can't
+sell assets)
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Key Concepts}\label{key-concepts}
+
+\subsubsection{Value at Risk (VaR)}\label{value-at-risk-var}
+
+``What's the maximum I could lose in a bad day?''
+
+\textbf{Example}: ``95\% VaR of \$1M means there's a 5\% chance of
+losing more than \$1M''
+
+\subsubsection{Portfolio Optimization}\label{portfolio-optimization}
+
+``How do I balance risk and return?''
+
+\textbf{Key Idea}: Diversification - don't put all eggs in one basket
+
+\subsubsection{Backtesting}\label{backtesting}
+
+``Would this strategy have worked in the past?''
+
+\textbf{Warning}: Past performance doesn't guarantee future results.
+Overfitting is a major risk.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Regulatory Requirements}\label{regulatory-requirements}
+
+\subsubsection{SR 11-7 (Federal Reserve)}\label{sr-11-7-federal-reserve}
+
+\begin{itemize}
+\tightlist
+\item
+  Model risk management
+\item
+  Independent validation
+\item
+  Ongoing monitoring
+\item
+  Documentation requirements
+\end{itemize}
+
+\subsubsection{MiFID II (Europe)}\label{mifid-ii-europe}
+
+\begin{itemize}
+\tightlist
+\item
+  Algorithmic trading controls
+\item
+  Best execution requirements
+\item
+  Transparency rules
+\end{itemize}
+
+\subsubsection{Basel III}\label{basel-iii}
+
+\begin{itemize}
+\tightlist
+\item
+  Capital requirements
+\item
+  Risk-weighted assets
+\item
+  Stress testing
+\end{itemize}
+
+\textbf{Key Point}: Models in finance are heavily regulated. You can't
+just deploy any ML model.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{When ML Works in Finance}\label{when-ml-works-in-finance}
+
+\subsubsection{Good Fit:}\label{good-fit}
+
+\begin{itemize}
+\tightlist
+\item
+  Large historical datasets available
+\item
+  Patterns are relatively stable
+\item
+  Decisions are frequent and similar
+\item
+  Speed matters
+\item
+  Human bias is a concern
+\end{itemize}
+
+\subsubsection{Poor Fit:}\label{poor-fit}
+
+\begin{itemize}
+\tightlist
+\item
+  Unprecedented events (black swans)
+\item
+  Data is sparse or unreliable
+\item
+  Regulations require human judgment
+\item
+  Explainability is critical
+\item
+  Market conditions change fundamentally
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Common Pitfalls}\label{common-pitfalls}
+
+\subsubsection{1. Overfitting to Historical
+Data}\label{overfitting-to-historical-data}
+
+\begin{itemize}
+\tightlist
+\item
+  Strategy worked in backtest but fails live
+\item
+  Solution: Out-of-sample testing, walk-forward validation
+\end{itemize}
+
+\subsubsection{2. Look-Ahead Bias}\label{look-ahead-bias}
+
+\begin{itemize}
+\tightlist
+\item
+  Using information that wouldn't have been available
+\item
+  Solution: Strict temporal separation
+\end{itemize}
+
+\subsubsection{3. Survivorship Bias}\label{survivorship-bias}
+
+\begin{itemize}
+\tightlist
+\item
+  Only analyzing companies that still exist
+\item
+  Solution: Include delisted/bankrupt companies
+\end{itemize}
+
+\subsubsection{4. Data Snooping}\label{data-snooping}
+
+\begin{itemize}
+\tightlist
+\item
+  Testing many strategies, keeping only winners
+\item
+  Solution: Pre-register hypotheses, adjust for multiple testing
+\end{itemize}
+
+\subsubsection{5. Ignoring Transaction
+Costs}\label{ignoring-transaction-costs}
+
+\begin{itemize}
+\tightlist
+\item
+  Strategy profitable on paper, loses money in practice
+\item
+  Solution: Include realistic costs in backtests
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Getting Started Checklist}\label{getting-started-checklist}
+
+\subsubsection{For Credit/Risk Models:}\label{for-creditrisk-models}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  Understand regulatory requirements
+\item[$\square$]
+  Document data sources and preprocessing
+\item[$\square$]
+  Establish baseline (simple model)
+\item[$\square$]
+  Plan for model monitoring
+\item[$\square$]
+  Prepare explainability reports
+\end{itemize}
+
+\subsubsection{For Trading Strategies:}\label{for-trading-strategies}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  Use realistic backtesting
+\item[$\square$]
+  Account for transaction costs
+\item[$\square$]
+  Test on out-of-sample data
+\item[$\square$]
+  Start with paper trading
+\item[$\square$]
+  Size positions conservatively
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Tools and Platforms}\label{tools-and-platforms}
+
+\subsubsection{Python Libraries:}\label{python-libraries}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{pandas}: Data manipulation
+\item
+  \textbf{numpy}: Numerical computing
+\item
+  \textbf{scikit-learn}: General ML
+\item
+  \textbf{statsmodels}: Statistical models
+\item
+  \textbf{QuantLib}: Derivatives pricing
+\end{itemize}
+
+\subsubsection{Platforms:}\label{platforms}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Bloomberg Terminal}: Market data, analytics
+\item
+  \textbf{Refinitiv}: Financial data
+\item
+  \textbf{Alpaca}: Algorithmic trading API
+\item
+  \textbf{QuantConnect}: Backtesting platform
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Key Terms}\label{key-terms}
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule\noalign{}
+Term & Definition \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+VaR & Maximum expected loss at confidence level \\
+Sharpe Ratio & Risk-adjusted return measure \\
+Alpha & Excess return above benchmark \\
+Beta & Sensitivity to market movements \\
+Drawdown & Peak-to-trough decline \\
+Backtesting & Testing strategy on historical data \\
+\end{longtable}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Ethics in Finance ML}\label{ethics-in-finance-ml}
+
+\subsubsection{Fair Lending:}\label{fair-lending}
+
+\begin{itemize}
+\tightlist
+\item
+  Models must not discriminate on protected characteristics
+\item
+  Even indirect discrimination (proxy variables) is problematic
+\item
+  Regular fairness audits required
+\end{itemize}
+
+\subsubsection{Market Manipulation:}\label{market-manipulation}
+
+\begin{itemize}
+\tightlist
+\item
+  Some algorithmic strategies may be illegal
+\item
+  Spoofing, layering, and front-running are prohibited
+\item
+  Ensure compliance with market rules
+\end{itemize}
+
+\subsubsection{Systemic Risk:}\label{systemic-risk}
+
+\begin{itemize}
+\tightlist
+\item
+  Many algorithms using similar strategies can amplify crashes
+\item
+  Flash crashes have occurred
+\item
+  Consider market impact
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Next Steps}\label{next-steps}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Learn}: Take a quantitative finance course
+\item
+  \textbf{Practice}: Use paper trading to test ideas
+\item
+  \textbf{Read}: Follow financial ML research
+\item
+  \textbf{Comply}: Understand regulatory requirements
+\item
+  \textbf{Proceed}: Read intermediate handout for implementation
+\end{enumerate}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\emph{In finance, the stakes are real money. Always validate thoroughly,
+comply with regulations, and remember that models can fail.}
+
+\end{document}

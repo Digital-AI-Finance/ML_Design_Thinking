@@ -1,0 +1,234 @@
+% Pandoc LaTeX template for course handouts
+% Usage: pandoc input.md -o output.tex --template=handout_template.tex --listings
+\documentclass[10pt,a4paper]{article}
+
+% Geometry
+\usepackage[margin=2.5cm]{geometry}
+
+% Fonts and encoding
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+
+% Math
+\usepackage{amsmath,amssymb,amsfonts}
+
+% Tables
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+
+% Graphics
+\usepackage{graphicx}
+
+% Colors
+\usepackage{xcolor}
+\definecolor{mlpurple}{RGB}{51,51,178}
+\definecolor{mlblue}{RGB}{0,102,204}
+\definecolor{codebg}{RGB}{248,248,248}
+\definecolor{codeframe}{RGB}{200,200,200}
+
+% Code listings
+\usepackage{listings}
+\lstset{
+  backgroundcolor=\color{codebg},
+  basicstyle=\ttfamily\small,
+  breakatwhitespace=false,
+  breaklines=true,
+  captionpos=b,
+  commentstyle=\color{gray},
+  frame=single,
+  framerule=0.5pt,
+  rulecolor=\color{codeframe},
+  keepspaces=true,
+  keywordstyle=\color{mlblue}\bfseries,
+  language=Python,
+  numbers=none,
+  showspaces=false,
+  showstringspaces=false,
+  showtabs=false,
+  stringstyle=\color{mlpurple},
+  tabsize=4,
+  xleftmargin=0.5em,
+  xrightmargin=0.5em,
+  aboveskip=1em,
+  belowskip=1em
+}
+
+% Hyperlinks
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=mlblue,
+  urlcolor=mlblue,
+  citecolor=mlblue
+}
+
+% Headers and footers
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\textcolor{mlpurple}{\textbf{Responsible AI}}}
+\rhead{\textcolor{gray}{Basic}}
+\cfoot{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Paragraph spacing
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.5em}
+
+% Section formatting
+\usepackage{titlesec}
+\titleformat{\section}
+  {\Large\bfseries\color{mlpurple}}
+  {\thesection}{1em}{}
+\titleformat{\subsection}
+  {\large\bfseries\color{mlblue}}
+  {\thesubsection}{1em}{}
+\titleformat{\subsubsection}
+  {\normalsize\bfseries}
+  {\thesubsubsection}{1em}{}
+
+% Lists
+\usepackage{enumitem}
+\setlist[itemize]{topsep=0.5em, itemsep=0.25em}
+\setlist[enumerate]{topsep=0.5em, itemsep=0.25em}
+
+% Tight list support for pandoc
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+% Title
+\title{\Huge\bfseries\color{mlpurple} Handout 1: Basic AI Ethics Checklist}
+\author{Machine Learning for Smarter Innovation}
+\date{}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{fancy}
+
+\section{Handout 1: Basic AI Ethics
+Checklist}\label{handout-1-basic-ai-ethics-checklist}
+
+\subsection{For Beginners}\label{for-beginners}
+
+\subsubsection{Before Building an AI
+System}\label{before-building-an-ai-system}
+
+\textbf{Purpose Check:} - {[} {]} Is there a real need for this AI
+system? - {[} {]} Have we considered non-AI alternatives? - {[} {]} Can
+we explain the value to stakeholders?
+
+\textbf{People Check:} - {[} {]} Who will be affected by this system? -
+{[} {]} Have we talked to users and affected communities? - {[} {]} Who
+might be harmed?
+
+\textbf{Data Check:} - {[} {]} Do we know where our data came from? -
+{[} {]} Do we have permission to use this data? - {[} {]} Is our data
+representative of all users? - {[} {]} Have we checked for obvious
+biases in the data?
+
+\subsubsection{During Development}\label{during-development}
+
+\textbf{Fairness Check:} - {[} {]} Have we tested performance across
+different groups? - {[} {]} Are error rates similar for all groups? -
+{[} {]} Have we documented any performance differences?
+
+\textbf{Transparency Check:} - {[} {]} Can we explain how the system
+makes decisions? - {[} {]} Have we documented what data we use? - {[}
+{]} Is it clear to users that AI is being used?
+
+\textbf{Safety Check:} - {[} {]} What happens if the system makes a
+mistake? - {[} {]} Have we tested edge cases? - {[} {]} Is there a human
+review process?
+
+\subsubsection{Before Deployment}\label{before-deployment}
+
+\textbf{Review Check:} - {[} {]} Has someone outside the team reviewed
+the system? - {[} {]} Have we tested with real users? - {[} {]} Do we
+have a plan for monitoring after launch?
+
+\textbf{Documentation Check:} - {[} {]} Have we created a model card? -
+{[} {]} Are limitations clearly documented? - {[} {]} Do users know how
+to report problems?
+
+\textbf{Legal Check:} - {[} {]} Have we checked relevant regulations
+(GDPR, AI Act)? - {[} {]} Do we have proper consent from data subjects?
+- {[} {]} Have we consulted legal counsel?
+
+\subsubsection{After Deployment}\label{after-deployment}
+
+\textbf{Monitoring Check:} - {[} {]} Are we tracking system performance
+regularly? - {[} {]} Have we set up alerts for problems? - {[} {]} Are
+we collecting user feedback?
+
+\textbf{Response Check:} - {[} {]} Do we have a process for handling
+complaints? - {[} {]} Can users appeal AI decisions? - {[} {]} Are we
+fixing identified problems quickly?
+
+\subsubsection{Red Flags (STOP if any of these are
+true)}\label{red-flags-stop-if-any-of-these-are-true}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{No} - We don't know who provided our training data
+\item
+  \textbf{No} - We haven't tested performance across different
+  demographic groups
+\item
+  \textbf{No} - We can't explain how the system makes decisions
+\item
+  \textbf{No} - There's no human oversight for high-stakes decisions
+\item
+  \textbf{No} - We have no plan for monitoring after deployment
+\item
+  \textbf{No} - We don't have user consent for data usage
+\item
+  \textbf{No} - The system makes decisions that significantly affect
+  people's lives without review
+\end{itemize}
+
+\subsubsection{Quick Terminology}\label{quick-terminology}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Bias}: Systematic errors that favor certain groups over others
+\item
+  \textbf{Fairness}: Treating similar people similarly
+\item
+  \textbf{Transparency}: Being open about how AI systems work
+\item
+  \textbf{Accountability}: Clear responsibility for AI outcomes
+\item
+  \textbf{Model Card}: A document describing an AI model's capabilities
+  and limitations
+\end{itemize}
+
+\subsubsection{Resources for Beginners}\label{resources-for-beginners}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Google's People + AI Guidebook}: Free, visual, practical
+\item
+  \textbf{IBM AI Ethics Toolkit}: Simple templates and checklists
+\item
+  \textbf{Microsoft Responsible AI Resources}: Video tutorials and
+  guides
+\item
+  \textbf{EU AI Act Summary} (official website): Plain language version
+\end{enumerate}
+
+\subsubsection{Key Takeaway}\label{key-takeaway}
+
+\textbf{Ethics isn't optional - it's essential for building AI systems
+that work for everyone.}
+
+Start with this checklist for every AI project, no matter how small.
+
+\end{document}

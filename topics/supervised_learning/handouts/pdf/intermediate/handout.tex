@@ -1,0 +1,225 @@
+% Pandoc LaTeX template for course handouts
+% Usage: pandoc input.md -o output.tex --template=handout_template.tex --listings
+\documentclass[10pt,a4paper]{article}
+
+% Geometry
+\usepackage[margin=2.5cm]{geometry}
+
+% Fonts and encoding
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+
+% Math
+\usepackage{amsmath,amssymb,amsfonts}
+
+% Tables
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+
+% Graphics
+\usepackage{graphicx}
+
+% Colors
+\usepackage{xcolor}
+\definecolor{mlpurple}{RGB}{51,51,178}
+\definecolor{mlblue}{RGB}{0,102,204}
+\definecolor{codebg}{RGB}{248,248,248}
+\definecolor{codeframe}{RGB}{200,200,200}
+
+% Code listings
+\usepackage{listings}
+\lstset{
+  backgroundcolor=\color{codebg},
+  basicstyle=\ttfamily\small,
+  breakatwhitespace=false,
+  breaklines=true,
+  captionpos=b,
+  commentstyle=\color{gray},
+  frame=single,
+  framerule=0.5pt,
+  rulecolor=\color{codeframe},
+  keepspaces=true,
+  keywordstyle=\color{mlblue}\bfseries,
+  language=Python,
+  numbers=none,
+  showspaces=false,
+  showstringspaces=false,
+  showtabs=false,
+  stringstyle=\color{mlpurple},
+  tabsize=4,
+  xleftmargin=0.5em,
+  xrightmargin=0.5em,
+  aboveskip=1em,
+  belowskip=1em
+}
+
+% Hyperlinks
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=mlblue,
+  urlcolor=mlblue,
+  citecolor=mlblue
+}
+
+% Headers and footers
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\textcolor{mlpurple}{\textbf{Supervised Learning}}}
+\rhead{\textcolor{gray}{Intermediate}}
+\cfoot{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Paragraph spacing
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.5em}
+
+% Section formatting
+\usepackage{titlesec}
+\titleformat{\section}
+  {\Large\bfseries\color{mlpurple}}
+  {\thesection}{1em}{}
+\titleformat{\subsection}
+  {\large\bfseries\color{mlblue}}
+  {\thesubsection}{1em}{}
+\titleformat{\subsubsection}
+  {\normalsize\bfseries}
+  {\thesubsubsection}{1em}{}
+
+% Lists
+\usepackage{enumitem}
+\setlist[itemize]{topsep=0.5em, itemsep=0.25em}
+\setlist[enumerate]{topsep=0.5em, itemsep=0.25em}
+
+% Tight list support for pandoc
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+% Title
+\title{\Huge\bfseries\color{mlpurple} Week 00b Intermediate: Supervised Learning Implementation}
+\author{Machine Learning for Smarter Innovation}
+\date{}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{fancy}
+
+\section{Week 00b Intermediate: Supervised Learning
+Implementation}\label{week-00b-intermediate-supervised-learning-implementation}
+
+\subsection{Regression Example: House Price
+Prediction}\label{regression-example-house-price-prediction}
+
+\begin{lstlisting}[language=Python]
+from sklearn.linear_model import LinearRegression, Ridge, Lasso
+from sklearn.ensemble import RandomForestRegressor, GradientBoostingRegressor
+from sklearn.metrics import mean_squared_error, r2_score
+import numpy as np
+import pandas as pd
+
+# Load data (example)
+from sklearn.datasets import fetch_california_housing
+housing = fetch_california_housing()
+X, y = housing.data, housing.target
+
+# Split
+from sklearn.model_selection import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Compare models
+models = {
+    'Linear': LinearRegression(),
+    'Ridge': Ridge(alpha=1.0),
+    'Lasso': Lasso(alpha=0.1),
+    'RandomForest': RandomForestRegressor(n_estimators=100),
+    'GradientBoosting': GradientBoostingRegressor(n_estimators=100)
+}
+
+for name, model in models.items():
+    model.fit(X_train, y_train)
+    y_pred = model.predict(X_test)
+    rmse = np.sqrt(mean_squared_error(y_test, y_pred))
+    r2 = r2_score(y_test, y_pred)
+    print(f"{name}: RMSE={rmse:.3f}, R²={r2:.3f}")
+\end{lstlisting}
+
+\subsection{Classification: Binary and
+Multi-class}\label{classification-binary-and-multi-class}
+
+\begin{lstlisting}[language=Python]
+from sklearn.datasets import load_breast_cancer, load_iris
+from sklearn.linear_model import LogisticRegression
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.svm import SVC
+from sklearn.metrics import classification_report, confusion_matrix
+
+# Binary classification
+cancer = load_breast_cancer()
+X, y = cancer.data, cancer.target
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+clf = LogisticRegression(max_iter=10000)
+clf.fit(X_train, y_train)
+y_pred = clf.predict(X_test)
+
+print(classification_report(y_test, y_pred, target_names=cancer.target_names))
+\end{lstlisting}
+
+\subsection{Hyperparameter Tuning}\label{hyperparameter-tuning}
+
+\begin{lstlisting}[language=Python]
+from sklearn.model_selection import GridSearchCV, RandomizedSearchCV
+
+param_grid = {
+    'n_estimators': [50, 100, 200],
+    'max_depth': [5, 10, 20, None],
+    'min_samples_split': [2, 5, 10]
+}
+
+rf = RandomForestClassifier()
+grid = GridSearchCV(rf, param_grid, cv=5, scoring='accuracy', n_jobs=-1)
+grid.fit(X_train, y_train)
+
+print(f"Best params: {grid.best_params_}")
+print(f"Best CV score: {grid.best_score_:.3f}")
+\end{lstlisting}
+
+\subsection{Feature Engineering}\label{feature-engineering}
+
+\begin{lstlisting}[language=Python]
+from sklearn.preprocessing import PolynomialFeatures, StandardScaler
+from sklearn.pipeline import Pipeline
+
+# Polynomial features
+pipeline = Pipeline([
+    ('poly', PolynomialFeatures(degree=2)),
+    ('scaler', StandardScaler()),
+    ('model', Ridge(alpha=1.0))
+])
+
+pipeline.fit(X_train, y_train)
+score = pipeline.score(X_test, y_test)
+\end{lstlisting}
+
+\subsection{Practice Exercises}\label{practice-exercises}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Load Titanic dataset, predict survival
+\item
+  Compare logistic vs SVM on iris dataset
+\item
+  Build ensemble of 3 different models
+\item
+  Tune XGBoost hyperparameters with RandomizedSearchCV
+\end{enumerate}
+
+\end{document}

@@ -1,0 +1,412 @@
+% Pandoc LaTeX template for course handouts
+% Usage: pandoc input.md -o output.tex --template=handout_template.tex --listings
+\documentclass[10pt,a4paper]{article}
+
+% Geometry
+\usepackage[margin=2.5cm]{geometry}
+
+% Fonts and encoding
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+
+% Math
+\usepackage{amsmath,amssymb,amsfonts}
+
+% Tables
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+
+% Graphics
+\usepackage{graphicx}
+
+% Colors
+\usepackage{xcolor}
+\definecolor{mlpurple}{RGB}{51,51,178}
+\definecolor{mlblue}{RGB}{0,102,204}
+\definecolor{codebg}{RGB}{248,248,248}
+\definecolor{codeframe}{RGB}{200,200,200}
+
+% Code listings
+\usepackage{listings}
+\lstset{
+  backgroundcolor=\color{codebg},
+  basicstyle=\ttfamily\small,
+  breakatwhitespace=false,
+  breaklines=true,
+  captionpos=b,
+  commentstyle=\color{gray},
+  frame=single,
+  framerule=0.5pt,
+  rulecolor=\color{codeframe},
+  keepspaces=true,
+  keywordstyle=\color{mlblue}\bfseries,
+  language=Python,
+  numbers=none,
+  showspaces=false,
+  showstringspaces=false,
+  showtabs=false,
+  stringstyle=\color{mlpurple},
+  tabsize=4,
+  xleftmargin=0.5em,
+  xrightmargin=0.5em,
+  aboveskip=1em,
+  belowskip=1em
+}
+
+% Hyperlinks
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=mlblue,
+  urlcolor=mlblue,
+  citecolor=mlblue
+}
+
+% Headers and footers
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\textcolor{mlpurple}{\textbf{Responsible AI}}}
+\rhead{\textcolor{gray}{Intermediate}}
+\cfoot{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Paragraph spacing
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.5em}
+
+% Section formatting
+\usepackage{titlesec}
+\titleformat{\section}
+  {\Large\bfseries\color{mlpurple}}
+  {\thesection}{1em}{}
+\titleformat{\subsection}
+  {\large\bfseries\color{mlblue}}
+  {\thesubsection}{1em}{}
+\titleformat{\subsubsection}
+  {\normalsize\bfseries}
+  {\thesubsubsection}{1em}{}
+
+% Lists
+\usepackage{enumitem}
+\setlist[itemize]{topsep=0.5em, itemsep=0.25em}
+\setlist[enumerate]{topsep=0.5em, itemsep=0.25em}
+
+% Tight list support for pandoc
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+% Title
+\title{\Huge\bfseries\color{mlpurple} Handout 2: Intermediate Bias Audit Guide}
+\author{Machine Learning for Smarter Innovation}
+\date{}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{fancy}
+
+\section{Handout 2: Intermediate Bias Audit
+Guide}\label{handout-2-intermediate-bias-audit-guide}
+
+\subsection{Step-by-Step Bias
+Detection}\label{step-by-step-bias-detection}
+
+\subsubsection{Phase 1: Preparation (1-2
+hours)}\label{phase-1-preparation-1-2-hours}
+
+\paragraph{1.1 Define Protected
+Attributes}\label{define-protected-attributes}
+
+Identify characteristics that should not influence decisions: -
+\textbf{Demographics}: Age, gender, race, ethnicity -
+\textbf{Socioeconomic}: Income, education, zip code - \textbf{Physical}:
+Disability status, health conditions - \textbf{Intersectional}:
+Combinations of above
+
+\textbf{Action}: List all protected attributes relevant to your domain.
+
+\paragraph{1.2 Define Success Metrics}\label{define-success-metrics}
+
+Choose appropriate fairness metrics for your context: -
+\textbf{High-stakes}: Equalized odds (criminal justice, healthcare) -
+\textbf{Opportunity}: Equal opportunity (hiring, loans) -
+\textbf{Representation}: Demographic parity (admissions,
+recommendations)
+
+\textbf{Action}: Document which metric(s) you'll use and why.
+
+\subsubsection{Phase 2: Data Audit (2-4
+hours)}\label{phase-2-data-audit-2-4-hours}
+
+\paragraph{2.1 Representation Analysis}\label{representation-analysis}
+
+\begin{lstlisting}[language=Python]
+import pandas as pd
+
+# Check group sizes
+df.groupby('protected_attribute').size()
+
+# Calculate proportions
+df['protected_attribute'].value_counts(normalize=True)
+
+# Identify underrepresented groups (< 5%)
+\end{lstlisting}
+
+\textbf{Red Flag}: Any group \textless{} 5\% of dataset
+
+\paragraph{2.2 Label Distribution}\label{label-distribution}
+
+\begin{lstlisting}[language=Python]
+# Check positive rate by group
+df.groupby('protected_attribute')['label'].mean()
+
+# Statistical test for difference
+from scipy.stats import chi2_contingency
+chi2_contingency(pd.crosstab(df['protected_attribute'], df['label']))
+\end{lstlisting}
+
+\textbf{Red Flag}: p-value \textless{} 0.05 suggests systematic
+difference
+
+\paragraph{2.3 Feature Correlation}\label{feature-correlation}
+
+\begin{lstlisting}[language=Python]
+# Check correlation with protected attribute
+df.corr()['protected_attribute'].sort_values()
+
+# Identify proxy variables (correlation > 0.3)
+\end{lstlisting}
+
+\textbf{Red Flag}: Features highly correlated with protected attribute
+
+\subsubsection{Phase 3: Model Audit (3-5
+hours)}\label{phase-3-model-audit-3-5-hours}
+
+\paragraph{3.1 Disaggregated
+Performance}\label{disaggregated-performance}
+
+Using Fairlearn:
+
+\begin{lstlisting}[language=Python]
+from fairlearn.metrics import MetricFrame
+from sklearn.metrics import accuracy_score, precision_score, recall_score
+
+# Calculate metrics by group
+metric_frame = MetricFrame(
+    metrics={
+        'accuracy': accuracy_score,
+        'precision': precision_score,
+        'recall': recall_score
+    },
+    y_true=y_test,
+    y_pred=y_pred,
+    sensitive_features=sensitive_features
+)
+
+# Display results
+print(metric_frame.by_group)
+print(metric_frame.difference())  # Max difference across groups
+\end{lstlisting}
+
+\textbf{Red Flag}: Difference \textgreater{} 0.05 in key metrics
+
+\paragraph{3.2 Fairness Metric
+Calculation}\label{fairness-metric-calculation}
+
+\textbf{Demographic Parity:}
+
+\begin{lstlisting}[language=Python]
+from fairlearn.metrics import demographic_parity_difference
+
+dp_diff = demographic_parity_difference(
+    y_true=y_test,
+    y_pred=y_pred,
+    sensitive_features=sensitive_features
+)
+
+print(f"Demographic Parity Difference: {dp_diff:.3f}")
+# Ideal: 0, Acceptable: < 0.1
+\end{lstlisting}
+
+\textbf{Equal Opportunity:}
+
+\begin{lstlisting}[language=Python]
+from fairlearn.metrics import equalized_odds_difference
+
+eo_diff = equalized_odds_difference(
+    y_true=y_test,
+    y_pred=y_pred,
+    sensitive_features=sensitive_features
+)
+
+print(f"Equalized Odds Difference: {eo_diff:.3f}")
+# Ideal: 0, Acceptable: < 0.1
+\end{lstlisting}
+
+\paragraph{3.3 Error Analysis by Group}\label{error-analysis-by-group}
+
+\begin{lstlisting}[language=Python]
+from sklearn.metrics import confusion_matrix
+
+for group in sensitive_features.unique():
+    mask = sensitive_features == group
+    cm = confusion_matrix(y_test[mask], y_pred[mask])
+
+    print(f"\nGroup: {group}")
+    print(f"TPR: {cm[1,1]/(cm[1,0]+cm[1,1]):.3f}")
+    print(f"FPR: {cm[0,1]/(cm[0,0]+cm[0,1]):.3f}")
+\end{lstlisting}
+
+\textbf{Red Flag}: TPR or FPR differs by \textgreater{} 0.1 across
+groups
+
+\subsubsection{Phase 4: Root Cause Analysis (2-3
+hours)}\label{phase-4-root-cause-analysis-2-3-hours}
+
+\paragraph{4.1 Bias Source
+Identification}\label{bias-source-identification}
+
+Ask: 1. \textbf{Data Bias}: Is the training data unbalanced or
+unrepresentative? 2. \textbf{Label Bias}: Do labels reflect historical
+discrimination? 3. \textbf{Feature Bias}: Are proxy variables leaking
+protected information? 4. \textbf{Model Bias}: Is the algorithm
+overfitting to majority group?
+
+\paragraph{4.2 Investigation Steps}\label{investigation-steps}
+
+\begin{lstlisting}[language=Python]
+# 1. Check feature importance
+import shap
+explainer = shap.TreeExplainer(model)
+shap_values = explainer.shap_values(X_test)
+shap.summary_plot(shap_values, X_test)
+
+# 2. Identify problematic features
+# Features correlated with protected attribute + high importance
+
+# 3. Analyze prediction distribution
+import matplotlib.pyplot as plt
+for group in sensitive_features.unique():
+    mask = sensitive_features == group
+    plt.hist(y_pred_proba[mask], alpha=0.5, label=group)
+plt.legend()
+plt.show()
+\end{lstlisting}
+
+\subsubsection{Phase 5: Mitigation
+(varies)}\label{phase-5-mitigation-varies}
+
+\paragraph{5.1 Choose Strategy}\label{choose-strategy}
+
+\textbf{Pre-processing} (if data bias): - Reweighting - Resampling -
+Removing correlated features
+
+\textbf{In-processing} (if model bias): - Fairness constraints -
+Adversarial debiasing
+
+\textbf{Post-processing} (quick fix): - Threshold optimization -
+Calibration per group
+
+\paragraph{5.2 Implementation Example}\label{implementation-example}
+
+\begin{lstlisting}[language=Python]
+from fairlearn.reductions import ExponentiatedGradient
+from fairlearn.reductions import EqualizedOdds
+
+# Define constraint
+constraint = EqualizedOdds()
+
+# Train fair model
+mitigator = ExponentiatedGradient(
+    estimator=base_model,
+    constraints=constraint
+)
+
+mitigator.fit(X_train, y_train, sensitive_features=A_train)
+y_pred_fair = mitigator.predict(X_test)
+
+# Re-evaluate
+metric_frame_fair = MetricFrame(
+    metrics={'accuracy': accuracy_score},
+    y_true=y_test,
+    y_pred=y_pred_fair,
+    sensitive_features=A_test
+)
+
+print("After mitigation:")
+print(metric_frame_fair.by_group)
+\end{lstlisting}
+
+\subsubsection{Phase 6: Documentation \&
+Monitoring}\label{phase-6-documentation-monitoring}
+
+\paragraph{6.1 Document Findings}\label{document-findings}
+
+Create a bias audit report including: 1. Protected attributes analyzed
+2. Fairness metrics measured 3. Disparities found 4. Root causes
+identified 5. Mitigation strategies applied 6. Residual risks
+
+\paragraph{6.2 Set Up Monitoring}\label{set-up-monitoring}
+
+\begin{lstlisting}[language=Python]
+# Monitor performance over time
+def monitor_fairness(model, X, y, sensitive_features, timestamp):
+    y_pred = model.predict(X)
+
+    metrics = {
+        'timestamp': timestamp,
+        'accuracy': accuracy_score(y, y_pred),
+        'demographic_parity': demographic_parity_difference(y, y_pred, sensitive_features),
+        'equalized_odds': equalized_odds_difference(y, y_pred, sensitive_features)
+    }
+
+    # Log to monitoring system
+    return metrics
+
+# Run monthly
+\end{lstlisting}
+
+\subsubsection{Tools Summary}\label{tools-summary}
+
+\begin{longtable}[]{@{}lll@{}}
+\toprule\noalign{}
+Tool & Best For & Learning Curve \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Fairlearn & Quick sklearn integration & Low \\
+AIF360 & Comprehensive analysis & Medium \\
+What-If Tool & Visual exploration & Low \\
+Aequitas & Detailed reporting & Medium \\
+\end{longtable}
+
+\subsubsection{Common Pitfalls}\label{common-pitfalls}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Testing only overall accuracy} - Always disaggregate
+\item
+  \textbf{Ignoring intersectionality} - Consider combinations of
+  attributes
+\item
+  \textbf{One-time audit} - Bias can emerge post-deployment
+\item
+  \textbf{Over-correcting} - Balance fairness and utility
+\item
+  \textbf{Assuming technical fix is sufficient} - Consider systemic
+  issues
+\end{enumerate}
+
+\subsubsection{Key Takeaway}\label{key-takeaway}
+
+\textbf{Bias auditing is not a checkbox - it's an ongoing process
+requiring technical skills, domain knowledge, and ethical judgment.}
+
+\end{document}

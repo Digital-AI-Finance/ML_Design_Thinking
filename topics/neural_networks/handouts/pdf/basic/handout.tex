@@ -1,0 +1,442 @@
+% Pandoc LaTeX template for course handouts
+% Usage: pandoc input.md -o output.tex --template=handout_template.tex --listings
+\documentclass[10pt,a4paper]{article}
+
+% Geometry
+\usepackage[margin=2.5cm]{geometry}
+
+% Fonts and encoding
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+
+% Math
+\usepackage{amsmath,amssymb,amsfonts}
+
+% Tables
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+
+% Graphics
+\usepackage{graphicx}
+
+% Colors
+\usepackage{xcolor}
+\definecolor{mlpurple}{RGB}{51,51,178}
+\definecolor{mlblue}{RGB}{0,102,204}
+\definecolor{codebg}{RGB}{248,248,248}
+\definecolor{codeframe}{RGB}{200,200,200}
+
+% Code listings
+\usepackage{listings}
+\lstset{
+  backgroundcolor=\color{codebg},
+  basicstyle=\ttfamily\small,
+  breakatwhitespace=false,
+  breaklines=true,
+  captionpos=b,
+  commentstyle=\color{gray},
+  frame=single,
+  framerule=0.5pt,
+  rulecolor=\color{codeframe},
+  keepspaces=true,
+  keywordstyle=\color{mlblue}\bfseries,
+  language=Python,
+  numbers=none,
+  showspaces=false,
+  showstringspaces=false,
+  showtabs=false,
+  stringstyle=\color{mlpurple},
+  tabsize=4,
+  xleftmargin=0.5em,
+  xrightmargin=0.5em,
+  aboveskip=1em,
+  belowskip=1em
+}
+
+% Hyperlinks
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=mlblue,
+  urlcolor=mlblue,
+  citecolor=mlblue
+}
+
+% Headers and footers
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\textcolor{mlpurple}{\textbf{Neural Networks}}}
+\rhead{\textcolor{gray}{Basic}}
+\cfoot{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Paragraph spacing
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.5em}
+
+% Section formatting
+\usepackage{titlesec}
+\titleformat{\section}
+  {\Large\bfseries\color{mlpurple}}
+  {\thesection}{1em}{}
+\titleformat{\subsection}
+  {\large\bfseries\color{mlblue}}
+  {\thesubsection}{1em}{}
+\titleformat{\subsubsection}
+  {\normalsize\bfseries}
+  {\thesubsubsection}{1em}{}
+
+% Lists
+\usepackage{enumitem}
+\setlist[itemize]{topsep=0.5em, itemsep=0.25em}
+\setlist[enumerate]{topsep=0.5em, itemsep=0.25em}
+
+% Tight list support for pandoc
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+% Title
+\title{\Huge\bfseries\color{mlpurple} Neural Networks - Basic Handout}
+\author{Machine Learning for Smarter Innovation}
+\date{}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{fancy}
+
+\section{Neural Networks - Basic
+Handout}\label{neural-networks---basic-handout}
+
+\textbf{Target Audience}: Beginners with no deep learning background
+\textbf{Duration}: 30 minutes reading \textbf{Level}: Basic (visual
+concepts, no math)
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{What Are Neural Networks?}\label{what-are-neural-networks}
+
+Think of neural networks like a factory assembly line. Raw materials
+(data) enter, pass through multiple processing stations (layers), and
+finished products (predictions) come out.
+
+\textbf{Key Insight}: Neural networks learn by adjusting thousands of
+tiny knobs (weights) until they produce the right outputs.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Real-World Examples}\label{real-world-examples}
+
+\subsubsection{Image Recognition}\label{image-recognition}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Facebook}: Auto-tags your friends in photos
+\item
+  \textbf{Google Photos}: Searches ``beach sunset'' finds relevant
+  images
+\item
+  \textbf{Medical}: Detects tumors in X-rays
+\end{itemize}
+
+\subsubsection{Language Understanding}\label{language-understanding}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{ChatGPT/Claude}: Understands and generates text
+\item
+  \textbf{Google Translate}: Real-time language translation
+\item
+  \textbf{Siri/Alexa}: Voice commands to actions
+\end{itemize}
+
+\subsubsection{Recommendations}\label{recommendations}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Netflix}: ``Because you watched\ldots{}''
+\item
+  \textbf{Spotify}: Personalized playlists
+\item
+  \textbf{Amazon}: Product suggestions
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{The Building Blocks}\label{the-building-blocks}
+
+\subsubsection{1. Neurons (Nodes)}\label{neurons-nodes}
+
+Simple processing units that: - Receive inputs - Apply a calculation -
+Pass output forward
+
+\textbf{Analogy}: Like a light dimmer - input (electricity) goes in,
+adjustment happens, output (light) comes out.
+
+\subsubsection{2. Layers}\label{layers}
+
+Groups of neurons working together: - \textbf{Input Layer}: Receives raw
+data (pixels, words, numbers) - \textbf{Hidden Layers}: Process and
+transform data - \textbf{Output Layer}: Produces final prediction
+
+\textbf{More layers = can learn more complex patterns}
+
+\subsubsection{3. Connections (Weights)}\label{connections-weights}
+
+Links between neurons with adjustable strength: - Strong connection =
+important relationship - Weak connection = less important - Training =
+adjusting these weights
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Types of Neural Networks}\label{types-of-neural-networks}
+
+\subsubsection{Multi-Layer Perceptron
+(MLP)}\label{multi-layer-perceptron-mlp}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Structure}: Fully connected layers
+\item
+  \textbf{Best for}: Tabular data (spreadsheets)
+\item
+  \textbf{Example}: Predict house prices from features
+\end{itemize}
+
+\subsubsection{Convolutional Neural Network
+(CNN)}\label{convolutional-neural-network-cnn}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Structure}: Detects patterns in grids
+\item
+  \textbf{Best for}: Images, spatial data
+\item
+  \textbf{Example}: Identify objects in photos
+\end{itemize}
+
+\subsubsection{Recurrent Neural Network
+(RNN/LSTM)}\label{recurrent-neural-network-rnnlstm}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Structure}: Has memory of past inputs
+\item
+  \textbf{Best for}: Sequences, time series
+\item
+  \textbf{Example}: Predict next word in sentence
+\end{itemize}
+
+\subsubsection{Transformer}\label{transformer}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Structure}: Attention mechanism
+\item
+  \textbf{Best for}: Language, long sequences
+\item
+  \textbf{Example}: ChatGPT, BERT, translation
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{How Neural Networks Learn}\label{how-neural-networks-learn}
+
+\subsubsection{Step 1: Forward Pass}\label{step-1-forward-pass}
+
+Data flows through network, producing a prediction.
+
+\subsubsection{Step 2: Calculate Error}\label{step-2-calculate-error}
+
+Compare prediction to correct answer (loss).
+
+\subsubsection{Step 3: Backward Pass}\label{step-3-backward-pass}
+
+Figure out which weights caused the error.
+
+\subsubsection{Step 4: Update Weights}\label{step-4-update-weights}
+
+Adjust weights to reduce error.
+
+\subsubsection{Step 5: Repeat}\label{step-5-repeat}
+
+Do this millions of times until accurate.
+
+\textbf{Analogy}: Like adjusting a recipe. Too salty? Use less salt next
+time. Too bland? Add more seasoning. Repeat until perfect.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{When to Use Neural
+Networks}\label{when-to-use-neural-networks}
+
+\subsubsection{Good Fit:}\label{good-fit}
+
+\begin{itemize}
+\tightlist
+\item
+  Large amounts of data (thousands+ examples)
+\item
+  Complex patterns (images, language, audio)
+\item
+  Accuracy is priority over interpretability
+\item
+  Have computational resources
+\end{itemize}
+
+\subsubsection{Poor Fit:}\label{poor-fit}
+
+\begin{itemize}
+\tightlist
+\item
+  Small datasets (under 1000 examples)
+\item
+  Need to explain decisions
+\item
+  Simple, linear relationships
+\item
+  Limited computing power
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Common Misconceptions}\label{common-misconceptions}
+
+\subsubsection{Myth: ``Neural networks think like
+humans''}\label{myth-neural-networks-think-like-humans}
+
+\textbf{Reality}: They recognize statistical patterns, not true
+understanding.
+
+\subsubsection{Myth: ``More layers = always
+better''}\label{myth-more-layers-always-better}
+
+\textbf{Reality}: Too many layers can hurt performance (overfitting,
+vanishing gradients).
+
+\subsubsection{Myth: ``Neural networks replace all other
+ML''}\label{myth-neural-networks-replace-all-other-ml}
+
+\textbf{Reality}: Random forests often beat neural nets on tabular data.
+
+\subsubsection{Myth: ``You need a PhD to use
+them''}\label{myth-you-need-a-phd-to-use-them}
+
+\textbf{Reality}: Modern libraries make basic use accessible.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Getting Started Checklist}\label{getting-started-checklist}
+
+\subsubsection{Prerequisites:}\label{prerequisites}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  Basic Python knowledge
+\item[$\square$]
+  Understanding of ML fundamentals
+\item[$\square$]
+  Access to GPU (optional but helpful)
+\item[$\square$]
+  Large dataset (1000+ examples)
+\end{itemize}
+
+\subsubsection{First Steps:}\label{first-steps}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  Start with a pre-trained model (transfer learning)
+\item[$\square$]
+  Use high-level libraries (Keras, fastai)
+\item[$\square$]
+  Begin with image classification (most tutorials)
+\item[$\square$]
+  Join communities (PyTorch forums, Hugging Face)
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Key Terms}\label{key-terms}
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule\noalign{}
+Term & Simple Definition \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Neuron & Basic processing unit \\
+Layer & Group of neurons \\
+Weight & Connection strength \\
+Activation & Output of a neuron \\
+Loss & How wrong the prediction is \\
+Epoch & One pass through all data \\
+Batch & Subset of data processed together \\
+Learning rate & How fast weights change \\
+\end{longtable}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Tools for Beginners}\label{tools-for-beginners}
+
+\subsubsection{User-Friendly:}\label{user-friendly}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Google Teachable Machine}: No code, train in browser
+\item
+  \textbf{Hugging Face}: Pre-trained models ready to use
+\item
+  \textbf{Keras}: Simple Python API
+\end{itemize}
+
+\subsubsection{When Ready for More:}\label{when-ready-for-more}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{PyTorch}: Flexible, research-friendly
+\item
+  \textbf{TensorFlow}: Production-ready, Google-backed
+\item
+  \textbf{JAX}: High-performance computing
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Next Steps}\label{next-steps}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Try}: Google's Teachable Machine (no code)
+\item
+  \textbf{Watch}: 3Blue1Brown neural network videos
+\item
+  \textbf{Practice}: Keras image classification tutorial
+\item
+  \textbf{Read}: Intermediate handout for implementation
+\end{enumerate}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\emph{Neural networks are powerful tools, but not magic. They find
+patterns in data - the quality of your data determines the quality of
+results.}
+
+\end{document}

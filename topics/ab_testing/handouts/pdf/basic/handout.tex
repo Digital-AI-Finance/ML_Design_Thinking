@@ -1,0 +1,621 @@
+% Pandoc LaTeX template for course handouts
+% Usage: pandoc input.md -o output.tex --template=handout_template.tex --listings
+\documentclass[10pt,a4paper]{article}
+
+% Geometry
+\usepackage[margin=2.5cm]{geometry}
+
+% Fonts and encoding
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+
+% Math
+\usepackage{amsmath,amssymb,amsfonts}
+
+% Tables
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+
+% Graphics
+\usepackage{graphicx}
+
+% Colors
+\usepackage{xcolor}
+\definecolor{mlpurple}{RGB}{51,51,178}
+\definecolor{mlblue}{RGB}{0,102,204}
+\definecolor{codebg}{RGB}{248,248,248}
+\definecolor{codeframe}{RGB}{200,200,200}
+
+% Code listings
+\usepackage{listings}
+\lstset{
+  backgroundcolor=\color{codebg},
+  basicstyle=\ttfamily\small,
+  breakatwhitespace=false,
+  breaklines=true,
+  captionpos=b,
+  commentstyle=\color{gray},
+  frame=single,
+  framerule=0.5pt,
+  rulecolor=\color{codeframe},
+  keepspaces=true,
+  keywordstyle=\color{mlblue}\bfseries,
+  language=Python,
+  numbers=none,
+  showspaces=false,
+  showstringspaces=false,
+  showtabs=false,
+  stringstyle=\color{mlpurple},
+  tabsize=4,
+  xleftmargin=0.5em,
+  xrightmargin=0.5em,
+  aboveskip=1em,
+  belowskip=1em
+}
+
+% Hyperlinks
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=mlblue,
+  urlcolor=mlblue,
+  citecolor=mlblue
+}
+
+% Headers and footers
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\textcolor{mlpurple}{\textbf{A/B Testing}}}
+\rhead{\textcolor{gray}{Basic}}
+\cfoot{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Paragraph spacing
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.5em}
+
+% Section formatting
+\usepackage{titlesec}
+\titleformat{\section}
+  {\Large\bfseries\color{mlpurple}}
+  {\thesection}{1em}{}
+\titleformat{\subsection}
+  {\large\bfseries\color{mlblue}}
+  {\thesubsection}{1em}{}
+\titleformat{\subsubsection}
+  {\normalsize\bfseries}
+  {\thesubsubsection}{1em}{}
+
+% Lists
+\usepackage{enumitem}
+\setlist[itemize]{topsep=0.5em, itemsep=0.25em}
+\setlist[enumerate]{topsep=0.5em, itemsep=0.25em}
+
+% Tight list support for pandoc
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+% Title
+\title{\Huge\bfseries\color{mlpurple} Handout 1: Basic A/B Testing}
+\author{Machine Learning for Smarter Innovation}
+\date{}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{fancy}
+
+\section{Handout 1: Basic A/B Testing}\label{handout-1-basic-ab-testing}
+
+\subsection{Week 10: A/B Testing \& Iterative
+Improvement}\label{week-10-ab-testing-iterative-improvement}
+
+\textbf{Skill Level: Basic \textbar{} No Code Required \textbar{} For
+Non-Technical Stakeholders}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{What is A/B Testing?}\label{what-is-ab-testing}
+
+A/B testing is a scientific experiment method where you show two
+versions of something (A and B) to different groups of users, then
+measure which version performs better.
+
+\textbf{Real-World Example:} - Version A: Blue ``Buy Now'' button -
+Version B: Green ``Buy Now'' button - Question: Which color gets more
+purchases?
+
+Instead of guessing, you test both versions at the same time with real
+users and let data decide.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Why A/B Testing Matters}\label{why-ab-testing-matters}
+
+\subsubsection{Companies That Test Win}\label{companies-that-test-win}
+
+\textbf{Spotify:} - Runs 1,000+ experiments per year - Tests every
+feature before full launch - Iterates 30\% faster than competitors -
+Result: Industry-leading user retention
+
+\textbf{Amazon:} - 35\% of revenue from recommendations - Jeff Bezos:
+``Our success is a function of experiments'' - Tests button colors,
+layouts, algorithms - Result: Highest e-commerce conversion rates
+
+\subsubsection{Companies That Don't Test
+Lose}\label{companies-that-dont-test-lose}
+
+\textbf{Knight Capital (2012):} - Deployed untested trading algorithm -
+Lost \$440 million in 45 minutes - Company bankrupt - Lesson: Test
+before you deploy
+
+\textbf{Quibi (2020):} - Launched \$1.75B streaming service without
+testing - Assumed horizontal-only videos would work - Users wanted
+vertical videos on phones - Result: Shut down after 6 months
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{The Five-Step A/B Testing
+Process}\label{the-five-step-ab-testing-process}
+
+\subsubsection{Step 1: Observe}\label{step-1-observe}
+
+\textbf{What to look for:} - Metric declining (conversion rate dropping)
+- User complaints increasing - Competitor launching new feature -
+Hypothesis from user research
+
+\textbf{Example:} ``Our checkout conversion rate dropped from 8\% to 6\%
+last month. We need to fix this.''
+
+\subsubsection{Step 2: Hypothesize}\label{step-2-hypothesize}
+
+\textbf{Format:} ``If {[}change{]}, then {[}metric{]} will {[}improve{]}
+because {[}reason{]}.''
+
+\textbf{Good Hypotheses:} - ``If we reduce form fields from 10 to 5,
+then checkout conversion will increase because users abandon long
+forms.'' - ``If we add product reviews, then purchase rate will increase
+because users trust peer opinions.''
+
+\textbf{Bad Hypotheses:} - ``Let's try a red button.'' (No reason) -
+``We should improve the site.'' (Too vague)
+
+\subsubsection{Step 3: Design}\label{step-3-design}
+
+\textbf{Key Questions:}
+
+\textbf{A. What are you testing?} - Control: Current 10-field checkout
+form - Treatment: New 5-field checkout form
+
+\textbf{B. What are you measuring?} - Primary metric: Checkout
+completion rate - Secondary metric: Time to complete checkout -
+Guardrail metric: Error rate (must not increase)
+
+\textbf{C. How many users do you need?} - Depends on current rate and
+desired improvement - Typical: 1,000 to 10,000 users per group -
+Calculator tools available online
+
+\textbf{D. How long will you run it?} - Minimum: 1 week (capture weekly
+patterns) - Typical: 2-4 weeks - Never stop early just because you see a
+winner
+
+\subsubsection{Step 4: Implement}\label{step-4-implement}
+
+\textbf{Technical Requirements:} - Randomly assign 50\% users to
+Control, 50\% to Treatment - Track user experience consistently -
+Monitor for technical errors - Ensure users always see same version
+
+\textbf{Checklist:} - {[} {]} Random assignment working correctly - {[}
+{]} Tracking implemented for all metrics - {[} {]} No technical errors
+in new version - {[} {]} Sample size calculator says we have enough
+users - {[} {]} Guardrail alerts configured
+
+\subsubsection{Step 5: Analyze}\label{step-5-analyze}
+
+\textbf{Look at three things:}
+
+\textbf{A. Statistical Significance} - Question: ``Is the difference
+real or just random luck?'' - Tool: P-value (should be less than 0.05) -
+Interpretation: 95\% confident the difference is real
+
+\textbf{B. Practical Significance} - Question: ``Is the improvement big
+enough to matter?'' - Example: 6.1\% vs 6.0\% conversion might be
+statistically significant but not worth the effort
+
+\textbf{C. Guardrails} - Question: ``Did we break anything else?'' -
+Check: Error rates, page load time, support tickets - Rule: If
+guardrails fail, don't ship
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Common Pitfalls and How to Avoid
+Them}\label{common-pitfalls-and-how-to-avoid-them}
+
+\subsubsection{Pitfall 1: Stopping Too
+Early}\label{pitfall-1-stopping-too-early}
+
+\textbf{Wrong:} ``After 3 days, Treatment is winning! Let's ship it!''
+
+\textbf{Right:} ``Wait the full 2 weeks. Day-of-week effects could
+reverse the result.''
+
+\textbf{Why it matters:} - Monday behavior differs from Saturday - Early
+users differ from late users - Initial excitement fades
+
+\subsubsection{Pitfall 2: Testing Too Many Things at
+Once}\label{pitfall-2-testing-too-many-things-at-once}
+
+\textbf{Wrong:} Change button color AND text AND position
+simultaneously.
+
+\textbf{Right:} Test one change at a time.
+
+\textbf{Why it matters:} If you change 3 things and conversion improves,
+which change caused it? You don't know.
+
+\subsubsection{Pitfall 3: Ignoring Sample
+Size}\label{pitfall-3-ignoring-sample-size}
+
+\textbf{Wrong:} ``We tested on 100 users. Treatment won 52 to 48. Ship
+it!''
+
+\textbf{Right:} ``100 users is too small. We need 5,000 per group for a
+reliable result.''
+
+\textbf{Why it matters:} Small samples produce random noise, not real
+insights.
+
+\subsubsection{Pitfall 4: P-Hacking
+(Peeking)}\label{pitfall-4-p-hacking-peeking}
+
+\textbf{Wrong:} Check results every hour. Stop when you see p less than
+0.05.
+
+\textbf{Right:} Pre-commit to sample size and duration. Check once at
+the end.
+
+\textbf{Why it matters:} If you check 20 times, you'll eventually see p
+less than 0.05 by random chance, even if there's no real effect.
+
+\subsubsection{Pitfall 5: Forgetting
+Segments}\label{pitfall-5-forgetting-segments}
+
+\textbf{The Trap: Simpson's Paradox}
+
+Overall result: Control wins (8.5\% vs 8.0\%) - New users: Treatment
+wins (12\% vs 10\%) - Power users: Treatment wins (9\% vs 8\%)
+
+How can Treatment win both segments but lose overall? Imbalanced sample
+sizes.
+
+\textbf{Solution:} Always analyze by key segments (new/returning,
+mobile/desktop, geography).
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Decision Framework}\label{decision-framework}
+
+\subsubsection{When to Ship}\label{when-to-ship}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Strong Win:} p less than 0.01, improvement greater than 10\%,
+  guardrails pass
+\item
+  \textbf{Decision:} Ship to 100\% immediately
+\item
+  \textbf{Example:} New recommendation algorithm increases revenue 15\%
+  with no downsides
+\end{itemize}
+
+\subsubsection{When to Iterate}\label{when-to-iterate}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Marginal Win:} p less than 0.05, improvement 2-5\%, some
+  guardrail degradation
+\item
+  \textbf{Decision:} Redesign to remove downsides, test again
+\item
+  \textbf{Example:} New checkout increases conversion 3\% but page load
+  time increases 20\%
+\end{itemize}
+
+\subsubsection{When to Stop}\label{when-to-stop}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Null Result:} p greater than 0.05, improvement less than 2\%
+\item
+  \textbf{Decision:} Stop testing, move to next idea
+\item
+  \textbf{Example:} Button color change shows 0.5\% improvement with p
+  equals 0.4
+\end{itemize}
+
+\subsubsection{When to Rollback}\label{when-to-rollback}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Guardrail Failure:} Primary metric improves but critical
+  guardrail fails
+\item
+  \textbf{Decision:} Immediate rollback, investigate root cause
+\item
+  \textbf{Example:} Conversion increases 10\% but error rate jumps from
+  0.1\% to 5\%
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Key Metrics Explained}\label{key-metrics-explained}
+
+\subsubsection{Primary Metrics (What You're Trying to
+Improve)}\label{primary-metrics-what-youre-trying-to-improve}
+
+\textbf{Conversion Rate:} - Formula: Conversions / Visitors - Example:
+500 purchases / 10,000 visitors equals 5\% - Use when: You want more
+people to take action
+
+\textbf{Average Revenue Per User (ARPU):} - Formula: Total revenue /
+Number of users - Example: \$100,000 revenue / 10,000 users equals \$10
+ARPU - Use when: You want to increase revenue per person
+
+\textbf{Retention Rate:} - Formula: Users returning next week / Total
+users - Example: 7,000 return / 10,000 original equals 70\% - Use when:
+You want users to come back
+
+\subsubsection{Guardrail Metrics (What You Must Not
+Break)}\label{guardrail-metrics-what-you-must-not-break}
+
+\textbf{Error Rate:} - Formula: Errors / Total requests - Example: 10
+errors / 10,000 requests equals 0.1\% - Threshold: Must stay below 1\%
+
+\textbf{Page Load Time:} - Measure: 95th percentile latency - Example:
+95\% of pages load in under 2 seconds - Threshold: Must stay below 3
+seconds
+
+\textbf{Support Ticket Rate:} - Formula: Support tickets / Active users
+- Example: 50 tickets / 10,000 users equals 0.5\% - Threshold: Must not
+increase more than 10\%
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Building an Experimentation
+Culture}\label{building-an-experimentation-culture}
+
+\subsubsection{Principles for Success}\label{principles-for-success}
+
+\textbf{1. Make Experiments Easy} - Pre-approved experiment framework -
+Self-service tools for product managers - No engineering bottlenecks -
+Goal: Launch experiment in less than 1 day
+
+\textbf{2. Celebrate Learning, Not Just Wins} - Reward well-designed
+tests, even if they fail - Share null results publicly - Learn from
+failures - Mantra: ``No such thing as a failed experiment''
+
+\textbf{3. Document Everything} - What was tested - Why we tested it -
+What we learned - What we'll do next
+
+\textbf{4. Set Velocity Targets} - Target: 10+ experiments per team per
+quarter - Measure: Time from idea to decision - Optimize: Reduce
+friction in testing process
+
+\subsubsection{Warning Signs of Poor
+Culture}\label{warning-signs-of-poor-culture}
+
+\begin{itemize}
+\tightlist
+\item
+  ``Let's just ship it and see what happens'' (No measurement)
+\item
+  ``We tested for 2 days and it's winning'' (Stopped too early)
+\item
+  ``The CEO wants this feature, no test needed'' (HiPPO: Highest Paid
+  Person's Opinion)
+\item
+  ``Last test failed, so we're not testing anymore'' (Learning aversion)
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Real-World Success
+Stories}\label{real-world-success-stories}
+
+\subsubsection{Netflix: 18\% Engagement
+Increase}\label{netflix-18-engagement-increase}
+
+\textbf{Challenge:} Users overwhelmed by 5,000+ titles
+\textbf{Hypothesis:} Personalized micro-genres will help discovery
+\textbf{Test:} Control (standard categories) vs Treatment (personalized
+micro-genres) \textbf{Result:} 18\% increase in viewing time, 25\%
+increase in discovery \textbf{Learning:} Personalization at the category
+level, not just the item level
+
+\subsubsection{Booking.com: 3.5\% Revenue
+Increase}\label{booking.com-3.5-revenue-increase}
+
+\textbf{Challenge:} Users abandon checkout due to analysis paralysis
+\textbf{Hypothesis:} Showing scarcity signals will create urgency
+\textbf{Test:} Control (no scarcity) vs Treatment (``Only 2 rooms
+left!'') \textbf{Result:} 3.5\% increase in booking completion
+\textbf{Learning:} Authentic scarcity signals reduce abandonment
+
+\subsubsection{Etsy: 12\% Search
+Improvement}\label{etsy-12-search-improvement}
+
+\textbf{Challenge:} Search results miss good matches
+\textbf{Hypothesis:} ML ranking will surface better results
+\textbf{Test:} Control (rule-based) vs Treatment (ML-based)
+\textbf{Result:} 12\% increase in search-to-purchase rate
+\textbf{Learning:} ML beats hand-crafted rules for complex ranking
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Your First A/B Test:
+Checklist}\label{your-first-ab-test-checklist}
+
+\subsubsection{Before You Start}\label{before-you-start}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  Clear hypothesis with expected direction
+\item[$\square$]
+  Primary metric defined and measurable
+\item[$\square$]
+  Guardrail metrics identified
+\item[$\square$]
+  Sample size calculated (use online calculator)
+\item[$\square$]
+  Duration planned (minimum 1 week)
+\item[$\square$]
+  Stakeholder alignment on decision criteria
+\end{itemize}
+
+\subsubsection{During the Test}\label{during-the-test}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  Random assignment is working (check split is 50/50)
+\item[$\square$]
+  Both versions have no technical errors
+\item[$\square$]
+  Guardrails are being monitored
+\item[$\square$]
+  No peeking at results before planned end date
+\end{itemize}
+
+\subsubsection{After the Test}\label{after-the-test}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  Statistical significance calculated (p-value)
+\item[$\square$]
+  Practical significance assessed (is the lift big enough?)
+\item[$\square$]
+  Guardrails reviewed (did we break anything?)
+\item[$\square$]
+  Segment analysis completed (any surprising patterns?)
+\item[$\square$]
+  Decision documented (ship/iterate/stop and why)
+\item[$\square$]
+  Results shared with team
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{FAQ}\label{faq}
+
+\textbf{Q: How long should I run my test?} A: Minimum 1 week to capture
+day-of-week effects. Typical is 2-4 weeks. Use a sample size calculator
+to determine when you have enough users.
+
+\textbf{Q: Can I test more than 2 versions?} A: Yes. A/B/C or A/B/C/D
+tests work the same way. Just need more users to maintain statistical
+power.
+
+\textbf{Q: What if my test shows no difference?} A: That's valuable
+learning. Document it and move to the next idea. Null results prevent
+wasted effort scaling something that doesn't work.
+
+\textbf{Q: Should I test on 10\% of users or 50\%?} A: Start small
+(10-20\%) if you're worried about risk. But 50/50 splits reach
+statistical significance faster with fewer total users.
+
+\textbf{Q: What's a good win rate for experiments?} A: Industry average
+is 1 in 7 tests produces a meaningful win (14\%). If you're winning more
+than 50\%, you're probably not taking enough risks.
+
+\textbf{Q: How do I convince my CEO to test instead of just shipping?}
+A: Frame it as risk reduction. ``Spending 2 weeks testing could save us
+from a \$1M mistake. Netflix tests everything for this reason.''
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Key Takeaways}\label{key-takeaways}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{A/B testing is the scientific method for product development}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Hypothesis, experiment, measure, learn
+  \end{itemize}
+\item
+  \textbf{Good experiments have three components}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Clear hypothesis with expected direction
+  \item
+    Sufficient sample size for reliable results
+  \item
+    Guardrail metrics to catch unintended consequences
+  \end{itemize}
+\item
+  \textbf{Most experiments fail, and that's good}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Industry average: 1 in 7 wins
+  \item
+    Null results prevent scaling bad ideas
+  \item
+    Celebrate learning, not just wins
+  \end{itemize}
+\item
+  \textbf{Common mistakes are predictable and avoidable}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Don't stop early
+  \item
+    Don't test multiple things at once
+  \item
+    Don't ignore sample size requirements
+  \item
+    Don't peek at results repeatedly
+  \end{itemize}
+\item
+  \textbf{Speed wins over perfection}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Companies that iterate faster learn faster
+  \item
+    Spotify: 1,000+ experiments per year
+  \item
+    Your goal: 10+ experiments per quarter
+  \end{itemize}
+\end{enumerate}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\textbf{Next Steps:} - Read Handout 2 for Python implementation guide -
+Use online sample size calculators to plan your first test - Document
+your hypothesis and get stakeholder alignment - Run your first
+experiment this week
+
+\textbf{Remember:} The best way to learn A/B testing is to run tests.
+Start small, document everything, and iterate.
+
+\end{document}

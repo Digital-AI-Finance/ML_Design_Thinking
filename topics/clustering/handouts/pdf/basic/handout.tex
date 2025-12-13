@@ -1,0 +1,445 @@
+% Pandoc LaTeX template for course handouts
+% Usage: pandoc input.md -o output.tex --template=handout_template.tex --listings
+\documentclass[10pt,a4paper]{article}
+
+% Geometry
+\usepackage[margin=2.5cm]{geometry}
+
+% Fonts and encoding
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+
+% Math
+\usepackage{amsmath,amssymb,amsfonts}
+
+% Tables
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+
+% Graphics
+\usepackage{graphicx}
+
+% Colors
+\usepackage{xcolor}
+\definecolor{mlpurple}{RGB}{51,51,178}
+\definecolor{mlblue}{RGB}{0,102,204}
+\definecolor{codebg}{RGB}{248,248,248}
+\definecolor{codeframe}{RGB}{200,200,200}
+
+% Code listings
+\usepackage{listings}
+\lstset{
+  backgroundcolor=\color{codebg},
+  basicstyle=\ttfamily\small,
+  breakatwhitespace=false,
+  breaklines=true,
+  captionpos=b,
+  commentstyle=\color{gray},
+  frame=single,
+  framerule=0.5pt,
+  rulecolor=\color{codeframe},
+  keepspaces=true,
+  keywordstyle=\color{mlblue}\bfseries,
+  language=Python,
+  numbers=none,
+  showspaces=false,
+  showstringspaces=false,
+  showtabs=false,
+  stringstyle=\color{mlpurple},
+  tabsize=4,
+  xleftmargin=0.5em,
+  xrightmargin=0.5em,
+  aboveskip=1em,
+  belowskip=1em
+}
+
+% Hyperlinks
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=mlblue,
+  urlcolor=mlblue,
+  citecolor=mlblue
+}
+
+% Headers and footers
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\textcolor{mlpurple}{\textbf{Clustering}}}
+\rhead{\textcolor{gray}{Basic}}
+\cfoot{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Paragraph spacing
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.5em}
+
+% Section formatting
+\usepackage{titlesec}
+\titleformat{\section}
+  {\Large\bfseries\color{mlpurple}}
+  {\thesection}{1em}{}
+\titleformat{\subsection}
+  {\large\bfseries\color{mlblue}}
+  {\thesubsection}{1em}{}
+\titleformat{\subsubsection}
+  {\normalsize\bfseries}
+  {\thesubsubsection}{1em}{}
+
+% Lists
+\usepackage{enumitem}
+\setlist[itemize]{topsep=0.5em, itemsep=0.25em}
+\setlist[enumerate]{topsep=0.5em, itemsep=0.25em}
+
+% Tight list support for pandoc
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+% Title
+\title{\Huge\bfseries\color{mlpurple} Week 1 Handout 1: Basic Clustering Fundamentals}
+\author{Machine Learning for Smarter Innovation}
+\date{}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{fancy}
+
+\section{Week 1 Handout 1: Basic Clustering
+Fundamentals}\label{week-1-handout-1-basic-clustering-fundamentals}
+
+\textbf{Target Audience}: Beginners with no ML background
+\textbf{Duration}: 30 minutes reading \textbf{Level}: Basic
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{What Is Clustering?}\label{what-is-clustering}
+
+Think of clustering like organizing your music collection. Instead of
+having thousands of songs scattered randomly, you group them by genre,
+mood, or artist. Clustering does the same thing with data - it finds
+natural groups automatically.
+
+\subsubsection{Real-World Examples}\label{real-world-examples}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Netflix}: Groups movies by viewing patterns (not just genre)
+\item
+  \textbf{Spotify}: Creates playlists based on listening habits
+\item
+  \textbf{Amazon}: Groups customers by shopping behavior
+\item
+  \textbf{Marketing}: Segments customers for targeted campaigns
+\end{itemize}
+
+\subsubsection{Why Clustering Matters for
+Innovation}\label{why-clustering-matters-for-innovation}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Scale}: Handle thousands of ideas instead of dozens
+\item
+  \textbf{Objectivity}: Removes human bias from grouping
+\item
+  \textbf{Discovery}: Finds patterns you never noticed
+\item
+  \textbf{Speed}: Minutes instead of weeks for analysis
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Key Concepts (No Math
+Required)}\label{key-concepts-no-math-required}
+
+\subsubsection{1. What Makes Things
+Similar?}\label{what-makes-things-similar}
+
+Clustering looks at features (characteristics) to decide what goes
+together: - \textbf{Customer example}: Age, income, location, spending
+habits - \textbf{Product example}: Price, category, ratings, reviews -
+\textbf{Innovation example}: Market size, technology level, funding
+needs
+
+\subsubsection{2. How Many Groups?}\label{how-many-groups}
+
+This is the \textbf{K} in K-means (the most popular method): -
+\textbf{Too few groups}: Everything mixed together (not useful) -
+\textbf{Too many groups}: Tiny groups (overwhelming) - \textbf{Just
+right}: Clear, actionable segments
+
+\subsubsection{3. Quality Check}\label{quality-check}
+
+How do you know if your groups are good? - \textbf{Tight groups}: Items
+in same group are very similar - \textbf{Separate groups}: Different
+groups are clearly distinct - \textbf{Makes sense}: Groups tell a
+meaningful story
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{The K-Means Process (Simple
+Version)}\label{the-k-means-process-simple-version}
+
+\subsubsection{Step 1: Choose Number of Groups
+(K)}\label{step-1-choose-number-of-groups-k}
+
+\begin{itemize}
+\tightlist
+\item
+  Start with your best guess
+\item
+  Common rule: Try 3-5 groups first
+\item
+  You can adjust later
+\end{itemize}
+
+\subsubsection{Step 2: Let the Computer Find
+Groups}\label{step-2-let-the-computer-find-groups}
+
+\begin{itemize}
+\tightlist
+\item
+  Algorithm places starting points randomly
+\item
+  Assigns each item to nearest starting point
+\item
+  Moves starting points to center of their groups
+\item
+  Repeats until groups stabilize
+\end{itemize}
+
+\subsubsection{Step 3: Check Quality}\label{step-3-check-quality}
+
+\begin{itemize}
+\tightlist
+\item
+  Look at the results visually
+\item
+  Use quality scores (like grades)
+\item
+  Ask: ``Do these groups make business sense?''
+\end{itemize}
+
+\subsubsection{Step 4: Name Your Groups}\label{step-4-name-your-groups}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Cluster 1}: ``Tech Innovators'' (high funding, software focus)
+\item
+  \textbf{Cluster 2}: ``Bootstrap Builders'' (low funding, service
+  focus)
+\item
+  \textbf{Cluster 3}: ``Green Pioneers'' (sustainability focus)
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{When NOT to Use
+Clustering}\label{when-not-to-use-clustering}
+
+\subsubsection{Clustering Won't Help
+When:}\label{clustering-wont-help-when}
+
+\begin{itemize}
+\tightlist
+\item
+  You already know your exact groups
+\item
+  You have very little data (under 50 items)
+\item
+  All your data looks the same
+\item
+  You need to predict specific outcomes (use classification instead)
+\end{itemize}
+
+\subsubsection{Common Mistakes to
+Avoid:}\label{common-mistakes-to-avoid}
+
+\begin{itemize}
+\tightlist
+\item
+  Not preparing data properly
+\item
+  Choosing too many groups
+\item
+  Ignoring domain knowledge
+\item
+  Over-interpreting results
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Getting Started Checklist}\label{getting-started-checklist}
+
+\subsubsection{Before You Begin:}\label{before-you-begin}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  \textbf{Clear goal}: What question are you trying to answer?
+\item[$\square$]
+  \textbf{Clean data}: Remove errors, handle missing values
+\item[$\square$]
+  \textbf{Right features}: Choose characteristics that matter
+\item[$\square$]
+  \textbf{Enough data}: At least 100 items recommended
+\end{itemize}
+
+\subsubsection{For Your First Project:}\label{for-your-first-project}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  \textbf{Start simple}: Use K-means with 3-5 groups
+\item[$\square$]
+  \textbf{Visualize}: Create charts to see patterns
+\item[$\square$]
+  \textbf{Validate}: Check if results make sense
+\item[$\square$]
+  \textbf{Iterate}: Try different numbers of groups
+\end{itemize}
+
+\subsubsection{Success Indicators:}\label{success-indicators}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  \textbf{Clear separation}: Groups look distinct
+\item[$\square$]
+  \textbf{Business relevance}: Groups tell meaningful stories
+\item[$\square$]
+  \textbf{Actionable insights}: You can make decisions based on groups
+\item[$\square$]
+  \textbf{Stable results}: Groups don't change dramatically with small
+  data changes
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Tools for Beginners}\label{tools-for-beginners}
+
+\subsubsection{No-Code Options:}\label{no-code-options}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Excel}: Basic clustering with scatter plots
+\item
+  \textbf{Google Sheets}: Simple data grouping
+\item
+  \textbf{Tableau}: Visual clustering analysis
+\item
+  \textbf{Orange3}: Drag-and-drop ML tool
+\end{itemize}
+
+\subsubsection{When You're Ready for
+Code:}\label{when-youre-ready-for-code}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Python}: Most popular for clustering
+\item
+  \textbf{R}: Great for statistical analysis
+\item
+  \textbf{SPSS}: User-friendly statistical software
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Next Steps}\label{next-steps}
+
+\subsubsection{This Week:}\label{this-week}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Identify} a dataset you want to explore
+\item
+  \textbf{Think} about what groups might exist
+\item
+  \textbf{Try} the practice exercise
+\item
+  \textbf{Join} the Slack discussion
+\end{enumerate}
+
+\subsubsection{Next Week Preview:}\label{next-week-preview}
+
+\begin{itemize}
+\tightlist
+\item
+  Advanced clustering techniques
+\item
+  Handling complex data types
+\item
+  Real industry applications
+\item
+  Building automated pipelines
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Questions to Ask Yourself}\label{questions-to-ask-yourself}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Data}: What characteristics define similarity in my domain?
+\item
+  \textbf{Groups}: How many natural segments do I expect?
+\item
+  \textbf{Purpose}: What decisions will these groups help me make?
+\item
+  \textbf{Validation}: How will I know if the results are good?
+\item
+  \textbf{Action}: What will I do differently based on these groups?
+\end{enumerate}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Quick Reference}\label{quick-reference}
+
+\subsubsection{Key Terms:}\label{key-terms}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Clustering}: Grouping similar items automatically
+\item
+  \textbf{K-means}: Most popular clustering method
+\item
+  \textbf{K}: Number of groups you want
+\item
+  \textbf{Features}: Characteristics used for grouping
+\item
+  \textbf{Centroid}: Center point of a group
+\end{itemize}
+
+\subsubsection{Success Metrics:}\label{success-metrics}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Silhouette Score}: Quality measure (higher = better)
+\item
+  \textbf{Elbow Method}: Helps choose optimal number of groups
+\item
+  \textbf{Business Validation}: Do results make practical sense?
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\emph{Remember: Clustering is a tool for discovery, not a magic
+solution. The insights come from combining algorithmic results with
+human expertise and domain knowledge.}
+
+\end{document}

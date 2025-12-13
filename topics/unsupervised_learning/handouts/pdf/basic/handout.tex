@@ -1,0 +1,372 @@
+% Pandoc LaTeX template for course handouts
+% Usage: pandoc input.md -o output.tex --template=handout_template.tex --listings
+\documentclass[10pt,a4paper]{article}
+
+% Geometry
+\usepackage[margin=2.5cm]{geometry}
+
+% Fonts and encoding
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+
+% Math
+\usepackage{amsmath,amssymb,amsfonts}
+
+% Tables
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+
+% Graphics
+\usepackage{graphicx}
+
+% Colors
+\usepackage{xcolor}
+\definecolor{mlpurple}{RGB}{51,51,178}
+\definecolor{mlblue}{RGB}{0,102,204}
+\definecolor{codebg}{RGB}{248,248,248}
+\definecolor{codeframe}{RGB}{200,200,200}
+
+% Code listings
+\usepackage{listings}
+\lstset{
+  backgroundcolor=\color{codebg},
+  basicstyle=\ttfamily\small,
+  breakatwhitespace=false,
+  breaklines=true,
+  captionpos=b,
+  commentstyle=\color{gray},
+  frame=single,
+  framerule=0.5pt,
+  rulecolor=\color{codeframe},
+  keepspaces=true,
+  keywordstyle=\color{mlblue}\bfseries,
+  language=Python,
+  numbers=none,
+  showspaces=false,
+  showstringspaces=false,
+  showtabs=false,
+  stringstyle=\color{mlpurple},
+  tabsize=4,
+  xleftmargin=0.5em,
+  xrightmargin=0.5em,
+  aboveskip=1em,
+  belowskip=1em
+}
+
+% Hyperlinks
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=mlblue,
+  urlcolor=mlblue,
+  citecolor=mlblue
+}
+
+% Headers and footers
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\textcolor{mlpurple}{\textbf{Unsupervised Learning}}}
+\rhead{\textcolor{gray}{Basic}}
+\cfoot{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Paragraph spacing
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.5em}
+
+% Section formatting
+\usepackage{titlesec}
+\titleformat{\section}
+  {\Large\bfseries\color{mlpurple}}
+  {\thesection}{1em}{}
+\titleformat{\subsection}
+  {\large\bfseries\color{mlblue}}
+  {\thesubsection}{1em}{}
+\titleformat{\subsubsection}
+  {\normalsize\bfseries}
+  {\thesubsubsection}{1em}{}
+
+% Lists
+\usepackage{enumitem}
+\setlist[itemize]{topsep=0.5em, itemsep=0.25em}
+\setlist[enumerate]{topsep=0.5em, itemsep=0.25em}
+
+% Tight list support for pandoc
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+% Title
+\title{\Huge\bfseries\color{mlpurple} Unsupervised Learning - Basic Handout}
+\author{Machine Learning for Smarter Innovation}
+\date{}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{fancy}
+
+\section{Unsupervised Learning - Basic
+Handout}\label{unsupervised-learning---basic-handout}
+
+\textbf{Target Audience}: Beginners with no ML background
+\textbf{Duration}: 25 minutes reading \textbf{Level}: Basic (no math
+required)
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{What Is Unsupervised
+Learning?}\label{what-is-unsupervised-learning}
+
+Think of it like organizing a messy closet. Nobody tells you which items
+go together - you discover patterns yourself based on colors, seasons,
+or occasions.
+
+\textbf{Supervised vs Unsupervised}: - \textbf{Supervised}: Teacher
+gives you answers to learn from - \textbf{Unsupervised}: No answers -
+find patterns on your own
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Real-World Examples}\label{real-world-examples}
+
+\subsubsection{Customer Segmentation}\label{customer-segmentation}
+
+\begin{itemize}
+\tightlist
+\item
+  Group customers by behavior (not demographics)
+\item
+  Discover: ``Weekend browsers'' vs ``Quick buyers'' vs ``Sale hunters''
+\end{itemize}
+
+\subsubsection{Anomaly Detection}\label{anomaly-detection}
+
+\begin{itemize}
+\tightlist
+\item
+  Find unusual transactions (fraud detection)
+\item
+  Spot equipment failures before they happen
+\end{itemize}
+
+\subsubsection{Document Organization}\label{document-organization}
+
+\begin{itemize}
+\tightlist
+\item
+  Group news articles by topic automatically
+\item
+  Organize customer feedback into themes
+\end{itemize}
+
+\subsubsection{Recommendation Systems}\label{recommendation-systems}
+
+\begin{itemize}
+\tightlist
+\item
+  ``Customers like you also bought\ldots{}''
+\item
+  Spotify's Discover Weekly playlists
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Three Main Types}\label{three-main-types}
+
+\subsubsection{1. Clustering}\label{clustering}
+
+\textbf{Goal}: Group similar items together - K-means: You choose number
+of groups - DBSCAN: Algorithm finds natural groupings - Hierarchical:
+Creates tree of relationships
+
+\textbf{Use when}: You want to find natural segments
+
+\subsubsection{2. Dimensionality
+Reduction}\label{dimensionality-reduction}
+
+\textbf{Goal}: Simplify complex data while keeping patterns - PCA: Find
+most important features - t-SNE: Create visual maps of high-dimensional
+data
+
+\textbf{Use when}: Too many features to analyze
+
+\subsubsection{3. Association Rules}\label{association-rules}
+
+\textbf{Goal}: Find items that appear together - Market basket: ``People
+who buy X also buy Y'' - Example: Diapers and beer on Friday evenings
+
+\textbf{Use when}: Finding hidden relationships
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{When to Use Unsupervised
+Learning}\label{when-to-use-unsupervised-learning}
+
+\subsubsection{Good Fit:}\label{good-fit}
+
+\begin{itemize}
+\tightlist
+\item
+  Exploring new datasets
+\item
+  No labeled training data available
+\item
+  Looking for hidden patterns
+\item
+  Reducing data complexity
+\item
+  Generating features for other models
+\end{itemize}
+
+\subsubsection{Poor Fit:}\label{poor-fit}
+
+\begin{itemize}
+\tightlist
+\item
+  Need specific predictions
+\item
+  Have clear right/wrong answers
+\item
+  Very small datasets (under 100 items)
+\item
+  Need highly interpretable results
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Quick Start Checklist}\label{quick-start-checklist}
+
+\subsubsection{Before You Begin:}\label{before-you-begin}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  Define your exploration goal
+\item[$\square$]
+  Ensure data is cleaned and scaled
+\item[$\square$]
+  Remove or handle missing values
+\item[$\square$]
+  Identify which features to include
+\end{itemize}
+
+\subsubsection{Your First Project:}\label{your-first-project}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  Start with K-means clustering (K=3)
+\item[$\square$]
+  Visualize results with scatter plots
+\item[$\square$]
+  Try different K values (2-10)
+\item[$\square$]
+  Name your discovered groups
+\end{itemize}
+
+\subsubsection{Validate Results:}\label{validate-results}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  Do groups make business sense?
+\item[$\square$]
+  Are groups distinct and meaningful?
+\item[$\square$]
+  Can you take action on findings?
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Common Pitfalls}\label{common-pitfalls}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Forgetting to scale data}: Features with larger values
+  dominate
+\item
+  \textbf{Choosing K randomly}: Use elbow method or silhouette score
+\item
+  \textbf{Ignoring outliers}: They can distort cluster centers
+\item
+  \textbf{Over-interpreting}: Not all patterns are meaningful
+\item
+  \textbf{No domain validation}: Always check with experts
+\end{enumerate}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Tools for Beginners}\label{tools-for-beginners}
+
+\subsubsection{No-Code Options:}\label{no-code-options}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Orange3}: Visual drag-and-drop ML
+\item
+  \textbf{KNIME}: Workflow-based analytics
+\item
+  \textbf{Tableau}: Built-in clustering
+\end{itemize}
+
+\subsubsection{Python Libraries:}\label{python-libraries}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{scikit-learn}: Standard ML library
+\item
+  \textbf{pandas}: Data manipulation
+\item
+  \textbf{matplotlib/seaborn}: Visualization
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Key Terms}\label{key-terms}
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule\noalign{}
+Term & Simple Definition \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Clustering & Grouping similar items \\
+K-means & Choose K groups, find centers \\
+DBSCAN & Density-based grouping \\
+PCA & Reduce dimensions, keep variance \\
+Silhouette & Quality score (-1 to 1, higher better) \\
+Elbow method & Graph to choose optimal K \\
+\end{longtable}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Next Steps}\label{next-steps}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Try}: Cluster a simple dataset (iris, wine)
+\item
+  \textbf{Explore}: Visualize your clusters
+\item
+  \textbf{Compare}: Try K=2, 3, 4, 5 and compare
+\item
+  \textbf{Read}: Intermediate handout for implementation details
+\end{enumerate}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\emph{Unsupervised learning is about discovery. Let the data tell its
+story, then use your expertise to interpret what it means.}
+
+\end{document}

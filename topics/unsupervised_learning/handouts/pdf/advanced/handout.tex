@@ -1,0 +1,493 @@
+% Pandoc LaTeX template for course handouts
+% Usage: pandoc input.md -o output.tex --template=handout_template.tex --listings
+\documentclass[10pt,a4paper]{article}
+
+% Geometry
+\usepackage[margin=2.5cm]{geometry}
+
+% Fonts and encoding
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+
+% Math
+\usepackage{amsmath,amssymb,amsfonts}
+
+% Tables
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+
+% Graphics
+\usepackage{graphicx}
+
+% Colors
+\usepackage{xcolor}
+\definecolor{mlpurple}{RGB}{51,51,178}
+\definecolor{mlblue}{RGB}{0,102,204}
+\definecolor{codebg}{RGB}{248,248,248}
+\definecolor{codeframe}{RGB}{200,200,200}
+
+% Code listings
+\usepackage{listings}
+\lstset{
+  backgroundcolor=\color{codebg},
+  basicstyle=\ttfamily\small,
+  breakatwhitespace=false,
+  breaklines=true,
+  captionpos=b,
+  commentstyle=\color{gray},
+  frame=single,
+  framerule=0.5pt,
+  rulecolor=\color{codeframe},
+  keepspaces=true,
+  keywordstyle=\color{mlblue}\bfseries,
+  language=Python,
+  numbers=none,
+  showspaces=false,
+  showstringspaces=false,
+  showtabs=false,
+  stringstyle=\color{mlpurple},
+  tabsize=4,
+  xleftmargin=0.5em,
+  xrightmargin=0.5em,
+  aboveskip=1em,
+  belowskip=1em
+}
+
+% Hyperlinks
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=mlblue,
+  urlcolor=mlblue,
+  citecolor=mlblue
+}
+
+% Headers and footers
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\textcolor{mlpurple}{\textbf{Unsupervised Learning}}}
+\rhead{\textcolor{gray}{Advanced}}
+\cfoot{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Paragraph spacing
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.5em}
+
+% Section formatting
+\usepackage{titlesec}
+\titleformat{\section}
+  {\Large\bfseries\color{mlpurple}}
+  {\thesection}{1em}{}
+\titleformat{\subsection}
+  {\large\bfseries\color{mlblue}}
+  {\thesubsection}{1em}{}
+\titleformat{\subsubsection}
+  {\normalsize\bfseries}
+  {\thesubsubsection}{1em}{}
+
+% Lists
+\usepackage{enumitem}
+\setlist[itemize]{topsep=0.5em, itemsep=0.25em}
+\setlist[enumerate]{topsep=0.5em, itemsep=0.25em}
+
+% Tight list support for pandoc
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+% Title
+\title{\Huge\bfseries\color{mlpurple} Unsupervised Learning - Advanced Handout}
+\author{Machine Learning for Smarter Innovation}
+\date{}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{fancy}
+
+\section{Unsupervised Learning - Advanced
+Handout}\label{unsupervised-learning---advanced-handout}
+
+\textbf{Target Audience}: Data scientists and ML engineers
+\textbf{Duration}: 60 minutes reading \textbf{Level}: Advanced
+(mathematical foundations, production considerations)
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Mathematical Foundations}\label{mathematical-foundations}
+
+\subsubsection{K-Means Objective
+Function}\label{k-means-objective-function}
+
+The K-means algorithm minimizes the within-cluster sum of squares
+(WCSS):
+
+\[J = \sum_{k=1}^{K} \sum_{x_i \in C_k} \|x_i - \mu_k\|^2\]
+
+Where: - \(K\) = number of clusters - \(C_k\) = set of points in cluster
+\(k\) - \(\mu_k\) = centroid of cluster \(k\) - \(\|x_i - \mu_k\|^2\) =
+squared Euclidean distance
+
+\textbf{Lloyd's Algorithm}: 1. Initialize centroids randomly 2.
+\textbf{Assignment}:
+\(C_k = \{x_i : \|x_i - \mu_k\|^2 \leq \|x_i - \mu_j\|^2 \; \forall j\}\)
+3. \textbf{Update}: \(\mu_k = \frac{1}{|C_k|} \sum_{x_i \in C_k} x_i\)
+4. Repeat until convergence
+
+\textbf{Convergence}: Guaranteed to converge (monotonically decreasing
+\(J\)), but only to local minimum.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{DBSCAN Formal
+Definitions}\label{dbscan-formal-definitions}
+
+\textbf{Core Point}: Point \(p\) is a core point if
+\(|N_\epsilon(p)| \geq \text{MinPts}\)
+
+Where \(N_\epsilon(p) = \{q \in D : d(p,q) \leq \epsilon\}\)
+
+\textbf{Directly Density-Reachable}: Point \(q\) is directly
+density-reachable from \(p\) if: - \(p\) is a core point -
+\(q \in N_\epsilon(p)\)
+
+\textbf{Density-Reachable}: Point \(q\) is density-reachable from \(p\)
+if there exists a chain \(p_1, ..., p_n\) where \(p_1 = p\),
+\(p_n = q\), and each \(p_{i+1}\) is directly density-reachable from
+\(p_i\).
+
+\textbf{Cluster}: Maximal set of density-connected points.
+
+\textbf{Time Complexity}: \(O(n^2)\) naive, \(O(n \log n)\) with spatial
+index (KD-tree, ball tree).
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{Hierarchical Clustering
+Linkage}\label{hierarchical-clustering-linkage}
+
+\textbf{Single Linkage} (nearest neighbor):
+\[d(C_i, C_j) = \min_{x \in C_i, y \in C_j} d(x, y)\]
+
+\textbf{Complete Linkage} (farthest neighbor):
+\[d(C_i, C_j) = \max_{x \in C_i, y \in C_j} d(x, y)\]
+
+\textbf{Average Linkage} (UPGMA):
+\[d(C_i, C_j) = \frac{1}{|C_i||C_j|} \sum_{x \in C_i} \sum_{y \in C_j} d(x, y)\]
+
+\textbf{Ward's Method} (minimize variance):
+\[d(C_i, C_j) = \sqrt{\frac{2|C_i||C_j|}{|C_i|+|C_j|}} \|\mu_i - \mu_j\|\]
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{PCA Mathematical
+Formulation}\label{pca-mathematical-formulation}
+
+Given data matrix \(X \in \mathbb{R}^{n \times d}\) (centered):
+
+\textbf{Covariance Matrix}: \(\Sigma = \frac{1}{n-1} X^T X\)
+
+\textbf{Eigendecomposition}: \(\Sigma = V \Lambda V^T\)
+
+Where \(V\) contains eigenvectors (principal components) and \(\Lambda\)
+contains eigenvalues.
+
+\textbf{Projection}: \(Z = X V_k\) where \(V_k\) contains top \(k\)
+eigenvectors.
+
+\textbf{Variance Explained}:
+\[\text{VE}_k = \frac{\sum_{i=1}^{k} \lambda_i}{\sum_{i=1}^{d} \lambda_i}\]
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Advanced Clustering
+Techniques}\label{advanced-clustering-techniques}
+
+\subsubsection{Gaussian Mixture Models
+(GMM)}\label{gaussian-mixture-models-gmm}
+
+Probabilistic generalization of K-means:
+
+\[p(x) = \sum_{k=1}^{K} \pi_k \mathcal{N}(x | \mu_k, \Sigma_k)\]
+
+\textbf{Advantages over K-means}: - Soft assignments (probabilities) -
+Non-spherical clusters - Model selection via BIC/AIC
+
+\begin{lstlisting}[language=Python]
+from sklearn.mixture import GaussianMixture
+
+# Fit GMM with model selection
+bics = []
+for k in range(2, 10):
+    gmm = GaussianMixture(n_components=k, random_state=42)
+    gmm.fit(X_scaled)
+    bics.append(gmm.bic(X_scaled))
+
+optimal_k = np.argmin(bics) + 2
+gmm = GaussianMixture(n_components=optimal_k, random_state=42)
+labels = gmm.fit_predict(X_scaled)
+probs = gmm.predict_proba(X_scaled)  # Soft assignments
+\end{lstlisting}
+
+\subsubsection{Spectral Clustering}\label{spectral-clustering}
+
+For non-convex cluster shapes:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Build similarity graph (affinity matrix)
+\item
+  Compute graph Laplacian
+\item
+  Find eigenvectors of Laplacian
+\item
+  Apply K-means to eigenvector representation
+\end{enumerate}
+
+\[L = D - W \quad \text{(unnormalized)}\]
+\[L_{sym} = I - D^{-1/2} W D^{-1/2} \quad \text{(normalized)}\]
+
+\begin{lstlisting}[language=Python]
+from sklearn.cluster import SpectralClustering
+
+spectral = SpectralClustering(n_clusters=4, affinity='rbf',
+                              gamma=1.0, random_state=42)
+labels = spectral.fit_predict(X_scaled)
+\end{lstlisting}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Validation Theory}\label{validation-theory}
+
+\subsubsection{Silhouette Coefficient}\label{silhouette-coefficient}
+
+For point \(i\): \[s(i) = \frac{b(i) - a(i)}{\max(a(i), b(i))}\]
+
+Where: - \(a(i)\) = mean intra-cluster distance - \(b(i)\) = mean
+nearest-cluster distance
+
+Range: \([-1, 1]\), higher is better.
+
+\subsubsection{Calinski-Harabasz Index}\label{calinski-harabasz-index}
+
+\[CH = \frac{SS_B / (k-1)}{SS_W / (n-k)}\]
+
+Where: - \(SS_B\) = between-cluster sum of squares - \(SS_W\) =
+within-cluster sum of squares - \(k\) = number of clusters - \(n\) =
+number of points
+
+\subsubsection{Gap Statistic}\label{gap-statistic}
+
+Compare WCSS to null reference distribution:
+
+\[\text{Gap}_k = \mathbb{E}[\log W_k^*] - \log W_k\]
+
+Choose smallest \(k\) where
+\(\text{Gap}_k \geq \text{Gap}_{k+1} - s_{k+1}\)
+
+\begin{lstlisting}[language=Python]
+from sklearn.cluster import KMeans
+from scipy.spatial.distance import pdist, squareform
+
+def gap_statistic(X, k_range, n_refs=10):
+    gaps = []
+    for k in k_range:
+        # Actual clustering
+        km = KMeans(n_clusters=k, random_state=42, n_init=10)
+        km.fit(X)
+        wk = km.inertia_
+
+        # Reference datasets
+        ref_wks = []
+        for _ in range(n_refs):
+            X_ref = np.random.uniform(X.min(axis=0), X.max(axis=0), X.shape)
+            km_ref = KMeans(n_clusters=k, random_state=42, n_init=10)
+            km_ref.fit(X_ref)
+            ref_wks.append(km_ref.inertia_)
+
+        gap = np.mean(np.log(ref_wks)) - np.log(wk)
+        gaps.append(gap)
+
+    return gaps
+\end{lstlisting}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Production Considerations}\label{production-considerations}
+
+\subsubsection{Scalability}\label{scalability}
+
+\begin{longtable}[]{@{}llll@{}}
+\toprule\noalign{}
+Algorithm & Time & Memory & Scalable Version \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+K-means & \(O(nkdi)\) & \(O(nd)\) & Mini-batch K-means \\
+DBSCAN & \(O(n^2)\) & \(O(n^2)\) & HDBSCAN \\
+Hierarchical & \(O(n^3)\) & \(O(n^2)\) & BIRCH \\
+GMM & \(O(nk^2d^2)\) & \(O(kd^2)\) & Online GMM \\
+\end{longtable}
+
+\subsubsection{Mini-Batch K-Means for Large
+Data}\label{mini-batch-k-means-for-large-data}
+
+\begin{lstlisting}[language=Python]
+from sklearn.cluster import MiniBatchKMeans
+
+mbk = MiniBatchKMeans(n_clusters=10, batch_size=1000,
+                      random_state=42, n_init=10)
+
+# Incremental fitting for streaming data
+for batch in data_generator():
+    mbk.partial_fit(batch)
+
+labels = mbk.predict(X_new)
+\end{lstlisting}
+
+\subsubsection{Handling High Dimensions}\label{handling-high-dimensions}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Curse of dimensionality}: Distances become meaningless in
+  high-D
+\item
+  \textbf{Solutions}:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    PCA before clustering
+  \item
+    Feature selection
+  \item
+    Use cosine similarity instead of Euclidean
+  \item
+    Subspace clustering
+  \end{itemize}
+\end{enumerate}
+
+\begin{lstlisting}[language=Python]
+# Cosine similarity for text/embeddings
+from sklearn.preprocessing import normalize
+
+X_normalized = normalize(X)  # L2 normalize
+# Now Euclidean distance = sqrt(2 * (1 - cosine_similarity))
+\end{lstlisting}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Cluster Stability}\label{cluster-stability}
+
+\subsubsection{Bootstrap Stability
+Analysis}\label{bootstrap-stability-analysis}
+
+\begin{lstlisting}[language=Python]
+from sklearn.metrics import adjusted_rand_score
+
+def cluster_stability(X, n_clusters, n_bootstrap=100):
+    """Measure cluster stability via bootstrap resampling."""
+    n = len(X)
+    km = KMeans(n_clusters=n_clusters, random_state=42, n_init=10)
+    base_labels = km.fit_predict(X)
+
+    ari_scores = []
+    for _ in range(n_bootstrap):
+        # Bootstrap sample
+        idx = np.random.choice(n, n, replace=True)
+        X_boot = X[idx]
+
+        # Cluster bootstrap sample
+        boot_labels = KMeans(n_clusters=n_clusters,
+                            random_state=42, n_init=10).fit_predict(X_boot)
+
+        # Compare to base (on common points)
+        ari = adjusted_rand_score(base_labels[idx], boot_labels)
+        ari_scores.append(ari)
+
+    return np.mean(ari_scores), np.std(ari_scores)
+
+stability, std = cluster_stability(X_scaled, n_clusters=4)
+print(f"Stability: {stability:.3f} (+/- {std:.3f})")
+\end{lstlisting}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Model Persistence and
+Deployment}\label{model-persistence-and-deployment}
+
+\begin{lstlisting}[language=Python]
+import joblib
+
+# Save model and scaler
+joblib.dump(kmeans, 'models/kmeans_model.pkl')
+joblib.dump(scaler, 'models/scaler.pkl')
+
+# Load and predict
+kmeans_loaded = joblib.load('models/kmeans_model.pkl')
+scaler_loaded = joblib.load('models/scaler.pkl')
+
+def predict_cluster(new_data):
+    """Production prediction function."""
+    X_new = scaler_loaded.transform(new_data)
+    cluster = kmeans_loaded.predict(X_new)
+    distance = kmeans_loaded.transform(X_new).min(axis=1)
+    return cluster, distance
+\end{lstlisting}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Monitoring and Drift
+Detection}\label{monitoring-and-drift-detection}
+
+\begin{lstlisting}[language=Python]
+def detect_cluster_drift(X_baseline, X_new, threshold=0.1):
+    """Detect if new data distribution has drifted from baseline."""
+    from scipy.stats import ks_2samp
+
+    drift_detected = False
+    for i in range(X_baseline.shape[1]):
+        stat, p_value = ks_2samp(X_baseline[:, i], X_new[:, i])
+        if p_value < threshold:
+            print(f"Feature {i}: Drift detected (p={p_value:.4f})")
+            drift_detected = True
+
+    return drift_detected
+\end{lstlisting}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{References}\label{references}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  MacQueen, J. (1967). ``Some methods for classification and analysis of
+  multivariate observations''
+\item
+  Ester, M., et al.~(1996). ``A density-based algorithm for discovering
+  clusters''
+\item
+  Ward, J. H. (1963). ``Hierarchical grouping to optimize an objective
+  function''
+\item
+  Tibshirani, R., et al.~(2001). ``Estimating the number of clusters via
+  the gap statistic''
+\end{enumerate}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\emph{In production, cluster quality depends not just on metrics but on
+business impact. Monitor, iterate, and validate with domain experts.}
+
+\end{document}

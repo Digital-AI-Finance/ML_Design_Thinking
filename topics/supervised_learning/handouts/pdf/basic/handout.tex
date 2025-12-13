@@ -1,0 +1,204 @@
+% Pandoc LaTeX template for course handouts
+% Usage: pandoc input.md -o output.tex --template=handout_template.tex --listings
+\documentclass[10pt,a4paper]{article}
+
+% Geometry
+\usepackage[margin=2.5cm]{geometry}
+
+% Fonts and encoding
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+
+% Math
+\usepackage{amsmath,amssymb,amsfonts}
+
+% Tables
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+
+% Graphics
+\usepackage{graphicx}
+
+% Colors
+\usepackage{xcolor}
+\definecolor{mlpurple}{RGB}{51,51,178}
+\definecolor{mlblue}{RGB}{0,102,204}
+\definecolor{codebg}{RGB}{248,248,248}
+\definecolor{codeframe}{RGB}{200,200,200}
+
+% Code listings
+\usepackage{listings}
+\lstset{
+  backgroundcolor=\color{codebg},
+  basicstyle=\ttfamily\small,
+  breakatwhitespace=false,
+  breaklines=true,
+  captionpos=b,
+  commentstyle=\color{gray},
+  frame=single,
+  framerule=0.5pt,
+  rulecolor=\color{codeframe},
+  keepspaces=true,
+  keywordstyle=\color{mlblue}\bfseries,
+  language=Python,
+  numbers=none,
+  showspaces=false,
+  showstringspaces=false,
+  showtabs=false,
+  stringstyle=\color{mlpurple},
+  tabsize=4,
+  xleftmargin=0.5em,
+  xrightmargin=0.5em,
+  aboveskip=1em,
+  belowskip=1em
+}
+
+% Hyperlinks
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=mlblue,
+  urlcolor=mlblue,
+  citecolor=mlblue
+}
+
+% Headers and footers
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\textcolor{mlpurple}{\textbf{Supervised Learning}}}
+\rhead{\textcolor{gray}{Basic}}
+\cfoot{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Paragraph spacing
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.5em}
+
+% Section formatting
+\usepackage{titlesec}
+\titleformat{\section}
+  {\Large\bfseries\color{mlpurple}}
+  {\thesection}{1em}{}
+\titleformat{\subsection}
+  {\large\bfseries\color{mlblue}}
+  {\thesubsection}{1em}{}
+\titleformat{\subsubsection}
+  {\normalsize\bfseries}
+  {\thesubsubsection}{1em}{}
+
+% Lists
+\usepackage{enumitem}
+\setlist[itemize]{topsep=0.5em, itemsep=0.25em}
+\setlist[enumerate]{topsep=0.5em, itemsep=0.25em}
+
+% Tight list support for pandoc
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+% Title
+\title{\Huge\bfseries\color{mlpurple} Week 00b Basic Handout: Supervised Learning - Predicting from Data}
+\author{Machine Learning for Smarter Innovation}
+\date{}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{fancy}
+
+\section{Week 00b Basic Handout: Supervised Learning - Predicting from
+Data}\label{week-00b-basic-handout-supervised-learning---predicting-from-data}
+
+\subsection{Overview}\label{overview}
+
+Learn prediction algorithms without advanced math. Focus on intuition
+and practical use.
+
+\subsection{Key Concepts}\label{key-concepts}
+
+\subsubsection{What is Supervised
+Learning?}\label{what-is-supervised-learning}
+
+Learning to predict outputs from inputs when you have labeled examples.
+
+\textbf{Examples}: - Predict house prices from features (regression) -
+Classify emails as spam/not spam (classification) - Diagnose diseases
+from symptoms (classification)
+
+\subsubsection{When to Use}\label{when-to-use}
+
+\begin{itemize}
+\tightlist
+\item
+  Have input-output pairs
+\item
+  Want to predict new cases
+\item
+  Pattern is consistent
+\end{itemize}
+
+\subsection{Algorithms at a Glance}\label{algorithms-at-a-glance}
+
+\subsubsection{1. Linear Regression}\label{linear-regression}
+
+\textbf{Use}: Predict continuous values (price, temperature)
+\textbf{Pro}: Simple, interpretable, fast \textbf{Con}: Only captures
+linear relationships
+
+\subsubsection{2. Logistic Regression}\label{logistic-regression}
+
+\textbf{Use}: Binary classification (yes/no decisions) \textbf{Pro}:
+Probability outputs, interpretable \textbf{Con}: Linear decision
+boundary
+
+\subsubsection{3. Decision Trees}\label{decision-trees}
+
+\textbf{Use}: Both regression and classification \textbf{Pro}:
+Human-readable, handles non-linear \textbf{Con}: Overfits easily
+
+\subsubsection{4. Random Forest}\label{random-forest}
+
+\textbf{Use}: Most tasks, especially tabular data \textbf{Pro}: Robust,
+handles overfitting, accurate \textbf{Con}: Slower, less interpretable
+
+\subsubsection{5. Gradient Boosting
+(XGBoost)}\label{gradient-boosting-xgboost}
+
+\textbf{Use}: Kaggle competitions, production systems \textbf{Pro}:
+State-of-art accuracy \textbf{Con}: Requires tuning, slow training
+
+\subsection{Decision Guide}\label{decision-guide}
+
+\textbf{Start with}: Random Forest (most forgiving) \textbf{Need speed}:
+Logistic/Linear Regression \textbf{Need interpretability}: Decision Tree
+\textbf{Need max accuracy}: XGBoost \textbf{Non-linear + small data}:
+SVM with kernel
+
+\subsection{Common Pitfalls}\label{common-pitfalls}
+
+\begin{itemize}
+\tightlist
+\item
+  Using accuracy on imbalanced data
+\item
+  Ignoring feature scaling
+\item
+  No train/test split
+\item
+  Overfitting to training set
+\end{itemize}
+
+\subsection{Next Steps}\label{next-steps}
+
+\begin{itemize}
+\tightlist
+\item
+  Week 00c: Unsupervised Learning
+\item
+  Try: Kaggle Titanic competition
+\end{itemize}
+
+\end{document}

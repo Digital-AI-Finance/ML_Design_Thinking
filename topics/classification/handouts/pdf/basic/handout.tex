@@ -1,0 +1,409 @@
+% Pandoc LaTeX template for course handouts
+% Usage: pandoc input.md -o output.tex --template=handout_template.tex --listings
+\documentclass[10pt,a4paper]{article}
+
+% Geometry
+\usepackage[margin=2.5cm]{geometry}
+
+% Fonts and encoding
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+
+% Math
+\usepackage{amsmath,amssymb,amsfonts}
+
+% Tables
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+
+% Graphics
+\usepackage{graphicx}
+
+% Colors
+\usepackage{xcolor}
+\definecolor{mlpurple}{RGB}{51,51,178}
+\definecolor{mlblue}{RGB}{0,102,204}
+\definecolor{codebg}{RGB}{248,248,248}
+\definecolor{codeframe}{RGB}{200,200,200}
+
+% Code listings
+\usepackage{listings}
+\lstset{
+  backgroundcolor=\color{codebg},
+  basicstyle=\ttfamily\small,
+  breakatwhitespace=false,
+  breaklines=true,
+  captionpos=b,
+  commentstyle=\color{gray},
+  frame=single,
+  framerule=0.5pt,
+  rulecolor=\color{codeframe},
+  keepspaces=true,
+  keywordstyle=\color{mlblue}\bfseries,
+  language=Python,
+  numbers=none,
+  showspaces=false,
+  showstringspaces=false,
+  showtabs=false,
+  stringstyle=\color{mlpurple},
+  tabsize=4,
+  xleftmargin=0.5em,
+  xrightmargin=0.5em,
+  aboveskip=1em,
+  belowskip=1em
+}
+
+% Hyperlinks
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=mlblue,
+  urlcolor=mlblue,
+  citecolor=mlblue
+}
+
+% Headers and footers
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\textcolor{mlpurple}{\textbf{Classification}}}
+\rhead{\textcolor{gray}{Basic}}
+\cfoot{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Paragraph spacing
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.5em}
+
+% Section formatting
+\usepackage{titlesec}
+\titleformat{\section}
+  {\Large\bfseries\color{mlpurple}}
+  {\thesection}{1em}{}
+\titleformat{\subsection}
+  {\large\bfseries\color{mlblue}}
+  {\thesubsection}{1em}{}
+\titleformat{\subsubsection}
+  {\normalsize\bfseries}
+  {\thesubsubsection}{1em}{}
+
+% Lists
+\usepackage{enumitem}
+\setlist[itemize]{topsep=0.5em, itemsep=0.25em}
+\setlist[enumerate]{topsep=0.5em, itemsep=0.25em}
+
+% Tight list support for pandoc
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+% Title
+\title{\Huge\bfseries\color{mlpurple} Handout 1: Basic Classification - Your First Steps in Machine Learning}
+\author{Machine Learning for Smarter Innovation}
+\date{}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{fancy}
+
+\section{Handout 1: Basic Classification - Your First Steps in Machine
+Learning}\label{handout-1-basic-classification---your-first-steps-in-machine-learning}
+
+\subsection{Learning Objectives}\label{learning-objectives}
+
+By the end of this handout, you will: - Understand what classification
+is and why it matters - Build your first classifier using Python -
+Evaluate how well your classifier works - Apply classification to a real
+innovation dataset
+
+\subsection{What is Classification?}\label{what-is-classification}
+
+Classification is teaching a computer to sort things into groups. Just
+like you sort: - Emails into spam or not spam - Photos into categories
+(vacation, family, work) - Music into genres (rock, pop, classical)
+
+In our innovation context, we classify: - Startups as likely to succeed
+or fail - Products as worth launching or not - Ideas as innovative or
+conventional
+
+\subsection{Your First Classifier in
+Python}\label{your-first-classifier-in-python}
+
+\subsubsection{Step 1: Import the Tools}\label{step-1-import-the-tools}
+
+\begin{lstlisting}[language=Python]
+# These are the basic tools we need
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score
+import pandas as pd
+\end{lstlisting}
+
+\subsubsection{Step 2: Load Data}\label{step-2-load-data}
+
+\begin{lstlisting}[language=Python]
+# Load our innovation dataset
+data = pd.read_csv('innovation_data.csv')
+
+# Look at the first few rows
+print(data.head())
+\end{lstlisting}
+
+\subsubsection{Step 3: Prepare the Data}\label{step-3-prepare-the-data}
+
+\begin{lstlisting}[language=Python]
+# X = features (what we know about each innovation)
+# y = target (what we want to predict - success or failure)
+
+X = data[['novelty_score', 'market_size', 'team_experience']]
+y = data['success']  # This is 1 for success, 0 for failure
+\end{lstlisting}
+
+\subsubsection{Step 4: Split into Training and Test
+Sets}\label{step-4-split-into-training-and-test-sets}
+
+\begin{lstlisting}[language=Python]
+# We use 80% of data to train, 20% to test
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42
+)
+
+print(f"Training on {len(X_train)} examples")
+print(f"Testing on {len(X_test)} examples")
+\end{lstlisting}
+
+\subsubsection{Step 5: Train Your First
+Classifier}\label{step-5-train-your-first-classifier}
+
+\begin{lstlisting}[language=Python]
+# Create a simple classifier (Logistic Regression)
+classifier = LogisticRegression()
+
+# Train it on the training data
+classifier.fit(X_train, y_train)
+
+print("Training complete!")
+\end{lstlisting}
+
+\subsubsection{Step 6: Make Predictions}\label{step-6-make-predictions}
+
+\begin{lstlisting}[language=Python]
+# Predict on the test set
+predictions = classifier.predict(X_test)
+
+# Look at first 5 predictions vs actual
+for i in range(5):
+    print(f"Predicted: {predictions[i]}, Actual: {y_test.iloc[i]}")
+\end{lstlisting}
+
+\subsubsection{Step 7: Evaluate
+Performance}\label{step-7-evaluate-performance}
+
+\begin{lstlisting}[language=Python]
+# Calculate accuracy (% correct)
+accuracy = accuracy_score(y_test, predictions)
+print(f"Accuracy: {accuracy * 100:.1f}%")
+
+# This means our classifier got X% of predictions correct!
+\end{lstlisting}
+
+\subsection{Understanding Different
+Classifiers}\label{understanding-different-classifiers}
+
+\subsubsection{1. Logistic Regression - The Simple
+Scorer}\label{logistic-regression---the-simple-scorer}
+
+Think of it as giving points for good features:
+
+\begin{lstlisting}[language=Python]
+from sklearn.linear_model import LogisticRegression
+
+model = LogisticRegression()
+model.fit(X_train, y_train)
+\end{lstlisting}
+
+\begin{itemize}
+\tightlist
+\item
+  Fast and simple
+\item
+  Good baseline
+\item
+  Easy to understand
+\end{itemize}
+
+\subsubsection{2. Decision Tree - The Question
+Asker}\label{decision-tree---the-question-asker}
+
+Like playing 20 questions:
+
+\begin{lstlisting}[language=Python]
+from sklearn.tree import DecisionTreeClassifier
+
+model = DecisionTreeClassifier(max_depth=5)
+model.fit(X_train, y_train)
+\end{lstlisting}
+
+\begin{itemize}
+\tightlist
+\item
+  Easy to visualize
+\item
+  Can explain decisions
+\item
+  Might overfit if too deep
+\end{itemize}
+
+\subsubsection{3. Random Forest - The Team of
+Experts}\label{random-forest---the-team-of-experts}
+
+Many trees voting together:
+
+\begin{lstlisting}[language=Python]
+from sklearn.ensemble import RandomForestClassifier
+
+model = RandomForestClassifier(n_estimators=100)
+model.fit(X_train, y_train)
+\end{lstlisting}
+
+\begin{itemize}
+\tightlist
+\item
+  More accurate
+\item
+  Handles complex patterns
+\item
+  Harder to explain
+\end{itemize}
+
+\subsection{Practical Exercise: Innovation Success
+Predictor}\label{practical-exercise-innovation-success-predictor}
+
+\begin{lstlisting}[language=Python]
+# Complete working example
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score, confusion_matrix
+
+# 1. Load and explore data
+data = pd.read_csv('innovation_data.csv')
+print(f"Dataset has {len(data)} innovations")
+print(f"Success rate: {data['success'].mean() * 100:.1f}%")
+
+# 2. Select features
+feature_columns = [
+    'novelty_score',      # 0-100 score
+    'market_size',        # in millions
+    'team_experience',    # in years
+    'development_time',   # in months
+    'budget_used'         # percentage of budget
+]
+X = data[feature_columns]
+y = data['success']
+
+# 3. Split data
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42
+)
+
+# 4. Train classifier
+classifier = RandomForestClassifier(n_estimators=100, random_state=42)
+classifier.fit(X_train, y_train)
+
+# 5. Make predictions
+predictions = classifier.predict(X_test)
+
+# 6. Evaluate
+accuracy = accuracy_score(y_test, predictions)
+print(f"\nModel accuracy: {accuracy * 100:.1f}%")
+
+# 7. Show feature importance
+importances = classifier.feature_importances_
+for feature, importance in zip(feature_columns, importances):
+    print(f"{feature}: {importance * 100:.1f}% important")
+\end{lstlisting}
+
+\subsection{Common Mistakes to Avoid}\label{common-mistakes-to-avoid}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Testing on training data} - Always keep test data separate
+\item
+  \textbf{Ignoring imbalanced data} - If 95\% fail, predicting ``all
+  fail'' gets 95\% accuracy!
+\item
+  \textbf{Not checking feature importance} - Some features might not
+  help at all
+\item
+  \textbf{Overfitting} - Making the model too complex for the data
+\end{enumerate}
+
+\subsection{Key Terms Summary}\label{key-terms-summary}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Classification}: Sorting into categories
+\item
+  \textbf{Features}: The information we use to make decisions
+\item
+  \textbf{Target}: What we're trying to predict
+\item
+  \textbf{Training}: Teaching the model with examples
+\item
+  \textbf{Testing}: Checking if the model learned correctly
+\item
+  \textbf{Accuracy}: Percentage of correct predictions
+\item
+  \textbf{Overfitting}: Memorizing instead of learning patterns
+\end{itemize}
+
+\subsection{Next Steps}\label{next-steps}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Try different classifiers on the same data
+\item
+  Add more features and see if accuracy improves
+\item
+  Visualize your decision tree to understand its logic
+\item
+  Experiment with different train/test splits
+\end{enumerate}
+
+\subsection{Quick Reference}\label{quick-reference}
+
+\begin{lstlisting}[language=Python]
+# Import everything you need
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score, confusion_matrix
+import pandas as pd
+
+# Basic workflow
+data = pd.read_csv('your_data.csv')
+X = data[['feature1', 'feature2', 'feature3']]
+y = data['target']
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+model = RandomForestClassifier()
+model.fit(X_train, y_train)
+predictions = model.predict(X_test)
+accuracy = accuracy_score(y_test, predictions)
+print(f"Accuracy: {accuracy * 100:.1f}%")
+\end{lstlisting}
+
+Remember: Everyone starts somewhere. Your first classifier might only be
+70\% accurate, and that's okay! The goal is to understand the process
+and improve from there.
+
+\end{document}

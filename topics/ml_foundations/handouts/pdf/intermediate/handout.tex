@@ -1,0 +1,456 @@
+% Pandoc LaTeX template for course handouts
+% Usage: pandoc input.md -o output.tex --template=handout_template.tex --listings
+\documentclass[10pt,a4paper]{article}
+
+% Geometry
+\usepackage[margin=2.5cm]{geometry}
+
+% Fonts and encoding
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+
+% Math
+\usepackage{amsmath,amssymb,amsfonts}
+
+% Tables
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+
+% Graphics
+\usepackage{graphicx}
+
+% Colors
+\usepackage{xcolor}
+\definecolor{mlpurple}{RGB}{51,51,178}
+\definecolor{mlblue}{RGB}{0,102,204}
+\definecolor{codebg}{RGB}{248,248,248}
+\definecolor{codeframe}{RGB}{200,200,200}
+
+% Code listings
+\usepackage{listings}
+\lstset{
+  backgroundcolor=\color{codebg},
+  basicstyle=\ttfamily\small,
+  breakatwhitespace=false,
+  breaklines=true,
+  captionpos=b,
+  commentstyle=\color{gray},
+  frame=single,
+  framerule=0.5pt,
+  rulecolor=\color{codeframe},
+  keepspaces=true,
+  keywordstyle=\color{mlblue}\bfseries,
+  language=Python,
+  numbers=none,
+  showspaces=false,
+  showstringspaces=false,
+  showtabs=false,
+  stringstyle=\color{mlpurple},
+  tabsize=4,
+  xleftmargin=0.5em,
+  xrightmargin=0.5em,
+  aboveskip=1em,
+  belowskip=1em
+}
+
+% Hyperlinks
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=mlblue,
+  urlcolor=mlblue,
+  citecolor=mlblue
+}
+
+% Headers and footers
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\textcolor{mlpurple}{\textbf{ML Foundations}}}
+\rhead{\textcolor{gray}{Intermediate}}
+\cfoot{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Paragraph spacing
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.5em}
+
+% Section formatting
+\usepackage{titlesec}
+\titleformat{\section}
+  {\Large\bfseries\color{mlpurple}}
+  {\thesection}{1em}{}
+\titleformat{\subsection}
+  {\large\bfseries\color{mlblue}}
+  {\thesubsection}{1em}{}
+\titleformat{\subsubsection}
+  {\normalsize\bfseries}
+  {\thesubsubsection}{1em}{}
+
+% Lists
+\usepackage{enumitem}
+\setlist[itemize]{topsep=0.5em, itemsep=0.25em}
+\setlist[enumerate]{topsep=0.5em, itemsep=0.25em}
+
+% Tight list support for pandoc
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+% Title
+\title{\Huge\bfseries\color{mlpurple} Week 00a Intermediate Handout: ML Foundations - Hands-On Implementation}
+\author{Machine Learning for Smarter Innovation}
+\date{}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{fancy}
+
+\section{Week 00a Intermediate Handout: ML Foundations - Hands-On
+Implementation}\label{week-00a-intermediate-handout-ml-foundations---hands-on-implementation}
+
+\subsection{For Students With: Basic Python, willingness to
+code}\label{for-students-with-basic-python-willingness-to-code}
+
+\subsection{Objectives}\label{objectives}
+
+\begin{itemize}
+\tightlist
+\item
+  Implement ML algorithms using scikit-learn
+\item
+  Understand train/test split and evaluation
+\item
+  Apply preprocessing and feature engineering
+\item
+  Build end-to-end ML pipeline
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Setup Environment}\label{setup-environment}
+
+\begin{lstlisting}[language=Python]
+# Install required packages
+pip install scikit-learn pandas numpy matplotlib seaborn
+
+# Import essentials
+import numpy as np
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import LogisticRegression
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+import matplotlib.pyplot as plt
+import seaborn as sns
+\end{lstlisting}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Exercise 1: Spam Detection (Supervised
+Classification)}\label{exercise-1-spam-detection-supervised-classification}
+
+\subsubsection{Step 1: Load and Explore
+Data}\label{step-1-load-and-explore-data}
+
+\begin{lstlisting}[language=Python]
+# Load SMS spam dataset
+from sklearn.datasets import fetch_20newsgroups
+from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
+
+# For this example, we'll create synthetic spam data
+emails = [
+    "Free money click here now",
+    "Meeting tomorrow at 3pm",
+    "Congratulations you won lottery",
+    "Can you review my document",
+    "Claim your prize urgent",
+    "Lunch plans for Friday"
+]
+labels = [1, 0, 1, 0, 1, 0]  # 1=spam, 0=not spam
+
+# Check class balance
+print(f"Spam: {sum(labels)}, Not spam: {len(labels)-sum(labels)}")
+\end{lstlisting}
+
+\subsubsection{Step 2: Feature
+Engineering}\label{step-2-feature-engineering}
+
+\begin{lstlisting}[language=Python]
+# Convert text to numbers using TF-IDF
+vectorizer = TfidfVectorizer(max_features=100, stop_words='english')
+X = vectorizer.fit_transform(emails)
+
+# Split data
+X_train, X_test, y_train, y_test = train_test_split(
+    X, labels, test_size=0.3, random_state=42, stratify=labels
+)
+
+print(f"Training samples: {X_train.shape[0]}")
+print(f"Test samples: {X_test.shape[0]}")
+print(f"Features: {X_train.shape[1]}")
+\end{lstlisting}
+
+\subsubsection{Step 3: Train Model}\label{step-3-train-model}
+
+\begin{lstlisting}[language=Python]
+# Try multiple algorithms
+models = {
+    'Logistic Regression': LogisticRegression(),
+    'Decision Tree': DecisionTreeClassifier(max_depth=5),
+    'Random Forest': RandomForestClassifier(n_estimators=10)
+}
+
+results = {}
+for name, model in models.items():
+    # Train
+    model.fit(X_train, y_train)
+
+    # Predict
+    y_pred = model.predict(X_test)
+
+    # Evaluate
+    accuracy = accuracy_score(y_test, y_pred)
+    results[name] = accuracy
+    print(f"{name}: {accuracy:.2%}")
+\end{lstlisting}
+
+\subsubsection{Step 4: Evaluate Best
+Model}\label{step-4-evaluate-best-model}
+
+\begin{lstlisting}[language=Python]
+# Get best model
+best_model_name = max(results, key=results.get)
+best_model = models[best_model_name]
+
+# Detailed evaluation
+y_pred = best_model.predict(X_test)
+print(classification_report(y_test, y_pred, target_names=['Not Spam', 'Spam']))
+
+# Confusion matrix
+cm = confusion_matrix(y_test, y_pred)
+sns.heatmap(cm, annot=True, fmt='d', cmap='Blues')
+plt.title(f'Confusion Matrix - {best_model_name}')
+plt.ylabel('True Label')
+plt.xlabel('Predicted Label')
+plt.show()
+\end{lstlisting}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Exercise 2: Customer Segmentation (Unsupervised
+Clustering)}\label{exercise-2-customer-segmentation-unsupervised-clustering}
+
+\begin{lstlisting}[language=Python]
+from sklearn.cluster import KMeans
+from sklearn.decomposition import PCA
+
+# Generate synthetic customer data
+np.random.seed(42)
+n_customers = 300
+
+# Features: [recency, frequency, monetary_value]
+customers = np.random.randn(n_customers, 3)
+customers[:100, :] += [2, 2, 2]  # High-value segment
+customers[100:200, :] += [-2, -2, -2]  # Low-value segment
+
+# Standardize
+scaler = StandardScaler()
+customers_scaled = scaler.fit_transform(customers)
+
+# Find optimal K using elbow method
+inertias = []
+K_range = range(2, 11)
+for k in K_range:
+    kmeans = KMeans(n_clusters=k, random_state=42)
+    kmeans.fit(customers_scaled)
+    inertias.append(kmeans.inertia_)
+
+# Plot elbow
+plt.plot(K_range, inertias, 'bo-')
+plt.xlabel('Number of Clusters (K)')
+plt.ylabel('Inertia')
+plt.title('Elbow Method')
+plt.show()
+
+# Fit final model
+k_optimal = 3
+kmeans = KMeans(n_clusters=k_optimal, random_state=42)
+clusters = kmeans.fit_predict(customers_scaled)
+
+# Visualize (2D PCA projection)
+pca = PCA(n_components=2)
+customers_2d = pca.fit_transform(customers_scaled)
+
+plt.scatter(customers_2d[:, 0], customers_2d[:, 1], c=clusters, cmap='viridis')
+plt.scatter(kmeans.cluster_centers_[:, 0], kmeans.cluster_centers_[:, 1],
+            marker='X', s=200, c='red', edgecolors='black', label='Centroids')
+plt.title('Customer Segments')
+plt.legend()
+plt.show()
+
+# Analyze segments
+for i in range(k_optimal):
+    segment = customers[clusters == i]
+    print(f"\nSegment {i}:")
+    print(f"  Size: {len(segment)}")
+    print(f"  Avg Recency: {segment[:, 0].mean():.2f}")
+    print(f"  Avg Frequency: {segment[:, 1].mean():.2f}")
+    print(f"  Avg Monetary: {segment[:, 2].mean():.2f}")
+\end{lstlisting}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Exercise 3: Complete ML
+Pipeline}\label{exercise-3-complete-ml-pipeline}
+
+\begin{lstlisting}[language=Python]
+from sklearn.pipeline import Pipeline
+from sklearn.model_selection import cross_val_score, GridSearchCV
+
+# Build pipeline
+pipeline = Pipeline([
+    ('scaler', StandardScaler()),
+    ('classifier', RandomForestClassifier(random_state=42))
+])
+
+# Hyperparameter tuning
+param_grid = {
+    'classifier__n_estimators': [10, 50, 100],
+    'classifier__max_depth': [3, 5, 10, None],
+    'classifier__min_samples_split': [2, 5, 10]
+}
+
+grid_search = GridSearchCV(pipeline, param_grid, cv=5, scoring='accuracy')
+grid_search.fit(X_train, y_train)
+
+print(f"Best parameters: {grid_search.best_params_}")
+print(f"Best CV score: {grid_search.best_score_:.2%}")
+
+# Test set performance
+best_pipeline = grid_search.best_estimator_
+test_score = best_pipeline.score(X_test, y_test)
+print(f"Test score: {test_score:.2%}")
+\end{lstlisting}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Key Implementation
+Patterns}\label{key-implementation-patterns}
+
+\subsubsection{1. Train/Test Split
+(ALWAYS)}\label{traintest-split-always}
+
+\begin{lstlisting}[language=Python]
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42, stratify=y  # Preserve class balance
+)
+\end{lstlisting}
+
+\subsubsection{2. Feature Scaling (for distance-based
+algorithms)}\label{feature-scaling-for-distance-based-algorithms}
+
+\begin{lstlisting}[language=Python]
+scaler = StandardScaler()
+X_train_scaled = scaler.fit_transform(X_train)
+X_test_scaled = scaler.transform(X_test)  # Use training stats!
+\end{lstlisting}
+
+\subsubsection{3. Cross-Validation (better than single
+split)}\label{cross-validation-better-than-single-split}
+
+\begin{lstlisting}[language=Python]
+scores = cross_val_score(model, X, y, cv=5)
+print(f"CV Accuracy: {scores.mean():.2%} (+/- {scores.std():.2%})")
+\end{lstlisting}
+
+\subsubsection{4. Model Persistence}\label{model-persistence}
+
+\begin{lstlisting}[language=Python]
+import joblib
+
+# Save model
+joblib.dump(best_model, 'spam_classifier.pkl')
+
+# Load model
+loaded_model = joblib.load('spam_classifier.pkl')
+\end{lstlisting}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Common Issues and
+Solutions}\label{common-issues-and-solutions}
+
+\subsubsection{Issue 1: Imbalanced
+Classes}\label{issue-1-imbalanced-classes}
+
+\begin{lstlisting}[language=Python]
+from sklearn.utils.class_weight import compute_class_weight
+
+# Auto-balance weights
+class_weights = compute_class_weight('balanced', classes=np.unique(y_train), y=y_train)
+model = LogisticRegression(class_weight='balanced')
+\end{lstlisting}
+
+\subsubsection{Issue 2: High
+Dimensionality}\label{issue-2-high-dimensionality}
+
+\begin{lstlisting}[language=Python]
+from sklearn.decomposition import PCA
+
+# Reduce dimensions
+pca = PCA(n_components=0.95)  # Keep 95% variance
+X_reduced = pca.fit_transform(X)
+\end{lstlisting}
+
+\subsubsection{Issue 3: Missing Data}\label{issue-3-missing-data}
+
+\begin{lstlisting}[language=Python]
+from sklearn.impute import SimpleImputer
+
+imputer = SimpleImputer(strategy='mean')
+X_imputed = imputer.fit_transform(X)
+\end{lstlisting}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Practice Exercises}\label{practice-exercises}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Iris Classification}: Load iris dataset, train 3 models,
+  compare performance
+\item
+  \textbf{Boston Housing}: Predict prices using regression (continuous
+  target)
+\item
+  \textbf{Digits Recognition}: CNN on MNIST dataset
+\item
+  \textbf{Text Classification}: 20 newsgroups multi-class classification
+\item
+  \textbf{Anomaly Detection}: Isolation Forest on credit card fraud
+  dataset
+\end{enumerate}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Next Steps}\label{next-steps}
+
+\begin{itemize}
+\tightlist
+\item
+  Kaggle competitions (Titanic, House Prices)
+\item
+  Scikit-learn documentation (excellent examples)
+\item
+  Week 00b: Deep dive into supervised algorithms
+\end{itemize}
+
+\end{document}

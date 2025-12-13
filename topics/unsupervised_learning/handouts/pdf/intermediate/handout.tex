@@ -1,0 +1,522 @@
+% Pandoc LaTeX template for course handouts
+% Usage: pandoc input.md -o output.tex --template=handout_template.tex --listings
+\documentclass[10pt,a4paper]{article}
+
+% Geometry
+\usepackage[margin=2.5cm]{geometry}
+
+% Fonts and encoding
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+
+% Math
+\usepackage{amsmath,amssymb,amsfonts}
+
+% Tables
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+
+% Graphics
+\usepackage{graphicx}
+
+% Colors
+\usepackage{xcolor}
+\definecolor{mlpurple}{RGB}{51,51,178}
+\definecolor{mlblue}{RGB}{0,102,204}
+\definecolor{codebg}{RGB}{248,248,248}
+\definecolor{codeframe}{RGB}{200,200,200}
+
+% Code listings
+\usepackage{listings}
+\lstset{
+  backgroundcolor=\color{codebg},
+  basicstyle=\ttfamily\small,
+  breakatwhitespace=false,
+  breaklines=true,
+  captionpos=b,
+  commentstyle=\color{gray},
+  frame=single,
+  framerule=0.5pt,
+  rulecolor=\color{codeframe},
+  keepspaces=true,
+  keywordstyle=\color{mlblue}\bfseries,
+  language=Python,
+  numbers=none,
+  showspaces=false,
+  showstringspaces=false,
+  showtabs=false,
+  stringstyle=\color{mlpurple},
+  tabsize=4,
+  xleftmargin=0.5em,
+  xrightmargin=0.5em,
+  aboveskip=1em,
+  belowskip=1em
+}
+
+% Hyperlinks
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=mlblue,
+  urlcolor=mlblue,
+  citecolor=mlblue
+}
+
+% Headers and footers
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\textcolor{mlpurple}{\textbf{Unsupervised Learning}}}
+\rhead{\textcolor{gray}{Intermediate}}
+\cfoot{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Paragraph spacing
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.5em}
+
+% Section formatting
+\usepackage{titlesec}
+\titleformat{\section}
+  {\Large\bfseries\color{mlpurple}}
+  {\thesection}{1em}{}
+\titleformat{\subsection}
+  {\large\bfseries\color{mlblue}}
+  {\thesubsection}{1em}{}
+\titleformat{\subsubsection}
+  {\normalsize\bfseries}
+  {\thesubsubsection}{1em}{}
+
+% Lists
+\usepackage{enumitem}
+\setlist[itemize]{topsep=0.5em, itemsep=0.25em}
+\setlist[enumerate]{topsep=0.5em, itemsep=0.25em}
+
+% Tight list support for pandoc
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+% Title
+\title{\Huge\bfseries\color{mlpurple} Unsupervised Learning - Intermediate Handout}
+\author{Machine Learning for Smarter Innovation}
+\date{}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{fancy}
+
+\section{Unsupervised Learning - Intermediate
+Handout}\label{unsupervised-learning---intermediate-handout}
+
+\textbf{Target Audience}: Practitioners with basic Python knowledge
+\textbf{Duration}: 45 minutes reading + coding \textbf{Level}:
+Intermediate (includes code examples)
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Setup}\label{setup}
+
+\begin{lstlisting}[language=Python]
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.preprocessing import StandardScaler
+from sklearn.cluster import KMeans, DBSCAN, AgglomerativeClustering
+from sklearn.decomposition import PCA
+from sklearn.manifold import TSNE
+from sklearn.metrics import silhouette_score, calinski_harabasz_score
+\end{lstlisting}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{1. K-Means Clustering}\label{k-means-clustering}
+
+\subsubsection{Basic Implementation}\label{basic-implementation}
+
+\begin{lstlisting}[language=Python]
+# Load and scale data
+X = df[['feature1', 'feature2', 'feature3']]
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X)
+
+# Fit K-means
+kmeans = KMeans(n_clusters=4, random_state=42, n_init=10)
+clusters = kmeans.fit_predict(X_scaled)
+
+# Add to dataframe
+df['cluster'] = clusters
+print(f"Cluster centers:\n{kmeans.cluster_centers_}")
+\end{lstlisting}
+
+\subsubsection{Finding Optimal K (Elbow
+Method)}\label{finding-optimal-k-elbow-method}
+
+\begin{lstlisting}[language=Python]
+inertias = []
+K_range = range(2, 11)
+
+for k in K_range:
+    km = KMeans(n_clusters=k, random_state=42, n_init=10)
+    km.fit(X_scaled)
+    inertias.append(km.inertia_)
+
+plt.figure(figsize=(10, 5))
+plt.subplot(1, 2, 1)
+plt.plot(K_range, inertias, 'bo-')
+plt.xlabel('Number of Clusters (K)')
+plt.ylabel('Inertia (Within-cluster SS)')
+plt.title('Elbow Method')
+
+# Silhouette scores
+silhouettes = []
+for k in K_range:
+    km = KMeans(n_clusters=k, random_state=42, n_init=10)
+    labels = km.fit_predict(X_scaled)
+    silhouettes.append(silhouette_score(X_scaled, labels))
+
+plt.subplot(1, 2, 2)
+plt.plot(K_range, silhouettes, 'ro-')
+plt.xlabel('Number of Clusters (K)')
+plt.ylabel('Silhouette Score')
+plt.title('Silhouette Analysis')
+plt.tight_layout()
+plt.show()
+\end{lstlisting}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{2. DBSCAN (Density-Based)}\label{dbscan-density-based}
+
+\subsubsection{When to Use DBSCAN}\label{when-to-use-dbscan}
+
+\begin{itemize}
+\tightlist
+\item
+  Unknown number of clusters
+\item
+  Clusters have irregular shapes
+\item
+  Need to identify outliers/noise
+\item
+  Data has varying densities
+\end{itemize}
+
+\subsubsection{Implementation}\label{implementation}
+
+\begin{lstlisting}[language=Python]
+from sklearn.cluster import DBSCAN
+from sklearn.neighbors import NearestNeighbors
+
+# Find optimal eps using k-distance graph
+neighbors = NearestNeighbors(n_neighbors=5)
+neighbors.fit(X_scaled)
+distances, _ = neighbors.kneighbors(X_scaled)
+distances = np.sort(distances[:, -1])
+
+plt.figure(figsize=(8, 4))
+plt.plot(distances)
+plt.ylabel('5-NN Distance')
+plt.xlabel('Points (sorted)')
+plt.title('K-Distance Graph - Look for elbow')
+plt.show()
+
+# Apply DBSCAN
+dbscan = DBSCAN(eps=0.5, min_samples=5)
+clusters = dbscan.fit_predict(X_scaled)
+
+# Analyze results
+n_clusters = len(set(clusters)) - (1 if -1 in clusters else 0)
+n_noise = list(clusters).count(-1)
+print(f"Clusters found: {n_clusters}")
+print(f"Noise points: {n_noise} ({n_noise/len(clusters):.1%})")
+\end{lstlisting}
+
+\subsubsection{Parameter Grid Search}\label{parameter-grid-search}
+
+\begin{lstlisting}[language=Python]
+eps_values = [0.3, 0.5, 0.7, 1.0]
+min_samples_values = [3, 5, 10]
+
+results = []
+for eps in eps_values:
+    for min_samples in min_samples_values:
+        db = DBSCAN(eps=eps, min_samples=min_samples)
+        labels = db.fit_predict(X_scaled)
+        n_clusters = len(set(labels)) - (1 if -1 in labels else 0)
+        n_noise = list(labels).count(-1)
+        if n_clusters > 1:
+            sil = silhouette_score(X_scaled[labels != -1], labels[labels != -1])
+        else:
+            sil = -1
+        results.append({'eps': eps, 'min_samples': min_samples,
+                       'n_clusters': n_clusters, 'noise': n_noise, 'silhouette': sil})
+
+pd.DataFrame(results).sort_values('silhouette', ascending=False)
+\end{lstlisting}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{3. Hierarchical Clustering}\label{hierarchical-clustering}
+
+\subsubsection{Dendrogram Analysis}\label{dendrogram-analysis}
+
+\begin{lstlisting}[language=Python]
+from scipy.cluster.hierarchy import dendrogram, linkage, fcluster
+
+# Create linkage matrix
+linked = linkage(X_scaled, method='ward')
+
+# Plot dendrogram
+plt.figure(figsize=(12, 6))
+dendrogram(linked, truncate_mode='lastp', p=30,
+           leaf_rotation=90, leaf_font_size=10)
+plt.title('Hierarchical Clustering Dendrogram')
+plt.xlabel('Sample Index or Cluster Size')
+plt.ylabel('Distance (Ward)')
+plt.axhline(y=15, color='r', linestyle='--', label='Cut threshold')
+plt.legend()
+plt.show()
+
+# Cut tree at threshold
+clusters = fcluster(linked, t=15, criterion='distance')
+# Or cut to get specific number of clusters
+clusters = fcluster(linked, t=4, criterion='maxclust')
+\end{lstlisting}
+
+\subsubsection{Linkage Methods
+Comparison}\label{linkage-methods-comparison}
+
+\begin{longtable}[]{@{}lll@{}}
+\toprule\noalign{}
+Method & Formula & Best For \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Ward & Minimize variance increase & Compact, equal-sized \\
+Complete & Max pairwise distance & Outlier-sensitive \\
+Average & Mean pairwise distance & Balanced \\
+Single & Min pairwise distance & Elongated shapes \\
+\end{longtable}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{4. Dimensionality Reduction}\label{dimensionality-reduction}
+
+\subsubsection{PCA for Feature
+Reduction}\label{pca-for-feature-reduction}
+
+\begin{lstlisting}[language=Python]
+from sklearn.decomposition import PCA
+
+# Determine optimal components
+pca_full = PCA()
+pca_full.fit(X_scaled)
+
+# Cumulative variance plot
+cum_var = np.cumsum(pca_full.explained_variance_ratio_)
+plt.figure(figsize=(8, 4))
+plt.plot(range(1, len(cum_var)+1), cum_var, 'bo-')
+plt.axhline(y=0.95, color='r', linestyle='--', label='95% threshold')
+plt.xlabel('Number of Components')
+plt.ylabel('Cumulative Explained Variance')
+plt.title('PCA - Variance Explained')
+plt.legend()
+plt.show()
+
+# Apply PCA (keep 95% variance)
+n_components = np.argmax(cum_var >= 0.95) + 1
+pca = PCA(n_components=n_components)
+X_pca = pca.fit_transform(X_scaled)
+print(f"Reduced from {X_scaled.shape[1]} to {n_components} components")
+\end{lstlisting}
+
+\subsubsection{t-SNE for Visualization}\label{t-sne-for-visualization}
+
+\begin{lstlisting}[language=Python]
+from sklearn.manifold import TSNE
+
+# t-SNE is for visualization only - never cluster on t-SNE output!
+tsne = TSNE(n_components=2, perplexity=30, random_state=42, n_iter=1000)
+X_tsne = tsne.fit_transform(X_scaled)
+
+plt.figure(figsize=(10, 8))
+scatter = plt.scatter(X_tsne[:, 0], X_tsne[:, 1], c=clusters,
+                     cmap='viridis', alpha=0.7)
+plt.colorbar(scatter, label='Cluster')
+plt.title('t-SNE Visualization of Clusters')
+plt.xlabel('t-SNE 1')
+plt.ylabel('t-SNE 2')
+plt.show()
+\end{lstlisting}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{5. Cluster Profiling}\label{cluster-profiling}
+
+\subsubsection{Statistical Summary}\label{statistical-summary}
+
+\begin{lstlisting}[language=Python]
+# Add cluster labels to data
+df['cluster'] = clusters
+
+# Profile each cluster
+profile = df.groupby('cluster').agg({
+    'feature1': ['mean', 'std', 'min', 'max'],
+    'feature2': ['mean', 'std', 'min', 'max'],
+    'feature3': ['mean', 'std', 'min', 'max']
+}).round(2)
+
+# Cluster sizes
+sizes = df['cluster'].value_counts().sort_index()
+print("Cluster sizes:")
+print(sizes)
+print(f"\nCluster profiles:\n{profile}")
+\end{lstlisting}
+
+\subsubsection{Visualization}\label{visualization}
+
+\begin{lstlisting}[language=Python]
+# Parallel coordinates plot
+from pandas.plotting import parallel_coordinates
+
+# Normalize for visualization
+df_norm = df.copy()
+for col in features:
+    df_norm[col] = (df[col] - df[col].mean()) / df[col].std()
+
+plt.figure(figsize=(12, 6))
+parallel_coordinates(df_norm[features + ['cluster']], 'cluster',
+                    colormap='viridis', alpha=0.5)
+plt.title('Cluster Profiles - Parallel Coordinates')
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.show()
+\end{lstlisting}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{6. Validation Metrics}\label{validation-metrics}
+
+\begin{lstlisting}[language=Python]
+from sklearn.metrics import (silhouette_score, calinski_harabasz_score,
+                            davies_bouldin_score)
+
+# Internal validation (no ground truth needed)
+print("Cluster Quality Metrics:")
+print(f"  Silhouette Score: {silhouette_score(X_scaled, clusters):.3f}")
+print(f"  Calinski-Harabasz: {calinski_harabasz_score(X_scaled, clusters):.1f}")
+print(f"  Davies-Bouldin: {davies_bouldin_score(X_scaled, clusters):.3f}")
+\end{lstlisting}
+
+\begin{longtable}[]{@{}lll@{}}
+\toprule\noalign{}
+Metric & Range & Interpretation \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Silhouette & -1 to 1 & Higher = better separation \\
+Calinski-Harabasz & 0 to inf & Higher = denser, well-separated \\
+Davies-Bouldin & 0 to inf & Lower = better \\
+\end{longtable}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Complete Workflow
+Template}\label{complete-workflow-template}
+
+\begin{lstlisting}[language=Python]
+def unsupervised_pipeline(df, features, method='kmeans', n_clusters=None):
+    """
+    Complete unsupervised learning pipeline.
+
+    Parameters:
+    - df: DataFrame with data
+    - features: list of column names to use
+    - method: 'kmeans', 'dbscan', or 'hierarchical'
+    - n_clusters: number of clusters (not needed for DBSCAN)
+    """
+    # 1. Prepare and scale
+    X = df[features].copy()
+    scaler = StandardScaler()
+    X_scaled = scaler.fit_transform(X)
+
+    # 2. Cluster
+    if method == 'kmeans':
+        model = KMeans(n_clusters=n_clusters, random_state=42, n_init=10)
+    elif method == 'dbscan':
+        model = DBSCAN(eps=0.5, min_samples=5)
+    elif method == 'hierarchical':
+        model = AgglomerativeClustering(n_clusters=n_clusters)
+
+    labels = model.fit_predict(X_scaled)
+
+    # 3. Evaluate
+    if len(set(labels)) > 1:
+        sil = silhouette_score(X_scaled, labels)
+        print(f"Silhouette Score: {sil:.3f}")
+
+    # 4. Visualize (PCA to 2D)
+    pca = PCA(n_components=2)
+    X_2d = pca.fit_transform(X_scaled)
+
+    plt.figure(figsize=(10, 6))
+    scatter = plt.scatter(X_2d[:, 0], X_2d[:, 1], c=labels, cmap='viridis')
+    plt.colorbar(scatter, label='Cluster')
+    plt.xlabel(f'PC1 ({pca.explained_variance_ratio_[0]:.1%})')
+    plt.ylabel(f'PC2 ({pca.explained_variance_ratio_[1]:.1%})')
+    plt.title(f'{method.upper()} Clustering Results')
+    plt.show()
+
+    return labels, X_scaled
+
+# Usage
+labels, X_scaled = unsupervised_pipeline(df, ['col1', 'col2', 'col3'],
+                                         method='kmeans', n_clusters=4)
+\end{lstlisting}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Practice Exercises}\label{practice-exercises}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Customer Segmentation}: Cluster customers by RFM (Recency,
+  Frequency, Monetary)
+\item
+  \textbf{Anomaly Detection}: Use DBSCAN to find outliers in transaction
+  data
+\item
+  \textbf{Document Clustering}: Cluster text embeddings to find topic
+  groups
+\end{enumerate}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Next Steps}\label{next-steps}
+
+\begin{itemize}
+\tightlist
+\item
+  Apply to real dataset with business context
+\item
+  Compare multiple algorithms on same data
+\item
+  Experiment with different feature combinations
+\item
+  Read advanced handout for production deployment
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\emph{The goal is not perfect clusters, but actionable insights. Always
+validate with domain experts.}
+
+\end{document}

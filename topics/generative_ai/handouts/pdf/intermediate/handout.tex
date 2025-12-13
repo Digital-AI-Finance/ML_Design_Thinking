@@ -1,0 +1,448 @@
+% Pandoc LaTeX template for course handouts
+% Usage: pandoc input.md -o output.tex --template=handout_template.tex --listings
+\documentclass[10pt,a4paper]{article}
+
+% Geometry
+\usepackage[margin=2.5cm]{geometry}
+
+% Fonts and encoding
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+
+% Math
+\usepackage{amsmath,amssymb,amsfonts}
+
+% Tables
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+
+% Graphics
+\usepackage{graphicx}
+
+% Colors
+\usepackage{xcolor}
+\definecolor{mlpurple}{RGB}{51,51,178}
+\definecolor{mlblue}{RGB}{0,102,204}
+\definecolor{codebg}{RGB}{248,248,248}
+\definecolor{codeframe}{RGB}{200,200,200}
+
+% Code listings
+\usepackage{listings}
+\lstset{
+  backgroundcolor=\color{codebg},
+  basicstyle=\ttfamily\small,
+  breakatwhitespace=false,
+  breaklines=true,
+  captionpos=b,
+  commentstyle=\color{gray},
+  frame=single,
+  framerule=0.5pt,
+  rulecolor=\color{codeframe},
+  keepspaces=true,
+  keywordstyle=\color{mlblue}\bfseries,
+  language=Python,
+  numbers=none,
+  showspaces=false,
+  showstringspaces=false,
+  showtabs=false,
+  stringstyle=\color{mlpurple},
+  tabsize=4,
+  xleftmargin=0.5em,
+  xrightmargin=0.5em,
+  aboveskip=1em,
+  belowskip=1em
+}
+
+% Hyperlinks
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=mlblue,
+  urlcolor=mlblue,
+  citecolor=mlblue
+}
+
+% Headers and footers
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\textcolor{mlpurple}{\textbf{Generative AI}}}
+\rhead{\textcolor{gray}{Intermediate}}
+\cfoot{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Paragraph spacing
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.5em}
+
+% Section formatting
+\usepackage{titlesec}
+\titleformat{\section}
+  {\Large\bfseries\color{mlpurple}}
+  {\thesection}{1em}{}
+\titleformat{\subsection}
+  {\large\bfseries\color{mlblue}}
+  {\thesubsection}{1em}{}
+\titleformat{\subsubsection}
+  {\normalsize\bfseries}
+  {\thesubsubsection}{1em}{}
+
+% Lists
+\usepackage{enumitem}
+\setlist[itemize]{topsep=0.5em, itemsep=0.25em}
+\setlist[enumerate]{topsep=0.5em, itemsep=0.25em}
+
+% Tight list support for pandoc
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+% Title
+\title{\Huge\bfseries\color{mlpurple} Handout 2: Prompt Engineering for Designers (Intermediate Level)}
+\author{Machine Learning for Smarter Innovation}
+\date{}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{fancy}
+
+\section{Handout 2: Prompt Engineering for Designers (Intermediate
+Level)}\label{handout-2-prompt-engineering-for-designers-intermediate-level}
+
+\subsection{Advanced Prompt
+Techniques}\label{advanced-prompt-techniques}
+
+\subsubsection{1. Role-Based Prompting}\label{role-based-prompting}
+
+\begin{lstlisting}[language=Python]
+prompt = """
+You are a senior UX designer at Apple with 15 years of experience.
+Your specialty is creating intuitive interfaces for complex tools.
+Task: Design a dashboard for AI model monitoring.
+Constraints: Must be accessible, work on mobile, use minimal colors.
+Output: Component list with descriptions and layout suggestions.
+"""
+\end{lstlisting}
+
+\subsubsection{2. Few-Shot Learning}\label{few-shot-learning}
+
+Provide examples to guide the AI:
+
+\begin{lstlisting}[language=Python]
+Examples:
+Input: "User needs to track fitness"
+Output: "FitTracker - Minimalist app with daily goals, progress rings, and social challenges"
+
+Input: "User needs to manage recipes"
+Output: "ChefMate - Smart recipe organizer with meal planning, shopping lists, and nutrition tracking"
+
+Now create: "User needs to learn languages"
+\end{lstlisting}
+
+\subsubsection{3. Chain-of-Thought
+Prompting}\label{chain-of-thought-prompting}
+
+\begin{lstlisting}[language=Python]
+prompt = """
+Let's design a sustainable packaging solution step by step:
+1. First, identify the key environmental problems with current packaging
+2. Then, list available eco-friendly materials
+3. Next, consider user experience requirements
+4. Finally, propose 3 innovative solutions
+Show your reasoning for each step.
+"""
+\end{lstlisting}
+
+\subsection{Prompt Templates for Different Use
+Cases}\label{prompt-templates-for-different-use-cases}
+
+\subsubsection{Product Ideation
+Template}\label{product-ideation-template}
+
+\begin{lstlisting}
+Context: [Industry/Market]
+Problem: [Specific pain point]
+Users: [Target demographic]
+Constraints: [Budget/Time/Tech]
+Generate: [Number] product concepts that include:
+- Name and tagline
+- Core value proposition
+- 3 key features
+- Monetization strategy
+- Competitive advantage
+\end{lstlisting}
+
+\subsubsection{UI/UX Design Brief}\label{uiux-design-brief}
+
+\begin{lstlisting}
+Project: [App/Website name]
+User Story: As a [user type], I want to [goal] so that [benefit]
+Design Requirements:
+- Style: [Minimalist/Bold/Playful]
+- Platform: [iOS/Android/Web]
+- Accessibility: [WCAG 2.1 AA]
+Generate:
+- Information architecture
+- Key screen descriptions
+- User flow diagram description
+- Interaction patterns
+\end{lstlisting}
+
+\subsubsection{Marketing Copy Generator}\label{marketing-copy-generator}
+
+\begin{lstlisting}
+Product: [Name and description]
+Target Audience: [Demographics + Psychographics]
+Tone: [Professional/Casual/Playful/Urgent]
+Channel: [Email/Social/Web/Print]
+Generate:
+- Headline (max 10 words)
+- Subheadline (max 20 words)
+- Body copy (100 words)
+- Call to action
+- 3 social media variations
+\end{lstlisting}
+
+\subsection{API Integration Basics}\label{api-integration-basics}
+
+\subsubsection{OpenAI API Example}\label{openai-api-example}
+
+\begin{lstlisting}[language=Python]
+import openai
+
+openai.api_key = 'your-api-key'
+
+def generate_design_concept(brief):
+    response = openai.ChatCompletion.create(
+        model="gpt-4-turbo-preview",
+        messages=[
+            {"role": "system", "content": "You are a creative director."},
+            {"role": "user", "content": brief}
+        ],
+        temperature=0.8,  # Higher = more creative
+        max_tokens=500,
+        presence_penalty=0.6,  # Avoid repetition
+    )
+    return response.choices[0].message.content
+
+# Usage
+brief = "Design a mental health app for teenagers"
+concept = generate_design_concept(brief)
+\end{lstlisting}
+
+\subsubsection{Cost Optimization
+Strategies}\label{cost-optimization-strategies}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Use Smaller Models First}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    GPT-3.5 for drafts (\$0.50/1M tokens)
+  \item
+    GPT-4 for refinement (\$10/1M tokens)
+  \end{itemize}
+\item
+  \textbf{Cache Common Responses}
+\end{enumerate}
+
+\begin{lstlisting}[language=Python]
+import hashlib
+import json
+
+cache = {}
+
+def cached_generate(prompt):
+    prompt_hash = hashlib.md5(prompt.encode()).hexdigest()
+    if prompt_hash in cache:
+        return cache[prompt_hash]
+
+    response = generate_design_concept(prompt)
+    cache[prompt_hash] = response
+    return response
+\end{lstlisting}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  \textbf{Batch Similar Requests}
+\end{enumerate}
+
+\begin{lstlisting}[language=Python]
+prompts = ["Design a chair", "Design a table", "Design a lamp"]
+batch_prompt = "For each item below, provide a modern minimalist design:\n" + "\n".join(prompts)
+\end{lstlisting}
+
+\subsection{Practical Workshop: Building a Design
+System}\label{practical-workshop-building-a-design-system}
+
+\subsubsection{Step 1: Generate Core
+Components}\label{step-1-generate-core-components}
+
+\begin{lstlisting}
+Prompt: Create a design system for a fintech startup.
+Include: Color palette (5 colors with hex codes),
+Typography (3 levels), Button states (default, hover, disabled),
+Card components, Form elements.
+Brand personality: Trustworthy, modern, accessible.
+\end{lstlisting}
+
+\subsubsection{Step 2: Create
+Variations}\label{step-2-create-variations}
+
+\begin{lstlisting}
+Take the button component and create 5 variations:
+1. Primary action
+2. Secondary action
+3. Destructive action
+4. Ghost button
+5. Icon button
+Maintain consistency with the design system.
+\end{lstlisting}
+
+\subsubsection{Step 3: Generate
+Documentation}\label{step-3-generate-documentation}
+
+\begin{lstlisting}
+Write component documentation for developers:
+- Component name and purpose
+- Props/parameters
+- Usage examples
+- Accessibility considerations
+- Do's and don'ts
+\end{lstlisting}
+
+\subsection{Combining Multiple AI
+Tools}\label{combining-multiple-ai-tools}
+
+\subsubsection{Workflow Example: Landing Page
+Creation}\label{workflow-example-landing-page-creation}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{ChatGPT}: Generate copy and content structure
+\item
+  \textbf{Midjourney}: Create hero image and graphics
+\item
+  \textbf{Claude}: Write technical documentation
+\item
+  \textbf{GitHub Copilot}: Generate HTML/CSS code
+\item
+  \textbf{Copy.ai}: Create email campaign
+\end{enumerate}
+
+\subsubsection{Integration Script}\label{integration-script}
+
+\begin{lstlisting}[language=Python]
+# Pseudo-code for multi-tool workflow
+def create_landing_page(product_brief):
+    # Step 1: Content
+    copy = chatgpt_api.generate_copy(product_brief)
+
+    # Step 2: Visual
+    image_prompt = f"Hero image for {product_brief}"
+    hero_image = midjourney_api.generate_image(image_prompt)
+
+    # Step 3: Code
+    html = copilot_api.generate_html(copy, hero_image)
+
+    # Step 4: Deploy
+    return deploy_to_server(html)
+\end{lstlisting}
+
+\subsection{Measuring Success}\label{measuring-success}
+
+\subsubsection{Quality Metrics}\label{quality-metrics}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Relevance Score}: Does output match brief?
+\item
+  \textbf{Originality}: How unique is the generation?
+\item
+  \textbf{Coherence}: Is it internally consistent?
+\item
+  \textbf{Usability}: Can it be implemented?
+\end{itemize}
+
+\subsubsection{A/B Testing AI
+Variations}\label{ab-testing-ai-variations}
+
+\begin{lstlisting}[language=Python]
+def test_variations(prompts, metric='click_rate'):
+    results = []
+    for prompt in prompts:
+        output = generate_design_concept(prompt)
+        performance = deploy_and_measure(output, metric)
+        results.append({'prompt': prompt, 'score': performance})
+    return sorted(results, key=lambda x: x['score'], reverse=True)
+\end{lstlisting}
+
+\subsection{Common Pitfalls and
+Solutions}\label{common-pitfalls-and-solutions}
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule\noalign{}
+Problem & Solution \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Generic outputs & Add more specific constraints \\
+Inconsistent style & Use style guide in system prompt \\
+Hallucinations & Verify facts, use lower temperature \\
+High costs & Use caching, smaller models \\
+Prompt injection & Validate and sanitize inputs \\
+\end{longtable}
+
+\subsection{Your Assignment}\label{your-assignment}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Create a complete product design brief using AI
+\item
+  Generate 10 variations with different prompts
+\item
+  Document which techniques work best
+\item
+  Calculate token usage and costs
+\item
+  Present your process and learnings
+\end{enumerate}
+
+\subsection{Resources for Continued
+Learning}\label{resources-for-continued-learning}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Prompt Engineering Guide}: promptingguide.ai
+\item
+  \textbf{OpenAI Cookbook}: github.com/openai/openai-cookbook
+\item
+  \textbf{Anthropic Claude Docs}: anthropic.com/docs
+\item
+  \textbf{LangChain Framework}: python.langchain.com
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\emph{Pro tip: The key to great AI output is iteration. Your first
+prompt is just the beginning - refine, experiment, and combine
+techniques for best results.}
+
+\end{document}

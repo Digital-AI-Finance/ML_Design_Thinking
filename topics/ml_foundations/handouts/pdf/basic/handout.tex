@@ -1,0 +1,470 @@
+% Pandoc LaTeX template for course handouts
+% Usage: pandoc input.md -o output.tex --template=handout_template.tex --listings
+\documentclass[10pt,a4paper]{article}
+
+% Geometry
+\usepackage[margin=2.5cm]{geometry}
+
+% Fonts and encoding
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+
+% Math
+\usepackage{amsmath,amssymb,amsfonts}
+
+% Tables
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+
+% Graphics
+\usepackage{graphicx}
+
+% Colors
+\usepackage{xcolor}
+\definecolor{mlpurple}{RGB}{51,51,178}
+\definecolor{mlblue}{RGB}{0,102,204}
+\definecolor{codebg}{RGB}{248,248,248}
+\definecolor{codeframe}{RGB}{200,200,200}
+
+% Code listings
+\usepackage{listings}
+\lstset{
+  backgroundcolor=\color{codebg},
+  basicstyle=\ttfamily\small,
+  breakatwhitespace=false,
+  breaklines=true,
+  captionpos=b,
+  commentstyle=\color{gray},
+  frame=single,
+  framerule=0.5pt,
+  rulecolor=\color{codeframe},
+  keepspaces=true,
+  keywordstyle=\color{mlblue}\bfseries,
+  language=Python,
+  numbers=none,
+  showspaces=false,
+  showstringspaces=false,
+  showtabs=false,
+  stringstyle=\color{mlpurple},
+  tabsize=4,
+  xleftmargin=0.5em,
+  xrightmargin=0.5em,
+  aboveskip=1em,
+  belowskip=1em
+}
+
+% Hyperlinks
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=mlblue,
+  urlcolor=mlblue,
+  citecolor=mlblue
+}
+
+% Headers and footers
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\textcolor{mlpurple}{\textbf{ML Foundations}}}
+\rhead{\textcolor{gray}{Basic}}
+\cfoot{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Paragraph spacing
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.5em}
+
+% Section formatting
+\usepackage{titlesec}
+\titleformat{\section}
+  {\Large\bfseries\color{mlpurple}}
+  {\thesection}{1em}{}
+\titleformat{\subsection}
+  {\large\bfseries\color{mlblue}}
+  {\thesubsection}{1em}{}
+\titleformat{\subsubsection}
+  {\normalsize\bfseries}
+  {\thesubsubsection}{1em}{}
+
+% Lists
+\usepackage{enumitem}
+\setlist[itemize]{topsep=0.5em, itemsep=0.25em}
+\setlist[enumerate]{topsep=0.5em, itemsep=0.25em}
+
+% Tight list support for pandoc
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+% Title
+\title{\Huge\bfseries\color{mlpurple} Week 00a Basic Handout: ML Foundations - Learning from Data}
+\author{Machine Learning for Smarter Innovation}
+\date{}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{fancy}
+
+\section{Week 00a Basic Handout: ML Foundations - Learning from
+Data}\label{week-00a-basic-handout-ml-foundations---learning-from-data}
+
+\subsection{For Students With: No prior ML knowledge, basic programming
+concepts}\label{for-students-with-no-prior-ml-knowledge-basic-programming-concepts}
+
+\subsection{Overview}\label{overview}
+
+This handout introduces machine learning fundamentals without requiring
+mathematical background. Focus on concepts, real-world examples, and
+practical understanding.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Part 1: The Big Idea - Machines That
+Learn}\label{part-1-the-big-idea---machines-that-learn}
+
+\subsubsection{What is Machine
+Learning?}\label{what-is-machine-learning}
+
+Machine learning means teaching computers to find patterns in data
+instead of programming explicit rules.
+
+\textbf{Traditional Programming}: - Programmer writes: IF spam word THEN
+mark as spam - Works for simple cases - Breaks with edge cases
+
+\textbf{Machine Learning}: - Computer discovers: ``These 500 emails are
+spam, these 500 are not spam'' - Learns patterns automatically - Adapts
+to new patterns
+
+\subsubsection{Why Machine Learning
+Now?}\label{why-machine-learning-now}
+
+Three factors came together: 1. \textbf{Data} - We generate billions of
+data points daily 2. \textbf{Computing} - GPUs can process massive
+datasets 3. \textbf{Algorithms} - Better learning methods discovered
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Part 2: The Three Learning
+Styles}\label{part-2-the-three-learning-styles}
+
+\subsubsection{1. Supervised Learning (Learning with a
+Teacher)}\label{supervised-learning-learning-with-a-teacher}
+
+\textbf{Example}: Spam detection - \textbf{Input}: Email text -
+\textbf{Label}: ``Spam'' or ``Not Spam'' - \textbf{Goal}: Learn to
+classify new emails
+
+\textbf{Real Applications}: - Email spam filters (Gmail) - Fraud
+detection (credit cards) - Medical diagnosis (X-ray analysis) - Price
+prediction (real estate)
+
+\textbf{When to Use}: - You have labeled examples (input + correct
+answer) - You want to predict or classify new data - Pattern is
+consistent over time
+
+\subsubsection{2. Unsupervised Learning (Learning without a
+Teacher)}\label{unsupervised-learning-learning-without-a-teacher}
+
+\textbf{Example}: Customer segmentation - \textbf{Input}: Customer
+purchase history - \textbf{Label}: None - \textbf{Goal}: Discover
+natural customer groups
+
+\textbf{Real Applications}: - Customer segmentation (marketing) -
+Anomaly detection (fraud, errors) - Recommendation systems (Netflix
+genres) - Document organization (Google News topics)
+
+\textbf{When to Use}: - No labels available - Want to discover hidden
+patterns - Explore data structure
+
+\subsubsection{3. Reinforcement Learning (Learning by Trial and
+Error)}\label{reinforcement-learning-learning-by-trial-and-error}
+
+\textbf{Example}: Game playing - \textbf{Input}: Game state -
+\textbf{Action}: Make a move - \textbf{Reward}: Win/loss/draw -
+\textbf{Goal}: Learn winning strategy
+
+\textbf{Real Applications}: - Game AI (AlphaGo, chess) - Robotics
+(walking, grasping) - Self-driving cars (navigation) - Resource
+optimization (data centers)
+
+\textbf{When to Use}: - Sequential decisions matter - Learn from
+interaction - Delayed rewards
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Part 3: How Does Learning
+Work?}\label{part-3-how-does-learning-work}
+
+\subsubsection{The Learning Process}\label{the-learning-process}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Collect Data} - Gather examples (emails, images, sensor
+  readings)
+\item
+  \textbf{Choose Model} - Pick learning algorithm (linear, tree, neural
+  network)
+\item
+  \textbf{Train} - Show model examples, adjust internal parameters
+\item
+  \textbf{Evaluate} - Test on NEW data (not training data!)
+\item
+  \textbf{Deploy} - Use in real world
+\end{enumerate}
+
+\subsubsection{Key Insight:
+Generalization}\label{key-insight-generalization}
+
+\textbf{Goal}: Perform well on NEW data, not just training data
+
+\textbf{Bad}: Memorizing training data (overfitting) \textbf{Good}:
+Learning underlying pattern (generalizing)
+
+\textbf{Analogy}: Student preparing for exam - Memorizing exact practice
+problems = overfitting - Understanding concepts = generalizing
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Part 4: Success Stories}\label{part-4-success-stories}
+
+\subsubsection{Email Spam Detection}\label{email-spam-detection}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Before ML}: Rule-based filters caught 60\% of spam
+\item
+  \textbf{After ML}: Gmail catches 99.9\% of spam
+\item
+  \textbf{Why}: Learns new spam patterns automatically
+\end{itemize}
+
+\subsubsection{Image Recognition}\label{image-recognition}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Before ML}: Hand-coded rules, poor accuracy
+\item
+  \textbf{After ML}: 95\%+ accuracy on ImageNet
+\item
+  \textbf{Breakthrough}: Deep learning (2012)
+\end{itemize}
+
+\subsubsection{Language Translation}\label{language-translation}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Before ML}: Rule-based translation, awkward output
+\item
+  \textbf{After ML}: Google Translate uses neural networks
+\item
+  \textbf{Result}: Human-level quality for many language pairs
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Part 5: When NOT to Use Machine
+Learning}\label{part-5-when-not-to-use-machine-learning}
+
+\subsubsection{ML is NOT the answer
+when:}\label{ml-is-not-the-answer-when}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Simple rules work} - Don't use ML to add two numbers
+\item
+  \textbf{No data available} - Need thousands+ examples minimum
+\item
+  \textbf{Explainability critical} - Medical/legal may require
+  transparent logic
+\item
+  \textbf{Data changes rapidly} - Model becomes outdated quickly
+\item
+  \textbf{Cost exceeds benefit} - Training can be expensive
+\end{enumerate}
+
+\subsubsection{Traditional Programming is Better
+For:}\label{traditional-programming-is-better-for}
+
+\begin{itemize}
+\tightlist
+\item
+  Calculations (tax computation)
+\item
+  Exact logic (password validation)
+\item
+  Known algorithms (sorting, searching)
+\item
+  Zero-tolerance errors (banking transactions)
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Part 6: Common Pitfalls (What Can Go
+Wrong)}\label{part-6-common-pitfalls-what-can-go-wrong}
+
+\subsubsection{1. Not Enough Data}\label{not-enough-data}
+
+\textbf{Problem}: Model can't learn pattern from 10 examples
+\textbf{Solution}: Collect more data (thousands minimum)
+
+\subsubsection{2. Biased Data}\label{biased-data}
+
+\textbf{Problem}: Training on non-representative data \textbf{Example}:
+Facial recognition trained only on light-skinned faces
+\textbf{Solution}: Diverse, balanced datasets
+
+\subsubsection{3. Overfitting}\label{overfitting}
+
+\textbf{Problem}: Model memorizes training data, fails on new data
+\textbf{Symptom}: 100\% training accuracy, 50\% test accuracy
+\textbf{Solution}: Regularization, more data, simpler model
+
+\subsubsection{4. Wrong Metric}\label{wrong-metric}
+
+\textbf{Problem}: Optimizing accuracy when precision matters
+\textbf{Example}: Cancer detection needs high recall (catch all cancers)
+\textbf{Solution}: Choose metric matching business goal
+
+\subsubsection{5. Data Leakage}\label{data-leakage}
+
+\textbf{Problem}: Test data accidentally in training set
+\textbf{Result}: Falsely optimistic performance \textbf{Solution}:
+Strict train/test separation
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Part 7: Practical
+Checklist}\label{part-7-practical-checklist}
+
+\subsubsection{Before Starting ML
+Project:}\label{before-starting-ml-project}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  Do I have enough labeled data? (1000+ examples minimum)
+\item[$\square$]
+  Is there a pattern to learn? (not random noise)
+\item[$\square$]
+  Can I measure success clearly? (accuracy, profit, etc.)
+\item[$\square$]
+  Is data representative of real-world use?
+\item[$\square$]
+  Do I have computational resources? (GPU for deep learning)
+\item[$\square$]
+  Is model interpretability required?
+\item[$\square$]
+  What happens if prediction is wrong? (risk assessment)
+\end{itemize}
+
+\subsubsection{Good First ML Projects:}\label{good-first-ml-projects}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Classification}: Email spam, sentiment analysis
+\item
+  \textbf{Regression}: Price prediction, demand forecasting
+\item
+  \textbf{Clustering}: Customer segmentation, document grouping
+\end{enumerate}
+
+\subsubsection{Avoid As First Project:}\label{avoid-as-first-project}
+
+\begin{itemize}
+\tightlist
+\item
+  Real-time systems (latency critical)
+\item
+  Safety-critical applications (medical, automotive)
+\item
+  Highly imbalanced data (fraud: 0.1\% positive rate)
+\item
+  Complex sequential decisions (reinforcement learning)
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Key Takeaways}\label{key-takeaways}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Learning from Data}: ML discovers patterns automatically vs
+  hand-coded rules
+\item
+  \textbf{Three Styles}: Supervised (with labels), Unsupervised (find
+  patterns), Reinforcement (trial and error)
+\item
+  \textbf{Generalization}: Goal is new data performance, not
+  memorization
+\item
+  \textbf{When to Use}: Abundant data, clear patterns, measurable
+  outcomes
+\item
+  \textbf{When NOT to Use}: Simple rules work, no data, explainability
+  critical
+\item
+  \textbf{Common Pitfalls}: Insufficient data, overfitting, bias, wrong
+  metric
+\end{enumerate}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Next Steps}\label{next-steps}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Week 00b}: Supervised Learning algorithms (regression, trees,
+  ensembles)
+\item
+  \textbf{Hands-On}: Try scikit-learn tutorials (spam detection, iris
+  classification)
+\item
+  \textbf{Reading}: ``Machine Learning Yearning'' by Andrew Ng (free
+  PDF)
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Glossary (Plain English)}\label{glossary-plain-english}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Algorithm}: Step-by-step learning procedure
+\item
+  \textbf{Feature}: Input variable (age, income, word count)
+\item
+  \textbf{Label}: Correct answer for training example
+\item
+  \textbf{Model}: Learned pattern from data
+\item
+  \textbf{Training}: Process of learning from data
+\item
+  \textbf{Testing}: Evaluating on new data
+\item
+  \textbf{Overfitting}: Memorizing instead of learning
+\item
+  \textbf{Generalization}: Working well on new data
+\item
+  \textbf{Supervised}: Learning with labeled examples
+\item
+  \textbf{Unsupervised}: Finding patterns without labels
+\end{itemize}
+
+\end{document}

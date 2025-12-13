@@ -1,0 +1,218 @@
+% Pandoc LaTeX template for course handouts
+% Usage: pandoc input.md -o output.tex --template=handout_template.tex --listings
+\documentclass[10pt,a4paper]{article}
+
+% Geometry
+\usepackage[margin=2.5cm]{geometry}
+
+% Fonts and encoding
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+
+% Math
+\usepackage{amsmath,amssymb,amsfonts}
+
+% Tables
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+
+% Graphics
+\usepackage{graphicx}
+
+% Colors
+\usepackage{xcolor}
+\definecolor{mlpurple}{RGB}{51,51,178}
+\definecolor{mlblue}{RGB}{0,102,204}
+\definecolor{codebg}{RGB}{248,248,248}
+\definecolor{codeframe}{RGB}{200,200,200}
+
+% Code listings
+\usepackage{listings}
+\lstset{
+  backgroundcolor=\color{codebg},
+  basicstyle=\ttfamily\small,
+  breakatwhitespace=false,
+  breaklines=true,
+  captionpos=b,
+  commentstyle=\color{gray},
+  frame=single,
+  framerule=0.5pt,
+  rulecolor=\color{codeframe},
+  keepspaces=true,
+  keywordstyle=\color{mlblue}\bfseries,
+  language=Python,
+  numbers=none,
+  showspaces=false,
+  showstringspaces=false,
+  showtabs=false,
+  stringstyle=\color{mlpurple},
+  tabsize=4,
+  xleftmargin=0.5em,
+  xrightmargin=0.5em,
+  aboveskip=1em,
+  belowskip=1em
+}
+
+% Hyperlinks
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=mlblue,
+  urlcolor=mlblue,
+  citecolor=mlblue
+}
+
+% Headers and footers
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\textcolor{mlpurple}{\textbf{Supervised Learning}}}
+\rhead{\textcolor{gray}{Advanced}}
+\cfoot{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Paragraph spacing
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.5em}
+
+% Section formatting
+\usepackage{titlesec}
+\titleformat{\section}
+  {\Large\bfseries\color{mlpurple}}
+  {\thesection}{1em}{}
+\titleformat{\subsection}
+  {\large\bfseries\color{mlblue}}
+  {\thesubsection}{1em}{}
+\titleformat{\subsubsection}
+  {\normalsize\bfseries}
+  {\thesubsubsection}{1em}{}
+
+% Lists
+\usepackage{enumitem}
+\setlist[itemize]{topsep=0.5em, itemsep=0.25em}
+\setlist[enumerate]{topsep=0.5em, itemsep=0.25em}
+
+% Tight list support for pandoc
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+% Title
+\title{\Huge\bfseries\color{mlpurple} Week 00b Advanced: Supervised Learning Theory}
+\author{Machine Learning for Smarter Innovation}
+\date{}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{fancy}
+
+\section{Week 00b Advanced: Supervised Learning
+Theory}\label{week-00b-advanced-supervised-learning-theory}
+
+\subsection{Linear Models}\label{linear-models}
+
+\subsubsection{OLS Regression}\label{ols-regression}
+
+Minimize: \(L(w) = \|Xw - y\|^2\)
+
+Solution: \(w^* = (X^TX)^{-1}X^Ty\)
+
+Assumptions: - Linearity - Independence - Homoscedasticity - Normality
+of residuals
+
+\subsubsection{Ridge Regression}\label{ridge-regression}
+
+\(w^* = (X^TX + \lambda I)^{-1}X^Ty\)
+
+Shrinks coefficients, prevents overfitting
+
+\subsubsection{Lasso Regression}\label{lasso-regression}
+
+\(\min_w \|Xw - y\|^2 + \lambda\|w\|_1\)
+
+Sparse solutions (feature selection)
+
+\subsection{Tree-Based Methods}\label{tree-based-methods}
+
+\subsubsection{CART Algorithm}\label{cart-algorithm}
+
+Recursive binary splitting minimizing impurity:
+
+\textbf{Gini impurity}: \[I_G = 1 - \sum_{k=1}^K p_k^2\]
+
+\textbf{Entropy}: \[H = -\sum_{k=1}^K p_k \log_2 p_k\]
+
+\subsubsection{Random Forest}\label{random-forest}
+
+Bootstrap aggregating (bagging): - Sample data with replacement - Train
+tree on each sample - Average predictions
+
+Reduces variance, prevents overfitting
+
+\subsubsection{Gradient Boosting}\label{gradient-boosting}
+
+Sequential additive model: \[F_m(x) = F_{m-1}(x) + \nu h_m(x)\]
+
+where \(h_m\) fits residuals:
+\[h_m = \argmin_h \sum_i L(y_i, F_{m-1}(x_i) + h(x_i))\]
+
+\subsection{SVM Theory}\label{svm-theory}
+
+\subsubsection{Primal Problem}\label{primal-problem}
+
+\[\min_{w,b} \frac{1}{2}\|w\|^2 + C\sum_i \xi_i\]
+
+Subject to: \(y_i(w^Tx_i + b) \geq 1 - \xi_i\)
+
+\subsubsection{Dual Problem}\label{dual-problem}
+
+\[\max_\alpha \sum_i \alpha_i - \frac{1}{2}\sum_{i,j} \alpha_i\alpha_j y_iy_j K(x_i, x_j)\]
+
+Subject to: \(0 \leq \alpha_i \leq C\), \(\sum_i \alpha_i y_i = 0\)
+
+\subsection{Probabilistic Models}\label{probabilistic-models}
+
+\subsubsection{Logistic Regression}\label{logistic-regression}
+
+\[P(y=1|x) = \frac{1}{1 + e^{-w^Tx}}\]
+
+Maximum likelihood:
+\[\max_w \sum_i [y_i \log \sigma(w^Tx_i) + (1-y_i)\log(1-\sigma(w^Tx_i))]\]
+
+\subsubsection{Naive Bayes}\label{naive-bayes}
+
+\[P(y|x) \propto P(y)\prod_i P(x_i|y)\]
+
+Independence assumption simplifies computation
+
+\subsection{Learning Theory}\label{learning-theory}
+
+\subsubsection{PAC Learning}\label{pac-learning}
+
+Sample complexity for \(\epsilon\)-accurate, \((1-\delta)\)-confident:
+\[m \geq \frac{1}{\epsilon}(\log|\mathcal{H}| + \log(1/\delta))\]
+
+\subsubsection{VC Dimension}\label{vc-dimension}
+
+\begin{itemize}
+\tightlist
+\item
+  Linear classifiers in \(\mathbb{R}^d\): \(d+1\)
+\item
+  Decision trees: \(\Omega(n)\) for \(n\) leaves
+\end{itemize}
+
+\subsection{References}\label{references}
+
+\begin{itemize}
+\tightlist
+\item
+  Hastie et al: Elements of Statistical Learning
+\item
+  Bishop: Pattern Recognition and Machine Learning
+\end{itemize}
+
+\end{document}

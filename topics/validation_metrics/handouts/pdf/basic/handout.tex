@@ -1,0 +1,695 @@
+% Pandoc LaTeX template for course handouts
+% Usage: pandoc input.md -o output.tex --template=handout_template.tex --listings
+\documentclass[10pt,a4paper]{article}
+
+% Geometry
+\usepackage[margin=2.5cm]{geometry}
+
+% Fonts and encoding
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+
+% Math
+\usepackage{amsmath,amssymb,amsfonts}
+
+% Tables
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+
+% Graphics
+\usepackage{graphicx}
+
+% Colors
+\usepackage{xcolor}
+\definecolor{mlpurple}{RGB}{51,51,178}
+\definecolor{mlblue}{RGB}{0,102,204}
+\definecolor{codebg}{RGB}{248,248,248}
+\definecolor{codeframe}{RGB}{200,200,200}
+
+% Code listings
+\usepackage{listings}
+\lstset{
+  backgroundcolor=\color{codebg},
+  basicstyle=\ttfamily\small,
+  breakatwhitespace=false,
+  breaklines=true,
+  captionpos=b,
+  commentstyle=\color{gray},
+  frame=single,
+  framerule=0.5pt,
+  rulecolor=\color{codeframe},
+  keepspaces=true,
+  keywordstyle=\color{mlblue}\bfseries,
+  language=Python,
+  numbers=none,
+  showspaces=false,
+  showstringspaces=false,
+  showtabs=false,
+  stringstyle=\color{mlpurple},
+  tabsize=4,
+  xleftmargin=0.5em,
+  xrightmargin=0.5em,
+  aboveskip=1em,
+  belowskip=1em
+}
+
+% Hyperlinks
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=mlblue,
+  urlcolor=mlblue,
+  citecolor=mlblue
+}
+
+% Headers and footers
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\textcolor{mlpurple}{\textbf{Validation & Metrics}}}
+\rhead{\textcolor{gray}{Basic}}
+\cfoot{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Paragraph spacing
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.5em}
+
+% Section formatting
+\usepackage{titlesec}
+\titleformat{\section}
+  {\Large\bfseries\color{mlpurple}}
+  {\thesection}{1em}{}
+\titleformat{\subsection}
+  {\large\bfseries\color{mlblue}}
+  {\thesubsection}{1em}{}
+\titleformat{\subsubsection}
+  {\normalsize\bfseries}
+  {\thesubsubsection}{1em}{}
+
+% Lists
+\usepackage{enumitem}
+\setlist[itemize]{topsep=0.5em, itemsep=0.25em}
+\setlist[enumerate]{topsep=0.5em, itemsep=0.25em}
+
+% Tight list support for pandoc
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+% Title
+\title{\Huge\bfseries\color{mlpurple} Handout 1: Understanding Model Performance Beyond Accuracy}
+\author{Machine Learning for Smarter Innovation}
+\date{}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{fancy}
+
+\section{Handout 1: Understanding Model Performance Beyond
+Accuracy}\label{handout-1-understanding-model-performance-beyond-accuracy}
+
+\subsection{Week 9 - Basic Level}\label{week-9---basic-level}
+
+\subsubsection{Introduction}\label{introduction}
+
+You've trained your first machine learning model and it shows ``95\%
+accuracy.'' Great, right? Not necessarily. This handout explains why
+accuracy alone can be misleading and introduces essential metrics for
+evaluating model performance.
+
+\textbf{Target Audience}: Beginners with basic Python knowledge, no
+advanced ML background required.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Part 1: Why 95\% Accuracy Can Be
+Terrible}\label{part-1-why-95-accuracy-can-be-terrible}
+
+\subsubsection{The Spam Filter Example}\label{the-spam-filter-example}
+
+Imagine you build an email spam filter. Your dataset contains: - 9,500
+legitimate emails (95\%) - 500 spam emails (5\%)
+
+You create a ``model'' that simply predicts every email as ``not spam.''
+What happens?
+
+\textbf{Accuracy = 9,500 correct / 10,000 total = 95\%}
+
+Sounds impressive! But your filter catches \textbf{zero spam emails}.
+It's completely useless despite high accuracy.
+
+\textbf{Key Lesson}: When classes are imbalanced (one outcome much rarer
+than others), accuracy hides critical failures.
+
+\subsubsection{Real-World Examples Where Accuracy
+Fails}\label{real-world-examples-where-accuracy-fails}
+
+\textbf{Medical Diagnosis}: - Disease prevalence: 1\% (99 healthy, 1
+sick per 100 people) - Model predicts everyone as ``healthy'' -
+Accuracy: 99\% - Problem: Misses every sick patient (catastrophic)
+
+\textbf{Fraud Detection}: - Fraud rate: 0.1\% (1 in 1,000 transactions)
+- Model predicts all transactions as ``legitimate'' - Accuracy: 99.9\% -
+Problem: Catches no fraud, loses millions
+
+\textbf{Hiring AI}: - Qualified candidates: 10\% - Model rejects
+everyone - Accuracy: 90\% - Problem: No one gets hired
+
+\textbf{Common Pattern}: Rare positive class + naive model = high
+accuracy but zero value.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Part 2: The Confusion Matrix - Four Numbers That Tell the
+Truth}\label{part-2-the-confusion-matrix---four-numbers-that-tell-the-truth}
+
+\subsubsection{Understanding the 2x2
+Grid}\label{understanding-the-2x2-grid}
+
+Every binary classification model's predictions fall into four
+categories:
+
+\begin{lstlisting}
+                    Actual Condition
+                 Positive    Negative
+Predicted  Pos   TP (✓)      FP (X)
+           Neg   FN (X)      TN (✓)
+\end{lstlisting}
+
+\textbf{Definitions}: - \textbf{TP (True Positive)}: Model said ``yes,''
+reality is ``yes'' (correct) - \textbf{TN (True Negative)}: Model said
+``no,'' reality is ``no'' (correct) - \textbf{FP (False Positive)}:
+Model said ``yes,'' reality is ``no'' (wrong - false alarm) - \textbf{FN
+(False Negative)}: Model said ``no,'' reality is ``yes'' (wrong - missed
+case)
+
+\subsubsection{Medical Diagnosis
+Example}\label{medical-diagnosis-example}
+
+You test 100 people for a disease: - 10 actually have the disease - 90
+are healthy
+
+Your model's results: - TP = 8 (correctly identified 8 sick patients) -
+FN = 2 (missed 2 sick patients) - TN = 85 (correctly identified 85
+healthy people) - FP = 5 (false alarm: told 5 healthy people they're
+sick)
+
+\textbf{Accuracy} = (TP + TN) / Total = (8 + 85) / 100 = 93\%
+
+But this doesn't tell you: - You missed 2 sick patients (could be fatal)
+- You gave 5 healthy people false alarms (unnecessary stress/treatment)
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Part 3: Precision and Recall - The Essential
+Trade-off}\label{part-3-precision-and-recall---the-essential-trade-off}
+
+\subsubsection{Precision: ``Of my positive predictions, how many were
+correct?''}\label{precision-of-my-positive-predictions-how-many-were-correct}
+
+\textbf{Formula}: Precision = TP / (TP + FP)
+
+\textbf{Plain English}: When the model says ``yes,'' how often is it
+right?
+
+\textbf{Example}: Your fraud detector flags 100 transactions as
+fraudulent: - 80 are actually fraud (TP = 80) - 20 are legitimate (FP =
+20) - Precision = 80 / 100 = 80\%
+
+\textbf{High Precision Means}: Few false alarms. When the model raises
+an alert, trust it.
+
+\textbf{When to prioritize precision}: - Spam filtering (don't delete
+real emails) - Content moderation (don't ban innocent users) - Precision
+medicine (don't give unnecessary treatment)
+
+\subsubsection{Recall: ``Of all actual positives, how many did I
+catch?''}\label{recall-of-all-actual-positives-how-many-did-i-catch}
+
+\textbf{Formula}: Recall = TP / (TP + FN)
+
+\textbf{Plain English}: Of all the ``yes'' cases, how many did the model
+find?
+
+\textbf{Example}: There are 100 actual fraud cases in your dataset: -
+Model catches 80 (TP = 80) - Model misses 20 (FN = 20) - Recall = 80 /
+100 = 80\%
+
+\textbf{High Recall Means}: Few missed cases. The model is thorough.
+
+\textbf{When to prioritize recall}: - Cancer screening (don't miss any
+cases) - Security systems (catch all threats) - Fraud detection (find
+all fraud, even with false alarms)
+
+\subsubsection{The Fundamental
+Trade-off}\label{the-fundamental-trade-off}
+
+\textbf{You cannot maximize both precision and recall simultaneously.}
+
+\textbf{Example}: Airport Security
+
+\textbf{High Recall Strategy} (catch every threat): - Search everyone
+thoroughly - Many false alarms (precision drops) - Long lines, but no
+threats slip through
+
+\textbf{High Precision Strategy} (minimize false alarms): - Only search
+obvious suspects - Fast lines, fewer innocent people searched - But some
+threats might pass (recall drops)
+
+\textbf{Key Insight}: Every problem requires balancing these two based
+on which error is more costly.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Part 4: When Is Your Model ``Good
+Enough''?}\label{part-4-when-is-your-model-good-enough}
+
+\subsubsection{Decision Framework}\label{decision-framework}
+
+\textbf{Ask these questions}:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{What's the class balance?}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Balanced (50/50): Accuracy is reasonable
+  \item
+    Imbalanced (1/99): Ignore accuracy, focus on precision/recall
+  \end{itemize}
+\item
+  \textbf{Which error is more costly?}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    FP costs more: Optimize for precision
+  \item
+    FN costs more: Optimize for recall
+  \item
+    Both costly: Balance with F1 score (harmonic mean)
+  \end{itemize}
+\item
+  \textbf{What's the baseline?}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Always compare to a simple baseline (e.g., ``always predict majority
+    class'')
+  \item
+    If your model isn't better than the baseline, it's useless
+  \end{itemize}
+\end{enumerate}
+
+\subsubsection{Example Decision Trees}\label{example-decision-trees}
+
+\textbf{Email Spam Filter}: - Class balance: 95\% real, 5\% spam
+(imbalanced) - Costly error: FP (deleting real email) - Metric:
+Precision (aim for 95\%+) - Acceptable: Recall 70\% (some spam gets
+through)
+
+\textbf{Cancer Screening}: - Class balance: 99\% healthy, 1\% cancer
+(very imbalanced) - Costly error: FN (missing cancer) - Metric: Recall
+(aim for 99\%+) - Acceptable: Precision 20\% (many false alarms, but
+caught all cancer)
+
+\textbf{Credit Scoring}: - Class balance: 95\% repay, 5\% default -
+Costly error: Both (lose money from defaults, lose customers from false
+rejections) - Metric: F1 score (balance precision and recall) - Target:
+F1 \textgreater{} 0.75
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Part 5: Using sklearn.metrics - Simple
+Examples}\label{part-5-using-sklearn.metrics---simple-examples}
+
+\subsubsection{Basic Code Template}\label{basic-code-template}
+
+\begin{lstlisting}[language=Python]
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, confusion_matrix
+
+# Assuming you have:
+# y_true: actual labels (e.g., [0, 1, 0, 1, 1])
+# y_pred: model predictions (e.g., [0, 1, 0, 0, 1])
+
+# Calculate metrics
+accuracy = accuracy_score(y_true, y_pred)
+precision = precision_score(y_true, y_pred)
+recall = recall_score(y_true, y_pred)
+f1 = f1_score(y_true, y_pred)
+
+print(f"Accuracy:  {accuracy:.2f}")
+print(f"Precision: {precision:.2f}")
+print(f"Recall:    {recall:.2f}")
+print(f"F1 Score:  {f1:.2f}")
+
+# Confusion matrix
+cm = confusion_matrix(y_true, y_pred)
+print("\nConfusion Matrix:")
+print(cm)
+\end{lstlisting}
+
+\subsubsection{Complete Example}\label{complete-example}
+
+\begin{lstlisting}[language=Python]
+from sklearn.datasets import make_classification
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import classification_report, confusion_matrix
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Create imbalanced dataset (5% positive class)
+X, y = make_classification(n_samples=1000, n_features=20,
+                           weights=[0.95, 0.05], random_state=42)
+
+# Split data
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2,
+                                                      stratify=y, random_state=42)
+
+# Train model
+model = LogisticRegression()
+model.fit(X_train, y_train)
+
+# Predictions
+y_pred = model.predict(X_test)
+
+# Comprehensive report
+print(classification_report(y_test, y_pred))
+
+# Confusion matrix visualization
+cm = confusion_matrix(y_test, y_pred)
+sns.heatmap(cm, annot=True, fmt='d', cmap='Blues')
+plt.ylabel('Actual')
+plt.xlabel('Predicted')
+plt.title('Confusion Matrix')
+plt.show()
+\end{lstlisting}
+
+\textbf{Output Interpretation}:
+
+\begin{lstlisting}
+              precision    recall  f1-score   support
+
+           0       0.98      0.99      0.99       190
+           1       0.75      0.60      0.67        10
+
+    accuracy                           0.97       200
+\end{lstlisting}
+
+This tells you: - Class 0 (negative): 98\% precision, 99\% recall
+(excellent) - Class 1 (positive): 75\% precision, 60\% recall (room for
+improvement) - Overall accuracy 97\% (misleading due to imbalance)
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Part 6: Evaluation Checklist for
+Beginners}\label{part-6-evaluation-checklist-for-beginners}
+
+\subsubsection{Before Training}\label{before-training}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  Understand the class distribution (balanced vs imbalanced)
+\item[$\square$]
+  Define which error is more costly (FP vs FN)
+\item[$\square$]
+  Choose primary metric (precision, recall, or F1)
+\item[$\square$]
+  Establish baseline performance (e.g., majority class)
+\end{itemize}
+
+\subsubsection{After Training}\label{after-training}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  Calculate accuracy (but don't trust it alone)
+\item[$\square$]
+  Calculate precision and recall
+\item[$\square$]
+  Create confusion matrix
+\item[$\square$]
+  Compare to baseline
+\item[$\square$]
+  Check performance on both classes separately
+\end{itemize}
+
+\subsubsection{Before Deployment}\label{before-deployment}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  Test on held-out test set (never used in training)
+\item[$\square$]
+  Analyze failure cases (which examples does it miss?)
+\item[$\square$]
+  Validate on recent data (not just old historical data)
+\item[$\square$]
+  Get stakeholder sign-off on acceptable performance
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Part 7: Common Mistakes and How to Avoid
+Them}\label{part-7-common-mistakes-and-how-to-avoid-them}
+
+\subsubsection{Mistake 1: Only Looking at
+Accuracy}\label{mistake-1-only-looking-at-accuracy}
+
+\textbf{Problem}: Accuracy hides class imbalance issues.
+
+\textbf{Solution}: Always calculate precision, recall, and F1. If
+classes are imbalanced, ignore accuracy entirely.
+
+\subsubsection{Mistake 2: Not Using Stratified
+Splits}\label{mistake-2-not-using-stratified-splits}
+
+\textbf{Problem}: Random train/test split might put all positive
+examples in training set.
+
+\textbf{Solution}: Use \passthrough{\lstinline!stratify=y!} in
+\passthrough{\lstinline!train\_test\_split()!}:
+
+\begin{lstlisting}[language=Python]
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, stratify=y, random_state=42
+)
+\end{lstlisting}
+
+\subsubsection{Mistake 3: Testing on Training
+Data}\label{mistake-3-testing-on-training-data}
+
+\textbf{Problem}: Model has ``seen'' the test data, giving falsely high
+performance.
+
+\textbf{Solution}: Always keep test set completely separate. Never fit
+any preprocessing on test data.
+
+\subsubsection{Mistake 4: Forgetting to Evaluate Both
+Classes}\label{mistake-4-forgetting-to-evaluate-both-classes}
+
+\textbf{Problem}: ``95\% precision'' might only be for the majority
+class.
+
+\textbf{Solution}: Use
+\passthrough{\lstinline!classification\_report()!} which shows per-class
+metrics:
+
+\begin{lstlisting}[language=Python]
+from sklearn.metrics import classification_report
+print(classification_report(y_test, y_pred))
+\end{lstlisting}
+
+\subsubsection{Mistake 5: Choosing Wrong Metric for
+Problem}\label{mistake-5-choosing-wrong-metric-for-problem}
+
+\textbf{Problem}: Optimizing precision when recall matters (or vice
+versa).
+
+\textbf{Solution}: Talk to domain experts: - Medical: Usually recall
+(don't miss cases) - Finance: Usually precision (false positives costly)
+- Safety: Usually recall (catch all threats)
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Part 8: Quick Reference}\label{part-8-quick-reference}
+
+\subsubsection{Metric Cheat Sheet}\label{metric-cheat-sheet}
+
+\begin{longtable}[]{@{}llll@{}}
+\toprule\noalign{}
+Metric & Formula & When to Use & Good Value \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Accuracy & (TP+TN)/Total & Balanced classes only & \textgreater{}
+0.80 \\
+Precision & TP/(TP+FP) & False positives costly & \textgreater{} 0.90 \\
+Recall & TP/(TP+FN) & False negatives costly & \textgreater{} 0.90 \\
+F1 Score & 2×(P×R)/(P+R) & Balance both errors & \textgreater{} 0.75 \\
+\end{longtable}
+
+\subsubsection{Code Snippets}\label{code-snippets}
+
+\textbf{Calculate all metrics}:
+
+\begin{lstlisting}[language=Python]
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
+
+acc = accuracy_score(y_true, y_pred)
+prec = precision_score(y_true, y_pred)
+rec = recall_score(y_true, y_pred)
+f1 = f1_score(y_true, y_pred)
+\end{lstlisting}
+
+\textbf{Confusion matrix}:
+
+\begin{lstlisting}[language=Python]
+from sklearn.metrics import confusion_matrix
+cm = confusion_matrix(y_true, y_pred)
+\end{lstlisting}
+
+\textbf{Classification report (all metrics)}:
+
+\begin{lstlisting}[language=Python]
+from sklearn.metrics import classification_report
+print(classification_report(y_true, y_pred))
+\end{lstlisting}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Practice Exercise}\label{practice-exercise}
+
+\subsubsection{Problem: Email Spam
+Filter}\label{problem-email-spam-filter}
+
+You have 1,000 emails: - 950 legitimate - 50 spam
+
+Your model's predictions: - Correctly identified 40 spam emails (TP) -
+Missed 10 spam emails (FN) - Flagged 30 legitimate emails as spam (FP) -
+Correctly identified 920 legitimate emails (TN)
+
+\textbf{Questions}:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  What is the accuracy?
+\item
+  What is the precision?
+\item
+  What is the recall?
+\item
+  Is this a good model? Why or why not?
+\item
+  Which metric matters most for a spam filter?
+\end{enumerate}
+
+\subsubsection{Solutions}\label{solutions}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \textbf{Accuracy} = (TP + TN) / Total = (40 + 920) / 1000 = 0.96
+  (96\%)
+\item
+  \textbf{Precision} = TP / (TP + FP) = 40 / (40 + 30) = 0.57 (57\%)
+\item
+  \textbf{Recall} = TP / (TP + FN) = 40 / (40 + 10) = 0.80 (80\%)
+\item
+  \textbf{Assessment}: Accuracy looks great (96\%), but precision is
+  poor (57\%). This means:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    The model catches 80\% of spam (good recall)
+  \item
+    But 43\% of ``spam'' flags are false alarms (poor precision)
+  \item
+    Users will see 30 legitimate emails incorrectly flagged
+  \item
+    This could delete important emails (unacceptable)
+  \end{itemize}
+\item
+  \textbf{Most important metric}: Precision. For spam filters, false
+  positives (deleting real emails) are worse than false negatives
+  (letting some spam through). Aim for precision \textgreater{} 95\%,
+  even if recall drops to 60-70\%.
+\end{enumerate}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Key Takeaways}\label{key-takeaways}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \textbf{Accuracy is not enough}: It hides class imbalance and cost
+  asymmetries.
+\item
+  \textbf{Confusion matrix is fundamental}: Always start by
+  understanding TP, TN, FP, FN.
+\item
+  \textbf{Precision vs Recall trade-off}: You can't maximize both.
+  Choose based on which error is costlier.
+\item
+  \textbf{Context determines metrics}: Medical (recall), Finance
+  (precision), General (F1).
+\item
+  \textbf{Always use test data}: Never evaluate on training data. Use
+  stratified splits for imbalanced classes.
+\item
+  \textbf{Compare to baseline}: If your model doesn't beat ``always
+  predict majority class,'' it's useless.
+\end{enumerate}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Next Steps}\label{next-steps}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Intermediate Handout}: Learn cross-validation, ROC curves, and
+  statistical testing
+\item
+  \textbf{Advanced Handout}: Custom business metrics, multi-objective
+  optimization, deployment strategies
+\item
+  \textbf{Week 9 Workshop}: Apply these concepts to real credit risk
+  validation challenge
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Resources}\label{resources}
+
+\textbf{sklearn Documentation}: - Metrics:
+https://scikit-learn.org/stable/modules/model\_evaluation.html -
+Classification metrics:
+https://scikit-learn.org/stable/modules/classes.html\#module-sklearn.metrics
+
+\textbf{Tutorials}: - Classification metrics explained:
+https://developers.google.com/machine-learning/crash-course/classification
+- Precision-Recall trade-off:
+https://developers.google.com/machine-learning/crash-course/classification/precision-and-recall
+
+\textbf{Books}: - ``Hands-On Machine Learning'' by Aurelien Geron
+(Chapter 3: Classification) - ``Introduction to Machine Learning with
+Python'' by Andreas Muller (Chapter 5: Model Evaluation)
+
+\end{document}

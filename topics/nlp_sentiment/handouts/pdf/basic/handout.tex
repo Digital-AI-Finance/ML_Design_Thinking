@@ -1,0 +1,385 @@
+% Pandoc LaTeX template for course handouts
+% Usage: pandoc input.md -o output.tex --template=handout_template.tex --listings
+\documentclass[10pt,a4paper]{article}
+
+% Geometry
+\usepackage[margin=2.5cm]{geometry}
+
+% Fonts and encoding
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+
+% Math
+\usepackage{amsmath,amssymb,amsfonts}
+
+% Tables
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+
+% Graphics
+\usepackage{graphicx}
+
+% Colors
+\usepackage{xcolor}
+\definecolor{mlpurple}{RGB}{51,51,178}
+\definecolor{mlblue}{RGB}{0,102,204}
+\definecolor{codebg}{RGB}{248,248,248}
+\definecolor{codeframe}{RGB}{200,200,200}
+
+% Code listings
+\usepackage{listings}
+\lstset{
+  backgroundcolor=\color{codebg},
+  basicstyle=\ttfamily\small,
+  breakatwhitespace=false,
+  breaklines=true,
+  captionpos=b,
+  commentstyle=\color{gray},
+  frame=single,
+  framerule=0.5pt,
+  rulecolor=\color{codeframe},
+  keepspaces=true,
+  keywordstyle=\color{mlblue}\bfseries,
+  language=Python,
+  numbers=none,
+  showspaces=false,
+  showstringspaces=false,
+  showtabs=false,
+  stringstyle=\color{mlpurple},
+  tabsize=4,
+  xleftmargin=0.5em,
+  xrightmargin=0.5em,
+  aboveskip=1em,
+  belowskip=1em
+}
+
+% Hyperlinks
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=mlblue,
+  urlcolor=mlblue,
+  citecolor=mlblue
+}
+
+% Headers and footers
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\textcolor{mlpurple}{\textbf{NLP & Sentiment}}}
+\rhead{\textcolor{gray}{Basic}}
+\cfoot{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Paragraph spacing
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.5em}
+
+% Section formatting
+\usepackage{titlesec}
+\titleformat{\section}
+  {\Large\bfseries\color{mlpurple}}
+  {\thesection}{1em}{}
+\titleformat{\subsection}
+  {\large\bfseries\color{mlblue}}
+  {\thesubsection}{1em}{}
+\titleformat{\subsubsection}
+  {\normalsize\bfseries}
+  {\thesubsubsection}{1em}{}
+
+% Lists
+\usepackage{enumitem}
+\setlist[itemize]{topsep=0.5em, itemsep=0.25em}
+\setlist[enumerate]{topsep=0.5em, itemsep=0.25em}
+
+% Tight list support for pandoc
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+% Title
+\title{\Huge\bfseries\color{mlpurple} Handout 1: Introduction to Sentiment Analysis (Basic Level)}
+\author{Machine Learning for Smarter Innovation}
+\date{}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{fancy}
+
+\section{Handout 1: Introduction to Sentiment Analysis (Basic
+Level)}\label{handout-1-introduction-to-sentiment-analysis-basic-level}
+
+\subsection{Week 3 - NLP for Emotional
+Context}\label{week-3---nlp-for-emotional-context}
+
+\subsubsection{What is Sentiment
+Analysis?}\label{what-is-sentiment-analysis}
+
+Sentiment analysis is the computational study of people's opinions,
+sentiments, emotions, and attitudes expressed in text. It helps us
+understand how users feel about products, services, or experiences at
+scale.
+
+\subsubsection{Key Concepts}\label{key-concepts}
+
+\paragraph{1. Sentiment Polarity}\label{sentiment-polarity}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Positive}: Expressing satisfaction, happiness, or approval
+\item
+  \textbf{Negative}: Expressing dissatisfaction, frustration, or
+  disapproval\\
+\item
+  \textbf{Neutral}: Factual statements without clear emotion
+\end{itemize}
+
+\paragraph{2. Why Sentiment Analysis Matters for
+Design}\label{why-sentiment-analysis-matters-for-design}
+
+\begin{itemize}
+\tightlist
+\item
+  Understand user pain points automatically
+\item
+  Identify delightful moments in the user journey
+\item
+  Prioritize features based on emotional impact
+\item
+  Monitor brand perception in real-time
+\end{itemize}
+
+\subsubsection{Traditional vs Machine Learning
+Approaches}\label{traditional-vs-machine-learning-approaches}
+
+\paragraph{Rule-Based Methods}\label{rule-based-methods}
+
+\begin{lstlisting}[language=Python]
+# Simple rule-based sentiment using word lists
+positive_words = ['good', 'great', 'excellent', 'amazing', 'wonderful']
+negative_words = ['bad', 'terrible', 'awful', 'horrible', 'poor']
+
+def simple_sentiment(text):
+    text_lower = text.lower()
+    pos_count = sum(1 for word in positive_words if word in text_lower)
+    neg_count = sum(1 for word in negative_words if word in text_lower)
+    
+    if pos_count > neg_count:
+        return 'positive'
+    elif neg_count > pos_count:
+        return 'negative'
+    else:
+        return 'neutral'
+\end{lstlisting}
+
+\textbf{Limitations}: - Misses context (``not good'' would be positive)
+- Can't detect sarcasm - Limited vocabulary - No understanding of word
+relationships
+
+\paragraph{Machine Learning Approach}\label{machine-learning-approach}
+
+\begin{lstlisting}[language=Python]
+from textblob import TextBlob
+
+def ml_sentiment(text):
+    analysis = TextBlob(text)
+    # Polarity ranges from -1 (negative) to 1 (positive)
+    if analysis.sentiment.polarity > 0.1:
+        return 'positive'
+    elif analysis.sentiment.polarity < -0.1:
+        return 'negative'
+    else:
+        return 'neutral'
+\end{lstlisting}
+
+\subsubsection{Getting Started with
+TextBlob}\label{getting-started-with-textblob}
+
+\paragraph{Installation}\label{installation}
+
+\begin{lstlisting}[language=bash]
+pip install textblob
+python -m textblob.download_corpora
+\end{lstlisting}
+
+\paragraph{Basic Usage}\label{basic-usage}
+
+\begin{lstlisting}[language=Python]
+from textblob import TextBlob
+
+# Analyze a product review
+review = "This product is amazing! The quality exceeded my expectations."
+blob = TextBlob(review)
+
+# Get sentiment
+print(f"Polarity: {blob.sentiment.polarity}")  # 0.625 (positive)
+print(f"Subjectivity: {blob.sentiment.subjectivity}")  # 0.6
+
+# Polarity: -1 to 1 (negative to positive)
+# Subjectivity: 0 to 1 (objective to subjective)
+\end{lstlisting}
+
+\subsubsection{Practice Exercise: Movie Review
+Sentiment}\label{practice-exercise-movie-review-sentiment}
+
+\paragraph{Task 1: Basic Analysis}\label{task-1-basic-analysis}
+
+\begin{lstlisting}[language=Python]
+reviews = [
+    "This movie was fantastic! Best film of the year.",
+    "Boring and predictable. Waste of time.",
+    "The acting was okay but the plot was confusing.",
+    "Absolutely loved it! Can't wait to watch again.",
+    "Terrible movie. Do not recommend."
+]
+
+# Your task: Classify each review as positive, negative, or neutral
+# Use both rule-based and TextBlob methods
+# Compare the results
+\end{lstlisting}
+
+\paragraph{Task 2: Batch Processing}\label{task-2-batch-processing}
+
+\begin{lstlisting}[language=Python]
+def analyze_reviews(reviews):
+    results = []
+    for review in reviews:
+        blob = TextBlob(review)
+        sentiment = 'positive' if blob.sentiment.polarity > 0.1 else \
+                   'negative' if blob.sentiment.polarity < -0.1 else 'neutral'
+        results.append({
+            'text': review,
+            'sentiment': sentiment,
+            'confidence': abs(blob.sentiment.polarity)
+        })
+    return results
+
+# Analyze all reviews and find:
+# 1. What percentage are positive?
+# 2. Which review has the strongest sentiment?
+# 3. Which reviews might need human review (low confidence)?
+\end{lstlisting}
+
+\subsubsection{Understanding Context
+Matters}\label{understanding-context-matters}
+
+Consider these examples: 1. ``This product is sick!'' → Context: Teen
+slang (Positive) vs Medical (Negative) 2. ``It's fine\ldots{}'' →
+Context: After complaint (Negative) vs First impression (Neutral) 3.
+``Interesting choice'' → Context: Design critique (Negative) vs Genuine
+interest (Positive)
+
+\subsubsection{Common Pitfalls to Avoid}\label{common-pitfalls-to-avoid}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Ignoring Negation}: ``not bad'' ≠ ``bad''
+\item
+  \textbf{Missing Sarcasm}: ``Oh great, another bug!'' (Actually
+  negative)
+\item
+  \textbf{Domain Specificity}: ``This app is the bomb!'' (Positive in
+  casual, concerning in security)
+\item
+  \textbf{Mixed Sentiment}: ``Love the design but hate the price''
+\end{enumerate}
+
+\subsubsection{Real-World Applications}\label{real-world-applications}
+
+\paragraph{Customer Reviews}\label{customer-reviews}
+
+\begin{lstlisting}[language=Python]
+# Analyzing product feedback
+def analyze_product_reviews(reviews):
+    sentiments = {'positive': 0, 'negative': 0, 'neutral': 0}
+    issues = []
+    
+    for review in reviews:
+        blob = TextBlob(review)
+        
+        # Classify sentiment
+        if blob.sentiment.polarity > 0.1:
+            sentiments['positive'] += 1
+        elif blob.sentiment.polarity < -0.1:
+            sentiments['negative'] += 1
+            # Extract potential issues from negative reviews
+            if 'bug' in review.lower() or 'crash' in review.lower():
+                issues.append('Technical issues')
+            elif 'expensive' in review.lower() or 'price' in review.lower():
+                issues.append('Pricing concerns')
+        else:
+            sentiments['neutral'] += 1
+    
+    return sentiments, issues
+\end{lstlisting}
+
+\subsubsection{Key Takeaways}\label{key-takeaways}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Start Simple}: Begin with TextBlob for quick prototypes
+\item
+  \textbf{Context is King}: Always consider the domain and audience
+\item
+  \textbf{Validate Results}: Manual review of a sample is essential
+\item
+  \textbf{Iterate}: Improve based on false positives/negatives
+\item
+  \textbf{Combine Methods}: Use rules for obvious cases, ML for complex
+  ones
+\end{enumerate}
+
+\subsubsection{Further Learning}\label{further-learning}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Try analyzing your favorite product's reviews
+\item
+  Experiment with different sentiment thresholds
+\item
+  Build a simple sentiment dashboard
+\item
+  Explore emotion detection (beyond positive/negative)
+\end{enumerate}
+
+\subsubsection{Useful Resources}\label{useful-resources}
+
+\begin{itemize}
+\tightlist
+\item
+  TextBlob Documentation: https://textblob.readthedocs.io/
+\item
+  NLTK Sentiment Analysis: https://www.nltk.org/
+\item
+  Hugging Face Sentiment Models:
+  https://huggingface.co/models?pipeline\_tag=sentiment-analysis
+\item
+  Real-time Twitter Sentiment: https://www.sentiment140.com/
+\end{itemize}
+
+\subsubsection{Assignment}\label{assignment}
+
+Create a simple sentiment analyzer for a product of your choice: 1.
+Collect 20-50 reviews (from Amazon, App Store, etc.) 2. Analyze
+sentiment using TextBlob 3. Identify the top 3 positive and negative
+themes 4. Create a simple visualization of results 5. Suggest one design
+improvement based on negative sentiment
+
+\textbf{Deliverable}: Python script + 1-page insights report
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\emph{Remember: Sentiment analysis is a tool to understand users at
+scale, but always validate insights with real user research!}
+
+\end{document}
