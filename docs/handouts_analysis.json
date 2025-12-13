@@ -1,0 +1,781 @@
+{
+  "topics": {
+    "ab_testing": {
+      "exists": true,
+      "files": [
+        {
+          "name": "handout_1_basic_ab_testing.md",
+          "size_kb": 12.8056640625,
+          "ext": ".md"
+        },
+        {
+          "name": "handout_2_intermediate_experimentation.md",
+          "size_kb": 21.880859375,
+          "ext": ".md"
+        },
+        {
+          "name": "handout_3_advanced_causal_inference.md",
+          "size_kb": 28.7255859375,
+          "ext": ".md"
+        }
+      ],
+      "md_files": [
+        "handout_1_basic_ab_testing.md",
+        "handout_2_intermediate_experimentation.md",
+        "handout_3_advanced_causal_inference.md"
+      ],
+      "pdf_files": [],
+      "tex_files": [],
+      "other_files": [],
+      "has_standard_3": true
+    },
+    "classification": {
+      "exists": true,
+      "files": [
+        {
+          "name": "handout_1_basic_classification.md",
+          "size_kb": 6.5537109375,
+          "ext": ".md"
+        },
+        {
+          "name": "handout_2_intermediate_classification.md",
+          "size_kb": 18.6533203125,
+          "ext": ".md"
+        },
+        {
+          "name": "handout_3_advanced_classification.md",
+          "size_kb": 41.595703125,
+          "ext": ".md"
+        }
+      ],
+      "md_files": [
+        "handout_1_basic_classification.md",
+        "handout_2_intermediate_classification.md",
+        "handout_3_advanced_classification.md"
+      ],
+      "pdf_files": [],
+      "tex_files": [],
+      "other_files": [],
+      "has_standard_3": true
+    },
+    "clustering": {
+      "exists": true,
+      "files": [
+        {
+          "name": "handout_1_basic_clustering_fundamentals.md",
+          "size_kb": 5.4453125,
+          "ext": ".md"
+        },
+        {
+          "name": "handout_2_intermediate_clustering_implementation.md",
+          "size_kb": 16.1787109375,
+          "ext": ".md"
+        },
+        {
+          "name": "handout_3_advanced_clustering_theory.md",
+          "size_kb": 23.1181640625,
+          "ext": ".md"
+        },
+        {
+          "name": "handout_dbscan_density.pdf",
+          "size_kb": 97.583984375,
+          "ext": ".pdf"
+        },
+        {
+          "name": "handout_dbscan_density.tex",
+          "size_kb": 8.89453125,
+          "ext": ".tex"
+        },
+        {
+          "name": "handout_distance_matters.pdf",
+          "size_kb": 68.2900390625,
+          "ext": ".pdf"
+        },
+        {
+          "name": "handout_distance_matters.tex",
+          "size_kb": 5.6953125,
+          "ext": ".tex"
+        },
+        {
+          "name": "handout_feature_detective.pdf",
+          "size_kb": 168.3984375,
+          "ext": ".pdf"
+        },
+        {
+          "name": "handout_feature_detective.tex",
+          "size_kb": 8.8935546875,
+          "ext": ".tex"
+        },
+        {
+          "name": "handout_feature_detective_visual.pdf",
+          "size_kb": 107.1005859375,
+          "ext": ".pdf"
+        },
+        {
+          "name": "handout_feature_detective_visual.tex",
+          "size_kb": 5.896484375,
+          "ext": ".tex"
+        },
+        {
+          "name": "handout_goldilocks_problem.pdf",
+          "size_kb": 82.0576171875,
+          "ext": ".pdf"
+        },
+        {
+          "name": "handout_goldilocks_problem.tex",
+          "size_kb": 6.74609375,
+          "ext": ".tex"
+        },
+        {
+          "name": "handout_hierarchical_dendrogram.pdf",
+          "size_kb": 112.2939453125,
+          "ext": ".pdf"
+        },
+        {
+          "name": "handout_hierarchical_dendrogram.tex",
+          "size_kb": 10.669921875,
+          "ext": ".tex"
+        },
+        {
+          "name": "handout_innovation_safari.pdf",
+          "size_kb": 144.75,
+          "ext": ".pdf"
+        },
+        {
+          "name": "handout_innovation_safari.tex",
+          "size_kb": 10.1416015625,
+          "ext": ".tex"
+        },
+        {
+          "name": "handout_innovation_safari_visual.pdf",
+          "size_kb": 86.037109375,
+          "ext": ".pdf"
+        },
+        {
+          "name": "handout_innovation_safari_visual.tex",
+          "size_kb": 5.7685546875,
+          "ext": ".tex"
+        },
+        {
+          "name": "handout_kmeans_discovery.pdf",
+          "size_kb": 88.0185546875,
+          "ext": ".pdf"
+        },
+        {
+          "name": "handout_kmeans_discovery.tex",
+          "size_kb": 9.923828125,
+          "ext": ".tex"
+        },
+        {
+          "name": "handout_kmeans_fails.pdf",
+          "size_kb": 86.189453125,
+          "ext": ".pdf"
+        },
+        {
+          "name": "handout_kmeans_fails.tex",
+          "size_kb": 4.7587890625,
+          "ext": ".tex"
+        },
+        {
+          "name": "handout_kmeans_fails_compiled.pdf",
+          "size_kb": 86.189453125,
+          "ext": ".pdf"
+        },
+        {
+          "name": "handout_kmeans_iterations.pdf",
+          "size_kb": 143.2861328125,
+          "ext": ".pdf"
+        },
+        {
+          "name": "handout_kmeans_iterations.tex",
+          "size_kb": 6.630859375,
+          "ext": ".tex"
+        },
+        {
+          "name": "handout_kmeans_iterations_compiled.pdf",
+          "size_kb": 143.2861328125,
+          "ext": ".pdf"
+        },
+        {
+          "name": "handout_outliers_misfits.pdf",
+          "size_kb": 94.275390625,
+          "ext": ".pdf"
+        },
+        {
+          "name": "handout_outliers_misfits.tex",
+          "size_kb": 6.755859375,
+          "ext": ".tex"
+        },
+        {
+          "name": "handout_pattern_hunters.pdf",
+          "size_kb": 115.431640625,
+          "ext": ".pdf"
+        },
+        {
+          "name": "handout_pattern_hunters.tex",
+          "size_kb": 9.8359375,
+          "ext": ".tex"
+        },
+        {
+          "name": "handout_pattern_hunters_visual.pdf",
+          "size_kb": 83.8134765625,
+          "ext": ".pdf"
+        },
+        {
+          "name": "handout_pattern_hunters_visual.tex",
+          "size_kb": 4.2890625,
+          "ext": ".tex"
+        },
+        {
+          "name": "handout_silhouette_validation.pdf",
+          "size_kb": 190.9501953125,
+          "ext": ".pdf"
+        },
+        {
+          "name": "handout_silhouette_validation.tex",
+          "size_kb": 9.0634765625,
+          "ext": ".tex"
+        },
+        {
+          "name": "week01_discovery_handout_prelession.pdf",
+          "size_kb": 260.5615234375,
+          "ext": ".pdf"
+        },
+        {
+          "name": "week01_discovery_worksheet_expanded.pdf",
+          "size_kb": 121.2060546875,
+          "ext": ".pdf"
+        }
+      ],
+      "md_files": [
+        "handout_1_basic_clustering_fundamentals.md",
+        "handout_2_intermediate_clustering_implementation.md",
+        "handout_3_advanced_clustering_theory.md"
+      ],
+      "pdf_files": [
+        "handout_dbscan_density.pdf",
+        "handout_distance_matters.pdf",
+        "handout_feature_detective.pdf",
+        "handout_feature_detective_visual.pdf",
+        "handout_goldilocks_problem.pdf",
+        "handout_hierarchical_dendrogram.pdf",
+        "handout_innovation_safari.pdf",
+        "handout_innovation_safari_visual.pdf",
+        "handout_kmeans_discovery.pdf",
+        "handout_kmeans_fails.pdf",
+        "handout_kmeans_fails_compiled.pdf",
+        "handout_kmeans_iterations.pdf",
+        "handout_kmeans_iterations_compiled.pdf",
+        "handout_outliers_misfits.pdf",
+        "handout_pattern_hunters.pdf",
+        "handout_pattern_hunters_visual.pdf",
+        "handout_silhouette_validation.pdf",
+        "week01_discovery_handout_prelession.pdf",
+        "week01_discovery_worksheet_expanded.pdf"
+      ],
+      "tex_files": [
+        "handout_dbscan_density.tex",
+        "handout_distance_matters.tex",
+        "handout_feature_detective.tex",
+        "handout_feature_detective_visual.tex",
+        "handout_goldilocks_problem.tex",
+        "handout_hierarchical_dendrogram.tex",
+        "handout_innovation_safari.tex",
+        "handout_innovation_safari_visual.tex",
+        "handout_kmeans_discovery.tex",
+        "handout_kmeans_fails.tex",
+        "handout_kmeans_iterations.tex",
+        "handout_outliers_misfits.tex",
+        "handout_pattern_hunters.tex",
+        "handout_pattern_hunters_visual.tex",
+        "handout_silhouette_validation.tex"
+      ],
+      "other_files": [],
+      "has_standard_3": true
+    },
+    "finance_applications": {
+      "exists": true,
+      "files": [
+        {
+          "name": "handout_1_level.md",
+          "size_kb": 0.4169921875,
+          "ext": ".md"
+        },
+        {
+          "name": "handout_2_level.md",
+          "size_kb": 1.1884765625,
+          "ext": ".md"
+        },
+        {
+          "name": "handout_3_level.md",
+          "size_kb": 0.8408203125,
+          "ext": ".md"
+        }
+      ],
+      "md_files": [
+        "handout_1_level.md",
+        "handout_2_level.md",
+        "handout_3_level.md"
+      ],
+      "pdf_files": [],
+      "tex_files": [],
+      "other_files": [],
+      "has_standard_3": true
+    },
+    "generative_ai": {
+      "exists": true,
+      "files": [
+        {
+          "name": "handout_1_basic_ai_prototyping.md",
+          "size_kb": 3.330078125,
+          "ext": ".md"
+        },
+        {
+          "name": "handout_2_intermediate_prompt_engineering.md",
+          "size_kb": 6.86328125,
+          "ext": ".md"
+        },
+        {
+          "name": "handout_3_advanced_genai_pipelines.md",
+          "size_kb": 12.888671875,
+          "ext": ".md"
+        }
+      ],
+      "md_files": [
+        "handout_1_basic_ai_prototyping.md",
+        "handout_2_intermediate_prompt_engineering.md",
+        "handout_3_advanced_genai_pipelines.md"
+      ],
+      "pdf_files": [],
+      "tex_files": [],
+      "other_files": [],
+      "has_standard_3": true
+    },
+    "ml_foundations": {
+      "exists": true,
+      "files": [
+        {
+          "name": "20251007_2300_ML_Intro_Exercise.pdf",
+          "size_kb": 535.61328125,
+          "ext": ".pdf"
+        },
+        {
+          "name": "20251007_2300_ML_Intro_Exercise.tex",
+          "size_kb": 13.6689453125,
+          "ext": ".tex"
+        },
+        {
+          "name": "20251007_2345_discovery_handout_FINAL.pdf",
+          "size_kb": 537.853515625,
+          "ext": ".pdf"
+        },
+        {
+          "name": "20251008_0800_discovery_solutions_v2.pdf",
+          "size_kb": 160.8916015625,
+          "ext": ".pdf"
+        },
+        {
+          "name": "20251008_0800_discovery_solutions_v2.tex",
+          "size_kb": 20.140625,
+          "ext": ".tex"
+        },
+        {
+          "name": "DELIVERY_SUMMARY.md",
+          "size_kb": 17.6494140625,
+          "ext": ".md"
+        },
+        {
+          "name": "handout_1_basic_ml_foundations.md",
+          "size_kb": 7.2060546875,
+          "ext": ".md"
+        },
+        {
+          "name": "handout_2_intermediate_ml_implementation.md",
+          "size_kb": 7.44921875,
+          "ext": ".md"
+        },
+        {
+          "name": "handout_3_advanced_ml_theory.md",
+          "size_kb": 5.412109375,
+          "ext": ".md"
+        },
+        {
+          "name": "QUICK_START.md",
+          "size_kb": 9.2177734375,
+          "ext": ".md"
+        },
+        {
+          "name": "README.md",
+          "size_kb": 10.9755859375,
+          "ext": ".md"
+        },
+        {
+          "name": "VERIFICATION_REPORT.md",
+          "size_kb": 16.2138671875,
+          "ext": ".md"
+        }
+      ],
+      "md_files": [
+        "DELIVERY_SUMMARY.md",
+        "handout_1_basic_ml_foundations.md",
+        "handout_2_intermediate_ml_implementation.md",
+        "handout_3_advanced_ml_theory.md",
+        "QUICK_START.md",
+        "README.md",
+        "VERIFICATION_REPORT.md"
+      ],
+      "pdf_files": [
+        "20251007_2300_ML_Intro_Exercise.pdf",
+        "20251007_2345_discovery_handout_FINAL.pdf",
+        "20251008_0800_discovery_solutions_v2.pdf"
+      ],
+      "tex_files": [
+        "20251007_2300_ML_Intro_Exercise.tex",
+        "20251008_0800_discovery_solutions_v2.tex"
+      ],
+      "other_files": [],
+      "has_standard_3": true
+    },
+    "neural_networks": {
+      "exists": true,
+      "files": [
+        {
+          "name": "handout_1_level.md",
+          "size_kb": 0.3798828125,
+          "ext": ".md"
+        },
+        {
+          "name": "handout_2_level.md",
+          "size_kb": 0.83984375,
+          "ext": ".md"
+        },
+        {
+          "name": "handout_3_level.md",
+          "size_kb": 0.65234375,
+          "ext": ".md"
+        }
+      ],
+      "md_files": [
+        "handout_1_level.md",
+        "handout_2_level.md",
+        "handout_3_level.md"
+      ],
+      "pdf_files": [],
+      "tex_files": [],
+      "other_files": [],
+      "has_standard_3": true
+    },
+    "nlp_sentiment": {
+      "exists": true,
+      "files": [
+        {
+          "name": "handout_1_basic_sentiment_analysis.md",
+          "size_kb": 6.564453125,
+          "ext": ".md"
+        },
+        {
+          "name": "handout_2_intermediate_bert_sentiment.md",
+          "size_kb": 12.7900390625,
+          "ext": ".md"
+        },
+        {
+          "name": "handout_3_advanced_aspect_emotion.md",
+          "size_kb": 25.369140625,
+          "ext": ".md"
+        }
+      ],
+      "md_files": [
+        "handout_1_basic_sentiment_analysis.md",
+        "handout_2_intermediate_bert_sentiment.md",
+        "handout_3_advanced_aspect_emotion.md"
+      ],
+      "pdf_files": [],
+      "tex_files": [],
+      "other_files": [],
+      "has_standard_3": true
+    },
+    "responsible_ai": {
+      "exists": true,
+      "files": [
+        {
+          "name": "handout_1_basic_ethics_checklist.md",
+          "size_kb": 3.2998046875,
+          "ext": ".md"
+        },
+        {
+          "name": "handout_2_intermediate_bias_audit.md",
+          "size_kb": 6.9326171875,
+          "ext": ".md"
+        },
+        {
+          "name": "handout_3_advanced_fairness_metrics.md",
+          "size_kb": 12.076171875,
+          "ext": ".md"
+        }
+      ],
+      "md_files": [
+        "handout_1_basic_ethics_checklist.md",
+        "handout_2_intermediate_bias_audit.md",
+        "handout_3_advanced_fairness_metrics.md"
+      ],
+      "pdf_files": [],
+      "tex_files": [],
+      "other_files": [],
+      "has_standard_3": true
+    },
+    "structured_output": {
+      "exists": true,
+      "files": [
+        {
+          "name": "handout_1_basic_reliability.md",
+          "size_kb": 6.171875,
+          "ext": ".md"
+        },
+        {
+          "name": "handout_2_intermediate_implementation.md",
+          "size_kb": 13.1435546875,
+          "ext": ".md"
+        },
+        {
+          "name": "handout_3_advanced_production.md",
+          "size_kb": 17.8701171875,
+          "ext": ".md"
+        }
+      ],
+      "md_files": [
+        "handout_1_basic_reliability.md",
+        "handout_2_intermediate_implementation.md",
+        "handout_3_advanced_production.md"
+      ],
+      "pdf_files": [],
+      "tex_files": [],
+      "other_files": [],
+      "has_standard_3": true
+    },
+    "supervised_learning": {
+      "exists": true,
+      "files": [
+        {
+          "name": "handout_1_basic_supervised.md",
+          "size_kb": 1.75,
+          "ext": ".md"
+        },
+        {
+          "name": "handout_2_intermediate_implementation.md",
+          "size_kb": 2.8359375,
+          "ext": ".md"
+        },
+        {
+          "name": "handout_3_advanced_theory.md",
+          "size_kb": 1.92578125,
+          "ext": ".md"
+        }
+      ],
+      "md_files": [
+        "handout_1_basic_supervised.md",
+        "handout_2_intermediate_implementation.md",
+        "handout_3_advanced_theory.md"
+      ],
+      "pdf_files": [],
+      "tex_files": [],
+      "other_files": [],
+      "has_standard_3": true
+    },
+    "topic_modeling": {
+      "exists": true,
+      "files": [
+        {
+          "name": "handout_1_basic_topic_modeling.md",
+          "size_kb": 4.2998046875,
+          "ext": ".md"
+        },
+        {
+          "name": "handout_2_intermediate_lda.md",
+          "size_kb": 8.322265625,
+          "ext": ".md"
+        },
+        {
+          "name": "handout_3_advanced_production.md",
+          "size_kb": 15.3857421875,
+          "ext": ".md"
+        }
+      ],
+      "md_files": [
+        "handout_1_basic_topic_modeling.md",
+        "handout_2_intermediate_lda.md",
+        "handout_3_advanced_production.md"
+      ],
+      "pdf_files": [],
+      "tex_files": [],
+      "other_files": [],
+      "has_standard_3": true
+    },
+    "unsupervised_learning": {
+      "exists": true,
+      "files": [
+        {
+          "name": "handout_1_level.md",
+          "size_kb": 0.3388671875,
+          "ext": ".md"
+        },
+        {
+          "name": "handout_2_level.md",
+          "size_kb": 0.853515625,
+          "ext": ".md"
+        },
+        {
+          "name": "handout_3_level.md",
+          "size_kb": 0.64453125,
+          "ext": ".md"
+        }
+      ],
+      "md_files": [
+        "handout_1_level.md",
+        "handout_2_level.md",
+        "handout_3_level.md"
+      ],
+      "pdf_files": [],
+      "tex_files": [],
+      "other_files": [],
+      "has_standard_3": true
+    },
+    "validation_metrics": {
+      "exists": true,
+      "files": [
+        {
+          "name": "handout_1_basic_metrics.md",
+          "size_kb": 14.1396484375,
+          "ext": ".md"
+        },
+        {
+          "name": "handout_2_intermediate_validation.md",
+          "size_kb": 24.71875,
+          "ext": ".md"
+        },
+        {
+          "name": "handout_3_advanced_selection.md",
+          "size_kb": 29.3681640625,
+          "ext": ".md"
+        }
+      ],
+      "md_files": [
+        "handout_1_basic_metrics.md",
+        "handout_2_intermediate_validation.md",
+        "handout_3_advanced_selection.md"
+      ],
+      "pdf_files": [],
+      "tex_files": [],
+      "other_files": [],
+      "has_standard_3": true
+    }
+  },
+  "duplicates": [],
+  "potential_unused": [
+    {
+      "topic": "clustering",
+      "file": "handout_dbscan_density.pdf",
+      "reason": "Similar to: ['handout_distance_matters.pdf', 'handout_feature_detective.pdf', 'handout_feature_detective_visual.pdf', 'handout_goldilocks_problem.pdf', 'handout_hierarchical_dendrogram.pdf', 'handout_innovation_safari.pdf', 'handout_innovation_safari_visual.pdf', 'handout_kmeans_discovery.pdf', 'handout_kmeans_fails.pdf', 'handout_kmeans_fails_compiled.pdf', 'handout_kmeans_iterations.pdf', 'handout_kmeans_iterations_compiled.pdf', 'handout_outliers_misfits.pdf', 'handout_pattern_hunters.pdf', 'handout_pattern_hunters_visual.pdf', 'handout_silhouette_validation.pdf', 'week01_discovery_handout_prelession.pdf']"
+    },
+    {
+      "topic": "clustering",
+      "file": "handout_distance_matters.pdf",
+      "reason": "Similar to: ['handout_dbscan_density.pdf', 'handout_feature_detective.pdf', 'handout_feature_detective_visual.pdf', 'handout_goldilocks_problem.pdf', 'handout_hierarchical_dendrogram.pdf', 'handout_innovation_safari.pdf', 'handout_innovation_safari_visual.pdf', 'handout_kmeans_discovery.pdf', 'handout_kmeans_fails.pdf', 'handout_kmeans_fails_compiled.pdf', 'handout_kmeans_iterations.pdf', 'handout_kmeans_iterations_compiled.pdf', 'handout_outliers_misfits.pdf', 'handout_pattern_hunters.pdf', 'handout_pattern_hunters_visual.pdf', 'handout_silhouette_validation.pdf', 'week01_discovery_handout_prelession.pdf']"
+    },
+    {
+      "topic": "clustering",
+      "file": "handout_feature_detective.pdf",
+      "reason": "Similar to: ['handout_dbscan_density.pdf', 'handout_distance_matters.pdf', 'handout_feature_detective_visual.pdf', 'handout_goldilocks_problem.pdf', 'handout_hierarchical_dendrogram.pdf', 'handout_innovation_safari.pdf', 'handout_innovation_safari_visual.pdf', 'handout_kmeans_discovery.pdf', 'handout_kmeans_fails.pdf', 'handout_kmeans_fails_compiled.pdf', 'handout_kmeans_iterations.pdf', 'handout_kmeans_iterations_compiled.pdf', 'handout_outliers_misfits.pdf', 'handout_pattern_hunters.pdf', 'handout_pattern_hunters_visual.pdf', 'handout_silhouette_validation.pdf', 'week01_discovery_handout_prelession.pdf']"
+    },
+    {
+      "topic": "clustering",
+      "file": "handout_feature_detective_visual.pdf",
+      "reason": "Similar to: ['handout_dbscan_density.pdf', 'handout_distance_matters.pdf', 'handout_feature_detective.pdf', 'handout_goldilocks_problem.pdf', 'handout_hierarchical_dendrogram.pdf', 'handout_innovation_safari.pdf', 'handout_innovation_safari_visual.pdf', 'handout_kmeans_discovery.pdf', 'handout_kmeans_fails.pdf', 'handout_kmeans_fails_compiled.pdf', 'handout_kmeans_iterations.pdf', 'handout_kmeans_iterations_compiled.pdf', 'handout_outliers_misfits.pdf', 'handout_pattern_hunters.pdf', 'handout_pattern_hunters_visual.pdf', 'handout_silhouette_validation.pdf', 'week01_discovery_handout_prelession.pdf']"
+    },
+    {
+      "topic": "clustering",
+      "file": "handout_goldilocks_problem.pdf",
+      "reason": "Similar to: ['handout_dbscan_density.pdf', 'handout_distance_matters.pdf', 'handout_feature_detective.pdf', 'handout_feature_detective_visual.pdf', 'handout_hierarchical_dendrogram.pdf', 'handout_innovation_safari.pdf', 'handout_innovation_safari_visual.pdf', 'handout_kmeans_discovery.pdf', 'handout_kmeans_fails.pdf', 'handout_kmeans_fails_compiled.pdf', 'handout_kmeans_iterations.pdf', 'handout_kmeans_iterations_compiled.pdf', 'handout_outliers_misfits.pdf', 'handout_pattern_hunters.pdf', 'handout_pattern_hunters_visual.pdf', 'handout_silhouette_validation.pdf', 'week01_discovery_handout_prelession.pdf']"
+    },
+    {
+      "topic": "clustering",
+      "file": "handout_hierarchical_dendrogram.pdf",
+      "reason": "Similar to: ['handout_dbscan_density.pdf', 'handout_distance_matters.pdf', 'handout_feature_detective.pdf', 'handout_feature_detective_visual.pdf', 'handout_goldilocks_problem.pdf', 'handout_innovation_safari.pdf', 'handout_innovation_safari_visual.pdf', 'handout_kmeans_discovery.pdf', 'handout_kmeans_fails.pdf', 'handout_kmeans_fails_compiled.pdf', 'handout_kmeans_iterations.pdf', 'handout_kmeans_iterations_compiled.pdf', 'handout_outliers_misfits.pdf', 'handout_pattern_hunters.pdf', 'handout_pattern_hunters_visual.pdf', 'handout_silhouette_validation.pdf', 'week01_discovery_handout_prelession.pdf']"
+    },
+    {
+      "topic": "clustering",
+      "file": "handout_innovation_safari.pdf",
+      "reason": "Similar to: ['handout_dbscan_density.pdf', 'handout_distance_matters.pdf', 'handout_feature_detective.pdf', 'handout_feature_detective_visual.pdf', 'handout_goldilocks_problem.pdf', 'handout_hierarchical_dendrogram.pdf', 'handout_innovation_safari_visual.pdf', 'handout_kmeans_discovery.pdf', 'handout_kmeans_fails.pdf', 'handout_kmeans_fails_compiled.pdf', 'handout_kmeans_iterations.pdf', 'handout_kmeans_iterations_compiled.pdf', 'handout_outliers_misfits.pdf', 'handout_pattern_hunters.pdf', 'handout_pattern_hunters_visual.pdf', 'handout_silhouette_validation.pdf', 'week01_discovery_handout_prelession.pdf']"
+    },
+    {
+      "topic": "clustering",
+      "file": "handout_innovation_safari_visual.pdf",
+      "reason": "Similar to: ['handout_dbscan_density.pdf', 'handout_distance_matters.pdf', 'handout_feature_detective.pdf', 'handout_feature_detective_visual.pdf', 'handout_goldilocks_problem.pdf', 'handout_hierarchical_dendrogram.pdf', 'handout_innovation_safari.pdf', 'handout_kmeans_discovery.pdf', 'handout_kmeans_fails.pdf', 'handout_kmeans_fails_compiled.pdf', 'handout_kmeans_iterations.pdf', 'handout_kmeans_iterations_compiled.pdf', 'handout_outliers_misfits.pdf', 'handout_pattern_hunters.pdf', 'handout_pattern_hunters_visual.pdf', 'handout_silhouette_validation.pdf', 'week01_discovery_handout_prelession.pdf']"
+    },
+    {
+      "topic": "clustering",
+      "file": "handout_kmeans_discovery.pdf",
+      "reason": "Similar to: ['handout_dbscan_density.pdf', 'handout_distance_matters.pdf', 'handout_feature_detective.pdf', 'handout_feature_detective_visual.pdf', 'handout_goldilocks_problem.pdf', 'handout_hierarchical_dendrogram.pdf', 'handout_innovation_safari.pdf', 'handout_innovation_safari_visual.pdf', 'handout_kmeans_fails.pdf', 'handout_kmeans_fails_compiled.pdf', 'handout_kmeans_iterations.pdf', 'handout_kmeans_iterations_compiled.pdf', 'handout_outliers_misfits.pdf', 'handout_pattern_hunters.pdf', 'handout_pattern_hunters_visual.pdf', 'handout_silhouette_validation.pdf', 'week01_discovery_handout_prelession.pdf']"
+    },
+    {
+      "topic": "clustering",
+      "file": "handout_kmeans_fails.pdf",
+      "reason": "Similar to: ['handout_dbscan_density.pdf', 'handout_distance_matters.pdf', 'handout_feature_detective.pdf', 'handout_feature_detective_visual.pdf', 'handout_goldilocks_problem.pdf', 'handout_hierarchical_dendrogram.pdf', 'handout_innovation_safari.pdf', 'handout_innovation_safari_visual.pdf', 'handout_kmeans_discovery.pdf', 'handout_kmeans_fails_compiled.pdf', 'handout_kmeans_iterations.pdf', 'handout_kmeans_iterations_compiled.pdf', 'handout_outliers_misfits.pdf', 'handout_pattern_hunters.pdf', 'handout_pattern_hunters_visual.pdf', 'handout_silhouette_validation.pdf', 'week01_discovery_handout_prelession.pdf']"
+    },
+    {
+      "topic": "clustering",
+      "file": "handout_kmeans_iterations.pdf",
+      "reason": "Similar to: ['handout_dbscan_density.pdf', 'handout_distance_matters.pdf', 'handout_feature_detective.pdf', 'handout_feature_detective_visual.pdf', 'handout_goldilocks_problem.pdf', 'handout_hierarchical_dendrogram.pdf', 'handout_innovation_safari.pdf', 'handout_innovation_safari_visual.pdf', 'handout_kmeans_discovery.pdf', 'handout_kmeans_fails.pdf', 'handout_kmeans_fails_compiled.pdf', 'handout_kmeans_iterations_compiled.pdf', 'handout_outliers_misfits.pdf', 'handout_pattern_hunters.pdf', 'handout_pattern_hunters_visual.pdf', 'handout_silhouette_validation.pdf', 'week01_discovery_handout_prelession.pdf']"
+    },
+    {
+      "topic": "clustering",
+      "file": "handout_outliers_misfits.pdf",
+      "reason": "Similar to: ['handout_dbscan_density.pdf', 'handout_distance_matters.pdf', 'handout_feature_detective.pdf', 'handout_feature_detective_visual.pdf', 'handout_goldilocks_problem.pdf', 'handout_hierarchical_dendrogram.pdf', 'handout_innovation_safari.pdf', 'handout_innovation_safari_visual.pdf', 'handout_kmeans_discovery.pdf', 'handout_kmeans_fails.pdf', 'handout_kmeans_fails_compiled.pdf', 'handout_kmeans_iterations.pdf', 'handout_kmeans_iterations_compiled.pdf', 'handout_pattern_hunters.pdf', 'handout_pattern_hunters_visual.pdf', 'handout_silhouette_validation.pdf', 'week01_discovery_handout_prelession.pdf']"
+    },
+    {
+      "topic": "clustering",
+      "file": "handout_pattern_hunters.pdf",
+      "reason": "Similar to: ['handout_dbscan_density.pdf', 'handout_distance_matters.pdf', 'handout_feature_detective.pdf', 'handout_feature_detective_visual.pdf', 'handout_goldilocks_problem.pdf', 'handout_hierarchical_dendrogram.pdf', 'handout_innovation_safari.pdf', 'handout_innovation_safari_visual.pdf', 'handout_kmeans_discovery.pdf', 'handout_kmeans_fails.pdf', 'handout_kmeans_fails_compiled.pdf', 'handout_kmeans_iterations.pdf', 'handout_kmeans_iterations_compiled.pdf', 'handout_outliers_misfits.pdf', 'handout_pattern_hunters_visual.pdf', 'handout_silhouette_validation.pdf', 'week01_discovery_handout_prelession.pdf']"
+    },
+    {
+      "topic": "clustering",
+      "file": "handout_pattern_hunters_visual.pdf",
+      "reason": "Similar to: ['handout_dbscan_density.pdf', 'handout_distance_matters.pdf', 'handout_feature_detective.pdf', 'handout_feature_detective_visual.pdf', 'handout_goldilocks_problem.pdf', 'handout_hierarchical_dendrogram.pdf', 'handout_innovation_safari.pdf', 'handout_innovation_safari_visual.pdf', 'handout_kmeans_discovery.pdf', 'handout_kmeans_fails.pdf', 'handout_kmeans_fails_compiled.pdf', 'handout_kmeans_iterations.pdf', 'handout_kmeans_iterations_compiled.pdf', 'handout_outliers_misfits.pdf', 'handout_pattern_hunters.pdf', 'handout_silhouette_validation.pdf', 'week01_discovery_handout_prelession.pdf']"
+    },
+    {
+      "topic": "clustering",
+      "file": "handout_silhouette_validation.pdf",
+      "reason": "Similar to: ['handout_dbscan_density.pdf', 'handout_distance_matters.pdf', 'handout_feature_detective.pdf', 'handout_feature_detective_visual.pdf', 'handout_goldilocks_problem.pdf', 'handout_hierarchical_dendrogram.pdf', 'handout_innovation_safari.pdf', 'handout_innovation_safari_visual.pdf', 'handout_kmeans_discovery.pdf', 'handout_kmeans_fails.pdf', 'handout_kmeans_fails_compiled.pdf', 'handout_kmeans_iterations.pdf', 'handout_kmeans_iterations_compiled.pdf', 'handout_outliers_misfits.pdf', 'handout_pattern_hunters.pdf', 'handout_pattern_hunters_visual.pdf', 'week01_discovery_handout_prelession.pdf']"
+    },
+    {
+      "topic": "clustering",
+      "file": "week01_discovery_handout_prelession.pdf",
+      "reason": "Similar to: ['week01_discovery_worksheet_expanded.pdf']"
+    },
+    {
+      "topic": "clustering",
+      "file": "week01_discovery_worksheet_expanded.pdf",
+      "reason": "Similar to: ['week01_discovery_handout_prelession.pdf']"
+    },
+    {
+      "topic": "ml_foundations",
+      "file": "20251007_2300_ML_Intro_Exercise.pdf",
+      "reason": "Similar to: ['20251007_2345_discovery_handout_FINAL.pdf']"
+    },
+    {
+      "topic": "ml_foundations",
+      "file": "20251007_2345_discovery_handout_FINAL.pdf",
+      "reason": "Similar to: ['20251007_2300_ML_Intro_Exercise.pdf']"
+    }
+  ],
+  "missing_standard": [],
+  "summary": {
+    "total_topics": 14,
+    "total_files": 85,
+    "total_md": 46,
+    "total_pdf": 22,
+    "total_tex": 17,
+    "duplicate_groups": 0,
+    "potential_unused": 19,
+    "missing_standard_structure": 0
+  }
+}
